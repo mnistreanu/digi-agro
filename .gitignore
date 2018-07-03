@@ -1,0 +1,18 @@
+.gradle
+/build/
+!gradle/wrapper/gradle-wrapper.jar
+gradlew
+gradlew.bat
+gradle/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+/out/
+
+inventory-app.iml
+
+
+/frontend/node_modules

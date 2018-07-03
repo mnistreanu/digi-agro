@@ -1,0 +1,14 @@
+export class Constants {
+
+  public static API_URL: string = "http://localhost:8080";
+  public static SERVER_ERROR: string = "Server Error";
+  public static TOKEN_KEY: string = "USER_INFO";
+  public static TOKEN_PREFIX: string = "Bearer ";
+  public static AUTH_HEADER: string = "Authorization";
+
+  public static LOGIN_PAGE: string = "/login";
+  public static PAGE_AFTER_LOGIN: string = "/pages/dashboard";
+  public static ERROR_PAGE: string = "/error";
+
+
+}

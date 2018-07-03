@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="insert-default-user" author="maxim.nistreanu" failOnError="false" runOnChange="true">
+        <sql>
+            <!--password: test123 -->
+            INSERT INTO user_account (id, username, password) values(1, 'admin', '$2a$10$J.79O6b/Zo9rPAivWonK1ufA3yB.dsH1UJMVZRrarOrBiDzFRT9NO');
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert-authorities" author="maxim.nistreanu" failOnError="false" runOnChange="true">
+        <sql>
+            INSERT INTO authority (id, name) values(1, 'ROLE_ADMIN');
+            INSERT INTO authority (id, name) values(2, 'ROLE_USER');
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert-user-authorities" author="maxim.nistreanu" failOnError="false" runOnChange="true">
+        <sql>
+            INSERT INTO user_authority (user_id, authority_id) VALUES (1, 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="prepare_work_types" author="maxim.nistreanu" failOnError="false" runOnChange="true">
+        <sql>
+            INSERT INTO work_type (id, name) VALUES
+            (1, 'SOWING'),
+            (2, 'PLOWING'),
+            (3, 'GATHERING'),
+            (4, 'WATERING'),
+            (5, 'WATERING'),
+            (6, 'SPRAY');
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>

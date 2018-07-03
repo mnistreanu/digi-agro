@@ -1,0 +1,32 @@
+<div class="login-container">
+    <div class="col-xl-4 col-md-6 col-10 mx-auto">
+        <div class="card">
+            <div class="card-body text-center">
+                <h2 class="card-title">Sign in to Azimuth</h2>
+                <a routerLink="/register" class="btn btn-link transition bottom-15">Don't have an account? Sign up now!</a>
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class=" text-left">
+                    <div class="form-group">
+                        <input formControlName="username" class="form-control checking-field" placeholder="Username" type="text">
+                        <span class="help-block text-danger" *ngIf="form.get('username').touched && form.get('username').hasError('required')">Username is required</span>
+                    </div>
+                    <div class="form-group">
+                        <input formControlName="password" class="form-control checking-field" placeholder="Password" type="password">
+                        <span class="help-block text-danger" *ngIf="form.get('password').touched && form.get('password').hasError('required')">Password is required</span>                              
+                    </div>
+                    <div class="form-group text-right">
+                        <a class="btn btn-link forgot transition" href="javascript:void(0);">Forgot password?</a>
+                    </div>
+                    <div class="form-group">
+                        <button [disabled]="!form.valid" class="btn btn-main btn-block" type="submit">Sign in</button>
+                    </div>
+
+                    <div class="form-group" *ngIf="badCredentials">
+                        Bad Credentials!
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
