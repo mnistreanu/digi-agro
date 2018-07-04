@@ -55,7 +55,9 @@
     "topojson": "3.0.2",
     "ts-helpers": "1.1.2",
     "widgster": "1.0.0",
-    "zone.js": "0.8.26"
+    "zone.js": "0.8.26",
+    "ag-grid": "^15.0.0",
+    "ag-grid-angular": "^15.0.0"
   },
   "napa": {
     "pace": "https://github.com/HubSpot/pace.git#v0.7.1",

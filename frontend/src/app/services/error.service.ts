@@ -11,9 +11,11 @@ export class ErrorService {
   constructor(private router: Router) { }
 
   processError(response: any): Observable<any> {
+
     // this.spinnerService.hide();
     let status = response.status;
-    let message = response._body.message || Constants.SERVER_ERROR;
+    let message = response.error.message || Constants.SERVER_ERROR;
+
 
     if (status == 401 || status == 403) {
       // this.growlService.addError(status == 401 ? Messages.UNAUTHORIZED : Messages.FORBIDDEN);

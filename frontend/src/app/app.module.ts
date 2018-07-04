@@ -13,6 +13,7 @@ import {ErrorComponent} from "./pages/error/error.component";
 import {AuthService} from "./services/auth.service";
 import {ErrorService} from "./services/error.service";
 import {HttpClientModule} from "@angular/common/http";
+import {UserService} from "./services/user.service";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import {HttpClientModule} from "@angular/common/http";
     }),
     routing   
   ],
-  providers: [AppConfig, AuthService, ErrorService],
+  providers: [AppConfig, AuthService, ErrorService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

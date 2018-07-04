@@ -6,7 +6,15 @@ export const menuItems = [
     selected: false,
     expanded: false,
     order: 0
-  }, 
+  },
+  {
+    title: 'Manage Users',
+    routerLink: '/pages/manage-users',
+    icon: 'fa-users',
+    selected: false,
+    expanded: false,
+    order: 1
+  },
   {
     title: 'Charts',
     routerLink: 'charts',

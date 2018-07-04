@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Rx";
 import {Constants} from "../common/constants";
-import {UserAuthI} from "../interfaces/user-auth";
+import {UserAuth} from "../interfaces/user-auth";
 import {Headers, RequestOptions} from "@angular/http";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
@@ -14,8 +14,6 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
     providedIn: 'root'
 })
 export class AuthService {
-
-    private options = new RequestOptions({headers: new Headers({'Content-Type': 'application/json'})});
 
     private httpOptions = {
         headers: new HttpHeaders({
@@ -33,16 +31,15 @@ export class AuthService {
         localStorage.removeItem(Constants.TOKEN_KEY);
     }
 
-
-    login(model: UserAuthI): Observable<boolean> {
+    login(model: UserAuth): Observable<boolean> {
         return this.http.post(Constants.API_URL + '/auth', model, this.httpOptions)
             .map((response) => {
-                let token = response.token;
+                let token = response['token'];
                 if (token) {
                     localStorage.setItem(Constants.TOKEN_KEY, JSON.stringify({username: model.username, token: token}));
                     return true;
                 }
-                this.authStatusChanged.emit(false);
+                // this.authStatusChanged.emit(false);
                 return false;
             })
             .catch(error => this.errorService.processError(error));
@@ -64,6 +61,21 @@ export class AuthService {
             return userInfo.username;
         }
         return null;
+    }
+
+    getToken(): String {
+        let userInfo = JSON.parse(localStorage.getItem(Constants.TOKEN_KEY));
+        return userInfo && userInfo.token ? userInfo.token : "";
+    }
+
+    getOptions() {
+
+        let headers = {'Content-Type':  'application/json'};
+        headers[Constants.AUTH_HEADER] = Constants.TOKEN_PREFIX + this.getToken();
+
+        return {
+            headers: new HttpHeaders(headers)
+        };
     }
 
 }

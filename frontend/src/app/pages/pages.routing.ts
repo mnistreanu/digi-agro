@@ -22,7 +22,8 @@ export const routes: Routes = [
             { path: 'tables', loadChildren: 'app/pages/tables/tables.module#TablesModule', data: { breadcrumb: 'Tables' } },
             { path: 'editors', loadChildren: 'app/pages/editors/editors.module#EditorsModule', data: { breadcrumb: 'Editors' } },
             { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } },
-            { path: 'blank', component: BlankComponent, data: { breadcrumb: 'Blank page' } }
+            { path: 'blank', component: BlankComponent, data: { breadcrumb: 'Blank page' } },
+            { path: 'manage-users', loadChildren: 'app/pages/manage-users/manage-users.module#ManageUsersModule', data: { breadcrumb: 'Manage Users' } }
         ]
     }
 ];

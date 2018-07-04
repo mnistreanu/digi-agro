@@ -1,0 +1,7 @@
+.edit-button {
+  height: 100%;
+  width: 100%;
+  display: block;
+  background: url(../../../../assets/img/edit-icon.png) no-repeat center;
+  cursor: pointer;
+}
