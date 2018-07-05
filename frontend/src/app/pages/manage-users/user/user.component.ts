@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../services/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserAccountModel} from "./user-account.model";
+import {emailValidator} from "../../../theme/validators/email.validator";
 
 @Component({
     selector: 'az-user',
@@ -61,7 +62,7 @@ export class UserComponent implements OnInit {
             lastName: [this.model.lastName],
             idnp: [this.model.idnp],
             birthDate: [birthDate],
-            email: [this.model.email],
+            email: [this.model.email, [emailValidator]],
             address: [this.model.address],
             phone: [this.model.phone],
             mobilePhone: [this.model.mobilePhone]

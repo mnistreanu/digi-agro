@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from "ag-grid";
 import {UserService} from "../../../services/user.service";
-import {EditRendererComponent} from "../../../theme/aggrid/edit-renderer/edit-renderer.component";
+import {EditRendererComponent} from "../../../modules/aggrid/edit-renderer/edit-renderer.component";
 import {Router} from "@angular/router";
 
 @Component({
@@ -85,6 +85,10 @@ export class UserListComponent implements OnInit {
 
     public onGridReady() {
         this.options.api.sizeColumnsToFit();
+    }
+
+    public adjustGridSize() {
+        setTimeout(() => {this.options.api.sizeColumnsToFit();}, 500);
     }
 
     public addUser() {

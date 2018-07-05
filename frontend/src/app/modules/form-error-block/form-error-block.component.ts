@@ -8,14 +8,11 @@ import {AbstractControl} from "@angular/forms";
 })
 export class FormErrorBlockComponent implements OnInit {
 
-    @Input()
-    control: AbstractControl;
+    @Input() control: AbstractControl;
 
-    @Input()
-    title: string;
+    @Input() title: string;
 
-    @Input()
-    formSubmitted: boolean;
+    @Input() formSubmitted: boolean;
 
     constructor() {
     }

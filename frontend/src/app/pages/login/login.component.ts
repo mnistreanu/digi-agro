@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {Constants} from "../../common/constants";
+import {AppState} from "../../app.state";
 
 @Component({
     selector: 'app-login',
@@ -44,7 +45,7 @@ export class LoginComponent implements OnInit {
             else {
                 this.badCredentials = true;
             }
-        }, error => {
+        }, () => {
             this.badCredentials = true;
         });
     }

@@ -23,7 +23,10 @@
     "@angular/platform-browser": "6.0.0",
     "@angular/platform-browser-dynamic": "6.0.0",
     "@angular/router": "6.0.0",
+    "@ngui/auto-complete": "^1.0.2",
     "@swimlane/ngx-datatable": "11.3.2",
+    "ag-grid": "^15.0.0",
+    "ag-grid-angular": "^15.0.0",
     "angular-2-dropdown-multiselect": "1.7.1",
     "angular-froala-wysiwyg": "2.8.1",
     "angular-resizable-element": "2.0.0",
@@ -46,6 +49,7 @@
     "ng2-charts": "1.6.0",
     "ng2-ckeditor": "1.2.0",
     "ng2-dragula": "1.5.0",
+    "ng2-input-autocomplete": "^0.1.0",
     "ngx-perfect-scrollbar": "5.3.5",
     "ngx-toastr": "8.5.0",
     "popper.js": "1.14.3",
@@ -55,9 +59,7 @@
     "topojson": "3.0.2",
     "ts-helpers": "1.1.2",
     "widgster": "1.0.0",
-    "zone.js": "0.8.26",
-    "ag-grid": "^15.0.0",
-    "ag-grid-angular": "^15.0.0"
+    "zone.js": "0.8.26"
   },
   "napa": {
     "pace": "https://github.com/HubSpot/pace.git#v0.7.1",

@@ -1,13 +1,13 @@
-import {Injectable} from "@angular/core";
+import {EventEmitter, Injectable} from "@angular/core";
 import {Observable} from "rxjs/Rx";
 import {Constants} from "../common/constants";
 import {UserAuth} from "../interfaces/user-auth";
-import {Headers, RequestOptions} from "@angular/http";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import {ErrorService} from "./error.service";
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Authorities} from "../common/authorities";
 
 
 @Injectable({
@@ -15,12 +15,13 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 })
 export class AuthService {
 
+    authStatusChanged: EventEmitter<boolean> = new EventEmitter();
+
     private httpOptions = {
         headers: new HttpHeaders({
             'Content-Type':  'application/json'
         })
     };
-
 
     constructor(private http: HttpClient,
                 private router: Router,
@@ -29,6 +30,7 @@ export class AuthService {
 
     logout() {
         localStorage.removeItem(Constants.TOKEN_KEY);
+        this.authStatusChanged.emit(false);
     }
 
     login(model: UserAuth): Observable<boolean> {
@@ -37,12 +39,26 @@ export class AuthService {
                 let token = response['token'];
                 if (token) {
                     localStorage.setItem(Constants.TOKEN_KEY, JSON.stringify({username: model.username, token: token}));
+                    this.setupAuthorities();
                     return true;
                 }
-                // this.authStatusChanged.emit(false);
+                this.authStatusChanged.emit(false);
                 return false;
             })
             .catch(error => this.errorService.processError(error));
+    }
+
+    setupAuthorities() {
+        this.http.get(Constants.API_URL + '/authorities', this.getOptions())
+            .subscribe((authorities:string[]) => {
+                let authorityObject = {};
+                authorities.forEach(authority => {
+                    authorityObject[authority] = true;
+                });
+                localStorage.setItem(Authorities.AUTHORITY_OBJECT, JSON.stringify(authorityObject));
+                    this.authStatusChanged.emit(true);
+            },
+            error => this.errorService.processError(error));
     }
 
     checkAuth() {
@@ -69,7 +85,6 @@ export class AuthService {
     }
 
     getOptions() {
-
         let headers = {'Content-Type':  'application/json'};
         headers[Constants.AUTH_HEADER] = Constants.TOKEN_PREFIX + this.getToken();
 
@@ -78,4 +93,7 @@ export class AuthService {
         };
     }
 
+    hasAuthority(authorityName) {
+        return this.isAuthenticated() && JSON.parse(localStorage.getItem(Authorities.AUTHORITY_OBJECT))[authorityName];
+    }
 }

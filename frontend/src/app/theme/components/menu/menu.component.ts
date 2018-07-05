@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation, ElementRef, HostListener } from '
 import { Router, ActivatedRoute , NavigationEnd } from '@angular/router';
 import { MenuService } from './menu.service';
 import { AppState } from "../../../app.state";
+import {Constants} from "../../../common/constants";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
     selector: 'az-menu',
@@ -24,6 +26,7 @@ export class MenuComponent implements OnInit {
                 private _router:Router,
                 private _activatedRoute:ActivatedRoute,
                 private _menuService:MenuService,
+                private authService: AuthService,
                 private _state:AppState) {
         
         this.menuItems = _menuService.getMenuItems();
@@ -39,7 +42,11 @@ export class MenuComponent implements OnInit {
                 }
                 window.scrollTo(0, 0);         
             }                
-        });      
+        });
+
+        this.authService.authStatusChanged.subscribe(() => {
+            this.menuItems = _menuService.getMenuItems();
+        });
 
     }
 

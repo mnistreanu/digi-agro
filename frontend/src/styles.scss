@@ -15,6 +15,16 @@
 // @import "../node_modules/dragula/dist/dragula.min.css";
 // @import "../node_modules/ngx-toastr/toastr.css";
 
+//----------------------------------------------------------------------------
+// fix for menu items
+.fa.fas {
+  font-weight: 900 !important;
+}
+.fa.fas {
+  font-family: Font Awesome\ 5 Free !important;
+}
+//----------------------------------------------------------------------------
+
 @-webkit-keyframes spin-cubeGridScaleDelay {
   0%, 70%, 100% {
     -webkit-transform: scale3D(1, 1, 1);
@@ -129,25 +139,25 @@
   height: 0px;
 }
 ::-webkit-scrollbar-thumb {
-    background: #e1e1e1;
-    border: 0px none #ffffff;
-    border-radius: 0px;
-    &:hover{
-        background: #cccccc;
-    }
-    &:active{
-        background: #888888; 
-    }
-}
-::-webkit-scrollbar-track {
-    background: #666666;
+    background: #777;
     border: 0px none #ffffff;
     border-radius: 0px;
     &:hover{
         background: #666666;
     }
     &:active{
-        background: #333333; 
+        background: #333333;
+    }
+}
+::-webkit-scrollbar-track {
+    background: #eee;
+    border: 0px none #ffffff;
+    border-radius: 0px;
+    &:hover{
+        background: #cccccc;
+    }
+    &:active{
+        background: #888888;
     }
 }
 ::-webkit-scrollbar-corner {

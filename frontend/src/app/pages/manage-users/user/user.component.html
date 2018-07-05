@@ -96,7 +96,9 @@
                 <div class="col-sm-6">
                     <label for="email">Email</label>
                     <div>
-                        <input id="email" class="form-control" formControlName="email">
+                        <input id="email" class="form-control checking-field" formControlName="email">
+                        <form-error-block [control]="form.get('email')" [formSubmitted]="submitted"
+                                          [title]="'Email'"></form-error-block>
                     </div>
                 </div>
                 <div class="col-sm-6">

@@ -3,4 +3,5 @@
     <span class="text-danger" *ngIf="control.hasError('unique')"><strong>{{title}}</strong> need be unique</span>
     <span class="text-danger" *ngIf="control.hasError('maxlength')"><strong>{{title}}</strong> max length is {{control.getError('maxlength').requiredLength}}</span>
     <span class="text-danger" *ngIf="control.hasError('minlength')"><strong>{{title}}</strong> min length is {{control.getError('minlength').requiredLength}}</span>
+    <span class="text-danger" *ngIf="control.hasError('invalidFormat')">Invalid format for {{ title }}</span>
 </span>
