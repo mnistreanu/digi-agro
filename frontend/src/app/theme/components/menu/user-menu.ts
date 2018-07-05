@@ -8,6 +8,14 @@ export const userMenuItems = [
     order: 0
   },
   {
+    title: 'Telemetry',
+    routerLink: '/pages/telemetry',
+    icon: 'fas fa-globe',
+    selected: false,
+    expanded: false,
+    order: 1
+  },
+  {
     title: 'Charts',
     routerLink: 'charts',
     icon: 'fa-bar-chart',

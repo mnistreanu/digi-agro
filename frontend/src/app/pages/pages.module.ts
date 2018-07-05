@@ -16,6 +16,7 @@ import {BackTopComponent} from "../theme/components/back-top/back-top.component"
 import {SearchComponent} from "./search/search.component";
 import {AdminGuard} from "../guard/admin-guard";
 import {UserGuard} from "../guard/user-guard";
+import {AuthGuard} from "../guard/auth-guard";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -43,6 +44,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         SearchComponent
     ],
     providers: [
+        AuthGuard,
         AdminGuard,
         UserGuard,
         {provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG}

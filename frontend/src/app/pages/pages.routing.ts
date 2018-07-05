@@ -5,10 +5,11 @@ import { PagesComponent } from './pages.component';
 import { BlankComponent } from './blank/blank.component';
 import { SearchComponent } from './search/search.component';
 import {AdminGuard} from "../guard/admin-guard";
+import {AuthGuard} from "../guard/auth-guard";
 
 export const routes: Routes = [
     {
-        path: '', 
+        path: '',
         component: PagesComponent,
         children:[
             { path:'', redirectTo:'dashboard', pathMatch:'full' },
@@ -27,7 +28,8 @@ export const routes: Routes = [
             { path: 'manage-users', loadChildren: 'app/pages/manage-users/manage-users.module#ManageUsersModule', data: { breadcrumb: 'Manage Users' }, canActivate: [AdminGuard] },
             { path: 'manage-brands', loadChildren: 'app/pages/manage-brands/manage-brands.module#ManageBrandsModule', data: { breadcrumb: 'Manage Brands' }, canActivate: [AdminGuard] },
             { path: 'manage-owners', loadChildren: 'app/pages/manage-owners/manage-owners.module#ManageOwnersModule', data: { breadcrumb: 'Manage Owners' }, canActivate: [AdminGuard] },
-            { path: 'manage-machines', loadChildren: 'app/pages/manage-machines/manage-machines.module#ManageMachinesModule', data: { breadcrumb: 'Manage Machines' }, canActivate: [AdminGuard] }
+            { path: 'manage-machines', loadChildren: 'app/pages/manage-machines/manage-machines.module#ManageMachinesModule', data: { breadcrumb: 'Manage Machines' }, canActivate: [AdminGuard] },
+            { path: 'telemetry', loadChildren: 'app/pages/telemetry/telemetry.module#TelemetryModule', data: { breadcrumb: 'Telemetry' }, canActivate: [AuthGuard] }
         ]
     }
 ];

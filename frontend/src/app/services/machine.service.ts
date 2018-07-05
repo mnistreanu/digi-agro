@@ -36,7 +36,6 @@ export class MachineService {
 
   fetchIdentifiers(): Observable<string[]> {
     return this.http.get(this.api + '/fetchIdentifiers', this.authService.getOptions())
-        .map((response: Response) => response.json())
         .catch(error => this.errorService.processError(error));
   }
 
