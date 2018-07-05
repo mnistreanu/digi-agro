@@ -4,6 +4,8 @@ import {UserService} from "../../../services/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserAccountModel} from "./user-account.model";
 import {emailValidator} from "../../../theme/validators/email.validator";
+import {ToastrService} from "ngx-toastr";
+import {Messages} from "../../../common/messages";
 
 @Component({
     selector: 'az-user',
@@ -22,7 +24,8 @@ export class UserComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
-                private userService: UserService) {
+                private userService: UserService,
+                private toastr: ToastrService) {
     }
 
     ngOnInit() {
@@ -86,7 +89,8 @@ export class UserComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-          return;
+            this.toastr.warning(Messages.VALIDATION_ERROR);
+            return;
         }
 
         Object.assign(this.model, form.value);
@@ -94,13 +98,15 @@ export class UserComponent implements OnInit {
         this.submitted = false;
 
         this.userService.save(this.model).subscribe((model) => {
-          this.model = model;
+            this.model = model;
+            this.toastr.success(Messages.SAVED);
         });
     }
 
     public remove() {
         this.userService.remove(this.model).subscribe(() => {
-          this.router.navigate(['/pages/manage-users']);
+            this.toastr.success(Messages.DELETED);
+            this.router.navigate(['/pages/manage-users']);
         });
     }
 

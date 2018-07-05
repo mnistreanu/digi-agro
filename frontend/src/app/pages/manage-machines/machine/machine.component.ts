@@ -5,6 +5,8 @@ import {OwnerService} from "../../../services/owner.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MachineModel} from "./machine.model";
+import {ToastrService} from "ngx-toastr";
+import {Messages} from "../../../common/messages";
 
 @Component({
     selector: 'az-machine',
@@ -34,7 +36,8 @@ export class MachineComponent implements OnInit {
                 private route: ActivatedRoute,
                 private ownerService: OwnerService,
                 private brandService: BrandService,
-                private machineService: MachineService,) {
+                private machineService: MachineService,
+                private toastr: ToastrService) {
     }
 
     ngOnInit() {
@@ -137,6 +140,7 @@ export class MachineComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
+            this.toastr.warning(Messages.VALIDATION_ERROR);
             return;
         }
 
@@ -148,6 +152,7 @@ export class MachineComponent implements OnInit {
 
         this.machineService.save(this.model).subscribe((model) => {
             this.model = model;
+            this.toastr.success(Messages.SAVED);
         });
 
     }
@@ -167,6 +172,7 @@ export class MachineComponent implements OnInit {
 
     public remove() {
         this.machineService.remove(this.model).subscribe(() => {
+            this.toastr.success(Messages.DELETED);
             this.router.navigate(['/pages/manage-machines']);
         });
     }

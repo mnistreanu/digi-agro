@@ -27,7 +27,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     imports: [
         CommonModule,
         PerfectScrollbarModule,
-        ToastrModule.forRoot(),
         DirectivesModule,
         PipesModule,
         routing

@@ -14,6 +14,7 @@ import {AuthService} from "./services/auth.service";
 import {ErrorService} from "./services/error.service";
 import {HttpClientModule} from "@angular/common/http";
 import {UserService} from "./services/user.service";
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {UserService} from "./services/user.service";
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ToastrModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDe_oVpi9eRSN99G4o6TwVjJbFBNr58NxE'
     }),
