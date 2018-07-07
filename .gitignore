@@ -16,3 +16,5 @@ inventory-app.iml
 
 
 /frontend/node_modules
+/frontend/package-lock.json
+/frontend/npm-debug.log
