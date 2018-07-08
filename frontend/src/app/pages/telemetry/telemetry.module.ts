@@ -11,6 +11,10 @@ import {EditRendererComponent} from "../../modules/aggrid/edit-renderer/edit-ren
 import {AgGridModule} from "ag-grid-angular";
 import {DeleteRendererComponent} from "../../modules/aggrid/delete-renderer/delete-renderer.component";
 import {NguiMapModule} from "@ngui/map";
+import { MapEventsComponent } from './map-events/map-events.component';
+import {MapEventService} from "../../services/map-event.service";
+import { TelemetryMapComponent } from './telemetry-map/telemetry-map.component';
+import { CoordinatesComponent } from './coordinates/coordinates.component';
 
 export const routes = [
   { path: '', component: TelemetryComponent, pathMatch: 'full' }
@@ -28,7 +32,7 @@ export const routes = [
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyC_u-ujFg1xhXlOnOV0GyptTlory-KvlFY'}),
     RouterModule.forChild(routes),
   ],
-  declarations: [TelemetryComponent],
-  providers: [TelemetryService]
+  declarations: [TelemetryComponent, MapEventsComponent, TelemetryMapComponent, CoordinatesComponent],
+  providers: [TelemetryService, MapEventService]
 })
 export class TelemetryModule { }
