@@ -1,31 +1,35 @@
 package com.arobs.model;
 
 
-import com.arobs.entity.Telemetry;
+import com.arobs.entity.MapEvent;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class TelemetryModel {
+public class MapEventModel {
 
     private Long id;
 
     private String username;
     private String machineIdentifier;
 
+    private String message;
+
     private BigDecimal latitude;
     private BigDecimal longitude;
 
     private Date createdAt;
 
-    public TelemetryModel() {
+    public MapEventModel() {
     }
 
-    public TelemetryModel(Telemetry entity) {
+    public MapEventModel(MapEvent entity) {
         id = entity.getId();
 
         username = entity.getUserAccount().getUsername();
         machineIdentifier = entity.getMachine().getIdentifier();
+
+        message = entity.getMessage();
 
         longitude = entity.getLongitude();
         latitude = entity.getLatitude();
@@ -79,5 +83,13 @@ public class TelemetryModel {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

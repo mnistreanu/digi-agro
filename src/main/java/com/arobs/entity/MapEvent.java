@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-public class Telemetry {
+public class MapEvent {
 
     @Id
     @GeneratedValue
@@ -22,13 +22,15 @@ public class Telemetry {
 
     private Date createdAt;
 
+    private String message;
+
     @Column(columnDefinition="Decimal(16, 6) default '0.000000'")
     private BigDecimal latitude, longitude;
 
     @Column(columnDefinition = "boolean default true")
     private boolean active = true;
 
-    public Telemetry() {
+    public MapEvent() {
     }
 
     public Long getId() {
@@ -85,5 +87,13 @@ public class Telemetry {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

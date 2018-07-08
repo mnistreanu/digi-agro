@@ -1,48 +1,43 @@
 package com.arobs.service;
 
-import com.arobs.entity.Telemetry;
+import com.arobs.entity.MapEvent;
 import com.arobs.interfaces.HasRepository;
-import com.arobs.model.TelemetryModel;
-import com.arobs.repository.TelemetryRepository;
-import com.arobs.repository.custom.TelemetryCustomRepository;
+import com.arobs.model.MapEventModel;
+import com.arobs.model.UpdateFieldModel;
+import com.arobs.repository.MapEventRepository;
+import com.arobs.repository.custom.MapEventCustomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
-public class TelemetryService implements HasRepository<TelemetryRepository> {
+public class MapEventService implements HasRepository<MapEventRepository> {
 
     @Autowired
-    private TelemetryRepository telemetryRepository;
+    private MapEventRepository mapEventRepository;
     @Autowired
-    private TelemetryCustomRepository telemetryCustomRepository;
+    private MapEventCustomRepository mapEventCustomRepository;
     @Autowired
     private UserAccountService userAccountService;
     @Autowired
     private MachineService machineService;
 
 
-    public Telemetry findOne(Long id) {
+    public MapEvent findOne(Long id) {
         return getRepository().findOne(id);
     }
 
-    public TelemetryModel findModelById(Long id) {
-        return new TelemetryModel(getRepository().findOne(id));
+    public MapEventModel findModelById(Long id) {
+        return new MapEventModel(getRepository().findOne(id));
     }
 
-    public List<Telemetry> findAll() {
-        return getRepository().findAll();
-    }
-
-    public List<TelemetryModel> findByMachineIdentifierAndUsername(String machineIdentifier, String username) {
-        List<Telemetry> items = getRepository().findByMachineIdentifierAndUsername(machineIdentifier, username);
-        return items.stream().map(TelemetryModel::new).collect(Collectors.toList());
+    public List<MapEventModel> findByMachineIdentifierAndUsername(String machineIdentifier, String username) {
+        List<MapEvent> items = getRepository().findByMachineIdentifierAndUsername(machineIdentifier, username);
+        return items.stream().map(MapEventModel::new).collect(Collectors.toList());
     }
 
     @Transactional
@@ -51,11 +46,11 @@ public class TelemetryService implements HasRepository<TelemetryRepository> {
     }
 
     @Transactional(rollbackOn = Exception.class)
-    public Telemetry save(TelemetryModel model) {
-        Telemetry entity;
+    public MapEvent save(MapEventModel model) {
+        MapEvent entity;
 
         if (model.getId() == null) {
-            entity = new Telemetry();
+            entity = new MapEvent();
         }
         else {
             entity = findOne(model.getId());
@@ -65,7 +60,7 @@ public class TelemetryService implements HasRepository<TelemetryRepository> {
         return getRepository().save(entity);
     }
 
-    private void copyValues(Telemetry entity, TelemetryModel model) {
+    private void copyValues(MapEvent entity, MapEventModel model) {
         entity.setLongitude(model.getLongitude());
         entity.setLatitude(model.getLatitude());
 
@@ -73,19 +68,20 @@ public class TelemetryService implements HasRepository<TelemetryRepository> {
             entity.setCreatedAt(new Date());
         }
 
+        entity.setMessage(model.getMessage());
+
         entity.setUserAccount(userAccountService.findByUsername(model.getUsername()));
         entity.setMachine(machineService.findByIdentifier(model.getMachineIdentifier()));
-
 
     }
 
     @Transactional
-    public void updateCoordinate(Long id, String field, BigDecimal value) {
-        telemetryCustomRepository.updateCoordinate(id, field, value);
+    public void update(UpdateFieldModel model) {
+        mapEventCustomRepository.update(model);
     }
 
     @Override
-    public TelemetryRepository getRepository() {
-        return telemetryRepository;
+    public MapEventRepository getRepository() {
+        return mapEventRepository;
     }
 }

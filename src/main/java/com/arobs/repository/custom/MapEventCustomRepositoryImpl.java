@@ -1,5 +1,6 @@
 package com.arobs.repository.custom;
 
+import com.arobs.model.UpdateFieldModel;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 
@@ -8,20 +9,28 @@ import javax.persistence.PersistenceContext;
 import java.math.BigDecimal;
 
 @Repository
-public class TelemetryCustomRepositoryImpl implements TelemetryCustomRepository {
+public class MapEventCustomRepositoryImpl implements MapEventCustomRepository {
 
     @PersistenceContext
     private EntityManager em;
 
     @Modifying
     @Override
-    public void updateCoordinate(Long id, String field, BigDecimal value) {
+    public void update(UpdateFieldModel model) {
 
-        String queryStr = "UPDATE Telemetry t SET t." + field + " = :value WHERE t.id = :id";
+        String queryStr = "UPDATE MapEvent e SET e." + model.getField() + " = ";
 
-        em.createQuery(queryStr)
-                .setParameter("value", value)
-                .setParameter("id", id)
+
+        if (model.getValue() == null) {
+            queryStr += " null ";
+        }
+        else {
+            queryStr += " '" + model.getValue() + "' ";
+        }
+
+        queryStr += " WHERE e.id = :id";
+
+        em.createQuery(queryStr).setParameter("id", model.getId())
                 .executeUpdate();
     }
 }

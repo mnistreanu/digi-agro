@@ -1,60 +1,42 @@
 package com.arobs.controller;
 
-import com.arobs.entity.Telemetry;
-import com.arobs.model.TelemetryModel;
-import com.arobs.service.TelemetryService;
+import com.arobs.model.MapEventModel;
+import com.arobs.model.UpdateFieldModel;
+import com.arobs.service.MapEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/telemetry")
-public class TelemetryController {
+@RequestMapping("/map-event")
+public class MapEventController {
 
     @Autowired
-    private TelemetryService telemetryService;
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<List<TelemetryModel>> getModels() {
-
-        List<Telemetry> items = telemetryService.findAll();
-        List<TelemetryModel> models = items.stream().map(TelemetryModel::new).collect(Collectors.toList());
-
-        return ResponseEntity.ok(models);
-    }
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<TelemetryModel> getModel(@PathVariable Long id) {
-        return ResponseEntity.ok(telemetryService.findModelById(id));
-    }
+    private MapEventService mapEventService;
 
     @RequestMapping(value = "/findByMachineIdentifierAndUsername", method = RequestMethod.GET)
-    public ResponseEntity<List<TelemetryModel>> findByMachineIdentifierAndUsername(
+    public ResponseEntity<List<MapEventModel>> findByMachineIdentifierAndUsername(
             @RequestParam("machineIdentifier") String machineIdentifier,
             @RequestParam("username") String username) {
-        return ResponseEntity.ok(telemetryService.findByMachineIdentifierAndUsername(machineIdentifier, username));
+        return ResponseEntity.ok(mapEventService.findByMachineIdentifierAndUsername(machineIdentifier, username));
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity<TelemetryModel> save(@RequestBody TelemetryModel model) {
-        return ResponseEntity.ok(new TelemetryModel(telemetryService.save(model)));
+    public ResponseEntity<MapEventModel> save(@RequestBody MapEventModel model) {
+        return ResponseEntity.ok(new MapEventModel(mapEventService.save(model)));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void remove(@PathVariable Long id) {
-        telemetryService.remove(id);
+        mapEventService.remove(id);
     }
 
-    @RequestMapping(value = "/updateCoordinate", method = RequestMethod.GET)
-    public void updateCoordinate(@RequestParam("id") Long id,
-                                 @RequestParam("field") String field,
-                                 @RequestParam("value") BigDecimal value) {
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public void update(@RequestBody UpdateFieldModel model) {
 
-        telemetryService.updateCoordinate(id, field, value);
+        mapEventService.update(model);
     }
 
 }
