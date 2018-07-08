@@ -27,6 +27,8 @@ export class Widget implements OnInit {
   }
 
   ngOnInit(): void {
-    this.$el.widgster();
+    let collapsed = this.$el.attr('data-widget-collapsed') === 'true';
+    let options = {collapsed: collapsed};
+    this.$el.widgster(options);
   }
 }
