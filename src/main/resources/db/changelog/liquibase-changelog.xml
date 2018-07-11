@@ -6,17 +6,18 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="insert-default-user" author="maxim.nistreanu" failOnError="false" runOnChange="true">
+    <changeSet id="insert-super-admin" author="maxim.nistreanu" failOnError="false" runOnChange="true">
         <sql>
             <!--password: test123 -->
-            INSERT INTO user_account (id, username, password) values(1, 'admin', '$2a$10$J.79O6b/Zo9rPAivWonK1ufA3yB.dsH1UJMVZRrarOrBiDzFRT9NO');
+            INSERT INTO user_account (id, username, password) values(1, 'super-admin', '$2a$10$J.79O6b/Zo9rPAivWonK1ufA3yB.dsH1UJMVZRrarOrBiDzFRT9NO');
         </sql>
     </changeSet>
 
     <changeSet id="insert-authorities" author="maxim.nistreanu" failOnError="false" runOnChange="true">
         <sql>
-            INSERT INTO authority (id, name) values(1, 'ROLE_ADMIN');
-            INSERT INTO authority (id, name) values(2, 'ROLE_USER');
+            INSERT INTO authority (id, name) values(1, 'ROLE_SUPER_ADMIN');
+            INSERT INTO authority (id, name) values(2, 'ROLE_ADMIN');
+            INSERT INTO authority (id, name) values(3, 'ROLE_USER');
         </sql>
     </changeSet>
 

@@ -96,4 +96,13 @@ export class AuthService {
     hasAuthority(authorityName) {
         return this.isAuthenticated() && JSON.parse(localStorage.getItem(Authorities.AUTHORITY_OBJECT))[authorityName];
     }
+
+    isSuperAdmin() {
+        return this.hasAuthority(Authorities.ROLE_SUPER_ADMIN);
+    }
+
+    isAdmin() {
+        return this.hasAuthority(Authorities.ROLE_ADMIN);
+    }
+
 }

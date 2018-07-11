@@ -6,6 +6,8 @@ import {UserAccountModel} from "./user-account.model";
 import {emailValidator} from "../../../theme/validators/email.validator";
 import {ToastrService} from "ngx-toastr";
 import {Messages} from "../../../common/messages";
+import {AuthService} from "../../../services/auth.service";
+import {Authorities} from "../../../common/authorities";
 
 @Component({
     selector: 'az-user',
@@ -24,6 +26,7 @@ export class UserComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
+                private authService: AuthService,
                 private userService: UserService,
                 private toastr: ToastrService) {
     }
@@ -96,11 +99,22 @@ export class UserComponent implements OnInit {
         Object.assign(this.model, form.value);
         this.isNew = false;
         this.submitted = false;
+        this.setupRole();
+
 
         this.userService.save(this.model).subscribe((model) => {
             this.model = model;
             this.toastr.success(Messages.SAVED);
         });
+    }
+
+    private setupRole() {
+        if (this.authService.isSuperAdmin()) {
+            this.model.roleName = Authorities.ROLE_ADMIN;
+        }
+        else {
+            this.model.roleName = Authorities.ROLE_USER;
+        }
     }
 
     public remove() {

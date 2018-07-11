@@ -16,7 +16,6 @@ export class ErrorService {
 
     processError(response: any): Observable<any> {
 
-        // this.spinnerService.hide();
         let status = response.status;
         let message = response.error.message || Constants.SERVER_ERROR;
 
@@ -25,19 +24,34 @@ export class ErrorService {
             this.toastr.error(status == 401 ? Messages.UNAUTHORIZED : Messages.FORBIDDEN);
             this.router.navigate([Constants.LOGIN_PAGE]);
         }
-        // else {
-        //   if (status == 404) {
-        //     message = 'Not Found';
-        //   }
-        //   else if (status == 0) {
-        //     message = 'Can\'t connect to Server';
-        //   }
-        //   this.setupErrorInfo(status, message);
-        //   this.router.navigate([Constants.ERROR_PAGE]);
-        // }
+        else {
+            if (status == 404) {
+                message = 'Not Found';
+            }
+            else if (status == 0) {
+                message = 'Can\'t connect to Server';
+            }
+            this.setupError(status, message);
+            this.router.navigate([Constants.ERROR_PAGE]);
+        }
 
-        return Observable.throw(message);
+        return Observable.throwError(message);
     }
 
+    private setupError(status, message) {
+        let errorInfo = {
+            status: status,
+            message: message
+        };
+        localStorage.setItem('error-info', JSON.stringify(errorInfo));
+    }
+
+    public getError(): Error {
+        return JSON.parse(localStorage.getItem('error-info'));
+    }
+
+    public clearError() {
+        localStorage.removeItem('error-info')
+    }
 
 }

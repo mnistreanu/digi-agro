@@ -4,6 +4,7 @@ import {Authorities} from "../../../common/authorities";
 import {adminMenuItems} from "./admin-menu";
 import {userMenuItems} from "./user-menu";
 import {menuItems} from './menu';
+import {superAdminMenuItems} from "./super-admin-menu";
 
 @Injectable()
 export class MenuService {
@@ -18,6 +19,9 @@ export class MenuService {
         }
         else if (this.authService.hasAuthority(Authorities.ROLE_ADMIN)) {
             return adminMenuItems
+        }
+        else if (this.authService.hasAuthority(Authorities.ROLE_SUPER_ADMIN)) {
+            return superAdminMenuItems
         }
 
         return menuItems;

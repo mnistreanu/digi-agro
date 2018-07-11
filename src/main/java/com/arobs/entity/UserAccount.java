@@ -13,7 +13,6 @@ public class UserAccount {
     private Long id;
 
     private String username;
-
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -23,20 +22,18 @@ public class UserAccount {
             inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")})
     private List<Authority> authorities;
 
+    @ManyToMany
+    @JoinTable(
+            name = "tenant_user",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "tenant_id", referencedColumnName = "id")})
+    private List<Tenant> tenants;
+
     private String email;
-
-    private String idnp;
-
     private String firstName;
-
     private String lastName;
-
-    private Date birthDate;
-
     private String address;
-
     private String phone;
-
     private String mobilePhone;
 
     @Column(columnDefinition = "boolean default true")
@@ -88,14 +85,6 @@ public class UserAccount {
         this.email = email;
     }
 
-    public String getIdnp() {
-        return idnp;
-    }
-
-    public void setIdnp(String idnp) {
-        this.idnp = idnp;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -110,14 +99,6 @@ public class UserAccount {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
     }
 
     public String getAddress() {
@@ -150,5 +131,13 @@ public class UserAccount {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public List<Tenant> getTenants() {
+        return tenants;
+    }
+
+    public void setTenants(List<Tenant> tenants) {
+        this.tenants = tenants;
     }
 }

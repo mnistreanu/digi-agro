@@ -22,7 +22,14 @@ public class UserController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<List<UserAccountLightModel>> getModels() {
 
-        List<UserAccount> userAccounts = userAccountService.findUsers();
+        List<UserAccount> userAccounts;
+        if (userAccountService.isSuperAdminAdmin()) {
+            userAccounts = userAccountService.findAdmins();
+        }
+        else {
+            userAccounts = userAccountService.findUsers();
+        }
+
         List<UserAccountLightModel> models = userAccounts.stream().map(UserAccountLightModel::new).collect(Collectors.toList());
 
         return ResponseEntity.ok(models);
@@ -38,13 +45,13 @@ public class UserController {
         return ResponseEntity.ok(userAccountService.checkUsernameUnique(id, username));
     }
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPER_ADMIN','ROLE_ADMIN')")
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<UserAccountModel> save(@RequestBody UserAccountModel model) {
         return ResponseEntity.ok(new UserAccountModel(userAccountService.save(model)));
     }
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPER_ADMIN','ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void remove(@PathVariable Long id) {
         userAccountService.remove(id);

@@ -1,8 +1,13 @@
 package com.arobs.model.userAccount;
 
+import com.arobs.entity.Authority;
+import com.arobs.entity.Tenant;
 import com.arobs.entity.UserAccount;
+import com.arobs.enums.AuthorityName;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserAccountModel {
 
@@ -14,13 +19,9 @@ public class UserAccountModel {
 
     private String email;
 
-    private String idnp;
-
     private String firstName;
 
     private String lastName;
-
-    private Date birthDate;
 
     private String address;
 
@@ -30,6 +31,10 @@ public class UserAccountModel {
 
     private boolean active;
 
+    private AuthorityName roleName;
+
+    private List<Long> tenants;
+
     public UserAccountModel() {
     }
 
@@ -37,15 +42,23 @@ public class UserAccountModel {
         id = entity.getId();
         username = entity.getUsername();
         email = entity.getEmail();
-        idnp = entity.getIdnp();
         firstName = entity.getFirstName();
         lastName = entity.getLastName();
-        birthDate = entity.getBirthDate();
         address = entity.getAddress();
         phone = entity.getPhone();
         mobilePhone = entity.getMobilePhone();
-
         active = entity.isActive();
+        for (Authority authority : entity.getAuthorities()) {
+            if (authority.getName().name().startsWith("ROLE_")) {
+                roleName = authority.getName();
+                break;
+            }
+        }
+
+        if (entity.getTenants() != null) {
+            tenants = entity.getTenants().stream().map(Tenant::getId).collect(Collectors.toList());
+        }
+
     }
 
     public Long getId() {
@@ -72,14 +85,6 @@ public class UserAccountModel {
         this.email = email;
     }
 
-    public String getIdnp() {
-        return idnp;
-    }
-
-    public void setIdnp(String idnp) {
-        this.idnp = idnp;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -94,14 +99,6 @@ public class UserAccountModel {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
     }
 
     public String getAddress() {
@@ -142,5 +139,21 @@ public class UserAccountModel {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public AuthorityName getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(AuthorityName roleName) {
+        this.roleName = roleName;
+    }
+
+    public List<Long> getTenants() {
+        return tenants;
+    }
+
+    public void setTenants(List<Long> tenants) {
+        this.tenants = tenants;
     }
 }

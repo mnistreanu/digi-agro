@@ -8,7 +8,8 @@ export const routes: Routes = [
   { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
   { path: 'login', loadChildren: 'app/pages/login/login.module#LoginModule' },
   { path: 'register', loadChildren: 'app/pages/register/register.module#RegisterModule' },
-  { path: '**', component: ErrorComponent }
+  { path: 'pages/error', component: ErrorComponent },
+  { path: '**', redirectTo: 'pages' }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes, {

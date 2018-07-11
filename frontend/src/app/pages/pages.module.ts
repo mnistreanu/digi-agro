@@ -1,7 +1,6 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from "ngx-perfect-scrollbar";
-import {ToastrModule} from "ngx-toastr";
 import {DirectivesModule} from "../theme/directives/directives.module";
 import {PipesModule} from "../theme/pipes/pipes.module";
 import {routing} from "./pages.routing";
@@ -17,6 +16,10 @@ import {SearchComponent} from "./search/search.component";
 import {AdminGuard} from "../guard/admin-guard";
 import {UserGuard} from "../guard/user-guard";
 import {AuthGuard} from "../guard/auth-guard";
+import {SuperAdminGuard} from "../guard/super-admin-guard";
+import {SuperAdminOrAdminGuard} from "../guard/super-admin-or-admin-guard";
+import {TenantService} from "../services/tenant.service";
+import {UserService} from "../services/user.service";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -44,8 +47,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ],
     providers: [
         AuthGuard,
+        SuperAdminGuard,
+        SuperAdminOrAdminGuard,
         AdminGuard,
         UserGuard,
+        TenantService,
         {provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG}
     ]
 })

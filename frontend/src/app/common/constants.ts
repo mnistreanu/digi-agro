@@ -8,7 +8,7 @@ export class Constants {
 
   public static LOGIN_PAGE: string = "/login";
   public static PAGE_AFTER_LOGIN: string = "/pages/dashboard";
-  public static ERROR_PAGE: string = "/error";
+  public static ERROR_PAGE: string = "/pages/error";
 
 
 }

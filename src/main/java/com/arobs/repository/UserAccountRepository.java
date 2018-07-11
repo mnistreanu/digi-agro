@@ -21,6 +21,11 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, Long> 
             " (SELECT auth FROM Authority auth WHERE auth.name = com.arobs.enums.AuthorityName.ROLE_USER) IN (authorities)")
     List<UserAccount> findUsers();
 
+    @Query("SELECT ua FROM UserAccount ua LEFT JOIN ua.authorities authorities " +
+            "WHERE ua.active = true AND " +
+            " (SELECT auth FROM Authority auth WHERE auth.name = com.arobs.enums.AuthorityName.ROLE_ADMIN) IN (authorities)")
+    List<UserAccount> findAdmins();
+
     @Modifying
     @Query("UPDATE UserAccount ua SET ua.active = false WHERE ua.id = :id")
     void remove(@Param("id") Long id);

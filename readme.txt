@@ -1,7 +1,7 @@
 Backend:
 - install: Java, Gradle, PostgreSQL
 - with gradle, install all dependencies
-- create data base with name: inventory-db
+- create data base with name: digi-agro-db
 - start Application.java, will be created structure in DB
 - restart application
 
