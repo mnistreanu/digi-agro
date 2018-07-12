@@ -34,4 +34,10 @@ public interface TenantBranchRepository extends JpaRepository<TenantBranch, Long
     @Query("SELECT b.id FROM TenantBranch b WHERE b.parent.id = :id")
     List<Long> getChildren(@Param("id") Long id);
 
+    @Query("SELECT new com.arobs.model.ListItemModel(b.id, b.name) " +
+            " FROM TenantBranch b WHERE b.active = true AND b.tenant.id IN (:tenants)")
+    List<ListItemModel> findByTenants(@Param("tenants") List<Long> tenants);
+
+    @Query("SELECT b FROM TenantBranch b WHERE b.id IN (:ids)")
+    List<TenantBranch> findByIds(@Param("ids") List<Long> ids);
 }

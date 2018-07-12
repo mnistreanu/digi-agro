@@ -2,6 +2,7 @@ package com.arobs.service;
 
 
 import com.arobs.entity.Tenant;
+import com.arobs.entity.TenantBranch;
 import com.arobs.entity.UserAccount;
 import com.arobs.enums.AuthorityName;
 import com.arobs.interfaces.HasRepository;
@@ -26,6 +27,8 @@ public class UserAccountService implements HasRepository<UserAccountRepository> 
     private AuthorityService authorityService;
     @Autowired
     private TenantService tenantService;
+    @Autowired
+    private TenantBranchService tenantBranchService;
 
     public boolean checkUsernameUnique(Long id, String username) {
         if (id == -1) {
@@ -122,6 +125,18 @@ public class UserAccountService implements HasRepository<UserAccountRepository> 
                 userAccount.getTenants().addAll(tenants);
             }
         }
+
+        if (model.getBranches() != null) {
+            List<TenantBranch> branches = tenantBranchService.findByIds(model.getBranches());
+            if (userAccount.getBranches() == null) {
+                userAccount.setBranches(branches);
+            }
+            else {
+                userAccount.getBranches().clear();
+                userAccount.getBranches().addAll(branches);
+            }
+        }
+
     }
 
     @Override

@@ -26,6 +26,13 @@ public class TenantBranchController {
         return ResponseEntity.ok(models);
     }
 
+
+    @RequestMapping(value = "/findByTenants", method = RequestMethod.POST)
+    public ResponseEntity<List<ListItemModel>> findByTenants(@RequestBody List<Long> tenants) {
+        List<ListItemModel> models = tenantBranchService.findByTenants(tenants);
+        return ResponseEntity.ok(models);
+    }
+
     @RequestMapping(value = "/findBy", method = RequestMethod.POST)
     public ResponseEntity<List<TenantBranchModel>> getModels(@RequestBody TenantBranchFilterRequestModel filterRequestModel) {
         List<TenantBranchModel> models = tenantBranchService.findByFilter(filterRequestModel);

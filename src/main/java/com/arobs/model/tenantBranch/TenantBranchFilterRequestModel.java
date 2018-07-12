@@ -3,6 +3,7 @@ package com.arobs.model.tenantBranch;
 
 public class TenantBranchFilterRequestModel {
 
+    private Long tenantId;
     private String name;
     private String description;
     private String country;
@@ -12,6 +13,14 @@ public class TenantBranchFilterRequestModel {
     private String phones;
 
     public TenantBranchFilterRequestModel() {
+    }
+
+    public Long getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(Long tenantId) {
+        this.tenantId = tenantId;
     }
 
     public String getName() {

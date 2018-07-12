@@ -119,4 +119,15 @@ public class TenantBranchService implements HasRepository<TenantBranchRepository
             return getRepository().fetchItemsByTenantAndNotIn(tenantId, treeDown);
         }
     }
+
+    public List<ListItemModel> findByTenants(List<Long> tenants) {
+        return getRepository().findByTenants(tenants);
+    }
+
+    public List<TenantBranch> findByIds(List<Long> ids) {
+        if (ids == null || ids.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return getRepository().findByIds(ids);
+    }
 }

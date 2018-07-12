@@ -20,6 +20,10 @@ public class TenantBranchCustomRepositoryImpl implements TenantBranchCustomRepos
         String queryStr = "SELECT new com.arobs.model.tenantBranch.TenantBranchModel(b) " +
                 " FROM TenantBranch b WHERE b.active = true ";
 
+        if (filterRequestModel.getTenantId() != null) {
+            queryStr += " AND b.tenant.id = " + filterRequestModel.getTenantId();
+        }
+
         if (filterRequestModel.getName() != null) {
             queryStr += " AND b.name LIKE '%" + filterRequestModel.getName() + "%' ";
         }

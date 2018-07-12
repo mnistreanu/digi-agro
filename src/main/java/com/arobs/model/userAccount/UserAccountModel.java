@@ -2,10 +2,10 @@ package com.arobs.model.userAccount;
 
 import com.arobs.entity.Authority;
 import com.arobs.entity.Tenant;
+import com.arobs.entity.TenantBranch;
 import com.arobs.entity.UserAccount;
 import com.arobs.enums.AuthorityName;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +34,7 @@ public class UserAccountModel {
     private AuthorityName roleName;
 
     private List<Long> tenants;
+    private List<Long> branches;
 
     public UserAccountModel() {
     }
@@ -57,6 +58,10 @@ public class UserAccountModel {
 
         if (entity.getTenants() != null) {
             tenants = entity.getTenants().stream().map(Tenant::getId).collect(Collectors.toList());
+        }
+
+        if (entity.getBranches() != null) {
+            branches = entity.getBranches().stream().map(TenantBranch::getId).collect(Collectors.toList());
         }
 
     }
@@ -155,5 +160,13 @@ public class UserAccountModel {
 
     public void setTenants(List<Long> tenants) {
         this.tenants = tenants;
+    }
+
+    public List<Long> getBranches() {
+        return branches;
+    }
+
+    public void setBranches(List<Long> branches) {
+        this.branches = branches;
     }
 }

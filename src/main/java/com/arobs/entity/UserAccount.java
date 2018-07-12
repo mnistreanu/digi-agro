@@ -29,6 +29,13 @@ public class UserAccount {
             inverseJoinColumns = {@JoinColumn(name = "tenant_id", referencedColumnName = "id")})
     private List<Tenant> tenants;
 
+    @ManyToMany
+    @JoinTable(
+            name = "user_branch",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "branch_id", referencedColumnName = "id")})
+    private List<TenantBranch> branches;
+
     private String email;
     private String firstName;
     private String lastName;
@@ -139,5 +146,13 @@ public class UserAccount {
 
     public void setTenants(List<Tenant> tenants) {
         this.tenants = tenants;
+    }
+
+    public List<TenantBranch> getBranches() {
+        return branches;
+    }
+
+    public void setBranches(List<TenantBranch> branches) {
+        this.branches = branches;
     }
 }
