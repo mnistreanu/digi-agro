@@ -1,0 +1,113 @@
+<div widget class="card">
+    <div class="card-header">
+        <span>Profile</span>
+        <div class="widget-controls">
+            <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
+            <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
+            <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
+            <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>
+            <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+        </div>
+    </div>
+    <div class="card-body widget-body">
+        <form [formGroup]="form" *ngIf="model">
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <div class="user-image-block">
+                        <img src="assets/img/users/user.jpg" alt="User Image">
+                    </div>
+                    <div class="user-image-change">
+                        <input type="file"/>
+                    </div>
+                </div>
+
+                <div class="col-sm-8">
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <label for="username">Username</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-user-o"></i></span>
+                                </div>
+                                <input id="username" class="form-control checking-field" formControlName="username"
+                                       (change)="validateUsernameToUnique()">
+                            </div>
+                            <form-error-block [control]="form.get('username')" [formSubmitted]="submitted"
+                                              [title]="'Username'"></form-error-block>
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="password">Password</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-key"></i></span>
+                                </div>
+                                <input id="password" class="form-control checking-field"
+                                       formControlName="password" type="password" autocomplete="new-password">
+                            </div>
+                            <form-error-block [control]="form.get('password')" [formSubmitted]="submitted"
+                                              [title]="'Password'"></form-error-block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="firstName">First Name</label>
+                    <div>
+                        <input id="firstName" class="form-control" formControlName="firstName">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="lastName">Last Name</label>
+                    <div>
+                        <input id="lastName" class="form-control" formControlName="lastName">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="email">Email</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                        </div>
+                        <input id="email" class="form-control checking-field" formControlName="email">
+                    </div>
+                    <form-error-block [control]="form.get('email')" [formSubmitted]="submitted"
+                                      [title]="'Email'"></form-error-block>
+                </div>
+                <div class="col-sm-6">
+                    <label for="address">Address</label>
+                    <div>
+                        <input id="address" class="form-control" formControlName="address">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="phone">Phone</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend"><span class="input-group-text">
+                            <i class="fa fa-phone"></i></span></div>
+                        <input id="phone" class="form-control" formControlName="phone">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="mobilePhone">Mobile Phone</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend"><span class="input-group-text">
+                            <i class="fas fa-mobile-alt"></i></span></div>
+                        <input id="mobilePhone" class="form-control" formControlName="mobilePhone">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-success pull-right" (click)="save(form)">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

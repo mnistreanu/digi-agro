@@ -44,7 +44,7 @@ export class MenuComponent implements OnInit {
             }                
         });
 
-        this.authService.authStatusChanged.subscribe(() => {
+        this.authService.userChangedChanged.subscribe(() => {
             this.menuItems = _menuService.getMenuItems();
         });
 

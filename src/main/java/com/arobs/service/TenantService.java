@@ -22,7 +22,7 @@ public class TenantService implements HasRepository<TenantRepository> {
     @Autowired
     private TenantCustomRepository tenantCustomRepository;
     @Autowired
-    private UserAccountService userAccountService;
+    private AuthService authService;
 
     @Override
     public TenantRepository getRepository() {
@@ -34,11 +34,11 @@ public class TenantService implements HasRepository<TenantRepository> {
     }
 
     public List<ListItemModel> fetchListItems() {
-        if (userAccountService.isSuperAdminAdmin()) {
+        if (authService.isSuperAdminAdmin()) {
             return getRepository().fetchAllListItems();
         }
         else {
-            return getRepository().fetchListItemsByUser(userAccountService.getCurrentUser().getId());
+            return getRepository().fetchListItemsByUser(authService.getCurrentUser().getId());
         }
     }
 

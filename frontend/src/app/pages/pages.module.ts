@@ -20,6 +20,9 @@ import {SuperAdminGuard} from "../guard/super-admin-guard";
 import {SuperAdminOrAdminGuard} from "../guard/super-admin-or-admin-guard";
 import {TenantService} from "../services/tenant.service";
 import {UserService} from "../services/user.service";
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormErrorBlockModule} from "../modules/form-error-block/form-error-block.module";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -32,7 +35,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         PerfectScrollbarModule,
         DirectivesModule,
         PipesModule,
-        routing
+        routing,
+        FormsModule,
+        ReactiveFormsModule,
+        FormErrorBlockModule
     ],
     declarations: [
         PagesComponent,
@@ -43,7 +49,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         MessagesComponent,
         BreadcrumbComponent,
         BackTopComponent,
-        SearchComponent
+        SearchComponent,
+        UserProfileComponent
     ],
     providers: [
         AuthGuard,

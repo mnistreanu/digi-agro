@@ -4,15 +4,11 @@ package com.arobs.service;
 import com.arobs.entity.Tenant;
 import com.arobs.entity.TenantBranch;
 import com.arobs.entity.UserAccount;
-import com.arobs.enums.AuthorityName;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.userAccount.UserAccountModel;
 import com.arobs.repository.UserAccountRepository;
-import com.arobs.security.JwtUser;
 import com.arobs.security.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -49,30 +45,6 @@ public class UserAccountService implements HasRepository<UserAccountRepository> 
         return new UserAccountModel(getRepository().findOne(id));
     }
 
-    public JwtUser getCurrentUser() {
-        return (JwtUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    }
-
-    public boolean isSuperAdminAdmin() {
-        JwtUser user = (JwtUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        for (GrantedAuthority grantedAuthority : user.getAuthorities()) {
-            if (grantedAuthority.getAuthority().equals(AuthorityName.ROLE_SUPER_ADMIN.name())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean isAdmin() {
-        JwtUser user = (JwtUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        for (GrantedAuthority grantedAuthority : user.getAuthorities()) {
-            if (grantedAuthority.getAuthority().equals(AuthorityName.ROLE_ADMIN.name())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public List<UserAccount> findAdmins() {
         return getRepository().findAdmins();
     }
@@ -103,17 +75,8 @@ public class UserAccountService implements HasRepository<UserAccountRepository> 
     }
 
     private void copyValues(UserAccount userAccount, UserAccountModel model) {
-        userAccount.setUsername(model.getUsername());
-        userAccount.setEmail(model.getEmail());
-        userAccount.setFirstName(model.getFirstName());
-        userAccount.setLastName(model.getLastName());
-        userAccount.setAddress(model.getAddress());
-        userAccount.setPhone(model.getPhone());
-        userAccount.setMobilePhone(model.getMobilePhone());
 
-        if (model.getPassword() != null) {
-            userAccount.setPassword(SecurityUtil.encryptPassword(model.getPassword()));
-        }
+        copyProfileValues(userAccount, model);
 
         if (model.getTenants() != null) {
             List<Tenant> tenants = tenantService.findByIds(model.getTenants());
@@ -136,11 +99,31 @@ public class UserAccountService implements HasRepository<UserAccountRepository> 
                 userAccount.getBranches().addAll(branches);
             }
         }
+    }
 
+    private void copyProfileValues(UserAccount userAccount, UserAccountModel model) {
+        userAccount.setUsername(model.getUsername());
+        userAccount.setEmail(model.getEmail());
+        userAccount.setFirstName(model.getFirstName());
+        userAccount.setLastName(model.getLastName());
+        userAccount.setAddress(model.getAddress());
+        userAccount.setPhone(model.getPhone());
+        userAccount.setMobilePhone(model.getMobilePhone());
+
+        if (model.getPassword() != null) {
+            userAccount.setPassword(SecurityUtil.encryptPassword(model.getPassword()));
+        }
     }
 
     @Override
     public UserAccountRepository getRepository() {
         return userAccountRepository;
+    }
+
+    @Transactional
+    public UserAccount saveProfile(UserAccountModel model) {
+        UserAccount userAccount = findOne(model.getId());
+        copyProfileValues(userAccount, model);
+        return getRepository().save(userAccount);
     }
 }

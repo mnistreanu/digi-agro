@@ -2,7 +2,7 @@ export class Constants {
 
   public static API_URL: string = "http://localhost:8080";
   public static SERVER_ERROR: string = "Server Error";
-  public static TOKEN_KEY: string = "USER_INFO";
+  public static USER_DATA: string = "USER_DATA";
   public static TOKEN_PREFIX: string = "Bearer ";
   public static AUTH_HEADER: string = "Authorization";
 

@@ -8,6 +8,7 @@ import {AdminGuard} from "../guard/admin-guard";
 import {AuthGuard} from "../guard/auth-guard";
 import {SuperAdminGuard} from "../guard/super-admin-guard";
 import {SuperAdminOrAdminGuard} from "../guard/super-admin-or-admin-guard";
+import {UserProfileComponent} from "./user-profile/user-profile.component";
 
 export const routes: Routes = [
     {
@@ -27,6 +28,7 @@ export const routes: Routes = [
             { path: 'editors', loadChildren: 'app/pages/editors/editors.module#EditorsModule', data: { breadcrumb: 'Editors' } },
             { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } },
             { path: 'blank', component: BlankComponent, data: { breadcrumb: 'Blank page' } },
+            { path: 'user-profile', component: UserProfileComponent, data: { breadcrumb: 'User Profile' } },
             { path: 'manage-users', loadChildren: 'app/pages/manage-users/manage-users.module#ManageUsersModule', data: { breadcrumb: 'Manage Users' }, canActivate: [SuperAdminOrAdminGuard] },
             { path: 'manage-brands', loadChildren: 'app/pages/manage-brands/manage-brands.module#ManageBrandsModule', data: { breadcrumb: 'Manage Brands' }, canActivate: [AdminGuard] },
             { path: 'manage-owners', loadChildren: 'app/pages/manage-owners/manage-owners.module#ManageOwnersModule', data: { breadcrumb: 'Manage Owners' }, canActivate: [AdminGuard] },

@@ -3,6 +3,7 @@ package com.arobs.controller;
 import com.arobs.entity.UserAccount;
 import com.arobs.model.userAccount.UserAccountLightModel;
 import com.arobs.model.userAccount.UserAccountModel;
+import com.arobs.service.AuthService;
 import com.arobs.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +19,14 @@ public class UserController {
 
     @Autowired
     private UserAccountService userAccountService;
+    @Autowired
+    private AuthService authService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<List<UserAccountLightModel>> getModels() {
 
         List<UserAccount> userAccounts;
-        if (userAccountService.isSuperAdminAdmin()) {
+        if (authService.isSuperAdminAdmin()) {
             userAccounts = userAccountService.findAdmins();
         }
         else {
@@ -49,6 +52,11 @@ public class UserController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<UserAccountModel> save(@RequestBody UserAccountModel model) {
         return ResponseEntity.ok(new UserAccountModel(userAccountService.save(model)));
+    }
+
+    @RequestMapping(value = "/saveProfile", method = RequestMethod.POST)
+    public ResponseEntity<UserAccountModel> saveProfile(@RequestBody UserAccountModel model) {
+        return ResponseEntity.ok(new UserAccountModel(userAccountService.saveProfile(model)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPER_ADMIN','ROLE_ADMIN')")

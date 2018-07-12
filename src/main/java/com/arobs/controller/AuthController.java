@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
@@ -39,14 +40,13 @@ public class AuthController {
     @Autowired
     private UserAccountService userAccountService;
 
-
     @RequestMapping(value = "/currentUser", method = RequestMethod.GET)
     public ResponseEntity<UserAccountModel> getCurrentUser()  {
         JwtUser user = (JwtUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return ResponseEntity.ok(new UserAccountModel(userAccountService.findByUsername(user.getUsername())));
     }
 
-    @RequestMapping(value = "/auth", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> auth(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
 
         final Authentication authentication = authenticationManager.authenticate(
@@ -57,7 +57,12 @@ public class AuthController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new JwtAuthenticationResponse(token));
+        List<String> authorities = new ArrayList<>();
+        for (GrantedAuthority grantedAuthority : authentication.getAuthorities()) {
+            authorities.add(grantedAuthority.getAuthority());
+        }
+
+        return ResponseEntity.ok(new JwtAuthenticationResponse(token, authorities));
     }
 
     @RequestMapping(value = "/authorities", method = RequestMethod.GET)

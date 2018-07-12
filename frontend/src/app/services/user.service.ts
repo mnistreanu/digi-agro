@@ -28,7 +28,7 @@ export class UserService {
         .catch(error => this.errorService.processError(error));
   }
 
-  checkUsernameUnique(id: number, username: string): Observable<boolean> {
+    checkUsernameUnique(id: number, username: string): Observable<boolean> {
     let queryParams = `?id=${id}&username=${username}`;
     return this.http.get(this.api + '/checkUsernameUnique' + queryParams, this.authService.getOptions())
         .catch(error => this.errorService.processError(error));
@@ -36,6 +36,11 @@ export class UserService {
 
   save(user: UserAccountModel): Observable<UserAccountModel> {
     return this.http.post(this.api + '/', user, this.authService.getOptions())
+        .catch(error => this.errorService.processError(error));
+  }
+
+  saveProfile(user: UserAccountModel): Observable<UserAccountModel> {
+    return this.http.post(this.api + '/saveProfile', user, this.authService.getOptions())
         .catch(error => this.errorService.processError(error));
   }
 

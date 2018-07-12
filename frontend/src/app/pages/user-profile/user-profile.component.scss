@@ -1,0 +1,17 @@
+.user-image-block {
+  max-width: 200px;
+  max-height: 200px;
+
+  padding: 2px;
+
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+.user-image-block img {
+  width: 100%;
+  height: 100%;
+}
+
+.user-image-change {
+  margin-top: 5px;
+}

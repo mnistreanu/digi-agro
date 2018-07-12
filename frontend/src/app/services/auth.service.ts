@@ -8,6 +8,7 @@ import {ErrorService} from "./error.service";
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Authorities} from "../common/authorities";
+import {UserAccountModel} from "../pages/manage-users/user/user-account.model";
 
 
 @Injectable({
@@ -15,7 +16,9 @@ import {Authorities} from "../common/authorities";
 })
 export class AuthService {
 
-    authStatusChanged: EventEmitter<boolean> = new EventEmitter();
+    private api: string = Constants.API_URL + "/auth";
+
+    userChangedChanged: EventEmitter<void> = new EventEmitter();
 
     private httpOptions = {
         headers: new HttpHeaders({
@@ -29,36 +32,35 @@ export class AuthService {
     }
 
     logout() {
-        localStorage.removeItem(Constants.TOKEN_KEY);
-        this.authStatusChanged.emit(false);
+        localStorage.removeItem(Constants.USER_DATA);
+        localStorage.removeItem(Authorities.AUTHORITY_OBJECT);
+        this.userChangedChanged.emit();
     }
 
     login(model: UserAuth): Observable<boolean> {
-        return this.http.post(Constants.API_URL + '/auth', model, this.httpOptions)
+        return this.http.post(this.api + '/login', model, this.httpOptions)
             .map((response) => {
                 let token = response['token'];
+                let authorities = response['authorities'];
                 if (token) {
-                    localStorage.setItem(Constants.TOKEN_KEY, JSON.stringify({username: model.username, token: token}));
-                    this.setupAuthorities();
+                    localStorage.setItem(Constants.USER_DATA, JSON.stringify({username: model.username, token: token}));
+                    this.setupAuthorities(authorities);
                     return true;
                 }
-                this.authStatusChanged.emit(false);
+                this.userChangedChanged.emit();
                 return false;
             })
             .catch(error => this.errorService.processError(error));
     }
 
-    setupAuthorities() {
-        this.http.get(Constants.API_URL + '/authorities', this.getOptions())
-            .subscribe((authorities:string[]) => {
-                let authorityObject = {};
-                authorities.forEach(authority => {
-                    authorityObject[authority] = true;
-                });
-                localStorage.setItem(Authorities.AUTHORITY_OBJECT, JSON.stringify(authorityObject));
-                    this.authStatusChanged.emit(true);
-            },
-            error => this.errorService.processError(error));
+    setupAuthorities(authorities: string[]) {
+        localStorage.setItem(Authorities.AUTHORITY_OBJECT, '{}');
+        let authorityObject = {};
+        authorities.forEach(authority => {
+            authorityObject[authority] = true;
+        });
+        localStorage.setItem(Authorities.AUTHORITY_OBJECT, JSON.stringify(authorityObject));
+        this.userChangedChanged.emit();
     }
 
     checkAuth() {
@@ -68,20 +70,25 @@ export class AuthService {
     }
 
     isAuthenticated(): boolean {
-        return !!localStorage.getItem(Constants.TOKEN_KEY);
+        return !!localStorage.getItem(Constants.USER_DATA);
     }
 
     getUsername(): string {
-        let userInfo = JSON.parse(localStorage.getItem(Constants.TOKEN_KEY));
-        if (userInfo) {
-            return userInfo.username;
+        let userData = JSON.parse(localStorage.getItem(Constants.USER_DATA));
+        if (userData) {
+            return userData.username;
         }
         return null;
     }
 
+    fetchCurrentUser(): Observable<UserAccountModel> {
+        return this.http.get(this.api + '/currentUser', this.getOptions())
+            .catch(error => this.errorService.processError(error));
+    }
+
     getToken(): String {
-        let userInfo = JSON.parse(localStorage.getItem(Constants.TOKEN_KEY));
-        return userInfo && userInfo.token ? userInfo.token : "";
+        let userData = JSON.parse(localStorage.getItem(Constants.USER_DATA));
+        return userData && userData.token ? userData.token : "";
     }
 
     getOptions() {
@@ -94,7 +101,8 @@ export class AuthService {
     }
 
     hasAuthority(authorityName) {
-        return this.isAuthenticated() && JSON.parse(localStorage.getItem(Authorities.AUTHORITY_OBJECT))[authorityName];
+        let authorityObject = localStorage.getItem(Authorities.AUTHORITY_OBJECT);
+        return this.isAuthenticated() && JSON.parse(authorityObject)[authorityName];
     }
 
     isSuperAdmin() {
@@ -103,6 +111,12 @@ export class AuthService {
 
     isAdmin() {
         return this.hasAuthority(Authorities.ROLE_ADMIN);
+    }
+
+    updateUser(model: UserAccountModel) {
+        let userData = JSON.parse(localStorage.getItem(Constants.USER_DATA));
+        // userData.username = model.username;
+        this.userChangedChanged.emit();
     }
 
 }
