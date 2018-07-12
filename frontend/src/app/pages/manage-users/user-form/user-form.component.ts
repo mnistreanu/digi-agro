@@ -68,7 +68,16 @@ export class UserFormComponent implements OnInit {
     }
 
     private setupBranches() {
-        this.branches = [{id: 1, name: 'b1'}];
+        let tenants = this.tenantForm.controls.tenants.value;
+        if (tenants.length == 0) {
+            this.branches = [];
+            this.tenantForm.controls.branches.setValue(null);
+        }
+        else {
+            this.branchService.findByTenants(tenants).subscribe((data) => {
+                this.branches = data;
+            });
+        }
     }
 
     private prepareNewModel() {
@@ -81,6 +90,7 @@ export class UserFormComponent implements OnInit {
         this.userService.findOne(id).subscribe(model => {
             this.model = model;
             this.buildForm();
+            this.setupBranches();
         });
     }
 
@@ -110,7 +120,7 @@ export class UserFormComponent implements OnInit {
 
         this.tenantForm = this.fb.group({
             tenants: [this.model.tenants, Validators.required],
-            branchId: [this.model.branchId],
+            branches: [this.model.branches],
         });
     }
 
@@ -216,5 +226,11 @@ export class UserFormComponent implements OnInit {
         }
     }
 
+    public remove() {
+        this.userService.remove(this.model).subscribe(() => {
+            this.toastr.success(Messages.DELETED);
+            this.router.navigate(['/pages/manage-users']);
+        });
+    }
 
 }

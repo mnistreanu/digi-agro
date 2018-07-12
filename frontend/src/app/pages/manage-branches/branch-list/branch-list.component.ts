@@ -4,6 +4,8 @@ import {ColDef, GridOptions} from "ag-grid";
 import {EditRendererComponent} from "../../../modules/aggrid/edit-renderer/edit-renderer.component";
 import {BranchService} from "../../../services/branch.service";
 import {BranchModel} from "../branch/branch.model";
+import {ListItem} from "../../../interfaces/list-item.interface";
+import {TenantService} from "../../../services/tenant.service";
 
 @Component({
   selector: 'az-branch-list',
@@ -15,12 +17,34 @@ export class BranchListComponent implements OnInit {
     options: GridOptions;
     context;
 
+    tenantId;
+    tenants: ListItem[];
+
     constructor(private router: Router,
+                private tenantService: TenantService,
                 private branchService: BranchService) {
     }
 
     ngOnInit() {
+        this.setupTenants();
         this.setupGrid();
+    }
+
+    private setupTenants() {
+        this.tenantService.fetchListItems().subscribe(data => {
+            this.tenants = data;
+            if (this.tenants.length > 0) {
+                this.tenantId = this.tenants[0].id;
+                this.setupRows();
+            }
+        });
+    }
+
+    public onTenantChange() {
+        if (this.tenantId == null) {
+            return;
+        }
+        this.setupRows();
     }
 
     private setupGrid() {
@@ -31,8 +55,6 @@ export class BranchListComponent implements OnInit {
         this.options.enableFilter = true;
         this.options.columnDefs = this.setupHeaders();
         this.context = {componentParent: this};
-
-        this.setupRows();
 
     }
 
@@ -99,34 +121,8 @@ export class BranchListComponent implements OnInit {
     }
 
     private setupRows() {
-        this.branchService.find().subscribe(models => {
+        this.branchService.find(this.tenantId).subscribe(models => {
             models = this.adjustTreeModels(models);
-            // this.options.api.setRowData(models);
-            // models = [ {
-            //     group: "Group A",
-            //     name: "max",
-            //     participants: [
-            //         {
-            //             group: "A.1",
-            //             name: "1",
-            //             year: "2008",
-            //             country: "United States"
-            //         },
-            //         {
-            //             group: "A.2",
-            //             name: "2",
-            //             year: "2008",
-            //             country: "United States"
-            //         },
-            //         {
-            //             group: "A.3",
-            //             name: "3",
-            //             year: "2008",
-            //             country: "United States"
-            //         }
-            //     ]
-            // }];
-
             this.options.api.setRowData(models);
         })
     }

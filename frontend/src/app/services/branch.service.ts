@@ -30,8 +30,10 @@ export class BranchService {
             .catch(error => this.errorService.processError(error));
     }
 
-    find(): Observable<BranchModel[]> {
-        let filterModel = {};
+    find(tenantId: number): Observable<BranchModel[]> {
+        let filterModel = {
+            tenantId: tenantId
+        };
         return this.http.post(this.api + '/findBy', filterModel, this.authService.getOptions())
             .catch(error => this.errorService.processError(error));
     }
@@ -52,6 +54,11 @@ export class BranchService {
             query += `&skipId=${skipId}`;
         }
         return this.http.get(this.api + '/fetchItems' + query, this.authService.getOptions())
+            .catch(error => this.errorService.processError(error));
+    }
+
+    findByTenants(tenants: number[]): Observable<ListItem[]> {
+        return this.http.post(this.api + '/findByTenants', tenants, this.authService.getOptions())
             .catch(error => this.errorService.processError(error));
     }
 }

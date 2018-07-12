@@ -14,6 +14,6 @@ export class UserAccountModel {
     roleName: string;
 
     tenants: number[];
-    branchId: number;
+    branches: number[];
 
 }

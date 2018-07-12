@@ -25,7 +25,7 @@ import {ToastrModule} from "ngx-toastr";
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({  positionClass: 'toast-bottom-right', closeButton: true}),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDe_oVpi9eRSN99G4o6TwVjJbFBNr58NxE'
     }),

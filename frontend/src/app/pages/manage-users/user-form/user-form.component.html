@@ -165,16 +165,17 @@
               </div>
             </div>
 
-            <!--todo: implement branch assignation-->
-
             <div class="form-group row" *ngIf="model.roleName == 'ROLE_USER'">
               <div class="col-sm-12">
                 <label for="branch">Branch</label>
                 <div>
-                  <select id="branch" class="form-control" formControlName="branchId">
-                    <option *ngFor="let b of branches" [ngValue]="b.id">{{ b.name }}</option>
-                  </select>
-                  <form-error-block [control]="tenantForm.get('branchId')" [formSubmitted]="step.submitted"
+                  <ss-multiselect-dropdown id="branch"
+                                           [options]="branches"
+                                           [settings]="multiSelectSettings"
+                                           formControlName="branches">
+
+                  </ss-multiselect-dropdown>
+                  <form-error-block [control]="tenantForm.get('branches')" [formSubmitted]="step.submitted"
                                     [title]="'Branch'"></form-error-block>
                 </div>
               </div>
@@ -199,6 +200,8 @@
 
         <div class="row">
           <div class="col-12">
+            <button class="btn btn-danger pull-left mr-2" *ngIf="model.id != null" (click)="remove()">Remove</button>
+
             <button class="btn btn-primary pull-left" (click)="prev()"><i class="fa fa-chevron-left arrow"></i>&nbsp; Prev Step</button>
             <button *ngIf="!steps[steps.length-1].active" class="btn btn-primary pull-right" (click)="next()">Next Step &nbsp;<i class="fa fa-chevron-right arrow"></i></button>
             <button *ngIf="steps[steps.length-1].active" class="btn btn-primary pull-right" (click)="confirm()">Confirm &nbsp;<i class="fa fa-check arrow"></i></button>
