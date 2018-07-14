@@ -21,14 +21,10 @@ export class TelemetryService {
             .catch(error => this.errorService.processError(error));
     }
 
-    findAll(): Observable<TelemetryModel[]> {
-        return this.http.get(this.api + '/', this.authService.getOptions())
-            .catch(error => this.errorService.processError(error));
-    }
 
     findByMachineIdentifierAndUsername(machineIdentifier, username): Observable<TelemetryModel[]> {
         let query = `?machineIdentifier=${machineIdentifier}&username=${username}`;
-        return this.http.get(this.api + '/findByMachineIdentifierAndUsername' + query, this.authService.getOptions())
+        return this.http.get(this.api + '/' + query, this.authService.getOptions())
             .catch(error => this.errorService.processError(error));
     }
 
@@ -43,8 +39,12 @@ export class TelemetryService {
     }
 
     updateCoordinate(id, field: any, value: any): Observable<void> {
-        let query = `?id=${id}&field=${field}&value=${value}`;
-        return this.http.get(this.api + '/updateCoordinate' + query, this.authService.getOptions())
+        let model = {
+            id: id,
+            field: field,
+            value: value
+        };
+        return this.http.post(this.api + '/coordinates', model, this.authService.getOptions())
             .catch(error => this.errorService.processError(error));
     }
 }

@@ -16,8 +16,8 @@ public class MapEventController {
     @Autowired
     private MapEventService mapEventService;
 
-    @RequestMapping(value = "/findByMachineIdentifierAndUsername", method = RequestMethod.GET)
-    public ResponseEntity<List<MapEventModel>> findByMachineIdentifierAndUsername(
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ResponseEntity<List<MapEventModel>> fetchModels(
             @RequestParam("machineIdentifier") String machineIdentifier,
             @RequestParam("username") String username) {
         return ResponseEntity.ok(mapEventService.findByMachineIdentifierAndUsername(machineIdentifier, username));
@@ -35,7 +35,6 @@ public class MapEventController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public void update(@RequestBody UpdateFieldModel model) {
-
         mapEventService.update(model);
     }
 

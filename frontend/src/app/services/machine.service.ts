@@ -18,9 +18,9 @@ export class MachineService {
               private http: HttpClient) {
   }
 
-  checkIdentifierUnique(id: number, value: string): Observable<boolean> {
+  validateIdentifier(id: number, value: string): Observable<boolean> {
     let queryParams = `?id=${id}&value=${value}`;
-    return this.http.get(this.api + '/checkIdentifierUnique' + queryParams, this.authService.getOptions())
+    return this.http.get(this.api + '/validate-identifier' + queryParams, this.authService.getOptions())
         .catch(error => this.errorService.processError(error));
   }
 
@@ -35,7 +35,7 @@ export class MachineService {
   }
 
   fetchIdentifiers(): Observable<string[]> {
-    return this.http.get(this.api + '/fetchIdentifiers', this.authService.getOptions())
+    return this.http.get(this.api + '/identifiers', this.authService.getOptions())
         .catch(error => this.errorService.processError(error));
   }
 

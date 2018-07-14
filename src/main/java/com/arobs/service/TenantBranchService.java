@@ -37,7 +37,7 @@ public class TenantBranchService implements HasRepository<TenantBranchRepository
         return tenantBranchCustomRepository.findByFilter(filterRequestModel);
     }
 
-    public boolean checkNameUnique(Long id, String name) {
+    public boolean validateName(Long id, String name) {
         if (id == -1) {
             return getRepository().countByName(name) == 0;
         }

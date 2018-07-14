@@ -20,19 +20,19 @@ export class TenantService {
     }
 
     fetchListItems(): Observable<ListItem[]> {
-        return this.http.get(this.api + '/fetchListItems', this.authService.getOptions())
+        return this.http.get(this.api + '/list-items', this.authService.getOptions())
             .catch(error => this.errorService.processError(error));
     }
 
-    checkNameUnique(id: number, name: string): Observable<boolean> {
+    validateName(id: number, name: string): Observable<boolean> {
         let queryParams = `?id=${id}&name=${name}`;
-        return this.http.get(this.api + '/checkNameUnique' + queryParams, this.authService.getOptions())
+        return this.http.get(this.api + '/validate-name' + queryParams, this.authService.getOptions())
             .catch(error => this.errorService.processError(error));
     }
 
-    checkFiscalCodeUnique(id: number, code: string): Observable<boolean> {
+    validateFiscalCode(id: number, code: string): Observable<boolean> {
         let queryParams = `?id=${id}&code=${code}`;
-        return this.http.get(this.api + '/checkFiscalCodeUnique' + queryParams, this.authService.getOptions())
+        return this.http.get(this.api + '/validate-fiscal-code' + queryParams, this.authService.getOptions())
             .catch(error => this.errorService.processError(error));
     }
 
@@ -43,7 +43,7 @@ export class TenantService {
 
     find(): Observable<TenantModel[]> {
         let filterModel = {};
-        return this.http.post(this.api + '/findBy', filterModel, this.authService.getOptions())
+        return this.http.post(this.api + '/find-by', filterModel, this.authService.getOptions())
             .catch(error => this.errorService.processError(error));
     }
 

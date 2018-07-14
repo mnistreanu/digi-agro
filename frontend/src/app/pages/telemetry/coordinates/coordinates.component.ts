@@ -135,7 +135,6 @@ export class CoordinatesComponent implements OnInit, OnChanges {
     }
 
     public setupRows() {
-        console.log('coord', this.machineIdentifier);
         this.telemetryService.findByMachineIdentifierAndUsername(this.machineIdentifier, this.username).subscribe(models => {
             this.options.api.setRowData(models);
             this.models = models;

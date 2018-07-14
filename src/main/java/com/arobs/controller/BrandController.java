@@ -32,9 +32,9 @@ public class BrandController {
         return ResponseEntity.ok(brandService.findModelById(id));
     }
 
-    @RequestMapping(value = "/checkNameUnique", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> checkNameUnique(@RequestParam("id") Long id, @RequestParam("name") String name) {
-        return ResponseEntity.ok(brandService.checkNameUnique(id, name));
+    @RequestMapping(value = "/validate-name", method = RequestMethod.GET)
+    public ResponseEntity<Boolean> validateName(@RequestParam("id") Long id, @RequestParam("name") String name) {
+        return ResponseEntity.ok(brandService.validateName(id, name));
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")

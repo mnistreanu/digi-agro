@@ -59,9 +59,9 @@ export class BrandComponent implements OnInit {
         });
     }
 
-    public validateNameToUnique() {
+    public onNameChange() {
         let control = this.form.controls.name;
-        this.brandService.checkNameUnique(this.model.id || -1, control.value).subscribe((isUnique) => {
+        this.brandService.validateName(this.model.id || -1, control.value).subscribe((isUnique) => {
             if (!isUnique) {
                 let errors = control.errors || {};
                 errors.unique = !isUnique;

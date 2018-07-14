@@ -23,7 +23,7 @@ public class MachineService implements HasRepository<MachineRepository> {
     private WorkTypeService workTypeService;
 
 
-    public boolean checkIdentifierUnique(Long id, String value) {
+    public boolean validateIdentifier(Long id, String value) {
         if (id == -1) {
             return getRepository().countByIdentifier(value) == 0;
         }

@@ -123,9 +123,9 @@ export class MachineComponent implements OnInit {
         return this.fb.array(arr);
     }
 
-    public validateIdentifierToUnique() {
+    public onIdentifierChange() {
         let control = this.form.controls.identifier;
-        this.machineService.checkIdentifierUnique(this.model.id || -1, control.value).subscribe((isUnique) => {
+        this.machineService.validateIdentifier(this.model.id || -1, control.value).subscribe((isUnique) => {
             if (!isUnique) {
                 let errors = control.errors || {};
                 errors.unique = !isUnique;

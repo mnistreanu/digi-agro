@@ -1,7 +1,7 @@
 package com.arobs.controller;
 
 import com.arobs.entity.UserAccount;
-import com.arobs.model.userAccount.UserAccountLightModel;
+import com.arobs.model.userAccount.UserAccountListModel;
 import com.arobs.model.userAccount.UserAccountModel;
 import com.arobs.service.AuthService;
 import com.arobs.service.UserAccountService;
@@ -23,17 +23,17 @@ public class UserController {
     private AuthService authService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<List<UserAccountLightModel>> getModels() {
+    public ResponseEntity<List<UserAccountListModel>> getModels() {
 
         List<UserAccount> userAccounts;
-        if (authService.isSuperAdminAdmin()) {
+        if (authService.isSuperAdminOrAdmin()) {
             userAccounts = userAccountService.findAdmins();
         }
         else {
             userAccounts = userAccountService.findUsers();
         }
 
-        List<UserAccountLightModel> models = userAccounts.stream().map(UserAccountLightModel::new).collect(Collectors.toList());
+        List<UserAccountListModel> models = userAccounts.stream().map(UserAccountListModel::new).collect(Collectors.toList());
 
         return ResponseEntity.ok(models);
     }
@@ -43,9 +43,9 @@ public class UserController {
         return ResponseEntity.ok(userAccountService.findModelById(id));
     }
 
-    @RequestMapping(value = "/checkUsernameUnique", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> checkUsernameUnique(@RequestParam("id") Long id, @RequestParam("username") String username) {
-        return ResponseEntity.ok(userAccountService.checkUsernameUnique(id, username));
+    @RequestMapping(value = "/validate-username", method = RequestMethod.GET)
+    public ResponseEntity<Boolean> validateUsername(@RequestParam("id") Long id, @RequestParam("username") String username) {
+        return ResponseEntity.ok(userAccountService.validateUsername(id, username));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPER_ADMIN','ROLE_ADMIN')")
@@ -54,7 +54,7 @@ public class UserController {
         return ResponseEntity.ok(new UserAccountModel(userAccountService.save(model)));
     }
 
-    @RequestMapping(value = "/saveProfile", method = RequestMethod.POST)
+    @RequestMapping(value = "/save-profile", method = RequestMethod.POST)
     public ResponseEntity<UserAccountModel> saveProfile(@RequestBody UserAccountModel model) {
         return ResponseEntity.ok(new UserAccountModel(userAccountService.saveProfile(model)));
     }

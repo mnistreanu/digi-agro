@@ -1,4 +1,4 @@
-export interface UserLight {
+export interface UserList {
 
   id: number;
   username: string;

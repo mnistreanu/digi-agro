@@ -16,9 +16,9 @@ export class BrandService {
               private http: HttpClient) {
   }
 
-  checkNameUnique(id: number, name: string): Observable<boolean> {
+  validateName(id: number, name: string): Observable<boolean> {
     let queryParams = `?id=${id}&name=${name}`;
-    return this.http.get(this.api + '/checkNameUnique' + queryParams, this.authService.getOptions())
+    return this.http.get(this.api + '/validate-name' + queryParams, this.authService.getOptions())
         .catch(error => this.errorService.processError(error));
   }
 

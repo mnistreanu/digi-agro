@@ -18,13 +18,13 @@ public class TenantController {
     @Autowired
     private TenantService tenantService;
 
-    @RequestMapping(value = "/fetchListItems", method = RequestMethod.GET)
-    public ResponseEntity<List<ListItemModel>> fetchItems() {
+    @RequestMapping(value = "/list-items", method = RequestMethod.GET)
+    public ResponseEntity<List<ListItemModel>> fetchListItems() {
         List<ListItemModel> models = tenantService.fetchListItems();
         return ResponseEntity.ok(models);
     }
 
-    @RequestMapping(value = "/findBy", method = RequestMethod.POST)
+    @RequestMapping(value = "/find-by", method = RequestMethod.POST)
     public ResponseEntity<List<TenantModel>> getModels(@RequestBody TenantFilterRequestModel filterRequestModel) {
         List<TenantModel> models = tenantService.findByFilter(filterRequestModel);
         return ResponseEntity.ok(models);
@@ -35,14 +35,14 @@ public class TenantController {
         return ResponseEntity.ok(new TenantModel(tenantService.findOne(id)));
     }
 
-    @RequestMapping(value = "/checkNameUnique", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> checkNameUnique(@RequestParam("id") Long id, @RequestParam("name") String name) {
-        return ResponseEntity.ok(tenantService.checkNameUnique(id, name));
+    @RequestMapping(value = "/validate-name", method = RequestMethod.GET)
+    public ResponseEntity<Boolean> validateName(@RequestParam("id") Long id, @RequestParam("name") String name) {
+        return ResponseEntity.ok(tenantService.validateName(id, name));
     }
 
-    @RequestMapping(value = "/checkFiscalCodeUnique", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> checkFiscalCodeUnique(@RequestParam("id") Long id, @RequestParam("code") String code) {
-        return ResponseEntity.ok(tenantService.checkFiscalCodeUnique(id, code));
+    @RequestMapping(value = "/validate-fiscal-code", method = RequestMethod.GET)
+    public ResponseEntity<Boolean> validateFiscalCode(@RequestParam("id") Long id, @RequestParam("code") String code) {
+        return ResponseEntity.ok(tenantService.validateFiscalCode(id, code));
     }
 
     @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")

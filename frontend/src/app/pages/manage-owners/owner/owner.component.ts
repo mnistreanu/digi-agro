@@ -60,9 +60,9 @@ export class OwnerComponent implements OnInit {
 
     }
 
-    public validateNameToUnique() {
+    public onNameChange() {
         let control = this.form.controls.name;
-        this.ownerService.checkNameUnique(this.model.id || -1, control.value).subscribe((isUnique) => {
+        this.ownerService.validateName(this.model.id || -1, control.value).subscribe((isUnique) => {
             if (!isUnique) {
                 let errors = control.errors || {};
                 errors.unique = !isUnique;

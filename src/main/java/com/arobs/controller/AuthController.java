@@ -40,7 +40,7 @@ public class AuthController {
     @Autowired
     private UserAccountService userAccountService;
 
-    @RequestMapping(value = "/currentUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/current-ser", method = RequestMethod.GET)
     public ResponseEntity<UserAccountModel> getCurrentUser()  {
         JwtUser user = (JwtUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return ResponseEntity.ok(new UserAccountModel(userAccountService.findByUsername(user.getUsername())));

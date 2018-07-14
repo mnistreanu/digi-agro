@@ -26,7 +26,7 @@ public class UserAccountService implements HasRepository<UserAccountRepository> 
     @Autowired
     private TenantBranchService tenantBranchService;
 
-    public boolean checkUsernameUnique(Long id, String username) {
+    public boolean validateUsername(Long id, String username) {
         if (id == -1) {
             return getRepository().countByUsername(username) == 0;
         }

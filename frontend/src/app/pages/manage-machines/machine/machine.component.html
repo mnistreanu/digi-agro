@@ -62,7 +62,7 @@
         <div class="col-sm-6">
           <label for="identifier">Identifier</label>
           <div>
-            <input id="identifier" class="form-control checking-field" formControlName="identifier" (change)="validateIdentifierToUnique()">
+            <input id="identifier" class="form-control checking-field" formControlName="identifier" (change)="onIdentifierChange()">
           </div>
           <form-error-block [control]="form.get('identifier')" [formSubmitted]="submitted"
                                [title]="'Identifier'"></form-error-block>

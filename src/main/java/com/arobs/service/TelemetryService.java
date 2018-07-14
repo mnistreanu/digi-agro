@@ -2,17 +2,17 @@ package com.arobs.service;
 
 import com.arobs.entity.Telemetry;
 import com.arobs.interfaces.HasRepository;
-import com.arobs.model.TelemetryModel;
+import com.arobs.model.UpdateFieldModel;
+import com.arobs.model.telemetry.TelemetryModel;
 import com.arobs.repository.TelemetryRepository;
 import com.arobs.repository.custom.TelemetryCustomRepository;
+import com.arobs.utils.NumericUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
@@ -80,8 +80,8 @@ public class TelemetryService implements HasRepository<TelemetryRepository> {
     }
 
     @Transactional
-    public void updateCoordinate(Long id, String field, BigDecimal value) {
-        telemetryCustomRepository.updateCoordinate(id, field, value);
+    public void updateCoordinate(UpdateFieldModel model) {
+        telemetryCustomRepository.updateCoordinate(model.getId(), model.getField(), NumericUtil.convertToBigDecimal(model.getValue()));
     }
 
     @Override

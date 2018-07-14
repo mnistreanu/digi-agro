@@ -66,9 +66,9 @@ export class TenantComponent implements OnInit {
         });
     }
 
-    public validateNameToUnique() {
+    public onNameChange() {
         let control = this.form.controls.name;
-        this.tenantService.checkNameUnique(this.model.id || -1, control.value).subscribe((isUnique) => {
+        this.tenantService.validateName(this.model.id || -1, control.value).subscribe((isUnique) => {
             if (!isUnique) {
                 let errors = control.errors || {};
                 errors.unique = !isUnique;
@@ -77,9 +77,9 @@ export class TenantComponent implements OnInit {
         });
     }
 
-    public validateFiscalCodeToUnique() {
+    public onFiscalCodeChange() {
         let control = this.form.controls.name;
-        this.tenantService.checkFiscalCodeUnique(this.model.id || -1, control.value).subscribe((isUnique) => {
+        this.tenantService.validateFiscalCode(this.model.id || -1, control.value).subscribe((isUnique) => {
             if (!isUnique) {
                 let errors = control.errors || {};
                 errors.unique = !isUnique;

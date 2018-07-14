@@ -39,7 +39,7 @@
                       <span class="input-group-text"><i class="fa fa-user-o"></i></span>
                     </div>
                     <input id="username" class="form-control checking-field" formControlName="username"
-                           (change)="validateUsernameToUnique()">
+                           (change)="onUsernameChange()">
                   </div>
                   <form-error-block [control]="accountForm.get('username')" [formSubmitted]="step.submitted"
                                     [title]="'Username'"></form-error-block>

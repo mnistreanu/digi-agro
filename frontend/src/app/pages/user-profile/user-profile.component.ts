@@ -49,7 +49,7 @@ export class UserProfileComponent implements OnInit {
 
     public validateUsernameToUnique() {
         let control = this.form.controls.username;
-        this.userService.checkUsernameUnique(this.model.id || -1, control.value).subscribe((isUnique) => {
+        this.userService.validateUsername(this.model.id || -1, control.value).subscribe((isUnique) => {
             if (!isUnique) {
                 let errors = control.errors || {};
                 errors.unique = !isUnique;

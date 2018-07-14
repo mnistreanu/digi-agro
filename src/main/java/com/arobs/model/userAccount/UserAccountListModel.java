@@ -3,7 +3,7 @@ package com.arobs.model.userAccount;
 
 import com.arobs.entity.UserAccount;
 
-public class UserAccountLightModel {
+public class UserAccountListModel {
 
     private Long id;
 
@@ -14,10 +14,10 @@ public class UserAccountLightModel {
 
     private String email;
 
-    public UserAccountLightModel() {
+    public UserAccountListModel() {
     }
 
-    public UserAccountLightModel(UserAccount entity) {
+    public UserAccountListModel(UserAccount entity) {
         id = entity.getId();
         username = entity.getUsername();
         firstName = entity.getFirstName();

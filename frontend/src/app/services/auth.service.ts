@@ -82,7 +82,7 @@ export class AuthService {
     }
 
     fetchCurrentUser(): Observable<UserAccountModel> {
-        return this.http.get(this.api + '/currentUser', this.getOptions())
+        return this.http.get(this.api + '/current-ser', this.getOptions())
             .catch(error => this.errorService.processError(error));
     }
 
@@ -114,7 +114,7 @@ export class AuthService {
     }
 
     updateUser(model: UserAccountModel) {
-        let userData = JSON.parse(localStorage.getItem(Constants.USER_DATA));
+        // let userData = JSON.parse(localStorage.getItem(Constants.USER_DATA));
         // userData.username = model.username;
         this.userChangedChanged.emit();
     }

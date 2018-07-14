@@ -20,7 +20,7 @@ export class MapEventService {
 
   findByMachineIdentifierAndUsername(machineIdentifier, username): Observable<MapEventModel[]> {
     let query = `?machineIdentifier=${machineIdentifier}&username=${username}`;
-    return this.http.get(this.api + '/findByMachineIdentifierAndUsername' + query, this.authService.getOptions())
+    return this.http.get(this.api + '/' + query, this.authService.getOptions())
         .catch(error => this.errorService.processError(error));
   }
 

@@ -16,7 +16,7 @@ public class BrandService implements HasRepository<BrandRepository> {
     @Autowired
     private BrandRepository brandRepository;
 
-    public boolean checkNameUnique(Long id, String name) {
+    public boolean validateName(Long id, String name) {
         if (id == -1) {
             return getRepository().countByName(name) == 0;
         }

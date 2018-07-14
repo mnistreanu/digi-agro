@@ -19,9 +19,9 @@ export class BranchService {
                 private http: HttpClient) {
     }
 
-    checkNameUnique(id: number, name: string): Observable<boolean> {
+    validateName(id: number, name: string): Observable<boolean> {
         let queryParams = `?id=${id}&name=${name}`;
-        return this.http.get(this.api + '/checkNameUnique' + queryParams, this.authService.getOptions())
+        return this.http.get(this.api + '/validate-name' + queryParams, this.authService.getOptions())
             .catch(error => this.errorService.processError(error));
     }
 
@@ -34,7 +34,7 @@ export class BranchService {
         let filterModel = {
             tenantId: tenantId
         };
-        return this.http.post(this.api + '/findBy', filterModel, this.authService.getOptions())
+        return this.http.post(this.api + '/find-by', filterModel, this.authService.getOptions())
             .catch(error => this.errorService.processError(error));
     }
 
@@ -53,12 +53,12 @@ export class BranchService {
         if (skipId != null) {
             query += `&skipId=${skipId}`;
         }
-        return this.http.get(this.api + '/fetchItems' + query, this.authService.getOptions())
+        return this.http.get(this.api + '/list-items' + query, this.authService.getOptions())
             .catch(error => this.errorService.processError(error));
     }
 
     findByTenants(tenants: number[]): Observable<ListItem[]> {
-        return this.http.post(this.api + '/findByTenants', tenants, this.authService.getOptions())
+        return this.http.post(this.api + '/find-by-tenants', tenants, this.authService.getOptions())
             .catch(error => this.errorService.processError(error));
     }
 }

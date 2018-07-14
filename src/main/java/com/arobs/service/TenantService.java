@@ -34,7 +34,7 @@ public class TenantService implements HasRepository<TenantRepository> {
     }
 
     public List<ListItemModel> fetchListItems() {
-        if (authService.isSuperAdminAdmin()) {
+        if (authService.isSuperAdminOrAdmin()) {
             return getRepository().fetchAllListItems();
         }
         else {
@@ -46,7 +46,7 @@ public class TenantService implements HasRepository<TenantRepository> {
         return tenantCustomRepository.findByFilter(filterRequestModel);
     }
 
-    public boolean checkNameUnique(Long id, String name) {
+    public boolean validateName(Long id, String name) {
         if (id == -1) {
             return getRepository().countByName(name) == 0;
         }
@@ -54,7 +54,7 @@ public class TenantService implements HasRepository<TenantRepository> {
     }
 
 
-    public boolean checkFiscalCodeUnique(Long id, String code) {
+    public boolean validateFiscalCode(Long id, String code) {
         if (id == -1) {
             return getRepository().countByFiscalCode(code) == 0;
         }

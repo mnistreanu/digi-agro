@@ -4,7 +4,7 @@ import {Constants} from "../common/constants";
 import {HttpClient} from "@angular/common/http";
 import {ErrorService} from "./error.service";
 import {AuthService} from "./auth.service";
-import {UserLight} from "../interfaces/user-light.interface";
+import {UserList} from "../interfaces/user-light.interface";
 import {UserAccountModel} from "../pages/manage-users/user/user-account.model";
 
 @Injectable({
@@ -18,7 +18,7 @@ export class UserService {
               private errorService: ErrorService,
               private http: HttpClient) { }
 
-  findAll(): Observable<UserLight[]> {
+  findAll(): Observable<UserList[]> {
     return this.http.get(this.api + '/', this.authService.getOptions())
         .catch(error => this.errorService.processError(error));
   }
@@ -28,9 +28,9 @@ export class UserService {
         .catch(error => this.errorService.processError(error));
   }
 
-    checkUsernameUnique(id: number, username: string): Observable<boolean> {
+    validateUsername(id: number, username: string): Observable<boolean> {
     let queryParams = `?id=${id}&username=${username}`;
-    return this.http.get(this.api + '/checkUsernameUnique' + queryParams, this.authService.getOptions())
+    return this.http.get(this.api + '/validate-username' + queryParams, this.authService.getOptions())
         .catch(error => this.errorService.processError(error));
   }
 
@@ -40,7 +40,7 @@ export class UserService {
   }
 
   saveProfile(user: UserAccountModel): Observable<UserAccountModel> {
-    return this.http.post(this.api + '/saveProfile', user, this.authService.getOptions())
+    return this.http.post(this.api + '/save-profile', user, this.authService.getOptions())
         .catch(error => this.errorService.processError(error));
   }
 

@@ -1,12 +1,8 @@
 package com.arobs.controller;
 
 import com.arobs.entity.Owner;
-import com.arobs.entity.UserAccount;
 import com.arobs.model.OwnerModel;
-import com.arobs.model.userAccount.UserAccountLightModel;
-import com.arobs.model.userAccount.UserAccountModel;
 import com.arobs.service.OwnerService;
-import com.arobs.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -36,9 +32,9 @@ public class OwnerController {
         return ResponseEntity.ok(ownerService.findModelById(id));
     }
 
-    @RequestMapping(value = "/checkNameUnique", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> checkNameUnique(@RequestParam("id") Long id, @RequestParam("name") String name) {
-        return ResponseEntity.ok(ownerService.checkNameUnique(id, name));
+    @RequestMapping(value = "/validate-name", method = RequestMethod.GET)
+    public ResponseEntity<Boolean> validateName(@RequestParam("id") Long id, @RequestParam("name") String name) {
+        return ResponseEntity.ok(ownerService.validateName(id, name));
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")

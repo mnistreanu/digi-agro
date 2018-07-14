@@ -187,9 +187,9 @@ export class UserFormComponent implements OnInit {
         });
     }
 
-    public validateUsernameToUnique() {
+    public onUsernameChange() {
         let control = this.accountForm.controls.username;
-        this.userService.checkUsernameUnique(this.model.id || -1, control.value).subscribe((isUnique) => {
+        this.userService.validateUsername(this.model.id || -1, control.value).subscribe((isUnique) => {
             if (!isUnique) {
                 let errors = control.errors || {};
                 errors.unique = !isUnique;

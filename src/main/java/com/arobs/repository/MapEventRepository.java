@@ -21,5 +21,5 @@ public interface MapEventRepository extends JpaRepository<MapEvent, Long> {
             " WHERE e.active = true AND e.userAccount.username = :username AND e.machine.identifier = :machineIdentifier " +
             " ORDER BY e.id")
     List<MapEvent> findByMachineIdentifierAndUsername(@Param("machineIdentifier") String machineIdentifier,
-                                                       @Param("username") String username);
+                                                      @Param("username") String username);
 }

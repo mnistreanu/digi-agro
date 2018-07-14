@@ -4,7 +4,7 @@ public class UpdateFieldModel {
 
     private Long id;
     private String field;
-    private Object value;
+    private String value;
 
     public UpdateFieldModel() {
     }
@@ -25,11 +25,11 @@ public class UpdateFieldModel {
         this.field = field;
     }
 
-    public Object getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(Object value) {
+    public void setValue(String value) {
         this.value = value;
     }
 }

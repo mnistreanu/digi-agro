@@ -19,21 +19,21 @@ public class TenantBranchController {
     @Autowired
     private TenantBranchService tenantBranchService;
 
-    @RequestMapping(value = "/fetchItems", method = RequestMethod.GET)
-    public ResponseEntity<List<ListItemModel>> fetchParents(@RequestParam("tenantId") Long tenantId, @RequestParam("skipId") Optional<Long> skipIdParam) {
+    @RequestMapping(value = "/list-items", method = RequestMethod.GET)
+    public ResponseEntity<List<ListItemModel>> getListItems(@RequestParam("tenantId") Long tenantId, @RequestParam("skipId") Optional<Long> skipIdParam) {
         Long skipId = skipIdParam.isPresent() ? skipIdParam.get() : null;
         List<ListItemModel> models = tenantBranchService.fetchItemsByTenant(tenantId, skipId);
         return ResponseEntity.ok(models);
     }
 
 
-    @RequestMapping(value = "/findByTenants", method = RequestMethod.POST)
+    @RequestMapping(value = "/find-by-tenants", method = RequestMethod.POST)
     public ResponseEntity<List<ListItemModel>> findByTenants(@RequestBody List<Long> tenants) {
         List<ListItemModel> models = tenantBranchService.findByTenants(tenants);
         return ResponseEntity.ok(models);
     }
 
-    @RequestMapping(value = "/findBy", method = RequestMethod.POST)
+    @RequestMapping(value = "/find-by", method = RequestMethod.POST)
     public ResponseEntity<List<TenantBranchModel>> getModels(@RequestBody TenantBranchFilterRequestModel filterRequestModel) {
         List<TenantBranchModel> models = tenantBranchService.findByFilter(filterRequestModel);
         return ResponseEntity.ok(models);
@@ -44,9 +44,9 @@ public class TenantBranchController {
         return ResponseEntity.ok(new TenantBranchModel(tenantBranchService.findOne(id)));
     }
 
-    @RequestMapping(value = "/checkNameUnique", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> checkNameUnique(@RequestParam("id") Long id, @RequestParam("name") String name) {
-        return ResponseEntity.ok(tenantBranchService.checkNameUnique(id, name));
+    @RequestMapping(value = "/validate-name", method = RequestMethod.GET)
+    public ResponseEntity<Boolean> validateName(@RequestParam("id") Long id, @RequestParam("name") String name) {
+        return ResponseEntity.ok(tenantBranchService.validateName(id, name));
     }
 
 

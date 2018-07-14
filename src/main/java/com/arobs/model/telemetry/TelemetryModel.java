@@ -1,4 +1,4 @@
-package com.arobs.model;
+package com.arobs.model.telemetry;
 
 
 import com.arobs.entity.Telemetry;

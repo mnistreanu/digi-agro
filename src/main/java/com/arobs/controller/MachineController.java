@@ -27,7 +27,7 @@ public class MachineController {
         return ResponseEntity.ok(models);
     }
 
-    @RequestMapping(value = "/fetchIdentifiers", method = RequestMethod.GET)
+    @RequestMapping(value = "/identifiers", method = RequestMethod.GET)
     public ResponseEntity<List<String>> fetchIdentifiers() {
         return ResponseEntity.ok(machineService.fetchIdentifiers());
     }
@@ -37,9 +37,9 @@ public class MachineController {
         return ResponseEntity.ok(machineService.findModelById(id));
     }
 
-    @RequestMapping(value = "/checkIdentifierUnique", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> checkIdentifierUnique(@RequestParam("id") Long id, @RequestParam("value") String value) {
-        return ResponseEntity.ok(machineService.checkIdentifierUnique(id, value));
+    @RequestMapping(value = "/validate-identifier", method = RequestMethod.GET)
+    public ResponseEntity<Boolean> validateIdentifier(@RequestParam("id") Long id, @RequestParam("value") String value) {
+        return ResponseEntity.ok(machineService.validateIdentifier(id, value));
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
