@@ -39,5 +39,34 @@
         </sql>
     </changeSet>
 
+    <!--
+        COUNTIES for each country, in 2 languages
+    -->
+    <changeSet id="add_counties" author="mgorgos" failOnError="true" runOnChange="true">
+        <createTable tableName="counties">
+            <column name="county_id" type="char(2)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="country_id" type="char(2)"/>
+            <column name="name_ro" type="varchar(128)" encoding="utf8"/>
+            <column name="name_ru" type="varchar(128)" encoding="utf8"/>
+        </createTable>
+    </changeSet>
+
+
+    <!--
+        CITIES and VILAGES for each county, in 2 languages
+    -->
+    <changeSet id="add_cities_villages" author="mgorgos" failOnError="true" runOnChange="true">
+        <createTable tableName="cities_villages">
+            <column name="city_village_id" type="bigint(20) unsigned">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="county_id" type="char(2)"/>
+            <column name="name_ro" type="varchar(128)" encoding="utf8"/>
+            <column name="name_ru" type="varchar(128)" encoding="utf8"/>
+        </createTable>
+    </changeSet>
+
 
 </databaseChangeLog>
