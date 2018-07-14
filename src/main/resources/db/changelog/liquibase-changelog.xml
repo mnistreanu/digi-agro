@@ -44,7 +44,7 @@
     -->
     <changeSet id="add_counties" author="mgorgos" failOnError="true" runOnChange="true">
         <createTable tableName="counties">
-            <column name="county_id" type="char(2)">
+            <column name="id" type="char(2)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="country_id" type="char(2)"/>
@@ -59,7 +59,7 @@
     -->
     <changeSet id="add_cities_villages" author="mgorgos" failOnError="true" runOnChange="true">
         <createTable tableName="cities_villages">
-            <column name="city_village_id" type="bigint(20) unsigned">
+            <column name="id" type="bigint(20) unsigned">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="county_id" type="char(2)"/>
