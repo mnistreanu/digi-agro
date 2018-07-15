@@ -12,18 +12,31 @@ import java.util.List;
 public class CityVillageService implements HasRepository<CityVillageRepository> {
 
     @Autowired
-    private CityVillageRepository CityVillageRepository;
+    private CityVillageRepository cityVillageRepository;
 
-    private List<CityVillage> findByCountryIdAndCountyId(String countryId, String countyId) {
-        return getRepository().findByCountryIdAndCountyId(countryId, countyId);
+    /**
+     * Cauta lista de sate si orase dupa tara si raion/judet
+     * @param countryId
+     * @param countyId
+     * @return
+     */
+    private List<CityVillage> find(String countryId, String countyId) {
+        return getRepository().find(countryId, countyId);
     }
 
-    private List<CityVillage> findByNameAndCountryIdAndCountyId(String countryId, String countyId, String name) {
-        return getRepository().findByNameAndCountryIdAndCountyId(countryId, countyId, '%' + name + '%');
+    /**
+     * Cauta lista de sate si orase dupa tara, raion/judet si nume
+     * @param countryId
+     * @param countyId
+     * @param name
+     * @return
+     */
+    private List<CityVillage> find(String countryId, String countyId, String name) {
+        return getRepository().find(countryId, countyId, '%' + name + '%');
     }
 
     @Override
     public CityVillageRepository getRepository() {
-        return CityVillageRepository;
+        return cityVillageRepository;
     }
 }

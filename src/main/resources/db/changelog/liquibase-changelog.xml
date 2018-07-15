@@ -52,8 +52,12 @@
             <column name="name_ru" type="varchar(128)" encoding="utf8"/>
         </createTable>
     </changeSet>
-
-
+<!--
+    <changeSet id="insert-counties" author="mgorgos" failOnError="false" runOnChange="true">
+        <sql>
+        </sql>
+    </changeSet>
+-->
     <!--
         CITIES_VILAGES - sate si orase din raioane/judete, in 2 limbi
     -->

@@ -14,13 +14,15 @@ import java.util.List;
 public interface CountyRepository extends JpaRepository<County, String> {
 
     @Query("SELECT c FROM County c " +
-            "WHERE c.countryId = :countryId")
-    List<County> findByCountryId(@Param("countryId") String countryId);
+            "WHERE c.countryId = :countryId " +
+            "ORDER BY c.id ")
+    List<County> find(@Param("countryId") String countryId);
 
     @Query("SELECT c FROM County c " +
             "WHERE c.countryId = :countryId " +
-            "AND (c.nameRo LIKE :name OR c.nameRu LIKE :name)")
-    List<County> findByNameAndCountryId(@Param("countryId") String countryId, @Param("name") String name);
+            "AND (c.nameRo LIKE :name OR c.nameRu LIKE :name) " +
+            "ORDER BY c.id ")
+    List<County> find(@Param("countryId") String countryId, @Param("name") String name);
 
 }
 
