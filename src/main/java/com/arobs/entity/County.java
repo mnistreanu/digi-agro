@@ -3,11 +3,13 @@ package com.arobs.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Created by mihail.gorgos on 14.07.2018.
  */
-@Entity (name = "counties")
+@Entity
+@Table(name = "counties")
 public class County {
 
     @Id
@@ -22,6 +24,9 @@ public class County {
 
     @Column (name = "name_ru")
     private String nameRu;
+
+    public County() {
+    }
 
     public String getId() {
         return id;

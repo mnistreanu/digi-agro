@@ -1,14 +1,12 @@
 package com.arobs.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by mihail.gorgos on 14.07.2018.
  */
-@Entity (name = "cities_villages")
+@Entity
+@Table(name = "cities_villages")
 public class CityVillage {
 
     @Id
@@ -18,11 +16,17 @@ public class CityVillage {
     @Column (name = "county_id")
     private String countyId;
 
+    @Column (name = "country_id")
+    private String countryId;
+
     @Column (name = "name_ro")
     private String nameRo;
 
     @Column (name = "name_ru")
     private String nameRu;
+
+    public CityVillage() {
+    }
 
     public Long getId() {
         return id;
@@ -54,5 +58,13 @@ public class CityVillage {
 
     public void setNameRu(String nameRu) {
         this.nameRu = nameRu;
+    }
+
+    public String getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(String countryId) {
+        this.countryId = countryId;
     }
 }

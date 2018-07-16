@@ -42,18 +42,18 @@
     <!--
         COUNTIES - raioane/judete pentru fiecare tara aparte, specificat in 2 limbi
     -->
-    <changeSet id="add_counties" author="mgorgos" failOnError="true" runOnChange="true">
-        <createTable tableName="counties">
-            <column name="id" type="char(2)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="country_id" type="char(2)"/>
-            <column name="name_ro" type="varchar(128)" encoding="utf8"/>
-            <column name="name_ru" type="varchar(128)" encoding="utf8"/>
-        </createTable>
-    </changeSet>
-<!--
-    <changeSet id="insert-counties-md" author="mgorgos" failOnError="false" runOnChange="true">
+    <!--<changeSet id="add_counties" author="mgorgos" failOnError="true" runOnChange="true">-->
+        <!--<createTable tableName="counties">-->
+            <!--<column name="id" type="char(2)">-->
+                <!--<constraints primaryKey="true" nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="country_id" type="char(2)"/>-->
+            <!--<column name="name_ro" type="varchar(128)" encoding="utf8"/>-->
+            <!--<column name="name_ru" type="varchar(128)" encoding="utf8"/>-->
+        <!--</createTable>-->
+    <!--</changeSet>-->
+
+    <changeSet id="insert-counties-md" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','AN','r-nul Anenii Noi','Новоаненский район‎');
             INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','BS','r-nul Basarabeasca','Бессарабский район');
@@ -99,20 +99,20 @@
             INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','UN','r-nul Ungheni','Унгенский район‎');
         </sql>
     </changeSet>
--->
+
     <!--
         CITIES_VILAGES - sate si orase din raioane/judete, in 2 limbi
     -->
-    <changeSet id="add_cities_villages" author="mgorgos" failOnError="true" runOnChange="true">
-        <createTable tableName="cities_villages">
-            <column name="id" type="bigint(20) unsigned">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="county_id" type="char(2)"/>
-            <column name="name_ro" type="varchar(128)" encoding="utf8"/>
-            <column name="name_ru" type="varchar(128)" encoding="utf8"/>
-        </createTable>
-    </changeSet>
+    <!--<changeSet id="add_cities_villages" author="mgorgos" failOnError="true" runOnChange="true">-->
+        <!--<createTable tableName="cities_villages">-->
+            <!--<column name="id" type="bigint(20) unsigned">-->
+                <!--<constraints primaryKey="true" nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="county_id" type="char(2)"/>-->
+            <!--<column name="name_ro" type="varchar(128)" encoding="utf8"/>-->
+            <!--<column name="name_ru" type="varchar(128)" encoding="utf8"/>-->
+        <!--</createTable>-->
+    <!--</changeSet>-->
 
 
     <!--
@@ -120,16 +120,16 @@
         dar cu tenant_id vor fi cele mai specifice la fiecare tenant aparte in caz ca va avea nevoie.
         La fel specificat in 2 limbi
     -->
-    <changeSet id="add_work_types" author="mgorgos" failOnError="true" runOnChange="true">
-        <createTable tableName="work_types">
-            <column name="work_type_id" type="bigint(20) unsigned" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="parent_type_id" type="bigint(20) unsigned" />
-            <column name="tenant_id" type="bigint(20) unsigned"/>
-            <column name="name_ro" type="varchar(128)" encoding="utf8"/>
-            <column name="name_ru" type="varchar(128)" encoding="utf8"/>
-        </createTable>
-    </changeSet>
+    <!--<changeSet id="add_work_types" author="mgorgos" failOnError="true" runOnChange="true">-->
+        <!--<createTable tableName="work_types">-->
+            <!--<column name="work_type_id" type="bigint(20) unsigned" autoIncrement="true">-->
+                <!--<constraints primaryKey="true" nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="parent_type_id" type="bigint(20) unsigned" />-->
+            <!--<column name="tenant_id" type="bigint(20) unsigned"/>-->
+            <!--<column name="name_ro" type="varchar(128)" encoding="utf8"/>-->
+            <!--<column name="name_ru" type="varchar(128)" encoding="utf8"/>-->
+        <!--</createTable>-->
+    <!--</changeSet>-->
 
 </databaseChangeLog>
