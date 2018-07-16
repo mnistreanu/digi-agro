@@ -36,6 +36,8 @@ public class UserAccountModel {
     private List<Long> tenants;
     private List<Long> branches;
 
+    private String logoUrl;
+
     public UserAccountModel() {
     }
 
@@ -49,6 +51,9 @@ public class UserAccountModel {
         phone = entity.getPhone();
         mobilePhone = entity.getMobilePhone();
         active = entity.isActive();
+
+        logoUrl = entity.getSafeLogoUrl();
+
         for (Authority authority : entity.getAuthorities()) {
             if (authority.getName().name().startsWith("ROLE_")) {
                 roleName = authority.getName();
@@ -168,5 +173,13 @@ public class UserAccountModel {
 
     public void setBranches(List<Long> branches) {
         this.branches = branches;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 }

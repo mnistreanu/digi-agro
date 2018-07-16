@@ -20,6 +20,9 @@ export class UserProfileComponent implements OnInit {
     submitted: boolean = false;
     model: UserAccountModel;
 
+    logoFile: File;
+    logoUrl: string;
+
     constructor(private router: Router,
                 private fb: FormBuilder,
                 private authService: AuthService,
@@ -30,6 +33,8 @@ export class UserProfileComponent implements OnInit {
     ngOnInit() {
         this.authService.fetchCurrentUser().subscribe(data => {
             this.model = data;
+            this.logoUrl = Constants.API_URL + this.model.logoUrl;
+            console.log('logo', this.logoUrl);
             this.buildForm();
         });
     }
@@ -67,12 +72,17 @@ export class UserProfileComponent implements OnInit {
             return;
         }
 
+        if (this.logoFile && this.logoFile.size > Constants.MAX_FILE_SIZE) {
+            this.toastr.error('File is too big');
+            return;
+        }
+
         let usernameChanged = this.model.username != form.controls.username.value;
 
         Object.assign(this.model, form.value);
         this.submitted = false;
 
-        this.userService.saveProfile(this.model).subscribe((model) => {
+        this.userService.saveProfile(this.model, this.logoFile).subscribe((model) => {
             this.model = model;
             this.toastr.success(Messages.SAVED);
             if (usernameChanged) {
@@ -85,5 +95,19 @@ export class UserProfileComponent implements OnInit {
         });
     }
 
+    public onUploadLogo(event) {
+        if (!event.target.files || !event.target.files[0]) {
+            return;
+        }
+
+        this.logoFile = event.target.files[0];
+
+        let reader = new FileReader();
+        reader.onload = (event: ProgressEvent) => {
+            this.logoUrl = (<FileReader>event.target).result;
+        };
+
+        reader.readAsDataURL(event.target.files[0]);
+    }
 
 }

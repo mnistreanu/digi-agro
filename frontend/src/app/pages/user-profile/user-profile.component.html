@@ -14,10 +14,10 @@
             <div class="form-group row">
                 <div class="col-sm-4">
                     <div class="user-image-block">
-                        <img src="assets/img/users/user.jpg" alt="User Image">
+                        <img [src]="logoUrl">
                     </div>
                     <div class="user-image-change">
-                        <input type="file"/>
+                        <input type="file" (change)="onUploadLogo($event)" accept="image/*"/>
                     </div>
                 </div>
 

@@ -42,8 +42,10 @@ export class AuthService {
             .map((response) => {
                 let token = response['token'];
                 let authorities = response['authorities'];
+                let logoUrl = response['logoUrl'];
                 if (token) {
-                    localStorage.setItem(Constants.USER_DATA, JSON.stringify({username: model.username, token: token}));
+                    let userData = {username: model.username, token: token, logoUrl: logoUrl};
+                    localStorage.setItem(Constants.USER_DATA, JSON.stringify(userData));
                     this.setupAuthorities(authorities);
                     return true;
                 }
@@ -81,6 +83,10 @@ export class AuthService {
         return null;
     }
 
+    getUserData() {
+        return JSON.parse(localStorage.getItem(Constants.USER_DATA));
+    }
+
     fetchCurrentUser(): Observable<UserAccountModel> {
         return this.http.get(this.api + '/current-ser', this.getOptions())
             .catch(error => this.errorService.processError(error));
@@ -100,6 +106,16 @@ export class AuthService {
         };
     }
 
+    getOptionsNoContentType() {
+        let headers = {};
+        headers[Constants.AUTH_HEADER] = Constants.TOKEN_PREFIX + this.getToken();
+
+        return {
+            headers: new HttpHeaders(headers)
+        };
+    }
+
+
     hasAuthority(authorityName) {
         let authorityObject = localStorage.getItem(Authorities.AUTHORITY_OBJECT);
         return this.isAuthenticated() && JSON.parse(authorityObject)[authorityName];
@@ -114,8 +130,9 @@ export class AuthService {
     }
 
     updateUser(model: UserAccountModel) {
-        // let userData = JSON.parse(localStorage.getItem(Constants.USER_DATA));
-        // userData.username = model.username;
+        let userData = JSON.parse(localStorage.getItem(Constants.USER_DATA));
+        userData.logoUrl = model.logoUrl;
+        localStorage.setItem(Constants.USER_DATA, JSON.stringify(userData));
         this.userChangedChanged.emit();
     }
 
