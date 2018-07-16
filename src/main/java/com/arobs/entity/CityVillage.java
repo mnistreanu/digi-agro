@@ -13,10 +13,10 @@ public class CityVillage {
     @GeneratedValue
     private Long id;
 
-    @Column (name = "county_id")
+    @Column (name = "county_id", length = 2)
     private String countyId;
 
-    @Column (name = "country_id")
+    @Column (name = "country_id", length = 2)
     private String countryId;
 
     @Column (name = "name_ro")
