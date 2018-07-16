@@ -116,20 +116,20 @@
 
 
     <!--
-        WORK_TYPES - tipuri de lurari agricole. Fara tenant_id vor fi cele generale (arat, semanat, etc)
+        AGRO WORK_TYPES - tipuri de lurari agricole. Fara tenant_id vor fi cele generale (arat, semanat, etc)
         dar cu tenant_id vor fi cele mai specifice la fiecare tenant aparte in caz ca va avea nevoie.
         La fel specificat in 2 limbi
     -->
-    <!--<changeSet id="add_work_types" author="mgorgos" failOnError="true" runOnChange="true">-->
-        <!--<createTable tableName="work_types">-->
-            <!--<column name="work_type_id" type="bigint(20) unsigned" autoIncrement="true">-->
-                <!--<constraints primaryKey="true" nullable="false"/>-->
-            <!--</column>-->
-            <!--<column name="parent_type_id" type="bigint(20) unsigned" />-->
-            <!--<column name="tenant_id" type="bigint(20) unsigned"/>-->
-            <!--<column name="name_ro" type="varchar(128)" encoding="utf8"/>-->
-            <!--<column name="name_ru" type="varchar(128)" encoding="utf8"/>-->
-        <!--</createTable>-->
-    <!--</changeSet>-->
+    <changeSet id="add_agro_work_types" author="mgorgos"  failOnError="true" runOnChange="true">
+        <createTable tableName="agro_work_types">
+            <column name="id" type="bigint(20)" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="parent_id" type="bigint" />
+            <column name="tenant_id" type="bigint"/>
+            <column name="name_ro" type="varchar(256)" encoding="utf8"/>
+            <column name="name_ru" type="varchar(256)" encoding="utf8"/>
+        </createTable>
+    </changeSet>
 
 </databaseChangeLog>
