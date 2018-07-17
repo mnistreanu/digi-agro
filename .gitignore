@@ -14,6 +14,7 @@ gradle/
 
 inventory-app.iml
 
+/files-directory/users
 
 /frontend/node_modules
 /frontend/package-lock.json

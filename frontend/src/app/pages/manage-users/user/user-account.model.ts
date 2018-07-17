@@ -16,4 +16,6 @@ export class UserAccountModel {
     tenants: number[];
     branches: number[];
 
+    logoUrl: string;
+
 }

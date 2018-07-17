@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { AppState } from '../../../app.state';
 import { SidebarService } from '../sidebar/sidebar.service';
 import {AuthService} from "../../../services/auth.service";
+import {Constants} from "../../../common/constants";
 
 @Component({
   selector: 'az-navbar',
@@ -15,6 +16,7 @@ export class NavbarComponent implements OnInit {
     public isMenuCollapsed:boolean = false;
 
     username: string;
+    logoUrl: string;
 
     constructor(private authService: AuthService,
                 private _state:AppState,
@@ -25,7 +27,21 @@ export class NavbarComponent implements OnInit {
         this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
             this.isMenuCollapsed = isCollapsed;
         });
-        this.username = this.authService.getUsername();
+
+        this.authService.userChangedChanged.subscribe(() => {
+            this.setupUserData();
+        });
+
+        this.setupUserData();
+    }
+
+    private setupUserData() {
+        let userData = this.authService.getUserData();
+        if (userData == null) {
+            return;
+        }
+        this.username = userData.username;
+        this.logoUrl = Constants.API_URL + userData.logoUrl;
     }
 
     public closeSubMenus(){

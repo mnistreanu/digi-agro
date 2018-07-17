@@ -1,5 +1,7 @@
-package com.arobs.controller.download;
+package com.arobs.controller;
 
+import com.arobs.service.FileService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -13,15 +15,16 @@ import java.io.File;
 import java.io.FileInputStream;
 
 @RestController
-@RequestMapping("/download")
-public class DownloadController {
+@RequestMapping("/file")
+public class FileController {
+
+    @Autowired
+    private FileService fileService;
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<InputStreamResource> download(@RequestParam("path") String path) throws Exception {
 
-        // todo: check path, must start from upload directory
-
-        File file = new File(path);
+        File file = fileService.getFile(path);
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
         return ResponseEntity.ok()

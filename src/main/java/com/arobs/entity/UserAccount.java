@@ -43,10 +43,19 @@ public class UserAccount {
     private String phone;
     private String mobilePhone;
 
+    private String logoUrl;
+
     @Column(columnDefinition = "boolean default true")
     private boolean active = true;
 
     public UserAccount() { }
+
+    public String getSafeLogoUrl() {
+        if (logoUrl == null) {
+            return "/file?path=common/user-logo.png";
+        }
+        return logoUrl;
+    }
 
     public String getFullName() {
         return firstName + " " + lastName;
@@ -154,5 +163,13 @@ public class UserAccount {
 
     public void setBranches(List<TenantBranch> branches) {
         this.branches = branches;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 }

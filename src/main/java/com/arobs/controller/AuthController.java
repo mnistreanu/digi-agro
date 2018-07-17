@@ -1,5 +1,6 @@
 package com.arobs.controller;
 
+import com.arobs.entity.UserAccount;
 import com.arobs.model.userAccount.UserAccountModel;
 import com.arobs.security.JwtAuthenticationRequest;
 import com.arobs.security.JwtAuthenticationResponse;
@@ -62,7 +63,8 @@ public class AuthController {
             authorities.add(grantedAuthority.getAuthority());
         }
 
-        return ResponseEntity.ok(new JwtAuthenticationResponse(token, authorities));
+        UserAccount userAccount = userAccountService.findByUsername(userDetails.getUsername());
+        return ResponseEntity.ok(new JwtAuthenticationResponse(token, authorities, userAccount.getSafeLogoUrl()));
     }
 
     @RequestMapping(value = "/authorities", method = RequestMethod.GET)

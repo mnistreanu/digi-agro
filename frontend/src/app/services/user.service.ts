@@ -39,8 +39,14 @@ export class UserService {
         .catch(error => this.errorService.processError(error));
   }
 
-  saveProfile(user: UserAccountModel): Observable<UserAccountModel> {
-    return this.http.post(this.api + '/save-profile', user, this.authService.getOptions())
+  saveProfile(user: UserAccountModel, file: File): Observable<UserAccountModel> {
+    let formData = new FormData();
+    if (file) {
+      formData.append("file", file, file.name);
+    }
+    formData.append("model", JSON.stringify(user));
+
+    return this.http.post(this.api + '/save-profile', formData, this.authService.getOptionsNoContentType())
         .catch(error => this.errorService.processError(error));
   }
 
