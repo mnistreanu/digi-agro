@@ -53,6 +53,9 @@
         </createTable>
     </changeSet>
 
+    <!--
+        Lista de raioane din Moldova, in limba romana si rusa
+    -->
     <changeSet id="insert-counties-md" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','AN','r-nul Anenii Noi','Новоаненский район‎');
@@ -160,7 +163,7 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="crop_catgeory_id" type="int"/>
+            <column name="crop_category_id" type="int"/>
             <column name="name_ro" type="varchar(256)" encoding="utf8"/>
             <column name="name_ru" type="varchar(256)" encoding="utf8"/>
         </createTable>
@@ -184,6 +187,25 @@
         </createTable>
     </changeSet>
 
+    <!--
+        Adaugat categoria CEREALE si 10 tipuri de cereale
+    -->
+    <changeSet id="insert-cereale" author="mgorgos" failOnError="true" runOnChange="true">
+        <sql>
+            INSERT INTO crop_categories (id, name_ro, name_ru) VALUES (1,'Cereale','Зерновые');
+
+            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (1,1, 'Grâu','Пшеница');
+            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (2,1, 'Secară','Рожь');
+            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (3,1, 'Triticale','Тритикале');
+            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (4,1, 'Orz','Ячмень');
+            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (5,1, 'Ovăz','Овес');
+            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (6,1, 'Porumb','Кукуруза');
+            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (7,1, 'Sorg','Сорг');
+            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (8,1, 'Mei','Просо');
+            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (9,1, 'Orez','Рис');
+            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (10,1, 'Hrișca','Гречиха');
+        </sql>
+    </changeSet>
 
 
 </databaseChangeLog>
