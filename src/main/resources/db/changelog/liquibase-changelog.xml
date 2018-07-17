@@ -137,7 +137,7 @@
     <!--
         CROP CATEGORIES - categorii de culturi agricole. Categorii vor fi adaugate de adminul sistemului.
         La fel specificat in 2 limbi.
-        De exemplu: fructe, legume, grine, culturi comerciale
+        De exemplu: fructe, legume, grine, culturi tehnice
     -->
     <changeSet id="add_crop_categories" author="mgorgos" failOnError="true" runOnChange="true">
         <createTable tableName="crop_categories">

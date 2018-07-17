@@ -16,8 +16,8 @@ public class Crop {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "crop_variety_id")
-    private Integer cropVarietyId;
+    @Column(name = "crop_category_id")
+    private Integer cropCategoryId;
 
     @Column(name = "name_ro")
     private String nameRo;
@@ -36,12 +36,12 @@ public class Crop {
         this.id = id;
     }
 
-    public Integer getCropVarietyId() {
-        return cropVarietyId;
+    public Integer getCropCategoryId() {
+        return cropCategoryId;
     }
 
-    public void setCropVarietyId(Integer cropVarietyId) {
-        this.cropVarietyId = cropVarietyId;
+    public void setCropCategoryId(Integer cropCategoryId) {
+        this.cropCategoryId = cropCategoryId;
     }
 
     public String getNameRo() {
