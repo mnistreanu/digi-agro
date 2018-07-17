@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {TranslateModule} from '@ngx-translate/core';
 
 import { ManageOwnersRoutingModule } from './manage-owners-routing.module';
 import {EditRendererComponent} from "../../modules/aggrid/edit-renderer/edit-renderer.component";
@@ -15,6 +16,7 @@ import {OwnerService} from "../../services/owner.service";
 @NgModule({
   imports: [
     CommonModule,
+    TranslateModule,
     ManageOwnersRoutingModule,
     FormsModule,
     ReactiveFormsModule,

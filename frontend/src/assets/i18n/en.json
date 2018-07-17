@@ -1,0 +1,50 @@
+{
+	"action": {
+		"create": "New",
+		"remove": "Remove",
+		"save": "Save"
+	},
+	"auth": {
+		"login": "Login",
+		"logout": "Logout"
+	},
+	"geo": {
+		"country": "Country",
+		"county": "County",
+		"village-city": "Village City"
+	},
+	"info": {
+		"description": "Description",
+		"name": "Name"
+	},
+	"machine": {
+		"motor": "Motor",
+		"power": "Power",
+		"speed-in-work": "Speed In Work",
+		"speed-on-road": "Speed On Road",
+		"type": "Type",
+		"work-types": "Work Types",
+		"сonsumption": "Consumption"
+	},
+	"response": {
+		"removed": "Removed",
+		"saved": "Saved"
+	},
+	"tenant": {
+		"tenant": "Tenant"
+	},
+	"tree": {
+		"parent": "Parent"
+	},
+	"user": {
+		"address": "Address",
+		"email": "Email",
+		"firstname": "First Name",
+		"lastname": "Last Name",
+		"mobile-phone": "Mobile Phone",
+		"password": "Password",
+		"phone": "Phone",
+		"profile": "Profile",
+		"username": "Username"
+	}
+}

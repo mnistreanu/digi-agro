@@ -12,10 +12,12 @@ import {EditRendererModule} from "../../modules/aggrid/edit-renderer/edit-render
 import {FormErrorBlockModule} from "../../modules/form-error-block/form-error-block.module";
 import {UserFormComponent} from './user-form/user-form.component';
 import {MultiselectDropdownModule} from "angular-2-dropdown-multiselect";
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
     imports: [
         CommonModule,
+        TranslateModule,
         FormsModule,
         ReactiveFormsModule,
         DirectivesModule,

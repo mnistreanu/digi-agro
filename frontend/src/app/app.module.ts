@@ -8,30 +8,46 @@ import {AgmCoreModule} from "@agm/core";
 import {routing} from "./app.routing";
 import {AppConfig} from "./app.config";
 
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+
 import {AppComponent} from "./app.component";
 import {ErrorComponent} from "./pages/error/error.component";
 import {AuthService} from "./services/auth.service";
 import {ErrorService} from "./services/error.service";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {UserService} from "./services/user.service";
 import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ErrorComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    ToastrModule.forRoot({  positionClass: 'toast-bottom-right', closeButton: true}),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDe_oVpi9eRSN99G4o6TwVjJbFBNr58NxE'
-    }),
-    routing   
-  ],
-  providers: [AppConfig, AuthService, ErrorService, UserService],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        ErrorComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        ToastrModule.forRoot({positionClass: 'toast-bottom-right', closeButton: true}),
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyDe_oVpi9eRSN99G4o6TwVjJbFBNr58NxE'
+        }),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        routing
+    ],
+    providers: [AppConfig, AuthService, ErrorService, UserService],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
+
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http);
+}

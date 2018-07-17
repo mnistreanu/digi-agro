@@ -64,7 +64,9 @@ public class AuthController {
         }
 
         UserAccount userAccount = userAccountService.findByUsername(userDetails.getUsername());
-        return ResponseEntity.ok(new JwtAuthenticationResponse(token, authorities, userAccount.getSafeLogoUrl()));
+
+
+        return ResponseEntity.ok(new JwtAuthenticationResponse(token, authorities, userAccount.getSafeLogoUrl(), userAccount.getLanguage()));
     }
 
     @RequestMapping(value = "/authorities", method = RequestMethod.GET)
