@@ -133,4 +133,20 @@
         </createTable>
     </changeSet>
 
+
+    <!--
+        CROP CATEGORIES - categorii de culturi agricole. Categorii vor fi adaugate de adminul sistemului.
+        La fel specificat in 2 limbi.
+    -->
+    <changeSet id="add_crop_categories" author="mgorgos" failOnError="true" runOnChange="true">
+        <createTable tableName="crop_categories">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name_ro" type="varchar(256)" encoding="utf8"/>
+            <column name="name_ru" type="varchar(256)" encoding="utf8"/>
+        </createTable>
+    </changeSet>
+
+
 </databaseChangeLog>
