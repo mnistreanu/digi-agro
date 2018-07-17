@@ -9,20 +9,23 @@ import javax.persistence.Table;
  * Created by mihail.gorgos on 14.07.2018.
  */
 @Entity
-@Table(name = "crop_categories")
-public class CropCategory {
+@Table(name = "crops")
+public class Crop {
 
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     private Integer id;
 
-    @Column (name = "name_ro")
+    @Column(name = "crop_variety_id")
+    private Integer cropVarietyId;
+
+    @Column(name = "name_ro")
     private String nameRo;
 
-    @Column (name = "name_ru")
+    @Column(name = "name_ru")
     private String nameRu;
 
-    public CropCategory() {
+    public Crop() {
     }
 
     public Integer getId() {
@@ -31,6 +34,14 @@ public class CropCategory {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getCropVarietyId() {
+        return cropVarietyId;
+    }
+
+    public void setCropVarietyId(Integer cropVarietyId) {
+        this.cropVarietyId = cropVarietyId;
     }
 
     public String getNameRo() {
@@ -49,3 +60,4 @@ public class CropCategory {
         this.nameRu = nameRu;
     }
 }
+
