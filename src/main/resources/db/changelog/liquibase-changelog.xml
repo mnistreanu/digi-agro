@@ -137,6 +137,7 @@
     <!--
         CROP CATEGORIES - categorii de culturi agricole. Categorii vor fi adaugate de adminul sistemului.
         La fel specificat in 2 limbi.
+        De exemplu: fructe, legume, grine, culturi comerciale
     -->
     <changeSet id="add_crop_categories" author="mgorgos" failOnError="true" runOnChange="true">
         <createTable tableName="crop_categories">
@@ -147,6 +148,42 @@
             <column name="name_ru" type="varchar(256)" encoding="utf8"/>
         </createTable>
     </changeSet>
+
+
+    <!--
+        CROPS - culturi agricole divizate pe categorii vor fi adaugate de adminul sistemului.
+        La fel specificat in 2 limbi.
+        De exemplu: mere, pere, gutuie care sunt de categorie FRUCTE
+    -->
+    <changeSet id="add_crops" author="mgorgos" failOnError="true" runOnChange="true">
+        <createTable tableName="crops">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="crop_catgeory_id" type="int"/>
+            <column name="name_ro" type="varchar(256)" encoding="utf8"/>
+            <column name="name_ru" type="varchar(256)" encoding="utf8"/>
+        </createTable>
+    </changeSet>
+
+    <!--
+        CROP VARIETIES - soiuri de culturi agricole divizate pe categorii vor fi adaugate de adminul
+        sistemului. La fel specificat in 2 limbi.
+        De exemplu: mere soi Golden Delicious, Jonagold, Idared, etc
+    -->
+    <changeSet id="add_crop_varieties" author="mgorgos" failOnError="true" runOnChange="true">
+        <createTable tableName="crop_varieties">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="crop_id" type="int"/>
+            <column name="name_ro" type="varchar(256)" encoding="utf8"/>
+            <column name="name_ru" type="varchar(256)" encoding="utf8"/>
+            <column name="description_ro" type="varchar(1024)" encoding="utf8"/>
+            <column name="description_ru" type="varchar(1024)" encoding="utf8"/>
+        </createTable>
+    </changeSet>
+
 
 
 </databaseChangeLog>
