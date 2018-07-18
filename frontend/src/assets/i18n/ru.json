@@ -8,6 +8,9 @@
 		"login": "Вход",
 		"logout": "Выход"
 	},
+	"general": {
+		"settings": "Настройки"
+	},
 	"geo": {
 		"country": "Страна",
 		"county": "Округ",
@@ -28,6 +31,16 @@
 		"type": "Тип",
 		"work-types": "Виды работы",
 		"сonsumption": "Расход"
+	},
+	"nav": {
+		"branches": "Подразделения",
+		"brands": "Бренды",
+		"dashboard": "Главная",
+		"machines": "Машины",
+		"owners": "Владелецы",
+		"telemetry": "Телеметрия",
+		"tenants": "Клиенты",
+		"users": "Пользователями"
 	},
 	"response": {
 		"added": "Добавлен",

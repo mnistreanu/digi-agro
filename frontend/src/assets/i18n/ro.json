@@ -8,6 +8,9 @@
 		"login": "Logare",
 		"logout": "Ieșire"
 	},
+	"general": {
+		"settings": "Setări"
+	},
 	"geo": {
 		"country": "Țară",
 		"county": "Județ",
@@ -28,6 +31,16 @@
 		"type": "Tip",
 		"work-types": "Tipuri de lucrul",
 		"сonsumption": "Consum"
+	},
+	"nav": {
+		"branches": "Subdiviziuni",
+		"brands": "Brands",
+		"dashboard": "Dashboard",
+		"machines": "Maşini",
+		"owners": "Proprietari",
+		"telemetry": "Telemetrie",
+		"tenants": "Clienți",
+		"users": "Utilizatori"
 	},
 	"response": {
 		"added": "A fost adăugat",
