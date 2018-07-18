@@ -18,4 +18,6 @@ export class UserAccountModel {
 
     logoUrl: string;
 
+    language: string;
+
 }

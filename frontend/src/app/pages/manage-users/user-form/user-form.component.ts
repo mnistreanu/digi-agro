@@ -228,7 +228,7 @@ export class UserFormComponent implements OnInit {
 
     public remove() {
         this.userService.remove(this.model).subscribe(() => {
-            this.toastr.success(Messages.DELETED);
+            this.toastr.success(Messages.REMOVED);
             this.router.navigate(['/pages/manage-users']);
         });
     }

@@ -38,6 +38,8 @@ public class UserAccountModel {
 
     private String logoUrl;
 
+    private String language;
+
     public UserAccountModel() {
     }
 
@@ -51,8 +53,8 @@ public class UserAccountModel {
         phone = entity.getPhone();
         mobilePhone = entity.getMobilePhone();
         active = entity.isActive();
-
         logoUrl = entity.getSafeLogoUrl();
+        language = entity.getLanguage();
 
         for (Authority authority : entity.getAuthorities()) {
             if (authority.getName().name().startsWith("ROLE_")) {
@@ -181,5 +183,13 @@ public class UserAccountModel {
 
     public void setLogoUrl(String logoUrl) {
         this.logoUrl = logoUrl;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 }

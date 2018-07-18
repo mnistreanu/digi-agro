@@ -93,7 +93,7 @@ export class TenantComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.toastr.warning(Messages.VALIDATION_ERROR);
+            this.toastr.warning(Messages.VALIDATION_FAIL);
             return;
         }
 
@@ -110,7 +110,7 @@ export class TenantComponent implements OnInit {
 
     public remove() {
         this.tenantService.remove(this.model).subscribe(() => {
-            this.toastr.success(Messages.DELETED);
+            this.toastr.success(Messages.REMOVED);
             this.router.navigate(['/pages/manage-tenants']);
         });
     }

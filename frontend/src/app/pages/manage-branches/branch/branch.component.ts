@@ -109,7 +109,7 @@ export class BranchComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.toastr.warning(Messages.VALIDATION_ERROR);
+            this.toastr.warning(Messages.VALIDATION_FAIL);
             return;
         }
 
@@ -126,7 +126,7 @@ export class BranchComponent implements OnInit {
 
     public remove() {
         this.branchService.remove(this.model).subscribe(() => {
-            this.toastr.success(Messages.DELETED);
+            this.toastr.success(Messages.REMOVED);
             this.router.navigate(['/pages/manage-branches']);
         });
     }

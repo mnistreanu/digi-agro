@@ -17,6 +17,9 @@
 		"description": "Описание",
 		"name": "Имя"
 	},
+	"language": {
+		"language": "Язык"
+	},
 	"machine": {
 		"motor": "Мотор",
 		"power": "Сила",
@@ -27,8 +30,10 @@
 		"сonsumption": "Расход"
 	},
 	"response": {
+		"added": "Добавлен",
 		"removed": "Удалено",
-		"saved": "Сохранено"
+		"saved": "Сохранено",
+		"username-changed-relogin": "Имя пользователя было изменено! Пожалуйста, перезайдите в систему"
 	},
 	"tenant": {
 		"tenant": "Клиент"
@@ -46,5 +51,15 @@
 		"phone": "Телефон",
 		"profile": "Профиль",
 		"username": "Имя пользователя"
+	},
+	"validation": {
+		"fail": "Ошибка проверки",
+		"file-to-big": "Файл слишком большой. Макс: ",
+		"invalid-format": "Неверный формат",
+		"max-length": "Максимальная длина",
+		"min-length": "Минимальная длина",
+		"password-do-not-match": "Пароли не совпадают",
+		"required": "Обязательное поле",
+		"unique": "Уникальное поле"
 	}
 }

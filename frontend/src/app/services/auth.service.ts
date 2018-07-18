@@ -138,6 +138,8 @@ export class AuthService {
         let userData = JSON.parse(localStorage.getItem(Constants.USER_DATA));
         userData.logoUrl = model.logoUrl;
         localStorage.setItem(Constants.USER_DATA, JSON.stringify(userData));
+        localStorage.setItem(Constants.LANGUAGE_KEY, model.language);
+        this.langService.setLanguage(model.language);
         this.userChangedChanged.emit();
     }
 

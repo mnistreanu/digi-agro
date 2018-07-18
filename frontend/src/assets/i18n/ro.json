@@ -17,6 +17,9 @@
 		"description": "Descriere",
 		"name": "Nume"
 	},
+	"language": {
+		"language": "Limba"
+	},
 	"machine": {
 		"motor": "Motor",
 		"power": "Putere",
@@ -27,8 +30,10 @@
 		"сonsumption": "Consum"
 	},
 	"response": {
+		"added": "A fost adăugat",
 		"removed": "A fost șters",
-		"saved": "A fost salvat"
+		"saved": "A fost salvat",
+		"username-changed-relogin": "Numele de utilizatorul a fost modificata! Reintrați în sistem"
 	},
 	"tenant": {
 		"tenant": "Client"
@@ -45,6 +50,16 @@
 		"password": "Parola",
 		"phone": "Telefon",
 		"profile": "Profil",
-		"username": "Nume de utilizator"
+		"username": "Nume utilizatorului"
+	},
+	"validation": {
+		"fail": "Eroare de validare",
+		"file-to-big": "Fișierul este prea mare. Max:",
+		"invalid-format": "Format nevalid",
+		"max-length": "Lungimea maximală",
+		"min-length": "Lungimea minimă",
+		"password-do-not-match": "Parolele nu se potrivesc",
+		"required": "Camp obligatoriu",
+		"unique": "Unic"
 	}
 }

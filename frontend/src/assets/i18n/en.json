@@ -17,6 +17,9 @@
 		"description": "Description",
 		"name": "Name"
 	},
+	"language": {
+		"language": "Language"
+	},
 	"machine": {
 		"motor": "Motor",
 		"power": "Power",
@@ -27,8 +30,10 @@
 		"сonsumption": "Consumption"
 	},
 	"response": {
+		"added": "Added",
 		"removed": "Removed",
-		"saved": "Saved"
+		"saved": "Saved",
+		"username-changed-relogin": "Username Changed! Please, re-login in the system"
 	},
 	"tenant": {
 		"tenant": "Tenant"
@@ -46,5 +51,15 @@
 		"phone": "Phone",
 		"profile": "Profile",
 		"username": "Username"
+	},
+	"validation": {
+		"fail": "Validation Fail",
+		"file-to-big": "File is too big. Max:",
+		"invalid-format": "Invalid Format",
+		"max-length": "Max length is",
+		"min-length": "Min length is",
+		"password-do-not-match": "Passwords do not match",
+		"required": "Required field",
+		"unique": "Unique field"
 	}
 }
