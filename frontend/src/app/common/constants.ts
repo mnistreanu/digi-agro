@@ -5,6 +5,7 @@ export class Constants {
     public static USER_DATA: string = "USER_DATA";
     public static TOKEN_PREFIX: string = "Bearer ";
     public static AUTH_HEADER: string = "Authorization";
+    public static LANGUAGE_KEY: string = "Language";
 
     public static LOGIN_PAGE: string = "/login";
     public static PAGE_AFTER_LOGIN: string = "/pages/dashboard";

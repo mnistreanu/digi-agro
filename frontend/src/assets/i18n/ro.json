@@ -1,0 +1,50 @@
+{
+	"action": {
+		"create": "Crea",
+		"remove": "Șterge",
+		"save": "Salvați"
+	},
+	"auth": {
+		"login": "Logare",
+		"logout": "Ieșire"
+	},
+	"geo": {
+		"country": "Țară",
+		"county": "Județ",
+		"village-city": "Satul Orașul"
+	},
+	"info": {
+		"description": "Descriere",
+		"name": "Nume"
+	},
+	"machine": {
+		"motor": "Motor",
+		"power": "Putere",
+		"speed-in-work": "Viteză în munca",
+		"speed-on-road": "Viteza pe drum",
+		"type": "Tip",
+		"work-types": "Tipuri de lucrul",
+		"сonsumption": "Consum"
+	},
+	"response": {
+		"removed": "A fost șters",
+		"saved": "A fost salvat"
+	},
+	"tenant": {
+		"tenant": "Client"
+	},
+	"tree": {
+		"parent": "Părinte"
+	},
+	"user": {
+		"address": "Adresa",
+		"email": "Email",
+		"firstname": "Nume",
+		"lastname": "Prenume",
+		"mobile-phone": "Mobil",
+		"password": "Parola",
+		"phone": "Telefon",
+		"profile": "Profil",
+		"username": "Nume de utilizator"
+	}
+}

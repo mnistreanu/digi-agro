@@ -1,5 +1,6 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
+import {TranslateModule} from '@ngx-translate/core';
 
 import {ManageBrandsRoutingModule} from "./manage-brands-routing.module";
 import {BrandListComponent} from "./brand-list/brand-list.component";
@@ -15,6 +16,7 @@ import {FormErrorBlockModule} from "../../modules/form-error-block/form-error-bl
 @NgModule({
   imports: [
     CommonModule,
+    TranslateModule,
     ManageBrandsRoutingModule,
     FormsModule,
     ReactiveFormsModule,

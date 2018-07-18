@@ -9,6 +9,7 @@ import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Authorities} from "../common/authorities";
 import {UserAccountModel} from "../pages/manage-users/user/user-account.model";
+import {LangService} from "./lang.service";
 
 
 @Injectable({
@@ -28,12 +29,14 @@ export class AuthService {
 
     constructor(private http: HttpClient,
                 private router: Router,
+                private langService: LangService,
                 private errorService: ErrorService) {
     }
 
     logout() {
         localStorage.removeItem(Constants.USER_DATA);
         localStorage.removeItem(Authorities.AUTHORITY_OBJECT);
+        this.langService.clear();
         this.userChangedChanged.emit();
     }
 
@@ -43,9 +46,11 @@ export class AuthService {
                 let token = response['token'];
                 let authorities = response['authorities'];
                 let logoUrl = response['logoUrl'];
+                let language = response['language'];
                 if (token) {
                     let userData = {username: model.username, token: token, logoUrl: logoUrl};
                     localStorage.setItem(Constants.USER_DATA, JSON.stringify(userData));
+                    this.langService.setLanguage(language);
                     this.setupAuthorities(authorities);
                     return true;
                 }

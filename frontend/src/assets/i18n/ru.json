@@ -1,0 +1,50 @@
+{
+	"action": {
+		"create": "Создать",
+		"remove": "Удалить",
+		"save": "Сохранить"
+	},
+	"auth": {
+		"login": "Вход",
+		"logout": "Выход"
+	},
+	"geo": {
+		"country": "Страна",
+		"county": "Округ",
+		"village-city": "Деревня Город"
+	},
+	"info": {
+		"description": "Описание",
+		"name": "Имя"
+	},
+	"machine": {
+		"motor": "Мотор",
+		"power": "Сила",
+		"speed-in-work": "Скорость в работе",
+		"speed-on-road": "Скорость на дороге",
+		"type": "Тип",
+		"work-types": "Виды работы",
+		"сonsumption": "Расход"
+	},
+	"response": {
+		"removed": "Удалено",
+		"saved": "Сохранено"
+	},
+	"tenant": {
+		"tenant": "Клиент"
+	},
+	"tree": {
+		"parent": "Родитель"
+	},
+	"user": {
+		"address": "Адрес",
+		"email": "Email",
+		"firstname": "Имя",
+		"lastname": "Фамилия",
+		"mobile-phone": "Мобильный",
+		"password": "Пароль",
+		"phone": "Телефон",
+		"profile": "Профиль",
+		"username": "Имя пользователя"
+	}
+}

@@ -45,6 +45,8 @@ public class UserAccount {
 
     private String logoUrl;
 
+    private String language;
+
     @Column(columnDefinition = "boolean default true")
     private boolean active = true;
 
@@ -171,5 +173,13 @@ public class UserAccount {
 
     public void setLogoUrl(String logoUrl) {
         this.logoUrl = logoUrl;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 }

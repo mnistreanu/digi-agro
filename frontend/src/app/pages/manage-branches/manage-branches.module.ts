@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {TranslateModule} from '@ngx-translate/core';
 
 import { ManageBranchesRoutingModule } from './manage-branches-routing.module';
 import {BranchListComponent} from "./branch-list/branch-list.component";
@@ -15,6 +16,7 @@ import { BranchComponent } from './branch/branch.component';
 @NgModule({
   imports: [
       CommonModule,
+      TranslateModule,
       ManageBranchesRoutingModule,
       FormsModule,
       ReactiveFormsModule,

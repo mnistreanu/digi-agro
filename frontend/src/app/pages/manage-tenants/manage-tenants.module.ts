@@ -10,10 +10,12 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TenantComponent} from './tenant/tenant.component';
 import {ManageTenantsRoutingModule} from "./manage-tenants-routing.module";
 import {TenantListFilterComponent} from './tenant-list-filter/tenant-list-filter.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
     imports: [
         CommonModule,
+        TranslateModule,
         ManageTenantsRoutingModule,
         FormsModule,
         ReactiveFormsModule,
