@@ -3,6 +3,7 @@ import {ColDef, GridOptions} from "ag-grid";
 import {UserService} from "../../../services/user.service";
 import {EditRendererComponent} from "../../../modules/aggrid/edit-renderer/edit-renderer.component";
 import {Router} from "@angular/router";
+import {LangService} from "../../../services/lang.service";
 
 @Component({
     selector: 'az-user-list',
@@ -15,11 +16,26 @@ export class UserListComponent implements OnInit {
     context;
 
     constructor(private router: Router,
+                private langService: LangService,
                 private userService: UserService) {
     }
 
+    labelUsername: string;
+    labelFirstName: string;
+    labelLastName: string;
+    labelEmail: string;
+
+
     ngOnInit() {
+        this.setupLabels();
         this.setupGrid();
+    }
+
+    private setupLabels() {
+        this.langService.get('user.username').subscribe((msg) => this.labelUsername = msg);
+        this.langService.get('user.firstname').subscribe((msg) => this.labelFirstName = msg);
+        this.langService.get('user.lastname').subscribe((msg) => this.labelLastName = msg);
+        this.langService.get('user.email').subscribe((msg) => this.labelEmail = msg);
     }
 
     private setupGrid() {
@@ -49,25 +65,25 @@ export class UserListComponent implements OnInit {
                 cellStyle: () => {return {padding: 0}}
             },
             {
-                headerName: 'Username',
+                headerName: this.labelUsername,
                 field: 'username',
                 width: 250,
                 minWidth: 200
             },
             {
-                headerName: 'First Name',
+                headerName: this.labelFirstName,
                 field: 'firstName',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'Last Name',
+                headerName: this.labelLastName,
                 field: 'lastName',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'Email',
+                headerName: this.labelEmail,
                 field: 'email',
                 width: 250,
                 minWidth: 200

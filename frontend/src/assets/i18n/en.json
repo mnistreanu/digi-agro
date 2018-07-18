@@ -1,6 +1,7 @@
 {
 	"action": {
-		"create": "New",
+		"confirm": "Confirm",
+		"create": "Add",
 		"remove": "Remove",
 		"save": "Save"
 	},
@@ -8,7 +9,11 @@
 		"login": "Login",
 		"logout": "Logout"
 	},
+	"branch": {
+		"branch": "Branch"
+	},
 	"general": {
+		"form": "Form",
 		"settings": "Settings"
 	},
 	"geo": {
@@ -48,6 +53,10 @@
 		"saved": "Saved",
 		"username-changed-relogin": "Username Changed! Please, re-login in the system"
 	},
+	"slider": {
+		"next": "Next",
+		"prev": "Prev"
+	},
 	"tenant": {
 		"tenant": "Tenant"
 	},
@@ -55,15 +64,21 @@
 		"parent": "Parent"
 	},
 	"user": {
+		"account-information": "Account Information",
 		"address": "Address",
+		"confirm-details": "Confirm Details",
+		"confirm-password": "Confirm Password",
 		"email": "Email",
 		"firstname": "First Name",
 		"lastname": "Last Name",
 		"mobile-phone": "Mobile Phone",
 		"password": "Password",
+		"personal-information": "Personal Information",
 		"phone": "Phone",
 		"profile": "Profile",
-		"username": "Username"
+		"tenant-information": "Tenant Information",
+		"username": "Username",
+		"users": "Users"
 	},
 	"validation": {
 		"fail": "Validation Fail",

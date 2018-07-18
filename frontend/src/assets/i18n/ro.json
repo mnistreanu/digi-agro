@@ -1,5 +1,6 @@
 {
 	"action": {
+		"confirm": "A confirma",
 		"create": "Crea",
 		"remove": "Șterge",
 		"save": "Salvați"
@@ -8,7 +9,11 @@
 		"login": "Logare",
 		"logout": "Ieșire"
 	},
+	"branch": {
+		"branch": "Subdiviziune"
+	},
 	"general": {
+		"form": "Forma",
 		"settings": "Setări"
 	},
 	"geo": {
@@ -48,6 +53,10 @@
 		"saved": "A fost salvat",
 		"username-changed-relogin": "Numele de utilizatorul a fost modificata! Reintrați în sistem"
 	},
+	"slider": {
+		"next": "Următor",
+		"prev": "Înapoi"
+	},
 	"tenant": {
 		"tenant": "Client"
 	},
@@ -55,15 +64,21 @@
 		"parent": "Părinte"
 	},
 	"user": {
+		"account-information": "Informații despre cont",
 		"address": "Adresa",
+		"confirm-details": "Confirmarea datelor",
+		"confirm-password": "Repetați parola",
 		"email": "Email",
 		"firstname": "Nume",
 		"lastname": "Prenume",
 		"mobile-phone": "Mobil",
 		"password": "Parola",
+		"personal-information": "Informație personala",
 		"phone": "Telefon",
 		"profile": "Profil",
-		"username": "Nume utilizatorului"
+		"tenant-information": "Informații despre client",
+		"username": "Nume utilizatorului",
+		"users": "Utilizatori"
 	},
 	"validation": {
 		"fail": "Eroare de validare",

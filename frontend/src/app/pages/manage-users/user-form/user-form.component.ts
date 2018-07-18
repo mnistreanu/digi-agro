@@ -13,6 +13,7 @@ import {IMultiSelectSettings} from "angular-2-dropdown-multiselect";
 import {BranchService} from "../../../services/branch.service";
 import {Messages} from "../../../common/messages";
 import {Authorities} from "../../../common/authorities";
+import {LangService} from "../../../services/lang.service";
 
 @Component({
     selector: 'az-user-form',
@@ -37,6 +38,9 @@ export class UserFormComponent implements OnInit {
         dynamicTitleMaxItems: 10
     };
 
+    labelSaved: string;
+    labelRemoved: string;
+
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
@@ -44,10 +48,12 @@ export class UserFormComponent implements OnInit {
                 private userService: UserService,
                 private branchService: BranchService,
                 private tenantService: TenantService,
+                private langService: LangService,
                 private toastr: ToastrService) {
     }
 
     ngOnInit() {
+        this.setupLabels();
         this.setupTenants();
         this.route.params.subscribe(params => {
             let id = params['id'];
@@ -59,6 +65,11 @@ export class UserFormComponent implements OnInit {
                 this.setupModel(id);
             }
         });
+    }
+
+    private setupLabels() {
+        this.langService.get(Messages.SAVED).subscribe((msg) => this.labelSaved = msg);
+        this.langService.get(Messages.REMOVED).subscribe((msg) => this.labelRemoved = msg);
     }
 
     private setupTenants() {
@@ -96,10 +107,10 @@ export class UserFormComponent implements OnInit {
 
     private buildForm() {
         this.steps = [
-            {name: 'Account Information', icon: 'fa fa-lock', active: true, valid: false, submitted: false},
-            {name: 'Personal Information', icon: 'fa fa-user', active: false, valid: false, submitted: false},
-            {name: 'Tenant Information', icon: 'far fa-user-tie', active: false, valid: false, submitted: false},
-            {name: 'Confirm Your Details', icon: 'fa fa-check-square-o', active: false, valid: false, submitted: false}
+            {name: 'user.account-information', icon: 'fa fa-lock', active: true, valid: false, submitted: false},
+            {name: 'user.personal-information', icon: 'fa fa-user', active: false, valid: false, submitted: false},
+            {name: 'user.tenant-information', icon: 'far fa-user-tie', active: false, valid: false, submitted: false},
+            {name: 'user.confirm-details', icon: 'fa fa-check-square-o', active: false, valid: false, submitted: false}
         ];
 
         this.accountForm = this.fb.group({
@@ -135,7 +146,7 @@ export class UserFormComponent implements OnInit {
         this.steps.some(function (step, index, steps) {
             if (index < steps.length - 1) {
                 if (step.active) {
-                    if (step.name == 'Account Information') {
+                    if (step.name == 'user.account-information') {
                         step.submitted = true;
                         if (accountForm.valid) {
                             step.active = false;
@@ -144,7 +155,7 @@ export class UserFormComponent implements OnInit {
                             return true;
                         }
                     }
-                    if (step.name == 'Personal Information') {
+                    if (step.name == 'user.personal-information') {
                         step.submitted = true;
                         if (personalForm.valid) {
                             step.active = false;
@@ -153,7 +164,7 @@ export class UserFormComponent implements OnInit {
                             return true;
                         }
                     }
-                    if (step.name == 'Tenant Information') {
+                    if (step.name == 'user.tenant-information') {
                         step.submitted = true;
                         if (tenantForm.valid) {
                             step.active = false;
@@ -212,7 +223,7 @@ export class UserFormComponent implements OnInit {
 
         this.userService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.toastr.success(Messages.SAVED);
+            this.toastr.success(this.labelSaved);
         });
 
     }
@@ -228,7 +239,7 @@ export class UserFormComponent implements OnInit {
 
     public remove() {
         this.userService.remove(this.model).subscribe(() => {
-            this.toastr.success(Messages.REMOVED);
+            this.toastr.success(this.labelRemoved);
             this.router.navigate(['/pages/manage-users']);
         });
     }
