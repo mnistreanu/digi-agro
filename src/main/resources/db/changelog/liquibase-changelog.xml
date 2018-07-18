@@ -208,4 +208,21 @@
     </changeSet>
 
 
+    <!--
+        Adaugat categoria PLANTE TEHNICE si 8 tipuri de plante
+    -->
+    <changeSet id="insert-plante-tehnice" author="mgorgos" failOnError="true" runOnChange="true">
+        <sql>
+            INSERT INTO crop_categories (id, name_ro, name_ru) VALUES (2,'Plance tehnice','Технические растения');
+
+            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (11,2, 'Floarea soarelui','Подсолнечник');
+            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (12,2, 'Rapiță','Рапс');
+            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (13,2, 'Sfeclă de zahăr','Сахарная свекла');
+            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (14,2, 'In','Лён');
+            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (15,2, 'Cânepă','Конопля');
+            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (16,2, 'Tutun','Табак');
+            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (17,2, 'Hamei','Хмель');
+            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (18,2, 'Soia','Соя');
+        </sql>
+    </changeSet>
 </databaseChangeLog>
