@@ -41,7 +41,7 @@ export class AuthService {
     }
 
     login(model: UserAuth): Observable<boolean> {
-        return this.http.post(this.api + '/login', model, this.httpOptions)
+        return this.http.post<boolean>(this.api + '/login', model)
             .map((response) => {
                 let token = response['token'];
                 let authorities = response['authorities'];
@@ -56,8 +56,7 @@ export class AuthService {
                 }
                 this.userChangedChanged.emit();
                 return false;
-            })
-            .catch(error => this.errorService.processError(error));
+            });
     }
 
     setupAuthorities(authorities: string[]) {
@@ -93,8 +92,7 @@ export class AuthService {
     }
 
     fetchCurrentUser(): Observable<UserAccountModel> {
-        return this.http.get(this.api + '/current-ser', this.getOptions())
-            .catch(error => this.errorService.processError(error));
+        return this.http.get<UserAccountModel>(this.api + '/current-ser');
     }
 
     getToken(): String {
@@ -102,24 +100,11 @@ export class AuthService {
         return userData && userData.token ? userData.token : "";
     }
 
-    getOptions() {
-        let headers = {'Content-Type':  'application/json'};
-        headers[Constants.AUTH_HEADER] = Constants.TOKEN_PREFIX + this.getToken();
-
-        return {
-            headers: new HttpHeaders(headers)
-        };
-    }
-
-    getOptionsNoContentType() {
+    createTokenHeader() {
         let headers = {};
         headers[Constants.AUTH_HEADER] = Constants.TOKEN_PREFIX + this.getToken();
-
-        return {
-            headers: new HttpHeaders(headers)
-        };
+        return headers;
     }
-
 
     hasAuthority(authorityName) {
         let authorityObject = localStorage.getItem(Authorities.AUTHORITY_OBJECT);

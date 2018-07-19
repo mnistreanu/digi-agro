@@ -1,45 +1,36 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Rx";
 import {HttpClient} from "@angular/common/http";
-import {AuthService} from "./auth.service";
 import {Constants} from "../common/constants";
 import {BrandModel} from "../pages/manage-brands/brand/brand.model";
-import {ErrorService} from "./error.service";
 
 @Injectable()
 export class BrandService {
 
   private api: string = Constants.API_URL + "/brand";
 
-  constructor(private authService: AuthService,
-              private errorService: ErrorService,
-              private http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
   validateName(id: number, name: string): Observable<boolean> {
     let queryParams = `?id=${id}&name=${name}`;
-    return this.http.get(this.api + '/validate-name' + queryParams, this.authService.getOptions())
-        .catch(error => this.errorService.processError(error));
+    return this.http.get<boolean>(this.api + '/validate-name' + queryParams);
   }
 
   findOne(id: number): Observable<BrandModel> {
-    return this.http.get(this.api + '/' + id, this.authService.getOptions())
-        .catch(error => this.errorService.processError(error));
+    return this.http.get<BrandModel>(this.api + '/' + id);
   }
 
   findAll(): Observable<BrandModel[]> {
-    return this.http.get(this.api + '/', this.authService.getOptions())
-        .catch(error => this.errorService.processError(error));
+    return this.http.get<BrandModel[]>(this.api + '/');
   }
 
   save(model: BrandModel): Observable<BrandModel> {
-    return this.http.post(this.api + '/', model, this.authService.getOptions())
-        .catch(error => this.errorService.processError(error));
+    return this.http.post<BrandModel>(this.api + '/', model);
   }
 
   remove(model: BrandModel): Observable<void> {
-    return this.http.delete(this.api + '/' + model.id, this.authService.getOptions())
-        .catch(error => this.errorService.processError(error));
+    return this.http.delete<void>(this.api + '/' + model.id);
   }
   
 }
