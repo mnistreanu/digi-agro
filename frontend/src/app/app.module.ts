@@ -19,11 +19,13 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {UserService} from "./services/user.service";
 import {ToastrModule} from "ngx-toastr";
 import {LangService} from "./services/lang.service";
+import { ManageCalendarComponent } from './pages/manage-calendar/manage-calendar.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        ErrorComponent
+        ErrorComponent,
+        ManageCalendarComponent
     ],
     imports: [
         BrowserModule,
