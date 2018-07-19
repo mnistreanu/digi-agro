@@ -4,6 +4,7 @@ import {Observable} from "rxjs/Rx";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {Messages} from "../common/messages";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Injectable({
     providedIn: 'root'
@@ -14,15 +15,17 @@ export class ErrorService {
                 private toastr: ToastrService) {
     }
 
-    processError(response: any): Observable<any> {
+    processError(response: HttpErrorResponse): Observable<any> {
 
         let status = response.status;
         let message = response.error.message || Constants.SERVER_ERROR;
 
-
         if (status == 401 || status == 403) {
             this.toastr.error(status == 401 ? Messages.UNAUTHORIZED : Messages.FORBIDDEN);
             this.router.navigate([Constants.LOGIN_PAGE]);
+        }
+        else if (status == 400) {
+            this.toastr.warning(message);
         }
         else {
             if (status == 404) {

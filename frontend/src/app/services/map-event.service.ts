@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from "@angular/core";
 import {Constants} from "../common/constants";
-import {AuthService} from "./auth.service";
 import {MapEventModel} from "../pages/telemetry/map-events/map-event.model";
 import {Observable} from "rxjs/Rx";
 import {HttpClient} from "@angular/common/http";
-import {ErrorService} from "./error.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,25 +11,20 @@ export class MapEventService {
 
   private api: string = Constants.API_URL + "/map-event";
 
-  constructor(private authService: AuthService,
-              private errorService: ErrorService,
-              private http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
   findByMachineIdentifierAndUsername(machineIdentifier, username): Observable<MapEventModel[]> {
     let query = `?machineIdentifier=${machineIdentifier}&username=${username}`;
-    return this.http.get(this.api + '/' + query, this.authService.getOptions())
-        .catch(error => this.errorService.processError(error));
+    return this.http.get<MapEventModel[]>(this.api + '/' + query);
   }
 
   save(model: MapEventModel): Observable<MapEventModel> {
-    return this.http.post(this.api + '/', model, this.authService.getOptions())
-        .catch(error => this.errorService.processError(error));
+    return this.http.post<MapEventModel>(this.api + '/', model);
   }
 
   remove(model: MapEventModel): Observable<void> {
-    return this.http.delete(this.api + '/' + model.id, this.authService.getOptions())
-        .catch(error => this.errorService.processError(error));
+    return this.http.delete<void>(this.api + '/' + model.id);
   }
 
   update(id, field: any, value: any): Observable<void> {
@@ -40,7 +33,6 @@ export class MapEventService {
       field: field,
       value: value
     };
-    return this.http.post(this.api + '/update', JSON.stringify(updateModel),this.authService.getOptions())
-        .catch(error => this.errorService.processError(error));
+    return this.http.post<void>(this.api + '/update', JSON.stringify(updateModel));
   }
 }

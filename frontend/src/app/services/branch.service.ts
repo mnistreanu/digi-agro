@@ -1,7 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from "@angular/core";
 import {Constants} from "../common/constants";
-import {AuthService} from "./auth.service";
-import {ErrorService} from "./error.service";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Rx";
 import {BranchModel} from "../pages/manage-branches/branch/branch.model";
@@ -14,38 +12,31 @@ export class BranchService {
 
     private api: string = Constants.API_URL + "/tenant-branch";
 
-    constructor(private authService: AuthService,
-                private errorService: ErrorService,
-                private http: HttpClient) {
+    constructor(private http: HttpClient) {
     }
 
     validateName(id: number, name: string): Observable<boolean> {
         let queryParams = `?id=${id}&name=${name}`;
-        return this.http.get(this.api + '/validate-name' + queryParams, this.authService.getOptions())
-            .catch(error => this.errorService.processError(error));
+        return this.http.get<boolean>(this.api + '/validate-name' + queryParams);
     }
 
     findOne(id: number): Observable<BranchModel> {
-        return this.http.get(this.api + '/' + id, this.authService.getOptions())
-            .catch(error => this.errorService.processError(error));
+        return this.http.get<BranchModel>(this.api + '/' + id);
     }
 
     find(tenantId: number): Observable<BranchModel[]> {
         let filterModel = {
             tenantId: tenantId
         };
-        return this.http.post(this.api + '/find-by', filterModel, this.authService.getOptions())
-            .catch(error => this.errorService.processError(error));
+        return this.http.post<BranchModel[]>(this.api + '/find-by', filterModel);
     }
 
     save(model: BranchModel): Observable<BranchModel> {
-        return this.http.post(this.api + '/', model, this.authService.getOptions())
-            .catch(error => this.errorService.processError(error));
+        return this.http.post<BranchModel>(this.api + '/', model);
     }
 
     remove(model: BranchModel): Observable<void> {
-        return this.http.delete(this.api + '/' + model.id, this.authService.getOptions())
-            .catch(error => this.errorService.processError(error));
+        return this.http.delete<void>(this.api + '/' + model.id);
     }
 
     fetchListItems(tenantId: number, skipId: number): Observable<ListItem[]> {
@@ -53,12 +44,10 @@ export class BranchService {
         if (skipId != null) {
             query += `&skipId=${skipId}`;
         }
-        return this.http.get(this.api + '/list-items' + query, this.authService.getOptions())
-            .catch(error => this.errorService.processError(error));
+        return this.http.get<ListItem[]>(this.api + '/list-items' + query);
     }
 
     findByTenants(tenants: number[]): Observable<ListItem[]> {
-        return this.http.post(this.api + '/find-by-tenants', tenants, this.authService.getOptions())
-            .catch(error => this.errorService.processError(error));
+        return this.http.post<ListItem[]>(this.api + '/find-by-tenants', tenants);
     }
 }
