@@ -140,7 +140,7 @@ export class MachineComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.toastr.warning(Messages.VALIDATION_ERROR);
+            this.toastr.warning(Messages.VALIDATION_FAIL);
             return;
         }
 
@@ -172,7 +172,7 @@ export class MachineComponent implements OnInit {
 
     public remove() {
         this.machineService.remove(this.model).subscribe(() => {
-            this.toastr.success(Messages.DELETED);
+            this.toastr.success(Messages.REMOVED);
             this.router.navigate(['/pages/manage-machines']);
         });
     }

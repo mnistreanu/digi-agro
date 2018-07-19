@@ -113,6 +113,7 @@ public class UserAccountService implements HasRepository<UserAccountRepository> 
         userAccount.setAddress(model.getAddress());
         userAccount.setPhone(model.getPhone());
         userAccount.setMobilePhone(model.getMobilePhone());
+        userAccount.setLanguage(model.getLanguage());
 
         if (model.getPassword() != null) {
             userAccount.setPassword(SecurityUtil.encryptPassword(model.getPassword()));

@@ -1,6 +1,6 @@
 export const adminMenuItems = [
     {
-        title: 'Dashboard',
+        title: 'nav.dashboard',
         routerLink: 'dashboard',
         icon: 'fa-home',
         selected: false,
@@ -8,7 +8,7 @@ export const adminMenuItems = [
         order: 0
     },
     {
-        title: 'Manage Branches',
+        title: 'nav.branches',
         routerLink: '/pages/manage-branches',
         icon: 'fas fa-code-branch',
         selected: false,
@@ -16,7 +16,7 @@ export const adminMenuItems = [
         order: 1
     },
     {
-        title: 'Manage Users',
+        title: 'nav.users',
         routerLink: '/pages/manage-users',
         icon: 'fa-users',
         selected: false,
@@ -24,7 +24,7 @@ export const adminMenuItems = [
         order: 2
     },
     {
-        title: 'Manage Brands',
+        title: 'nav.brands',
         routerLink: '/pages/manage-brands',
         icon: 'fa-bold',
         selected: false,
@@ -32,7 +32,7 @@ export const adminMenuItems = [
         order: 3
     },
     {
-        title: 'Manage Owners',
+        title: 'nav.owners',
         routerLink: '/pages/manage-owners',
         icon: 'fas fa-user-tie',
         selected: false,
@@ -40,7 +40,7 @@ export const adminMenuItems = [
         order: 4
     },
     {
-        title: 'Manage Machines',
+        title: 'nav.machines',
         routerLink: '/pages/manage-machines',
         icon: 'fas fa-car',
         selected: false,
@@ -48,7 +48,7 @@ export const adminMenuItems = [
         order: 5
     },
     {
-        title: 'Telemetry',
+        title: 'nav.telemetry',
         routerLink: '/pages/telemetry',
         icon: 'fas fa-globe',
         selected: false,

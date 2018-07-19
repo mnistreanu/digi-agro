@@ -92,7 +92,7 @@ export class UserComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.toastr.warning(Messages.VALIDATION_ERROR);
+            this.toastr.warning(Messages.VALIDATION_FAIL);
             return;
         }
 
@@ -119,7 +119,7 @@ export class UserComponent implements OnInit {
 
     public remove() {
         this.userService.remove(this.model).subscribe(() => {
-            this.toastr.success(Messages.DELETED);
+            this.toastr.success(Messages.REMOVED);
             this.router.navigate(['/pages/manage-users']);
         });
     }

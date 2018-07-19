@@ -1,8 +1,20 @@
 <span class="help-block" *ngIf="control.errors && (control.touched || formSubmitted)">
-    <span class="text-danger" *ngIf="control.hasError('required')"><strong>{{title}}</strong> is required</span>
-    <span class="text-danger" *ngIf="control.hasError('unique')"><strong>{{title}}</strong> need be unique</span>
-    <span class="text-danger" *ngIf="control.hasError('maxlength')"><strong>{{title}}</strong> max length is {{control.getError('maxlength').requiredLength}}</span>
-    <span class="text-danger" *ngIf="control.hasError('minlength')"><strong>{{title}}</strong> min length is {{control.getError('minlength').requiredLength}}</span>
-    <span class="text-danger" *ngIf="control.hasError('invalidFormat')">Invalid format for {{ title }}</span>
-    <span class="text-danger" *ngIf="control.hasError('mismatchedPasswords')">Passwords do not match</span>
+    <span class="text-danger" *ngIf="control.hasError('required')">
+        <span translate>validation.required</span>
+    </span>
+    <span class="text-danger" *ngIf="control.hasError('unique')">
+        <span translate>validation.unique</span>
+    </span>
+    <span class="text-danger" *ngIf="control.hasError('maxlength')">
+        <span translate>validation.max-length</span> {{control.getError('maxlength').requiredLength}}
+    </span>
+    <span class="text-danger" *ngIf="control.hasError('minlength')">
+        <span translate>validation.min-length</span> {{control.getError('minlength').requiredLength}}
+    </span>
+    <span class="text-danger" *ngIf="control.hasError('invalidFormat')">
+        <span translate>validation.invalid-format</span>
+    </span>
+    <span class="text-danger" *ngIf="control.hasError('mismatchedPasswords')">
+        <span translate>validation.password-do-not-match</span>
+    </span>
 </span>

@@ -184,7 +184,7 @@ export class MapEventsComponent implements OnInit, OnChanges {
         this.mapEventService.remove(model).subscribe(() => {
             this.models.splice(this.models.indexOf(model), 1);
             this.mapEventChanged.emit(this.models);
-            this.toastr.success(Messages.DELETED);
+            this.toastr.success(Messages.REMOVED);
         });
     }
 

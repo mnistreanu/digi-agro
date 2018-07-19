@@ -1,12 +1,20 @@
 {
 	"action": {
-		"create": "New",
+		"confirm": "Confirm",
+		"create": "Add",
 		"remove": "Remove",
 		"save": "Save"
 	},
 	"auth": {
 		"login": "Login",
 		"logout": "Logout"
+	},
+	"branch": {
+		"branch": "Branch"
+	},
+	"general": {
+		"form": "Form",
+		"settings": "Settings"
 	},
 	"geo": {
 		"country": "Country",
@@ -17,6 +25,9 @@
 		"description": "Description",
 		"name": "Name"
 	},
+	"language": {
+		"language": "Language"
+	},
 	"machine": {
 		"motor": "Motor",
 		"power": "Power",
@@ -26,9 +37,25 @@
 		"work-types": "Work Types",
 		"сonsumption": "Consumption"
 	},
+	"nav": {
+		"branches": "Branches",
+		"brands": "Brands",
+		"dashboard": "Dashboard",
+		"machines": "Machines",
+		"owners": "Owners",
+		"telemetry": "Telemetry",
+		"tenants": "Tenants",
+		"users": "Users"
+	},
 	"response": {
+		"added": "Added",
 		"removed": "Removed",
-		"saved": "Saved"
+		"saved": "Saved",
+		"username-changed-relogin": "Username Changed! Please, re-login in the system"
+	},
+	"slider": {
+		"next": "Next",
+		"prev": "Prev"
 	},
 	"tenant": {
 		"tenant": "Tenant"
@@ -37,14 +64,30 @@
 		"parent": "Parent"
 	},
 	"user": {
+		"account-information": "Account Information",
 		"address": "Address",
+		"confirm-details": "Confirm Details",
+		"confirm-password": "Confirm Password",
 		"email": "Email",
 		"firstname": "First Name",
 		"lastname": "Last Name",
 		"mobile-phone": "Mobile Phone",
 		"password": "Password",
+		"personal-information": "Personal Information",
 		"phone": "Phone",
 		"profile": "Profile",
-		"username": "Username"
+		"tenant-information": "Tenant Information",
+		"username": "Username",
+		"users": "Users"
+	},
+	"validation": {
+		"fail": "Validation Fail",
+		"file-to-big": "File is too big. Max:",
+		"invalid-format": "Invalid Format",
+		"max-length": "Max length is",
+		"min-length": "Min length is",
+		"password-do-not-match": "Passwords do not match",
+		"required": "Required field",
+		"unique": "Unique field"
 	}
 }

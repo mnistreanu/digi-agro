@@ -1,6 +1,6 @@
 export const superAdminMenuItems = [
     {
-        title: 'Dashboard',
+        title: 'nav.dashboard',
         routerLink: 'dashboard',
         icon: 'fa-home',
         selected: false,
@@ -8,7 +8,7 @@ export const superAdminMenuItems = [
         order: 0
     },
     {
-        title: 'Manage Tenants',
+        title: 'nav.tenants',
         routerLink: '/pages/manage-tenants',
         icon: 'fas fa-user-tie',
         selected: false,
@@ -16,7 +16,7 @@ export const superAdminMenuItems = [
         order: 1
     },
     {
-        title: 'Manage Branches',
+        title: 'nav.branches',
         routerLink: '/pages/manage-branches',
         icon: 'fas fa-code-branch',
         selected: false,
@@ -24,7 +24,7 @@ export const superAdminMenuItems = [
         order: 2
     },
     {
-        title: 'Manage Users',
+        title: 'nav.users',
         routerLink: '/pages/manage-users',
         icon: 'fa-users',
         selected: false,

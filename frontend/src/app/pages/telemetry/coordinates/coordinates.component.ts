@@ -182,7 +182,7 @@ export class CoordinatesComponent implements OnInit, OnChanges {
         this.telemetryService.remove(model).subscribe(() => {
             this.models.splice(this.models.indexOf(model), 1);
             this.coordinateChanged.emit(this.models);
-            this.toastr.success(Messages.DELETED);
+            this.toastr.success(Messages.REMOVED);
         });
     }
 

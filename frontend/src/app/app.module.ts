@@ -18,6 +18,7 @@ import {ErrorService} from "./services/error.service";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {UserService} from "./services/user.service";
 import {ToastrModule} from "ngx-toastr";
+import {LangService} from "./services/lang.service";
 
 @NgModule({
     declarations: [
@@ -41,7 +42,7 @@ import {ToastrModule} from "ngx-toastr";
         }),
         routing
     ],
-    providers: [AppConfig, AuthService, ErrorService, UserService],
+    providers: [AppConfig, AuthService, ErrorService, UserService, LangService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

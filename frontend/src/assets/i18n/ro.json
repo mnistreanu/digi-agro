@@ -1,5 +1,6 @@
 {
 	"action": {
+		"confirm": "A confirma",
 		"create": "Crea",
 		"remove": "Șterge",
 		"save": "Salvați"
@@ -7,6 +8,13 @@
 	"auth": {
 		"login": "Logare",
 		"logout": "Ieșire"
+	},
+	"branch": {
+		"branch": "Subdiviziune"
+	},
+	"general": {
+		"form": "Forma",
+		"settings": "Setări"
 	},
 	"geo": {
 		"country": "Țară",
@@ -17,6 +25,9 @@
 		"description": "Descriere",
 		"name": "Nume"
 	},
+	"language": {
+		"language": "Limba"
+	},
 	"machine": {
 		"motor": "Motor",
 		"power": "Putere",
@@ -26,9 +37,25 @@
 		"work-types": "Tipuri de lucrul",
 		"сonsumption": "Consum"
 	},
+	"nav": {
+		"branches": "Subdiviziuni",
+		"brands": "Brands",
+		"dashboard": "Dashboard",
+		"machines": "Maşini",
+		"owners": "Proprietari",
+		"telemetry": "Telemetrie",
+		"tenants": "Clienți",
+		"users": "Utilizatori"
+	},
 	"response": {
+		"added": "A fost adăugat",
 		"removed": "A fost șters",
-		"saved": "A fost salvat"
+		"saved": "A fost salvat",
+		"username-changed-relogin": "Numele de utilizatorul a fost modificata! Reintrați în sistem"
+	},
+	"slider": {
+		"next": "Următor",
+		"prev": "Înapoi"
 	},
 	"tenant": {
 		"tenant": "Client"
@@ -37,14 +64,30 @@
 		"parent": "Părinte"
 	},
 	"user": {
+		"account-information": "Informații despre cont",
 		"address": "Adresa",
+		"confirm-details": "Confirmarea datelor",
+		"confirm-password": "Repetați parola",
 		"email": "Email",
 		"firstname": "Nume",
 		"lastname": "Prenume",
 		"mobile-phone": "Mobil",
 		"password": "Parola",
+		"personal-information": "Informație personala",
 		"phone": "Telefon",
 		"profile": "Profil",
-		"username": "Nume de utilizator"
+		"tenant-information": "Informații despre client",
+		"username": "Nume utilizatorului",
+		"users": "Utilizatori"
+	},
+	"validation": {
+		"fail": "Eroare de validare",
+		"file-to-big": "Fișierul este prea mare. Max:",
+		"invalid-format": "Format nevalid",
+		"max-length": "Lungimea maximală",
+		"min-length": "Lungimea minimă",
+		"password-do-not-match": "Parolele nu se potrivesc",
+		"required": "Camp obligatoriu",
+		"unique": "Unic"
 	}
 }

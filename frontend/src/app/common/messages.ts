@@ -5,9 +5,9 @@ export class Messages {
   public static UNAUTHORIZED: string = 'Unauthorized';
   public static FORBIDDEN: string = 'Forbidden';
 
-  public static VALIDATION_ERROR: string = 'Validation Error';
-  public static ADDED: string = 'Added';
-  public static SAVED: string = 'Saved';
-  public static DELETED: string = 'Deleted';
+  public static VALIDATION_FAIL: string = 'validation.fail';
+  public static ADDED: string = 'response.added';
+  public static SAVED: string = 'response.saved';
+  public static REMOVED: string = 'response.removed';
 
 }

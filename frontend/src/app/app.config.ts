@@ -11,8 +11,8 @@ export class AppConfig {
    constructor(){
         this.sassVariables = this.getSassVariables();
         this.config = {
-            name: 'Azimuth',
-            title: 'Admin template based on Angular 6 and Bootstrap 4',
+            name: 'Digi Agro',
+            title: 'Digi Agro',
             version: '2.3.0',
             colors:{
                 main: this.sassVariables['main-color'],

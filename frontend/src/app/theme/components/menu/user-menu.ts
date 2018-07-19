@@ -1,6 +1,6 @@
 export const userMenuItems = [
   {
-    title: 'Dashboard',
+    title: 'nav.dashboard',
     routerLink: 'dashboard',
     icon: 'fa-home',
     selected: false,
@@ -8,7 +8,7 @@ export const userMenuItems = [
     order: 0
   },
   {
-    title: 'Telemetry',
+    title: 'nav.telemetry',
     routerLink: '/pages/telemetry',
     icon: 'fas fa-globe',
     selected: false,

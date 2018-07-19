@@ -8,6 +8,7 @@ import {UserAccountModel} from "../manage-users/user/user-account.model";
 import {Messages} from "../../common/messages";
 import {Router} from "@angular/router";
 import {Constants} from "../../common/constants";
+import {LangService} from "../../services/lang.service";
 
 @Component({
     selector: 'az-user-profile',
@@ -23,20 +24,34 @@ export class UserProfileComponent implements OnInit {
     logoFile: File;
     logoUrl: string;
 
+    labelFileIsTooBig: string;
+    labelSaved: string;
+    labelValidationFail: string;
+    labelUsernameChangedRelogin: string;
+
     constructor(private router: Router,
                 private fb: FormBuilder,
+                private langService: LangService,
                 private authService: AuthService,
                 private userService: UserService,
                 private toastr: ToastrService) {
     }
 
     ngOnInit() {
+        this.setupLabels();
         this.authService.fetchCurrentUser().subscribe(data => {
             this.model = data;
             this.logoUrl = Constants.API_URL + this.model.logoUrl;
             console.log('logo', this.logoUrl);
             this.buildForm();
         });
+    }
+
+    private setupLabels() {
+        this.langService.get('validation.file-to-big').subscribe((message) => this.labelFileIsTooBig = message);
+        this.langService.get('response.username-changed-relogin').subscribe((message) => this.labelUsernameChangedRelogin = message);
+        this.langService.get(Messages.SAVED).subscribe((message) => this.labelSaved = message);
+        this.langService.get(Messages.VALIDATION_FAIL).subscribe((message) => this.labelValidationFail = message);
     }
 
     private buildForm() {
@@ -48,11 +63,12 @@ export class UserProfileComponent implements OnInit {
             email: [this.model.email, [emailValidator]],
             address: [this.model.address],
             phone: [this.model.phone],
-            mobilePhone: [this.model.mobilePhone]
+            mobilePhone: [this.model.mobilePhone],
+            language: [this.model.language],
         });
     }
 
-    public validateUsernameToUnique() {
+    public onUsernameChange() {
         let control = this.form.controls.username;
         this.userService.validateUsername(this.model.id || -1, control.value).subscribe((isUnique) => {
             if (!isUnique) {
@@ -68,12 +84,12 @@ export class UserProfileComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.toastr.warning(Messages.VALIDATION_ERROR);
+            this.toastr.warning(this.labelValidationFail);
             return;
         }
 
-        if (this.logoFile && this.logoFile.size > Constants.MAX_FILE_SIZE) {
-            this.toastr.error('File is too big');
+        if (this.logoFile && this.logoFile.size > 2000000) {
+            this.toastr.error(this.labelFileIsTooBig + '2MB');
             return;
         }
 
@@ -84,9 +100,9 @@ export class UserProfileComponent implements OnInit {
 
         this.userService.saveProfile(this.model, this.logoFile).subscribe((model) => {
             this.model = model;
-            this.toastr.success(Messages.SAVED);
+            this.toastr.success(this.labelSaved);
             if (usernameChanged) {
-                this.toastr.success('Username Changed! Please, re-login in the system.');
+                this.toastr.success(this.labelUsernameChangedRelogin);
                 this.router.navigate([Constants.LOGIN_PAGE]);
             }
             else {
