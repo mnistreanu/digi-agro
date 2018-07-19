@@ -21,16 +21,27 @@ public class AgroTaskController {
     private AgroTaskService agroTaskService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<List<AgroTaskModel>> getModels(@RequestParam("tenant_id") Long tenantId,
+    public ResponseEntity<PayloadModel> getModels(@RequestParam("tenant_id") Long tenantId,
                                                          @RequestParam("scheduled_date") Date scheduledDate) {
 
-        List<AgroTask> items = agroTaskService.findFutureTasks(tenantId, scheduledDate == null ? new Date() : scheduledDate);
-        List<AgroTaskModel> models = items.stream().map(AgroTaskModel::new).collect(Collectors.toList());
+        PayloadModel<AgroTaskModel> payloadModel = new PayloadModel<>();
 
-        PayloadModel<AgroTaskModel> model = new PayloadModel<>();
-        model.setStatus(PayloadModel.STATUS_SUCCESS);
+        try {
+            List<AgroTask> items = agroTaskService.findFutureTasks(tenantId, scheduledDate == null ? new Date() : scheduledDate);
+            if (!items.isEmpty()) {
+                List<AgroTaskModel> models = items.stream().map(AgroTaskModel::new).collect(Collectors.toList());
+                AgroTaskModel[] payload = models.toArray(new AgroTaskModel[models.size()]);
+                payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
+                payloadModel.setPayload(payload);
+            } else {
+                payloadModel.setStatus(PayloadModel.STATUS_WARNING);
+            }
+        } catch (Exception e) {
+            payloadModel.setStatus(PayloadModel.STATUS_ERROR);
+            payloadModel.setMessage(e.getLocalizedMessage());
+        }
 
-        return ResponseEntity.ok(models);
+        return ResponseEntity.ok(payloadModel);
     }
 //
 //    @RequestMapping(value = "/identifiers", method = RequestMethod.GET)
