@@ -23,7 +23,10 @@ import {UserProfileComponent} from "./user-profile/user-profile.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FormErrorBlockModule} from "../modules/form-error-block/form-error-block.module";
 import {TranslateModule} from '@ngx-translate/core';
+
 import {AgroTaskCalendarComponent} from './agrotask-calendar/agrotask-calendar.component';
+import {AgroTaskCalendarModule} from './agrotask-calendar/agrotask-calendar.module';
+import {AgroTaskService} from "../services/agrotask.service";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -41,6 +44,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         ReactiveFormsModule,
         FormErrorBlockModule,
         TranslateModule,
+        AgroTaskCalendarModule
     ],
     declarations: [
         PagesComponent,
@@ -62,6 +66,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         AdminGuard,
         UserGuard,
         TenantService,
+        AgroTaskService,
         {provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG}
     ]
 })
