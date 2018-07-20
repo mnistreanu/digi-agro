@@ -37,8 +37,8 @@ export const routes: Routes = [
             { path: 'telemetry', loadChildren: 'app/pages/telemetry/telemetry.module#TelemetryModule', data: { breadcrumb: 'Telemetry' }, canActivate: [AuthGuard] },
 
             { path: 'manage-tenants', loadChildren: 'app/pages/manage-tenants/manage-tenants.module#ManageTenantsModule', data: { breadcrumb: 'Manage Tenants' }, canActivate: [SuperAdminGuard] },
-            { path: 'manage-branches', loadChildren: 'app/pages/manage-branches/manage-branches.module#ManageBranchesModule', data: { breadcrumb: 'Manage Branches' }, canActivate: [SuperAdminOrAdminGuard] }
-            { path: 'manage-calendar', component: ManageCalendarComponent, data: { breadcrumb: 'Manage Calendar' } },
+            { path: 'manage-branches', loadChildren: 'app/pages/manage-branches/manage-branches.module#ManageBranchesModule', data: { breadcrumb: 'Manage Branches' }, canActivate: [SuperAdminOrAdminGuard] },
+            { path: 'manage-calendar', component: ManageCalendarComponent, data: { breadcrumb: 'Manage Calendar' } }
         ]
     }
 ];

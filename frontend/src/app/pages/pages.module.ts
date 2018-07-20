@@ -23,7 +23,7 @@ import {UserProfileComponent} from "./user-profile/user-profile.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FormErrorBlockModule} from "../modules/form-error-block/form-error-block.module";
 import {TranslateModule} from '@ngx-translate/core';
-import {ManageCalendar, ManageCalendarComponent} from './manage-calendar/manage-calendar.component';
+import {ManageCalendarComponent} from './manage-calendar/manage-calendar.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
