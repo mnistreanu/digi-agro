@@ -22,10 +22,7 @@ import {TenantService} from "../services/tenant.service";
 import {UserProfileComponent} from "./user-profile/user-profile.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FormErrorBlockModule} from "../modules/form-error-block/form-error-block.module";
-import {TranslateModule} from '@ngx-translate/core';
-
-import {AgroTaskCalendarComponent} from './agrotask-calendar/agrotask-calendar.component';
-import {AgroTaskCalendarModule} from './agrotask-calendar/agrotask-calendar.module';
+import {TranslateModule} from "@ngx-translate/core";
 import {AgroTaskService} from "../services/agrotask.service";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -43,8 +40,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         FormsModule,
         ReactiveFormsModule,
         FormErrorBlockModule,
-        TranslateModule,
-        AgroTaskCalendarModule
+        TranslateModule
     ],
     declarations: [
         PagesComponent,
@@ -56,8 +52,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         BreadcrumbComponent,
         BackTopComponent,
         SearchComponent,
-        UserProfileComponent,
-        AgroTaskCalendarComponent
+        UserProfileComponent
     ],
     providers: [
         AuthGuard,

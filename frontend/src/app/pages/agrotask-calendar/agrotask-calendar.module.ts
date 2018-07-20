@@ -6,7 +6,7 @@ import { DirectivesModule } from '../../theme/directives/directives.module';
 import {AgroTaskCalendarComponent} from "./agrotask-calendar.component";
 
 export const routes = [
-  { path: '', component: AgroTaskCalendarComponent, pathMatch: 'full' }
+  { path: '', component: AgroTaskCalendarComponent }
 ];
 
 @NgModule({

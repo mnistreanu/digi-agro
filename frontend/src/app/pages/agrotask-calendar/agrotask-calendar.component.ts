@@ -1,11 +1,11 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { AppConfig } from "../../app.config";
-import 'style-loader!fullcalendar/dist/fullcalendar.min.css';
+import {Component} from "@angular/core";
+import {AppConfig} from "../../app.config";
+import "style-loader!fullcalendar/dist/fullcalendar.min.css";
 
 @Component({
   selector: 'az-agrotask-calendar',
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: './agrotask-calendar.component.html'
+  templateUrl: './agrotask-calendar.component.html',
+  styleUrls: ['./agrotask-calendar.component.scss']
 })
 export class AgroTaskCalendarComponent {
   public config:any;
