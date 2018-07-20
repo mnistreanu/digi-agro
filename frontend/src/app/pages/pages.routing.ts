@@ -9,6 +9,7 @@ import {AuthGuard} from "../guard/auth-guard";
 import {SuperAdminGuard} from "../guard/super-admin-guard";
 import {SuperAdminOrAdminGuard} from "../guard/super-admin-or-admin-guard";
 import {UserProfileComponent} from "./user-profile/user-profile.component";
+import {ManageCalendarComponent} from "./manage-calendar/manage-calendar.component";
 
 export const routes: Routes = [
     {
@@ -37,6 +38,7 @@ export const routes: Routes = [
 
             { path: 'manage-tenants', loadChildren: 'app/pages/manage-tenants/manage-tenants.module#ManageTenantsModule', data: { breadcrumb: 'Manage Tenants' }, canActivate: [SuperAdminGuard] },
             { path: 'manage-branches', loadChildren: 'app/pages/manage-branches/manage-branches.module#ManageBranchesModule', data: { breadcrumb: 'Manage Branches' }, canActivate: [SuperAdminOrAdminGuard] }
+            { path: 'manage-calendar', component: ManageCalendarComponent, data: { breadcrumb: 'Manage Calendar' } },
         ]
     }
 ];
