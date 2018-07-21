@@ -20,13 +20,11 @@ export class GlobalHttpInterceptorService implements HttpInterceptor {
             setHeaders: this.authService.createTokenHeader()
         });
 
-        if (req.url.indexOf('/file?path=') == -1) {
-            req = req.clone({
-                setHeaders: {'Content-Type': 'application/json'}
-            });
-        }
-
-        // return next.handle(req);
+        // if (req.url.indexOf('/file?path=') == -1) {
+        //     req = req.clone({
+        //         setHeaders: {'Content-Type': 'application/json'}
+        //     });
+        // }
 
         return next.handle(req).do(
             (event: HttpEvent<any>) => {
