@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class AgroTaskModel implements Serializable {
 
     private Long id;
-    private AgroWorkType type;
+    private Integer workTypeId;
     private String title;
     private String description;
     private Long tenantId;
@@ -30,7 +30,7 @@ public class AgroTaskModel implements Serializable {
 
     public AgroTaskModel(AgroTask entity) {
         this.id = entity.getId();
-        this.type = entity.getWorkType();
+        this.workTypeId = entity.getWorkType().getId();
         this.title = entity.getTitle();
         this.description = entity.getDescription();
         this.tenantId = entity.getTenantId();
@@ -47,12 +47,12 @@ public class AgroTaskModel implements Serializable {
         this.id = id;
     }
 
-    public AgroWorkType getType() {
-        return type;
+    public Integer getWorkTypeId() {
+        return workTypeId;
     }
 
-    public void setType(AgroWorkType type) {
-        this.type = type;
+    public void setWorkTypeId(Integer workTypeId) {
+        this.workTypeId = workTypeId;
     }
 
     public String getTitle() {

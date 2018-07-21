@@ -1,6 +1,8 @@
 import {Component} from "@angular/core";
 import {AppConfig} from "../../app.config";
+import {AgroTaskService} from "../../services/agrotask.service";
 import "style-loader!fullcalendar/dist/fullcalendar.min.css";
+import {PayloadModel} from "../agrotask-calendar/payload.model";
 
 @Component({
   selector: 'az-agrotask-calendar',
@@ -16,8 +18,9 @@ export class AgroTaskCalendarComponent {
   dragOptions: Object = { zIndex: 999, revert: true, revertDuration: 0 };
   event: any = {};
   createEvent: any;
+  model: PayloadModel;
 
-  constructor(private _appConfig:AppConfig) {
+  constructor(private _appConfig:AppConfig, private agroTaskService: AgroTaskService ) {
     this.config = this._appConfig.config;
     this.configFn = this._appConfig;
 
@@ -170,6 +173,13 @@ export class AgroTaskCalendarComponent {
     this.$calendar = jQuery('#calendar');
     this.$calendar.fullCalendar(this.calendarOptions);
     jQuery('.draggable').draggable(this.dragOptions);
+    this.findAgroTasks();
+  }
+
+  private findAgroTasks() {
+    this.agroTaskService.find().subscribe(payloadModel => {
+      this.model = payloadModel;
+    })
 
   }
 

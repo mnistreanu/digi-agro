@@ -16,12 +16,20 @@ export const superAdminMenuItems = [
         order: 1
     },
     {
+        title: 'Agro Task Calendar',
+        routerLink: '/pages/agrotask-calendar',
+        icon: 'fa-calendar',
+        selected: false,
+        expanded: false,
+        order: 2
+    },
+    {
         title: 'nav.branches',
         routerLink: '/pages/manage-branches',
         icon: 'fas fa-code-branch',
         selected: false,
         expanded: false,
-        order: 2
+        order: 3
     },
     {
         title: 'nav.users',
@@ -29,7 +37,7 @@ export const superAdminMenuItems = [
         icon: 'fa-users',
         selected: false,
         expanded: false,
-        order: 3
+        order: 4
     },
     {
         title: 'Charts',

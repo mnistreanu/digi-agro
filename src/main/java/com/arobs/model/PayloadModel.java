@@ -1,6 +1,7 @@
 package com.arobs.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * Created by mihail.gorgos on 19.07.2018.
@@ -46,5 +47,14 @@ public class PayloadModel<T> implements Serializable {
 
     public void setPayload(T[] payload) {
         this.payload = payload;
+    }
+
+    @Override
+    public String toString() {
+        return "PayloadModel{" +
+                "status='" + status + '\'' +
+                ", message='" + message + '\'' +
+                ", payload=" + Arrays.toString(payload) +
+                '}';
     }
 }

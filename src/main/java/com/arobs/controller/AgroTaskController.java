@@ -21,15 +21,15 @@ public class AgroTaskController {
     private AgroTaskService agroTaskService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<PayloadModel> getModels(@RequestParam("tenant_id") Long tenantId,
-                                                         @RequestParam("scheduled_date") Date scheduledDate) {
+    public ResponseEntity<PayloadModel> getScheduledTasks() {
 
         PayloadModel<AgroTaskModel> payloadModel = new PayloadModel<>();
+        System.out.println(payloadModel);
 
         try {
-            List<AgroTask> items = agroTaskService.findFutureTasks(tenantId, scheduledDate == null ? new Date() : scheduledDate);
-            if (!items.isEmpty()) {
-                List<AgroTaskModel> models = items.stream().map(AgroTaskModel::new).collect(Collectors.toList());
+            List<AgroTask> agroTasks = agroTaskService.findFutureTasks(1L, new Date());
+            if (!agroTasks.isEmpty()) {
+                List<AgroTaskModel> models = agroTasks.stream().map(AgroTaskModel::new).collect(Collectors.toList());
                 AgroTaskModel[] payload = models.toArray(new AgroTaskModel[models.size()]);
                 payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
                 payloadModel.setPayload(payload);
@@ -40,7 +40,6 @@ public class AgroTaskController {
             payloadModel.setStatus(PayloadModel.STATUS_ERROR);
             payloadModel.setMessage(e.getLocalizedMessage());
         }
-
         return ResponseEntity.ok(payloadModel);
     }
 //
@@ -49,11 +48,11 @@ public class AgroTaskController {
 //        return ResponseEntity.ok(agroTaskService.fetchIdentifiers());
 //    }
 //
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<AgroTaskModel> getModel(@PathVariable Long id) {
-        AgroTask at = agroTaskService.findOne(id);
-        return ResponseEntity.ok(new AgroTaskModel(at));
-    }
+//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+//    public ResponseEntity<AgroTaskModel> getModel(@PathVariable Long id) {
+//        AgroTask at = agroTaskService.findOne(id);
+//        return ResponseEntity.ok(new AgroTaskModel(at));
+//    }
 //
 //    @RequestMapping(value = "/validate-identifier", method = RequestMethod.GET)
 //    public ResponseEntity<Boolean> validateIdentifier(@RequestParam("id") Long id, @RequestParam("value") String value) {
