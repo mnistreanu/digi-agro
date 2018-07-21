@@ -6,7 +6,6 @@ import com.arobs.model.PayloadModel;
 import com.arobs.service.AgroTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -22,12 +21,12 @@ public class AgroTaskController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<PayloadModel> getScheduledTasks() {
-
+        Long tenantId  = 1L;
+        Date scheduledTime = null;
         PayloadModel<AgroTaskModel> payloadModel = new PayloadModel<>();
-        System.out.println(payloadModel);
 
         try {
-            List<AgroTask> agroTasks = agroTaskService.findFutureTasks(1L, new Date());
+            List<AgroTask> agroTasks = agroTaskService.find(tenantId, scheduledTime);
             if (!agroTasks.isEmpty()) {
                 List<AgroTaskModel> models = agroTasks.stream().map(AgroTaskModel::new).collect(Collectors.toList());
                 AgroTaskModel[] payload = models.toArray(new AgroTaskModel[models.size()]);
@@ -40,6 +39,7 @@ public class AgroTaskController {
             payloadModel.setStatus(PayloadModel.STATUS_ERROR);
             payloadModel.setMessage(e.getLocalizedMessage());
         }
+
         return ResponseEntity.ok(payloadModel);
     }
 //

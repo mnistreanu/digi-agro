@@ -17,16 +17,12 @@ public class AgroTaskService implements HasRepository<AgroTaskRepository> {
     @Autowired
     private AgroTaskRepository agroTaskRepository;
 
-    public List<AgroTask> find(Long tenantId) {
-        return getRepository().find(tenantId);
-    }
-
-    public List<AgroTask> findFutureTasks(Long tenantId, Date scheduledTime) {
-        return getRepository().findInFuture(tenantId, scheduledTime);
-    }
-
-    public List<AgroTask> findPastTasks(Long tenantId, Date scheduledTime) {
-        return getRepository().findInPast(tenantId, scheduledTime);
+    public List<AgroTask> find(Long tenantId, Date scheduledTime) {
+        if (scheduledTime == null) {
+            return getRepository().findAll(tenantId);
+        } else {
+            return getRepository().findInFuture(tenantId, scheduledTime);
+        }
     }
 
     public AgroTask findOne(Long id) {

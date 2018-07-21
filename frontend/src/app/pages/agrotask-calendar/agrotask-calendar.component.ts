@@ -21,13 +21,13 @@ export class AgroTaskCalendarComponent {
   model: PayloadModel;
 
   constructor(private _appConfig:AppConfig, private agroTaskService: AgroTaskService ) {
-    this.config = this._appConfig.config;
-    this.configFn = this._appConfig;
+      this.config = this._appConfig.config;
+      this.configFn = this._appConfig;
 
-    let date = new Date();
-    let d = date.getDate();
-    let m = date.getMonth();
-    let y = date.getFullYear();
+    // let date = new Date();
+    // let d = date.getDate();
+    // let m = date.getMonth();
+    // let y = date.getFullYear();
 
     this.calendarOptions = {
       header: {
@@ -36,66 +36,66 @@ export class AgroTaskCalendarComponent {
         right: 'month,agendaWeek,agendaDay,listMonth'
       },
       events: [
-        {
-          title: 'All Day Event',
-          start: new Date(y, m, 1),
-          backgroundColor: this.config.colors.primary,
-          textColor: this.config.colors.default,
-          description: 'Will be busy throughout the whole day'
-        },
-        {
-          title: 'Long Event',
-          start: new Date(y, m, d + 5),
-          end: new Date(y, m, d + 7),
-          description: 'This conference should be worse visiting'
-        },
-        {
-          id: 999,
-          title: 'Blah Blah Car',
-          start: new Date(y, m, d - 3, 16, 0),
-          allDay: false,
-          description: 'Agree with this guy on arrival time'
-        },
-        {
-          id: 1000,
-          title: 'Buy this template',
-          start: new Date(y, m, d + 3, 12, 0),
-          allDay: false,
-          backgroundColor: this.config.colors.warning,
-          textColor: this.config.colors.default,
-          description: 'Make sure everything is consistent first'
-        },
-        {
-          title: 'Got to school',
-          start: new Date(y, m, d + 16, 12, 0),
-          end: new Date(y, m, d + 16, 13, 0),
-          backgroundColor:  this.config.colors.danger,
-          textColor: this.config.colors.default,
-          description: 'Time to go back'
-        },
-        {
-          title: 'Study some Node',
-          start: new Date(y, m, d + 18, 12, 0),
-          end: new Date(y, m, d + 18, 13, 0),
-          backgroundColor: this.config.colors.success,
-          textColor: this.config.colors.default,
-          description: 'Node.js is a platform built ' +
-          'on Chrome\'s JavaScript runtime for easily' +
-          ' building fast, scalable network applications.' +
-          ' Node.js uses an event-driven, non-blocking' +
-          ' I/O model that makes it lightweight and' +
-          ' efficient, perfect for data-intensive real-time' +
-          ' applications that run across distributed devices.'
-        },
-        {
-          title: 'Azimuth link',
-          start: new Date(y, m, 28),
-          end: new Date(y, m, 29),
-          url: 'http://themeseason.com/',
-          backgroundColor: this.config.colors.info,
-          textColor: this.config.colors.default,
-          description: this.config.title
-        }
+        // {
+        //   title: 'All Day Event',
+        //   start: new Date(y, m, 1),
+        //   backgroundColor: this.config.colors.primary,
+        //   textColor: this.config.colors.default,
+        //   description: 'Will be busy throughout the whole day'
+        // },
+        // {
+        //   title: 'Long Event',
+        //   start: new Date(y, m, d + 5),
+        //   end: new Date(y, m, d + 7),
+        //   description: 'This conference should be worse visiting'
+        // },
+        // {
+        //   id: 999,
+        //   title: 'Blah Blah Car',
+        //   start: new Date(y, m, d - 3, 16, 0),
+        //   allDay: false,
+        //   description: 'Agree with this guy on arrival time'
+        // },
+        // {
+        //   id: 1000,
+        //   title: 'Buy this template',
+        //   start: new Date(y, m, d + 3, 12, 0),
+        //   allDay: false,
+        //   backgroundColor: this.config.colors.warning,
+        //   textColor: this.config.colors.default,
+        //   description: 'Make sure everything is consistent first'
+        // },
+        // {
+        //   title: 'Got to school',
+        //   start: new Date(y, m, d + 16, 12, 0),
+        //   end: new Date(y, m, d + 16, 13, 0),
+        //   backgroundColor:  this.config.colors.danger,
+        //   textColor: this.config.colors.default,
+        //   description: 'Time to go back'
+        // },
+        // {
+        //   title: 'Study some Node',
+        //   start: new Date(y, m, d + 18, 12, 0),
+        //   end: new Date(y, m, d + 18, 13, 0),
+        //   backgroundColor: this.config.colors.success,
+        //   textColor: this.config.colors.default,
+        //   description: 'Node.js is a platform built ' +
+        //   'on Chrome\'s JavaScript runtime for easily' +
+        //   ' building fast, scalable network applications.' +
+        //   ' Node.js uses an event-driven, non-blocking' +
+        //   ' I/O model that makes it lightweight and' +
+        //   ' efficient, perfect for data-intensive real-time' +
+        //   ' applications that run across distributed devices.'
+        // },
+        // {
+        //   title: 'Azimuth link',
+        //   start: new Date(y, m, 28),
+        //   end: new Date(y, m, 29),
+        //   url: 'http://themeseason.com/',
+        //   backgroundColor: this.config.colors.info,
+        //   textColor: this.config.colors.default,
+        //   description: this.config.title
+        // }
       ],
       eventColor: this.config.colors.info,
       selectable: true,
@@ -178,9 +178,38 @@ export class AgroTaskCalendarComponent {
 
   private findAgroTasks() {
     this.agroTaskService.find().subscribe(payloadModel => {
-      this.model = payloadModel;
+        var payload = payloadModel.payload;
+        for(var i=0; i <payload.length; i++) {
+            let agroEvent : any = {};
+            agroEvent.id = payload[i].id;
+            agroEvent.workTypeId = payload[i].workTypeId;
+            agroEvent.title = payload[i].title;
+            agroEvent.start = new Date(payload[i].scheduledStart);
+            agroEvent.backgroundColor = this.getEventBackgroundColor(agroEvent.workTypeId);
+            agroEvent.textColor = this.config.colors.default;
+            agroEvent.description = payload[i].description;
+            this.$calendar.fullCalendar('renderEvent', agroEvent, true);
+        }
     })
 
   }
 
+  private getEventBackgroundColor(workTypeId) {
+      switch(workTypeId) {
+          case 1:
+              return this.config.colors.success;
+          case 2:
+              return this.config.colors.primary;
+          case 3:
+              return this.config.colors.warning;
+          case 4:
+              return this.config.colors.danger;
+          case 5:
+              return this.config.colors.info;
+          case 6:
+              return this.config.colors.dark;
+          default:
+              return this.config.colors.gray;
+      }
+  }
 }

@@ -16,7 +16,7 @@ public interface AgroTaskRepository extends JpaRepository<AgroTask, Long> {
     @Query("SELECT t FROM AgroTask t " +
             "WHERE t.tenantId = :tenantId " +
             "ORDER BY t.scheduledStart ")
-    List<AgroTask> find(@Param("tenantId") Long tenantId);
+    List<AgroTask> findAll(@Param("tenantId") Long tenantId);
 
     @Query("SELECT t FROM AgroTask t " +
             "WHERE t.tenantId = :tenantId " +
@@ -24,11 +24,6 @@ public interface AgroTaskRepository extends JpaRepository<AgroTask, Long> {
             "ORDER BY t.scheduledStart ")
     List<AgroTask> findInFuture(@Param("tenantId") Long tenantId, @Param("scheduledTime") Date scheduledTime);
 
-    @Query("SELECT t FROM AgroTask t " +
-            "WHERE t.tenantId = :tenantId " +
-            "AND t.scheduledStart < :scheduledTime " +
-            "ORDER BY t.scheduledStart ")
-    List<AgroTask> findInPast(@Param("tenantId") Long tenantId, @Param("scheduledTime") Date scheduledTime);
 
     @Modifying
     @Query("DELETE FROM AgroTask t WHERE t.id = :id")
