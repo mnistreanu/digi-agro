@@ -15,10 +15,11 @@ import {AppComponent} from "./app.component";
 import {ErrorComponent} from "./pages/error/error.component";
 import {AuthService} from "./services/auth.service";
 import {ErrorService} from "./services/error.service";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {UserService} from "./services/user.service";
 import {ToastrModule} from "ngx-toastr";
 import {LangService} from "./services/lang.service";
+import {GlobalHttpInterceptorService} from "./services/global-http-interceptor.service";
 
 @NgModule({
     declarations: [
@@ -42,7 +43,10 @@ import {LangService} from "./services/lang.service";
         }),
         routing
     ],
-    providers: [AppConfig, AuthService, ErrorService, UserService, LangService],
+    providers: [
+        AppConfig, AuthService, ErrorService, UserService, LangService,
+        {provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true}
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
