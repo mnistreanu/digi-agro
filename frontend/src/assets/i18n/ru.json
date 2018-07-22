@@ -7,6 +7,9 @@
 	},
 	"agrotask-calendar": {
 		"enter-new-event": "Просто введите название события",
+		"event-description": "описание",
+		"event-title": "название",
+		"event-type": "тип",
 		"new-event": "Новая задача",
 		"title": "План сельскохозяйственных работ"
 	},

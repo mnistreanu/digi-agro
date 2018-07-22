@@ -7,6 +7,9 @@
 	},
 	"agrotask-calendar": {
 		"enter-new-event": "Doar introduceți numele evenimentului",
+		"event-description": "descrierea",
+		"event-title": "denumirea",
+		"event-type": "tip",
 		"new-event": "Activitate nouă",
 		"title": "Agenda lucrărilor agricole"
 	},
