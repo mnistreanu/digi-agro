@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 import {AppConfig} from "../../app.config";
 import {AgroTaskService} from "../../services/agrotask.service";
 import "style-loader!fullcalendar/dist/fullcalendar.min.css";
-import {PayloadModel} from "../agrotask-calendar/payload.model";
+import {PayloadModel} from "../payload.model";
 
 @Component({
   selector: 'az-agrotask-calendar',
