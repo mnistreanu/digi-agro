@@ -11,6 +11,7 @@ import {LangService} from "../../services/lang.service";
   styleUrls: ['./agrotask-calendar.component.scss']
 })
 export class AgroTaskCalendarComponent {
+
   public config:any;
   public configFn:any;
 

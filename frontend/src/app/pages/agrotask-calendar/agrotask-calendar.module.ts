@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DirectivesModule } from '../../theme/directives/directives.module';
 import {AgroTaskCalendarComponent} from "./agrotask-calendar.component";
+import {TranslateModule} from '@ngx-translate/core';
 
 export const routes = [
   { path: '', component: AgroTaskCalendarComponent }
@@ -14,6 +15,7 @@ export const routes = [
     CommonModule,
     FormsModule,
     DirectivesModule,
+    TranslateModule,
     RouterModule.forChild(routes)
   ],
   declarations: [

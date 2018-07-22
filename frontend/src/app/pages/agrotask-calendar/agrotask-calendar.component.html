@@ -3,7 +3,7 @@
 
     <div widget class="card" >
       <div class="card-header">
-        <span>Calendarul lucrarilor agricole</span>
+        <span><div translate>agrotask-calendar.title</div></span>
         <div class="widget-controls">
           <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
           <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
@@ -44,8 +44,8 @@
                 <div class="modal-content">
                   <div class="modal-header modal-success d-block">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h5 class="modal-title">New Event</h5>
-                    <p class="text-muted no-margin"> Just enter event name to create a new one </p>
+                    <h5 class="modal-title"><div translate>agrotask-calendar.new-event</div></h5>
+                    <p class="text-muted no-margin"> <div translate>agrotask-calendar.enter-new-event</div> </p>
                   </div>
                   <div class="modal-body">
                     <div class="form-group">
@@ -53,7 +53,7 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default">Cancel</button>
+                    <button data-dismiss="modal" class="btn btn-default"><div translate>general.cancel</div></button>
                     <button (click)="createEvent()" class="btn btn-success">OK</button>
                   </div>
                 </div>

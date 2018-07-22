@@ -5,6 +5,11 @@
 		"remove": "Șterge",
 		"save": "Salvați"
 	},
+	"agrotask-calendar": {
+		"enter-new-event": "Doar introduceți numele evenimentului",
+		"new-event": "Activitate nouă",
+		"title": "Agenda lucrărilor agricole"
+	},
 	"auth": {
 		"login": "Logare",
 		"logout": "Ieșire"
@@ -13,6 +18,7 @@
 		"branch": "Subdiviziune"
 	},
 	"general": {
+		"cancel": "Anulare",
 		"form": "Forma",
 		"settings": "Setări"
 	},
