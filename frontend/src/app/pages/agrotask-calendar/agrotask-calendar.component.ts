@@ -3,6 +3,7 @@ import {AppConfig} from "../../app.config";
 import {AgroTaskService} from "../../services/agrotask.service";
 import "style-loader!fullcalendar/dist/fullcalendar.min.css";
 import {AgrotaskModel} from "../agrotask-calendar/agrotask.model";
+import {LangService} from "../../services/lang.service";
 
 @Component({
   selector: 'az-agrotask-calendar',
@@ -20,7 +21,10 @@ export class AgroTaskCalendarComponent {
   createEvent: any;
   agrotaskModels: AgrotaskModel[];
 
-  constructor(private _appConfig:AppConfig, private agroTaskService: AgroTaskService ) {
+  constructor(private _appConfig:AppConfig,
+              private agroTaskService: AgroTaskService,
+              private langService: LangService) {
+
       this.config = this._appConfig.config;
       this.configFn = this._appConfig;
 
@@ -30,6 +34,7 @@ export class AgroTaskCalendarComponent {
     // let y = date.getFullYear();
 
     this.calendarOptions = {
+      locale: this.langService.getLanguage(),
       header: {
         left: 'today prev,next',
         center: 'title',

@@ -11,8 +11,10 @@ export class LangService {
     }
 
     setupDefault() {
-        this.translate.setDefaultLang('en');
-        this.translate.use('en');
+        const language = 'en';
+        this.translate.setDefaultLang(language);
+        this.translate.use(language);
+        localStorage.setItem(Constants.LANGUAGE_KEY, language);
     }
 
     restoreLanguage() {
@@ -33,6 +35,10 @@ export class LangService {
         else {
             this.setupDefault();
         }
+    }
+
+    getLanguage() {
+        return localStorage.getItem(Constants.LANGUAGE_KEY);
     }
 
     clear() {
