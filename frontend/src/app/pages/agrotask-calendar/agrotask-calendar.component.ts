@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 import {AppConfig} from "../../app.config";
 import {AgroTaskService} from "../../services/agrotask.service";
 import "style-loader!fullcalendar/dist/fullcalendar.min.css";
-import {PayloadModel} from "../payload.model";
+import {AgrotaskModel} from "../agrotask-calendar/agrotask.model";
 
 @Component({
   selector: 'az-agrotask-calendar',
@@ -18,7 +18,7 @@ export class AgroTaskCalendarComponent {
   dragOptions: Object = { zIndex: 999, revert: true, revertDuration: 0 };
   event: any = {};
   createEvent: any;
-  model: PayloadModel;
+  agrotaskModels: AgrotaskModel[];
 
   constructor(private _appConfig:AppConfig, private agroTaskService: AgroTaskService ) {
       this.config = this._appConfig.config;
@@ -83,7 +83,7 @@ export class AgroTaskCalendarComponent {
         //   'on Chrome\'s JavaScript runtime for easily' +
         //   ' building fast, scalable network applications.' +
         //   ' Node.js uses an event-driven, non-blocking' +
-        //   ' I/O model that makes it lightweight and' +
+        //   ' I/O payloadModel that makes it lightweight and' +
         //   ' efficient, perfect for data-intensive real-time' +
         //   ' applications that run across distributed devices.'
         // },
@@ -178,16 +178,22 @@ export class AgroTaskCalendarComponent {
 
   private findAgroTasks() {
     this.agroTaskService.find().subscribe(payloadModel => {
-        var payload = payloadModel.payload;
-        for(var i=0; i <payload.length; i++) {
+        let status = payloadModel.status;
+        let message = payloadModel.message;
+        this.agrotaskModels = payloadModel.payload;
+
+        for(var i=0; i <this.agrotaskModels.length; i++) {
             let agroEvent : any = {};
-            agroEvent.id = payload[i].id;
-            agroEvent.workTypeId = payload[i].workTypeId;
-            agroEvent.title = payload[i].title;
-            agroEvent.start = new Date(payload[i].scheduledStart);
+
+            agroEvent.id = this.agrotaskModels[i].id;
+            agroEvent.workTypeId = this.agrotaskModels[i].workTypeId;
+            agroEvent.title = this.agrotaskModels[i].title;
+            agroEvent.start = new Date(this.agrotaskModels[i].scheduledStart);
+            agroEvent.end = new Date(this.agrotaskModels[i].scheduledEnd);
             agroEvent.backgroundColor = this.getEventBackgroundColor(agroEvent.workTypeId);
             agroEvent.textColor = this.config.colors.default;
-            agroEvent.description = payload[i].description;
+            agroEvent.description = this.agrotaskModels[i].description;
+            agroEvent.createdBy = this.agrotaskModels[i].createdBy;
             this.$calendar.fullCalendar('renderEvent', agroEvent, true);
         }
     })
