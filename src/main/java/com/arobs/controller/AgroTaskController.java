@@ -1,9 +1,12 @@
 package com.arobs.controller;
 
 import com.arobs.entity.AgroTask;
+import com.arobs.entity.AgroWorkType;
 import com.arobs.model.AgroTaskModel;
+import com.arobs.model.AgroWorkTypeModel;
 import com.arobs.model.PayloadModel;
 import com.arobs.service.AgroTaskService;
+import com.arobs.service.AgroWorkTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +22,9 @@ public class AgroTaskController {
     @Autowired
     private AgroTaskService agroTaskService;
 
+    @Autowired
+    private AgroWorkTypeService agroWorkTypeService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<PayloadModel> getScheduledTasks() {
         Long tenantId  = 1L;
@@ -30,6 +36,30 @@ public class AgroTaskController {
             if (!agroTasks.isEmpty()) {
                 List<AgroTaskModel> models = agroTasks.stream().map(AgroTaskModel::new).collect(Collectors.toList());
                 AgroTaskModel[] payload = models.toArray(new AgroTaskModel[models.size()]);
+                payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
+                payloadModel.setPayload(payload);
+            } else {
+                payloadModel.setStatus(PayloadModel.STATUS_WARNING);
+            }
+        } catch (Exception e) {
+            payloadModel.setStatus(PayloadModel.STATUS_ERROR);
+            payloadModel.setMessage(e.getLocalizedMessage());
+        }
+
+        return ResponseEntity.ok(payloadModel);
+    }
+
+    @RequestMapping(value = "/workTypes", method = RequestMethod.GET)
+    public ResponseEntity<PayloadModel> getAgroWorkTypes() {
+        Long tenantId  = 1L;
+
+        PayloadModel<AgroWorkTypeModel> payloadModel = new PayloadModel<>();
+
+        try {
+            List<AgroWorkType> workTypes = agroWorkTypeService.find(tenantId);
+            if (!workTypes.isEmpty()) {
+                List<AgroWorkTypeModel> models = workTypes.stream().map(AgroWorkTypeModel::new).collect(Collectors.toList());
+                AgroWorkTypeModel[] payload = models.toArray(new AgroWorkTypeModel[models.size()]);
                 payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
                 payloadModel.setPayload(payload);
             } else {

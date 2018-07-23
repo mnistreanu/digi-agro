@@ -14,11 +14,11 @@ public class AgroWorkTypeService implements HasRepository<AgroWorkTypeRepository
     @Autowired
     private AgroWorkTypeRepository agroWorkTypeRepository;
 
-    private List<AgroWorkType> find() {
+    public List<AgroWorkType> find() {
         return getRepository().find();
     }
 
-    private List<AgroWorkType> find(Long tenantId) {
+    public List<AgroWorkType> find(Long tenantId) {
         return getRepository().find(tenantId);
     }
 

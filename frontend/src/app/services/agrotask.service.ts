@@ -15,4 +15,8 @@ export class AgroTaskService {
     find(): Observable<PayloadModel> {
         return this.http.get<PayloadModel>(this.api + '/');
     }
+
+    findWorkTypes(): Observable<PayloadModel> {
+        return this.http.get<PayloadModel>(this.api + '/workTypes');
+    }
 }

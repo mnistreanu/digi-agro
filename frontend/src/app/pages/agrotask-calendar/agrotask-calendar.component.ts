@@ -4,6 +4,7 @@ import {AgroTaskService} from "../../services/agrotask.service";
 import "style-loader!fullcalendar/dist/fullcalendar.min.css";
 import {AgrotaskModel} from "../agrotask-calendar/agrotask.model";
 import {LangService} from "../../services/lang.service";
+import {AgroWorkTypeModel} from "./agroworktype.model";
 
 @Component({
   selector: 'az-agrotask-calendar',
@@ -20,6 +21,7 @@ export class AgroTaskCalendarComponent {
   dragOptions: Object = { zIndex: 999, revert: true, revertDuration: 0 };
   event: any = {};
   createEvent: any;
+  workTypeModels: AgroWorkTypeModel[];
   agrotaskModels: AgrotaskModel[];
 
   constructor(private _appConfig:AppConfig,
@@ -179,8 +181,18 @@ export class AgroTaskCalendarComponent {
     this.$calendar = jQuery('#calendar');
     this.$calendar.fullCalendar(this.calendarOptions);
     jQuery('.draggable').draggable(this.dragOptions);
+    this.findAgroWorkTypes();
     this.findAgroTasks();
   }
+
+    private findAgroWorkTypes() {
+        this.agroTaskService.findWorkTypes().subscribe(payloadModel => {
+            let status = payloadModel.status;
+            let message = payloadModel.message;
+            this.workTypeModels = payloadModel.payload;
+            debugger;
+        })
+    }
 
   private findAgroTasks() {
     this.agroTaskService.find().subscribe(payloadModel => {

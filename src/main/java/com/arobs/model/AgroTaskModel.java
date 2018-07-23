@@ -2,17 +2,9 @@ package com.arobs.model;
 
 
 import com.arobs.entity.AgroTask;
-import com.arobs.entity.AgroWorkType;
-import com.arobs.entity.Machine;
-import com.arobs.entity.WorkType;
-import com.arobs.enums.MachineType;
-import com.arobs.enums.MotorType;
-import com.arobs.enums.WorkName;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class AgroTaskModel implements Serializable {
 
