@@ -15,7 +15,11 @@ import java.util.List;
 public class AgroTaskService implements HasRepository<AgroTaskRepository> {
 
     @Autowired
+    private AuthService authService;
+    @Autowired
     private AgroTaskRepository agroTaskRepository;
+    @Autowired
+    private AgroWorkTypeService agroWorkTypeService;
 
     public List<AgroTask> find(Long tenantId, Date scheduledTime) {
         if (scheduledTime == null) {
@@ -40,36 +44,27 @@ public class AgroTaskService implements HasRepository<AgroTaskRepository> {
 
         if (model.getId() == null) {
             entity = new AgroTask();
+            entity.setCreatedBy(authService.getCurrentUser().getId());
+            entity.setTenantId(model.getTenantId());
         }
         else {
             entity = findOne(model.getId());
         }
 
         copyValues(entity, model);
+
         return getRepository().save(entity);
     }
 
     @Transactional
     private void copyValues(AgroTask entity, AgroTaskModel model) {
-//        entity.setIdentifier(model.getIdentifier());
-//        entity.setName(model.getName());
-//        entity.setType(model.getType());
-//
-//        entity.setFabricationDate(model.getFabricationDate());
-//        entity.setFabricationCountry(model.getFabricationCountry());
-//
-//        entity.setMotorType(model.getMotorType());
-//        entity.setConsumption(model.getConsumption());
-//        entity.setPower(model.getPower());
-//        entity.setSpeedOnRoad(model.getSpeedOnRoad());
-//        entity.setSpeedInWork(model.getSpeedInWork());
-//
-//        entity.setOwner(ownerService.register(model.getOwner()));
-//        entity.setBrand(brandService.register(model.getBrand()));
-//
-//        entity.getWorkTypes().clear();
-//        entity.getWorkTypes().addAll(workTypeService.findByNames(model.getWorkTypes()));
+        entity.setTitle(model.getTitle());
+        entity.setDescription(model.getDescription());
+        entity.setScheduledStart(model.getScheduledStart());
+        entity.setScheduledEnd(model.getScheduledEnd());
+        entity.setWorkType(agroWorkTypeService.findOne(model.getWorkTypeId()));
     }
+
     @Override
     public AgroTaskRepository getRepository() {
         return agroTaskRepository;

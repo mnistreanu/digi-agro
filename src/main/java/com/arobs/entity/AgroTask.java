@@ -11,7 +11,7 @@ import java.util.Date;
 public class AgroTask {
 
     @Id
-    @Column(name = "id")
+    @GeneratedValue
     private Long id;
 
     @ManyToOne
@@ -36,9 +36,7 @@ public class AgroTask {
     @Column(name = "scheduled_end")
     private Date scheduledEnd;
 
-    public AgroTask () {
-
-    }
+    public AgroTask () {}
 
     public Long getId() {
         return id;

@@ -1,4 +1,4 @@
-export class AgrotaskModel {
+export class AgroTaskModel {
 
     id: number;
     tenantId: number;

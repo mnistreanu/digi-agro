@@ -1,5 +1,6 @@
 {
 	"action": {
+		"cancel": "Anulare",
 		"confirm": "A confirma",
 		"create": "Crea",
 		"remove": "Șterge",
@@ -21,7 +22,6 @@
 		"branch": "Subdiviziune"
 	},
 	"general": {
-		"cancel": "Anulare",
 		"form": "Forma",
 		"settings": "Setări"
 	},

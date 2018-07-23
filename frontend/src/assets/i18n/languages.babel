@@ -9,6 +9,27 @@
                 <name>action</name>
                 <children>
                     <concept_node>
+                        <name>cancel</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>ro-RO</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>ru-RU</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>confirm</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
@@ -301,27 +322,6 @@
             <folder_node>
                 <name>general</name>
                 <children>
-                    <concept_node>
-                        <name>cancel</name>
-                        <definition_loaded>false</definition_loaded>
-                        <description></description>
-                        <comment></comment>
-                        <default_text></default_text>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>ro-RO</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>ru-RU</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
                     <concept_node>
                         <name>form</name>
                         <definition_loaded>false</definition_loaded>

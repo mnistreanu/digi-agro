@@ -1,5 +1,6 @@
 {
 	"action": {
+		"cancel": "Cancel",
 		"confirm": "Confirm",
 		"create": "Add",
 		"remove": "Remove",
@@ -21,7 +22,6 @@
 		"branch": "Branch"
 	},
 	"general": {
-		"cancel": "Cancel",
 		"form": "Form",
 		"settings": "Settings"
 	},

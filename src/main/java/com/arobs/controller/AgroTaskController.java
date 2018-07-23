@@ -5,10 +5,13 @@ import com.arobs.entity.AgroWorkType;
 import com.arobs.model.AgroTaskModel;
 import com.arobs.model.AgroWorkTypeModel;
 import com.arobs.model.PayloadModel;
+import com.arobs.security.JwtUser;
 import com.arobs.service.AgroTaskService;
 import com.arobs.service.AgroWorkTypeService;
+import com.arobs.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -16,12 +19,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/agroTasks")
+@RequestMapping("/agro-task")
 public class AgroTaskController {
 
     @Autowired
     private AgroTaskService agroTaskService;
-
     @Autowired
     private AgroWorkTypeService agroWorkTypeService;
 
@@ -89,16 +91,23 @@ public class AgroTaskController {
 //        return ResponseEntity.ok(agroTaskService.validateIdentifier(id, value));
 //    }
 //
-//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-//    @RequestMapping(value = "/", method = RequestMethod.POST)
-//    public ResponseEntity<AgroTaskModel> save(@RequestBody AgroTaskModel model) {
-//        return ResponseEntity.ok(new AgroTaskModel(agroTaskService.save(model)));
-//    }
-//
-//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-//    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-//    public void remove(@PathVariable Long id) {
-//        agroTaskService.remove(id);
-//    }
+
+    @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public ResponseEntity<AgroTaskModel> save(@RequestBody AgroTaskModel model) {
+
+        // todo: adjust tenant
+        if (model.getTenantId() == null) {
+            model.setTenantId(1L);
+        }
+
+        return ResponseEntity.ok(new AgroTaskModel(agroTaskService.save(model)));
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void remove(@PathVariable Long id) {
+        agroTaskService.remove(id);
+    }
 
 }
