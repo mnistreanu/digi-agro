@@ -49,9 +49,18 @@
                   </div>
                   <div class="modal-body">
                     <div class="form-group">
-                      <input class="form-control" [(ngModel)]="event.workTypeId" type="text" placeholder="{{'agrotask-calendar.event-type'|translate}}">
+                      <select [(ngModel)]="event.workTypeId" class="form-control custom-select">
+                        <option *ngFor="let workType of agrotaskModels" [(ngValue)]="workType.id">{{workType.nameRo}}</option>
+                      </select>
+
+                      <!--<select class="form-control custom-select" >-->
+                        <!--<option selected [(ngModel)]="event.workTypeId">{{'agrotask-calendar.event-type'|translate}}</option>-->
+                        <!--<option value="1">One</option>-->
+                        <!--<option value="2">Two</option>-->
+                        <!--<option value="3">Three</option>-->
+                      <!--</select>-->
                       <input class="form-control" [(ngModel)]="event.title" type="text" placeholder="{{'agrotask-calendar.event-title'|translate}}">
-                      <input class="form-control" [(ngModel)]="event.description" type="text" placeholder="{{'agrotask-calendar.event-description'|translate}}">
+                      <textarea class="form-control" [(ngModel)]="event.description" placeholder="{{'agrotask-calendar.event-description'|translate}}"></textarea>
                     </div>
                   </div>
                   <div class="modal-footer">
