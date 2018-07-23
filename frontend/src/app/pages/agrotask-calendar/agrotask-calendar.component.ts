@@ -190,7 +190,6 @@ export class AgroTaskCalendarComponent {
             let status = payloadModel.status;
             let message = payloadModel.message;
             this.workTypeModels = payloadModel.payload;
-            debugger;
         })
     }
 
