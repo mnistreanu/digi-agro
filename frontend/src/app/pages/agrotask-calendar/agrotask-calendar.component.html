@@ -37,7 +37,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="create-event-modal" *ngIf="eventForm">
+<div class="modal fade" id="create-event-modal">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header modal-success d-block">
@@ -46,7 +46,7 @@
                 <h5 class="modal-title" translate>agrotask-calendar.new-event</h5>
             </div>
             <div class="modal-body">
-                <form [formGroup]="eventForm">
+                <form [formGroup]="eventForm" *ngIf="eventForm">
                     <div class="form-group">
                         <select class="form-control custom-select" formControlName="workTypeId">
                             <option *ngFor="let workType of workTypeModels"
