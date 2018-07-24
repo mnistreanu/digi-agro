@@ -29,5 +29,8 @@ public interface AgroTaskRepository extends JpaRepository<AgroTask, Long> {
     @Query("DELETE FROM AgroTask t WHERE t.id = :id")
     void remove(@Param("id") Long id);
 
+    @Modifying
+    @Query("UPDATE AgroTask t SET t.scheduledStart = :start, t.scheduledEnd = :end WHERE t.id = :id")
+    void changeSchedule(@Param("id") Long id, @Param("start") Date start, @Param("end") Date end);
 }
 

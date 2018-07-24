@@ -61,6 +61,7 @@ export class AgroTaskCalendarComponent {
     private setupCalendarOptions() {
         this.calendarOptions = {
             locale: this.langService.getLanguage(),
+            timezone: 'local',
             header: {
                 left: 'today prev,next',
                 center: 'title',
@@ -70,39 +71,14 @@ export class AgroTaskCalendarComponent {
             eventColor: this.config.colors.info,
             selectable: true,
             selectHelper: true,
-            select: (start, end) => this.prepareNewEvent(start, end),
+            select: (start, end) => {
+                this.prepareNewEvent(start, end)
+            },
             eventClick: (event) => this.prepareEvent(event),
+            eventResize: (event) => this.onEventTimeChange(event),
+            eventDrop: (event) => this.onEventTimeChange(event),
             editable: true,
             droppable: true,
-
-            drop: (dateItem, event): void => { // this function is called when something is dropped
-                // retrieve the dropped element's stored Event Object
-                let originalEventObject = {
-                    // use the element's text as the event title
-                    title: jQuery.trim(jQuery(event.target).text())
-                };
-
-                // we need to copy it, so that multiple events don't have a reference to the same object
-                let copiedEventObject = jQuery.extend({}, originalEventObject);
-
-                // assign it the date that was reported
-                copiedEventObject.start = dateItem;
-                copiedEventObject.allDay = !dateItem.hasTime();
-
-                let $categoryClass = jQuery(event.target).data('event-class');
-                if ($categoryClass) {
-                    copiedEventObject.className = [$categoryClass];
-                }
-
-                // render the event on the calendar
-                // the last `true` argument determines if
-                // the event 'sticks'
-                // http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-                this.$calendar.fullCalendar('renderEvent', copiedEventObject, true);
-
-                jQuery(event.target).remove();
-
-            },
             dayRender: function (date, cell) {
                 let today = new Date().toDateString();
                 let compareDate = date.toDate().toDateString();
@@ -139,10 +115,38 @@ export class AgroTaskCalendarComponent {
                 agroEvent.description = model.description;
                 agroEvent.createdBy = model.createdBy;
                 agroEvent.tenantId = model.tenantId;
+                // todo: need fix allDay
+                agroEvent.allDay = !model.scheduledEnd || this.isAllDay(agroEvent);
+                // agroEvent.allDay = true;
                 this.$calendar.fullCalendar('renderEvent', agroEvent, true);
             });
         });
     }
+
+    private isAllDay(agroEvent): boolean {
+
+        let d1 = agroEvent.start;
+        let d2 = agroEvent.end;
+
+        if (!d1 || !d2) {
+            return false;
+        }
+
+        if (d1.getDate() != d2.getDate()) {
+            return true;
+        }
+
+        if (d1.getMonth() != d2.getMonth()) {
+            return true;
+        }
+
+        if (d1.getFullYear() != d2.getFullYear()) {
+            return true;
+        }
+
+        return false;
+    }
+
 
     prepareEvent(event) {
         this.event = event;
@@ -159,6 +163,8 @@ export class AgroTaskCalendarComponent {
     prepareNewEvent(start, end) {
         this.formSubmitted = false;
 
+        let allDay = !start.hasTime() && !end.hasTime();
+
         this.eventForm = this.fb.group({
             workTypeId: [null, Validators.required],
             title: [null, Validators.required],
@@ -169,7 +175,8 @@ export class AgroTaskCalendarComponent {
             start: start,
             end: end,
             backgroundColor: this.config.colors.success,
-            textColor: this.config.colors.default
+            textColor: this.config.colors.default,
+            allDay: allDay
         };
 
         jQuery('#create-event-modal').modal('show');
@@ -193,6 +200,15 @@ export class AgroTaskCalendarComponent {
             this.$calendar.fullCalendar('renderEvent', this.event, true);
             this.$calendar.fullCalendar('unselect');
             jQuery('#create-event-modal').modal('hide');
+        });
+    }
+
+    private onEventTimeChange(event) {
+        let id = event.id;
+        let start = event.start;
+        let end = event.end;
+        this.agroTaskService.changeEventTime(id, start, end).subscribe(() => {
+            this.toaStrService.success(this.labelSaved);
         });
     }
 

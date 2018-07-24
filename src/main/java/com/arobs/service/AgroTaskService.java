@@ -2,7 +2,7 @@ package com.arobs.service;
 
 import com.arobs.entity.AgroTask;
 import com.arobs.interfaces.HasRepository;
-import com.arobs.model.AgroTaskModel;
+import com.arobs.model.agroTask.AgroTaskModel;
 import com.arobs.repository.AgroTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +20,11 @@ public class AgroTaskService implements HasRepository<AgroTaskRepository> {
     private AgroTaskRepository agroTaskRepository;
     @Autowired
     private AgroWorkTypeService agroWorkTypeService;
+
+    @Override
+    public AgroTaskRepository getRepository() {
+        return agroTaskRepository;
+    }
 
     public List<AgroTask> find(Long tenantId, Date scheduledTime) {
         if (scheduledTime == null) {
@@ -65,8 +70,8 @@ public class AgroTaskService implements HasRepository<AgroTaskRepository> {
         entity.setWorkType(agroWorkTypeService.findOne(model.getWorkTypeId()));
     }
 
-    @Override
-    public AgroTaskRepository getRepository() {
-        return agroTaskRepository;
+    @Transactional
+    public void changeSchedule(Long id, Date start, Date end) {
+        getRepository().changeSchedule(id, start, end);
     }
 }

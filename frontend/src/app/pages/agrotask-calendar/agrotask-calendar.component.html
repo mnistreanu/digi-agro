@@ -25,8 +25,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p><i class="fa fa-calendar"></i> &nbsp; {{ event.start | date:'dd/MM/yyyy hh:mm' }}</p>
-                <p *ngIf="event.end"><i class="fa fa-clock-o"></i> &nbsp; {{ event.end | date:'dd/MM/yyyy hh:mm' }}</p>
+                <p><i class="fa fa-calendar"></i> &nbsp; {{ event.start | date:'dd/MM/yyyy H:mm' }}</p>
+                <p *ngIf="event.end"><i class="fa fa-clock-o"></i> &nbsp; {{ event.end | date:'dd/MM/yyyy H:mm' }}</p>
                 <p *ngIf="event.description">{{ event.description }}</p>
             </div>
             <div class="modal-footer">

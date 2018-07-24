@@ -1,4 +1,4 @@
-package com.arobs.model;
+package com.arobs.model.agroTask;
 
 
 import com.arobs.entity.AgroTask;

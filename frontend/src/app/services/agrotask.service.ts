@@ -18,7 +18,17 @@ export class AgroTaskService {
     }
 
     findWorkTypes(): Observable<PayloadModel> {
-        return this.http.get<PayloadModel>(this.api + '/workTypes');
+        return this.http.get<PayloadModel>(this.api + '/work-types');
+    }
+
+    changeEventTime(id, start, end): Observable<void> {
+        let body = {
+            id: id,
+            start: start,
+            end: end
+        };
+
+        return this.http.post<void>(this.api + '/schedule', body);
     }
 
     save(event): Observable<AgroTaskModel> {

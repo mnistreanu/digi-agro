@@ -2,13 +2,12 @@ package com.arobs.controller;
 
 import com.arobs.entity.AgroTask;
 import com.arobs.entity.AgroWorkType;
-import com.arobs.model.AgroTaskModel;
 import com.arobs.model.AgroWorkTypeModel;
 import com.arobs.model.PayloadModel;
-import com.arobs.security.JwtUser;
+import com.arobs.model.agroTask.AgroTaskModel;
+import com.arobs.model.agroTask.AgroTaskScheduleChangeModel;
 import com.arobs.service.AgroTaskService;
 import com.arobs.service.AgroWorkTypeService;
-import com.arobs.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -51,7 +50,7 @@ public class AgroTaskController {
         return ResponseEntity.ok(payloadModel);
     }
 
-    @RequestMapping(value = "/workTypes", method = RequestMethod.GET)
+    @RequestMapping(value = "/work-types", method = RequestMethod.GET)
     public ResponseEntity<PayloadModel> getAgroWorkTypes() {
         Long tenantId  = 1L;
 
@@ -91,6 +90,12 @@ public class AgroTaskController {
 //        return ResponseEntity.ok(agroTaskService.validateIdentifier(id, value));
 //    }
 //
+
+    @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
+    @RequestMapping(value = "/schedule", method = RequestMethod.POST)
+    public void changeSchedule(@RequestBody AgroTaskScheduleChangeModel model) {
+        agroTaskService.changeSchedule(model.getId(), model.getStart(), model.getEnd());
+    }
 
     @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
     @RequestMapping(value = "/", method = RequestMethod.POST)
