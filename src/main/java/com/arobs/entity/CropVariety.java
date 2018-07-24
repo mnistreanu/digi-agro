@@ -1,9 +1,6 @@
 package com.arobs.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by mihail.gorgos on 14.07.2018.
@@ -13,7 +10,7 @@ import javax.persistence.Table;
 public class CropVariety {
 
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "crop_id")

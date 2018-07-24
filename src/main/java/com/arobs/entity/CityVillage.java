@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class CityVillage {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column (name = "county_id", length = 2)

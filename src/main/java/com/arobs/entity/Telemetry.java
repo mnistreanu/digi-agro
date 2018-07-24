@@ -9,7 +9,7 @@ import java.util.Date;
 public class Telemetry {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
