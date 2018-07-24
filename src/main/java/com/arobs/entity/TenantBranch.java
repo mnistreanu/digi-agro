@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 public class TenantBranch {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
