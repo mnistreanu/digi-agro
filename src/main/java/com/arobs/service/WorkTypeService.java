@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
+@Deprecated
 public class WorkTypeService implements HasRepository<WorkTypeRepository> {
 
     @Autowired

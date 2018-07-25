@@ -6,6 +6,42 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+
+    <changeSet id="add_tenants" author="mgorgos">
+        <createTable tableName="tenants">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(256)" encoding="utf8">
+                <constraints nullable="false" />
+            </column>
+            <column name="country_id" type="char(2)" encoding="utf8">
+                <constraints nullable="false" />
+            </column>
+            <column name="fiscal_code" type="varchar(32)" />
+            <column name="description" type="varchar(1024)" encoding="utf8"/>
+            <column name="county_id" type="char(2)" />
+            <column name="city_village_id" type="bigint" />
+            <column name="address" type="varchar(1024)" encoding="utf8"/>
+            <column name="phones" type="varchar(128)" encoding="utf8"/>
+            <column name="deleted_at" type="datetime"/>
+            <column name="deleted_by" type="bigint"/>
+            <column name="blocked_at" type="datetime"/>
+            <column name="blocked_by" type="bigint"/>
+            <column name="blocked_reason" type="varchar(256)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="insert-2-tenants" author="mihai.gorgos" failOnError="true" runOnChange="true">
+        <sql>
+            INSERT INTO tenants(id, name, country_id, fiscal_code, description, county_id, city_village_id, address, phones)
+            VALUES (1, 'Gospodăria Ţărănească Orhei', 'md', '9842367810452', 'Gospodăria Ţărănească Orhei este super-puper', 'OR', null, 'str.Solidaritatii 14', '0-232-12345 0-232-12346');
+
+            INSERT INTO tenants(id, name, country_id, fiscal_code, description, county_id, city_village_id, address, phones)
+            VALUES (2, 'InterAgro Nisporeni', 'md', '8239045184523', 'InterAgro Nisporeni este super-puper', 'NS', null, 'str.Vladimir Ilici Lenin 1', '0-111-12345 0-111-12346');
+        </sql>
+    </changeSet>
+
     <changeSet id="insert-super-admin" author="maxim.nistreanu" failOnError="false" runOnChange="true">
         <sql>
             <!--password: test123 -->

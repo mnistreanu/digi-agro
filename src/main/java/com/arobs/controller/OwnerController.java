@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/owner")
+@Deprecated
 public class OwnerController {
 
     @Autowired

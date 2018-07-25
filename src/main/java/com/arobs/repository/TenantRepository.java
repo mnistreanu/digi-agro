@@ -13,27 +13,25 @@ import java.util.List;
 @Repository
 public interface TenantRepository extends JpaRepository<Tenant, Long> {
 
-    @Query("SELECT COUNT(t) FROM Tenant t WHERE t.name = :name AND t.active = true")
-    long countByName(@Param("name") String name);
 
-    @Query("SELECT COUNT(t) FROM Tenant t WHERE t.name = :name AND t.id <> :id AND t.active = true")
-    long countByNameEscapeId(@Param("id") Long id, @Param("name") String name);
-
-    @Query("SELECT COUNT(t) FROM Tenant t WHERE t.fiscalCode = :fiscalCode AND t.active = true")
+    @Query("SELECT COUNT(t) FROM Tenant t WHERE t.fiscalCode = :fiscalCode AND t.deletedAt IS NOT NULL ")
     long countByFiscalCode(@Param("fiscalCode") String fiscalCode);
 
-    @Query("SELECT COUNT(t) FROM Tenant t WHERE t.fiscalCode = :fiscalCode AND t.id <> :id AND t.active = true")
-    long countByFiscalCodeEscapeId(@Param("id") Long id, @Param("fiscalCode") String fiscalCode);
 
     @Modifying
-    @Query("UPDATE Tenant t SET t.active = false WHERE t.id = :id")
-    void remove(@Param("id") Long id);
+    @Query("UPDATE Tenant t " +
+            "SET t.deletedAt = now(), t.deletedBy = :userId " +
+            "WHERE t.id = :id")
+    void remove(@Param("id") Long id, @Param("userId") Long userId);
 
-    @Query("SELECT new com.arobs.model.ListItemModel(t.id, t.name) FROM Tenant t WHERE t.active = true")
+    @Query("SELECT new com.arobs.model.ListItemModel(t.id, t.name) FROM Tenant t WHERE t.deletedAt IS NOT NULL")
     List<ListItemModel> fetchAllListItems();
 
-    @Query("SELECT new com.arobs.model.ListItemModel(t.id, t.name) FROM UserAccount u JOIN u.tenants t " +
-            " WHERE u.id = :userId AND t.active = true GROUP BY t.id")
+    @Query("SELECT new com.arobs.model.ListItemModel(t.id, t.name) " +
+            "FROM UserAccount u " +
+            "JOIN u.tenants t " +
+            "WHERE u.id = :userId AND t.deletedAt IS NOT NULL " +
+            "GROUP BY t.id")
     List<ListItemModel> fetchListItemsByUser(@Param("userId") Long userId);
 
     @Query("SELECT t FROM Tenant t WHERE t.id IN (:ids)")

@@ -46,19 +46,17 @@ public class TenantService implements HasRepository<TenantRepository> {
         return tenantCustomRepository.findByFilter(filterRequestModel);
     }
 
-    public boolean validateName(Long id, String name) {
-        if (id == -1) {
-            return getRepository().countByName(name) == 0;
-        }
-        return getRepository().countByNameEscapeId(id, name) == 0;
-    }
+//    public boolean validateName(Long id, String name) {
+//        if (id == -1) {
+//            return getRepository().countByName(name) == 0;
+//        }
+//        return getRepository().countByNameEscapeId(id, name) == 0;
+//    }
 
 
     public boolean validateFiscalCode(Long id, String code) {
-        if (id == -1) {
-            return getRepository().countByFiscalCode(code) == 0;
-        }
-        return getRepository().countByFiscalCodeEscapeId(id, code) == 0;
+        long count = getRepository().countByFiscalCode(code);
+        return count == 0;
     }
 
     @Transactional
@@ -84,7 +82,7 @@ public class TenantService implements HasRepository<TenantRepository> {
         entity.setFiscalCode(model.getFiscalCode());
         entity.setCountry(model.getCountry());
         entity.setCounty(model.getCounty());
-        entity.setVillageCity(model.getVillageCity());
+//        entity.setVillageCity(model.getVillageCity());
         entity.setAddress(model.getAddress());
         entity.setPhones(model.getPhones());
     }
@@ -95,8 +93,8 @@ public class TenantService implements HasRepository<TenantRepository> {
     }
 
     @Transactional
-    public void remove(Long id) {
-        getRepository().remove(id);
+    public void remove(Long id, Long userId) {
+        getRepository().remove(id, userId);
     }
 
     public List<Tenant> findByIds(List<Long> ids) {

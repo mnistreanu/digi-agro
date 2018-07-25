@@ -25,7 +25,7 @@ public class TenantModel {
         fiscalCode = entity.getFiscalCode();
         country = entity.getCountry();
         county = entity.getCounty();
-        villageCity = entity.getVillageCity();
+//        villageCity = entity.getVillageCity();
         address = entity.getAddress();
         phones = entity.getPhones();
     }

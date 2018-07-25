@@ -5,6 +5,7 @@ import com.arobs.enums.WorkName;
 import javax.persistence.*;
 
 @Entity
+@Deprecated
 public class WorkType {
 
     @Id

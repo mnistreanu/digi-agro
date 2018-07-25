@@ -3,6 +3,7 @@ package com.arobs.model;
 
 import com.arobs.entity.Owner;
 
+@Deprecated
 public class OwnerModel {
 
     private Long id;

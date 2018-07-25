@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Deprecated
 public class OwnerService implements HasRepository<OwnerRepository> {
 
     @Autowired

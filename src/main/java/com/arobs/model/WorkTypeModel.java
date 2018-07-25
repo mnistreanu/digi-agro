@@ -3,6 +3,7 @@ package com.arobs.model;
 import com.arobs.entity.WorkType;
 import com.arobs.enums.WorkName;
 
+@Deprecated
 public class WorkTypeModel {
 
     private Long id;

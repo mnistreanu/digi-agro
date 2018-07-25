@@ -4,6 +4,7 @@ package com.arobs.entity;
 import javax.persistence.*;
 
 @Entity
+@Deprecated
 public class Owner {
 
     @Id

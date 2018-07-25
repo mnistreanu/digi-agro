@@ -35,10 +35,10 @@ public class TenantController {
         return ResponseEntity.ok(new TenantModel(tenantService.findOne(id)));
     }
 
-    @RequestMapping(value = "/validate-name", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> validateName(@RequestParam("id") Long id, @RequestParam("name") String name) {
-        return ResponseEntity.ok(tenantService.validateName(id, name));
-    }
+//    @RequestMapping(value = "/validate-name", method = RequestMethod.GET)
+//    public ResponseEntity<Boolean> validateName(@RequestParam("id") Long id, @RequestParam("name") String name) {
+//        return ResponseEntity.ok(tenantService.validateName(id, name));
+//    }
 
     @RequestMapping(value = "/validate-fiscal-code", method = RequestMethod.GET)
     public ResponseEntity<Boolean> validateFiscalCode(@RequestParam("id") Long id, @RequestParam("code") String code) {
@@ -54,7 +54,7 @@ public class TenantController {
     @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void remove(@PathVariable Long id) {
-        tenantService.remove(id);
+        tenantService.remove(id, 1L);
     }
 
 }

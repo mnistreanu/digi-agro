@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Repository
+@Deprecated
 public interface WorkTypeRepository extends JpaRepository<WorkType, Long> {
 
     @Query("SELECT wt FROM WorkType wt WHERE wt.name IN (:names)")
