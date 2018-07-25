@@ -10,9 +10,9 @@
     <sql>
         DELETE FROM databasechangelog;
 
-        DROP TABLE tenant_user;
-        DROP TABLE tenant_branch;
         DROP TABLE user_branch;
+        DROP TABLE tenant_branch;
+        DROP TABLE tenant_user;
         DROP TABLE tenant;
         DROP TABLE tenants;
         DROP TABLE agro_tasks;
