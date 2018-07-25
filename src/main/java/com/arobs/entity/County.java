@@ -9,7 +9,7 @@ import javax.persistence.Table;
  * Created by mihail.gorgos on 14.07.2018.
  */
 @Entity
-@Table(name = "counties")
+@Table(name = "county")
 public class County {
 
     @Id

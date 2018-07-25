@@ -17,23 +17,22 @@ public interface TenantRepository extends JpaRepository<Tenant, Long> {
     @Query("SELECT COUNT(t) FROM Tenant t WHERE t.fiscalCode = :fiscalCode AND t.deletedAt IS NULL ")
     long countByFiscalCode(@Param("fiscalCode") String fiscalCode);
 
-
     @Modifying
     @Query("UPDATE Tenant t " +
             "SET t.deletedAt = now(), t.deletedBy = :userId " +
             "WHERE t.id = :id")
     void remove(@Param("id") Long id, @Param("userId") Long userId);
-
-    @Query("SELECT new com.arobs.model.ListItemModel(t.id, t.name) FROM Tenant t WHERE t.deletedAt IS NULL")
-    List<ListItemModel> fetchAllListItems();
-
-    @Query("SELECT new com.arobs.model.ListItemModel(t.id, t.name) " +
-            "FROM UserAccount u " +
-            "JOIN u.tenants t " +
-            "WHERE u.id = :userId AND t.deletedAt IS NULL " +
-            "GROUP BY t.id")
-    List<ListItemModel> fetchListItemsByUser(@Param("userId") Long userId);
+//
+//    @Query("SELECT new com.arobs.model.ListItemModel(t.id, t.name) FROM Tenant t WHERE t.deletedAt IS NULL")
+//    List<ListItemModel> fetchAllListItems();
+//
+//    @Query("SELECT new com.arobs.model.ListItemModel(t.id, t.name) " +
+//            "FROM UserAccount u " +
+//            "JOIN u.tenants t " +
+//            "WHERE u.id = :userId AND t.deletedAt IS NULL " +
+//            "GROUP BY t.id")
+//    List<ListItemModel> fetchListItemsByUser(@Param("userId") Long userId);
 
     @Query("SELECT t FROM Tenant t WHERE t.id IN (:ids)")
-    List<Tenant> findByIds(@Param("ids") List<Long> ids);
+    List<Tenant> find(@Param("ids") List<Long> ids);
 }

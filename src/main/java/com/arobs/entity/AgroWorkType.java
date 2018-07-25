@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by mihail.gorgos on 14.07.2018.
  */
 @Entity
-@Table(name = "agro_work_types")
+@Table(name = "agro_work_type")
 public class AgroWorkType {
 
     @Id

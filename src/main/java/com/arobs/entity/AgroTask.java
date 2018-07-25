@@ -7,7 +7,7 @@ import java.util.Date;
  * Created by mihail.gorgos on 18.07.2018.
  */
 @Entity
-@Table(name = "agro_tasks")
+@Table(name = "agro_task")
 public class AgroTask {
 
     @Id
