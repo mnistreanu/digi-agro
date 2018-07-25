@@ -54,4 +54,16 @@ public class TenantCustomRepository {
         return em.createQuery(queryStr).getResultList();
 
     }
+
+//
+//    @Query("SELECT new com.arobs.model.ListItemModel(t.id, t.name) FROM Tenant t WHERE t.deletedAt IS NULL")
+//    List<ListItemModel> fetchAllListItems();
+//
+//    @Query("SELECT new com.arobs.model.ListItemModel(t.id, t.name) " +
+//            "FROM UserAccount u " +
+//            "JOIN u.tenants t " +
+//            "WHERE u.id = :userId AND t.deletedAt IS NULL " +
+//            "GROUP BY t.id")
+//    List<ListItemModel> fetchListItemsByUser(@Param("userId") Long userId);
+
 }

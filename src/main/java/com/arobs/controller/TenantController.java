@@ -18,11 +18,11 @@ public class TenantController {
     @Autowired
     private TenantService tenantService;
 
-    @RequestMapping(value = "/list-items", method = RequestMethod.GET)
-    public ResponseEntity<List<ListItemModel>> fetchListItems() {
-        List<ListItemModel> models = tenantService.fetchListItems();
-        return ResponseEntity.ok(models);
-    }
+//    @RequestMapping(value = "/list-items", method = RequestMethod.GET)
+//    public ResponseEntity<List<ListItemModel>> fetchListItems() {
+//        List<ListItemModel> models = tenantService.fetchListItems();
+//        return ResponseEntity.ok(models);
+//    }
 
     @RequestMapping(value = "/find-by", method = RequestMethod.POST)
     public ResponseEntity<List<TenantModel>> getModels(@RequestBody TenantFilterModel filterRequestModel) {

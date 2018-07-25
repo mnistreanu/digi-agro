@@ -6,9 +6,29 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+    <changeSet id="clean-db" author="mihai.gorgos" failOnError="true" runOnChange="true">
+    <sql>
+        DELETE FROM databasechangelog;
 
-    <changeSet id="add_tenants" author="mgorgos">
-        <createTable tableName="tenants">
+        DROP TABLE tenant_user;
+        DROP TABLE tenant_branch;
+        DROP TABLE user_branch;
+        DROP TABLE tenant;
+        DROP TABLE tenants;
+        DROP TABLE agro_tasks;
+        DROP TABLE agro_work_types;
+        DROP TABLE cities_villages;
+        DROP TABLE counties;
+        DROP TABLE crops;
+        DROP TABLE crop_categories;
+        DROP TABLE crop_varieties;
+        DROP TABLE machine_work_types;
+    </sql>
+    </changeSet>
+
+
+    <changeSet id="add_tenant" author="mgorgos">
+        <createTable tableName="tenant">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -34,10 +54,10 @@
 
     <changeSet id="insert-2-tenants" author="mihai.gorgos" failOnError="true" runOnChange="true">
         <sql>
-            INSERT INTO tenants(id, name, country_id, fiscal_code, description, county_id, city_village_id, address, phones)
+            INSERT INTO tenant (id, name, country_id, fiscal_code, description, county_id, city_village_id, address, phones)
             VALUES (1, 'Gospodăria Ţărănească Orhei', 'md', '9842367810452', 'Gospodăria Ţărănească Orhei este super-puper', 'OR', null, 'str.Solidaritatii 14', '0-232-12345 0-232-12346');
 
-            INSERT INTO tenants(id, name, country_id, fiscal_code, description, county_id, city_village_id, address, phones)
+            INSERT INTO tenant (id, name, country_id, fiscal_code, description, county_id, city_village_id, address, phones)
             VALUES (2, 'InterAgro Nisporeni', 'md', '8239045184523', 'InterAgro Nisporeni este super-puper', 'NS', null, 'str.Vladimir Ilici Lenin 1', '0-111-12345 0-111-12346');
         </sql>
     </changeSet>
@@ -63,23 +83,23 @@
         </sql>
     </changeSet>
 
-    <changeSet id="prepare_work_types" author="maxim.nistreanu" failOnError="false" runOnChange="true">
-        <sql>
-            INSERT INTO work_type (id, name) VALUES
-            (1, 'SOWING'),
-            (2, 'PLOWING'),
-            (3, 'GATHERING'),
-            (4, 'WATERING'),
-            (5, 'WATERING'),
-            (6, 'SPRAY');
-        </sql>
-    </changeSet>
+    <!--<changeSet id="prepare_work_types" author="maxim.nistreanu" failOnError="false" runOnChange="true">-->
+        <!--<sql>-->
+            <!--INSERT INTO work_type (id, name) VALUES-->
+            <!--(1, 'SOWING'),-->
+            <!--(2, 'PLOWING'),-->
+            <!--(3, 'GATHERING'),-->
+            <!--(4, 'WATERING'),-->
+            <!--(5, 'WATERING'),-->
+            <!--(6, 'SPRAY');-->
+        <!--</sql>-->
+    <!--</changeSet>-->
 
     <!--
         COUNTIES - raioane/judete pentru fiecare tara aparte, specificat in 2 limbi
     -->
-    <changeSet id="add_counties" author="mgorgos" failOnError="false" runOnChange="true">
-        <createTable tableName="counties">
+    <changeSet id="add_county" author="mgorgos" failOnError="false" runOnChange="true">
+        <createTable tableName="county">
             <column name="id" type="char(2)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -94,56 +114,56 @@
     -->
     <changeSet id="insert-counties-md" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','AN','r-nul Anenii Noi','Новоаненский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','BS','r-nul Basarabeasca','Бессарабский район');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','BL','or.Bălți','Бельцы');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','BE','or.Bender tr.','Бендеры');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','BR','r-nul Briceni','Бричанский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','CH','r-nul Cahul','Кагульский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','CC','r-nul Camenca tr.','Каменский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','CT','r-nul Cantemir','Кантемирский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','CL','r-nul Călărași','Каларашский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','CS','r-nul Căușeni','Каушанский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','CG','r-nul Ceadîr-Lunga','Чадыр-Лунгский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD',' C', 'mun.Chișinău','Кишинев');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','CM','r-nul Cimișlia','Чимишлийский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','CO','r-nul Comrat','Комратский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','CR','r-nul Criuleni','Криулянский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','DN','r-nul Dondușeni','Дондюшанский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','DR','r-nul Drochia','Дрокиевский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','DB','r-nul Dubăsari','Дубоссарский район');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','ED','r-nul Edineț','Единецкий район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','FL','r-nul Fălești','Фалештский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','FR','r-nul Florești','Флорештский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','GL','r-nul Glodeni','Глодянский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','GR','r-nul Grigoriopol tr.','Григориопольский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','HN','r-nul Hîncești','Хынчештский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','IL','r-nul Ialoveni','Яловенский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','LV','r-nul Leova','Леовский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','NS','r-nul Nisporeni','Ниспоренский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','OC','r-nul Ocnița','Окницкий район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','OR','r-nul Orhei','Оргеевский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','RZ','r-nul Rezina','Резинский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','RB','r-nul Rîbnița tr.','Рыбницкий район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','RS','r-nul Rîșcani','Рышканский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','SG','r-nul Sîngerei','Сынжерейский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','SL','r-nul Slobozia tr.','Слободзейский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','SR','r-nul Soroca','Сорокский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','ST','r-nul Strășeni','Страшенский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','SD','r-nul Șoldănești','Шолданештский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','SV','r-nul Ștefan Vodă','Штефан-Водский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','TR','r-nul Taraclia','Тараклийский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','TL','r-nul Telenești','Теленештский район‎');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','TS','or.Tiraspol tr.','Тирасполь');
-            INSERT INTO counties (country_id, id, name_ro, name_ru) VALUES ('MD','UN','r-nul Ungheni','Унгенский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','AN','r-nul Anenii Noi','Новоаненский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','BS','r-nul Basarabeasca','Бессарабский район');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','BL','or.Bălți','Бельцы');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','BE','or.Bender tr.','Бендеры');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','BR','r-nul Briceni','Бричанский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CH','r-nul Cahul','Кагульский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CC','r-nul Camenca tr.','Каменский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CT','r-nul Cantemir','Кантемирский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CL','r-nul Călărași','Каларашский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CS','r-nul Căușeni','Каушанский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CG','r-nul Ceadîr-Lunga','Чадыр-Лунгский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD',' C', 'mun.Chișinău','Кишинев');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CM','r-nul Cimișlia','Чимишлийский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CO','r-nul Comrat','Комратский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CR','r-nul Criuleni','Криулянский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','DN','r-nul Dondușeni','Дондюшанский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','DR','r-nul Drochia','Дрокиевский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','DB','r-nul Dubăsari','Дубоссарский район');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','ED','r-nul Edineț','Единецкий район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','FL','r-nul Fălești','Фалештский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','FR','r-nul Florești','Флорештский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','GL','r-nul Glodeni','Глодянский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','GR','r-nul Grigoriopol tr.','Григориопольский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','HN','r-nul Hîncești','Хынчештский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','IL','r-nul Ialoveni','Яловенский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','LV','r-nul Leova','Леовский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','NS','r-nul Nisporeni','Ниспоренский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','OC','r-nul Ocnița','Окницкий район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','OR','r-nul Orhei','Оргеевский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','RZ','r-nul Rezina','Резинский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','RB','r-nul Rîbnița tr.','Рыбницкий район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','RS','r-nul Rîșcani','Рышканский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','SG','r-nul Sîngerei','Сынжерейский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','SL','r-nul Slobozia tr.','Слободзейский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','SR','r-nul Soroca','Сорокский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','ST','r-nul Strășeni','Страшенский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','SD','r-nul Șoldănești','Шолданештский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','SV','r-nul Ștefan Vodă','Штефан-Водский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','TR','r-nul Taraclia','Тараклийский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','TL','r-nul Telenești','Теленештский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','TS','or.Tiraspol tr.','Тирасполь');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','UN','r-nul Ungheni','Унгенский район‎');
         </sql>
     </changeSet>
 
     <!--
         CITIES_VILAGES - sate si orase din raioane/judete, in 2 limbi
     -->
-    <changeSet id="add_cities_villages" author="mgorgos" failOnError="true" runOnChange="true">
-        <createTable tableName="cities_villages">
+    <changeSet id="add_city_village" author="mgorgos" failOnError="true" runOnChange="true">
+        <createTable tableName="city_village">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -160,8 +180,8 @@
         dar cu tenant_id vor fi cele mai specifice la fiecare tenant aparte in caz ca va avea nevoie.
         La fel specificat in 2 limbi
     -->
-    <changeSet id="add_agro_work_types" author="mgorgos"  failOnError="true" runOnChange="true">
-        <createTable tableName="agro_work_types">
+    <changeSet id="add_agro_work_type" author="mgorgos"  failOnError="true" runOnChange="true">
+        <createTable tableName="agro_work_type">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -172,24 +192,24 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="insert-agro-work-types" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="insert-agro-work-type" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
-            INSERT INTO agro_work_types (id, name_ro, name_ru) VALUES (1,'Aratul','Вспашка');
-            INSERT INTO agro_work_types (id, name_ro, name_ru) VALUES (2,'Lucrarea cu grapa','Работа с бороной');
-            INSERT INTO agro_work_types (id, name_ro, name_ru) VALUES (3,'Prăgatirea pat germinativ','Прорастание проростков');
-            INSERT INTO agro_work_types (id, name_ro, name_ru) VALUES (4,'Semănatul','Посев');
-            INSERT INTO agro_work_types (id, name_ro, name_ru) VALUES (5,'Pulverizarea chemicalelor','Распыление химикатов');
-            INSERT INTO agro_work_types (id, name_ro, name_ru) VALUES (6,'Irigarea','Орошение');
-            INSERT INTO agro_work_types (id, name_ro, name_ru) VALUES (7,'Culesul roadei','Сбор урожая');
+            INSERT INTO agro_work_type (id, name_ro, name_ru) VALUES (1,'Aratul','Вспашка');
+            INSERT INTO agro_work_type (id, name_ro, name_ru) VALUES (2,'Lucrarea cu grapa','Работа с бороной');
+            INSERT INTO agro_work_type (id, name_ro, name_ru) VALUES (3,'Prăgatirea pat germinativ','Прорастание проростков');
+            INSERT INTO agro_work_type (id, name_ro, name_ru) VALUES (4,'Semănatul','Посев');
+            INSERT INTO agro_work_type (id, name_ro, name_ru) VALUES (5,'Pulverizarea chemicalelor','Распыление химикатов');
+            INSERT INTO agro_work_type (id, name_ro, name_ru) VALUES (6,'Irigarea','Орошение');
+            INSERT INTO agro_work_type (id, name_ro, name_ru) VALUES (7,'Culesul roadei','Сбор урожая');
         </sql>
     </changeSet>
 
      <!--
-        AGRO TASKS - aici se vor contine toate definitiile la lucrarile agricole planidifate.
+        AGRO TASK - aici se vor contine toate definitiile la lucrarile agricole planidifate.
         Deja mersul lucrarilor, costurile, etc se vor contine in alte tabele separate.
     -->
-    <changeSet id="add_agro_tasks" author="mgorgos"  failOnError="true" runOnChange="true">
-        <createTable tableName="agro_tasks">
+    <changeSet id="add_agro_task" author="mgorgos"  failOnError="true" runOnChange="true">
+        <createTable tableName="agro_task" >
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -203,51 +223,26 @@
         </createTable>
     </changeSet>
 
-    <!--<changeSet id="insert-agro-tasks-iulie-2018" author="mgorgos" failOnError="true" runOnChange="true">-->
-        <!--<sql>-->
-            <!--INSERT INTO agro_tasks (id, tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 1, 1, 'Salonul international de agricultura', '24 februarie - 4 martie 2018, Paris, Franţa', '2018-07-01 10:00:00', '2018-07-01 21:00:00');-->
-            <!--INSERT INTO agro_tasks (id, tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (2, 1, 2, 'MoldAgroTech', '14-17 martie 2018, Chişinău, Moldova', '2018-07-05 08:00:00', '2018-07-05 21:00:00');-->
-            <!--INSERT INTO agro_tasks (id, tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (3, 1, 3, 'Expo Flowers &amp; Garden', '8-11 martie 2018, Romexpo Bucureşti', '2018-07-12 10:00:00', '2018-07-13 21:00:00');-->
-            <!--INSERT INTO agro_tasks (id, tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (4, 1, 4, 'Agro Expo Bucovina', '22-25 martie 2017, Suceava', '2018-07-20 10:00:00', null);-->
-            <!--INSERT INTO agro_tasks (id, tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (5, 1, 5, 'VinVest', '30 martie - 1 aprilie 2018, CRAFT, Timişoara', '2018-07-23 10:00:00', '2018-07-25 21:00:00');-->
-            <!--INSERT INTO agro_tasks (id, tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (6, 1, 6, 'Agraria', '19-22 aprilie 2018, Jucu, Cluj', '2018-07-26 10:00:00', '2018-07-26 21:00:00');-->
-            <!--INSERT INTO agro_tasks (id, tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (7, 1, 7, 'Agro Expo Util', '3-6 mai 2018, Constanta', '2018-07-31 10:00:00', '2018-07-31 21:00:00');-->
-        <!--</sql>-->
-    <!--</changeSet>-->
 
-
-    <!--<changeSet id="insert-agro-tasks-august-2018" author="mgorgos" failOnError="true" runOnChange="true">-->
-        <!--<sql>-->
-            <!--INSERT INTO agro_tasks (id, tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (8, 1, 1, 'Salonul international de agricultura', '24 februarie - 4 martie 2018, Paris, Franţa', '2018-08-01 10:00:00', '2018-08-01 21:00:00');-->
-            <!--INSERT INTO agro_tasks (id, tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (9, 1, 2, 'MoldAgroTech', '14-17 martie 2018, Chişinău, Moldova', '2018-08-05 08:00:00', '2018-08-05 21:00:00');-->
-            <!--INSERT INTO agro_tasks (id, tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (10, 1, 3, 'Expo Flowers &amp; Garden', '8-11 martie 2018, Romexpo Bucureşti', '2018-08-12 10:00:00', '2018-08-13 21:00:00');-->
-            <!--INSERT INTO agro_tasks (id, tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (11, 1, 4, 'Agro Expo Bucovina', '22-25 martie 2017, Suceava', '2018-08-20 10:00:00', null);-->
-            <!--INSERT INTO agro_tasks (id, tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (12, 1, 5, 'VinVest', '30 martie - 1 aprilie 2018, CRAFT, Timişoara', '2018-08-23 10:00:00', '2018-08-25 21:00:00');-->
-            <!--INSERT INTO agro_tasks (id, tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (13, 1, 6, 'Agraria', '19-22 aprilie 2018, Jucu, Cluj', '2018-08-26 10:00:00', '2018-08-26 21:00:00');-->
-            <!--INSERT INTO agro_tasks (id, tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (14, 1, 7, 'Agro Expo Util', '3-6 mai 2018, Constanta', '2018-08-31 10:00:00', '2018-08-31 21:00:00');-->
-        <!--</sql>-->
-    <!--</changeSet>-->
-
-
-    <changeSet id="insert-agro-tasks-iulie-august-2018" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="insert-agro-task-iulie-august-2018" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
-            DELETE FROM agro_tasks;
+            DELETE FROM agro_task;
 
-            INSERT INTO agro_tasks (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 1, 'Salonul international de agricultura', '24 februarie - 4 martie 2018, Paris, Franţa', '2018-07-01 10:00:00', '2018-07-01 21:00:00');
-            INSERT INTO agro_tasks (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 2, 'MoldAgroTech', '14-17 martie 2018, Chişinău, Moldova', '2018-07-05 08:00:00', '2018-07-05 21:00:00');
-            INSERT INTO agro_tasks (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 3, 'Expo Flowers &amp; Garden', '8-11 martie 2018, Romexpo Bucureşti', '2018-07-12 10:00:00', '2018-07-13 21:00:00');
-            INSERT INTO agro_tasks (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 4, 'Agro Expo Bucovina', '22-25 martie 2017, Suceava', '2018-07-20 10:00:00', null);
-            INSERT INTO agro_tasks (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 5, 'VinVest', '30 martie - 1 aprilie 2018, CRAFT, Timişoara', '2018-07-23 10:00:00', '2018-07-25 21:00:00');
-            INSERT INTO agro_tasks (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 6, 'Agraria', '19-22 aprilie 2018, Jucu, Cluj', '2018-07-26 10:00:00', '2018-07-26 21:00:00');
-            INSERT INTO agro_tasks (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 7, 'Agro Expo Util', '3-6 mai 2018, Constanta', '2018-07-31 10:00:00', '2018-07-31 21:00:00');
+            INSERT INTO agro_task (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 1, 'Salonul international de agricultura', '24 februarie - 4 martie 2018, Paris, Franţa', '2018-07-01 10:00:00', '2018-07-01 21:00:00');
+            INSERT INTO agro_task (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 2, 'MoldAgroTech', '14-17 martie 2018, Chişinău, Moldova', '2018-07-05 08:00:00', '2018-07-05 21:00:00');
+            INSERT INTO agro_task (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 3, 'Expo Flowers &amp; Garden', '8-11 martie 2018, Romexpo Bucureşti', '2018-07-12 10:00:00', '2018-07-13 21:00:00');
+            INSERT INTO agro_task (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 4, 'Agro Expo Bucovina', '22-25 martie 2017, Suceava', '2018-07-20 10:00:00', null);
+            INSERT INTO agro_task (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 5, 'VinVest', '30 martie - 1 aprilie 2018, CRAFT, Timişoara', '2018-07-23 10:00:00', '2018-07-25 21:00:00');
+            INSERT INTO agro_task (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 6, 'Agraria', '19-22 aprilie 2018, Jucu, Cluj', '2018-07-26 10:00:00', '2018-07-26 21:00:00');
+            INSERT INTO agro_task (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 7, 'Agro Expo Util', '3-6 mai 2018, Constanta', '2018-07-31 10:00:00', '2018-07-31 21:00:00');
 
-            INSERT INTO agro_tasks (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 1, 'Salonul international de agricultura', '24 februarie - 4 martie 2018, Paris, Franţa', '2018-08-01 10:00:00', '2018-08-01 21:00:00');
-            INSERT INTO agro_tasks (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 2, 'MoldAgroTech', '14-17 martie 2018, Chişinău, Moldova', '2018-08-05 08:00:00', '2018-08-05 21:00:00');
-            INSERT INTO agro_tasks (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 3, 'Expo Flowers &amp; Garden', '8-11 martie 2018, Romexpo Bucureşti', '2018-08-12 10:00:00', '2018-08-13 21:00:00');
-            INSERT INTO agro_tasks (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 4, 'Agro Expo Bucovina', '22-25 martie 2017, Suceava', '2018-08-20 10:00:00', null);
-            INSERT INTO agro_tasks (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 5, 'VinVest', '30 martie - 1 aprilie 2018, CRAFT, Timişoara', '2018-08-23 10:00:00', '2018-08-25 21:00:00');
-            INSERT INTO agro_tasks (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 6, 'Agraria', '19-22 aprilie 2018, Jucu, Cluj', '2018-08-26 10:00:00', '2018-08-26 21:00:00');
-            INSERT INTO agro_tasks (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 7, 'Agro Expo Util', '3-6 mai 2018, Constanta', '2018-08-31 10:00:00', '2018-08-31 21:00:00');
+            INSERT INTO agro_task (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 1, 'Salonul international de agricultura', '24 februarie - 4 martie 2018, Paris, Franţa', '2018-08-01 10:00:00', '2018-08-01 21:00:00');
+            INSERT INTO agro_task (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 2, 'MoldAgroTech', '14-17 martie 2018, Chişinău, Moldova', '2018-08-05 08:00:00', '2018-08-05 21:00:00');
+            INSERT INTO agro_task (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 3, 'Expo Flowers &amp; Garden', '8-11 martie 2018, Romexpo Bucureşti', '2018-08-12 10:00:00', '2018-08-13 21:00:00');
+            INSERT INTO agro_task (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 4, 'Agro Expo Bucovina', '22-25 martie 2017, Suceava', '2018-08-20 10:00:00', null);
+            INSERT INTO agro_task (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 5, 'VinVest', '30 martie - 1 aprilie 2018, CRAFT, Timişoara', '2018-08-23 10:00:00', '2018-08-25 21:00:00');
+            INSERT INTO agro_task (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 6, 'Agraria', '19-22 aprilie 2018, Jucu, Cluj', '2018-08-26 10:00:00', '2018-08-26 21:00:00');
+            INSERT INTO agro_task (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 7, 'Agro Expo Util', '3-6 mai 2018, Constanta', '2018-08-31 10:00:00', '2018-08-31 21:00:00');
         </sql>
     </changeSet>
 
@@ -257,8 +252,8 @@
         La fel specificat in 2 limbi.
         De exemplu: fructe, legume, grine, culturi tehnice
     -->
-    <changeSet id="add_crop_categories" author="mgorgos" failOnError="true" runOnChange="true">
-        <createTable tableName="crop_categories">
+    <changeSet id="add_crop_category" author="mgorgos" failOnError="true" runOnChange="true">
+        <createTable tableName="crop_category">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -273,8 +268,8 @@
         La fel specificat in 2 limbi.
         De exemplu: mere, pere, gutuie care sunt de categorie FRUCTE
     -->
-    <changeSet id="add_crops" author="mgorgos" failOnError="true" runOnChange="true">
-        <createTable tableName="crops">
+    <changeSet id="add_crop" author="mgorgos" failOnError="true" runOnChange="true">
+        <createTable tableName="crop">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -289,8 +284,8 @@
         sistemului. La fel specificat in 2 limbi.
         De exemplu: mere soi Golden Delicious, Jonagold, Idared, etc
     -->
-    <changeSet id="add_crop_varieties" author="mgorgos" failOnError="true" runOnChange="true">
-        <createTable tableName="crop_varieties">
+    <changeSet id="add_crop_variety" author="mgorgos" failOnError="true" runOnChange="true">
+        <createTable tableName="crop_variety">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -305,20 +300,20 @@
     <!--
         Adaugat categoria CEREALE si 10 tipuri de cereale
     -->
-    <changeSet id="insert-cereale" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="insert-category-cereale" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
-            INSERT INTO crop_categories (id, name_ro, name_ru) VALUES (1,'Cereale','Зерновые');
+            INSERT INTO crop_category (id, name_ro, name_ru) VALUES (1,'Cereale','Зерновые');
 
-            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (1,1, 'Grâu','Пшеница');
-            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (2,1, 'Secară','Рожь');
-            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (3,1, 'Triticale','Тритикале');
-            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (4,1, 'Orz','Ячмень');
-            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (5,1, 'Ovăz','Овес');
-            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (6,1, 'Porumb','Кукуруза');
-            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (7,1, 'Sorg','Сорг');
-            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (8,1, 'Mei','Просо');
-            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (9,1, 'Orez','Рис');
-            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (10,1, 'Hrișca','Гречиха');
+            INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (1,1, 'Grâu','Пшеница');
+            INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (2,1, 'Secară','Рожь');
+            INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (3,1, 'Triticale','Тритикале');
+            INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (4,1, 'Orz','Ячмень');
+            INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (5,1, 'Ovăz','Овес');
+            INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (6,1, 'Porumb','Кукуруза');
+            INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (7,1, 'Sorg','Сорг');
+            INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (8,1, 'Mei','Просо');
+            INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (9,1, 'Orez','Рис');
+            INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (10,1, 'Hrișca','Гречиха');
         </sql>
     </changeSet>
 
@@ -326,18 +321,18 @@
     <!--
         Adaugat categoria PLANTE TEHNICE si 8 tipuri de plante
     -->
-    <changeSet id="insert-plante-tehnice" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="insert-category-plante-tehnice" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
-            INSERT INTO crop_categories (id, name_ro, name_ru) VALUES (2,'Plance tehnice','Технические растения');
+            INSERT INTO crop_category (id, name_ro, name_ru) VALUES (2,'Plance tehnice','Технические растения');
 
-            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (11,2, 'Floarea soarelui','Подсолнечник');
-            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (12,2, 'Rapiță','Рапс');
-            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (13,2, 'Sfeclă de zahăr','Сахарная свекла');
-            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (14,2, 'In','Лён');
-            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (15,2, 'Cânepă','Конопля');
-            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (16,2, 'Tutun','Табак');
-            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (17,2, 'Hamei','Хмель');
-            INSERT INTO crops (id, crop_category_id, name_ro, name_ru) VALUES (18,2, 'Soia','Соя');
+            INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (11,2, 'Floarea soarelui','Подсолнечник');
+            INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (12,2, 'Rapiță','Рапс');
+            INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (13,2, 'Sfeclă de zahăr','Сахарная свекла');
+            INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (14,2, 'In','Лён');
+            INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (15,2, 'Cânepă','Конопля');
+            INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (16,2, 'Tutun','Табак');
+            INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (17,2, 'Hamei','Хмель');
+            INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (18,2, 'Soia','Соя');
         </sql>
     </changeSet>
 

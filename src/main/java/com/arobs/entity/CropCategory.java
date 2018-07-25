@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by mihail.gorgos on 14.07.2018.
  */
 @Entity
-@Table(name = "crop_categories")
+@Table(name = "crop_category")
 public class CropCategory {
 
     @Id
