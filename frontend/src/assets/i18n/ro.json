@@ -6,13 +6,13 @@
 		"remove": "Șterge",
 		"save": "Salvați"
 	},
-	"agrotask-calendar": {
+	"agro-task-calendar": {
 		"enter-new-event": "Doar introduceți numele evenimentului",
-		"event-description": "descrierea",
-		"event-title": "denumirea",
-		"event-type": "tipul lucrării agricole",
-		"new-event": "Activitate nouă",
-		"title": "Agenda lucrărilor agricole"
+		"event-description": "Descrierea",
+		"event-title": "Denumirea",
+		"event-type": "Tipul lucrării agricole",
+		"title": "Agenda lucrărilor agricole",
+		"event": "Activitate"
 	},
 	"auth": {
 		"login": "Logare",

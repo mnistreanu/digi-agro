@@ -17,7 +17,7 @@ export const superAdminMenuItems = [
     },
     {
         title: 'Agro Task Calendar',
-        routerLink: '/pages/agrotask-calendar',
+        routerLink: '/pages/agro-task-calendar',
         icon: 'fa-calendar',
         selected: false,
         expanded: false,

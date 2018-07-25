@@ -71,10 +71,8 @@ export class AgroTaskCalendarComponent {
             eventColor: this.config.colors.info,
             selectable: true,
             selectHelper: true,
-            select: (start, end) => {
-                this.prepareNewEvent(start, end)
-            },
-            eventClick: (event) => this.prepareEvent(event),
+            select: (start, end) => this.prepareNewEvent(start, end),
+            eventClick: (event) => this.showEvent(event),
             eventResize: (event) => this.onEventTimeChange(event),
             eventDrop: (event) => this.onEventTimeChange(event),
             editable: true,
@@ -115,63 +113,28 @@ export class AgroTaskCalendarComponent {
                 agroEvent.description = model.description;
                 agroEvent.createdBy = model.createdBy;
                 agroEvent.tenantId = model.tenantId;
-                // todo: need fix allDay
-                agroEvent.allDay = !model.scheduledEnd || this.isAllDay(agroEvent);
-                // agroEvent.allDay = true;
                 this.$calendar.fullCalendar('renderEvent', agroEvent, true);
             });
         });
     }
 
-    private isAllDay(agroEvent): boolean {
+    showEvent(event) {
 
-        let d1 = agroEvent.start;
-        let d2 = agroEvent.end;
-
-        if (!d1 || !d2) {
-            return false;
-        }
-
-        if (d1.getDate() != d2.getDate()) {
-            return true;
-        }
-
-        if (d1.getMonth() != d2.getMonth()) {
-            return true;
-        }
-
-        if (d1.getFullYear() != d2.getFullYear()) {
-            return true;
-        }
-
-        return false;
-    }
-
-
-    prepareEvent(event) {
         this.event = event;
-        jQuery('#show-event-modal').modal('show');
-    }
-
-    remove() {
-        this.agroTaskService.remove(this.event.id).subscribe(() => {
-            this.$calendar.fullCalendar('removeEvents', this.event.id);
-            this.toaStrService.success(this.labelRemoved);
+        this.formSubmitted = false;
+        this.eventForm = this.fb.group({
+            workTypeId: [this.event.workTypeId, Validators.required],
+            title: [this.event.title, Validators.required],
+            description: [this.event.description]
         });
+
+        jQuery('#event-modal').modal('show');
     }
 
     prepareNewEvent(start, end) {
-        this.formSubmitted = false;
-
         let allDay = !start.hasTime() && !end.hasTime();
 
-        this.eventForm = this.fb.group({
-            workTypeId: [null, Validators.required],
-            title: [null, Validators.required],
-            description: [null]
-        });
-
-        this.event = {
+        let event = {
             start: start,
             end: end,
             backgroundColor: this.config.colors.success,
@@ -179,10 +142,10 @@ export class AgroTaskCalendarComponent {
             allDay: allDay
         };
 
-        jQuery('#create-event-modal').modal('show');
+        this.showEvent(event);
     }
 
-    createEvent() {
+    saveEvent() {
         this.formSubmitted = true;
 
         if (!this.eventForm.valid) {
@@ -191,15 +154,30 @@ export class AgroTaskCalendarComponent {
         }
 
         Object.assign(this.event, this.eventForm.value);
+        this.event.backgroundColor = this.getEventBackgroundColor(this.event.workTypeId);
+        let isNew = this.event.id == null;
 
         this.agroTaskService.save(this.event).subscribe(data => {
             this.event.id = data.id;
 
             this.toaStrService.success(this.labelSaved);
 
-            this.$calendar.fullCalendar('renderEvent', this.event, true);
+            if (isNew) {
+                this.$calendar.fullCalendar('renderEvent', this.event, true);
+            }
+            else {
+                this.$calendar.fullCalendar('updateEvent', this.event);
+            }
+
             this.$calendar.fullCalendar('unselect');
-            jQuery('#create-event-modal').modal('hide');
+            jQuery('#event-modal').modal('hide');
+        });
+    }
+
+    remove() {
+        this.agroTaskService.remove(this.event.id).subscribe(() => {
+            this.$calendar.fullCalendar('removeEvents', this.event.id);
+            this.toaStrService.success(this.labelRemoved);
         });
     }
 

@@ -6,13 +6,13 @@
 		"remove": "Remove",
 		"save": "Save"
 	},
-	"agrotask-calendar": {
+	"agro-task-calendar": {
 		"enter-new-event": "Just enter event name to create a new one",
-		"event-description": "description",
-		"event-title": "title",
-		"event-type": "type of work",
-		"new-event": "New Event",
-		"title": "Agenda of agricultural works"
+		"event-description": "Description",
+		"event-title": "Title",
+		"event-type": "Type of work",
+		"title": "Agenda of agricultural works",
+		"event": "Event"
 	},
 	"auth": {
 		"login": "Login",

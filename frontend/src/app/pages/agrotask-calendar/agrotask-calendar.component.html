@@ -1,6 +1,6 @@
 <div widget class="card">
     <div class="card-header">
-        <span><div translate>agrotask-calendar.title</div></span>
+        <span translate>agro-task-calendar.title</span>
         <div class="widget-controls">
             <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
             <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
@@ -16,39 +16,19 @@
     </div>
 </div>
 
-<div class="modal fade" id="show-event-modal">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header modal-info">
-                <h5 *ngIf="event.title" class="modal-title">{{ event.title }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
-                </button>
-            </div>
-            <div class="modal-body">
-                <p><i class="fa fa-calendar"></i> &nbsp; {{ event.start | date:'dd/MM/yyyy H:mm' }}</p>
-                <p *ngIf="event.end"><i class="fa fa-clock-o"></i> &nbsp; {{ event.end | date:'dd/MM/yyyy H:mm' }}</p>
-                <p *ngIf="event.description">{{ event.description }}</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger btn-sm mr-auto" data-dismiss="modal" (click)="remove()" translate>action.remove</button>
-                <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">OK</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="create-event-modal">
+<div class="modal fade" id="event-modal">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header modal-success d-block">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
                 </button>
-                <h5 class="modal-title" translate>agrotask-calendar.new-event</h5>
+                <h5 class="modal-title" translate>agro-task-calendar.event</h5>
             </div>
             <div class="modal-body">
                 <form [formGroup]="eventForm" *ngIf="eventForm">
                     <div class="form-group">
-                        <select class="form-control custom-select" formControlName="workTypeId">
+                        <label for="work-type" translate>agro-task-calendar.event-type</label>
+                        <select id="work-type" class="form-control custom-select" formControlName="workTypeId">
                             <option *ngFor="let workType of workTypeModels"
                                     [ngValue]="workType.id">{{workType.nameRo}}
                             </option>
@@ -57,20 +37,22 @@
                         </form-error-block>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" formControlName="title"
-                               placeholder="{{'agrotask-calendar.event-title'|translate}}">
+                        <label for="work-type" translate>agro-task-calendar.event-title</label>
+                        <input class="form-control" formControlName="title">
                         <form-error-block [control]="eventForm.get('title')" [formSubmitted]="formSubmitted"
-                                          [title]="'agrotask-calendar.event-title'"></form-error-block>
+                                          [title]="'agro-task-calendar.event-title'"></form-error-block>
                     </div>
                     <div class="form-group">
-                        <input class="form-control" formControlName="description"
-                               placeholder="{{'agrotask-calendar.event-description'|translate}}">
+                        <label for="work-type" translate>agro-task-calendar.event-description</label>
+                        <input class="form-control" formControlName="description">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" translate>action.cancel</button>
-                <button (click)="createEvent()" class="btn btn-success" translate>action.save</button>
+                <button type="button" class="btn btn-danger btn-sm mr-auto" data-dismiss="modal"
+                        *ngIf="event.id != null"
+                        (click)="remove()" translate>action.remove</button>
+                <button (click)="saveEvent()" class="btn btn-success">OK</button>
             </div>
         </div>
     </div>

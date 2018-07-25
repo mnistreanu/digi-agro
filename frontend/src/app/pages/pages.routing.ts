@@ -38,7 +38,7 @@ export const routes: Routes = [
 
             { path: 'manage-tenants', loadChildren: 'app/pages/manage-tenants/manage-tenants.module#ManageTenantsModule', data: { breadcrumb: 'Manage Tenants' }, canActivate: [SuperAdminGuard] },
             { path: 'manage-branches', loadChildren: 'app/pages/manage-branches/manage-branches.module#ManageBranchesModule', data: { breadcrumb: 'Manage Branches' }, canActivate: [SuperAdminOrAdminGuard] },
-            { path: 'agrotask-calendar', loadChildren: 'app/pages/agrotask-calendar/agrotask-calendar.module#AgroTaskCalendarModule', data: { breadcrumb: 'Agro Task Calendar' }, canActivate: [SuperAdminOrAdminGuard] }
+            { path: 'agro-task-calendar', loadChildren: 'app/pages/agrotask-calendar/agrotask-calendar.module#AgroTaskCalendarModule', data: { breadcrumb: 'Agro Task Calendar' }, canActivate: [SuperAdminOrAdminGuard] }
         ]
     }
 ];

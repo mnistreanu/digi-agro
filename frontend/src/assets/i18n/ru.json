@@ -6,13 +6,13 @@
 		"remove": "Удалить",
 		"save": "Сохранить"
 	},
-	"agrotask-calendar": {
+	"agro-task-calendar": {
 		"enter-new-event": "Просто введите название события",
-		"event-description": "описание",
-		"event-title": "название",
-		"event-type": "тип сельскохозяйственной работы",
-		"new-event": "Новая задача",
-		"title": "План сельскохозяйственных работ"
+		"event-description": "Описание",
+		"event-title": "Название",
+		"event-type": "Тип сельскохозяйственной работы",
+		"title": "План сельскохозяйственных работ",
+		"event": "Задача"
 	},
 	"auth": {
 		"login": "Вход",
