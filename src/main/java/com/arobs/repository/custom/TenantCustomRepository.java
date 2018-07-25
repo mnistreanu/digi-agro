@@ -1,7 +1,7 @@
 package com.arobs.repository.custom;
 
-import com.arobs.model.tenant.TenantFilterRequestModel;
-import com.arobs.model.tenant.TenantModel;
+import com.arobs.entity.Tenant;
+import com.arobs.model.tenant.TenantFilterModel;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -14,41 +14,40 @@ public class TenantCustomRepository {
     @PersistenceContext
     private EntityManager em;
 
-    public List<TenantModel> findByFilter(TenantFilterRequestModel filterRequestModel) {
+    public List<Tenant> find(TenantFilterModel filterModel) {
 
-        String queryStr = "SELECT new com.arobs.model.tenant.TenantModel(t) " +
-                " FROM Tenant t WHERE t.active = true ";
+        String queryStr = "SELECT t FROM Tenant t WHERE t.deletedAt IS NULL ";
 
-        if (filterRequestModel.getName() != null) {
-            queryStr += " AND t.name LIKE '%" + filterRequestModel.getName() + "%' ";
+        if (filterModel.getName() != null) {
+            queryStr += " AND t.name LIKE '%" + filterModel.getName() + "%' ";
         }
 
-        if (filterRequestModel.getDescription() != null) {
-            queryStr += " t.description LIKE '%" + filterRequestModel.getDescription() + "%' ";
+        if (filterModel.getDescription() != null) {
+            queryStr += " t.description LIKE '%" + filterModel.getDescription() + "%' ";
         }
 
-        if (filterRequestModel.getFiscalCode() != null) {
-            queryStr += " t.fiscalCode LIKE '%" + filterRequestModel.getFiscalCode() + "%' ";
+        if (filterModel.getFiscalCode() != null) {
+            queryStr += " t.fiscalCode LIKE '%" + filterModel.getFiscalCode() + "%' ";
         }
 
-        if (filterRequestModel.getCountry() != null) {
-            queryStr += " t.country LIKE '%" + filterRequestModel.getCountry() + "%' ";
+        if (filterModel.getCountry() != null) {
+            queryStr += " t.country LIKE '%" + filterModel.getCountry() + "%' ";
         }
 
-        if (filterRequestModel.getCounty() != null) {
-            queryStr += " t.county LIKE '%" + filterRequestModel.getCounty() + "%' ";
+        if (filterModel.getCounty() != null) {
+            queryStr += " t.county LIKE '%" + filterModel.getCounty() + "%' ";
         }
 
-        if (filterRequestModel.getVillageCity() != null) {
-            queryStr += " t.villageCity LIKE '%" + filterRequestModel.getVillageCity() + "%' ";
+//        if (filterModel.getVillageCity() != null) {
+//            queryStr += " t.villageCity LIKE '%" + filterModel.getVillageCity() + "%' ";
+//        }
+
+        if (filterModel.getAddress() != null) {
+            queryStr += " t.address LIKE '%" + filterModel.getAddress() + "%' ";
         }
 
-        if (filterRequestModel.getAddress() != null) {
-            queryStr += " t.address LIKE '%" + filterRequestModel.getAddress() + "%' ";
-        }
-
-        if (filterRequestModel.getPhones() != null) {
-            queryStr += " t.phones LIKE '%" + filterRequestModel.getPhones() + "%' ";
+        if (filterModel.getPhones() != null) {
+            queryStr += " t.phones LIKE '%" + filterModel.getPhones() + "%' ";
 
         }
 

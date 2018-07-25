@@ -1,7 +1,7 @@
 package com.arobs.controller;
 
 import com.arobs.model.ListItemModel;
-import com.arobs.model.tenant.TenantFilterRequestModel;
+import com.arobs.model.tenant.TenantFilterModel;
 import com.arobs.model.tenant.TenantModel;
 import com.arobs.service.TenantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class TenantController {
     }
 
     @RequestMapping(value = "/find-by", method = RequestMethod.POST)
-    public ResponseEntity<List<TenantModel>> getModels(@RequestBody TenantFilterRequestModel filterRequestModel) {
+    public ResponseEntity<List<TenantModel>> getModels(@RequestBody TenantFilterModel filterRequestModel) {
         List<TenantModel> models = tenantService.findByFilter(filterRequestModel);
         return ResponseEntity.ok(models);
     }

@@ -3,7 +3,7 @@ package com.arobs.service;
 import com.arobs.entity.Tenant;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.ListItemModel;
-import com.arobs.model.tenant.TenantFilterRequestModel;
+import com.arobs.model.tenant.TenantFilterModel;
 import com.arobs.model.tenant.TenantModel;
 import com.arobs.repository.TenantRepository;
 import com.arobs.repository.custom.TenantCustomRepository;
@@ -42,8 +42,13 @@ public class TenantService implements HasRepository<TenantRepository> {
         }
     }
 
-    public List<TenantModel> findByFilter(TenantFilterRequestModel filterRequestModel) {
-        return tenantCustomRepository.findByFilter(filterRequestModel);
+    public List<TenantModel> findByFilter(TenantFilterModel filterRequestModel) {
+        List<TenantModel> list = new ArrayList<TenantModel>();
+        List<Tenant> tenants = tenantCustomRepository.find(filterRequestModel);
+        for (Tenant t:tenants) {
+            list.add(new TenantModel(t));
+        }
+        return list;
     }
 
 //    public boolean validateName(Long id, String name) {

@@ -1,7 +1,6 @@
 package com.arobs.model.tenant;
 
-
-public class TenantFilterRequestModel {
+public class TenantFilterModel {
 
     private String name;
     private String description;
@@ -12,7 +11,7 @@ public class TenantFilterRequestModel {
     private String address;
     private String phones;
 
-    public TenantFilterRequestModel() {
+    public TenantFilterModel() {
     }
 
     public String getName() {

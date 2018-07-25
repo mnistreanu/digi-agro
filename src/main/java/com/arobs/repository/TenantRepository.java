@@ -14,7 +14,7 @@ import java.util.List;
 public interface TenantRepository extends JpaRepository<Tenant, Long> {
 
 
-    @Query("SELECT COUNT(t) FROM Tenant t WHERE t.fiscalCode = :fiscalCode AND t.deletedAt IS NOT NULL ")
+    @Query("SELECT COUNT(t) FROM Tenant t WHERE t.fiscalCode = :fiscalCode AND t.deletedAt IS NULL ")
     long countByFiscalCode(@Param("fiscalCode") String fiscalCode);
 
 
@@ -24,13 +24,13 @@ public interface TenantRepository extends JpaRepository<Tenant, Long> {
             "WHERE t.id = :id")
     void remove(@Param("id") Long id, @Param("userId") Long userId);
 
-    @Query("SELECT new com.arobs.model.ListItemModel(t.id, t.name) FROM Tenant t WHERE t.deletedAt IS NOT NULL")
+    @Query("SELECT new com.arobs.model.ListItemModel(t.id, t.name) FROM Tenant t WHERE t.deletedAt IS NULL")
     List<ListItemModel> fetchAllListItems();
 
     @Query("SELECT new com.arobs.model.ListItemModel(t.id, t.name) " +
             "FROM UserAccount u " +
             "JOIN u.tenants t " +
-            "WHERE u.id = :userId AND t.deletedAt IS NOT NULL " +
+            "WHERE u.id = :userId AND t.deletedAt IS NULL " +
             "GROUP BY t.id")
     List<ListItemModel> fetchListItemsByUser(@Param("userId") Long userId);
 
