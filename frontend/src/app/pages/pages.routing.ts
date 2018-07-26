@@ -9,7 +9,7 @@ import {AuthGuard} from "../guard/auth-guard";
 import {SuperAdminGuard} from "../guard/super-admin-guard";
 import {SuperAdminOrAdminGuard} from "../guard/super-admin-or-admin-guard";
 import {UserProfileComponent} from "./user-profile/user-profile.component";
-import {AgroTaskCalendarComponent} from "./agrotask-calendar/agrotask-calendar.component";
+import {AgroTaskCalendarComponent} from "./agro-task-calendar/agro-task-calendar.component";
 
 export const routes: Routes = [
     {
@@ -38,7 +38,7 @@ export const routes: Routes = [
 
             { path: 'manage-tenants', loadChildren: 'app/pages/manage-tenants/manage-tenants.module#ManageTenantsModule', data: { breadcrumb: 'Manage Tenants' }, canActivate: [SuperAdminGuard] },
             { path: 'manage-branches', loadChildren: 'app/pages/manage-branches/manage-branches.module#ManageBranchesModule', data: { breadcrumb: 'Manage Branches' }, canActivate: [SuperAdminOrAdminGuard] },
-            { path: 'agro-task-calendar', loadChildren: 'app/pages/agrotask-calendar/agrotask-calendar.module#AgroTaskCalendarModule', data: { breadcrumb: 'Agro Task Calendar' }, canActivate: [SuperAdminOrAdminGuard] }
+            { path: 'agro-task-calendar', loadChildren: 'app/pages/agro-task-calendar/agro-task-calendar.module#AgroTaskCalendarModule', data: { breadcrumb: 'Agro Task Calendar' }, canActivate: [SuperAdminOrAdminGuard] }
         ]
     }
 ];

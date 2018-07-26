@@ -3,7 +3,7 @@ import {Constants} from "../common/constants";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Rx";
 import {PayloadModel} from "../pages/payload.model";
-import {AgroTaskModel} from "../pages/agrotask-calendar/agro-task.model";
+import {AgroTaskModel} from "../pages/agro-task-calendar/agro-task.model";
 
 @Injectable()
 export class AgroTaskService {

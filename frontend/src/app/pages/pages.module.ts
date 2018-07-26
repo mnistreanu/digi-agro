@@ -23,7 +23,7 @@ import {UserProfileComponent} from "./user-profile/user-profile.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FormErrorBlockModule} from "../modules/form-error-block/form-error-block.module";
 import {TranslateModule} from "@ngx-translate/core";
-import {AgroTaskService} from "../services/agrotask.service";
+import {AgroTaskService} from "../services/agro-task.service";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true

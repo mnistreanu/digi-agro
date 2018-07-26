@@ -1,18 +1,18 @@
 import {Component} from "@angular/core";
 import {AppConfig} from "../../app.config";
-import {AgroTaskService} from "../../services/agrotask.service";
+import {AgroTaskService} from "../../services/agro-task.service";
 import "style-loader!fullcalendar/dist/fullcalendar.min.css";
 import {AgroTaskModel} from "./agro-task.model";
 import {LangService} from "../../services/lang.service";
-import {AgroWorkTypeModel} from "./agroworktype.model";
+import {AgroWorkTypeModel} from "./agro-work-type.model";
 import {ToastrService} from "ngx-toastr";
 import {Messages} from "../../common/messages";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
-    selector: 'az-agrotask-calendar',
-    templateUrl: './agrotask-calendar.component.html',
-    styleUrls: ['./agrotask-calendar.component.scss']
+    selector: 'az-agro-task-calendar',
+    templateUrl: './agro-task-calendar.component.html',
+    styleUrls: ['./agro-task-calendar.component.scss']
 })
 export class AgroTaskCalendarComponent {
 

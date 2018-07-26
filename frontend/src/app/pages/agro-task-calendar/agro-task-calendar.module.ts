@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {DirectivesModule} from '../../theme/directives/directives.module';
-import {AgroTaskCalendarComponent} from "./agrotask-calendar.component";
+import {AgroTaskCalendarComponent} from "./agro-task-calendar.component";
 import {TranslateModule} from '@ngx-translate/core';
 import {FormErrorBlockModule} from "../../modules/form-error-block/form-error-block.module";
 
