@@ -13,11 +13,11 @@ import {MessagesComponent} from "../theme/components/messages/messages.component
 import {BreadcrumbComponent} from "../theme/components/breadcrumb/breadcrumb.component";
 import {BackTopComponent} from "../theme/components/back-top/back-top.component";
 import {SearchComponent} from "./search/search.component";
-import {AdminGuard} from "../guard/admin-guard";
-import {UserGuard} from "../guard/user-guard";
-import {AuthGuard} from "../guard/auth-guard";
-import {SuperAdminGuard} from "../guard/super-admin-guard";
-import {SuperAdminOrAdminGuard} from "../guard/super-admin-or-admin-guard";
+import {AdminGuard} from "../guards/admin-guard";
+import {UserGuard} from "../guards/user-guard";
+import {AuthGuard} from "../guards/auth-guard";
+import {SuperAdminGuard} from "../guards/super-admin-guard";
+import {SuperAdminOrAdminGuard} from "../guards/super-admin-or-admin-guard";
 import {TenantService} from "../services/tenant.service";
 import {UserProfileComponent} from "./user-profile/user-profile.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";

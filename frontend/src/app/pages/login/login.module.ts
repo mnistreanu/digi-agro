@@ -15,7 +15,7 @@ export const routes = [
     TranslateModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(routes)
   ],
   declarations: [LoginComponent]
 })

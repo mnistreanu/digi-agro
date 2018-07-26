@@ -4,10 +4,10 @@ import { ModuleWithProviders } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { BlankComponent } from './blank/blank.component';
 import { SearchComponent } from './search/search.component';
-import {AdminGuard} from "../guard/admin-guard";
-import {AuthGuard} from "../guard/auth-guard";
-import {SuperAdminGuard} from "../guard/super-admin-guard";
-import {SuperAdminOrAdminGuard} from "../guard/super-admin-or-admin-guard";
+import {AdminGuard} from "../guards/admin-guard";
+import {AuthGuard} from "../guards/auth-guard";
+import {SuperAdminGuard} from "../guards/super-admin-guard";
+import {SuperAdminOrAdminGuard} from "../guards/super-admin-or-admin-guard";
 import {UserProfileComponent} from "./user-profile/user-profile.component";
 import {AgroTaskCalendarComponent} from "./agro-task-calendar/agro-task-calendar.component";
 
