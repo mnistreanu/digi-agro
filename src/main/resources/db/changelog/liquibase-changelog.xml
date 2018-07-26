@@ -361,4 +361,32 @@
         </sql>
     </changeSet>
 
+    <changeSet id="insert-4-parcels-tenant-2" author="mgorgos" failOnError="true" runOnChange="true">
+        <sql>
+            INSERT INTO parcel(id, cadaster_number, city_village_id, country_id, county_id, created_at, description, landworthiness_points, name, parent_id, tenant_id)
+            VALUES (4, 'AB-34567-NS-12356', null, 'md', 'NS', '2018-07-26 12:45:00', 'sus in deal', 89, 'Floarea soarelui', null, 2);
+
+            INSERT INTO parcel_geometry(	parcel_id, coords)
+            VALUES (4, '{ "coords": [ [47.070854, 28.145911], [47.069766, 28.144750], [47.068454, 28.146618], [47.069552, 28.147994] ]}');
+
+            INSERT INTO parcel(id, cadaster_number, city_village_id, country_id, county_id, created_at, description, landworthiness_points, name, parent_id, tenant_id)
+            VALUES (5, 'AB-34567-NS-17554', null, 'md', 'NS', '2018-07-26 12:45:00', 'sus in stinga', 84, 'Porumb furajer', null, 2);
+
+            INSERT INTO parcel_geometry(	parcel_id, coords)
+            VALUES (5, '{ "coords": [ [47.068454, 28.146618], [47.069552, 28.147994], [47.068984, 28.148861], [47.067851, 28.147590] ]}');
+
+            INSERT INTO parcel(id, cadaster_number, city_village_id, country_id, county_id, created_at, description, landworthiness_points, name, parent_id, tenant_id)
+            VALUES (6, 'AB-34567-NS-18698', null, 'md', 'NS', '2018-07-26 12:45:00', 'jos la vale', 82, 'Negru de purcari', null, 2);
+
+            INSERT INTO parcel_geometry(	parcel_id, coords)
+            VALUES (6, '{ "coords": [ [47.068984, 28.148861], [47.067851, 28.147590], [47.066603, 28.149660], [47.067649, 28.150897] ]}');
+
+            INSERT INTO parcel(id, cadaster_number, city_village_id, country_id, county_id, created_at, description, landworthiness_points, name, parent_id, tenant_id)
+            VALUES (7, 'AB-34567-NS-18398', null, 'md', 'NS', '2018-07-26 12:45:00', 'jos iin stinga', 82, 'Tutun Kentuki', null, 2);
+
+            INSERT INTO parcel_geometry(	parcel_id, coords)
+            VALUES (7, '{ "coords": [ [47.066603, 28.149660], [47.067649, 28.150897], [47.066009, 28.153511], [47.066329, 28.150125] ]}');
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
