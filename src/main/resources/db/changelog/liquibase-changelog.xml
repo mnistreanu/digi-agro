@@ -6,25 +6,25 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="clean-db" author="mihai.gorgos" failOnError="true" runOnChange="true">
-    <sql>
-        DELETE FROM databasechangelog;
+    <!--<changeSet id="clean-db" author="mihai.gorgos" failOnError="true" runOnChange="true">-->
+    <!--<sql>-->
+        <!--DELETE FROM databasechangelog;-->
 
-        DROP TABLE user_branch;
-        DROP TABLE tenant_branch;
-        DROP TABLE tenant_user;
-        DROP TABLE tenant;
-        DROP TABLE tenants;
-        DROP TABLE agro_tasks;
-        DROP TABLE agro_work_types;
-        DROP TABLE cities_villages;
-        DROP TABLE counties;
-        DROP TABLE crops;
-        DROP TABLE crop_categories;
-        DROP TABLE crop_varieties;
-        DROP TABLE machine_work_types;
-    </sql>
-    </changeSet>
+        <!--DROP TABLE user_branch;-->
+        <!--DROP TABLE tenant_branch;-->
+        <!--DROP TABLE tenant_user;-->
+        <!--DROP TABLE tenant;-->
+        <!--DROP TABLE tenants;-->
+        <!--DROP TABLE agro_tasks;-->
+        <!--DROP TABLE agro_work_types;-->
+        <!--DROP TABLE cities_villages;-->
+        <!--DROP TABLE counties;-->
+        <!--DROP TABLE crops;-->
+        <!--DROP TABLE crop_categories;-->
+        <!--DROP TABLE crop_varieties;-->
+        <!--DROP TABLE machine_work_types;-->
+    <!--</sql>-->
+    <!--</changeSet>-->
 
 
     <changeSet id="add_tenant" author="mgorgos">
@@ -52,7 +52,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="insert-2-tenants" author="mihai.gorgos" failOnError="true" runOnChange="true">
+    <changeSet id="insert-2-tenants" author="mihai.gorgos" failOnError="false" runOnChange="true">
         <sql>
             INSERT INTO tenant (id, name, country_id, fiscal_code, description, county_id, city_village_id, address, phones)
             VALUES (1, 'Gospodăria Ţărănească Orhei', 'md', '9842367810452', 'Gospodăria Ţărănească Orhei este super-puper', 'OR', null, 'str.Solidaritatii 14', '0-232-12345 0-232-12346');
@@ -112,7 +112,7 @@
     <!--
         Lista de raioane din Moldova, in limba romana si rusa
     -->
-    <changeSet id="insert-counties-md" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="insert-counties-md" author="mgorgos" failOnError="false" runOnChange="true">
         <sql>
             INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','AN','r-nul Anenii Noi','Новоаненский район‎');
             INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','BS','r-nul Basarabeasca','Бессарабский район');
@@ -336,6 +336,29 @@
         </sql>
     </changeSet>
 
+    <!--
+        Adaugat 3 parcele cu coordonate la tenant_id=1
+    -->
+    <changeSet id="insert-3-parcels-tenant-1" author="mgorgos" failOnError="true" runOnChange="true">
+        <sql>
+            INSERT INTO parcel(id, cadaster_number, city_village_id, country_id, county_id, created_at, description, landworthiness_points, name, parent_id, tenant_id)
+            VALUES (1, 'AB-34567-ZB-12356', null, 'md', 'HN', '2018-07-26 12:45:00', 'sus in deal', 89, 'Floarea soarelui', null, 1);
 
+            INSERT INTO parcel_geometry(	parcel_id, coords)
+            VALUES (1, '{ "coords": [ [46.811898, 28.638581], [46.810215, 28.634720], [46.798834, 28.643039], [46.799954, 28.644066], [46.802772, 28.644606] ]}');
+
+            INSERT INTO parcel(id, cadaster_number, city_village_id, country_id, county_id, created_at, description, landworthiness_points, name, parent_id, tenant_id)
+            VALUES (2, 'AB-34567-ZB-17554', null, 'md', 'HN', '2018-07-26 12:45:00', 'sus in stinga', 84, 'Porumb furajer', null, 1);
+
+            INSERT INTO parcel_geometry(	parcel_id, coords)
+            VALUES (2, '{ "coords": [ [46.811898, 28.638581], [46.814937, 28.645115], [46.811814, 28.644840], [46.809678, 28.640038] ]}');
+
+            INSERT INTO parcel(id, cadaster_number, city_village_id, country_id, county_id, created_at, description, landworthiness_points, name, parent_id, tenant_id)
+            VALUES (3, 'AB-34567-ZB-1898', null, 'md', 'HN', '2018-07-26 12:45:00', 'jos la vale', 82, 'Negru de purcari', null, 1);
+
+            INSERT INTO parcel_geometry(	parcel_id, coords)
+            VALUES (3, '{ "coords": [ [46.811814, 28.644840], [46.809678, 28.640038], [46.804438, 28.643071], [46.801469, 28.645740], [46.802652, 28.645927], [46.803798, 28.645621], [46.807954, 28.648691] ]}');
+        </sql>
+    </changeSet>
 
 </databaseChangeLog>
