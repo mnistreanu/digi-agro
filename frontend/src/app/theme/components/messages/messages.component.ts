@@ -11,7 +11,7 @@ import {NotificationService} from "../../../services/notification.service";
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./messages.component.scss'],
     templateUrl: './messages.component.html',
-    providers: [MessagesService]
+    providers: [MessagesService, NotificationService, AgroTaskService]
 })
 
 export class MessagesComponent{     
@@ -92,6 +92,7 @@ export class MessagesComponent{
                 notification.name = 'Weather alert';
                 notification.text = model.message;
                 notification.time = model.createdAt;
+                notification.image = '../assets/img/shopping-cart.svg';
                 this.notifications.push(notification);
             });
 
