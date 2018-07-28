@@ -8,11 +8,11 @@
 	},
 	"agro-task-calendar": {
 		"enter-new-event": "Just enter event name to create a new one",
+		"event": "Event",
 		"event-description": "Description",
 		"event-title": "Title",
 		"event-type": "Type of work",
-		"title": "Agenda of agricultural works",
-		"event": "Event"
+		"title": "Agenda of agricultural works"
 	},
 	"auth": {
 		"login": "Login",
@@ -55,6 +55,15 @@
 		"telemetry": "Telemetry",
 		"tenants": "Tenants",
 		"users": "Users"
+	},
+	"notification": {
+		"weather_fog_alert": "Warning, after {{days}} days it's going to be fog",
+		"weather_freezing_alert": "Warning, after {{days}} days it's going to be freezing and temperature could go down to {{degrees}} degrees",
+		"weather_hail_alert": "Warning, after {{days}} days it's going to be hail",
+		"weather_heat_alert": "Warning, after {{days}} days it's going to be heat",
+		"weather_rain_alert": "Warning, after {{days}} days it's going to be raining",
+		"weather_snow_alert": "Warning, after {{days}} days will snow",
+		"weather_wind_alert": "Warning, after {{days}} days will be strong wind"
 	},
 	"response": {
 		"added": "Added",

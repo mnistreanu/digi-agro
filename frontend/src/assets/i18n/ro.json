@@ -8,11 +8,11 @@
 	},
 	"agro-task-calendar": {
 		"enter-new-event": "Doar introduceți numele evenimentului",
+		"event": "Activitate",
 		"event-description": "Descrierea",
 		"event-title": "Denumirea",
 		"event-type": "Tipul lucrării agricole",
-		"title": "Agenda lucrărilor agricole",
-		"event": "Activitate"
+		"title": "Agenda lucrărilor agricole"
 	},
 	"auth": {
 		"login": "Logare",
@@ -55,6 +55,15 @@
 		"telemetry": "Telemetrie",
 		"tenants": "Clienți",
 		"users": "Utilizatori"
+	},
+	"notification": {
+		"weather_fog_alert": "Atenție, peste {{days}} zile va fi ceață",
+		"weather_freezing_alert": "Atenție, peste {{days}} zile vor fi înghețuri și temperatura ar putea coborî până la {{degrees}} grade",
+		"weather_hail_alert": "Atenție, peste {{days}} zile va fi grindină",
+		"weather_heat_alert": "Atenție, peste {{days}} zile va fi caniculă",
+		"weather_rain_alert": "Atenție, peste {{days}} zile va ploua",
+		"weather_snow_alert": "Atenție, peste {{days}} zile va ninge",
+		"weather_wind_alert": "Atenție, peste {{days}} zile va fi vânt puternic"
 	},
 	"response": {
 		"added": "A fost adăugat",

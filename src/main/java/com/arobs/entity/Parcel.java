@@ -31,6 +31,12 @@ public class Parcel {
     @Column(name = "landworthiness_points")
     private Integer landworthinessPoints;
 
+    /**
+     * Aria parcelei masurata in hectare
+     */
+    @Column(name = "area")
+    private Double area;
+
     @Column(name = "name", length = 128)
     private String name;
 

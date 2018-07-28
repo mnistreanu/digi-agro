@@ -19,8 +19,8 @@ public class ParcelGeometry {
     @Column(name = "parcel_id")
     private Long parcelId;
 
-    @Column(name = "coords", length = 4096)
-    private String coords;
+    @Column(name = "coordinates", length = 4096)
+    private String coordinates;
 
     public Long getParcelId() {
         return parcelId;
@@ -30,12 +30,12 @@ public class ParcelGeometry {
         this.parcelId = parcelId;
     }
 
-    public String getCoords() {
-        return coords;
+    public String getCoordinates() {
+        return coordinates;
     }
 
-    public void setCoords(String coords) {
-        this.coords = coords;
+    public void setCoordinates(String coordinates) {
+        this.coordinates = coordinates;
     }
 
 }
