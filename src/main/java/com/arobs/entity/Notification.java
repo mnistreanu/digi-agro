@@ -1,8 +1,6 @@
 package com.arobs.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -17,10 +15,7 @@ public class Notification {
     private Long id;
 
     @Column(name = "notification_type_id")
-    private Integer alertTypeId;
-
-    @Column(name = "tenant_id")
-    private Long tenantId;
+    private Integer notificationTypeId;
 
     @Column(name = "user_id")
     private Long userId;
@@ -42,20 +37,12 @@ public class Notification {
         this.id = id;
     }
 
-    public Integer getAlertTypeId() {
-        return alertTypeId;
+    public Integer getNotificationTypeId() {
+        return notificationTypeId;
     }
 
-    public void setAlertTypeId(Integer alertTypeId) {
-        this.alertTypeId = alertTypeId;
-    }
-
-    public Long getTenantId() {
-        return tenantId;
-    }
-
-    public void setTenantId(Long tenantId) {
-        this.tenantId = tenantId;
+    public void setNotificationTypeId(Integer notificationTypeId) {
+        this.notificationTypeId = notificationTypeId;
     }
 
     public Long getUserId() {

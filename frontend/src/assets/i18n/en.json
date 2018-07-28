@@ -57,13 +57,13 @@
 		"users": "Users"
 	},
 	"notification": {
-		"weather_fog_alert": "Warning, after {0} days it's going to be fog",
-		"weather_freezing_alert": "Warning, after {0} days it's going to be freezing and temperature could go down to {1} degrees",
-		"weather_hail_alert": "Warning, after {0} days it's going to be hail",
-		"weather_heat_alert": "Warning, after {0} days it's going to be heat",
-		"weather_rain_alert": "Warning, after {0} days it's going to be raining",
-		"weather_snow_alert": "Warning, after {0} days will snow",
-		"weather_wind_alert": "Warning, after {0} days will be strong wind"
+		"weather_fog_alert": "Warning, after {{days}} days it's going to be fog",
+		"weather_freezing_alert": "Warning, after {{days}} days it's going to be freezing and temperature could go down to {{degrees}} degrees",
+		"weather_hail_alert": "Warning, after {{days}} days it's going to be hail",
+		"weather_heat_alert": "Warning, after {{days}} days it's going to be heat",
+		"weather_rain_alert": "Warning, after {{days}} days it's going to be raining",
+		"weather_snow_alert": "Warning, after {{days}} days will snow",
+		"weather_wind_alert": "Warning, after {{days}} days will be strong wind"
 	},
 	"response": {
 		"added": "Added",

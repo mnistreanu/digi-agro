@@ -400,5 +400,66 @@
         </sql>
     </changeSet>
 
+    <changeSet id="insert-3-users" author="mihai.gorgos" failOnError="false" runOnChange="true">
+        <sql>
+            <!--password: test123 -->
+            INSERT INTO user_account (id, username, password, first_name, last_name, language) values(2, 'mihai.gorgos', '$2a$10$J.79O6b/Zo9rPAivWonK1ufA3yB.dsH1UJMVZRrarOrBiDzFRT9NO', 'Mihai', 'Gorgos', 'ro');
+            INSERT INTO user_account (id, username, password, first_name, last_name, language) values(3, 'maxim.nistreanu', '$2a$10$J.79O6b/Zo9rPAivWonK1ufA3yB.dsH1UJMVZRrarOrBiDzFRT9NO', 'Maxim', 'Nistreanu', 'ro');
+            INSERT INTO user_account (id, username, password, first_name, last_name, language) values(4, 'sergiu.gangan', '$2a$10$J.79O6b/Zo9rPAivWonK1ufA3yB.dsH1UJMVZRrarOrBiDzFRT9NO', 'Sergiu', 'Gangan', 'ru');
 
+            INSERT INTO user_authority (user_id, authority_id) VALUES (2, 3);
+            INSERT INTO user_authority (user_id, authority_id) VALUES (3, 3);
+            INSERT INTO user_authority (user_id, authority_id) VALUES (4, 3);
+
+            INSERT INTO tenant_user (user_id, tenant_id) VALUES (2, 1);
+            INSERT INTO tenant_user (user_id, tenant_id) VALUES (3, 1);
+            INSERT INTO tenant_user (user_id, tenant_id) VALUES (3, 2);
+            INSERT INTO tenant_user (user_id, tenant_id) VALUES (4, 2);
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert-notification-subscriptions-for-3-users" author="mihai.gorgos" failOnError="false" runOnChange="true">
+        <sql>
+            <!--password: test123 -->
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (2, 1);
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (2, 2);
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (2, 3);
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (2, 4);
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (2, 5);
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (2, 6);
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (2, 7);
+
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (3, 1);
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (3, 2);
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (3, 3);
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (3, 4);
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (3, 5);
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (3, 6);
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (3, 7);
+
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (4, 1);
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (4, 2);
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (4, 3);
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (4, 4);
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (4, 5);
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (4, 6);
+            INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (4, 7);
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert-notifications-for-3-users" author="mihai.gorgos" failOnError="false" runOnChange="true">
+        <sql>
+            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (1, NOW(), 'Atenție, peste 3 zile va fi caniculă', 2);
+            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (2, NOW(), 'Atenție, peste 3 zile vor fi înghețuri și temperatura ar putea coborî până la -20 grade', 2);
+            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (3, NOW(), 'Atenție, peste 3 zile va fi vânt puternic', 2);
+
+            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (1, NOW(), 'Atenție, peste 3 zile va fi caniculă', 3);
+            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (2, NOW(), 'Atenție, peste 3 zile vor fi înghețuri și temperatura ar putea coborî până la -20 grade', 3);
+            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (3, NOW(), 'Atenție, peste 3 zile va fi vânt puternic', 3);
+
+            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (1, NOW(), 'Atenție, peste 3 zile va fi caniculă', 4);
+            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (2, NOW(), 'Atenție, peste 3 zile vor fi înghețuri și temperatura ar putea coborî până la -20 grade', 4);
+            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (3, NOW(), 'Atenție, peste 3 zile va fi vânt puternic', 4);
+        </sql>
+    </changeSet>
 </databaseChangeLog>

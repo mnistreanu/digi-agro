@@ -57,13 +57,13 @@
 		"users": "Utilizatori"
 	},
 	"notification": {
-		"weather_fog_alert": "Atenție, peste {0} zile va fi ceață",
-		"weather_freezing_alert": "Atenție, peste {0} zile vor fi înghețuri și temperatura ar putea coborî până la {1} grade",
-		"weather_hail_alert": "Atenție, peste {0} zile va fi grindină",
-		"weather_heat_alert": "Atenție, peste {0} zile va fi caniculă",
-		"weather_rain_alert": "Atenție, peste {0} zile va ploua",
-		"weather_snow_alert": "Atenție, peste {0} zile va ninge",
-		"weather_wind_alert": "Atenție, peste {0} zile va fi vânt puternic"
+		"weather_fog_alert": "Atenție, peste {{days}} zile va fi ceață",
+		"weather_freezing_alert": "Atenție, peste {{days}} zile vor fi înghețuri și temperatura ar putea coborî până la {{degrees}} grade",
+		"weather_hail_alert": "Atenție, peste {{days}} zile va fi grindină",
+		"weather_heat_alert": "Atenție, peste {{days}} zile va fi caniculă",
+		"weather_rain_alert": "Atenție, peste {{days}} zile va ploua",
+		"weather_snow_alert": "Atenție, peste {{days}} zile va ninge",
+		"weather_wind_alert": "Atenție, peste {{days}} zile va fi vânt puternic"
 	},
 	"response": {
 		"added": "A fost adăugat",
