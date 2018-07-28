@@ -3,6 +3,8 @@ import {Component, ViewEncapsulation} from '@angular/core';
 import {MessagesService} from '../../../services/messages.service';
 import {AgroTaskService} from '../../../services/agro-task.service';
 import {AgroTaskModel} from "../../../pages/agro-task-calendar/agro-task.model";
+import {NotificationModel} from "../../../pages/notification.model";
+import {NotificationService} from "../../../services/notification.service";
 
 @Component({
     selector: 'az-messages',
@@ -14,14 +16,18 @@ import {AgroTaskModel} from "../../../pages/agro-task-calendar/agro-task.model";
 
 export class MessagesComponent{     
     public messages:Array<Object>;
+
     public notifications:Array<Object>;
+    public notificationModels: NotificationModel[];
+
     public tasks:Array<Object>;
     public agrotaskModels: AgroTaskModel[];
 
-    constructor (private messagesService:MessagesService, private agroTaskService:AgroTaskService){
+    constructor (private messagesService:MessagesService, private agroTaskService:AgroTaskService,
+                 private notificationService: NotificationService){
         this.messages = messagesService.getMessages();
-        this.notifications = messagesService.getNotifications();
-        this.tasks = this.findAgroTasks();
+        this.findNotifications();
+        this.findAgroTasks();
     }
 
     private findAgroTasks() {
@@ -65,5 +71,30 @@ export class MessagesComponent{
             default:
                 return 'gray';
         }
+    }
+
+
+    private findNotifications() {
+        // name: 'michael',
+        // text: 'Michael posted a new article.',
+        // time: '1 min ago'
+
+        this.notificationService.find().subscribe(payloadModel => {
+            let status = payloadModel.status;
+            let message = payloadModel.message;
+            this.notificationModels = payloadModel.payload;
+            this.notifications = new Array(0);
+
+            this.notificationModels.forEach((model) => {
+                let notification: any = {};
+                notification.id = model.id;
+                notification.notificationTypeId = model.notificationTypeId;
+                notification.name = 'Weather alert';
+                notification.text = model.message;
+                notification.time = model.createdAt;
+                this.notifications.push(notification);
+            });
+
+        });
     }
 }

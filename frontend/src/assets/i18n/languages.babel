@@ -182,7 +182,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>event-title</name>
+                        <name>event-message</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -224,7 +224,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>title</name>
+                        <name>message</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>

@@ -208,20 +208,20 @@
         AGRO TASK - aici se vor contine toate definitiile la lucrarile agricole planidifate.
         Deja mersul lucrarilor, costurile, etc se vor contine in alte tabele separate.
     -->
-    <changeSet id="add_agro_task" author="mgorgos"  failOnError="true" runOnChange="true">
-        <createTable tableName="agro_task" >
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="agro_work_type_id" type="bigint" />
-            <column name="tenant_id" type="bigint"/>
-            <column name="title" type="varchar(256)" encoding="utf8"/>
-            <column name="description" type="varchar(1024)" encoding="utf8"/>
-            <column name="created_by" type="bigint"/>
-            <column name="scheduled_start" type="datetime" />
-            <column name="scheduled_end" type="datetime" />
-        </createTable>
-    </changeSet>
+    <!--<changeSet id="add_agro_task" author="mgorgos"  failOnError="true" runOnChange="true">-->
+        <!--<createTable tableName="agro_task" >-->
+            <!--<column name="id" type="bigint" autoIncrement="true">-->
+                <!--<constraints primaryKey="true" nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="agro_work_type_id" type="bigint" />-->
+            <!--<column name="tenant_id" type="bigint"/>-->
+            <!--<column name="message" type="varchar(256)" encoding="utf8"/>-->
+            <!--<column name="description" type="varchar(1024)" encoding="utf8"/>-->
+            <!--<column name="created_by" type="bigint"/>-->
+            <!--<column name="scheduled_start" type="datetime" />-->
+            <!--<column name="scheduled_end" type="datetime" />-->
+        <!--</createTable>-->
+    <!--</changeSet>-->
 
 
     <changeSet id="insert-agro-task-iulie-august-2018" author="mgorgos" failOnError="true" runOnChange="true">
