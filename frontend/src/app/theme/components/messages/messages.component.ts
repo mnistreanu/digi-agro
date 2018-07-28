@@ -34,12 +34,12 @@ export class MessagesComponent{
         // task.text: 'Design some buttons',
         // task.value: '20%',
         // task.class: 'info'
+        this.tasks = [];
 
         this.agroTaskService.find().subscribe(payloadModel => {
             let status = payloadModel.status;
             let message = payloadModel.message;
             this.agrotaskModels = payloadModel.payload;
-            this.tasks = new Array(0);
 
             this.agrotaskModels.forEach((model) => {
                 let agroTask: any = {};
