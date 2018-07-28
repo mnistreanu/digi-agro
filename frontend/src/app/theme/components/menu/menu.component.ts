@@ -3,7 +3,7 @@ import { Router, ActivatedRoute , NavigationEnd } from '@angular/router';
 import { MenuService } from './menu.service';
 import { AppState } from "../../../app.state";
 import {Constants} from "../../../common/constants";
-import {AuthService} from "../../../services/auth.service";
+import {AuthService} from "../../../services/auth/auth.service";
 
 @Component({
     selector: 'az-menu',
@@ -44,7 +44,7 @@ export class MenuComponent implements OnInit {
             }                
         });
 
-        this.authService.userChangedChanged.subscribe(() => {
+        this.authService.userChanged.subscribe(() => {
             this.menuItems = _menuService.getMenuItems();
         });
 

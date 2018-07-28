@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {UserService} from "../../services/user.service";
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from "../../services/auth/auth.service";
 import {emailValidator} from "../../theme/validators/email.validator";
 import {UserAccountModel} from "../manage-users/user/user-account.model";
 import {Messages} from "../../common/messages";

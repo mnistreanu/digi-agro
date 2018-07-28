@@ -162,7 +162,7 @@
     <!--
         CITIES_VILAGES - sate si orase din raioane/judete, in 2 limbi
     -->
-    <changeSet id="add_city_village" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="add_city_village" author="mgorgos" failOnError="false" runOnChange="true">
         <createTable tableName="city_village">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
@@ -388,7 +388,7 @@
             VALUES (7, '{ "coordinates": [ [47.066603, 28.149660], [47.067649, 28.150897], [47.066009, 28.153511], [47.066329, 28.150125] ]}');
         </sql>
     </changeSet>
-    <changeSet id="insert-7-weather-alerts" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="insert-7-weather-alerts" author="mgorgos" failOnError="false" runOnChange="true">
         <sql>
             INSERT INTO notification_type(translation_key) VALUES ('weather_heat_alert');
             INSERT INTO notification_type(translation_key) VALUES ('weather_freezing_alert');

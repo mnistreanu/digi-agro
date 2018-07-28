@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {Messages} from "../common/messages";
 import {HttpErrorResponse} from "@angular/common/http";
+import {StorageService} from "./storage.service";
 
 @Injectable({
     providedIn: 'root'
@@ -12,6 +13,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 export class ErrorService {
 
     constructor(private router: Router,
+                private storageService: StorageService,
                 private toastr: ToastrService) {
     }
 
@@ -46,15 +48,15 @@ export class ErrorService {
             status: status,
             message: message
         };
-        localStorage.setItem('error-info', JSON.stringify(errorInfo));
+        this.storageService.setItem('error-info', JSON.stringify(errorInfo));
     }
 
     public getError(): Error {
-        return JSON.parse(localStorage.getItem('error-info'));
+        return JSON.parse(this.storageService.getItem('error-info'));
     }
 
     public clearError() {
-        localStorage.removeItem('error-info')
+        this.storageService.removeItem('error-info')
     }
 
 }

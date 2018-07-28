@@ -13,7 +13,7 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 
 import {AppComponent} from "./app.component";
 import {ErrorComponent} from "./pages/error/error.component";
-import {AuthService} from "./services/auth.service";
+import {AuthService} from "./services/auth/auth.service";
 import {ErrorService} from "./services/error.service";
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {UserService} from "./services/user.service";

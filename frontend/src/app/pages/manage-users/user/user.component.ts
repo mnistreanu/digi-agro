@@ -6,7 +6,7 @@ import {UserAccountModel} from "./user-account.model";
 import {emailValidator} from "../../../theme/validators/email.validator";
 import {ToastrService} from "ngx-toastr";
 import {Messages} from "../../../common/messages";
-import {AuthService} from "../../../services/auth.service";
+import {AuthService} from "../../../services/auth/auth.service";
 import {Authorities} from "../../../common/authorities";
 
 @Component({

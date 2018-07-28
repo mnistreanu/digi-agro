@@ -1,11 +1,11 @@
-<div class="login-container">
+<div class="login-container" *ngIf="!authenticated">
     <div class="col-xl-4 col-md-6 col-10 mx-auto">
         <div class="card">
             <div class="card-body text-center">
                 <h2 class="card-title">Sign in to Azimuth</h2>
                 <a routerLink="/register" class="btn btn-link transition bottom-15">Don't have an account? Sign up now!</a>
 
-                <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class=" text-left">
+                <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="text-left">
                     <div class="form-group">
                         <input formControlName="username" class="form-control checking-field" placeholder="Username" type="text">
                         <span class="help-block text-danger" *ngIf="form.get('username').touched && form.get('username').hasError('required')">Username is required</span>
@@ -30,3 +30,6 @@
     </div>
 </div>
 
+<tenant-selector *ngIf="needShowTenantSelector"
+                 [tenants]="authData.tenants"
+                 (tenantSelected)="onTenantSelected()"></tenant-selector>

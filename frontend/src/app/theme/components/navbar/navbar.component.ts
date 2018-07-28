@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { AppState } from '../../../app.state';
 import { SidebarService } from '../sidebar/sidebar.service';
-import {AuthService} from "../../../services/auth.service";
+import {AuthService} from "../../../services/auth/auth.service";
 import {Constants} from "../../../common/constants";
 
 @Component({
@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
             this.isMenuCollapsed = isCollapsed;
         });
 
-        this.authService.userChangedChanged.subscribe(() => {
+        this.authService.userChanged.subscribe(() => {
             this.setupUserData();
         });
 

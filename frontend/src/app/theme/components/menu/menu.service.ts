@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AuthService} from "../../../services/auth.service";
+import {AuthService} from "../../../services/auth/auth.service";
 import {Authorities} from "../../../common/authorities";
 import {adminMenuItems} from "./admin-menu";
 import {userMenuItems} from "./user-menu";

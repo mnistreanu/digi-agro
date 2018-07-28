@@ -1,6 +1,7 @@
 package com.arobs.controller;
 
 import com.arobs.entity.UserAccount;
+import com.arobs.model.ListItemModel;
 import com.arobs.model.userAccount.UserAccountModel;
 import com.arobs.security.JwtAuthenticationRequest;
 import com.arobs.security.JwtAuthenticationResponse;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/auth")
@@ -48,7 +50,7 @@ public class AuthController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<?> auth(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
+    public ResponseEntity<JwtAuthenticationResponse> auth(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
 
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
@@ -64,9 +66,15 @@ public class AuthController {
         }
 
         UserAccount userAccount = userAccountService.findByUsername(userDetails.getUsername());
+        List<ListItemModel> tenants = userAccount.getTenants().stream()
+                .map(t -> new ListItemModel(t.getId(), t.getName())).collect(Collectors.toList());
 
+        JwtAuthenticationResponse response = new JwtAuthenticationResponse(
+                userAccount.getUsername(),
+                token, authorities, userAccount.getSafeLogoUrl(),
+                userAccount.getLanguage(), tenants);
 
-        return ResponseEntity.ok(new JwtAuthenticationResponse(token, authorities, userAccount.getSafeLogoUrl(), userAccount.getLanguage()));
+        return ResponseEntity.ok(response);
     }
 
     @RequestMapping(value = "/authorities", method = RequestMethod.GET)

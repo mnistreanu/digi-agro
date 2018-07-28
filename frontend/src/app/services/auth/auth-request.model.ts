@@ -1,4 +1,4 @@
-export interface UserAuth {
+export class AuthRequestModel {
     username: String;
     password: String;
 }

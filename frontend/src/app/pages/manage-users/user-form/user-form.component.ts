@@ -5,7 +5,7 @@ import {emailValidator} from "../../../theme/validators/email.validator";
 import {matchPasswordValidator} from "../../../theme/validators/match-password.validator";
 import {ToastrService} from "ngx-toastr";
 import {UserService} from "../../../services/user.service";
-import {AuthService} from "../../../services/auth.service";
+import {AuthService} from "../../../services/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TenantService} from "../../../services/tenant.service";
 import {ListItem} from "../../../interfaces/list-item.interface";

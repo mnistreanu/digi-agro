@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
 import {MachineService} from "../../../services/machine.service";
-import {AuthService} from "../../../services/auth.service";
+import {AuthService} from "../../../services/auth/auth.service";
 import {CoordinatesComponent} from "../coordinates/coordinates.component";
 import {TelemetryModel} from "./telemetry.model";
 import {MapEventsComponent} from "../map-events/map-events.component";

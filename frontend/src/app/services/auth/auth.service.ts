@@ -1,17 +1,16 @@
 import {EventEmitter, Injectable} from "@angular/core";
 import {Observable} from "rxjs/Rx";
-import {Constants} from "../common/constants";
-import {UserAuth} from "../interfaces/user-auth";
+import {Constants} from "../../common/constants";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
-import {ErrorService} from "./error.service";
 import {Router} from "@angular/router";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Authorities} from "../common/authorities";
-import {UserAccountModel} from "../pages/manage-users/user/user-account.model";
-import {LangService} from "./lang.service";
-import {ListItem} from "../interfaces/list-item.interface";
-import {StorageService} from "./storage.service";
+import {HttpClient} from "@angular/common/http";
+import {Authorities} from "../../common/authorities";
+import {UserAccountModel} from "../../pages/manage-users/user/user-account.model";
+import {LangService} from "../lang.service";
+import {StorageService} from "../storage.service";
+import {AuthResponseModel} from "./auth-response.model";
+import {AuthRequestModel} from "./auth-request.model";
 
 
 @Injectable({
@@ -23,17 +22,10 @@ export class AuthService {
 
     userChanged: EventEmitter<void> = new EventEmitter();
 
-    private httpOptions = {
-        headers: new HttpHeaders({
-            'Content-Type':  'application/json'
-        })
-    };
-
     constructor(private http: HttpClient,
                 private router: Router,
                 private storageService: StorageService,
-                private langService: LangService,
-                private errorService: ErrorService) {
+                private langService: LangService) {
     }
 
     logout() {
@@ -42,21 +34,16 @@ export class AuthService {
         this.userChanged.emit();
     }
 
-    login(model: UserAuth): Observable<ListItem[]> {
-        return this.http.post<boolean>(this.api + '/login', model)
-            .map((response) => {
-                let token = response['token'];
-                let authorities = response['authorities'];
-                let logoUrl = response['logoUrl'];
-                let language = response['language'];
-                let userData = {username: model.username, token: token, logoUrl: logoUrl};
-                this.storageService.setItem(Constants.USER_DATA, JSON.stringify(userData));
-                this.langService.setLanguage(language);
-                this.setupAuthorities(authorities);
-                this.userChanged.emit();
+    login(model: AuthRequestModel): Observable<AuthResponseModel> {
+        return this.http.post<AuthResponseModel>(this.api + '/login', model)
+    }
 
-                return response['tenants'];
-            });
+    finishLogin(authData: AuthResponseModel) {
+        let userData = {username: authData.username, token: authData.token, logoUrl: authData.logoUrl};
+        this.storageService.setItem(Constants.USER_DATA, JSON.stringify(userData));
+        this.langService.setLanguage(authData.language);
+        this.setupAuthorities(authData.authorities);
+        this.userChanged.emit();
     }
 
     setupAuthorities(authorities: string[]) {

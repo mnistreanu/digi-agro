@@ -1,24 +1,26 @@
 import {Injectable} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {Constants} from "../common/constants";
+import {StorageService} from "./storage.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class LangService {
 
-    constructor(private translate: TranslateService) {
+    constructor(private translate: TranslateService,
+                private storageService: StorageService) {
     }
 
     setupDefault() {
         const language = 'en';
         this.translate.setDefaultLang(language);
         this.translate.use(language);
-        localStorage.setItem(Constants.LANGUAGE_KEY, language);
+        this.storageService.setItem(Constants.LANGUAGE_KEY, language);
     }
 
     restoreLanguage() {
-        let language = localStorage.getItem(Constants.LANGUAGE_KEY);
+        let language = this.storageService.getItem(Constants.LANGUAGE_KEY);
         if (language) {
             this.translate.use(language);
         }
@@ -29,7 +31,7 @@ export class LangService {
 
     setLanguage(language) {
         if (language) {
-            localStorage.setItem(Constants.LANGUAGE_KEY, language);
+            this.storageService.setItem(Constants.LANGUAGE_KEY, language);
             this.translate.use(language);
         }
         else {
@@ -38,12 +40,7 @@ export class LangService {
     }
 
     getLanguage() {
-        return localStorage.getItem(Constants.LANGUAGE_KEY);
-    }
-
-    clear() {
-        localStorage.removeItem(Constants.LANGUAGE_KEY);
-        this.translate.use(this.translate.getDefaultLang());
+        return this.storageService.getItem(Constants.LANGUAGE_KEY);
     }
 
     get(key) {
