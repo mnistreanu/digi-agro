@@ -6,7 +6,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <!--<changeSet id="clean-db" author="mihai.gorgos" failOnError="false" runOnChange="true">-->
+    <!--<changeSet id="clean-db" author="mihai.gorgos" failOnError="true" runOnChange="true">-->
     <!--<sql>-->
         <!--DELETE FROM databasechangelog;-->
 
@@ -27,32 +27,32 @@
     <!--</changeSet>-->
 
 
-    <changeSet id="add_tenant" author="mgorgos">
-        <createTable tableName="tenant">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="name" type="varchar(256)" encoding="utf8">
-                <constraints nullable="false" />
-            </column>
-            <column name="country_id" type="char(2)" encoding="utf8">
-                <constraints nullable="false" />
-            </column>
-            <column name="fiscal_code" type="varchar(32)" />
-            <column name="description" type="varchar(1024)" encoding="utf8"/>
-            <column name="county_id" type="char(2)" />
-            <column name="city_village_id" type="bigint" />
-            <column name="address" type="varchar(1024)" encoding="utf8"/>
-            <column name="phones" type="varchar(128)" encoding="utf8"/>
-            <column name="deleted_at" type="datetime"/>
-            <column name="deleted_by" type="bigint"/>
-            <column name="blocked_at" type="datetime"/>
-            <column name="blocked_by" type="bigint"/>
-            <column name="blocked_reason" type="varchar(256)"/>
-        </createTable>
-    </changeSet>
+    <!--<changeSet id="add_tenant" author="mgorgos">-->
+        <!--<createTable tableName="tenant">-->
+            <!--<column name="id" type="bigint" autoIncrement="true">-->
+                <!--<constraints primaryKey="true" nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="name" type="varchar(256)" encoding="utf8">-->
+                <!--<constraints nullable="false" />-->
+            <!--</column>-->
+            <!--<column name="country_id" type="char(2)" encoding="utf8">-->
+                <!--<constraints nullable="false" />-->
+            <!--</column>-->
+            <!--<column name="fiscal_code" type="varchar(32)" />-->
+            <!--<column name="description" type="varchar(1024)" encoding="utf8"/>-->
+            <!--<column name="county_id" type="char(2)" />-->
+            <!--<column name="city_village_id" type="bigint" />-->
+            <!--<column name="address" type="varchar(1024)" encoding="utf8"/>-->
+            <!--<column name="phones" type="varchar(128)" encoding="utf8"/>-->
+            <!--<column name="deleted_at" type="datetime"/>-->
+            <!--<column name="deleted_by" type="bigint"/>-->
+            <!--<column name="blocked_at" type="datetime"/>-->
+            <!--<column name="blocked_by" type="bigint"/>-->
+            <!--<column name="blocked_reason" type="varchar(256)"/>-->
+        <!--</createTable>-->
+    <!--</changeSet>-->
 
-    <changeSet id="insert-2-tenants" author="mihai.gorgos" failOnError="false" runOnChange="true">
+    <changeSet id="insert-2-tenants" author="mihai.gorgos" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO tenant (id, name, country_id, fiscal_code, description, county_id, city_village_id, address, phones)
             VALUES (1, 'Gospodăria Ţărănească Orhei', 'md', '9842367810452', 'Gospodăria Ţărănească Orhei este super-puper', 'OR', null, 'str.Solidaritatii 14', '0-232-12345 0-232-12346');
@@ -62,14 +62,14 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert-super-admin" author="maxim.nistreanu" failOnError="false" runOnChange="true">
+    <changeSet id="insert-super-admin" author="maxim.nistreanu" failOnError="true" runOnChange="true">
         <sql>
             <!--password: test123 -->
             INSERT INTO user_account (id, username, password) values(1, 'super-admin', '$2a$10$J.79O6b/Zo9rPAivWonK1ufA3yB.dsH1UJMVZRrarOrBiDzFRT9NO');
         </sql>
     </changeSet>
 
-    <changeSet id="insert-authorities" author="maxim.nistreanu" failOnError="false" runOnChange="true">
+    <changeSet id="insert-authorities" author="maxim.nistreanu" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO authority (id, name) values(1, 'ROLE_SUPER_ADMIN');
             INSERT INTO authority (id, name) values(2, 'ROLE_ADMIN');
@@ -77,13 +77,13 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert-user-authorities" author="maxim.nistreanu" failOnError="false" runOnChange="true">
+    <changeSet id="insert-user-authorities" author="maxim.nistreanu" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO user_authority (user_id, authority_id) VALUES (1, 1);
         </sql>
     </changeSet>
 
-    <!--<changeSet id="prepare_work_types" author="maxim.nistreanu" failOnError="false" runOnChange="true">-->
+    <!--<changeSet id="prepare_work_types" author="maxim.nistreanu" failOnError="true" runOnChange="true">-->
         <!--<sql>-->
             <!--INSERT INTO work_type (id, name) VALUES-->
             <!--(1, 'SOWING'),-->
@@ -98,21 +98,21 @@
     <!--
         COUNTIES - raioane/judete pentru fiecare tara aparte, specificat in 2 limbi
     -->
-    <changeSet id="add_county" author="mgorgos" failOnError="false" runOnChange="true">
-        <createTable tableName="county">
-            <column name="id" type="char(2)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="country_id" type="char(2)"/>
-            <column name="name_ro" type="varchar(128)" encoding="utf8"/>
-            <column name="name_ru" type="varchar(128)" encoding="utf8"/>
-        </createTable>
-    </changeSet>
+    <!--<changeSet id="add_county" author="mgorgos" failOnError="true" runOnChange="true">-->
+        <!--<createTable tableName="county">-->
+            <!--<column name="id" type="char(2)">-->
+                <!--<constraints primaryKey="true" nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="country_id" type="char(2)"/>-->
+            <!--<column name="name_ro" type="varchar(128)" encoding="utf8"/>-->
+            <!--<column name="name_ru" type="varchar(128)" encoding="utf8"/>-->
+        <!--</createTable>-->
+    <!--</changeSet>-->
 
     <!--
         Lista de raioane din Moldova, in limba romana si rusa
     -->
-    <changeSet id="insert-counties-md" author="mgorgos" failOnError="false" runOnChange="true">
+    <changeSet id="insert-counties-md" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','AN','r-nul Anenii Noi','Новоаненский район‎');
             INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','BS','r-nul Basarabeasca','Бессарабский район');
@@ -162,17 +162,17 @@
     <!--
         CITIES_VILAGES - sate si orase din raioane/judete, in 2 limbi
     -->
-    <changeSet id="add_city_village" author="mgorgos" failOnError="false" runOnChange="true">
-        <createTable tableName="city_village">
-            <column name="id" type="bigint">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="country_id" type="char(2)"/>
-            <column name="county_id" type="char(2)"/>
-            <column name="name_ro" type="varchar(128)" encoding="utf8"/>
-            <column name="name_ru" type="varchar(128)" encoding="utf8"/>
-        </createTable>
-    </changeSet>
+    <!--<changeSet id="add_city_village" author="mgorgos" failOnError="true" runOnChange="true">-->
+        <!--<createTable tableName="city_village">-->
+            <!--<column name="id" type="bigint">-->
+                <!--<constraints primaryKey="true" nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="country_id" type="char(2)"/>-->
+            <!--<column name="county_id" type="char(2)"/>-->
+            <!--<column name="name_ro" type="varchar(128)" encoding="utf8"/>-->
+            <!--<column name="name_ru" type="varchar(128)" encoding="utf8"/>-->
+        <!--</createTable>-->
+    <!--</changeSet>-->
 
 
     <!--
@@ -180,19 +180,19 @@
         dar cu tenant_id vor fi cele mai specifice la fiecare tenant aparte in caz ca va avea nevoie.
         La fel specificat in 2 limbi
     -->
-    <changeSet id="add_agro_work_type" author="mgorgos"  failOnError="false" runOnChange="true">
-        <createTable tableName="agro_work_type">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="parent_id" type="bigint" />
-            <column name="tenant_id" type="bigint"/>
-            <column name="name_ro" type="varchar(256)" encoding="utf8"/>
-            <column name="name_ru" type="varchar(256)" encoding="utf8"/>
-        </createTable>
-    </changeSet>
+    <!--<changeSet id="add_agro_work_type" author="mgorgos"  failOnError="true" runOnChange="true">-->
+        <!--<createTable tableName="agro_work_type">-->
+            <!--<column name="id" type="bigint" autoIncrement="true">-->
+                <!--<constraints primaryKey="true" nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="parent_id" type="bigint" />-->
+            <!--<column name="tenant_id" type="bigint"/>-->
+            <!--<column name="name_ro" type="varchar(256)" encoding="utf8"/>-->
+            <!--<column name="name_ru" type="varchar(256)" encoding="utf8"/>-->
+        <!--</createTable>-->
+    <!--</changeSet>-->
 
-    <changeSet id="insert-agro-work-type" author="mgorgos" failOnError="false" runOnChange="true">
+    <changeSet id="insert-agro-work-type" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO agro_work_type (id, name_ro, name_ru) VALUES (1,'Aratul','Вспашка');
             INSERT INTO agro_work_type (id, name_ro, name_ru) VALUES (2,'Lucrarea cu grapa','Работа с бороной');
@@ -208,7 +208,7 @@
         AGRO TASK - aici se vor contine toate definitiile la lucrarile agricole planidifate.
         Deja mersul lucrarilor, costurile, etc se vor contine in alte tabele separate.
     -->
-    <!--<changeSet id="add_agro_task" author="mgorgos"  failOnError="false" runOnChange="true">-->
+    <!--<changeSet id="add_agro_task" author="mgorgos"  failOnError="true" runOnChange="true">-->
         <!--<createTable tableName="agro_task" >-->
             <!--<column name="id" type="bigint" autoIncrement="true">-->
                 <!--<constraints primaryKey="true" nullable="false"/>-->
@@ -224,7 +224,7 @@
     <!--</changeSet>-->
 
 
-    <changeSet id="insert-agro-task-iulie-august-2018" author="mgorgos" failOnError="false" runOnChange="true">
+    <changeSet id="insert-agro-task-iulie-august-2018" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
             DELETE FROM agro_task;
 
@@ -252,15 +252,15 @@
         La fel specificat in 2 limbi.
         De exemplu: fructe, legume, grine, culturi tehnice
     -->
-    <changeSet id="add_crop_category" author="mgorgos" failOnError="false" runOnChange="true">
-        <createTable tableName="crop_category">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="name_ro" type="varchar(256)" encoding="utf8"/>
-            <column name="name_ru" type="varchar(256)" encoding="utf8"/>
-        </createTable>
-    </changeSet>
+    <!--<changeSet id="add_crop_category" author="mgorgos" failOnError="true" runOnChange="true">-->
+        <!--<createTable tableName="crop_category">-->
+            <!--<column name="id" type="bigint" autoIncrement="true">-->
+                <!--<constraints primaryKey="true" nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="name_ro" type="varchar(256)" encoding="utf8"/>-->
+            <!--<column name="name_ru" type="varchar(256)" encoding="utf8"/>-->
+        <!--</createTable>-->
+    <!--</changeSet>-->
 
 
     <!--
@@ -268,39 +268,39 @@
         La fel specificat in 2 limbi.
         De exemplu: mere, pere, gutuie care sunt de categorie FRUCTE
     -->
-    <changeSet id="add_crop" author="mgorgos" failOnError="false" runOnChange="true">
-        <createTable tableName="crop">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="crop_category_id" type="int"/>
-            <column name="name_ro" type="varchar(256)" encoding="utf8"/>
-            <column name="name_ru" type="varchar(256)" encoding="utf8"/>
-        </createTable>
-    </changeSet>
+    <!--<changeSet id="add_crop" author="mgorgos" failOnError="true" runOnChange="true">-->
+        <!--<createTable tableName="crop">-->
+            <!--<column name="id" type="bigint" autoIncrement="true">-->
+                <!--<constraints primaryKey="true" nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="crop_category_id" type="int"/>-->
+            <!--<column name="name_ro" type="varchar(256)" encoding="utf8"/>-->
+            <!--<column name="name_ru" type="varchar(256)" encoding="utf8"/>-->
+        <!--</createTable>-->
+    <!--</changeSet>-->
 
     <!--
         CROP VARIETIES - soiuri de culturi agricole divizate pe categorii vor fi adaugate de adminul
         sistemului. La fel specificat in 2 limbi.
         De exemplu: mere soi Golden Delicious, Jonagold, Idared, etc
     -->
-    <changeSet id="add_crop_variety" author="mgorgos" failOnError="false" runOnChange="true">
-        <createTable tableName="crop_variety">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="crop_id" type="int"/>
-            <column name="name_ro" type="varchar(256)" encoding="utf8"/>
-            <column name="name_ru" type="varchar(256)" encoding="utf8"/>
-            <column name="description_ro" type="varchar(1024)" encoding="utf8"/>
-            <column name="description_ru" type="varchar(1024)" encoding="utf8"/>
-        </createTable>
-    </changeSet>
+    <!--<changeSet id="add_crop_variety" author="mgorgos" failOnError="true" runOnChange="true">-->
+        <!--<createTable tableName="crop_variety">-->
+            <!--<column name="id" type="bigint" autoIncrement="true">-->
+                <!--<constraints primaryKey="true" nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="crop_id" type="int"/>-->
+            <!--<column name="name_ro" type="varchar(256)" encoding="utf8"/>-->
+            <!--<column name="name_ru" type="varchar(256)" encoding="utf8"/>-->
+            <!--<column name="description_ro" type="varchar(1024)" encoding="utf8"/>-->
+            <!--<column name="description_ru" type="varchar(1024)" encoding="utf8"/>-->
+        <!--</createTable>-->
+    <!--</changeSet>-->
 
     <!--
         Adaugat categoria CEREALE si 10 tipuri de cereale
     -->
-    <changeSet id="insert-category-cereale" author="mgorgos" failOnError="false" runOnChange="true">
+    <changeSet id="insert-category-cereale" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO crop_category (id, name_ro, name_ru) VALUES (1,'Cereale','Зерновые');
 
@@ -321,7 +321,7 @@
     <!--
         Adaugat categoria PLANTE TEHNICE si 8 tipuri de plante
     -->
-    <changeSet id="insert-category-plante-tehnice" author="mgorgos" failOnError="false" runOnChange="true">
+    <changeSet id="insert-category-plante-tehnice" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO crop_category (id, name_ro, name_ru) VALUES (2,'Plance tehnice','Технические растения');
 
@@ -339,7 +339,7 @@
     <!--
         Adaugat 3 parcele cu coordonate la tenant_id=1
     -->
-    <changeSet id="insert-3-parcels-tenant-1" author="mgorgos" failOnError="false" runOnChange="true">
+    <changeSet id="insert-3-parcels-tenant-1" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO parcel(id, cadaster_number, city_village_id, country_id, county_id, created_at, description, landworthiness_points, name, parent_id, tenant_id)
             VALUES (1, 'AB-34567-ZB-12356', null, 'md', 'HN', '2018-07-26 12:45:00', 'sus in deal', 89, 'Floarea soarelui', null, 1);
@@ -361,7 +361,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert-4-parcels-tenant-2" author="mgorgos" failOnError="false" runOnChange="true">
+    <changeSet id="insert-4-parcels-tenant-2" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO parcel(id, cadaster_number, city_village_id, country_id, county_id, created_at, description, landworthiness_points, name, parent_id, tenant_id)
             VALUES (4, 'AB-34567-NS-12356', null, 'md', 'NS', '2018-07-26 12:45:00', 'sus in deal', 89, 'Floarea soarelui', null, 2);
@@ -388,7 +388,7 @@
             VALUES (7, '{ "coordinates": [ [47.066603, 28.149660], [47.067649, 28.150897], [47.066009, 28.153511], [47.066329, 28.150125] ]}');
         </sql>
     </changeSet>
-    <changeSet id="insert-8-weather-alerts" author="mgorgos" failOnError="false" runOnChange="true">
+    <changeSet id="insert-8-weather-alerts" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
             DELETE FROM notification;
             DELETE FROM notification_type;
@@ -404,7 +404,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert-3-users" author="mihai.gorgos" failOnError="false" runOnChange="true">
+    <changeSet id="insert-3-users" author="mihai.gorgos" failOnError="true" runOnChange="true">
         <sql>
             <!--password: test123 -->
             INSERT INTO user_account (id, username, password, first_name, last_name, language) values(2, 'mihai.gorgos', '$2a$10$J.79O6b/Zo9rPAivWonK1ufA3yB.dsH1UJMVZRrarOrBiDzFRT9NO', 'Mihai', 'Gorgos', 'ro');
@@ -422,7 +422,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert-notification-subscriptions-for-3-users" author="mihai.gorgos" failOnError="false" runOnChange="true">
+    <changeSet id="insert-notification-subscriptions-for-3-users" author="mihai.gorgos" failOnError="true" runOnChange="true">
         <sql>
             <!--password: test123 -->
             INSERT INTO notification_subscription (user_id, notification_type_id) VALUES (2, 1);
@@ -451,7 +451,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert-5-notifications-for-3-users" author="mihai.gorgos" failOnError="false" runOnChange="true">
+    <changeSet id="insert-5-notifications-for-3-users" author="mihai.gorgos" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (1, NOW(), 'Atenție, peste 3 zile va fi caniculă', 2);
             INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (2, NOW(), 'Atenție, peste 3 zile vor fi înghețuri și temperatura ar putea coborî până la -20 grade', 2);

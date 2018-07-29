@@ -30,6 +30,8 @@ public class Notification {
     @Column(name = "seen_at")
     private Date seenAt;
 
+    private Date createdAt;
+
     public Long getId() {
         return id;
     }
@@ -76,5 +78,13 @@ public class Notification {
 
     public void setSeenAt(Date seenAt) {
         this.seenAt = seenAt;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }
