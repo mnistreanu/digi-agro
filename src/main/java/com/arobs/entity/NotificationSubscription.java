@@ -14,18 +14,27 @@ public class NotificationSubscription {
     @Column (name = "id")
     private Long id;
 
-    @Column(name = "notification_type_id")
-    private Integer notificationTypeId;
+    @ManyToOne (fetch = FetchType.EAGER)
+    @JoinColumn(name = "notification_type_id")
+    private NotificationType notificationType;
 
     @Column(name = "user_id")
     private Long userId;
 
-    public Integer getNotificationTypeId() {
-        return notificationTypeId;
+    public Long getId() {
+        return id;
     }
 
-    public void setNotificationTypeId(Integer notificationTypeId) {
-        this.notificationTypeId = notificationTypeId;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public NotificationType getNotificationType() {
+        return notificationType;
+    }
+
+    public void setNotificationType(NotificationType notificationType) {
+        this.notificationType = notificationType;
     }
 
     public Long getUserId() {

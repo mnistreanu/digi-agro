@@ -2,17 +2,27 @@
     <div class="card-header">
         <span translate>Notification subscriptions</span>
         <div class="widget-controls">
-            <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
-            <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
-            <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
-            <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>
-            <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+            <!--<a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>-->
+            <!--<a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>-->
+            <!--<a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>-->
+            <!--<a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>-->
+            <!--<a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>-->
         </div>
     </div>
     <div class="card-body widget-body">
-        <div class="card-body">
-            <div id="notification-subscription"></div>
-        </div>
+        <form>
+            <div class="list" slim-scroll>
+                <div *ngFor="let notificationType of notificationTypes" class="transition">
+                    <img src="{{ ( notificationType.image ) }}">
+                    <div class="list-content">
+                        <div class="custom-control custom-checkbox">
+                            <label class="custom-control-label " for="checkboxDefault{{notificationType.id}}">{{notificationType.name}}</label>
+                            <input type="checkbox" class="custom-control-input" id="checkboxDefault{{notificationType.id}}" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 
