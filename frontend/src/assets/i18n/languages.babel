@@ -1025,7 +1025,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>weather-rain-alert</name>
+                        <name>weather-hoar-frost-alert</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -1046,7 +1046,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>weather-hoar-frost-alert</name>
+                        <name>weather-rain-alert</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>

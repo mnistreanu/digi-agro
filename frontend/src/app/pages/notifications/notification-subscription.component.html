@@ -2,17 +2,30 @@
     <div class="card-header">
         <span translate>Notification subscriptions</span>
         <div class="widget-controls">
-            <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
-            <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
-            <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
-            <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>
-            <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+            <!--<a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>-->
+            <!--<a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>-->
+            <!--<a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>-->
+            <!--<a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>-->
+            <!--<a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>-->
         </div>
     </div>
     <div class="card-body widget-body">
-        <div class="card-body">
-            <div id="notification-subscription"></div>
-        </div>
+        <form>
+            <table>
+                <tr *ngFor="let nt of notificationTypes">
+                    <td>
+                        <img [src]="nt.image" class="notification-image"/>
+                    </td>
+                    <td>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="nt-checkbox-{{nt.id}}" >
+                            <label class="custom-control-label " for="nt-checkbox-{{nt.id}}"
+                                   translate>notification.{{nt.name}}</label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
     </div>
 </div>
 
