@@ -13,7 +13,7 @@
         <form>
             <div class="list" slim-scroll>
                 <div *ngFor="let notificationType of notificationTypes" class="transition">
-                    <img [src]="notificationType.image">
+                    <img [src]="notificationType.image" class="notification-image">
                     <div class="list-content">
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="checkboxDefault{{notificationType.id}}" >
