@@ -68,7 +68,7 @@ export class TenantComponent implements OnInit {
 
     public onNameChange() {
         let control = this.form.controls.name;
-        this.tenantService.isUnique(this.model.id, control.value).subscribe((isUnique) => {
+        this.tenantService.validateName(this.model.id, control.value).subscribe((isUnique) => {
             if (!isUnique) {
                 let errors = control.errors || {};
                 errors.unique = !isUnique;
@@ -78,8 +78,8 @@ export class TenantComponent implements OnInit {
     }
 
     public onFiscalCodeChange() {
-        let control = this.form.controls.name;
-        this.tenantService.validateFiscalCode(this.model.id || -1, control.value).subscribe((isUnique) => {
+        let control = this.form.controls.fiscalCode;
+        this.tenantService.validateFiscalCode(this.model.id, control.value).subscribe((isUnique) => {
             if (!isUnique) {
                 let errors = control.errors || {};
                 errors.unique = !isUnique;

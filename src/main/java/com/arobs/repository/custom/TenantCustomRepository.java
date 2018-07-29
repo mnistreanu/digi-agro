@@ -60,7 +60,7 @@ public class TenantCustomRepository {
     public boolean isUnique(Long currentId, String field, String value) {
 
         String q = "SELECT COUNT(t) " +
-                " FROM Tenant t WHERE t.{0} = {1}";
+                " FROM Tenant t WHERE t.{0} = ''{1}''";
         q = MessageFormat.format(q, field, value);
 
         if (currentId != null) {

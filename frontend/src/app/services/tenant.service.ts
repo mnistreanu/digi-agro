@@ -19,14 +19,20 @@ export class TenantService {
         return this.http.get<ListItem[]>(this.api + '/list-items');
     }
 
-    isUnique(id: number, value: string): Observable<boolean> {
-        let queryParams = `?id=${id}&field=name&value=${value}`;
+    validateName(id: number, value: string): Observable<boolean> {
+        let queryParams = `?field=name&value=${value}`;
+        if (id) {
+            queryParams += `&id=${id}`;
+        }
         return this.http.get<boolean>(this.api + '/unique' + queryParams);
     }
 
-    validateFiscalCode(id: number, code: string): Observable<boolean> {
-        let queryParams = `?id=${id}&code=${code}`;
-        return this.http.get<boolean>(this.api + '/validate-fiscal-code' + queryParams);
+    validateFiscalCode(id: number, value: string): Observable<boolean> {
+        let queryParams = `?field=fiscalCode&value=${value}`;
+        if (id) {
+            queryParams += `&id=${id}`;
+        }
+        return this.http.get<boolean>(this.api + '/unique' + queryParams);
     }
 
     findOne(id: number): Observable<TenantModel> {

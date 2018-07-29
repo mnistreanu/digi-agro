@@ -14,9 +14,6 @@ import java.util.List;
 public interface TenantRepository extends JpaRepository<Tenant, Long> {
 
 
-    @Query("SELECT COUNT(t) FROM Tenant t WHERE t.fiscalCode = :fiscalCode AND t.deletedAt IS NULL ")
-    long countByFiscalCode(@Param("fiscalCode") String fiscalCode);
-
     @Modifying
     @Query("UPDATE Tenant t " +
             "SET t.deletedAt = now(), t.deletedBy = :userId " +

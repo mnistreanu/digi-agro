@@ -50,11 +50,6 @@ public class TenantController {
         return ResponseEntity.ok(tenantService.isUnique(id, field, value));
     }
 
-    @RequestMapping(value = "/validate-fiscal-code", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> validateFiscalCode(@RequestParam("id") Long id, @RequestParam("code") String code) {
-        return ResponseEntity.ok(tenantService.validateFiscalCode(id, code));
-    }
-
     @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<TenantModel> save(@RequestBody TenantModel model) {

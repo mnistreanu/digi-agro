@@ -53,25 +53,11 @@ public class TenantService implements HasRepository<TenantRepository> {
     }
 
     public boolean isUnique(Long currentId, String field, String value) {
-        if (!field.equals("name") || !field.equals("fiscalCode")) {
-            throw new IllegalArgumentException("Field must be: name or fiscalCode");
+        if (!(field.equals("name") || field.equals("fiscalCode"))) {
+            throw new IllegalArgumentException("Invalid field name");
         }
 
         return tenantCustomRepository.isUnique(currentId, field, value);
-
-    }
-
-//    public boolean validateName(Long id, String name) {
-//        if (id == -1) {
-//            return getRepository().countByName(name) == 0;
-//        }
-//        return getRepository().countByNameEscapeId(id, name) == 0;
-//    }
-
-
-    public boolean validateFiscalCode(Long id, String code) {
-        long count = getRepository().countByFiscalCode(code);
-        return count == 0;
     }
 
     @Transactional

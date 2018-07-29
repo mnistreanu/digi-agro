@@ -20,7 +20,10 @@ export class ErrorService {
     processError(response: HttpErrorResponse): Observable<any> {
 
         let status = response.status;
-        let message = response.error.message || Constants.SERVER_ERROR;
+        let message = Constants.SERVER_ERROR;
+        if (response.error) {
+            message = response.error.message;
+        }
 
         if (status == 401 || status == 403) {
             this.toastr.error(status == 401 ? Messages.UNAUTHORIZED : Messages.FORBIDDEN);
