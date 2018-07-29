@@ -6,59 +6,15 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <!--<changeSet id="clean-db" author="mihai.gorgos" failOnError="true" runOnChange="true">-->
-    <!--<sql>-->
-        <!--DELETE FROM databasechangelog;-->
-
-        <!--DROP TABLE user_branch;-->
-        <!--DROP TABLE tenant_branch;-->
-        <!--DROP TABLE tenant_user;-->
-        <!--DROP TABLE tenant;-->
-        <!--DROP TABLE tenants;-->
-        <!--DROP TABLE agro_tasks;-->
-        <!--DROP TABLE agro_work_types;-->
-        <!--DROP TABLE cities_villages;-->
-        <!--DROP TABLE counties;-->
-        <!--DROP TABLE crops;-->
-        <!--DROP TABLE crop_categories;-->
-        <!--DROP TABLE crop_varieties;-->
-        <!--DROP TABLE machine_work_types;-->
-    <!--</sql>-->
-    <!--</changeSet>-->
-
-
-    <!--<changeSet id="add_tenant" author="mgorgos">-->
-        <!--<createTable tableName="tenant">-->
-            <!--<column name="id" type="bigint" autoIncrement="true">-->
-                <!--<constraints primaryKey="true" nullable="false"/>-->
-            <!--</column>-->
-            <!--<column name="name" type="varchar(256)" encoding="utf8">-->
-                <!--<constraints nullable="false" />-->
-            <!--</column>-->
-            <!--<column name="country_id" type="char(2)" encoding="utf8">-->
-                <!--<constraints nullable="false" />-->
-            <!--</column>-->
-            <!--<column name="fiscal_code" type="varchar(32)" />-->
-            <!--<column name="description" type="varchar(1024)" encoding="utf8"/>-->
-            <!--<column name="county_id" type="char(2)" />-->
-            <!--<column name="city_village_id" type="bigint" />-->
-            <!--<column name="address" type="varchar(1024)" encoding="utf8"/>-->
-            <!--<column name="phones" type="varchar(128)" encoding="utf8"/>-->
-            <!--<column name="deleted_at" type="datetime"/>-->
-            <!--<column name="deleted_by" type="bigint"/>-->
-            <!--<column name="blocked_at" type="datetime"/>-->
-            <!--<column name="blocked_by" type="bigint"/>-->
-            <!--<column name="blocked_reason" type="varchar(256)"/>-->
-        <!--</createTable>-->
-    <!--</changeSet>-->
-
     <changeSet id="insert-2-tenants" author="mihai.gorgos" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO tenant (id, name, country_id, fiscal_code, description, county_id, city_village_id, address, phones)
             VALUES (1, 'Gospodăria Ţărănească Orhei', 'md', '9842367810452', 'Gospodăria Ţărănească Orhei este super-puper', 'OR', null, 'str.Solidaritatii 14', '0-232-12345 0-232-12346');
+            select nextval('tenant_id_seq');
 
             INSERT INTO tenant (id, name, country_id, fiscal_code, description, county_id, city_village_id, address, phones)
             VALUES (2, 'InterAgro Nisporeni', 'md', '8239045184523', 'InterAgro Nisporeni este super-puper', 'NS', null, 'str.Vladimir Ilici Lenin 1', '0-111-12345 0-111-12346');
+            select nextval('tenant_id_seq');
         </sql>
     </changeSet>
 
@@ -66,6 +22,7 @@
         <sql>
             <!--password: test123 -->
             INSERT INTO user_account (id, username, password) values(1, 'super-admin', '$2a$10$J.79O6b/Zo9rPAivWonK1ufA3yB.dsH1UJMVZRrarOrBiDzFRT9NO');
+            select nextval('user_account_id_seq');
         </sql>
     </changeSet>
 
@@ -74,6 +31,9 @@
             INSERT INTO authority (id, name) values(1, 'ROLE_SUPER_ADMIN');
             INSERT INTO authority (id, name) values(2, 'ROLE_ADMIN');
             INSERT INTO authority (id, name) values(3, 'ROLE_USER');
+            select nextval('authority_id_seq');
+            select nextval('authority_id_seq');
+            select nextval('authority_id_seq');
         </sql>
     </changeSet>
 
@@ -82,32 +42,6 @@
             INSERT INTO user_authority (user_id, authority_id) VALUES (1, 1);
         </sql>
     </changeSet>
-
-    <!--<changeSet id="prepare_work_types" author="maxim.nistreanu" failOnError="true" runOnChange="true">-->
-        <!--<sql>-->
-            <!--INSERT INTO work_type (id, name) VALUES-->
-            <!--(1, 'SOWING'),-->
-            <!--(2, 'PLOWING'),-->
-            <!--(3, 'GATHERING'),-->
-            <!--(4, 'WATERING'),-->
-            <!--(5, 'WATERING'),-->
-            <!--(6, 'SPRAY');-->
-        <!--</sql>-->
-    <!--</changeSet>-->
-
-    <!--
-        COUNTIES - raioane/judete pentru fiecare tara aparte, specificat in 2 limbi
-    -->
-    <!--<changeSet id="add_county" author="mgorgos" failOnError="true" runOnChange="true">-->
-        <!--<createTable tableName="county">-->
-            <!--<column name="id" type="char(2)">-->
-                <!--<constraints primaryKey="true" nullable="false"/>-->
-            <!--</column>-->
-            <!--<column name="country_id" type="char(2)"/>-->
-            <!--<column name="name_ro" type="varchar(128)" encoding="utf8"/>-->
-            <!--<column name="name_ru" type="varchar(128)" encoding="utf8"/>-->
-        <!--</createTable>-->
-    <!--</changeSet>-->
 
     <!--
         Lista de raioane din Moldova, in limba romana si rusa
@@ -159,39 +93,6 @@
         </sql>
     </changeSet>
 
-    <!--
-        CITIES_VILAGES - sate si orase din raioane/judete, in 2 limbi
-    -->
-    <!--<changeSet id="add_city_village" author="mgorgos" failOnError="true" runOnChange="true">-->
-        <!--<createTable tableName="city_village">-->
-            <!--<column name="id" type="bigint">-->
-                <!--<constraints primaryKey="true" nullable="false"/>-->
-            <!--</column>-->
-            <!--<column name="country_id" type="char(2)"/>-->
-            <!--<column name="county_id" type="char(2)"/>-->
-            <!--<column name="name_ro" type="varchar(128)" encoding="utf8"/>-->
-            <!--<column name="name_ru" type="varchar(128)" encoding="utf8"/>-->
-        <!--</createTable>-->
-    <!--</changeSet>-->
-
-
-    <!--
-        AGRO WORK_TYPES - tipuri de lurari agricole. Fara tenant_id vor fi cele generale (arat, semanat, etc)
-        dar cu tenant_id vor fi cele mai specifice la fiecare tenant aparte in caz ca va avea nevoie.
-        La fel specificat in 2 limbi
-    -->
-    <!--<changeSet id="add_agro_work_type" author="mgorgos"  failOnError="true" runOnChange="true">-->
-        <!--<createTable tableName="agro_work_type">-->
-            <!--<column name="id" type="bigint" autoIncrement="true">-->
-                <!--<constraints primaryKey="true" nullable="false"/>-->
-            <!--</column>-->
-            <!--<column name="parent_id" type="bigint" />-->
-            <!--<column name="tenant_id" type="bigint"/>-->
-            <!--<column name="name_ro" type="varchar(256)" encoding="utf8"/>-->
-            <!--<column name="name_ru" type="varchar(256)" encoding="utf8"/>-->
-        <!--</createTable>-->
-    <!--</changeSet>-->
-
     <changeSet id="insert-agro-work-type" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO agro_work_type (id, name_ro, name_ru) VALUES (1,'Aratul','Вспашка');
@@ -201,33 +102,19 @@
             INSERT INTO agro_work_type (id, name_ro, name_ru) VALUES (5,'Pulverizarea chemicalelor','Распыление химикатов');
             INSERT INTO agro_work_type (id, name_ro, name_ru) VALUES (6,'Irigarea','Орошение');
             INSERT INTO agro_work_type (id, name_ro, name_ru) VALUES (7,'Culesul roadei','Сбор урожая');
+            select nextval('agro_work_type_id_seq');
+            select nextval('agro_work_type_id_seq');
+            select nextval('agro_work_type_id_seq');
+            select nextval('agro_work_type_id_seq');
+            select nextval('agro_work_type_id_seq');
+            select nextval('agro_work_type_id_seq');
+            select nextval('agro_work_type_id_seq');
         </sql>
     </changeSet>
 
-     <!--
-        AGRO TASK - aici se vor contine toate definitiile la lucrarile agricole planidifate.
-        Deja mersul lucrarilor, costurile, etc se vor contine in alte tabele separate.
-    -->
-    <!--<changeSet id="add_agro_task" author="mgorgos"  failOnError="true" runOnChange="true">-->
-        <!--<createTable tableName="agro_task" >-->
-            <!--<column name="id" type="bigint" autoIncrement="true">-->
-                <!--<constraints primaryKey="true" nullable="false"/>-->
-            <!--</column>-->
-            <!--<column name="agro_work_type_id" type="bigint" />-->
-            <!--<column name="tenant_id" type="bigint"/>-->
-            <!--<column name="message" type="varchar(256)" encoding="utf8"/>-->
-            <!--<column name="description" type="varchar(1024)" encoding="utf8"/>-->
-            <!--<column name="created_by" type="bigint"/>-->
-            <!--<column name="scheduled_start" type="datetime" />-->
-            <!--<column name="scheduled_end" type="datetime" />-->
-        <!--</createTable>-->
-    <!--</changeSet>-->
 
-
-    <changeSet id="insert-agro-task-iulie-august-2018" author="mgorgos" failOnError="false" runOnChange="true">
+    <changeSet id="insert-agro-task-iulie-august-2018" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
-            DELETE FROM agro_task;
-
             INSERT INTO agro_task (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 1, 'Salonul international de agricultura', '24 februarie - 4 martie 2018, Paris, Franţa', '2018-07-01 10:00:00', '2018-07-01 21:00:00');
             INSERT INTO agro_task (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 2, 'MoldAgroTech', '14-17 martie 2018, Chişinău, Moldova', '2018-07-05 08:00:00', '2018-07-05 21:00:00');
             INSERT INTO agro_task (tenant_id, agro_work_type_id, title, description, scheduled_start, scheduled_end) VALUES (1, 3, 'Expo Flowers &amp; Garden', '8-11 martie 2018, Romexpo Bucureşti', '2018-07-12 10:00:00', '2018-07-13 21:00:00');
@@ -246,63 +133,13 @@
         </sql>
     </changeSet>
 
-
-    <!--
-        CROP CATEGORIES - categorii de culturi agricole. Categorii vor fi adaugate de adminul sistemului.
-        La fel specificat in 2 limbi.
-        De exemplu: fructe, legume, grine, culturi tehnice
-    -->
-    <!--<changeSet id="add_crop_category" author="mgorgos" failOnError="true" runOnChange="true">-->
-        <!--<createTable tableName="crop_category">-->
-            <!--<column name="id" type="bigint" autoIncrement="true">-->
-                <!--<constraints primaryKey="true" nullable="false"/>-->
-            <!--</column>-->
-            <!--<column name="name_ro" type="varchar(256)" encoding="utf8"/>-->
-            <!--<column name="name_ru" type="varchar(256)" encoding="utf8"/>-->
-        <!--</createTable>-->
-    <!--</changeSet>-->
-
-
-    <!--
-        CROPS - culturi agricole divizate pe categorii vor fi adaugate de adminul sistemului.
-        La fel specificat in 2 limbi.
-        De exemplu: mere, pere, gutuie care sunt de categorie FRUCTE
-    -->
-    <!--<changeSet id="add_crop" author="mgorgos" failOnError="true" runOnChange="true">-->
-        <!--<createTable tableName="crop">-->
-            <!--<column name="id" type="bigint" autoIncrement="true">-->
-                <!--<constraints primaryKey="true" nullable="false"/>-->
-            <!--</column>-->
-            <!--<column name="crop_category_id" type="int"/>-->
-            <!--<column name="name_ro" type="varchar(256)" encoding="utf8"/>-->
-            <!--<column name="name_ru" type="varchar(256)" encoding="utf8"/>-->
-        <!--</createTable>-->
-    <!--</changeSet>-->
-
-    <!--
-        CROP VARIETIES - soiuri de culturi agricole divizate pe categorii vor fi adaugate de adminul
-        sistemului. La fel specificat in 2 limbi.
-        De exemplu: mere soi Golden Delicious, Jonagold, Idared, etc
-    -->
-    <!--<changeSet id="add_crop_variety" author="mgorgos" failOnError="true" runOnChange="true">-->
-        <!--<createTable tableName="crop_variety">-->
-            <!--<column name="id" type="bigint" autoIncrement="true">-->
-                <!--<constraints primaryKey="true" nullable="false"/>-->
-            <!--</column>-->
-            <!--<column name="crop_id" type="int"/>-->
-            <!--<column name="name_ro" type="varchar(256)" encoding="utf8"/>-->
-            <!--<column name="name_ru" type="varchar(256)" encoding="utf8"/>-->
-            <!--<column name="description_ro" type="varchar(1024)" encoding="utf8"/>-->
-            <!--<column name="description_ru" type="varchar(1024)" encoding="utf8"/>-->
-        <!--</createTable>-->
-    <!--</changeSet>-->
-
     <!--
         Adaugat categoria CEREALE si 10 tipuri de cereale
     -->
-    <changeSet id="insert-category-cereale" author="mgorgos" failOnError="false" runOnChange="true">
+    <changeSet id="insert-category-cereale" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO crop_category (id, name_ro, name_ru) VALUES (1,'Cereale','Зерновые');
+            select nextval('crop_category_id_seq');
 
             INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (1,1, 'Grâu','Пшеница');
             INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (2,1, 'Secară','Рожь');
@@ -314,6 +151,16 @@
             INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (8,1, 'Mei','Просо');
             INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (9,1, 'Orez','Рис');
             INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (10,1, 'Hrișca','Гречиха');
+            select nextval('crop_id_seq');
+            select nextval('crop_id_seq');
+            select nextval('crop_id_seq');
+            select nextval('crop_id_seq');
+            select nextval('crop_id_seq');
+            select nextval('crop_id_seq');
+            select nextval('crop_id_seq');
+            select nextval('crop_id_seq');
+            select nextval('crop_id_seq');
+            select nextval('crop_id_seq');
         </sql>
     </changeSet>
 
@@ -321,9 +168,10 @@
     <!--
         Adaugat categoria PLANTE TEHNICE si 8 tipuri de plante
     -->
-    <changeSet id="insert-category-plante-tehnice" author="mgorgos" failOnError="false" runOnChange="true">
+    <changeSet id="insert-category-plante-tehnice" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO crop_category (id, name_ro, name_ru) VALUES (2,'Plance tehnice','Технические растения');
+            select nextval('crop_category_id_seq');
 
             INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (11,2, 'Floarea soarelui','Подсолнечник');
             INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (12,2, 'Rapiță','Рапс');
@@ -333,6 +181,14 @@
             INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (16,2, 'Tutun','Табак');
             INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (17,2, 'Hamei','Хмель');
             INSERT INTO crop (id, crop_category_id, name_ro, name_ru) VALUES (18,2, 'Soia','Соя');
+            select nextval('crop_id_seq');
+            select nextval('crop_id_seq');
+            select nextval('crop_id_seq');
+            select nextval('crop_id_seq');
+            select nextval('crop_id_seq');
+            select nextval('crop_id_seq');
+            select nextval('crop_id_seq');
+            select nextval('crop_id_seq');
         </sql>
     </changeSet>
 
@@ -343,18 +199,21 @@
         <sql>
             INSERT INTO parcel(id, cadaster_number, city_village_id, country_id, county_id, created_at, description, landworthiness_points, name, parent_id, tenant_id)
             VALUES (1, 'AB-34567-ZB-12356', null, 'md', 'HN', '2018-07-26 12:45:00', 'sus in deal', 89, 'Floarea soarelui', null, 1);
+            select nextval('parcel_id_seq');
 
             INSERT INTO parcel_geometry(	parcel_id, coordinates)
             VALUES (1, '{ "coordinates": [ [46.811898, 28.638581], [46.810215, 28.634720], [46.798834, 28.643039], [46.799954, 28.644066], [46.802772, 28.644606] ]}');
 
             INSERT INTO parcel(id, cadaster_number, city_village_id, country_id, county_id, created_at, description, landworthiness_points, name, parent_id, tenant_id)
             VALUES (2, 'AB-34567-ZB-17554', null, 'md', 'HN', '2018-07-26 12:45:00', 'sus in stinga', 84, 'Porumb furajer', null, 1);
+            select nextval('parcel_id_seq');
 
             INSERT INTO parcel_geometry(	parcel_id, coordinates)
             VALUES (2, '{ "coordinates": [ [46.811898, 28.638581], [46.814937, 28.645115], [46.811814, 28.644840], [46.809678, 28.640038] ]}');
 
             INSERT INTO parcel(id, cadaster_number, city_village_id, country_id, county_id, created_at, description, landworthiness_points, name, parent_id, tenant_id)
             VALUES (3, 'AB-34567-ZB-1898', null, 'md', 'HN', '2018-07-26 12:45:00', 'jos la vale', 82, 'Negru de purcari', null, 1);
+            select nextval('parcel_id_seq');
 
             INSERT INTO parcel_geometry(	parcel_id, coordinates)
             VALUES (3, '{ "coordinates": [ [46.811814, 28.644840], [46.809678, 28.640038], [46.804438, 28.643071], [46.801469, 28.645740], [46.802652, 28.645927], [46.803798, 28.645621], [46.807954, 28.648691] ]}');
@@ -365,24 +224,28 @@
         <sql>
             INSERT INTO parcel(id, cadaster_number, city_village_id, country_id, county_id, created_at, description, landworthiness_points, name, parent_id, tenant_id)
             VALUES (4, 'AB-34567-NS-12356', null, 'md', 'NS', '2018-07-26 12:45:00', 'sus in deal', 89, 'Floarea soarelui', null, 2);
+            select nextval('parcel_id_seq');
 
             INSERT INTO parcel_geometry(	parcel_id, coordinates)
             VALUES (4, '{ "coordinates": [ [47.070854, 28.145911], [47.069766, 28.144750], [47.068454, 28.146618], [47.069552, 28.147994] ]}');
 
             INSERT INTO parcel(id, cadaster_number, city_village_id, country_id, county_id, created_at, description, landworthiness_points, name, parent_id, tenant_id)
             VALUES (5, 'AB-34567-NS-17554', null, 'md', 'NS', '2018-07-26 12:45:00', 'sus in stinga', 84, 'Porumb furajer', null, 2);
+            select nextval('parcel_id_seq');
 
             INSERT INTO parcel_geometry(	parcel_id, coordinates)
             VALUES (5, '{ "coordinates": [ [47.068454, 28.146618], [47.069552, 28.147994], [47.068984, 28.148861], [47.067851, 28.147590] ]}');
 
             INSERT INTO parcel(id, cadaster_number, city_village_id, country_id, county_id, created_at, description, landworthiness_points, name, parent_id, tenant_id)
             VALUES (6, 'AB-34567-NS-18698', null, 'md', 'NS', '2018-07-26 12:45:00', 'jos la vale', 82, 'Negru de purcari', null, 2);
+            select nextval('parcel_id_seq');
 
             INSERT INTO parcel_geometry(	parcel_id, coordinates)
             VALUES (6, '{ "coordinates": [ [47.068984, 28.148861], [47.067851, 28.147590], [47.066603, 28.149660], [47.067649, 28.150897] ]}');
 
             INSERT INTO parcel(id, cadaster_number, city_village_id, country_id, county_id, created_at, description, landworthiness_points, name, parent_id, tenant_id)
             VALUES (7, 'AB-34567-NS-18398', null, 'md', 'NS', '2018-07-26 12:45:00', 'jos iin stinga', 82, 'Tutun Kentuki', null, 2);
+            select nextval('parcel_id_seq');
 
             INSERT INTO parcel_geometry(	parcel_id, coordinates)
             VALUES (7, '{ "coordinates": [ [47.066603, 28.149660], [47.067649, 28.150897], [47.066009, 28.153511], [47.066329, 28.150125] ]}');
@@ -390,9 +253,6 @@
     </changeSet>
     <changeSet id="insert-8-weather-alerts" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
-            DELETE FROM notification;
-            DELETE FROM notification_type;
-
             INSERT INTO notification_type(id, translation_key) VALUES (1, 'weather-heat-alert');
             INSERT INTO notification_type(id, translation_key) VALUES (2, 'weather-freezing-alert');
             INSERT INTO notification_type(id, translation_key) VALUES (3, 'weather-wind-alert');
@@ -401,6 +261,14 @@
             INSERT INTO notification_type(id, translation_key) VALUES (6, 'weather-hail-alert');
             INSERT INTO notification_type(id, translation_key) VALUES (7, 'weather-fog-alert');
             INSERT INTO notification_type(id, translation_key) VALUES (8, 'weather-hoar-frost-alert');
+            select nextval('notification_type_id_seq');
+            select nextval('notification_type_id_seq');
+            select nextval('notification_type_id_seq');
+            select nextval('notification_type_id_seq');
+            select nextval('notification_type_id_seq');
+            select nextval('notification_type_id_seq');
+            select nextval('notification_type_id_seq');
+            select nextval('notification_type_id_seq');
         </sql>
     </changeSet>
 
@@ -410,6 +278,10 @@
             INSERT INTO user_account (id, username, password, first_name, last_name, language) values(2, 'mihai.gorgos', '$2a$10$J.79O6b/Zo9rPAivWonK1ufA3yB.dsH1UJMVZRrarOrBiDzFRT9NO', 'Mihai', 'Gorgos', 'ro');
             INSERT INTO user_account (id, username, password, first_name, last_name, language) values(3, 'maxim.nistreanu', '$2a$10$J.79O6b/Zo9rPAivWonK1ufA3yB.dsH1UJMVZRrarOrBiDzFRT9NO', 'Maxim', 'Nistreanu', 'ro');
             INSERT INTO user_account (id, username, password, first_name, last_name, language) values(4, 'sergiu.gangan', '$2a$10$J.79O6b/Zo9rPAivWonK1ufA3yB.dsH1UJMVZRrarOrBiDzFRT9NO', 'Sergiu', 'Gangan', 'ru');
+
+            select nextval('user_account_id_seq');
+            select nextval('user_account_id_seq');
+            select nextval('user_account_id_seq');
 
             INSERT INTO user_authority (user_id, authority_id) VALUES (2, 3);
             INSERT INTO user_authority (user_id, authority_id) VALUES (3, 3);

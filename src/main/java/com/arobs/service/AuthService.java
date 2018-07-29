@@ -14,7 +14,7 @@ public class AuthService {
         return (JwtUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
-    public boolean isSuperAdminOrAdmin() {
+    public boolean isSuperAdmin() {
         JwtUser user = (JwtUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         for (GrantedAuthority grantedAuthority : user.getAuthorities()) {
             if (grantedAuthority.getAuthority().equals(AuthorityName.ROLE_SUPER_ADMIN.name())) {

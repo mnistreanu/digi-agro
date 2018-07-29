@@ -6,7 +6,7 @@
 
 
                 <div class="form-group">
-                    <select class="form-control" [ngModel]="tenantId">
+                    <select class="form-control" [(ngModel)]="tenantId">
                         <option *ngFor="let t of tenants" [ngValue]="t.id">{{ t.name }}</option>
                     </select>
                 </div>

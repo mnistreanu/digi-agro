@@ -30,7 +30,7 @@ public class UserController {
     public ResponseEntity<List<UserAccountListModel>> getModels() {
 
         List<UserAccount> userAccounts;
-        if (authService.isSuperAdminOrAdmin()) {
+        if (authService.isSuperAdmin()) {
             userAccounts = userAccountService.findAdmins();
         }
         else {

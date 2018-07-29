@@ -22,6 +22,15 @@ public interface TenantRepository extends JpaRepository<Tenant, Long> {
             "SET t.deletedAt = now(), t.deletedBy = :userId " +
             "WHERE t.id = :id")
     void remove(@Param("id") Long id, @Param("userId") Long userId);
+
+    @Query("SELECT t FROM Tenant t WHERE t.deletedAt IS NULL")
+    List<Tenant> findAll();
+
+    @Query("SELECT t FROM UserAccount u " +
+            "JOIN u.tenants t " +
+            "WHERE u.id = :userId AND t.deletedAt IS NULL " +
+            "GROUP BY t.id")
+    List<Tenant> findByUser(@Param("userId") Long userId);
 //
 //    @Query("SELECT new com.arobs.model.ListItemModel(t.id, t.name) FROM Tenant t WHERE t.deletedAt IS NULL")
 //    List<ListItemModel> fetchAllListItems();

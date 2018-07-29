@@ -32,15 +32,15 @@ public class TenantService implements HasRepository<TenantRepository> {
     public Tenant findOne(Long id) {
         return getRepository().findOne(id);
     }
-//
-//    public List<ListItemModel> fetchListItems() {
-//        if (authService.isSuperAdminOrAdmin()) {
-//            return getRepository().fetchAllListItems();
-//        }
-//        else {
-//            return getRepository().fetchListItemsByUser(authService.getCurrentUser().getId());
-//        }
-//    }
+
+    public List<Tenant> findByUser() {
+        if (authService.isSuperAdmin()) {
+            return getRepository().findAll();
+        }
+        else {
+            return getRepository().findByUser(authService.getCurrentUser().getId());
+        }
+    }
 
     public List<TenantModel> findByFilter(TenantFilterModel filterRequestModel) {
         List<TenantModel> list = new ArrayList<TenantModel>();

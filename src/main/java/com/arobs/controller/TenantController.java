@@ -1,5 +1,6 @@
 package com.arobs.controller;
 
+import com.arobs.entity.Tenant;
 import com.arobs.model.ListItemModel;
 import com.arobs.model.tenant.TenantFilterModel;
 import com.arobs.model.tenant.TenantModel;
@@ -10,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/tenant")
@@ -18,11 +20,12 @@ public class TenantController {
     @Autowired
     private TenantService tenantService;
 
-//    @RequestMapping(value = "/list-items", method = RequestMethod.GET)
-//    public ResponseEntity<List<ListItemModel>> fetchListItems() {
-//        List<ListItemModel> models = tenantService.fetchListItems();
-//        return ResponseEntity.ok(models);
-//    }
+    @RequestMapping(value = "/list-items", method = RequestMethod.GET)
+    public ResponseEntity<List<ListItemModel>> fetchListItems() {
+        List<Tenant> tenants = tenantService.findByUser();
+        List<ListItemModel> models = tenants.stream().map(t -> new ListItemModel(t.getId(), t.getName())).collect(Collectors.toList());
+        return ResponseEntity.ok(models);
+    }
 
     @RequestMapping(value = "/find-by", method = RequestMethod.POST)
     public ResponseEntity<List<TenantModel>> getModels(@RequestBody TenantFilterModel filterRequestModel) {

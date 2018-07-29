@@ -1,14 +1,14 @@
 import {RouterModule, Routes} from '@angular/router';
 import {ModuleWithProviders} from '@angular/core';
-
-import {PagesComponent} from './pages.component';
-import {BlankComponent} from './blank/blank.component';
-import {SearchComponent} from './search/search.component';
-import {AdminGuard} from "../guard/admin-guard";
-import {AuthGuard} from "../guard/auth-guard";
-import {SuperAdminGuard} from "../guard/super-admin-guard";
-import {SuperAdminOrAdminGuard} from "../guard/super-admin-or-admin-guard";
+import {PagesComponent} from "./pages.component";
+import {SearchComponent} from "./search/search.component";
+import {BlankComponent} from "./blank/blank.component";
 import {UserProfileComponent} from "./user-profile/user-profile.component";
+import {SuperAdminOrAdminGuard} from "../guards/super-admin-or-admin-guard";
+import {AdminGuard} from "../guards/admin-guard";
+import {AuthGuard} from "../guards/auth-guard";
+import {SuperAdminGuard} from "../guards/super-admin-guard";
+
 
 export const routes: Routes = [
     {
