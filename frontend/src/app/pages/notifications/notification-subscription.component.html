@@ -11,18 +11,20 @@
     </div>
     <div class="card-body widget-body">
         <form>
-            <div class="list" slim-scroll>
-                <div *ngFor="let notificationType of notificationTypes" class="transition">
-                    <img [src]="notificationType.image" class="notification-image">
-                    <div class="list-content">
+            <table>
+                <tr *ngFor="let nt of notificationTypes">
+                    <td>
+                        <img [src]="nt.image" class="notification-image"/>
+                    </td>
+                    <td>
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="checkboxDefault{{notificationType.id}}" >
-                            <label class="custom-control-label " for="checkboxDefault{{notificationType.id}}"
-                                   translate [translateParams]="{days: 1}">notification.{{notificationType.name}}</label>
+                            <input type="checkbox" class="custom-control-input" id="nt-checkbox-{{nt.id}}" >
+                            <label class="custom-control-label " for="nt-checkbox-{{nt.id}}"
+                                   translate [translateParams]="{days: 1}">notification.{{nt.name}}</label>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </td>
+                </tr>
+            </table>
         </form>
     </div>
 </div>
