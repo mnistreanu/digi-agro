@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.text.MessageFormat;
 import java.util.List;
 
 @Repository
@@ -53,6 +54,21 @@ public class TenantCustomRepository {
 
         return em.createQuery(queryStr).getResultList();
 
+    }
+
+    public boolean isUnique(Long currentId, String field, String value) {
+
+        String q = "SELECT COUNT(t) " +
+                " FROM Tenant t WHERE t.{0} = {1}";
+        q = MessageFormat.format(q, field, value);
+
+        if (currentId != null) {
+            q += " AND t.id != " + currentId;
+        }
+
+        Long count = (Long) em.createQuery(q).getSingleResult();
+
+        return count == 0;
     }
 
 //

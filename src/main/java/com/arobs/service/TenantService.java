@@ -43,12 +43,21 @@ public class TenantService implements HasRepository<TenantRepository> {
     }
 
     public List<TenantModel> findByFilter(TenantFilterModel filterRequestModel) {
-        List<TenantModel> list = new ArrayList<TenantModel>();
+        List<TenantModel> list = new ArrayList<>();
         List<Tenant> tenants = tenantCustomRepository.find(filterRequestModel);
         for (Tenant t:tenants) {
             list.add(new TenantModel(t));
         }
         return list;
+    }
+
+    public boolean isUnique(Long currentId, String field, String value) {
+        if (!field.equals("name") || !field.equals("fiscalCode")) {
+            throw new IllegalArgumentException("Field must be: name or fiscalCode");
+        }
+
+        return tenantCustomRepository.isUnique(currentId, field, value);
+
     }
 
 //    public boolean validateName(Long id, String name) {

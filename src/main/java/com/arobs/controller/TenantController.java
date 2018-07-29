@@ -43,6 +43,12 @@ public class TenantController {
 //        return ResponseEntity.ok(tenantService.validateName(id, name));
 //    }
 
+    @RequestMapping(value = "/unique", method = RequestMethod.GET)
+    public ResponseEntity<Boolean> isUnique(@RequestParam("id") Long id, @RequestParam("field") String field, @RequestParam("value") String value) {
+        // todo: user optional for id
+        return ResponseEntity.ok(tenantService.isUnique(id, field, value));
+    }
+
     @RequestMapping(value = "/validate-fiscal-code", method = RequestMethod.GET)
     public ResponseEntity<Boolean> validateFiscalCode(@RequestParam("id") Long id, @RequestParam("code") String code) {
         return ResponseEntity.ok(tenantService.validateFiscalCode(id, code));
