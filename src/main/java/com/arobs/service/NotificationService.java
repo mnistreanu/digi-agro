@@ -23,12 +23,14 @@ public class NotificationService implements HasRepository<NotificationRepository
         return notificationRepository;
     }
 
-    public List<Notification> find(Long userId, boolean onlyNotSeen) {
-        if (onlyNotSeen) {
-            return getRepository().findNotSeen(userId);
-        } else {
-            return getRepository().findAll(userId);
-        }
+    public List<Notification> findAll(Long userId) {
+        Date dateFrom = new Date();
+        return getRepository().findAll(userId);
+    }
+
+    public List<Notification> findNotSeen(Long userId, Date dateFrom) {
+        dateFrom = dateFrom == null ? new Date(): dateFrom;
+        return getRepository().findNotSeen(userId, dateFrom);
     }
 
     public Notification findOne(Long id) {

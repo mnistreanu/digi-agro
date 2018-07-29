@@ -4,6 +4,7 @@ package com.arobs.model.notification;
 import com.arobs.entity.Notification;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.Date;
 
 public class NotificationModel implements Serializable {
@@ -14,6 +15,9 @@ public class NotificationModel implements Serializable {
     private String message;
     private Long userId;
     private Date dateTo;
+    private Duration duration;
+    private long durationDays;
+    private long durationHours;
     private Date seenAt;
 
     public NotificationModel() {
@@ -26,6 +30,9 @@ public class NotificationModel implements Serializable {
         this.message = entity.getMessage();
         this.userId = entity.getUserId();
         this.dateTo = entity.getDateTo();
+        this.duration = entity.getDuration();
+        this.durationDays = duration.toDays();
+        this.durationHours = duration.toHours() - duration.toDays() *24;
         this.seenAt = entity.getSeenAt();
     }
 
@@ -75,6 +82,29 @@ public class NotificationModel implements Serializable {
 
     public void setDateTo(Date dateTo) {
         this.dateTo = dateTo;
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public void setDurationDays(long durationDays) {
+        this.durationDays = durationDays;
+    }
+
+    public void setDurationHours(long durationHours) {
+        this.durationHours = durationHours;
+    }
+
+    public long getDurationDays() {
+        return durationDays;
+    }
+    public long getDurationHours() {
+        return durationHours;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
     }
 
     public Date getSeenAt() {

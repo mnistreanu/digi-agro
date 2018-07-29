@@ -20,8 +20,16 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
 
     @Query("SELECT n FROM Notification n " +
             "WHERE n.userId = :userId " +
+            "AND n.dateTo > :dateFrom " +
             "ORDER BY n.dateTo ")
-    List<Notification> findNotSeen(@Param("userId") Long userId);
+    List<Notification> findAll(@Param("userId") Long userId, @Param("dateFrom") Date dateFrom);
+
+    @Query("SELECT n FROM Notification n " +
+            "WHERE n.userId = :userId " +
+            "AND n.dateTo > :dateFrom " +
+            "AND n.seenAt IS NULL " +
+            "ORDER BY n.dateTo ")
+    List<Notification> findNotSeen(@Param("userId") Long userId, @Param("dateFrom") Date dateFrom );
 
     @Modifying
     @Query("UPDATE Notification n SET n.seenAt = now() WHERE n.id = :id")

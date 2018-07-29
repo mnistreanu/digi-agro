@@ -1,0 +1,119 @@
+import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
+
+@Component({
+    selector: 'az-notification-subscription',
+    templateUrl: './notification-subscription.component.html',
+    styleUrls: ['./notification-subscription.component.scss']
+})
+export class NotificationSubscriptionComponent implements OnInit {
+
+    context;
+
+    constructor(private router: Router) {
+    }
+
+    ngOnInit() {
+//        this.setupGrid();
+    }
+
+    // private setupGrid() {
+    //     this.options = <GridOptions>{};
+    //
+    //     this.options.enableColResize = true;
+    //     this.options.enableSorting = true;
+    //     this.options.enableFilter = true;
+    //     this.options.columnDefs = this.setupHeaders();
+    //     this.context = {componentParent: this};
+    //
+    //     this.setupRows();
+    //
+    // }
+    //
+    // private setupHeaders() {
+    //
+    //     let headers: ColDef[] = [
+    //         {
+    //             field: 'edit',
+    //             width: 24,
+    //             minWidth: 24,
+    //             maxWidth: 30,
+    //             editable: false,
+    //             suppressResize: true,
+    //             suppressMenu: true,
+    //             cellRendererFramework: EditRendererComponent,
+    //             cellStyle: () => {return {padding: 0};}
+    //         },
+    //         {
+    //             headerName: 'Name',
+    //             field: 'name',
+    //             width: 200,
+    //             minWidth: 200
+    //         },
+    //         {
+    //             headerName: 'Description',
+    //             field: 'description',
+    //             width: 200,
+    //             minWidth: 200
+    //         },
+    //         {
+    //             headerName: 'Fiscal Code',
+    //             field: 'fiscalCode',
+    //             width: 200,
+    //             minWidth: 200
+    //         },
+    //         {
+    //             headerName: 'Country',
+    //             field: 'country',
+    //             width: 200,
+    //             minWidth: 200
+    //         },
+    //         {
+    //             headerName: 'County',
+    //             field: 'county',
+    //             width: 200,
+    //             minWidth: 200
+    //         },
+    //         {
+    //             headerName: 'Village City',
+    //             field: 'villageCity',
+    //             width: 200,
+    //             minWidth: 200
+    //         },
+    //         {
+    //             headerName: 'Address',
+    //             field: 'address',
+    //             width: 200,
+    //             minWidth: 200
+    //         },
+    //         {
+    //             headerName: 'Phones',
+    //             field: 'phones',
+    //             width: 200,
+    //             minWidth: 200
+    //         }
+    //     ];
+    //
+    //     return headers;
+    // }
+    //
+    // private setupRows() {
+    //     this.notificationsService.find().subscribe(models => {
+    //         this.options.api.setRowData(models);
+    //     })
+    // }
+    //
+    // public onGridReady() {
+    //     this.options.api.sizeColumnsToFit();
+    // }
+    //
+    // public adjustGridSize() {
+    //     setTimeout(() => {this.options.api.sizeColumnsToFit();}, 500);
+    // }
+
+    // public onEdit(node) {
+    //     let model = node.data;
+    //     this.router.navigate(['/pages/manage-tenants/tenant/' + model.id]);
+    // }
+
+}

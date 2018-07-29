@@ -325,23 +325,25 @@
 
     <changeSet id="insert-5-notifications-for-3-users" author="mihai.gorgos" failOnError="true" runOnChange="true">
         <sql>
-            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (1, NOW(), 'Atenție, peste 3 zile va fi caniculă', 2);
-            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (2, NOW(), 'Atenție, peste 3 zile vor fi înghețuri și temperatura ar putea coborî până la -20 grade', 2);
-            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (3, NOW(), 'Atenție, peste 3 zile va fi vânt puternic', 2);
-            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (4, NOW(), 'Atenție, va ploua', 2);
-            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (5, NOW(), 'Atenție, va ninge', 2);
+            DELETE FROM notification;
 
-            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (1, NOW(), 'Atenție, peste 3 zile va fi caniculă', 3);
-            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (2, NOW(), 'Atenție, peste 3 zile vor fi înghețuri și temperatura ar putea coborî până la -20 grade', 3);
-            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (3, NOW(), 'Atenție, peste 3 zile va fi vânt puternic', 3);
-            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (4, NOW(), 'Atenție, va ploua', 3);
-            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (5, NOW(), 'Atenție, va ninge', 3);
+            INSERT INTO notification (notification_type_id, created_at, date_to, message, user_id) VALUES (1, NOW(), NOW() + interval '24 hours', 'Atenție, peste 3 zile va fi caniculă', 2);
+            INSERT INTO notification (notification_type_id, created_at, date_to, message, user_id) VALUES (2, NOW(), NOW() + interval '36 hours', 'Atenție, peste 3 zile vor fi înghețuri și temperatura ar putea coborî până la -20 grade', 2);
+            INSERT INTO notification (notification_type_id, created_at, date_to, message, user_id) VALUES (3, NOW(), NOW() + interval '48 hours', 'Atenție, peste 3 zile va fi vânt puternic', 2);
+            INSERT INTO notification (notification_type_id, created_at, date_to, message, user_id) VALUES (4, NOW(), NOW() + interval '60 hours', 'Atenție, va ploua', 2);
+            INSERT INTO notification (notification_type_id, created_at, date_to, message, user_id) VALUES (5, NOW(), NOW() + interval '72 hours', 'Atenție, va ninge', 2);
 
-            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (1, NOW(), 'Atenție, peste 3 zile va fi caniculă', 4);
-            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (2, NOW(), 'Atenție, peste 3 zile vor fi înghețuri și temperatura ar putea coborî până la -20 grade', 4);
-            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (3, NOW(), 'Atenție, peste 3 zile va fi vânt puternic', 4);
-            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (4, NOW(), 'Atenție, va ploua', 4);
-            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (5, NOW(), 'Atenție, va ninge', 4);
+            INSERT INTO notification (notification_type_id, created_at, date_to, message, user_id) VALUES (1, NOW(), NOW() + interval '24 hours', 'Atenție, peste 3 zile va fi caniculă', 3);
+            INSERT INTO notification (notification_type_id, created_at, date_to, message, user_id) VALUES (2, NOW(), NOW() + interval '36 hours', 'Atenție, peste 3 zile vor fi înghețuri și temperatura ar putea coborî până la -20 grade', 3);
+            INSERT INTO notification (notification_type_id, created_at, date_to, message, user_id) VALUES (3, NOW(), NOW() + interval '48 hours', 'Atenție, peste 3 zile va fi vânt puternic', 3);
+            INSERT INTO notification (notification_type_id, created_at, date_to, message, user_id) VALUES (4, NOW(), NOW() + interval '60 hours', 'Atenție, va ploua', 3);
+            INSERT INTO notification (notification_type_id, created_at, date_to, message, user_id) VALUES (5, NOW(), NOW() + interval '72 hours', 'Atenție, va ninge', 3);
+
+            INSERT INTO notification (notification_type_id, created_at, date_to, message, user_id) VALUES (1, NOW(), NOW() + interval '24 hours', 'Atenție, peste 3 zile va fi caniculă', 4);
+            INSERT INTO notification (notification_type_id, created_at, date_to, message, user_id) VALUES (2, NOW(), NOW() + interval '36 hours', 'Atenție, peste 3 zile vor fi înghețuri și temperatura ar putea coborî până la -20 grade', 4);
+            INSERT INTO notification (notification_type_id, created_at, date_to, message, user_id) VALUES (3, NOW(), NOW() + interval '48 hours', 'Atenție, peste 3 zile va fi vânt puternic', 4);
+            INSERT INTO notification (notification_type_id, created_at, date_to, message, user_id) VALUES (4, NOW(), NOW() + interval '60 hours', 'Atenție, va ploua', 4);
+            INSERT INTO notification (notification_type_id, created_at, date_to, message, user_id) VALUES (5, NOW(), NOW() + interval '72 hours', 'Atenție, va ninge', 4);
         </sql>
     </changeSet>
 </databaseChangeLog>

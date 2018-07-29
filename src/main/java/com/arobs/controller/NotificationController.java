@@ -31,7 +31,7 @@ public class NotificationController {
         PayloadModel<NotificationModel> payloadModel = new PayloadModel<>();
 
         try {
-            List<Notification> notifications = notificationService.find(userId, onlyNotSeen);
+            List<Notification> notifications = notificationService.findNotSeen(userId, new Date());
             if (!notifications.isEmpty()) {
                 List<NotificationModel> models = notifications.stream().map(NotificationModel::new).collect(Collectors.toList());
                 NotificationModel[] payload = models.toArray(new NotificationModel[models.size()]);

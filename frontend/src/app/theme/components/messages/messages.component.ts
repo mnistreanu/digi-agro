@@ -91,7 +91,7 @@ export class MessagesComponent{
                 notification.typeId = model.typeId;
                 notification.name = 'METEO'; //TODO  de extras denumirea tabelul notification_type
                 notification.text = model.message;
-                notification.time = 'peste ' + model.typeId + ' zile'; //TODO de facut corect
+                notification.time = 'peste ' + model.durationDays + ' zile si ' + model.durationHours +' ore'; //TODO de facut corect
                 notification.image = '../assets/img/notifications/'+model.translationKey+ '.png';
                 this.notifications.push(notification);
             });

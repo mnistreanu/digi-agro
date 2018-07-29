@@ -1,6 +1,9 @@
 package com.arobs.entity;
 
 import javax.persistence.*;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -66,6 +69,20 @@ public class Notification {
 
     public Date getDateTo() {
         return dateTo;
+    }
+
+    @Transient
+    public Duration getDuration() {
+        try {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(dateTo);
+            LocalDateTime localDateTo = LocalDateTime.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1,
+                    cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
+
+            return Duration.between(LocalDateTime.now(), localDateTo);
+        } catch (Exception e) {
+            return Duration.ZERO;
+        }
     }
 
     public void setDateTo(Date dateTo) {
