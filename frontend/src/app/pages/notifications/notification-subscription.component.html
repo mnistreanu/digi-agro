@@ -13,11 +13,12 @@
         <form>
             <div class="list" slim-scroll>
                 <div *ngFor="let notificationType of notificationTypes" class="transition">
-                    <img src="{{ ( notificationType.image ) }}">
+                    <img [src]="notificationType.image">
                     <div class="list-content">
                         <div class="custom-control custom-checkbox">
-                            <label class="custom-control-label " for="checkboxDefault{{notificationType.id}}">{{notificationType.name}}</label>
                             <input type="checkbox" class="custom-control-input" id="checkboxDefault{{notificationType.id}}" >
+                            <label class="custom-control-label " for="checkboxDefault{{notificationType.id}}"
+                                   translate [translateParams]="{days: 1}">notification.{{notificationType.name}}</label>
                         </div>
                     </div>
                 </div>
