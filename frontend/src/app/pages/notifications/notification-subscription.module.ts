@@ -1,3 +1,4 @@
+///<reference path="notification-subscription.component.ts"/>
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {EditRendererComponent} from "../../modules/aggrid/edit-renderer/edit-renderer.component";
@@ -8,6 +9,11 @@ import {DirectivesModule} from "../../theme/directives/directives.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TranslateModule} from '@ngx-translate/core';
 import {NotificationSubscriptionComponent} from "./notification-subscription.component";
+import {RouterModule} from "@angular/router";
+
+export const routes = [
+    { path: '', component: NotificationSubscriptionComponent, pathMatch: 'full' }
+];
 
 @NgModule({
     imports: [
@@ -19,6 +25,7 @@ import {NotificationSubscriptionComponent} from "./notification-subscription.com
         FormErrorBlockModule,
         EditRendererModule,
         AgGridModule.withComponents([EditRendererComponent])
+        RouterModule.forChild(routes)
     ],
     declarations: [NotificationSubscriptionComponent]
 })
