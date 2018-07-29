@@ -6,7 +6,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <!--<changeSet id="clean-db" author="mihai.gorgos" failOnError="true" runOnChange="true">-->
+    <!--<changeSet id="clean-db" author="mihai.gorgos" failOnError="false" runOnChange="true">-->
     <!--<sql>-->
         <!--DELETE FROM databasechangelog;-->
 
@@ -162,7 +162,7 @@
     <!--
         CITIES_VILAGES - sate si orase din raioane/judete, in 2 limbi
     -->
-    <changeSet id="add_city_village" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="add_city_village" author="mgorgos" failOnError="false" runOnChange="true">
         <createTable tableName="city_village">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
@@ -180,7 +180,7 @@
         dar cu tenant_id vor fi cele mai specifice la fiecare tenant aparte in caz ca va avea nevoie.
         La fel specificat in 2 limbi
     -->
-    <changeSet id="add_agro_work_type" author="mgorgos"  failOnError="true" runOnChange="true">
+    <changeSet id="add_agro_work_type" author="mgorgos"  failOnError="false" runOnChange="true">
         <createTable tableName="agro_work_type">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -192,7 +192,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="insert-agro-work-type" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="insert-agro-work-type" author="mgorgos" failOnError="false" runOnChange="true">
         <sql>
             INSERT INTO agro_work_type (id, name_ro, name_ru) VALUES (1,'Aratul','Вспашка');
             INSERT INTO agro_work_type (id, name_ro, name_ru) VALUES (2,'Lucrarea cu grapa','Работа с бороной');
@@ -208,7 +208,7 @@
         AGRO TASK - aici se vor contine toate definitiile la lucrarile agricole planidifate.
         Deja mersul lucrarilor, costurile, etc se vor contine in alte tabele separate.
     -->
-    <!--<changeSet id="add_agro_task" author="mgorgos"  failOnError="true" runOnChange="true">-->
+    <!--<changeSet id="add_agro_task" author="mgorgos"  failOnError="false" runOnChange="true">-->
         <!--<createTable tableName="agro_task" >-->
             <!--<column name="id" type="bigint" autoIncrement="true">-->
                 <!--<constraints primaryKey="true" nullable="false"/>-->
@@ -224,7 +224,7 @@
     <!--</changeSet>-->
 
 
-    <changeSet id="insert-agro-task-iulie-august-2018" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="insert-agro-task-iulie-august-2018" author="mgorgos" failOnError="false" runOnChange="true">
         <sql>
             DELETE FROM agro_task;
 
@@ -252,7 +252,7 @@
         La fel specificat in 2 limbi.
         De exemplu: fructe, legume, grine, culturi tehnice
     -->
-    <changeSet id="add_crop_category" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="add_crop_category" author="mgorgos" failOnError="false" runOnChange="true">
         <createTable tableName="crop_category">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -268,7 +268,7 @@
         La fel specificat in 2 limbi.
         De exemplu: mere, pere, gutuie care sunt de categorie FRUCTE
     -->
-    <changeSet id="add_crop" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="add_crop" author="mgorgos" failOnError="false" runOnChange="true">
         <createTable tableName="crop">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -284,7 +284,7 @@
         sistemului. La fel specificat in 2 limbi.
         De exemplu: mere soi Golden Delicious, Jonagold, Idared, etc
     -->
-    <changeSet id="add_crop_variety" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="add_crop_variety" author="mgorgos" failOnError="false" runOnChange="true">
         <createTable tableName="crop_variety">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -300,7 +300,7 @@
     <!--
         Adaugat categoria CEREALE si 10 tipuri de cereale
     -->
-    <changeSet id="insert-category-cereale" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="insert-category-cereale" author="mgorgos" failOnError="false" runOnChange="true">
         <sql>
             INSERT INTO crop_category (id, name_ro, name_ru) VALUES (1,'Cereale','Зерновые');
 
@@ -321,7 +321,7 @@
     <!--
         Adaugat categoria PLANTE TEHNICE si 8 tipuri de plante
     -->
-    <changeSet id="insert-category-plante-tehnice" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="insert-category-plante-tehnice" author="mgorgos" failOnError="false" runOnChange="true">
         <sql>
             INSERT INTO crop_category (id, name_ro, name_ru) VALUES (2,'Plance tehnice','Технические растения');
 
@@ -388,7 +388,7 @@
             VALUES (7, '{ "coordinates": [ [47.066603, 28.149660], [47.067649, 28.150897], [47.066009, 28.153511], [47.066329, 28.150125] ]}');
         </sql>
     </changeSet>
-    <changeSet id="insert-8-weather-alerts" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="insert-8-weather-alerts" author="mgorgos" failOnError="false" runOnChange="true">
         <sql>
             DELETE FROM notification;
             DELETE FROM notification_type;

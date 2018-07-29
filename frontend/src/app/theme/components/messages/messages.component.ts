@@ -82,7 +82,7 @@ export class MessagesComponent{
         this.notificationService.find().subscribe(payloadModel => {
             let status = payloadModel.status;
             let message = payloadModel.message;
-            this.notificationModels = payloadModel.payload;
+            this.notificationModels = payloadModel.payload || [];
             // this.notifications = new Array(0);
 
             this.notificationModels.forEach((model) => {
