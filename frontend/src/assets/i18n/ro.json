@@ -51,19 +51,25 @@
 		"brands": "Brands",
 		"dashboard": "Dashboard",
 		"machines": "Maşini",
+		"notifications": "Notificari",
 		"owners": "Proprietari",
+		"tasks": "Sarcini",
 		"telemetry": "Telemetrie",
 		"tenants": "Clienți",
 		"users": "Utilizatori"
 	},
 	"notification": {
-		"weather_fog_alert": "Atenție, peste {{days}} zile va fi ceață",
-		"weather_freezing_alert": "Atenție, peste {{days}} zile vor fi înghețuri și temperatura ar putea coborî până la {{degrees}} grade",
-		"weather_hail_alert": "Atenție, peste {{days}} zile va fi grindină",
-		"weather_heat_alert": "Atenție, peste {{days}} zile va fi caniculă",
-		"weather_rain_alert": "Atenție, peste {{days}} zile va ploua",
-		"weather_snow_alert": "Atenție, peste {{days}} zile va ninge",
-		"weather_wind_alert": "Atenție, peste {{days}} zile va fi vânt puternic"
+		"mark-all-as-read": "Marcheaza toate ca fiind citite",
+		"view-all-notifications": "Vizualizați toate notificările",
+		"view-all-tasks": "Vizualizați toate sarcinile",
+		"weather-fog-alert": "Atenție, peste {{days}} zile va fi ceață",
+		"weather-freezing-alert": "Atenție, peste {{days}} zile vor fi înghețuri și temperatura ar putea coborî până la {{degrees}} grade",
+		"weather-hail-alert": "Atenție, peste {{days}} zile va fi grindină",
+		"weather-heat-alert": "Atenție, peste {{days}} zile va fi caniculă",
+		"weather-rain-alert": "Atenție, peste {{days}} zile va ploua",
+		"weather-hoar-frost-alert": "Atenție, va fi brumă",
+		"weather-snow-alert": "Atenție, peste {{days}} zile va ninge",
+		"weather-wind-alert": "Atenție, peste {{days}} zile va fi vânt puternic"
 	},
 	"response": {
 		"added": "A fost adăugat",

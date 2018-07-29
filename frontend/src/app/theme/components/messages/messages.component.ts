@@ -15,12 +15,12 @@ import {NotificationService} from "../../../services/notification.service";
 })
 
 export class MessagesComponent{     
-    public messages:Array<Object>;
+    public messages:Array<Object> = [];
 
-    public notifications:Array<Object>;
+    public notifications:Array<Object> = [];
     public notificationModels: NotificationModel[];
 
-    public tasks:Array<Object>;
+    public tasks:Array<Object> = [];
     public agrotaskModels: AgroTaskModel[];
 
     constructor (private messagesService:MessagesService, private agroTaskService:AgroTaskService,
@@ -34,12 +34,12 @@ export class MessagesComponent{
         // task.text: 'Design some buttons',
         // task.value: '20%',
         // task.class: 'info'
-        this.tasks = [];
 
         this.agroTaskService.find().subscribe(payloadModel => {
             let status = payloadModel.status;
             let message = payloadModel.message;
             this.agrotaskModels = payloadModel.payload;
+            // this.tasks = new Array(0);
 
             this.agrotaskModels.forEach((model) => {
                 let agroTask: any = {};
@@ -82,17 +82,17 @@ export class MessagesComponent{
         this.notificationService.find().subscribe(payloadModel => {
             let status = payloadModel.status;
             let message = payloadModel.message;
-            this.notificationModels = payloadModel.payload;
-            this.notifications = new Array(0);
+            this.notificationModels = payloadModel.payload || [];
+            // this.notifications = new Array(0);
 
             this.notificationModels.forEach((model) => {
                 let notification: any = {};
                 notification.id = model.id;
-                notification.notificationTypeId = model.notificationTypeId;
-                notification.name = 'Weather alert';
+                notification.typeId = model.typeId;
+                notification.name = 'METEO'; //TODO  de extras denumirea tabelul notification_type
                 notification.text = model.message;
-                notification.time = model.createdAt;
-                notification.image = '../assets/img/shopping-cart.svg';
+                notification.time = 'peste ' + model.typeId + ' zile'; //TODO de facut corect
+                notification.image = '../assets/img/notifications/'+model.translationKey+ '.png';
                 this.notifications.push(notification);
             });
 

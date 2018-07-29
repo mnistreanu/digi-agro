@@ -1,15 +1,14 @@
-import { Routes, RouterModule } from '@angular/router';
-import { ModuleWithProviders } from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {ModuleWithProviders} from '@angular/core';
 
-import { PagesComponent } from './pages.component';
-import { BlankComponent } from './blank/blank.component';
-import { SearchComponent } from './search/search.component';
-import {AdminGuard} from "../guards/admin-guard";
-import {AuthGuard} from "../guards/auth-guard";
-import {SuperAdminGuard} from "../guards/super-admin-guard";
-import {SuperAdminOrAdminGuard} from "../guards/super-admin-or-admin-guard";
+import {PagesComponent} from './pages.component';
+import {BlankComponent} from './blank/blank.component';
+import {SearchComponent} from './search/search.component';
+import {AdminGuard} from "../guard/admin-guard";
+import {AuthGuard} from "../guard/auth-guard";
+import {SuperAdminGuard} from "../guard/super-admin-guard";
+import {SuperAdminOrAdminGuard} from "../guard/super-admin-or-admin-guard";
 import {UserProfileComponent} from "./user-profile/user-profile.component";
-import {AgroTaskCalendarComponent} from "./agro-task-calendar/agro-task-calendar.component";
 
 export const routes: Routes = [
     {
@@ -32,13 +31,12 @@ export const routes: Routes = [
             { path: 'user-profile', component: UserProfileComponent, data: { breadcrumb: 'User Profile' } },
             { path: 'manage-users', loadChildren: 'app/pages/manage-users/manage-users.module#ManageUsersModule', data: { breadcrumb: 'Manage Users' }, canActivate: [SuperAdminOrAdminGuard] },
             { path: 'manage-brands', loadChildren: 'app/pages/manage-brands/manage-brands.module#ManageBrandsModule', data: { breadcrumb: 'Manage Brands' }, canActivate: [AdminGuard] },
-            { path: 'manage-owners', loadChildren: 'app/pages/manage-owners/manage-owners.module#ManageOwnersModule', data: { breadcrumb: 'Manage Owners' }, canActivate: [AdminGuard] },
             { path: 'manage-machines', loadChildren: 'app/pages/manage-machines/manage-machines.module#ManageMachinesModule', data: { breadcrumb: 'Manage Machines' }, canActivate: [AdminGuard] },
             { path: 'telemetry', loadChildren: 'app/pages/telemetry/telemetry.module#TelemetryModule', data: { breadcrumb: 'Telemetry' }, canActivate: [AuthGuard] },
 
             { path: 'manage-tenants', loadChildren: 'app/pages/manage-tenants/manage-tenants.module#ManageTenantsModule', data: { breadcrumb: 'Manage Tenants' }, canActivate: [SuperAdminGuard] },
-            { path: 'manage-branches', loadChildren: 'app/pages/manage-branches/manage-branches.module#ManageBranchesModule', data: { breadcrumb: 'Manage Branches' }, canActivate: [SuperAdminOrAdminGuard] },
-            { path: 'agro-task-calendar', loadChildren: 'app/pages/agro-task-calendar/agro-task-calendar.module#AgroTaskCalendarModule', data: { breadcrumb: 'Agro Task Calendar' }, canActivate: [SuperAdminOrAdminGuard] }
+            { path: 'manage-branches', loadChildren: 'app/pages/manage-branches/manage-branches.module#ManageBranchesModule', data: { breadcrumb: 'Manage Branches' }, canActivate: [AdminGuard] },
+            { path: 'agro-task-calendar', loadChildren: 'app/pages/agro-task-calendar/agro-task-calendar.module#AgroTaskCalendarModule', data: { breadcrumb: 'Agro Task Calendar' }, canActivate: [AuthGuard] }
         ]
     }
 ];

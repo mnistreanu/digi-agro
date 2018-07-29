@@ -1,7 +1,6 @@
 package com.arobs.model.notification;
 
 
-import com.arobs.entity.AgroTask;
 import com.arobs.entity.Notification;
 
 import java.io.Serializable;
@@ -10,10 +9,11 @@ import java.util.Date;
 public class NotificationModel implements Serializable {
 
     private Long id;
-    private Integer notificationTypeId;
+    private Integer typeId;
+    private String translationKey;
     private String message;
     private Long userId;
-    private Date createdAt;
+    private Date dateTo;
     private Date seenAt;
 
     public NotificationModel() {
@@ -21,10 +21,11 @@ public class NotificationModel implements Serializable {
 
     public NotificationModel(Notification entity) {
         this.id = entity.getId();
-        this.notificationTypeId = entity.getNotificationTypeId();
+        this.typeId = entity.getNotificationType().getId();
+        this.translationKey = entity.getNotificationType().getTranslationKey();
         this.message = entity.getMessage();
         this.userId = entity.getUserId();
-        this.createdAt = entity.getCreatedAt();
+        this.dateTo = entity.getDateTo();
         this.seenAt = entity.getSeenAt();
     }
 
@@ -36,12 +37,20 @@ public class NotificationModel implements Serializable {
         this.id = id;
     }
 
-    public Integer getNotificationTypeId() {
-        return notificationTypeId;
+    public Integer getTypeId() {
+        return typeId;
     }
 
-    public void setNotificationTypeId(Integer notificationTypeId) {
-        this.notificationTypeId = notificationTypeId;
+    public void setTypeId(Integer typeId) {
+        this.typeId = typeId;
+    }
+
+    public String getTranslationKey() {
+        return translationKey;
+    }
+
+    public void setTranslationKey(String translationKey) {
+        this.translationKey = translationKey;
     }
 
     public String getMessage() {
@@ -60,12 +69,12 @@ public class NotificationModel implements Serializable {
         this.userId = userId;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getDateTo() {
+        return dateTo;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setDateTo(Date dateTo) {
+        this.dateTo = dateTo;
     }
 
     public Date getSeenAt() {
