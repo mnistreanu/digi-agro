@@ -62,14 +62,14 @@
 		"mark-all-as-read": "Отметить все как прочитанные",
 		"view-all-notifications": "Просмотреть все уведомления",
 		"view-all-tasks": "Просмотреть все задачи",
-		"weather-fog-alert": "Внимание, через {{days}} дней будет туман",
-		"weather-freezing-alert": "Внимание, через {{days}} дней будут заморозки и температура может снизиться до {{degrees}} градусов",
-		"weather-hail-alert": "Внимание, через {{days}} дней будет град",
-		"weather-heat-alert": "Внимание, через {{days}} дней будет сильная жара",
-		"weather-rain-alert": "Внимание, через {{days}} дней будет дождь",
-		"weather-hoar-frost-alert": "Внимание, будет иней",
-		"weather-snow-alert": "Внимание, через {{days}} дней будет снег",
-		"weather-wind-alert": "Внимание, через {{days}} дней будет сильный ветер"
+		"weather-fog-alert": "Предупреждение о тумане",
+		"weather-freezing-alert": "Предупреждение о заморозках и низкой температуре",
+		"weather-hail-alert": "Предупреждение о граде",
+		"weather-heat-alert": "Предупреждение о сильной жаре",
+		"weather-hoar-frost-alert": "Предупреждение о инее",
+		"weather-rain-alert": "Предупреждение о дожде",
+		"weather-snow-alert": "Предупреждение о снегопаде",
+		"weather-wind-alert": "Предупреждение о сильном ветре"
 	},
 	"response": {
 		"added": "Добавлен",
