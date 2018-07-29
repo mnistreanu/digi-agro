@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -44,8 +45,8 @@ public class TenantController {
 //    }
 
     @RequestMapping(value = "/unique", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> isUnique(@RequestParam("id") Long id, @RequestParam("field") String field, @RequestParam("value") String value) {
-        // todo: user optional for id
+    public ResponseEntity<Boolean> isUnique(@RequestParam(value = "id", required = false) Long id,
+                                            @RequestParam("field") String field, @RequestParam("value") String value) {
         return ResponseEntity.ok(tenantService.isUnique(id, field, value));
     }
 

@@ -68,7 +68,7 @@ export class TenantComponent implements OnInit {
 
     public onNameChange() {
         let control = this.form.controls.name;
-        this.tenantService.isUnique(this.model.id || -1, control.value).subscribe((isUnique) => {
+        this.tenantService.isUnique(this.model.id, control.value).subscribe((isUnique) => {
             if (!isUnique) {
                 let errors = control.errors || {};
                 errors.unique = !isUnique;

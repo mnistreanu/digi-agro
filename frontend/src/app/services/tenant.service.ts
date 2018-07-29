@@ -19,9 +19,9 @@ export class TenantService {
         return this.http.get<ListItem[]>(this.api + '/list-items');
     }
 
-    validateName(id: number, name: string): Observable<boolean> {
-        let queryParams = `?id=${id}&name=${name}`;
-        return this.http.get<boolean>(this.api + '/validate-name' + queryParams);
+    isUnique(id: number, value: string): Observable<boolean> {
+        let queryParams = `?id=${id}&field=name&value=${value}`;
+        return this.http.get<boolean>(this.api + '/unique' + queryParams);
     }
 
     validateFiscalCode(id: number, code: string): Observable<boolean> {
