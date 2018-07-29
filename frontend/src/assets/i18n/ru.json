@@ -51,19 +51,25 @@
 		"brands": "Бренды",
 		"dashboard": "Главная",
 		"machines": "Машины",
+		"notifications": "Уведомления",
 		"owners": "Владелецы",
+		"tasks": "Задания",
 		"telemetry": "Телеметрия",
 		"tenants": "Клиенты",
 		"users": "Пользователями"
 	},
 	"notification": {
-		"weather_fog_alert": "Внимание, через {{days}} дней будет туман",
-		"weather_freezing_alert": "Внимание, через {{days}} дней будут заморозки и температура может снизиться до {{degrees}} градусов",
-		"weather_hail_alert": "Внимание, через {{days}} дней будет град",
-		"weather_heat_alert": " Внимание, через {{days}} дней будет сильная жара",
-		"weather_rain_alert": " Внимание, через {{days}} дней будет дождь",
-		"weather_snow_alert": "Внимание, через {{days}} дней будет снег",
-		"weather_wind_alert": "Внимание, через {{days}} дней будет сильный ветер"
+		"mark-all-as-read": "Отметить все как прочитанные",
+		"view-all-notifications": "Просмотреть все уведомления",
+		"view-all-tasks": "Просмотреть все задачи",
+		"weather-fog-alert": "Внимание, через {{days}} дней будет туман",
+		"weather-freezing-alert": "Внимание, через {{days}} дней будут заморозки и температура может снизиться до {{degrees}} градусов",
+		"weather-hail-alert": "Внимание, через {{days}} дней будет град",
+		"weather-heat-alert": "Внимание, через {{days}} дней будет сильная жара",
+		"weather-rain-alert": "Внимание, через {{days}} дней будет дождь",
+		"weather-hoar-frost-alert": "Внимание, будет иней",
+		"weather-snow-alert": "Внимание, через {{days}} дней будет снег",
+		"weather-wind-alert": "Внимание, через {{days}} дней будет сильный ветер"
 	},
 	"response": {
 		"added": "Добавлен",

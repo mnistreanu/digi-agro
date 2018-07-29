@@ -51,19 +51,25 @@
 		"brands": "Brands",
 		"dashboard": "Dashboard",
 		"machines": "Machines",
+		"notifications": "Notifications",
 		"owners": "Owners",
+		"tasks": "Tasks",
 		"telemetry": "Telemetry",
 		"tenants": "Tenants",
 		"users": "Users"
 	},
 	"notification": {
-		"weather_fog_alert": "Warning, after {{days}} days it's going to be fog",
-		"weather_freezing_alert": "Warning, after {{days}} days it's going to be freezing and temperature could go down to {{degrees}} degrees",
-		"weather_hail_alert": "Warning, after {{days}} days it's going to be hail",
-		"weather_heat_alert": "Warning, after {{days}} days it's going to be heat",
-		"weather_rain_alert": "Warning, after {{days}} days it's going to be raining",
-		"weather_snow_alert": "Warning, after {{days}} days will snow",
-		"weather_wind_alert": "Warning, after {{days}} days will be strong wind"
+		"mark-all-as-read": "Mark All as Read",
+		"view-all-notifications": "View all notifications",
+		"view-all-tasks": "View all tasks",
+		"weather-fog-alert": "Warning, after {{days}} days it's going to be fog",
+		"weather-freezing-alert": "Warning, after {{days}} days it's going to be freezing and temperature could go down to {{degrees}} degrees",
+		"weather-hail-alert": "Warning, after {{days}} days it's going to be hail",
+		"weather-heat-alert": "Warning, after {{days}} days it's going to be heat",
+		"weather-rain-alert": "Warning, after {{days}} days it's going to be raining",
+		"weather-hoar-frost-alert": "Warning, it's going to be hoar frost",
+		"weather-snow-alert": "Warning, after {{days}} days will snow",
+		"weather-wind-alert": "Warning, after {{days}} days will be strong wind"
 	},
 	"response": {
 		"added": "Added",

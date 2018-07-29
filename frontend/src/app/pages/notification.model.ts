@@ -2,8 +2,9 @@ export class NotificationModel {
 
     id: number;
     userId: number;
-    notificationTypeId: number;
+    typeId: number;
+    translationKey: number;
     message:string;
-    createdAt:Date;
+    dateTo:Date;
     seenAt:Date;
 }

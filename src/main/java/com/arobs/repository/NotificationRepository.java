@@ -15,12 +15,12 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
 
     @Query("SELECT n FROM Notification n " +
             "WHERE n.userId = :userId " +
-            "ORDER BY n.createdAt ")
+            "ORDER BY n.dateTo ")
     List<Notification> findAll(@Param("userId") Long userId);
 
     @Query("SELECT n FROM Notification n " +
             "WHERE n.userId = :userId " +
-            "ORDER BY n.createdAt ")
+            "ORDER BY n.dateTo ")
     List<Notification> findNotSeen(@Param("userId") Long userId);
 
     @Modifying

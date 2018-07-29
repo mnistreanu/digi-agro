@@ -14,8 +14,9 @@ public class Notification {
     @Column(name="id")
     private Long id;
 
-    @Column(name = "notification_type_id")
-    private Integer notificationTypeId;
+    @ManyToOne (fetch = FetchType.EAGER)
+    @JoinColumn(name = "notification_type_id")
+    private NotificationType notificationType;
 
     @Column(name = "user_id")
     private Long userId;
@@ -23,8 +24,8 @@ public class Notification {
     @Column(name="message", columnDefinition = "varchar(1024)")
     private String message;
 
-    @Column(name = "created_at")
-    private Date createdAt;
+    @Column(name = "date_to")
+    private Date dateTo;
 
     @Column(name = "seen_at")
     private Date seenAt;
@@ -37,12 +38,12 @@ public class Notification {
         this.id = id;
     }
 
-    public Integer getNotificationTypeId() {
-        return notificationTypeId;
+    public NotificationType getNotificationType() {
+        return notificationType;
     }
 
-    public void setNotificationTypeId(Integer notificationTypeId) {
-        this.notificationTypeId = notificationTypeId;
+    public void setNotificationType(NotificationType notificationType) {
+        this.notificationType = notificationType;
     }
 
     public Long getUserId() {
@@ -61,12 +62,12 @@ public class Notification {
         this.message = message;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getDateTo() {
+        return dateTo;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setDateTo(Date dateTo) {
+        this.dateTo = dateTo;
     }
 
     public Date getSeenAt() {

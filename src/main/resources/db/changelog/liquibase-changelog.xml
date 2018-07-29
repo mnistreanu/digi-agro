@@ -388,15 +388,19 @@
             VALUES (7, '{ "coordinates": [ [47.066603, 28.149660], [47.067649, 28.150897], [47.066009, 28.153511], [47.066329, 28.150125] ]}');
         </sql>
     </changeSet>
-    <changeSet id="insert-7-weather-alerts" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="insert-8-weather-alerts" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
-            INSERT INTO notification_type(translation_key) VALUES ('weather_heat_alert');
-            INSERT INTO notification_type(translation_key) VALUES ('weather_freezing_alert');
-            INSERT INTO notification_type(translation_key) VALUES ('weather_wind_alert');
-            INSERT INTO notification_type(translation_key) VALUES ('weather_snow_alert');
-            INSERT INTO notification_type(translation_key) VALUES ('weather_rain_alert');
-            INSERT INTO notification_type(translation_key) VALUES ('weather_hail_alert');
-            INSERT INTO notification_type(translation_key) VALUES ('weather_fog_alert');
+            DELETE FROM notification;
+            DELETE FROM notification_type;
+
+            INSERT INTO notification_type(id, translation_key) VALUES (1, 'weather-heat-alert');
+            INSERT INTO notification_type(id, translation_key) VALUES (2, 'weather-freezing-alert');
+            INSERT INTO notification_type(id, translation_key) VALUES (3, 'weather-wind-alert');
+            INSERT INTO notification_type(id, translation_key) VALUES (4, 'weather-snow-alert');
+            INSERT INTO notification_type(id, translation_key) VALUES (5, 'weather-rain-alert');
+            INSERT INTO notification_type(id, translation_key) VALUES (6, 'weather-hail-alert');
+            INSERT INTO notification_type(id, translation_key) VALUES (7, 'weather-fog-alert');
+            INSERT INTO notification_type(id, translation_key) VALUES (8, 'weather-hoar-frost-alert');
         </sql>
     </changeSet>
 
@@ -447,19 +451,25 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert-notifications-for-3-users" author="mihai.gorgos" failOnError="false" runOnChange="true">
+    <changeSet id="insert-5-notifications-for-3-users" author="mihai.gorgos" failOnError="false" runOnChange="true">
         <sql>
             INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (1, NOW(), 'Atenție, peste 3 zile va fi caniculă', 2);
             INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (2, NOW(), 'Atenție, peste 3 zile vor fi înghețuri și temperatura ar putea coborî până la -20 grade', 2);
             INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (3, NOW(), 'Atenție, peste 3 zile va fi vânt puternic', 2);
+            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (4, NOW(), 'Atenție, va ploua', 2);
+            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (5, NOW(), 'Atenție, va ninge', 2);
 
             INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (1, NOW(), 'Atenție, peste 3 zile va fi caniculă', 3);
             INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (2, NOW(), 'Atenție, peste 3 zile vor fi înghețuri și temperatura ar putea coborî până la -20 grade', 3);
             INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (3, NOW(), 'Atenție, peste 3 zile va fi vânt puternic', 3);
+            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (4, NOW(), 'Atenție, va ploua', 3);
+            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (5, NOW(), 'Atenție, va ninge', 3);
 
             INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (1, NOW(), 'Atenție, peste 3 zile va fi caniculă', 4);
             INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (2, NOW(), 'Atenție, peste 3 zile vor fi înghețuri și temperatura ar putea coborî până la -20 grade', 4);
             INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (3, NOW(), 'Atenție, peste 3 zile va fi vânt puternic', 4);
+            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (4, NOW(), 'Atenție, va ploua', 4);
+            INSERT INTO notification (notification_type_id, created_at, message, user_id) VALUES (5, NOW(), 'Atenție, va ninge', 4);
         </sql>
     </changeSet>
 </databaseChangeLog>

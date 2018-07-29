@@ -1,7 +1,7 @@
 
 <ul class="notifications"> 
  
-    <li class="dropdown message-menu">
+    <li class="dropdown message-menu" style="display: none">
         <a href class="dropdown-toggle message" data-toggle="dropdown" aria-expanded="false">
             <i class="fa fa-envelope-o"></i>
             <span>7</span>
@@ -32,16 +32,16 @@
     <li class="dropdown notification-menu">
         <a href class="dropdown-toggle notification" data-toggle="dropdown" aria-expanded="false">
             <i class="fa fa-bell-o"></i>
-            <span>5</span>
+            <span>{{notifications.length}}</span>
             <div class="pulsate"></div>
         </a>
 
         <div class="top-dropdown-menu dropdown-menu">
             <i class="dropdown-arr"></i>
             <div class="header clearfix">
-                <span>Notifications</span>
-                <a href="javascript:void(0);" class="transition">Mark All as Read</a>
-                <a href="javascript:void(0);" class="transition">Settings</a>
+                <span translate>nav.notifications</span>
+                <a href="javascript:void(0);" class="transition" translate>notification.mark-all-as-read</a>
+                <a href="javascript:void(0);" class="transition" translate>general.settings</a>
             </div>
             <div class="list" slim-scroll [slimScrollOptions]="{height: 250}"> 
                 <a *ngFor="let notification of notifications" href class="transition">
@@ -53,7 +53,7 @@
                 </a>
             </div> 
             <div class="footer">
-                <a href="javascript:void(0);" class="transition">View all notifications</a>
+                <a href="javascript:void(0);" class="transition" translate>notification.view-all-notifications</a>
             </div> 
         </div> 
     </li>
@@ -67,9 +67,9 @@
         <div class="top-dropdown-menu dropdown-menu">
             <i class="dropdown-arr"></i>
             <div class="header clearfix">
-                <span>Tasks</span>
-                <a href="javascript:void(0);" class="transition">Mark All as Read</a>
-                <a href="javascript:void(0);" class="transition">Settings</a>
+                <span translate>nav.tasks</span>
+                <a href="javascript:void(0);" class="transition" translate>notification.mark-all-as-read</a>
+                <a href="javascript:void(0);" class="transition" translate>general.settings</a>
             </div>
             <div class="list" slim-scroll [slimScrollOptions]="{height: 250}">
                 <a *ngFor="let task of tasks" href class="transition">
@@ -80,7 +80,7 @@
                 </a>
             </div>
             <div class="footer">
-                <a href="javascript:void(0);" class="transition">View all tasks</a>
+                <a href="javascript:void(0);" class="transition" translate>notification.view-all-tasks</a>
             </div>     
         </div>
     </li>
