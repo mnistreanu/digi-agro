@@ -24,7 +24,7 @@ export const routes = [
         DirectivesModule,
         FormErrorBlockModule,
         EditRendererModule,
-        AgGridModule.withComponents([EditRendererComponent])
+        AgGridModule.withComponents([EditRendererComponent]),
         RouterModule.forChild(routes)
     ],
     declarations: [NotificationSubscriptionComponent]
