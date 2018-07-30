@@ -36,11 +36,35 @@ public class NotificationController {
     public ResponseEntity<PayloadModel> getNotifications() {
         Long userId  = 2L;
         boolean onlyNotSeen = false;
-        Date scheduledTime = null;
+        Date scheduledTime = new Date();
         PayloadModel<NotificationModel> payloadModel = new PayloadModel<>();
 
         try {
-            List<Notification> notifications = notificationService.findNotSeen(userId, new Date());
+            List<Notification> notifications = notificationService.findNotSeen(userId, scheduledTime);
+            if (!notifications.isEmpty()) {
+                List<NotificationModel> models = notifications.stream().map(NotificationModel::new).collect(Collectors.toList());
+                NotificationModel[] payload = models.toArray(new NotificationModel[models.size()]);
+                payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
+                payloadModel.setPayload(payload);
+            } else {
+                payloadModel.setStatus(PayloadModel.STATUS_WARNING);
+            }
+        } catch (Exception e) {
+            payloadModel.setStatus(PayloadModel.STATUS_ERROR);
+            payloadModel.setMessage(e.getLocalizedMessage());
+        }
+
+        return ResponseEntity.ok(payloadModel);
+    }
+
+
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public ResponseEntity<PayloadModel> getAllNotifications() {
+        Long userId  = 2L;
+        PayloadModel<NotificationModel> payloadModel = new PayloadModel<>();
+
+        try {
+            List<Notification> notifications = notificationService.findAll(userId);
             if (!notifications.isEmpty()) {
                 List<NotificationModel> models = notifications.stream().map(NotificationModel::new).collect(Collectors.toList());
                 NotificationModel[] payload = models.toArray(new NotificationModel[models.size()]);

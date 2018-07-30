@@ -18,6 +18,10 @@ export class NotificationService {
         return this.http.get<PayloadModel>(this.api + '/');
     }
 
+    findAll(): Observable<PayloadModel> {
+        return this.http.get<PayloadModel>(this.api + '/all');
+    }
+
     findTypes(): Observable<PayloadModel> {
         return this.http.get<PayloadModel>(this.api + '/types');
     }

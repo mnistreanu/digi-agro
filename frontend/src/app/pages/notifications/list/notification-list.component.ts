@@ -5,6 +5,7 @@ import {ColDef, GridOptions} from "ag-grid";
 import {NotificationModel} from "../notification.model";
 import {ImageRendererComponent} from "../../../modules/aggrid/image-renderer/image-renderer.component";
 import {LangService} from "../../../services/lang.service";
+import moment = require("moment");
 
 @Component({
   selector: 'az-notification-list',
@@ -64,13 +65,13 @@ export class NotificationListComponent implements OnInit {
                 minWidth: 400
             },
             {
-                headerName: 'Time to',
+                headerName: 'Days to',
                 field: 'durationDays',
                 width: 200,
                 minWidth: 100
             },
             {
-                headerName: 'Time to',
+                headerName: 'Hours to',
                 field: 'durationHours',
                 width: 200,
                 minWidth: 100
@@ -78,6 +79,11 @@ export class NotificationListComponent implements OnInit {
             {
                 headerName: 'Seen At',
                 field: 'seenAt',
+                filter: 'agDateColumnFilter',
+                cellClass: 'cell-date',
+                cellFormatter :  function(data) {
+                    return moment(data.value).format('D.MM, hh:mm:ss');
+                },
                 width: 200,
                 minWidth: 100
             }
@@ -87,7 +93,7 @@ export class NotificationListComponent implements OnInit {
     }
 
     private setupRows() {
-        this.notificationService.find().subscribe(payloadModel => {
+        this.notificationService.findAll().subscribe(payloadModel => {
             let models = payloadModel.payload;
             this.adjustNotificationTypes(models);
             this.adjustNotificationImages(models);
