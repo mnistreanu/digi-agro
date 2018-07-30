@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {NotificationService} from "../../../services/notification.service";
 import {Router} from "@angular/router";
 import {ColDef, GridOptions} from "ag-grid";
 import {NotificationModel} from "../notification.model";
 import {ImageRendererComponent} from "../../../modules/aggrid/image-renderer/image-renderer.component";
 import {LangService} from "../../../services/lang.service";
-import {DateUtil} from "../../../common/dateUtil";
 
 @Component({
   selector: 'az-notification-list',
@@ -81,13 +80,21 @@ export class NotificationListComponent implements OnInit {
                 field: 'seenAt',
                 filter: 'agDateColumnFilter',
                 cellClass: 'cell-date',
-                valueFormatter: params => DateUtil.formatDateWithTime(params.value),
+                // valueFormatter: params => DateUtil.formatDateWithTime(params.value),
+                valueFormatter: params => this.formatDate(params),
                 width: 200,
                 minWidth: 160
             }
         ];
 
         return headers;
+    }
+
+    private formatDate(params) {
+        if (!params.value) {
+            return '';
+        }
+        return moment(params.value).format('D.MMM, hh.mm');
     }
 
     private setupRows() {

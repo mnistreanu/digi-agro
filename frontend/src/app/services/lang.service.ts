@@ -17,12 +17,14 @@ export class LangService {
         this.translate.setDefaultLang(language);
         this.translate.use(language);
         this.storageService.setItem(Constants.LANGUAGE_KEY, language);
+        moment.locale(language);
     }
 
     restoreLanguage() {
         let language = this.storageService.getItem(Constants.LANGUAGE_KEY);
         if (language) {
             this.translate.use(language);
+            moment.locale(language);
         }
         else {
             this.setupDefault();
@@ -33,6 +35,7 @@ export class LangService {
         if (language) {
             this.storageService.setItem(Constants.LANGUAGE_KEY, language);
             this.translate.use(language);
+            moment.locale(language);
         }
         else {
             this.setupDefault();
