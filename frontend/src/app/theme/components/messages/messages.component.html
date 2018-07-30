@@ -47,13 +47,13 @@
                 <a *ngFor="let notification of notifications" href class="transition">
                     <img src="{{ ( notification.image || (notification.name | profilePicture)) }}">                    
                     <div class="list-content">
-                        <h3>{{notification.name}} <span class="pull-right"> {{notification.time}}</span></h3>
+                        <h3><b translate>notification.{{notification.name}}</b><span class="pull-right"> {{notification.time}}</span></h3>
                         <p>{{notification.text}}</p>
                     </div>
                 </a>
             </div> 
             <div class="footer">
-                <a href="javascript:void(0);" class="transition" translate>notification.view-all-notifications</a>
+                <a href="/pages/notification-list" class="transition" translate>notification.view-all-notifications</a>
             </div> 
         </div> 
     </li>

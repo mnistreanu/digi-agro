@@ -1,10 +1,8 @@
-///<reference path="../../services/notification.service.ts"/>
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import {NotificationService} from "../../services/notification.service";
-import {EditRendererComponent} from "../../modules/aggrid/edit-renderer/edit-renderer.component";
+import {NotificationService} from "../../../services/notification.service";
 import {ColDef, GridOptions} from "ag-grid";
-import {ListItem} from "../../interfaces/list-item.interface";
+import {ListItem} from "../../../interfaces/list-item.interface";
 
 @Component({
     selector: 'az-notification-subscription',
@@ -17,8 +15,7 @@ export class NotificationSubscriptionComponent implements OnInit {
     public listItems: ListItem[];
     public notificationTypes:Array<Object> = [];
 
-    constructor(private router: Router,
-                private notificationService: NotificationService) {
+    constructor(private router: Router, private notificationService: NotificationService) {
     }
 
     ngOnInit() {
@@ -32,7 +29,7 @@ export class NotificationSubscriptionComponent implements OnInit {
             this.listItems.forEach((model) => {
                 let notificationType: any = {};
                 notificationType.id = model.id;
-                notificationType.name = model.name; //TODO  de extras denumirea tabelul notification_type
+                notificationType.name = model.name;
                 notificationType.image = '../assets/img/notifications/'+model.name+ '.png';
                 this.notificationTypes.push(notificationType);
             });

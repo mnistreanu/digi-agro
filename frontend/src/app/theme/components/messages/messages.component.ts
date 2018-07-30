@@ -3,15 +3,16 @@ import {Component, ViewEncapsulation} from '@angular/core';
 import {MessagesService} from '../../../services/messages.service';
 import {AgroTaskService} from '../../../services/agro-task.service';
 import {AgroTaskModel} from "../../../pages/agro-task-calendar/agro-task.model";
-import {NotificationModel} from "../../../pages/notification.model";
+import {NotificationModel} from "../../../pages/notifications/notification.model";
 import {NotificationService} from "../../../services/notification.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'az-messages',
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./messages.component.scss'],
     templateUrl: './messages.component.html',
-    providers: [MessagesService, NotificationService, AgroTaskService]
+    providers: [MessagesService, NotificationService, AgroTaskService, TranslateService]
 })
 
 export class MessagesComponent{     
@@ -24,7 +25,7 @@ export class MessagesComponent{
     public agrotaskModels: AgroTaskModel[];
 
     constructor (private messagesService:MessagesService, private agroTaskService:AgroTaskService,
-                 private notificationService: NotificationService){
+                 private notificationService: NotificationService, private translate: TranslateService){
         this.messages = messagesService.getMessages();
         this.findNotifications();
         this.findAgroTasks();
@@ -88,7 +89,7 @@ export class MessagesComponent{
                 let notification: any = {};
                 notification.id = model.id;
                 notification.typeId = model.typeId;
-                notification.name = 'METEO'; //TODO  de extras denumirea tabelul notification_type
+                notification.name = model.translationKey;
                 notification.text = model.message;
                 notification.time = 'peste ' + model.durationDays + ' zile si ' + model.durationHours +' ore'; //TODO de facut corect
                 notification.image = '../assets/img/notifications/'+model.translationKey+ '.png';
