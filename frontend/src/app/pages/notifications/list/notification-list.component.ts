@@ -3,6 +3,7 @@ import {NotificationService} from "../../../services/notification.service";
 import {Router} from "@angular/router";
 import {ColDef, GridOptions} from "ag-grid";
 import {NotificationModel} from "../notification.model";
+import {ImageRendererComponent} from "../../../modules/aggrid/image-renderer/image-renderer.component";
 
 @Component({
   selector: 'az-notification-list',
@@ -11,7 +12,6 @@ import {NotificationModel} from "../notification.model";
 })
 export class NotificationListComponent implements OnInit {
 
-    public notificationModels: NotificationModel[];
     options: GridOptions;
     context;
 
@@ -33,7 +33,6 @@ export class NotificationListComponent implements OnInit {
         this.context = {componentParent: this};
 
         this.setupRows();
-
     }
 
     private setupHeaders() {
@@ -41,10 +40,14 @@ export class NotificationListComponent implements OnInit {
         let headers: ColDef[] = [
             {
                 headerName: '',
-//                image: '../assets/img/notifications/'+translationKey+ '.png',
-                field: 'translationKey',
-                width: 100,
-                minWidth: 100
+                field: 'notificationImage',
+                cellRendererFramework: ImageRendererComponent,
+                cellStyle: () => {return {padding: 0}},
+                width: 50,
+                minWidth: 50,
+                maxWidth: 50,
+                suppressResize: true,
+                suppressMenu: true
             },
             {
                 headerName: 'Type',
@@ -83,8 +86,15 @@ export class NotificationListComponent implements OnInit {
 
     private setupRows() {
         this.notificationService.find().subscribe(payloadModel => {
-            this.notificationModels = payloadModel.payload;
-            this.options.api.setRowData(this.notificationModels);
+            let models = payloadModel.payload;
+            this.adjustNotificationImages(models);
+            this.options.api.setRowData(models);
+        });
+    }
+
+    private adjustNotificationImages(models: NotificationModel[]) {
+        models.forEach((model) => {
+            model.notificationImage = '../assets/img/notifications/' + model.translationKey + '.png';
         });
     }
 

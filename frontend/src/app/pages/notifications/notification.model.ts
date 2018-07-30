@@ -5,8 +5,10 @@ export class NotificationModel {
     typeId: number;
     translationKey: string;
     message:string;
-    dateTo:Date;
+    dateTo: Date;
     durationDays;
     durationHours;
-    seenAt:Date;
+    seenAt: Date;
+
+    notificationImage: string;
 }

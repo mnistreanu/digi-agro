@@ -41,7 +41,7 @@
             <div class="header clearfix">
                 <span translate>nav.notifications</span>
                 <a href="javascript:void(0);" class="transition" translate>notification.mark-all-as-read</a>
-                <a href="/pages/notification-subscription" class="transition" translate>general.settings</a>
+                <a routerLink="/pages/notification-subscription" class="transition" translate>general.settings</a>
             </div>
             <div class="list" slim-scroll [slimScrollOptions]="{height: 250}"> 
                 <a *ngFor="let notification of notifications" href class="transition">
@@ -53,7 +53,7 @@
                 </a>
             </div> 
             <div class="footer">
-                <a href="/pages/notification-list" class="transition" translate>notification.view-all-notifications</a>
+                <a routerLink="/pages/notification-list" class="transition" translate>notification.view-all-notifications</a>
             </div> 
         </div> 
     </li>
