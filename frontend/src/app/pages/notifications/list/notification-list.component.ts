@@ -5,7 +5,7 @@ import {ColDef, GridOptions} from "ag-grid";
 import {NotificationModel} from "../notification.model";
 import {ImageRendererComponent} from "../../../modules/aggrid/image-renderer/image-renderer.component";
 import {LangService} from "../../../services/lang.service";
-import moment = require("moment");
+import {DateUtil} from "../../../common/dateUtil";
 
 @Component({
   selector: 'az-notification-list',
@@ -81,11 +81,9 @@ export class NotificationListComponent implements OnInit {
                 field: 'seenAt',
                 filter: 'agDateColumnFilter',
                 cellClass: 'cell-date',
-                cellFormatter :  function(data) {
-                    return moment(data.value).format('D.MM, hh:mm:ss');
-                },
+                valueFormatter: params => DateUtil.formatDateWithTime(params.value),
                 width: 200,
-                minWidth: 100
+                minWidth: 160
             }
         ];
 
