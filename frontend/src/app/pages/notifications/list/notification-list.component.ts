@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {ColDef, GridOptions} from "ag-grid";
 import {NotificationModel} from "../notification.model";
 import {ImageRendererComponent} from "../../../modules/aggrid/image-renderer/image-renderer.component";
+import {LangService} from "../../../services/lang.service";
 
 @Component({
   selector: 'az-notification-list',
@@ -16,6 +17,7 @@ export class NotificationListComponent implements OnInit {
     context;
 
     constructor(private router: Router,
+                private langService: LangService,
                 private notificationService: NotificationService) {
     }
 
@@ -51,7 +53,7 @@ export class NotificationListComponent implements OnInit {
             },
             {
                 headerName: 'Type',
-                field: 'translationKey',
+                field: 'type',
                 width: 400,
                 minWidth: 200
             },
@@ -87,6 +89,7 @@ export class NotificationListComponent implements OnInit {
     private setupRows() {
         this.notificationService.find().subscribe(payloadModel => {
             let models = payloadModel.payload;
+            this.adjustNotificationTypes(models);
             this.adjustNotificationImages(models);
             this.options.api.setRowData(models);
         });
@@ -95,6 +98,12 @@ export class NotificationListComponent implements OnInit {
     private adjustNotificationImages(models: NotificationModel[]) {
         models.forEach((model) => {
             model.notificationImage = '../assets/img/notifications/' + model.translationKey + '.png';
+        });
+    }
+
+    private adjustNotificationTypes(models: NotificationModel[]) {
+        models.forEach((model) => {
+            this.langService.get('notification.' + model.translationKey).subscribe(msg => model.type = msg);
         });
     }
 

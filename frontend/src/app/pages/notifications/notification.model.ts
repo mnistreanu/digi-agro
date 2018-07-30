@@ -4,6 +4,7 @@ export class NotificationModel {
     userId: number;
     typeId: number;
     translationKey: string;
+    type: string;
     message:string;
     dateTo: Date;
     durationDays;
