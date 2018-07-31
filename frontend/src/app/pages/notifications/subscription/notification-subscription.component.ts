@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
-import {NotificationService} from "../../../services/notification.service";
-import {ColDef, GridOptions} from "ag-grid";
-import {ListItem} from "../../../interfaces/list-item.interface";
+import {Component, OnInit} from "@angular/core";
+import {ToastrService} from "ngx-toastr";
+import {LangService} from "../../../services/lang.service";
+import {Messages} from "../../../common/messages";
+import {NotificationSubscriptionService} from "../../../services/notification/notification-subscription.service";
+import {NotificationSubscriptionModel} from "./notification-subscription.model";
 
 @Component({
     selector: 'az-notification-subscription',
@@ -11,30 +12,38 @@ import {ListItem} from "../../../interfaces/list-item.interface";
 })
 export class NotificationSubscriptionComponent implements OnInit {
 
-    context;
-    public listItems: ListItem[];
-    public notificationTypes:Array<Object> = [];
+    public models: NotificationSubscriptionModel[] = [];
 
-    constructor(private router: Router, private notificationService: NotificationService) {
+    private labelSaved: string;
+
+    constructor(private toastrService: ToastrService,
+                private langService: LangService,
+                private notificationSubscriptionService: NotificationSubscriptionService) {
     }
 
     ngOnInit() {
-        this.findNotificationTypes();
+        this.setupLabels();
+        this.setupModels();
     }
 
-    private findNotificationTypes() {
-        this.notificationService.findTypes().subscribe(payloadModel => {
-            this.listItems = payloadModel.payload;
+    private setupLabels() {
+        this.langService.get(Messages.SAVED).subscribe(msg => this.labelSaved = msg);
+    }
 
-            this.listItems.forEach((model) => {
-                let notificationType: any = {};
-                notificationType.id = model.id;
-                notificationType.name = model.name;
-                notificationType.image = '../assets/img/notifications/'+model.name+ '.png';
-                this.notificationTypes.push(notificationType);
+    private setupModels() {
+        this.notificationSubscriptionService.find().subscribe(items => {
+            this.models = items;
+            this.models.forEach((model) => {
+                model.typeModel.image = '../assets/img/notifications/' + model.typeModel.key + '.png';
             });
         })
     }
 
+    changeSubscription(event, model) {
+        model.subscribed = event.target.checked;
+        this.notificationSubscriptionService.changeSubscription(model.typeModel.id, model.subscribed).subscribe(() => {
+            this.toastrService.success(this.labelSaved);
+        });
+    }
 
 }

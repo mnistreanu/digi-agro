@@ -10,7 +10,7 @@ import java.util.Date;
 public class NotificationModel implements Serializable {
 
     private Long id;
-    private Integer typeId;
+    private Long typeId;
     private String translationKey;
     private String message;
     private Long userId;
@@ -44,11 +44,11 @@ public class NotificationModel implements Serializable {
         this.id = id;
     }
 
-    public Integer getTypeId() {
+    public Long getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(Integer typeId) {
+    public void setTypeId(Long typeId) {
         this.typeId = typeId;
     }
 

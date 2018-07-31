@@ -17,6 +17,10 @@ public interface NotificationSubscriptionRepository extends JpaRepository<Notifi
     @Query("SELECT s FROM NotificationSubscription s WHERE s.userId = :userId")
     List<NotificationSubscription> find(@Param("userId") Long userId);
 
+    @Modifying
+    @Query("DELETE FROM NotificationSubscription s WHERE s.userId = :userId AND s.notificationType.id = :typeId")
+    void delete(@Param("userId") Long userId, @Param("typeId") Long typeId);
+
 
 }
 

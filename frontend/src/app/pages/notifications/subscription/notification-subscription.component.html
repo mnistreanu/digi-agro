@@ -12,15 +12,16 @@
     <div class="card-body widget-body">
         <form>
             <table>
-                <tr *ngFor="let nt of notificationTypes">
+                <tr *ngFor="let m of models; let i = index;">
                     <td>
-                        <img [src]="nt.image" class="notification-image"/>
+                        <img [src]="m.typeModel.image" class="notification-image"/>
                     </td>
                     <td>
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="nt-checkbox-{{nt.id}}" >
-                            <label class="custom-control-label " for="nt-checkbox-{{nt.id}}"
-                                   translate>notification.{{nt.name}}</label>
+                            <input id="nt-checkbox-{{i}}" type="checkbox" class="custom-control-input"
+                                   [checked]="m.subscribed" (change)="changeSubscription($event, m)">
+                            <label class="custom-control-label" for="nt-checkbox-{{i}}"
+                                   translate>notification.{{m.typeModel.key}}</label>
                         </div>
                     </td>
                 </tr>

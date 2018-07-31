@@ -1,45 +1,28 @@
 package com.arobs.model.notification;
 
-import com.arobs.entity.NotificationSubscription;
-
 import java.io.Serializable;
 
 public class NotificationSubscriptionModel implements Serializable {
 
-    private Long id;
-    private Integer typeId;
-    private Long userId;
+    private NotificationTypeModel typeModel;
+    private Boolean subscribed;
 
     public NotificationSubscriptionModel() {
     }
 
-    public NotificationSubscriptionModel(NotificationSubscription entity) {
-        this.id = entity.getId();
-        this.typeId = entity.getNotificationType().getId();
-        this.userId = entity.getUserId();
+    public NotificationTypeModel getTypeModel() {
+        return typeModel;
     }
 
-    public Long getId() {
-        return id;
+    public void setTypeModel(NotificationTypeModel typeModel) {
+        this.typeModel = typeModel;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Boolean getSubscribed() {
+        return subscribed;
     }
 
-    public Integer getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setSubscribed(Boolean subscribed) {
+        this.subscribed = subscribed;
     }
 }

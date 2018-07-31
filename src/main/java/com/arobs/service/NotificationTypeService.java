@@ -14,7 +14,7 @@ public class NotificationTypeService implements HasRepository<NotificationTypeRe
     @Autowired
     private NotificationTypeRepository notificationTypeRepository;
 
-    public NotificationType findOne(Integer id) {
+    public NotificationType findOne(Long id) {
         return getRepository().findOne(id);
     }
 

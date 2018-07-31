@@ -8,19 +8,19 @@ import javax.persistence.*;
 @Entity
 @Table(name = "notification_type")
 public class NotificationType {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private Integer id;
+    private Long id;
 
     @Column(name="translation_key", columnDefinition = "varchar(256)")
     private String translationKey;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

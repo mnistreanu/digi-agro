@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {NotificationService} from "../../../services/notification.service";
+import {NotificationService} from "../../../services/notification/notification.service";
 import {Router} from "@angular/router";
 import {ColDef, GridOptions} from "ag-grid";
 import {NotificationModel} from "../notification.model";

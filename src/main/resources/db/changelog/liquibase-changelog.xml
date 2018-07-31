@@ -251,6 +251,7 @@
             VALUES (7, '{ "coordinates": [ [47.066603, 28.149660], [47.067649, 28.150897], [47.066009, 28.153511], [47.066329, 28.150125] ]}');
         </sql>
     </changeSet>
+
     <changeSet id="insert-8-weather-alerts" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO notification_type(id, translation_key) VALUES (1, 'weather-heat-alert');
@@ -269,6 +270,12 @@
             select nextval('notification_type_id_seq');
             select nextval('notification_type_id_seq');
             select nextval('notification_type_id_seq');
+        </sql>
+    </changeSet>
+
+    <changeSet id="notification-type-change-pk-type" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <sql>
+            ALTER TABLE notification_type ALTER COLUMN id TYPE bigint;
         </sql>
     </changeSet>
 

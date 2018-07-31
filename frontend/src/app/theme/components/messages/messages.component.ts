@@ -4,7 +4,7 @@ import {MessagesService} from '../../../services/messages.service';
 import {AgroTaskService} from '../../../services/agro-task.service';
 import {AgroTaskModel} from "../../../pages/agro-task-calendar/agro-task.model";
 import {NotificationModel} from "../../../pages/notifications/notification.model";
-import {NotificationService} from "../../../services/notification.service";
+import {NotificationService} from "../../../services/notification/notification.service";
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({

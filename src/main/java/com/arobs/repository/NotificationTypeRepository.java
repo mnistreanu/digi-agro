@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface NotificationTypeRepository extends JpaRepository<NotificationType, Integer> {
+public interface NotificationTypeRepository extends JpaRepository<NotificationType, Long> {
 
     @Query("SELECT nt FROM NotificationType nt")
     List<NotificationType> find();
