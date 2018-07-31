@@ -82,7 +82,7 @@ export class MenuService {
 
         if (isAdmin || isUser) {
             menuItems.push({
-                title: 'Agro Task Calendar',
+                title: 'nav.work-agenda',
                 routerLink: '/pages/agro-task-calendar',
                 icon: 'fa-calendar',
                 selected: false,

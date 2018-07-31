@@ -47,11 +47,13 @@
 		"сonsumption": "Consum"
 	},
 	"nav": {
+		"work-agenda": "Agenda lucrărilor",
 		"branches": "Subdiviziuni",
 		"brands": "Brands",
 		"dashboard": "Dashboard",
 		"machines": "Maşini",
-		"notifications": "Notificari",
+		"notifications": "Notificări",
+		"notifications-and-alerts": "Notificări și alete",
 		"owners": "Proprietari",
 		"tasks": "Sarcini",
 		"telemetry": "Telemetrie",

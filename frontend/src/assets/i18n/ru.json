@@ -47,11 +47,13 @@
 		"сonsumption": "Расход"
 	},
 	"nav": {
+		"work-agenda": "Повестка работ",
 		"branches": "Подразделения",
 		"brands": "Бренды",
 		"dashboard": "Главная",
 		"machines": "Машины",
 		"notifications": "Уведомления",
+		"notifications-and-alerts": "Уведомления и оповещения",
 		"owners": "Владелецы",
 		"tasks": "Задания",
 		"telemetry": "Телеметрия",

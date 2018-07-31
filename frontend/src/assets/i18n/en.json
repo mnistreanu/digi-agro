@@ -47,11 +47,13 @@
 		"сonsumption": "Consumption"
 	},
 	"nav": {
+		"work-agenda": "Work agenda",
 		"branches": "Branches",
 		"brands": "Brands",
 		"dashboard": "Dashboard",
 		"machines": "Machines",
 		"notifications": "Notifications",
+		"notifications-and-alerts": "Notifications and alerts",
 		"owners": "Owners",
 		"tasks": "Tasks",
 		"telemetry": "Telemetry",

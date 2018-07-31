@@ -94,7 +94,7 @@ export class NotificationListComponent implements OnInit {
         if (!params.value) {
             return '';
         }
-        return moment(params.value).format('D.MMM, hh.mm');
+        return moment(params.value).format('D MMMM, hh:mm');
     }
 
     private setupRows() {
