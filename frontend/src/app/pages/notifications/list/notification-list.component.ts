@@ -79,8 +79,22 @@ export class NotificationListComponent implements OnInit {
                 headerName: 'Seen At',
                 field: 'seenAt',
                 filter: 'agDateColumnFilter',
-                cellClass: 'cell-date',
-                // valueFormatter: params => DateUtil.formatDateWithTime(params.value),
+                filterParams: {
+                    comparator: function(filterDate, cellValue) {
+                        let filterDateWithoutTime = new Date(filterDate.getFullYear(), filterDate.getMonth(), filterDate.getDate());
+                        let cellDate = new Date(cellValue);
+                        let cellDateWithoutTime = new Date(cellDate.getFullYear(), cellDate.getMonth(), cellDate.getDate());
+
+                        let a = cellDateWithoutTime.getTime();
+                        let b = filterDateWithoutTime.getTime();
+
+                        if (a == b) {
+                            return 0;
+                        }
+
+                        return a > b ? 1 : -1;
+                    }
+                },
                 valueFormatter: params => this.formatDate(params),
                 width: 200,
                 minWidth: 160
