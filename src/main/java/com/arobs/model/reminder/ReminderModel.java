@@ -1,12 +1,12 @@
-package com.arobs.model.agroTask;
+package com.arobs.model.reminder;
 
 
-import com.arobs.entity.AgroTask;
+import com.arobs.entity.Reminder;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class AgroTaskModel implements Serializable {
+public class ReminderModel implements Serializable {
 
     private Long id;
     private Integer workTypeId;
@@ -14,21 +14,21 @@ public class AgroTaskModel implements Serializable {
     private String description;
     private Long tenantId;
     private Long createdBy;
-    private Date scheduledStart;
-    private Date scheduledEnd;
+    private Date starting;
+    private Date ending;
 
-    public AgroTaskModel() {
+    public ReminderModel() {
     }
 
-    public AgroTaskModel(AgroTask entity) {
+    public ReminderModel(Reminder entity) {
         this.id = entity.getId();
         this.workTypeId = entity.getWorkType().getId();
         this.title = entity.getTitle();
         this.description = entity.getDescription();
         this.tenantId = entity.getTenantId();
         this.createdBy = entity.getCreatedBy();
-        this.scheduledStart = entity.getScheduledStart();
-        this.scheduledEnd = entity.getScheduledEnd();
+        this.starting = entity.getStarting();
+        this.ending = entity.getEnding();
     }
 
     public Long getId() {
@@ -79,19 +79,19 @@ public class AgroTaskModel implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public Date getScheduledStart() {
-        return scheduledStart;
+    public Date getStarting() {
+        return starting;
     }
 
-    public void setScheduledStart(Date scheduledStart) {
-        this.scheduledStart = scheduledStart;
+    public void setStarting(Date starting) {
+        this.starting = starting;
     }
 
-    public Date getScheduledEnd() {
-        return scheduledEnd;
+    public Date getEnding() {
+        return ending;
     }
 
-    public void setScheduledEnd(Date scheduledEnd) {
-        this.scheduledEnd = scheduledEnd;
+    public void setEnding(Date ending) {
+        this.ending = ending;
     }
 }

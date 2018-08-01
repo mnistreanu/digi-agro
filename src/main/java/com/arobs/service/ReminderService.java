@@ -1,9 +1,9 @@
 package com.arobs.service;
 
-import com.arobs.entity.AgroTask;
+import com.arobs.entity.Reminder;
 import com.arobs.interfaces.HasRepository;
-import com.arobs.model.agroTask.AgroTaskModel;
-import com.arobs.repository.AgroTaskRepository;
+import com.arobs.model.reminder.ReminderModel;
+import com.arobs.repository.ReminderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,29 +12,29 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class AgroTaskService implements HasRepository<AgroTaskRepository> {
+public class ReminderService implements HasRepository<ReminderRepository> {
 
     @Autowired
     private AuthService authService;
     @Autowired
-    private AgroTaskRepository agroTaskRepository;
+    private ReminderRepository reminderRepository;
     @Autowired
     private AgroWorkTypeService agroWorkTypeService;
 
     @Override
-    public AgroTaskRepository getRepository() {
-        return agroTaskRepository;
+    public ReminderRepository getRepository() {
+        return reminderRepository;
     }
 
-    public List<AgroTask> find(Long tenantId, Date scheduledTime) {
+    public List<Reminder> find(Long tenantId, Date scheduledTime) {
         if (scheduledTime == null) {
-            return getRepository().findAll(tenantId);
+            return getRepository().find(tenantId);
         } else {
-            return getRepository().findInFuture(tenantId, scheduledTime);
+            return getRepository().find(tenantId, scheduledTime);
         }
     }
 
-    public AgroTask findOne(Long id) {
+    public Reminder findOne(Long id) {
         return getRepository().findOne(id);
     }
 
@@ -44,11 +44,11 @@ public class AgroTaskService implements HasRepository<AgroTaskRepository> {
     }
 
     @Transactional(rollbackOn = Exception.class)
-    public AgroTask save(AgroTaskModel model) {
-        AgroTask entity;
+    public Reminder save(ReminderModel model) {
+        Reminder entity;
 
         if (model.getId() == null) {
-            entity = new AgroTask();
+            entity = new Reminder();
             entity.setCreatedBy(authService.getCurrentUser().getId());
             entity.setTenantId(model.getTenantId());
         }
@@ -62,11 +62,11 @@ public class AgroTaskService implements HasRepository<AgroTaskRepository> {
     }
 
     @Transactional
-    private void copyValues(AgroTask entity, AgroTaskModel model) {
+    private void copyValues(Reminder entity, ReminderModel model) {
         entity.setTitle(model.getTitle());
         entity.setDescription(model.getDescription());
-        entity.setScheduledStart(model.getScheduledStart());
-        entity.setScheduledEnd(model.getScheduledEnd());
+        entity.setStarting(model.getStarting());
+        entity.setEnding(model.getEnding());
         entity.setWorkType(agroWorkTypeService.findOne(model.getWorkTypeId()));
     }
 

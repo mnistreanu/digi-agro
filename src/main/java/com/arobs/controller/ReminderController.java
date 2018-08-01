@@ -1,12 +1,12 @@
 package com.arobs.controller;
 
-import com.arobs.entity.AgroTask;
+import com.arobs.entity.Reminder;
 import com.arobs.entity.AgroWorkType;
 import com.arobs.model.AgroWorkTypeModel;
 import com.arobs.model.PayloadModel;
-import com.arobs.model.agroTask.AgroTaskModel;
-import com.arobs.model.agroTask.AgroTaskScheduleChangeModel;
-import com.arobs.service.AgroTaskService;
+import com.arobs.model.reminder.ReminderModel;
+import com.arobs.model.reminder.ReminderChangeModel;
+import com.arobs.service.ReminderService;
 import com.arobs.service.AgroWorkTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,25 +18,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/agro-task")
-public class AgroTaskController {
+@RequestMapping("/reminder")
+public class ReminderController {
 
     @Autowired
-    private AgroTaskService agroTaskService;
+    private ReminderService reminderService;
     @Autowired
     private AgroWorkTypeService agroWorkTypeService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<PayloadModel> getScheduledTasks() {
         Long tenantId  = 1L;
-        Date scheduledTime = null;
-        PayloadModel<AgroTaskModel> payloadModel = new PayloadModel<>();
+        Date scheduledTime = new Date();
+        PayloadModel<ReminderModel> payloadModel = new PayloadModel<>();
 
         try {
-            List<AgroTask> agroTasks = agroTaskService.find(tenantId, scheduledTime);
-            if (!agroTasks.isEmpty()) {
-                List<AgroTaskModel> models = agroTasks.stream().map(AgroTaskModel::new).collect(Collectors.toList());
-                AgroTaskModel[] payload = models.toArray(new AgroTaskModel[models.size()]);
+            List<Reminder> reminders = reminderService.find(tenantId, scheduledTime);
+            if (!reminders.isEmpty()) {
+                List<ReminderModel> models = reminders.stream().map(ReminderModel::new).collect(Collectors.toList());
+                ReminderModel[] payload = models.toArray(new ReminderModel[models.size()]);
                 payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
                 payloadModel.setPayload(payload);
             } else {
@@ -80,9 +80,9 @@ public class AgroTaskController {
 //    }
 //
 //    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-//    public ResponseEntity<AgroTaskModel> getModel(@PathVariable Long id) {
-//        AgroTask at = agroTaskService.findOne(id);
-//        return ResponseEntity.ok(new AgroTaskModel(at));
+//    public ResponseEntity<ReminderModel> getModel(@PathVariable Long id) {
+//        Reminder at = agroTaskService.findOne(id);
+//        return ResponseEntity.ok(new ReminderModel(at));
 //    }
 //
 //    @RequestMapping(value = "/validate-identifier", method = RequestMethod.GET)
@@ -93,26 +93,26 @@ public class AgroTaskController {
 
     @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
     @RequestMapping(value = "/schedule", method = RequestMethod.POST)
-    public void changeSchedule(@RequestBody AgroTaskScheduleChangeModel model) {
-        agroTaskService.changeSchedule(model.getId(), model.getStart(), model.getEnd());
+    public void changeSchedule(@RequestBody ReminderChangeModel model) {
+        reminderService.changeSchedule(model.getId(), model.getStarting(), model.getEnding());
     }
 
     @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity<AgroTaskModel> save(@RequestBody AgroTaskModel model) {
+    public ResponseEntity<ReminderModel> save(@RequestBody ReminderModel model) {
 
         // todo: adjust tenant
         if (model.getTenantId() == null) {
             model.setTenantId(1L);
         }
 
-        return ResponseEntity.ok(new AgroTaskModel(agroTaskService.save(model)));
+        return ResponseEntity.ok(new ReminderModel(reminderService.save(model)));
     }
 
     @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void remove(@PathVariable Long id) {
-        agroTaskService.remove(id);
+        reminderService.remove(id);
     }
 
 }

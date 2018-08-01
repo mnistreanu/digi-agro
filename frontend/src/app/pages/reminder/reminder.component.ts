@@ -1,8 +1,8 @@
 import {Component} from "@angular/core";
 import {AppConfig} from "../../app.config";
-import {AgroTaskService} from "../../services/agro-task.service";
+import {ReminderService} from "../../services/reminder.service";
 import "style-loader!fullcalendar/dist/fullcalendar.min.css";
-import {AgroTaskModel} from "./agro-task.model";
+import {ReminderModel} from "./reminder.model";
 import {LangService} from "../../services/lang.service";
 import {AgroWorkTypeModel} from "./agro-work-type.model";
 import {ToastrService} from "ngx-toastr";
@@ -10,11 +10,11 @@ import {Messages} from "../../common/messages";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
-    selector: 'az-agro-task-calendar',
-    templateUrl: './agro-task-calendar.component.html',
-    styleUrls: ['./agro-task-calendar.component.scss']
+    selector: 'az-reminder',
+    templateUrl: './reminder.component.html',
+    styleUrls: ['./reminder.component.scss']
 })
-export class AgroTaskCalendarComponent {
+export class ReminderComponent {
 
     config: any;
 
@@ -23,7 +23,7 @@ export class AgroTaskCalendarComponent {
     dragOptions: Object = {zIndex: 999, revert: true, revertDuration: 0};
 
     workTypeModels: AgroWorkTypeModel[];
-    agrotaskModels: AgroTaskModel[];
+    reminderModels: ReminderModel[];
 
     event: any = {};
     eventForm: FormGroup;
@@ -35,7 +35,7 @@ export class AgroTaskCalendarComponent {
 
     constructor(private appConfig: AppConfig,
                 private fb: FormBuilder,
-                private agroTaskService: AgroTaskService,
+                private reminderService: ReminderService,
                 private toaStrService: ToastrService,
                 private langService: LangService) {
     }
@@ -49,7 +49,7 @@ export class AgroTaskCalendarComponent {
         this.$calendar.fullCalendar(this.calendarOptions);
         jQuery('.draggable').draggable(this.dragOptions);
         this.findAgroWorkTypes();
-        this.findAgroTasks();
+        this.findReminders();
     }
 
     private setupLabels() {
@@ -88,32 +88,32 @@ export class AgroTaskCalendarComponent {
     }
 
     private findAgroWorkTypes() {
-        this.agroTaskService.findWorkTypes().subscribe(payloadModel => {
+        this.reminderService.findWorkTypes().subscribe(payloadModel => {
             let status = payloadModel.status;
             let message = payloadModel.message;
             this.workTypeModels = payloadModel.payload;
         })
     }
 
-    private findAgroTasks() {
-        this.agroTaskService.find().subscribe(payloadModel => {
+    private findReminders() {
+        this.reminderService.find().subscribe(payloadModel => {
             let status = payloadModel.status;
             let message = payloadModel.message;
-            this.agrotaskModels = payloadModel.payload;
+            this.reminderModels = payloadModel.payload || [];
 
-            this.agrotaskModels.forEach((model) => {
-                let agroEvent: any = {};
-                agroEvent.id = model.id;
-                agroEvent.workTypeId = model.workTypeId;
-                agroEvent.title = model.title;
-                agroEvent.start = new Date(model.scheduledStart);
-                agroEvent.end = new Date(model.scheduledEnd);
-                agroEvent.backgroundColor = this.getEventBackgroundColor(agroEvent.workTypeId);
-                agroEvent.textColor = this.config.colors.default;
-                agroEvent.description = model.description;
-                agroEvent.createdBy = model.createdBy;
-                agroEvent.tenantId = model.tenantId;
-                this.$calendar.fullCalendar('renderEvent', agroEvent, true);
+            this.reminderModels.forEach((model) => {
+                let event: any = {};
+                event.id = model.id;
+                event.workTypeId = model.workTypeId;
+                event.title = model.title;
+                event.start = new Date(model.starting);
+                event.end = new Date(model.ending);
+                event.backgroundColor = this.getEventBackgroundColor(event.workTypeId);
+                event.textColor = this.config.colors.default;
+                event.description = model.description;
+                event.createdBy = model.createdBy;
+                event.tenantId = model.tenantId;
+                this.$calendar.fullCalendar('renderEvent', event, true);
             });
         });
     }
@@ -157,7 +157,7 @@ export class AgroTaskCalendarComponent {
         this.event.backgroundColor = this.getEventBackgroundColor(this.event.workTypeId);
         let isNew = this.event.id == null;
 
-        this.agroTaskService.save(this.event).subscribe(data => {
+        this.reminderService.save(this.event).subscribe(data => {
             this.event.id = data.id;
 
             this.toaStrService.success(this.labelSaved);
@@ -175,7 +175,7 @@ export class AgroTaskCalendarComponent {
     }
 
     remove() {
-        this.agroTaskService.remove(this.event.id).subscribe(() => {
+        this.reminderService.remove(this.event.id).subscribe(() => {
             this.$calendar.fullCalendar('removeEvents', this.event.id);
             this.toaStrService.success(this.labelRemoved);
         });
@@ -185,7 +185,7 @@ export class AgroTaskCalendarComponent {
         let id = event.id;
         let start = event.start;
         let end = event.end;
-        this.agroTaskService.changeEventTime(id, start, end).subscribe(() => {
+        this.reminderService.changeEventTime(id, start, end).subscribe(() => {
             this.toaStrService.success(this.labelSaved);
         });
     }

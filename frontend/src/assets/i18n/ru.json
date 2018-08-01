@@ -6,7 +6,7 @@
 		"remove": "Удалить",
 		"save": "Сохранить"
 	},
-	"agro-task-calendar": {
+	"reminder": {
 		"enter-new-event": "Просто введите название события",
 		"event": "Задача",
 		"event-description": "Описание",

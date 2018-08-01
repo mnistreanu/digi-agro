@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { AgroTaskService } from './agro-task.service';
+import { ReminderService } from './reminder.service';
 
-describe('AgroTaskService', () => {
+describe('ReminderService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AgroTaskService]
+      providers: [ReminderService]
     });
   });
 
-  it('should be created', inject([AgroTaskService], (service: AgroTaskService) => {
+  it('should be created', inject([ReminderService], (service: ReminderService) => {
     expect(service).toBeTruthy();
   }));
 });

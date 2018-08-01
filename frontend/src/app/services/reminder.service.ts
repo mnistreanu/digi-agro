@@ -3,12 +3,12 @@ import {Constants} from "../common/constants";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Rx";
 import {PayloadModel} from "../pages/payload.model";
-import {AgroTaskModel} from "../pages/agro-task-calendar/agro-task.model";
+import {ReminderModel} from "../pages/reminder/reminder.model";
 
 @Injectable()
-export class AgroTaskService {
+export class ReminderService {
 
-    private api: string = Constants.API_URL + "/agro-task";
+    private api: string = Constants.API_URL + "/reminder";
 
     constructor(private http: HttpClient) {
     }
@@ -31,20 +31,20 @@ export class AgroTaskService {
         return this.http.post<void>(this.api + '/schedule', body);
     }
 
-    save(event): Observable<AgroTaskModel> {
+    save(event): Observable<ReminderModel> {
 
         let model = {
             id: event.id,
             workTypeId: event.workTypeId,
             title: event.title,
             description: event.description,
-            scheduledStart: event.start,
-            scheduledEnd: event.end,
+            starting: event.start,
+            ending: event.end,
             createdBy: event.createdBy,
             tenantId: event.tenantId
         };
 
-        return this.http.post<AgroTaskModel>(this.api + '/', model);
+        return this.http.post<ReminderModel>(this.api + '/', model);
     }
 
     remove(id): Observable<void> {

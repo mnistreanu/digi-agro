@@ -36,7 +36,7 @@ export const routes: Routes = [
 
             { path: 'manage-tenants', loadChildren: 'app/pages/manage-tenants/manage-tenants.module#ManageTenantsModule', data: { breadcrumb: 'Manage Tenants' }, canActivate: [SuperAdminGuard] },
             { path: 'manage-branches', loadChildren: 'app/pages/manage-branches/manage-branches.module#ManageBranchesModule', data: { breadcrumb: 'Manage Branches' }, canActivate: [AdminGuard] },
-            { path: 'agro-task-calendar', loadChildren: 'app/pages/agro-task-calendar/agro-task-calendar.module#AgroTaskCalendarModule', data: { breadcrumb: 'Agro Task Calendar' }, canActivate: [AuthGuard] },
+            { path: 'reminder', loadChildren: 'app/pages/reminder/reminder.module#ReminderModule', data: { breadcrumb: 'Reminders' }, canActivate: [AuthGuard] },
             { path: 'notification-subscription', loadChildren: 'app/pages/notifications/subscription/notification-subscription.module#NotificationSubscriptionModule', data: { breadcrumb: 'Notification subscriptions' }, canActivate: [AuthGuard] },
             { path: 'notification-list', loadChildren: 'app/pages/notifications/list/notification-list.module#NotificationListModule', data: { breadcrumb: 'Notifications' }, canActivate: [AuthGuard] }
         ]

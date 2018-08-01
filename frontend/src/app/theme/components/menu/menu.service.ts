@@ -83,7 +83,7 @@ export class MenuService {
         if (isAdmin || isUser) {
             menuItems.push({
                 title: 'nav.work-agenda',
-                routerLink: '/pages/agro-task-calendar',
+                routerLink: '/pages/reminder',
                 icon: 'fa-calendar',
                 selected: false,
                 expanded: false

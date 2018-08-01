@@ -116,7 +116,7 @@
                 </children>
             </folder_node>
             <folder_node>
-                <name>agro-task-calendar</name>
+                <name>reminder</name>
                 <children>
                     <concept_node>
                         <name>enter-new-event</name>

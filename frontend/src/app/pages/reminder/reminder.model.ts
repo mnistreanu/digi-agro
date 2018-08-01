@@ -1,11 +1,11 @@
-export class AgroTaskModel {
+export class ReminderModel {
 
     id: number;
     tenantId: number;
     workTypeId: number;
     title:string;
     description:string;
-    scheduledStart:Date;
-    scheduledEnd:Date;
+    starting:Date;
+    ending:Date;
     createdBy: number;
 }

@@ -1,14 +1,15 @@
 package com.arobs.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by mihail.gorgos on 18.07.2018.
  */
 @Entity
-@Table(name = "agro_task")
-public class AgroTask {
+@Table(name = "reminder")
+public class Reminder implements Serializable {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -30,13 +31,13 @@ public class AgroTask {
     @Column(name = "created_by")
     private Long createdBy;
 
-    @Column(name = "scheduled_start")
-    private Date scheduledStart;
+    @Column(name = "starting")
+    private Date starting;
 
-    @Column(name = "scheduled_end")
-    private Date scheduledEnd;
+    @Column(name = "ending")
+    private Date ending;
 
-    public AgroTask () {}
+    public Reminder() {}
 
     public Long getId() {
         return id;
@@ -86,19 +87,19 @@ public class AgroTask {
         this.createdBy = createdBy;
     }
 
-    public Date getScheduledStart() {
-        return scheduledStart;
+    public Date getStarting() {
+        return starting;
     }
 
-    public void setScheduledStart(Date scheduledStart) {
-        this.scheduledStart = scheduledStart;
+    public void setStarting(Date starting) {
+        this.starting = starting;
     }
 
-    public Date getScheduledEnd() {
-        return scheduledEnd;
+    public Date getEnding() {
+        return ending;
     }
 
-    public void setScheduledEnd(Date scheduledEnd) {
-        this.scheduledEnd = scheduledEnd;
+    public void setEnding(Date ending) {
+        this.ending = ending;
     }
 }

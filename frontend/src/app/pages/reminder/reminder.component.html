@@ -1,6 +1,6 @@
 <div widget class="card">
     <div class="card-header">
-        <span translate>agro-task-calendar.title</span>
+        <span translate>reminder.title</span>
         <div class="widget-controls">
             <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
             <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
@@ -24,12 +24,12 @@
             <div class="modal-header modal-success d-block">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
                 </button>
-                <h5 class="modal-title" translate>agro-task-calendar.event</h5>
+                <h5 class="modal-title" translate>reminder.event</h5>
             </div>
             <div class="modal-body">
                 <form [formGroup]="eventForm" *ngIf="eventForm">
                     <div class="form-group">
-                        <label for="work-type" translate>agro-task-calendar.event-type</label>
+                        <label for="work-type" translate>reminder.event-type</label>
                         <select id="work-type" class="form-control custom-select" formControlName="workTypeId">
                             <option *ngFor="let workType of workTypeModels"
                                     [ngValue]="workType.id">{{workType.nameRo}}
@@ -39,13 +39,13 @@
                         </form-error-block>
                     </div>
                     <div class="form-group">
-                        <label for="work-type" translate>agro-task-calendar.event-title</label>
+                        <label for="work-type" translate>reminder.event-title</label>
                         <input class="form-control" formControlName="title">
                         <form-error-block [control]="eventForm.get('title')" [formSubmitted]="formSubmitted"
                                           [title]="'agro-task-calendar.event-title'"></form-error-block>
                     </div>
                     <div class="form-group">
-                        <label for="work-type" translate>agro-task-calendar.event-description</label>
+                        <label for="work-type" translate>reminder.event-description</label>
                         <input class="form-control" formControlName="description">
                     </div>
                 </form>

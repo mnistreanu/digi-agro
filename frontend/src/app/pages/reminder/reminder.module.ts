@@ -3,12 +3,12 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {DirectivesModule} from '../../theme/directives/directives.module';
-import {AgroTaskCalendarComponent} from "./agro-task-calendar.component";
+import {ReminderComponent} from "./reminder.component";
 import {TranslateModule} from '@ngx-translate/core';
 import {FormErrorBlockModule} from "../../modules/form-error-block/form-error-block.module";
 
 export const routes = [
-    {path: '', component: AgroTaskCalendarComponent}
+    {path: '', component: ReminderComponent}
 ];
 
 @NgModule({
@@ -22,8 +22,8 @@ export const routes = [
         RouterModule.forChild(routes)
     ],
     declarations: [
-        AgroTaskCalendarComponent
+        ReminderComponent
     ]
 })
-export class AgroTaskCalendarModule {
+export class ReminderModule {
 }

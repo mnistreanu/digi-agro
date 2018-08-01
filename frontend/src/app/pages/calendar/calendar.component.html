@@ -59,8 +59,8 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                         </div>
                                         <div class="modal-body">
-                                            <p><i class="fa fa-calendar"></i> &nbsp; {{ event.start | date: 'EEE MMM d y hh:mm a' }}</p>
-                                            <p *ngIf="event.end"><i class="fa fa-clock-o"></i> &nbsp; {{ event.end | date: 'EEE MMM d y hh:mm a' }}</p>
+                                            <p><i class="fa fa-calendar"></i> &nbsp; {{ event.starting | date: 'EEE MMM d y hh:mm a' }}</p>
+                                            <p *ngIf="event.ending"><i class="fa fa-clock-o"></i> &nbsp; {{ event.ending | date: 'EEE MMM d y hh:mm a' }}</p>
                                             <p *ngIf="event.description">{{ event.description }}</p>
                                         </div>
                                         <div class="modal-footer">

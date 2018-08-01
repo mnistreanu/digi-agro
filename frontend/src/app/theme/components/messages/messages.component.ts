@@ -1,8 +1,8 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 
 import {MessagesService} from '../../../services/messages.service';
-import {AgroTaskService} from '../../../services/agro-task.service';
-import {AgroTaskModel} from "../../../pages/agro-task-calendar/agro-task.model";
+import {ReminderService} from '../../../services/reminder.service';
+import {ReminderModel} from "../../../pages/reminder/reminder.model";
 import {NotificationModel} from "../../../pages/notifications/notification.model";
 import {NotificationService} from "../../../services/notification/notification.service";
 import {TranslateService} from "@ngx-translate/core";
@@ -12,7 +12,7 @@ import {TranslateService} from "@ngx-translate/core";
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./messages.component.scss'],
     templateUrl: './messages.component.html',
-    providers: [MessagesService, NotificationService, AgroTaskService, TranslateService]
+    providers: [MessagesService, NotificationService, ReminderService, TranslateService]
 })
 
 export class MessagesComponent{     
@@ -21,35 +21,34 @@ export class MessagesComponent{
     public notifications:Array<Object> = [];
     public notificationModels: NotificationModel[];
 
-    public tasks:Array<Object> = [];
-    public agrotaskModels: AgroTaskModel[];
+    public reminders:Array<Object> = [];
+    public reminderModels: ReminderModel[];
 
-    constructor (private messagesService:MessagesService, private agroTaskService:AgroTaskService,
+    constructor (private messagesService:MessagesService, private reminderService:ReminderService,
                  private notificationService: NotificationService, private translate: TranslateService){
         this.messages = messagesService.getMessages();
         this.findNotifications();
-        this.findAgroTasks();
+        this.findReminders();
     }
 
-    private findAgroTasks() {
+    private findReminders() {
         // task.text: 'Design some buttons',
         // task.value: '20%',
         // task.class: 'info'
 
-        this.agroTaskService.find().subscribe(payloadModel => {
+        this.reminderService.find().subscribe(payloadModel => {
             let status = payloadModel.status;
             let message = payloadModel.message;
-            this.agrotaskModels = payloadModel.payload;
-            // this.tasks = new Array(0);
+            this.reminderModels = payloadModel.payload || [];
 
-            this.agrotaskModels.forEach((model) => {
+            this.reminderModels.forEach((model) => {
                 let agroTask: any = {};
                 agroTask.id = model.id;
                 agroTask.workTypeId = model.workTypeId;
                 agroTask.text = model.title;
                 agroTask.value = '20%';
                 agroTask.class = this.getTaskClass(agroTask.workTypeId);
-                this.tasks.push(agroTask); 
+                this.reminders.push(agroTask);
             });
 
         });

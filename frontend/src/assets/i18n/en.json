@@ -6,7 +6,7 @@
 		"remove": "Remove",
 		"save": "Save"
 	},
-	"agro-task-calendar": {
+	"reminder": {
 		"enter-new-event": "Just enter event name to create a new one",
 		"event": "Event",
 		"event-description": "Description",
