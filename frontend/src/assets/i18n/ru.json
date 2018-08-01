@@ -71,7 +71,9 @@
 		"weather-hoar-frost-alert": "Предупреждение о инее",
 		"weather-rain-alert": "Предупреждение о дожде",
 		"weather-snow-alert": "Предупреждение о снегопаде",
-		"weather-wind-alert": "Предупреждение о сильном ветре"
+		"weather-wind-alert": "Предупреждение о сильном ветре",
+		"remaining-time": "через {{ days }} дней и {{ hours }} часов",
+		"no-new-notifications": "Нет новых уведомлений"
 	},
 	"response": {
 		"added": "Добавлен",

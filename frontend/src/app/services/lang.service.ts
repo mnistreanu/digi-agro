@@ -46,7 +46,7 @@ export class LangService {
         return this.storageService.getItem(Constants.LANGUAGE_KEY);
     }
 
-    get(key) {
-        return this.translate.get(key);
+    get(key, params?: Object) {
+        return this.translate.get(key, params);
     }
 }

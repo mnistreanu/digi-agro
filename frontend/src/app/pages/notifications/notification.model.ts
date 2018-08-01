@@ -11,5 +11,6 @@ export class NotificationModel {
     durationHours;
     seenAt: Date;
 
-    notificationImage: string;
+    remainingTime: string;
+    image: string;
 }

@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Rx";
 import {PayloadModel} from "../../pages/payload.model";
 import {Constants} from "../../common/constants";
+import {NotificationModel} from "../../pages/notifications/notification.model";
 
 @Injectable({
     providedIn: 'root'
@@ -14,16 +15,17 @@ export class NotificationService {
     constructor(private http: HttpClient) {
     }
 
-    find(): Observable<PayloadModel> {
-        return this.http.get<PayloadModel>(this.api + '/');
+    find(): Observable<NotificationModel[]> {
+        return this.http.get<NotificationModel[]>(this.api + '/');
     }
 
-    findAll(): Observable<PayloadModel> {
-        return this.http.get<PayloadModel>(this.api + '/all');
+    findAll(): Observable<NotificationModel[]> {
+        return this.http.get<NotificationModel[]>(this.api + '/?all=true');
     }
 
-//    see(id): Observable<void> {
-//        return this.http.post<void>(this.api + '/' + id);
-//    }
+    see(models: NotificationModel[]): Observable<void> {
+        let ids = models.map(model => model.id);
+        return this.http.post<void>(this.api + '/see', ids);
+    }
 
 }

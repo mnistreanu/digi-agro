@@ -42,7 +42,7 @@ export class NotificationListComponent implements OnInit {
         let headers: ColDef[] = [
             {
                 headerName: '',
-                field: 'notificationImage',
+                field: 'image',
                 cellRendererFramework: ImageRendererComponent,
                 cellStyle: () => {return {padding: 0}},
                 width: 50,
@@ -98,8 +98,7 @@ export class NotificationListComponent implements OnInit {
     }
 
     private setupRows() {
-        this.notificationService.findAll().subscribe(payloadModel => {
-            let models = payloadModel.payload;
+        this.notificationService.findAll().subscribe(models => {
             this.adjustNotificationTypes(models);
             this.adjustNotificationImages(models);
             this.options.api.setRowData(models);
@@ -108,7 +107,7 @@ export class NotificationListComponent implements OnInit {
 
     private adjustNotificationImages(models: NotificationModel[]) {
         models.forEach((model) => {
-            model.notificationImage = '../assets/img/notifications/' + model.translationKey + '.png';
+            model.image = '../assets/img/notifications/' + model.translationKey + '.png';
         });
     }
 
@@ -124,15 +123,6 @@ export class NotificationListComponent implements OnInit {
 
     public adjustGridSize() {
         setTimeout(() => {this.options.api.sizeColumnsToFit();}, 500);
-    }
-
-    public add() {
-        this.router.navigate(['/pages/manage-notifications/notification/-1']);
-    }
-
-    public onEdit(node) {
-        let model = node.data;
-        this.router.navigate(['/pages/manage-notifications/notification/' + model.id]);
     }
 
 }

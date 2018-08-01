@@ -6,6 +6,7 @@ import {ReminderModel} from "../../../pages/reminder/reminder.model";
 import {NotificationModel} from "../../../pages/notifications/notification.model";
 import {NotificationService} from "../../../services/notification/notification.service";
 import {TranslateService} from "@ngx-translate/core";
+import {LangService} from "../../../services/lang.service";
 
 @Component({
     selector: 'az-messages',
@@ -18,14 +19,16 @@ import {TranslateService} from "@ngx-translate/core";
 export class MessagesComponent{     
     public messages:Array<Object> = [];
 
-    public notifications:Array<Object> = [];
-    public notificationModels: NotificationModel[];
+    public hasNotifications: boolean = false;
+    public notificationModels: NotificationModel[] = [];
 
     public reminders:Array<Object> = [];
     public reminderModels: ReminderModel[];
 
-    constructor (private messagesService:MessagesService, private reminderService:ReminderService,
-                 private notificationService: NotificationService, private translate: TranslateService){
+    constructor (private messagesService:MessagesService,
+                 private reminderService:ReminderService,
+                 private notificationService: NotificationService,
+                 private langService: LangService){
         this.messages = messagesService.getMessages();
         this.findNotifications();
         this.findReminders();
@@ -75,26 +78,20 @@ export class MessagesComponent{
 
 
     private findNotifications() {
-        // name: 'michael',
-        // text: 'Michael posted a new article.',
-        // time: '1 min ago'
-
-        this.notificationService.find().subscribe(payloadModel => {
-            let status = payloadModel.status;
-            let message = payloadModel.message;
-            this.notificationModels = payloadModel.payload || [];
-
+        this.notificationService.find().subscribe(models => {
+            this.notificationModels = models;
+            this.hasNotifications = models.length > 0;
             this.notificationModels.forEach((model) => {
-                let notification: any = {};
-                notification.id = model.id;
-                notification.typeId = model.typeId;
-                notification.name = model.translationKey;
-                notification.text = model.message;
-                notification.time = 'peste ' + model.durationDays + ' zile si ' + model.durationHours +' ore'; //TODO de facut corect
-                notification.image = '../assets/img/notifications/'+model.translationKey+ '.png';
-                this.notifications.push(notification);
+                this.langService.get('notification.remaining-time', {days: model.durationDays, hours: model.durationHours})
+                    .subscribe(msg => model.remainingTime = msg);
+                model.image = '../assets/img/notifications/' + model.translationKey+ '.png';
             });
+        });
+    }
 
+    public markAsSeenNotifications() {
+        this.notificationService.see(this.notificationModels).subscribe(() => {
+            this.notificationModels = [];
         });
     }
 }

@@ -71,7 +71,9 @@
 		"weather-hoar-frost-alert": "Alertă de brumă",
 		"weather-rain-alert": "Alertă de ploaie",
 		"weather-snow-alert": "Alertă de ninsoare",
-		"weather-wind-alert": "Alertă de vânt puternic"
+		"weather-wind-alert": "Alertă de vânt puternic",
+		"remaining-time": "peste {{ days }} zile și {{ hours }} ore",
+		"no-new-notifications": "Nu sunt notificări"
 	},
 	"response": {
 		"added": "A fost adăugat",

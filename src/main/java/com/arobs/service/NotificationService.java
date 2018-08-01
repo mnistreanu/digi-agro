@@ -24,12 +24,11 @@ public class NotificationService implements HasRepository<NotificationRepository
     }
 
     public List<Notification> findAll(Long userId) {
-        Date dateFrom = new Date();
         return getRepository().findAll(userId);
     }
 
     public List<Notification> findNotSeen(Long userId, Date dateFrom) {
-        dateFrom = dateFrom == null ? new Date(): dateFrom;
+        dateFrom = dateFrom == null ? new Date() : dateFrom;
         return getRepository().findNotSeen(userId, dateFrom);
     }
 
@@ -38,7 +37,7 @@ public class NotificationService implements HasRepository<NotificationRepository
     }
 
     @Transactional
-    public void see(Long id) {
-        getRepository().see(id);
+    public void see(List<Long> ids) {
+        getRepository().see(ids, new Date());
     }
 }

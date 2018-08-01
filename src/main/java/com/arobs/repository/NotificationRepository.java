@@ -32,7 +32,8 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
     List<Notification> findNotSeen(@Param("userId") Long userId, @Param("dateFrom") Date dateFrom );
 
     @Modifying
-    @Query("UPDATE Notification n SET n.seenAt = now() WHERE n.id = :id")
-    void see(@Param("id") Long id);
+    @Query("UPDATE Notification n SET n.seenAt = :date " +
+            "WHERE n.id IN (:ids) AND n.seenAt IS NULL")
+    void see(@Param("ids") List<Long> ids, @Param("date") Date date);
 }
 
