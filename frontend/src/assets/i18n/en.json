@@ -50,7 +50,10 @@
 		"work-agenda": "Work agenda",
 		"branches": "Branches",
 		"brands": "Brands",
+		"costs-forecasting": "Costs forecasting",
 		"dashboard": "Dashboard",
+		"forecasts": "Forecasts",
+		"harvesting-forecasting": "Harvesting forecasting",
 		"machines": "Machines",
 		"notifications": "Notifications",
 		"notifications-and-alerts": "Notifications and alerts",
@@ -62,6 +65,8 @@
 	},
 	"notification": {
 		"mark-all-as-read": "Mark All as Read",
+		"no-new-notifications": "There are no new notifications",
+		"remaining-time": "after {{ days }} days and {{ hours }} hours",
 		"view-all-notifications": "View all notifications",
 		"view-all-tasks": "View all tasks",
 		"weather-fog-alert": "Fog alert",
@@ -71,9 +76,7 @@
 		"weather-hoar-frost-alert": "Hoar frost alert",
 		"weather-rain-alert": "Raining alert",
 		"weather-snow-alert": "Snow alert",
-		"weather-wind-alert": "Strong wind alert",
-		"remaining-time": "after {{ days }} days and {{ hours }} hours",
-		"no-new-notifications": "There are no new notifications"
+		"weather-wind-alert": "Strong wind alert"
 	},
 	"response": {
 		"added": "Added",

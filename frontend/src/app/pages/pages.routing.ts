@@ -38,7 +38,8 @@ export const routes: Routes = [
             { path: 'manage-branches', loadChildren: 'app/pages/manage-branches/manage-branches.module#ManageBranchesModule', data: { breadcrumb: 'Manage Branches' }, canActivate: [AdminGuard] },
             { path: 'reminder', loadChildren: 'app/pages/reminder/reminder.module#ReminderModule', data: { breadcrumb: 'Reminders' }, canActivate: [AuthGuard] },
             { path: 'notification-subscription', loadChildren: 'app/pages/notifications/subscription/notification-subscription.module#NotificationSubscriptionModule', data: { breadcrumb: 'Notification subscriptions' }, canActivate: [AuthGuard] },
-            { path: 'notification-list', loadChildren: 'app/pages/notifications/list/notification-list.module#NotificationListModule', data: { breadcrumb: 'Notifications' }, canActivate: [AuthGuard] }
+            { path: 'notification-list', loadChildren: 'app/pages/notifications/list/notification-list.module#NotificationListModule', data: { breadcrumb: 'Notifications' }, canActivate: [AuthGuard] },
+            { path: 'forecasting', loadChildren: 'app/pages/forecast/forecast-charts.module#ForecastChartsModule', data: { breadcrumb: 'Forecasting' }, canActivate: [AuthGuard] }
         ]
     }
 ];

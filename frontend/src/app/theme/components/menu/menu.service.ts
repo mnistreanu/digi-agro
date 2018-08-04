@@ -107,6 +107,23 @@ export class MenuService {
                 ]
             },
             {
+                title: 'nav.forecasts',
+                routerLink: 'forecasting',
+                icon: 'fa-bar-chart',
+                selected: false,
+                expanded: false,
+                subMenu: [
+                    {
+                        title: 'nav.harvesting-forecasting',
+                        routerLink: 'forecasting/harvesting',
+                    },
+                    {
+                        title: 'nav.costs-forecasting',
+                        routerLink: 'forecasting/harvesting',
+                    },
+                ]
+            },
+            {
                 title: 'UI Features',
                 routerLink: 'ui',
                 icon: 'fa-laptop',

@@ -50,7 +50,10 @@
 		"work-agenda": "Повестка работ",
 		"branches": "Подразделения",
 		"brands": "Бренды",
+		"costs-forecasting": "Прогнозирование затрат",
 		"dashboard": "Главная",
+		"forecasts": "Прогнозирование",
+		"harvesting-forecasting": "Прогнозирование урожая",
 		"machines": "Машины",
 		"notifications": "Уведомления",
 		"notifications-and-alerts": "Уведомления и оповещения",
@@ -62,6 +65,8 @@
 	},
 	"notification": {
 		"mark-all-as-read": "Отметить все как прочитанные",
+		"no-new-notifications": "Нет новых уведомлений",
+		"remaining-time": "через {{ days }} дней и {{ hours }} часов",
 		"view-all-notifications": "Просмотреть все уведомления",
 		"view-all-tasks": "Просмотреть все задачи",
 		"weather-fog-alert": "Предупреждение о тумане",
@@ -71,9 +76,7 @@
 		"weather-hoar-frost-alert": "Предупреждение о инее",
 		"weather-rain-alert": "Предупреждение о дожде",
 		"weather-snow-alert": "Предупреждение о снегопаде",
-		"weather-wind-alert": "Предупреждение о сильном ветре",
-		"remaining-time": "через {{ days }} дней и {{ hours }} часов",
-		"no-new-notifications": "Нет новых уведомлений"
+		"weather-wind-alert": "Предупреждение о сильном ветре"
 	},
 	"response": {
 		"added": "Добавлен",

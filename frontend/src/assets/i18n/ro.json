@@ -50,7 +50,10 @@
 		"work-agenda": "Agenda lucrărilor",
 		"branches": "Subdiviziuni",
 		"brands": "Brands",
+		"costs-forecasting": "Prognoză costuri",
 		"dashboard": "Dashboard",
+		"forecasts": "Prognoze",
+		"harvesting-forecasting": "Prognoză recoltă",
 		"machines": "Maşini",
 		"notifications": "Notificări",
 		"notifications-and-alerts": "Notificări și alete",
@@ -62,6 +65,8 @@
 	},
 	"notification": {
 		"mark-all-as-read": "Marcheaza toate ca fiind citite",
+		"no-new-notifications": "Nu sunt notificări",
+		"remaining-time": "peste {{ days }} zile și {{ hours }} ore",
 		"view-all-notifications": "Vizualizați toate notificările",
 		"view-all-tasks": "Vizualizați toate sarcinile",
 		"weather-fog-alert": "Alertă de ceață",
@@ -71,9 +76,7 @@
 		"weather-hoar-frost-alert": "Alertă de brumă",
 		"weather-rain-alert": "Alertă de ploaie",
 		"weather-snow-alert": "Alertă de ninsoare",
-		"weather-wind-alert": "Alertă de vânt puternic",
-		"remaining-time": "peste {{ days }} zile și {{ hours }} ore",
-		"no-new-notifications": "Nu sunt notificări"
+		"weather-wind-alert": "Alertă de vânt puternic"
 	},
 	"response": {
 		"added": "A fost adăugat",
