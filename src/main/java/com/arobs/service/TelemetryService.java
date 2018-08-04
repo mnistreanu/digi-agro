@@ -1,11 +1,11 @@
 package com.arobs.service;
 
-import com.arobs.entity.Telemetry;
+import com.arobs.entity.MachineTelemetry;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.UpdateFieldModel;
-import com.arobs.model.telemetry.TelemetryModel;
-import com.arobs.repository.TelemetryRepository;
-import com.arobs.repository.custom.TelemetryCustomRepository;
+import com.arobs.model.telemetry.MachineTelemetryModel;
+import com.arobs.repository.MachineTelemetryRepository;
+import com.arobs.repository.custom.MachineTelemetryCustomRepository;
 import com.arobs.utils.NumericUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,36 +13,31 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
-public class TelemetryService implements HasRepository<TelemetryRepository> {
+public class TelemetryService implements HasRepository<MachineTelemetryRepository> {
 
     @Autowired
-    private TelemetryRepository telemetryRepository;
+    private MachineTelemetryRepository machineTelemetryRepository;
     @Autowired
-    private TelemetryCustomRepository telemetryCustomRepository;
+    private MachineTelemetryCustomRepository machineTelemetryCustomRepository;
     @Autowired
     private UserAccountService userAccountService;
     @Autowired
     private MachineService machineService;
 
 
-    public Telemetry findOne(Long id) {
+    public MachineTelemetry findOne(Long id) {
         return getRepository().findOne(id);
     }
 
-    public TelemetryModel findModelById(Long id) {
-        return new TelemetryModel(getRepository().findOne(id));
-    }
-
-    public List<Telemetry> findAll() {
+    public List<MachineTelemetry> findAll() {
         return getRepository().findAll();
     }
 
-    public List<TelemetryModel> findByMachineIdentifierAndUsername(String machineIdentifier, String username) {
-        List<Telemetry> items = getRepository().findByMachineIdentifierAndUsername(machineIdentifier, username);
-        return items.stream().map(TelemetryModel::new).collect(Collectors.toList());
+
+    public List<MachineTelemetry> find(String machineIdentifier, Long userId) {
+        return getRepository().find(machineIdentifier, userId);
     }
 
     @Transactional
@@ -51,11 +46,12 @@ public class TelemetryService implements HasRepository<TelemetryRepository> {
     }
 
     @Transactional(rollbackOn = Exception.class)
-    public Telemetry save(TelemetryModel model) {
-        Telemetry entity;
+    public MachineTelemetry save(MachineTelemetryModel model, Long userId) {
+        MachineTelemetry entity;
 
         if (model.getId() == null) {
-            entity = new Telemetry();
+            entity = new MachineTelemetry();
+            entity.setUserAccount(userAccountService.findOne(userId));
         }
         else {
             entity = findOne(model.getId());
@@ -65,7 +61,7 @@ public class TelemetryService implements HasRepository<TelemetryRepository> {
         return getRepository().save(entity);
     }
 
-    private void copyValues(Telemetry entity, TelemetryModel model) {
+    private void copyValues(MachineTelemetry entity, MachineTelemetryModel model) {
         entity.setLongitude(model.getLongitude());
         entity.setLatitude(model.getLatitude());
 
@@ -73,19 +69,16 @@ public class TelemetryService implements HasRepository<TelemetryRepository> {
             entity.setCreatedAt(new Date());
         }
 
-        entity.setUserAccount(userAccountService.findByUsername(model.getUsername()));
         entity.setMachine(machineService.findByIdentifier(model.getMachineIdentifier()));
-
-
     }
 
     @Transactional
     public void updateCoordinate(UpdateFieldModel model) {
-        telemetryCustomRepository.updateCoordinate(model.getId(), model.getField(), NumericUtil.convertToBigDecimal(model.getValue()));
+        machineTelemetryCustomRepository.updateCoordinate(model.getId(), model.getField(), NumericUtil.convertToBigDecimal(model.getValue()));
     }
 
     @Override
-    public TelemetryRepository getRepository() {
-        return telemetryRepository;
+    public MachineTelemetryRepository getRepository() {
+        return machineTelemetryRepository;
     }
 }

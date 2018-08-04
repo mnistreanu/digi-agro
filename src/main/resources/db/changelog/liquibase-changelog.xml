@@ -433,4 +433,11 @@
         </sql>
     </changeSet>
 
+    <changeSet id="map-event-table-drop-machine-id" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <sql>
+            ALTER TABLE map_event DROP CONSTRAINT fkrba9q61il5j634jk31uhe2wc9;
+            ALTER TABLE map_event DROP COLUMN machine_id;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

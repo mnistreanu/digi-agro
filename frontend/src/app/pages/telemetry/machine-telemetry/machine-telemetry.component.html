@@ -13,6 +13,16 @@
 
     <div>
       <button class="btn btn-sm btn-primary" (click)="add()">Add</button>
+
+      <form class="form-inline pull-right">
+        <label for="machineIdentifier" class="mr-1">Machine</label>
+        <select id="machineIdentifier" name="machineIdentifier" class="form-control" style="width: 150px;"
+                [(ngModel)]="machineIdentifier" (change)="onMachineChange()">
+          <option *ngFor="let i of availableMachineIdentifiers" [ngValue]="i">{{ i }}</option>
+        </select>
+      </form>
+
+      <div class="clearfix"></div>
     </div>
 
     <ag-grid-angular class="ag-theme-material" style="width: 100%; height: 250px; min-height: 100%;"

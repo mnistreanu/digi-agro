@@ -9,10 +9,6 @@ import java.util.Date;
 public class MapEventModel {
 
     private Long id;
-
-    private String username;
-    private String machineIdentifier;
-
     private String message;
 
     private BigDecimal latitude;
@@ -25,10 +21,6 @@ public class MapEventModel {
 
     public MapEventModel(MapEvent entity) {
         id = entity.getId();
-
-        username = entity.getUserAccount().getUsername();
-        machineIdentifier = entity.getMachine().getIdentifier();
-
         message = entity.getMessage();
 
         longitude = entity.getLongitude();
@@ -43,22 +35,6 @@ public class MapEventModel {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getMachineIdentifier() {
-        return machineIdentifier;
-    }
-
-    public void setMachineIdentifier(String machineIdentifier) {
-        this.machineIdentifier = machineIdentifier;
     }
 
     public BigDecimal getLatitude() {

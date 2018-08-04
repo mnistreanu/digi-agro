@@ -12,14 +12,12 @@ import java.util.List;
 @Repository
 public interface MapEventRepository extends JpaRepository<MapEvent, Long> {
 
-
     @Modifying
     @Query("UPDATE MapEvent e SET e.active = false WHERE e.id = :id")
     void remove(@Param("id") Long id);
 
     @Query("SELECT e FROM MapEvent e " +
-            " WHERE e.active = true AND e.userAccount.username = :username AND e.machine.identifier = :machineIdentifier " +
+            " WHERE e.active = true AND e.userAccount.id = :userId " +
             " ORDER BY e.id")
-    List<MapEvent> findByMachineIdentifierAndUsername(@Param("machineIdentifier") String machineIdentifier,
-                                                      @Param("username") String username);
+    List<MapEvent> find(@Param("userId") Long userId);
 }

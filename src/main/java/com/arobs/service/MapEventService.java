@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class MapEventService implements HasRepository<MapEventRepository> {
@@ -23,21 +22,15 @@ public class MapEventService implements HasRepository<MapEventRepository> {
     private MapEventCustomRepository mapEventCustomRepository;
     @Autowired
     private UserAccountService userAccountService;
-    @Autowired
-    private MachineService machineService;
 
 
     public MapEvent findOne(Long id) {
         return getRepository().findOne(id);
     }
 
-    public MapEventModel findModelById(Long id) {
-        return new MapEventModel(getRepository().findOne(id));
-    }
 
-    public List<MapEventModel> findByMachineIdentifierAndUsername(String machineIdentifier, String username) {
-        List<MapEvent> items = getRepository().findByMachineIdentifierAndUsername(machineIdentifier, username);
-        return items.stream().map(MapEventModel::new).collect(Collectors.toList());
+    public List<MapEvent> find(Long userId) {
+        return getRepository().find(userId);
     }
 
     @Transactional
@@ -46,11 +39,12 @@ public class MapEventService implements HasRepository<MapEventRepository> {
     }
 
     @Transactional(rollbackOn = Exception.class)
-    public MapEvent save(MapEventModel model) {
+    public MapEvent save(MapEventModel model, Long userId) {
         MapEvent entity;
 
         if (model.getId() == null) {
             entity = new MapEvent();
+            entity.setUserAccount(userAccountService.findOne(userId));
         }
         else {
             entity = findOne(model.getId());
@@ -69,10 +63,6 @@ public class MapEventService implements HasRepository<MapEventRepository> {
         }
 
         entity.setMessage(model.getMessage());
-
-        entity.setUserAccount(userAccountService.findByUsername(model.getUsername()));
-        entity.setMachine(machineService.findByIdentifier(model.getMachineIdentifier()));
-
     }
 
     @Transactional

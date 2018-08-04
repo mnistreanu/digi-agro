@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-public class Telemetry {
+public class MachineTelemetry {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class Telemetry {
     @Column(columnDefinition = "boolean default true")
     private boolean active = true;
 
-    public Telemetry() {
+    public MachineTelemetry() {
     }
 
     public Long getId() {

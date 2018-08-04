@@ -16,10 +16,6 @@ public class MapEvent {
     @JoinColumn(name = "user_account_id")
     private UserAccount userAccount;
 
-    @ManyToOne
-    @JoinColumn(name = "machine_id")
-    private Machine machine;
-
     private Date createdAt;
 
     private String message;
@@ -47,14 +43,6 @@ public class MapEvent {
 
     public void setUserAccount(UserAccount userAccount) {
         this.userAccount = userAccount;
-    }
-
-    public Machine getMachine() {
-        return machine;
-    }
-
-    public void setMachine(Machine machine) {
-        this.machine = machine;
     }
 
     public Date getCreatedAt() {

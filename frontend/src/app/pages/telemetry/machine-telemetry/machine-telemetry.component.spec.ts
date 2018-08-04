@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CoordinatesComponent } from './coordinates.component';
+import { MachineTelemetryComponent } from './machine-telemetry.component';
 
-describe('CoordinatesComponent', () => {
-  let component: CoordinatesComponent;
-  let fixture: ComponentFixture<CoordinatesComponent>;
+describe('MachineTelemetryComponent', () => {
+  let component: MachineTelemetryComponent;
+  let fixture: ComponentFixture<MachineTelemetryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoordinatesComponent ]
+      declarations: [ MachineTelemetryComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CoordinatesComponent);
+    fixture = TestBed.createComponent(MachineTelemetryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

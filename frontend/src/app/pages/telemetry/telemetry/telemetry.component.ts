@@ -1,10 +1,6 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {MachineService} from "../../../services/machine.service";
-import {AuthService} from "../../../services/auth/auth.service";
-import {CoordinatesComponent} from "../coordinates/coordinates.component";
-import {TelemetryModel} from "./telemetry.model";
-import {MapEventsComponent} from "../map-events/map-events.component";
+import {Component, OnInit} from "@angular/core";
 import {MapEventModel} from "../map-events/map-event.model";
+import {MachineTelemetryModel} from "../machine-telemetry/machine-telemetry.model";
 
 @Component({
     selector: 'az-telemetry',
@@ -13,49 +9,21 @@ import {MapEventModel} from "../map-events/map-event.model";
 })
 export class TelemetryComponent implements OnInit {
 
-    username: string;
-    machinesPresent: boolean = false;
-    machineIdentifier: string;
-    availableMachineIdentifiers: string[];
 
     mapPolylinePath: any[] = [];
     mapMarkers: any[] = [];
 
-    constructor(private machineService: MachineService,
-                private authService: AuthService) {
+    constructor() {
     }
 
     ngOnInit() {
-        this.setupUser();
-        this.setupMachineIdentifiers();
     }
 
-    private setupUser() {
-        this.username = this.authService.getUsername();
-    }
-
-    private setupMachineIdentifiers() {
-        this.machineService.fetchIdentifiers().subscribe(data => {
-            this.availableMachineIdentifiers = data;
-
-            this.machinesPresent = data && data.length > 0;
-            if (!this.machinesPresent) {
-                return;
-            }
-
-            this.machineIdentifier = this.availableMachineIdentifiers[0];
-        })
-    }
-
-    public onMachineChange() {
-
-    }
-
-    processCoordinates(models: TelemetryModel[]) {
+    processCoordinates(models: MachineTelemetryModel[]) {
         this.setupMapPolyline(models);
     }
 
-    private setupMapPolyline(models: TelemetryModel[]) {
+    private setupMapPolyline(models: MachineTelemetryModel[]) {
         this.mapPolylinePath = models.map((model) => {
             return {lat: +model.latitude, lng: +model.longitude};
         });

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from "@angular/core";
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {MapEventModel} from "./map-event.model";
 import {ColDef, GridOptions} from "ag-grid";
 import {MapEventService} from "../../../services/map-event.service";
@@ -7,16 +7,15 @@ import {DeleteRendererComponent} from "../../../modules/aggrid/delete-renderer/d
 import {DateUtil} from "../../../common/dateUtil";
 import {Messages} from "../../../common/messages";
 import {NumericUtil} from "../../../common/numericUtil";
+import {LangService} from "../../../services/lang.service";
 
 @Component({
     selector: 'az-map-events',
     templateUrl: './map-events.component.html',
     styleUrls: ['./map-events.component.scss']
 })
-export class MapEventsComponent implements OnInit, OnChanges {
+export class MapEventsComponent implements OnInit {
 
-    @Input() username;
-    @Input() machineIdentifier;
 
     @Output() mapEventChanged: EventEmitter<MapEventModel[]> = new EventEmitter<MapEventModel[]>();
 
@@ -25,19 +24,26 @@ export class MapEventsComponent implements OnInit, OnChanges {
 
     models: MapEventModel[] = [];
 
+    labelAdded: string;
+    labelSaved: string;
+    labelRemoved: string;
+
     constructor(private mapEventService: MapEventService,
+                private langService: LangService,
                 private toastr: ToastrService) {
     }
 
     ngOnInit() {
+        this.setupLabels();
         this.setupGrid();
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes.machineIdentifier) {
-            this.setupRows();
-        }
+    private setupLabels() {
+        this.langService.get(Messages.ADDED).subscribe(msg => this.labelAdded = msg);
+        this.langService.get(Messages.SAVED).subscribe(msg => this.labelSaved = msg);
+        this.langService.get(Messages.REMOVED).subscribe(msg => this.labelRemoved = msg);
     }
+
 
     private setupGrid() {
         this.options = <GridOptions>{};
@@ -130,13 +136,13 @@ export class MapEventsComponent implements OnInit, OnChanges {
         let value = params.newValue;
 
         this.mapEventService.update(model.id, field, value).subscribe(() => {
-            this.toastr.success(Messages.SAVED);
+            this.toastr.success(this.labelSaved);
             this.mapEventChanged.emit(this.models);
         });
     }
 
     public setupRows() {
-        this.mapEventService.findByMachineIdentifierAndUsername(this.machineIdentifier, this.username).subscribe(models => {
+        this.mapEventService.find().subscribe(models => {
             this.options.api.setRowData(models);
             this.models = models;
             this.adjustGridSize();
@@ -158,8 +164,6 @@ export class MapEventsComponent implements OnInit, OnChanges {
     public add() {
         let item = new MapEventModel();
 
-        item.machineIdentifier = this.machineIdentifier;
-        item.username = this.username;
         item.createdAt = new Date();
         item.latitude = 0;
         item.longitude = 0;
@@ -173,7 +177,7 @@ export class MapEventsComponent implements OnInit, OnChanges {
             this.models.push(item);
             this.mapEventChanged.emit(this.models);
 
-            this.toastr.success(Messages.ADDED);
+            this.toastr.success(this.labelAdded);
         });
     }
 
@@ -184,7 +188,7 @@ export class MapEventsComponent implements OnInit, OnChanges {
         this.mapEventService.remove(model).subscribe(() => {
             this.models.splice(this.models.indexOf(model), 1);
             this.mapEventChanged.emit(this.models);
-            this.toastr.success(Messages.REMOVED);
+            this.toastr.success(this.labelRemoved);
         });
     }
 

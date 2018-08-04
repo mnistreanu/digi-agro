@@ -1,21 +1,8 @@
-<div *ngIf="machinesPresent">
-    <div class="card bottom-15">
-        <div class="card-body widget-body">
+<div>
 
-            <form class="form-inline pull-right">
-                <label for="machineIdentifier" class="mr-1">Machine</label>
-                <select id="machineIdentifier" name="machineIdentifier" class="form-control" style="width: 150px;"
-                        [(ngModel)]="machineIdentifier" (change)="onMachineChange()">
-                    <option *ngFor="let i of availableMachineIdentifiers" [ngValue]="i">{{ i }}</option>
-                </select>
-            </form>
+    <machine-telemetry (coordinateChanged)="processCoordinates($event)"></machine-telemetry>
 
-        </div>
-    </div>
-
-    <az-coordinates [username]="username" [machineIdentifier]="machineIdentifier" (coordinateChanged)="processCoordinates($event)"></az-coordinates>
-
-    <az-map-events [username]="username" [machineIdentifier]="machineIdentifier" (mapEventChanged)="processEvents($event)"></az-map-events>
+    <az-map-events (mapEventChanged)="processEvents($event)"></az-map-events>
 
     <az-telemetry-map [polylinePath]="mapPolylinePath" [markers]="mapMarkers"></az-telemetry-map>
 

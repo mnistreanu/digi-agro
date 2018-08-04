@@ -1,16 +1,15 @@
 package com.arobs.model.telemetry;
 
 
-import com.arobs.entity.Telemetry;
+import com.arobs.entity.MachineTelemetry;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class TelemetryModel {
+public class MachineTelemetryModel {
 
     private Long id;
 
-    private String username;
     private String machineIdentifier;
 
     private BigDecimal latitude;
@@ -18,13 +17,12 @@ public class TelemetryModel {
 
     private Date createdAt;
 
-    public TelemetryModel() {
+    public MachineTelemetryModel() {
     }
 
-    public TelemetryModel(Telemetry entity) {
+    public MachineTelemetryModel(MachineTelemetry entity) {
         id = entity.getId();
 
-        username = entity.getUserAccount().getUsername();
         machineIdentifier = entity.getMachine().getIdentifier();
 
         longitude = entity.getLongitude();
@@ -39,14 +37,6 @@ public class TelemetryModel {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getMachineIdentifier() {

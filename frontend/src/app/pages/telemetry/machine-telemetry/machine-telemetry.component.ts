@@ -1,43 +1,65 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from "@angular/core";
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {ColDef, GridOptions} from "ag-grid";
-import {TelemetryModel} from "../telemetry/telemetry.model";
-import {TelemetryService} from "../../../services/telemetry.service";
+import {MachineTelemetryModel} from "./machine-telemetry.model";
 import {ToastrService} from "ngx-toastr";
 import {NumericUtil} from "../../../common/numericUtil";
 import {DeleteRendererComponent} from "../../../modules/aggrid/delete-renderer/delete-renderer.component";
 import {Messages} from "../../../common/messages";
 import {DateUtil} from "../../../common/dateUtil";
+import {MachineService} from "../../../services/machine.service";
+import {LangService} from "../../../services/lang.service";
+import {MachineTelemetryService} from "../../../services/machine-telemetry.service";
 
 @Component({
-    selector: 'az-coordinates',
-    templateUrl: './coordinates.component.html',
-    styleUrls: ['./coordinates.component.scss']
+    selector: 'machine-telemetry',
+    templateUrl: './machine-telemetry.component.html',
+    styleUrls: ['./machine-telemetry.component.scss']
 })
-export class CoordinatesComponent implements OnInit, OnChanges {
+export class MachineTelemetryComponent implements OnInit {
+
+    @Output() coordinateChanged: EventEmitter<MachineTelemetryModel[]> = new EventEmitter<MachineTelemetryModel[]>();
 
     options: GridOptions;
     context;
 
-    @Input() username: string;
-    @Input() machineIdentifier: string;
+    machineIdentifier: string;
+    availableMachineIdentifiers: string[];
 
-    @Output() coordinateChanged: EventEmitter<TelemetryModel[]> = new EventEmitter<TelemetryModel[]>();
+    models: MachineTelemetryModel[] = [];
 
-    models: TelemetryModel[] = [];
+    labelAdded: string;
+    labelSaved: string;
+    labelRemoved: string;
 
-    constructor(private telemetryService: TelemetryService,
+    constructor(private machineTelemetryService: MachineTelemetryService,
+                private machineService: MachineService,
+                private langService: LangService,
                 private toastr: ToastrService) {
     }
 
 
     ngOnInit(): void {
+        this.setupLabels();
+        this.setupMachineIdentifiers();
         this.setupGrid();
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes.machineIdentifier) {
-            this.setupRows();
-        }
+    private setupLabels() {
+        this.langService.get(Messages.ADDED).subscribe(msg => this.labelAdded = msg);
+        this.langService.get(Messages.SAVED).subscribe(msg => this.labelSaved = msg);
+        this.langService.get(Messages.REMOVED).subscribe(msg => this.labelRemoved = msg);
+    }
+
+    private setupMachineIdentifiers() {
+        this.machineService.fetchIdentifiers().subscribe(data => {
+            this.availableMachineIdentifiers = data;
+
+            if (data && data.length > 0) {
+                return;
+            }
+
+            this.machineIdentifier = this.availableMachineIdentifiers[0];
+        })
     }
 
     public setupGrid() {
@@ -128,21 +150,20 @@ export class CoordinatesComponent implements OnInit, OnChanges {
         let field = params.colDef.field;
         let value = params.newValue;
 
-        this.telemetryService.updateCoordinate(model.id, field, value).subscribe(() => {
-            this.toastr.success(Messages.SAVED);
+        this.machineTelemetryService.updateCoordinate(model.id, field, value).subscribe(() => {
+            this.toastr.success(this.labelSaved);
             this.coordinateChanged.emit(this.models);
         });
     }
 
     public setupRows() {
-        this.telemetryService.findByMachineIdentifierAndUsername(this.machineIdentifier, this.username).subscribe(models => {
+        this.machineTelemetryService.find(this.machineIdentifier).subscribe(models => {
             this.options.api.setRowData(models);
             this.models = models;
             this.adjustGridSize();
             this.coordinateChanged.emit(this.models);
         });
     }
-
 
     public onGridReady() {
         this.options.api.sizeColumnsToFit();
@@ -155,23 +176,21 @@ export class CoordinatesComponent implements OnInit, OnChanges {
     }
 
     public add() {
-        let item = new TelemetryModel();
+        let item = new MachineTelemetryModel();
 
         item.machineIdentifier = this.machineIdentifier;
-        item.username = this.username;
         item.createdAt = new Date();
         item.latitude = 0;
         item.longitude = 0;
 
         this.options.api.updateRowData({add: [item]});
 
-        this.telemetryService.save(item).subscribe((savedModel) => {
+        this.machineTelemetryService.save(item).subscribe((savedModel) => {
             item.id = savedModel.id;
 
             this.models.push(item);
             this.coordinateChanged.emit(this.models);
-
-            this.toastr.success(Messages.ADDED);
+            this.toastr.success(this.labelAdded);
         });
     }
 
@@ -179,15 +198,11 @@ export class CoordinatesComponent implements OnInit, OnChanges {
         let model = node.data;
         this.options.api.updateRowData({remove: [model]});
 
-        this.telemetryService.remove(model).subscribe(() => {
+        this.machineTelemetryService.remove(model).subscribe(() => {
             this.models.splice(this.models.indexOf(model), 1);
             this.coordinateChanged.emit(this.models);
-            this.toastr.success(Messages.REMOVED);
+            this.toastr.success(this.labelRemoved);
         });
     }
 
-
-    setMachineIdentifier(machineIdentifier: string) {
-        this.machineIdentifier = machineIdentifier;
-    }
 }

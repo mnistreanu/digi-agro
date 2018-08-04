@@ -1,9 +1,8 @@
-export class TelemetryModel {
+export class MachineTelemetryModel {
 
   constructor() {}
 
   id: number;
-  username: string;
   machineIdentifier: string;
 
   latitude: number;

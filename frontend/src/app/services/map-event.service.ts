@@ -4,9 +4,7 @@ import {MapEventModel} from "../pages/telemetry/map-events/map-event.model";
 import {Observable} from "rxjs/Rx";
 import {HttpClient} from "@angular/common/http";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class MapEventService {
 
   private api: string = Constants.API_URL + "/map-event";
@@ -14,9 +12,8 @@ export class MapEventService {
   constructor(private http: HttpClient) {
   }
 
-  findByMachineIdentifierAndUsername(machineIdentifier, username): Observable<MapEventModel[]> {
-    let query = `?machineIdentifier=${machineIdentifier}&username=${username}`;
-    return this.http.get<MapEventModel[]>(this.api + '/' + query);
+  find(): Observable<MapEventModel[]> {
+    return this.http.get<MapEventModel[]>(this.api + '/');
   }
 
   save(model: MapEventModel): Observable<MapEventModel> {
@@ -33,6 +30,6 @@ export class MapEventService {
       field: field,
       value: value
     };
-    return this.http.post<void>(this.api + '/update', JSON.stringify(updateModel));
+    return this.http.post<void>(this.api + '/update', updateModel);
   }
 }

@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import java.math.BigDecimal;
 
 @Repository
-public class TelemetryCustomRepository {
+public class MachineTelemetryCustomRepository {
 
     @PersistenceContext
     private EntityManager em;
@@ -16,7 +16,7 @@ public class TelemetryCustomRepository {
     @Modifying
     public void updateCoordinate(Long id, String field, BigDecimal value) {
 
-        String queryStr = "UPDATE Telemetry t SET t." + field + " = :value WHERE t.id = :id";
+        String queryStr = "UPDATE MachineTelemetry t SET t." + field + " = :value WHERE t.id = :id";
 
         em.createQuery(queryStr)
                 .setParameter("value", value)
