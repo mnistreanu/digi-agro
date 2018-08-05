@@ -6,6 +6,8 @@ import { AppConfig } from "../../../app.config";
   encapsulation: ViewEncapsulation.None,
   templateUrl: './forecast-harvest-charts.component.html'
 })
+
+
 export class ForecastHarvestChartsComponent  {
     public config:any;
     public configFn:any;

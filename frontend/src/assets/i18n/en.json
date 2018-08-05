@@ -21,6 +21,14 @@
 	"branch": {
 		"branch": "Branch"
 	},
+	"crop": {
+		"name": "Agricultural crop",
+		"variety": "Variety"
+	},
+	"forecast": {
+		"description": "Description",
+		"name": "Forecast name"
+	},
 	"general": {
 		"form": "Form",
 		"settings": "Settings"

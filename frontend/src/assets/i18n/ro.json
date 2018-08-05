@@ -21,6 +21,14 @@
 	"branch": {
 		"branch": "Subdiviziune"
 	},
+	"crop": {
+		"name": "Cultura agricolă",
+		"variety": "Soi"
+	},
+	"forecast": {
+		"description": "Descrierea prognozei",
+		"name": "Denumire prognoză"
+	},
 	"general": {
 		"form": "Forma",
 		"settings": "Setări"

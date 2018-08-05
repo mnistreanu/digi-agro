@@ -7,6 +7,7 @@ import {ForecastHarvestChartsComponent} from './harvest/forecast-harvest-charts.
 import {ForecastHarvestComponent} from './harvest/forecast-harvest.component';
 import {ChartsModule} from "ng2-charts";
 import {ReactiveFormsModule} from "@angular/forms";
+import {TranslateModule} from '@ngx-translate/core';
 
 export const routes = [
   { path: '', redirectTo: 'forecasting', pathMatch: 'full' },
@@ -18,6 +19,7 @@ export const routes = [
 
 @NgModule({
   imports: [
+    TranslateModule,
     CommonModule,
     ReactiveFormsModule,
     ChartsModule,
