@@ -58,9 +58,10 @@ export class LoginComponent implements OnInit {
     }
 
     private processTenants() {
+        debugger;
         if (this.authData.tenants.length <= 1) {
             if (this.authData.tenants.length == 1) {
-                this.storageService.setItem(Constants.TENANT, this.authData.tenants[0]);
+                this.storageService.setItem(Constants.TENANT, this.authData.tenants[0].id);
             }
             this.finishLogin();
         }
