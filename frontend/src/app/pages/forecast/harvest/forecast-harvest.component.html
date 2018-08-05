@@ -21,8 +21,8 @@
                             <div class="form-group row text-sm-right">
                                 <label class="col-sm-3 form-control-label m-t-5" translate>forecast.name</label>
                                 <div class="col-sm-8 text-left">
-                                    <input class="form-control checking-field" type="text" formControlName="simple" required>
-                                    <span class="help-block text-danger" *ngIf="myForm.get('simple').touched && myForm.get('simple').hasError('required')">Field is required</span>
+                                    <input class="form-control checking-field" type="text" formControlName="name" required>
+                                    <span class="help-block text-danger" *ngIf="myForm.get('name').touched && myForm.get('name').hasError('required')">Field is required</span>
                                 </div>
                             </div>
 
@@ -31,9 +31,9 @@
                                 <div class="col-sm-8 text-left">
                                     <div class="form-group">
                                         <!--<label for="work-type" translate>reminder.event-type</label>-->
-                                        <select id="cropCategoryId" class="form-control custom-select" formControlName="cropCategoryId">
-                                            <option *ngFor="let cropCategory of cropCategoryModels"
-                                                    [ngValue]="cropCategory.id">{{cropCategory.nameRo}}
+                                        <select id="crop-category" class="form-control custom-select" formControlName="cropCategoryId">
+                                            <option *ngFor="let category of categoryModels"
+                                                    [ngValue]="category.id">{{category.nameRo}}
                                             </option>
                                         </select>
                                     </div>
@@ -46,7 +46,7 @@
                                 <div class="col-sm-8 text-left">
                                     <div class="form-group">
                                         <!--<label for="work-type" translate>reminder.event-type</label>-->
-                                        <select id="cropId" class="form-control custom-select" formControlName="cropId">
+                                        <select id="crop-name" class="form-control custom-select" formControlName="cropId">
                                             <option *ngFor="let crop of cropModels"
                                                     [ngValue]="crop.id">{{crop.nameRo}}
                                             </option>
@@ -58,11 +58,10 @@
                             <div class="form-group row text-sm-right">
                                 <label class="col-sm-3 form-control-label m-t-5" translate>crop.variety</label>
                                 <div class="col-sm-8 text-left">
-                                    <select class="form-control custom-select" id="exampleSelect3">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <select id="crop-variety" class="form-control custom-select" formControlName="cropVarietyId">
+                                        <option *ngFor="let variety of varietyModels"
+                                                [ngValue]="variety.id">{{variety.nameRo}}
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -71,7 +70,7 @@
                             <div class="form-group row text-sm-right">
                                 <label class="col-sm-3 form-control-label m-t-5" translate>forecast.description</label>
                                 <div class="col-sm-8 text-left">
-                                    <textarea class="form-control checking-field" type="text" formControlName="maxLength" required></textarea>
+                                    <textarea class="form-control checking-field" type="text" formControlName="description" required></textarea>
                                 </div>
                             </div>
 

@@ -1,6 +1,6 @@
 import {Component, ViewEncapsulation, OnInit, NgModule} from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MyForm } from './forecast-harvest.interface';
+import { ForecastHarvestForm } from './forecast-harvest.interface';
 import {CropService} from "../../../services/crop.service";
 import {CropCategoryModel} from "../../crop/crop-category.model";
 import {CropModel} from "../../crop/crop.model";
@@ -26,12 +26,16 @@ export class ForecastHarvestComponent implements OnInit  {
 
     ngOnInit() {
         this.myForm = this.formBuilder.group({
-            simple: ['', Validators.required],
+            name: ['', Validators.compose([Validators.required,  Validators.maxLength(256)])],
+            cropCategoryId: ['', Validators.required],
+            cropId: ['', Validators.required],
+            cropVarietyId: [''],
+            description: ['', Validators.compose([Validators.required,  Validators.maxLength(1024)])],
         });
 
         this.findCropCategories();
-        this.findCrops(null);
-        this.findVarieties(null);
+        this.findCrops(1);
+        this.findVarieties(1);
     }
 
     private findCropCategories() {
@@ -43,7 +47,7 @@ export class ForecastHarvestComponent implements OnInit  {
     }
 
     private findCrops(categoryId: number) {
-        this.cropService.findCrops().subscribe(payloadModel => {
+        this.cropService.findCrops(categoryId).subscribe(payloadModel => {
             let status = payloadModel.status;
             let message = payloadModel.message;
             this.cropModels = payloadModel.payload;
@@ -51,14 +55,14 @@ export class ForecastHarvestComponent implements OnInit  {
     }
 
     private findVarieties(cropId: number) {
-        this.cropService.findVarieties().subscribe(payloadModel => {
+        this.cropService.findVarieties(cropId).subscribe(payloadModel => {
             let status = payloadModel.status;
             let message = payloadModel.message;
             this.varietyModels = payloadModel.payload;
         })
     }
 
-    onSubmit({ value, valid }: { value: MyForm, valid: boolean }) {
+    onSubmit({ value, valid }: { value: ForecastHarvestForm, valid: boolean }) {
         console.log(value, valid);
     }
 

@@ -18,12 +18,12 @@ export class CropService {
         return this.http.get<PayloadModel>(this.api + '/categories');
     }
 
-    public findCrops(): Observable<PayloadModel> {
-        return this.http.get<PayloadModel>(this.api + '/crops');
+    public findCrops(categoryId: number): Observable<PayloadModel> {
+        return this.http.get<PayloadModel>(this.api + '/crops?categoryId=' + categoryId);
     }
 
-    public findVarieties(): Observable<PayloadModel> {
-        return this.http.get<PayloadModel>(this.api + '/varieties');
+    public findVarieties(cropId: number): Observable<PayloadModel> {
+        return this.http.get<PayloadModel>(this.api + '/varieties?cropId=' + cropId);
     }
 
 

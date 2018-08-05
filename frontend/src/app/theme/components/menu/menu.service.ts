@@ -130,7 +130,7 @@ export class MenuService {
                         routerLink: 'forecasting/harvesting',
                     },
                     {
-                        title: 'nav.harvesting-forecasting',
+                        title: 'nav.harvesting-forecasting-form',
                         routerLink: 'forecasting/harvesting-form',
                     },
                     {
@@ -138,7 +138,7 @@ export class MenuService {
                         routerLink: 'forecasting/costs',
                     },
                     {
-                        title: 'nav.costs-forecasting',
+                        title: 'nav.costs-forecasting-form',
                         routerLink: 'forecasting/costs-form',
                     },
                 ]

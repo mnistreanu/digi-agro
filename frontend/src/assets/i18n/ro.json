@@ -14,14 +14,6 @@
 		"event-type": "Tipul lucrării agricole",
 		"title": "Agenda lucrărilor agricole"
 	},
-	"parcel": {
-		"parcels": "Parcele",
-		"name": "Nume",
-		"cadaster-number": "№ Cadaster",
-		"land-worthiness-points": "Valabilitatea Terenului",
-		"area": "Arie",
-		"description": "Descriere"
-	},
 	"auth": {
 		"login": "Logare",
 		"logout": "Ieșire"
@@ -43,9 +35,9 @@
 		"settings": "Setări"
 	},
 	"geo": {
-		"map": "Hartă",
 		"country": "Țară",
 		"county": "Județ",
+		"map": "Hartă",
 		"village-city": "Satul Orașul"
 	},
 	"info": {
@@ -69,18 +61,20 @@
 		"branches": "Subdiviziuni",
 		"brands": "Brands",
 		"costs-forecasting": "Prognoză costuri",
+		"costs-forecasting-form": "Prognoză costuri FORM",
 		"dashboard": "Dashboard",
 		"forecasts": "Prognoze",
 		"harvesting-forecasting": "Prognoză recoltă",
+		"harvesting-forecasting-form": "Prognoză recoltă FORM",
 		"machines": "Maşini",
 		"notifications": "Notificări",
 		"notifications-and-alerts": "Notificări și alete",
 		"owners": "Proprietari",
+		"parcels": "Parcele",
 		"tasks": "Sarcini",
 		"telemetry": "Telemetrie",
 		"tenants": "Clienți",
-		"users": "Utilizatori",
-		"parcels": "Parcele"
+		"users": "Utilizatori"
 	},
 	"notification": {
 		"mark-all-as-read": "Marcheaza toate ca fiind citite",
@@ -96,6 +90,14 @@
 		"weather-rain-alert": "Alertă de ploaie",
 		"weather-snow-alert": "Alertă de ninsoare",
 		"weather-wind-alert": "Alertă de vânt puternic"
+	},
+	"parcel": {
+		"area": "Arie",
+		"cadaster-number": "№ Cadaster",
+		"description": "Descriere",
+		"land-worthiness-points": "Valabilitatea Terenului",
+		"name": "Nume",
+		"parcels": "Parcele"
 	},
 	"response": {
 		"added": "A fost adăugat",

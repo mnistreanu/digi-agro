@@ -14,14 +14,6 @@
 		"event-type": "Тип сельскохозяйственной работы",
 		"title": "План сельскохозяйственных работ"
 	},
-	"parcel": {
-		"parcels": "Участки",
-		"name": "Имя",
-		"cadaster-number": "№ Кадастра",
-		"land-worthiness-points": "Земельная ценность",
-		"area": "Площадь",
-		"description": "Описание"
-	},
 	"auth": {
 		"login": "Вход",
 		"logout": "Выход"
@@ -43,9 +35,9 @@
 		"settings": "Настройки"
 	},
 	"geo": {
-		"map": "Карта",
 		"country": "Страна",
 		"county": "Округ",
+		"map": "Карта",
 		"village-city": "Деревня Город"
 	},
 	"info": {
@@ -69,18 +61,20 @@
 		"branches": "Подразделения",
 		"brands": "Бренды",
 		"costs-forecasting": "Прогнозирование затрат",
+		"costs-forecasting-form": "Прогнозирование затрат FORM",
 		"dashboard": "Главная",
 		"forecasts": "Прогнозирование",
 		"harvesting-forecasting": "Прогнозирование урожая",
+		"harvesting-forecasting-form": "Прогнозирование урожая FORM",
 		"machines": "Машины",
 		"notifications": "Уведомления",
 		"notifications-and-alerts": "Уведомления и оповещения",
 		"owners": "Владелецы",
+		"parcels": "Участки",
 		"tasks": "Задания",
 		"telemetry": "Телеметрия",
 		"tenants": "Клиенты",
-		"users": "Пользователями",
-		"parcels": "Участки"
+		"users": "Пользователями"
 	},
 	"notification": {
 		"mark-all-as-read": "Отметить все как прочитанные",
@@ -96,6 +90,14 @@
 		"weather-rain-alert": "Предупреждение о дожде",
 		"weather-snow-alert": "Предупреждение о снегопаде",
 		"weather-wind-alert": "Предупреждение о сильном ветре"
+	},
+	"parcel": {
+		"area": "Площадь",
+		"cadaster-number": "№ Кадастра",
+		"description": "Описание",
+		"land-worthiness-points": "Земельная ценность",
+		"name": "Имя",
+		"parcels": "Участки"
 	},
 	"response": {
 		"added": "Добавлен",

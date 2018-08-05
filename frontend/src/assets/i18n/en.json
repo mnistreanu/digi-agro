@@ -14,14 +14,6 @@
 		"event-type": "Type of work",
 		"title": "Agenda of agricultural works"
 	},
-	"parcel": {
-		"parcels": "Parcels",
-		"name": "Name",
-		"cadaster-number": "Cadaster №",
-		"land-worthiness-points": "Land Worthiness Points",
-		"area": "Area",
-		"description": "Description"
-	},
 	"auth": {
 		"login": "Login",
 		"logout": "Logout"
@@ -43,9 +35,9 @@
 		"settings": "Settings"
 	},
 	"geo": {
-		"map": "Map",
 		"country": "Country",
 		"county": "County",
+		"map": "Map",
 		"village-city": "Village City"
 	},
 	"info": {
@@ -69,18 +61,20 @@
 		"branches": "Branches",
 		"brands": "Brands",
 		"costs-forecasting": "Costs forecasting",
+		"costs-forecasting-form": "Costs forecasting FORM",
 		"dashboard": "Dashboard",
 		"forecasts": "Forecasts",
 		"harvesting-forecasting": "Harvesting forecasting",
+		"harvesting-forecasting-form": "Harvesting forecasting FORM",
 		"machines": "Machines",
 		"notifications": "Notifications",
 		"notifications-and-alerts": "Notifications and alerts",
 		"owners": "Owners",
+		"parcels": "Parcels",
 		"tasks": "Tasks",
 		"telemetry": "Telemetry",
 		"tenants": "Tenants",
-		"users": "Users",
-		"parcels": "Parcels"
+		"users": "Users"
 	},
 	"notification": {
 		"mark-all-as-read": "Mark All as Read",
@@ -96,6 +90,14 @@
 		"weather-rain-alert": "Raining alert",
 		"weather-snow-alert": "Snow alert",
 		"weather-wind-alert": "Strong wind alert"
+	},
+	"parcel": {
+		"area": "Area",
+		"cadaster-number": "Cadaster №",
+		"description": "Description",
+		"land-worthiness-points": "Land Worthiness Points",
+		"name": "Name",
+		"parcels": "Parcels"
 	},
 	"response": {
 		"added": "Added",

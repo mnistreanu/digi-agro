@@ -1,5 +1,7 @@
-export interface MyForm {
-    simple: string;
-    minLength: string;
-    maxLength: string;
+export interface ForecastHarvestForm {
+    name;
+    description;
+    cropCategoryId: number;
+    cropId: number;
+    cropVarietyId: number;
 }
