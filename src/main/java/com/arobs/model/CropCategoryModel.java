@@ -1,25 +1,23 @@
-package com.arobs.entity;
+package com.arobs.model;
 
-import javax.persistence.*;
 
-/**
- * Created by mihail.gorgos on 14.07.2018.
- */
-@Entity
-@Table(name = "crop_category")
-public class CropCategory {
+import com.arobs.entity.CropCategory;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import java.io.Serializable;
+
+public class CropCategoryModel implements Serializable {
+
     private Long id;
-
-    @Column (name = "name_ro")
     private String nameRo;
-
-    @Column (name = "name_ru")
     private String nameRu;
 
-    public CropCategory() {
+    public CropCategoryModel() {
+    }
+
+    public CropCategoryModel(CropCategory entity) {
+        this.id = entity.getId();
+        this.nameRo = entity.getNameRo();
+        this.nameRu = entity.getNameRu();
     }
 
     public Long getId() {

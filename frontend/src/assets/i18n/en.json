@@ -22,6 +22,7 @@
 		"branch": "Branch"
 	},
 	"crop": {
+		"category": "Category",
 		"name": "Agricultural crop",
 		"variety": "Variety"
 	},

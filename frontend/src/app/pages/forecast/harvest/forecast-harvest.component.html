@@ -27,14 +27,29 @@
                             </div>
 
                             <div class="form-group row text-sm-right">
+                                <label class="col-sm-3 form-control-label m-t-5" translate>crop.category</label>
+                                <div class="col-sm-8 text-left">
+                                    <div class="form-group">
+                                        <!--<label for="work-type" translate>reminder.event-type</label>-->
+                                        <select id="cropCategoryId" class="form-control custom-select" formControlName="cropCategoryId">
+                                            <option *ngFor="let cropCategory of cropCategoryModels"
+                                                    [ngValue]="cropCategory.id">{{cropCategory.nameRo}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row text-sm-right">
                                 <label class="col-sm-3 form-control-label m-t-5" translate>crop.name</label>
                                 <div class="col-sm-8 text-left">
                                     <div class="form-group">
-                                        <select class="form-control custom-select" id="exampleSelect3">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                        <!--<label for="work-type" translate>reminder.event-type</label>-->
+                                        <select id="cropId" class="form-control custom-select" formControlName="cropId">
+                                            <option *ngFor="let crop of cropModels"
+                                                    [ngValue]="crop.id">{{crop.nameRo}}
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
