@@ -2,7 +2,7 @@
     <div class="col">
         <div widget class="card">
             <div class="card-header">
-                <span>VALIDATORS</span>
+                <span translate>nav.harvesting-forecasting</span>
                 <div class="widget-controls">
                     <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
                     <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
@@ -19,7 +19,7 @@
                         <form (ngSubmit)="onSubmit(myForm)" [formGroup]="myForm">
 
                             <div class="form-group row text-sm-right">
-                                <label class="col-sm-3 form-control-label m-t-5">Simple</label>
+                                <label class="col-sm-3 form-control-label m-t-5" translate>forecast.name</label>
                                 <div class="col-sm-8 text-left">
                                     <input class="form-control checking-field" type="text" formControlName="simple" required>
                                     <span class="help-block text-danger" *ngIf="myForm.get('simple').touched && myForm.get('simple').hasError('required')">Field is required</span>
@@ -27,25 +27,38 @@
                             </div>
 
                             <div class="form-group row text-sm-right">
-                                <label class="col-sm-3 form-control-label m-t-5">Min length (3)</label>
+                                <label class="col-sm-3 form-control-label m-t-5" translate>crop.name</label>
                                 <div class="col-sm-8 text-left">
-                                    <input class="form-control checking-field" type="text" formControlName="minLength" required>
-                                    <span class="help-block" *ngIf="myForm.get('minLength').touched">
-                                        <span class="text-danger" *ngIf="myForm.get('minLength').hasError('required')">Field is required</span>
-                                        <span class="text-danger" *ngIf="myForm.get('minLength').hasError('minlength')">Minimum of 3 characters</span>
-                                    </span>
+                                    <div class="form-group">
+                                        <select class="form-control custom-select" id="exampleSelect3">
+                                            <option selected>Open this select menu</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="form-group row text-sm-right">
-                                <label class="col-sm-3 form-control-label m-t-5">Max length (10)</label>
+                                <label class="col-sm-3 form-control-label m-t-5" translate>crop.variety</label>
                                 <div class="col-sm-8 text-left">
-                                    <input class="form-control checking-field" type="text" formControlName="maxLength" required>
-                                    <span class="help-block text-danger" *ngIf="myForm.get('maxLength').touched && myForm.get('maxLength').hasError('required')">Field is required</span>
-                                    <span class="help-block text-danger" *ngIf="myForm.get('maxLength').touched && myForm.get('maxLength').hasError('maxlength')">Maximum of 10 characters</span>
+                                    <select class="form-control custom-select" id="exampleSelect3">
+                                        <option selected>Open this select menu</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
                                 </div>
                             </div>
 
+
+                            <div class="form-group row text-sm-right">
+                                <label class="col-sm-3 form-control-label m-t-5" translate>forecast.description</label>
+                                <div class="col-sm-8 text-left">
+                                    <textarea class="form-control checking-field" type="text" formControlName="maxLength" required></textarea>
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-8 mx-auto text-center">
