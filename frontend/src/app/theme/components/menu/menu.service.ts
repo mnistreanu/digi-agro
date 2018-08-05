@@ -119,7 +119,7 @@ export class MenuService {
                     },
                     {
                         title: 'nav.costs-forecasting',
-                        routerLink: 'forecasting/harvesting',
+                        routerLink: 'forecasting/costs',
                     },
                 ]
             },
