@@ -90,6 +90,10 @@ export class AuthService {
     createTokenHeader() {
         let headers = {};
         headers[Constants.AUTH_HEADER] = Constants.TOKEN_PREFIX + this.getToken();
+        let tenant = this.storageService.getItem(Constants.TENANT);
+        if (tenant) {
+            headers[Constants.TENANT] = tenant;
+        }
         return headers;
     }
 

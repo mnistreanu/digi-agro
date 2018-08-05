@@ -18,16 +18,13 @@
                 [strokeWeight]="2">
       </polyline>
 
-      <polygon [editable]="true"
-               [paths]="polygonPath"
+      <polygon *ngFor="let p of parcels"
+               [paths]="p.paths"
                [strokeColor]="'#FFC107'"
                [strokeOpacity]="0.8"
                [strokeWeight]="2"
-               [fillColor]="'#FFC107'"
-               [fillOpacity]="0.35"
-               (click)="onPolygonClick($event)"
-               (mousedown)="onMouseDown($event)"
-               (mouseup)="onMouseUp($event)">
+               [fillColor]="p.fillColor"
+               [fillOpacity]="0.35">
       </polygon>
 
       <marker *ngFor="let m of markers"

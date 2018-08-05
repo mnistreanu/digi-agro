@@ -57,6 +57,12 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             }
         }
 
+        String tenantStr = request.getHeader("TENANT");
+        if (tenantStr != null) {
+            Long tenantId = Long.parseLong(tenantStr);
+            request.getSession().setAttribute("tenant", tenantId);
+        }
+
         filterChain.doFilter(request, response);
     }
 }
