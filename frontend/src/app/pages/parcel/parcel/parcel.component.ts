@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ParcelModel} from "../../telemetry/parcel.model";
+import {ParcelMapComponent} from "../parcel-map/parcel-map.component";
 
 @Component({
     selector: 'az-parcel',
@@ -7,6 +8,8 @@ import {ParcelModel} from "../../telemetry/parcel.model";
     styleUrls: ['./parcel.component.scss']
 })
 export class ParcelComponent implements OnInit {
+
+    @ViewChild(ParcelMapComponent) parcelMap: ParcelMapComponent;
 
     private parcels: ParcelModel[];
 
@@ -19,6 +22,10 @@ export class ParcelComponent implements OnInit {
 
     registerParcels(data) {
         this.parcels = data;
+    }
+
+    registerCenter(center) {
+        this.parcelMap.updateCenter(center);
     }
 
 }

@@ -3,6 +3,7 @@ import {ColDef, GridOptions} from "ag-grid";
 import {LangService} from "../../../services/lang.service";
 import {ParcelModel} from "../../telemetry/parcel.model";
 import {ParcelService} from "../../../services/parcel.service";
+import {NavigateRendererComponent} from "../../../modules/aggrid/view-renderer/navigate-renderer.component";
 
 @Component({
     selector: 'parcel-list',
@@ -12,6 +13,7 @@ import {ParcelService} from "../../../services/parcel.service";
 export class ParcelListComponent implements OnInit {
 
     @Output() dataChanged: EventEmitter<ParcelModel[]> = new EventEmitter<ParcelModel[]>();
+    @Output() centerChanged: EventEmitter<any> = new EventEmitter<any>();
 
     options: GridOptions;
     context;
@@ -57,6 +59,17 @@ export class ParcelListComponent implements OnInit {
     private setupHeaders() {
 
         let headers: ColDef[] = [
+            {
+                field: 'view',
+                width: 20,
+                minWidth: 20,
+                maxWidth: 20,
+                editable: false,
+                suppressResize: true,
+                suppressMenu: true,
+                cellRendererFramework: NavigateRendererComponent,
+                cellStyle: () => {return {padding: 0};}
+            },
             {
                 headerName: this.labelName,
                 field: 'name',
@@ -128,6 +141,12 @@ export class ParcelListComponent implements OnInit {
 
     private randomColor(): string {
         return '#' + Math.random().toString(16).slice(-3);
+    }
+
+    public navigate(node) {
+        let model = node.data;
+        let firstCoord = model.paths[0];
+        this.centerChanged.emit(firstCoord.lat + ',' + firstCoord.lng);
     }
 
 

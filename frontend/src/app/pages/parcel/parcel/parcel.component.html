@@ -1,4 +1,4 @@
 <div>
-  <parcel-list (dataChanged)="registerParcels($event)"></parcel-list>
+  <parcel-list (dataChanged)="registerParcels($event)" (centerChanged)="registerCenter($event)"></parcel-list>
   <parcel-map [parcels]="parcels"></parcel-map>
 </div>

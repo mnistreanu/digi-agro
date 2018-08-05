@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditRendererComponent } from './edit-renderer.component';
+import { NavigateRendererComponent } from './navigate-renderer.component';
 
 describe('NavigateRendererComponent', () => {
-  let component: EditRendererComponent;
-  let fixture: ComponentFixture<EditRendererComponent>;
+  let component: NavigateRendererComponent;
+  let fixture: ComponentFixture<NavigateRendererComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditRendererComponent ]
+      declarations: [ NavigateRendererComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditRendererComponent);
+    fixture = TestBed.createComponent(NavigateRendererComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

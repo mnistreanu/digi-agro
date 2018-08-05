@@ -9,9 +9,10 @@ import {ParcelModel} from "../../telemetry/parcel.model";
 export class ParcelMapComponent implements OnInit {
 
     @Input() parcels: any[];
-    @Input() center: any;
 
     @ViewChild('infoBody') infoBody: ElementRef;
+
+    private center: string;
 
     private infoParcel: ParcelModel;
     private infoWindow;
@@ -25,14 +26,15 @@ export class ParcelMapComponent implements OnInit {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        this.setupCenter();
     }
 
     private setupCenter() {
-        if (!this.center) {
-            this.center = 'Moldova, Chisinau';
-        }
-        // this.center = first.lat + ',' + first.lng;
+        this.center = 'Moldova, Chisinau';
+    }
+
+    public updateCenter(data) {
+        console.log(data);
+        this.center = data;
     }
 
     private onParcelClick(parcel, event) {
