@@ -6,6 +6,7 @@ import { DirectivesModule } from '../../theme/directives/directives.module';
 import {ForecastHarvestChartsComponent} from './harvest/forecast-harvest-charts.component';
 import {ForecastHarvestComponent} from './harvest/forecast-harvest.component';
 import {ChartsModule} from "ng2-charts";
+import {ReactiveFormsModule} from "@angular/forms";
 
 export const routes = [
   { path: '', redirectTo: 'forecasting', pathMatch: 'full' },
@@ -18,6 +19,7 @@ export const routes = [
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     ChartsModule,
     DirectivesModule,
     RouterModule.forChild(routes)
