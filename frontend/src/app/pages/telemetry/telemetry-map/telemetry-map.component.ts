@@ -15,6 +15,7 @@ export class TelemetryMapComponent implements OnInit, OnChanges {
     private center: string;
 
     private parcels: ParcelModel[];
+    private currentParcel: ParcelModel;
 
     constructor(private parcelService: ParcelService) {
     }
@@ -53,6 +54,21 @@ export class TelemetryMapComponent implements OnInit, OnChanges {
                });
             });
         });
+    }
+
+    private onParcelClick(parcel, event) {
+        this.currentParcel = parcel;
+        // event.target.nguiMapComponent.openInfoWindow('iw', event.target, {
+        //         lat: 48,
+        //         lng: 28
+        //     });
+        let infoWindow = new google.maps.InfoWindow;
+        infoWindow.setContent('test');
+        infoWindow.setPosition({
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng()
+        });
+        infoWindow.open(event.target.map);
     }
 
     private randomColor(): string {
