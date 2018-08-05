@@ -1,10 +1,10 @@
 export class ParcelModel {
 
     id: number;
-    cadasterNumber: string;
-    landworthinessPoints: number;
-    area: number;
     name: string;
+    cadasterNumber: string;
+    landWorthinessPoints: number;
+    area: number;
     description: string;
     coordinates: any;
 

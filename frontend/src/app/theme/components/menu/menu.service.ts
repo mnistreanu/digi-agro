@@ -82,6 +82,18 @@ export class MenuService {
 
         if (isAdmin || isUser) {
             menuItems.push({
+                title: 'nav.parcels',
+                routerLink: '/pages/parcel',
+                icon: 'fas fa-globe',
+                selected: false,
+                expanded: false
+            });
+        }
+
+
+
+        if (isAdmin || isUser) {
+            menuItems.push({
                 title: 'nav.work-agenda',
                 routerLink: '/pages/reminder',
                 icon: 'fa-calendar',

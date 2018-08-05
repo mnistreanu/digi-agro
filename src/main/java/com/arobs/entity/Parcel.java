@@ -28,8 +28,8 @@ public class Parcel {
     @Column(name = "cadaster_number", length = 128)
     private String cadasterNumber;
 
-    @Column(name = "landworthiness_points")
-    private Integer landworthinessPoints;
+    @Column(name = "land_worthiness_points")
+    private Integer landWorthinessPoints;
 
     /**
      * Aria parcelei masurata in hectare
@@ -87,12 +87,12 @@ public class Parcel {
         this.cadasterNumber = cadasterNumber;
     }
 
-    public Integer getLandworthinessPoints() {
-        return landworthinessPoints;
+    public Integer getLandWorthinessPoints() {
+        return landWorthinessPoints;
     }
 
-    public void setLandworthinessPoints(Integer landworthinessPoints) {
-        this.landworthinessPoints = landworthinessPoints;
+    public void setLandWorthinessPoints(Integer landWorthinessPoints) {
+        this.landWorthinessPoints = landWorthinessPoints;
     }
 
     public String getName() {

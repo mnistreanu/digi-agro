@@ -40,7 +40,9 @@ export const routes: Routes = [
             { path: 'notification-subscription', loadChildren: 'app/pages/notifications/subscription/notification-subscription.module#NotificationSubscriptionModule', data: { breadcrumb: 'Notification subscriptions' }, canActivate: [AuthGuard] },
             { path: 'notification-list', loadChildren: 'app/pages/notifications/list/notification-list.module#NotificationListModule', data: { breadcrumb: 'Notifications' }, canActivate: [AuthGuard] },
             { path: 'forecasting', loadChildren: 'app/pages/forecast/forecast.module#ForecastModule', data: { breadcrumb: 'Forecasting' }, canActivate: [AuthGuard] },
-            { path: 'costs', loadChildren: 'app/pages/forecast/forecast.module#ForecastModule', data: { breadcrumb: 'Costs' }, canActivate: [AuthGuard] }
+            { path: 'costs', loadChildren: 'app/pages/forecast/forecast.module#ForecastModule', data: { breadcrumb: 'Costs' }, canActivate: [AuthGuard] },
+
+            { path: 'parcel', loadChildren: 'app/pages/parcel/parcel.module#ParcelModule', data: { breadcrumb: 'Parcel' }, canActivate: [AuthGuard] }
         ]
     }
 ];

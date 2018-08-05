@@ -1,0 +1,51 @@
+<div widget class="card bottom-30">
+  <div class="card-header">
+    <span translate>geo.map</span>
+    <div class="widget-controls">
+      <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
+      <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
+      <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+    </div>
+  </div>
+  <div class="card-body widget-body">
+
+    <ngui-map zoom="15" [center]="center" mapTypeId="terrain" scrollwheel="true">
+      <polygon *ngFor="let p of parcels"
+               (click)="onParcelClick(p, $event)"
+               [paths]="p.paths"
+               [strokeColor]="'#FFC107'"
+               [strokeOpacity]="0.8"
+               [strokeWeight]="2"
+               [fillColor]="p.fillColor"
+               [fillOpacity]="0.35">
+      </polygon>
+    </ngui-map>
+
+  </div>
+</div>
+
+<div #infoBody>
+  <br>
+  <table class="table table-bordered table-hover" *ngIf="infoParcel">
+    <tr>
+      <td translate>parcel.name</td>
+      <td>{{ infoParcel.name }}</td>
+    </tr>
+    <tr>
+      <td translate>parcel.cadaster-number</td>
+      <td>{{ infoParcel.cadasterNumber }}</td>
+    </tr>
+    <tr>
+      <td translate>parcel.land-worthiness-points</td>
+      <td>{{ infoParcel.landWorthinessPoints }}</td>
+    </tr>
+    <tr>
+      <td translate>parcel.area</td>
+      <td>{{ infoParcel.area }}</td>
+    </tr>
+    <tr>
+      <td translate>parcel.description</td>
+      <td>{{ infoParcel.description }}</td>
+    </tr>
+  </table>
+</div>

@@ -9,7 +9,7 @@ public class ParcelModel {
 
     private Long id;
     private String cadasterNumber;
-    private Integer landworthinessPoints;
+    private Integer landWorthinessPoints;
     private Double area;
     private String name;
     private String description;
@@ -23,7 +23,7 @@ public class ParcelModel {
 
         id = entity.getId();
         cadasterNumber = entity.getCadasterNumber();
-        landworthinessPoints = entity.getLandworthinessPoints();
+        landWorthinessPoints = entity.getLandWorthinessPoints();
         area = entity.getArea();
         name = entity.getName();
         description = entity.getDescription();
@@ -45,12 +45,12 @@ public class ParcelModel {
         this.cadasterNumber = cadasterNumber;
     }
 
-    public Integer getLandworthinessPoints() {
-        return landworthinessPoints;
+    public Integer getLandWorthinessPoints() {
+        return landWorthinessPoints;
     }
 
-    public void setLandworthinessPoints(Integer landworthinessPoints) {
-        this.landworthinessPoints = landworthinessPoints;
+    public void setLandWorthinessPoints(Integer landWorthinessPoints) {
+        this.landWorthinessPoints = landWorthinessPoints;
     }
 
     public Double getArea() {

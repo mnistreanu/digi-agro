@@ -440,4 +440,11 @@
         </sql>
     </changeSet>
 
+    <changeSet id="parcel-table-changes" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <sql>
+            UPDATE parcel SET land_worthiness_points = landworthiness_points;
+            ALTER TABLE parcel DROP COLUMN landworthiness_points;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
