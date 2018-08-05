@@ -31,7 +31,6 @@
       </polygon>
 
       <marker *ngFor="let m of markers"
-              (click)="onParcelClick(null, $event)"
               [position]="m.position"
               [title]="m.message"></marker>
     </ngui-map>
