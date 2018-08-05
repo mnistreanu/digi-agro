@@ -1,9 +1,8 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {ColDef, GridOptions} from "ag-grid";
 import {LangService} from "../../../services/lang.service";
 import {ParcelModel} from "../../telemetry/parcel.model";
 import {ParcelService} from "../../../services/parcel.service";
-import {NavigateRendererComponent} from "../../../modules/aggrid/view-renderer/navigate-renderer.component";
 
 @Component({
     selector: 'parcel-list',
@@ -50,6 +49,7 @@ export class ParcelListComponent implements OnInit {
         this.options.enableColResize = true;
         this.options.enableSorting = true;
         this.options.enableFilter = true;
+        this.options.rowSelection = 'single';
         this.options.columnDefs = this.setupHeaders();
         this.context = {componentParent: this};
 
@@ -59,17 +59,6 @@ export class ParcelListComponent implements OnInit {
     private setupHeaders() {
 
         let headers: ColDef[] = [
-            {
-                field: 'view',
-                width: 20,
-                minWidth: 20,
-                maxWidth: 20,
-                editable: false,
-                suppressResize: true,
-                suppressMenu: true,
-                cellRendererFramework: NavigateRendererComponent,
-                cellStyle: () => {return {padding: 0};}
-            },
             {
                 headerName: this.labelName,
                 field: 'name',
@@ -143,11 +132,10 @@ export class ParcelListComponent implements OnInit {
         return '#' + Math.random().toString(16).slice(-3);
     }
 
-    public navigate(node) {
-        let model = node.data;
+    private onSelectionChanged(event) {
+        let model = this.options.api.getSelectedRows()[0];
         let firstCoord = model.paths[0];
-        this.centerChanged.emit(firstCoord.lat + ',' + firstCoord.lng);
+        this.centerChanged.emit(firstCoord);
     }
-
 
 }
