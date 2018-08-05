@@ -20,8 +20,6 @@
 
       <polygon *ngFor="let p of parcels"
                (click)="onParcelClick(p, $event)"
-               [title]="'abc'"
-               [id]="'idabc'"
                [paths]="p.paths"
                [strokeColor]="'#FFC107'"
                [strokeOpacity]="0.8"
