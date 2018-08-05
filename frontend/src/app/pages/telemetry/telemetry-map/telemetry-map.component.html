@@ -19,6 +19,9 @@
       </polyline>
 
       <polygon *ngFor="let p of parcels"
+               (click)="onParcelClick(p, $event)"
+               [title]="'abc'"
+               [id]="'idabc'"
                [paths]="p.paths"
                [strokeColor]="'#FFC107'"
                [strokeOpacity]="0.8"
@@ -28,10 +31,36 @@
       </polygon>
 
       <marker *ngFor="let m of markers"
+              (click)="onParcelClick(null, $event)"
               [position]="m.position"
               [title]="m.message"></marker>
-
     </ngui-map>
 
   </div>
+</div>
+
+<div #infoBody>
+    <br>
+    <table class="table table-bordered table-hover" *ngIf="infoParcel">
+        <tr>
+            <td>Name</td>
+            <td>{{ infoParcel.name }}</td>
+        </tr>
+        <tr>
+            <td>Area</td>
+            <td>{{ infoParcel.area }}</td>
+        </tr>
+        <tr>
+            <td>Cadaster Number</td>
+            <td>{{ infoParcel.cadasterNumber }}</td>
+        </tr>
+        <tr>
+            <td>Land Worthiness Points</td>
+            <td>{{ infoParcel.landworthinessPoints }}</td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>{{ infoParcel.description }}</td>
+        </tr>
+    </table>
 </div>
