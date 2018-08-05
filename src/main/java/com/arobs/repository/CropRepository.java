@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CropRepository extends JpaRepository<Crop, Integer> {
+public interface CropRepository extends JpaRepository<Crop, Long> {
 
     @Query("SELECT c FROM Crop c " +
             "ORDER BY c.nameRo ")
@@ -18,6 +18,6 @@ public interface CropRepository extends JpaRepository<Crop, Integer> {
     @Query("SELECT c FROM Crop c " +
             "WHERE c.cropCategoryId = :categoryId " +
             "ORDER BY c.nameRo ")
-    List<Crop> find(@Param("categoryId") Integer categoryId);
+    List<Crop> find(@Param("categoryId") Long categoryId);
 }
 

@@ -16,7 +16,7 @@ public class CropCategoryService implements HasRepository<CropCategoryRepository
     @Autowired
     private CropCategoryRepository cropCategoryRepository;
 
-    private List<CropCategory> find() {
+    public List<CropCategory> find() {
            return getRepository().find();
     }
 

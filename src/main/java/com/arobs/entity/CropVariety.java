@@ -11,10 +11,10 @@ public class CropVariety {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "crop_id")
-    private Integer cropId;
+    private Long cropId;
 
     @Column(name = "name_ro")
     private String nameRo;
@@ -31,19 +31,19 @@ public class CropVariety {
     public CropVariety() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getCropId() {
+    public Long getCropId() {
         return cropId;
     }
 
-    public void setCropId(Integer cropId) {
+    public void setCropId(Long cropId) {
         this.cropId = cropId;
     }
 

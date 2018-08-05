@@ -14,7 +14,7 @@ public class CropService implements HasRepository<CropRepository> {
     @Autowired
     private CropRepository cropRepository;
 
-    private List<Crop> find(Integer categoryId) {
+    public List<Crop> find(Long categoryId) {
         if (categoryId != null) {
             return getRepository().find(categoryId);
         } else {

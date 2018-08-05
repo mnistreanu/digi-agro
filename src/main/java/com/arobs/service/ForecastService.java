@@ -3,10 +3,7 @@ package com.arobs.service;
 import com.arobs.entity.*;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.reminder.ReminderModel;
-import com.arobs.repository.ForecastHarvestRepository;
-import com.arobs.repository.ForecastParcelRepository;
-import com.arobs.repository.ForecastRepository;
-import com.arobs.repository.ForecastSnapshotRepository;
+import com.arobs.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +28,12 @@ public class ForecastService implements HasRepository<ForecastRepository> {
 
     @Autowired
     private ForecastHarvestRepository harvestRepository;
+
+    @Autowired
+    private CropRepository cropRepository;
+
+    @Autowired
+    private CropVarietyRepository cropVarietyRepository;
 
     @Override
     public ForecastRepository getRepository() {

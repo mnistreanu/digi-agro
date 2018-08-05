@@ -1,6 +1,7 @@
 package com.arobs.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by mihail.gorgos on 03.08.2018.
@@ -27,6 +28,18 @@ public class Forecast {
 
     @Column(name = "description", length = 1024)
     private String description;
+
+    @Column(name = "created_at")
+    private Date createdAt;
+
+    @Column(name = "created_by")
+    private Long createdBy;
+
+    @Column(name = "deleted_at")
+    private Date deletedAt;
+
+    @Column(name = "deleted_by")
+    private Long deletedBy;
 
     public Long getId() {
         return id;
@@ -74,5 +87,37 @@ public class Forecast {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Long getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Long createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Date getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(Date deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
+    public Long getDeletedBy() {
+        return deletedBy;
+    }
+
+    public void setDeletedBy(Long deletedBy) {
+        this.deletedBy = deletedBy;
     }
 }

@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "forecast_parcel")
 public class ForecastParcel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

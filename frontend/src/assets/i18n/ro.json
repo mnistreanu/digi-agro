@@ -30,6 +30,7 @@
 		"branch": "Subdiviziune"
 	},
 	"crop": {
+		"category": "Categoria",
 		"name": "Cultura agricolă",
 		"variety": "Soi"
 	},

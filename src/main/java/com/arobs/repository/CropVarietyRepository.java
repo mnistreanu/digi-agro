@@ -10,12 +10,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CropVarietyRepository extends JpaRepository<CropVariety, Integer> {
+public interface CropVarietyRepository extends JpaRepository<CropVariety, Long> {
 
     @Query("SELECT v FROM CropVariety v " +
             "WHERE v.cropId = :cropId " +
             "ORDER BY v.nameRo ")
-    List<CropVariety> find(@Param("cropId") Integer cropId);
+    List<CropVariety> find(@Param("cropId") Long cropId);
 
 }
 
