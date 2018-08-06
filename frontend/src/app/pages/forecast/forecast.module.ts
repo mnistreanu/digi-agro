@@ -9,10 +9,12 @@ import {ChartsModule} from "ng2-charts";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TranslateModule} from '@ngx-translate/core';
 import {MultiselectDropdownModule} from "angular-2-dropdown-multiselect";
+import {ForecastHarvestFactorComponent} from "./harvest/forecast-harvest-factor.component";
 
 export const routes = [
   { path: '', redirectTo: 'forecasting', pathMatch: 'full' },
   { path: 'harvesting-form', component: ForecastHarvestComponent,  data: { breadcrumb: 'harvesting-form' }},
+  { path: 'harvesting-factor', component: ForecastHarvestFactorComponent,  data: { breadcrumb: 'harvesting-factor' }},
   { path: 'harvesting', component: ForecastHarvestChartsComponent,  data: { breadcrumb: 'harvesting' }},
   { path: 'costs-form', component: ForecastHarvestComponent,  data: { breadcrumb: 'costs-form' }},
   { path: 'costs', component: ForecastHarvestChartsComponent,  data: { breadcrumb: 'costs' }}
@@ -30,7 +32,7 @@ export const routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [
-    ForecastHarvestChartsComponent, ForecastHarvestComponent
+    ForecastHarvestChartsComponent, ForecastHarvestComponent, ForecastHarvestFactorComponent
   ]
 })
 

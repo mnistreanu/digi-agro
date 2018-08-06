@@ -1,4 +1,4 @@
-export class ForecastHarvestModel {
+export class ForecastHarvestModelZZZ {
 
     id: number;
     cropCategoryId: number;
