@@ -13,29 +13,29 @@ import {FormErrorBlockModule} from "../../modules/form-error-block/form-error-bl
 import {ForecastHarvestFactorComponent} from "./harvest/forecast-harvest-factor.component";
 
 export const routes = [
-    { path: '', redirectTo: 'forecasting', pathMatch: 'full' },
-    { path: 'harvesting-form', component: ForecastHarvestComponent,  data: { breadcrumb: 'harvesting-form' }},
-    { path: 'harvesting-factor', component: ForecastHarvestFactorComponent,  data: { breadcrumb: 'harvesting-factor' }},
-    { path: 'harvesting', component: ForecastHarvestChartsComponent,  data: { breadcrumb: 'harvesting' }},
-    { path: 'costs-form', component: ForecastHarvestComponent,  data: { breadcrumb: 'costs-form' }},
-    { path: 'costs', component: ForecastHarvestChartsComponent,  data: { breadcrumb: 'costs' }}
+    {path: '', redirectTo: 'forecasting', pathMatch: 'full'},
+    {path: 'harvesting-form', component: ForecastHarvestComponent, data: {breadcrumb: 'harvesting-form'}},
+    {path: 'harvesting-factor', component: ForecastHarvestFactorComponent, data: {breadcrumb: 'harvesting-factor'}},
+    {path: 'harvesting', component: ForecastHarvestChartsComponent, data: {breadcrumb: 'harvesting'}},
+    {path: 'costs-form', component: ForecastHarvestComponent, data: {breadcrumb: 'costs-form'}},
+    {path: 'costs', component: ForecastHarvestChartsComponent, data: {breadcrumb: 'costs'}}
 ];
 
 @NgModule({
-  imports: [
-    TranslateModule,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MultiselectDropdownModule,
-    ChartsModule,
-    DirectivesModule,
-      FormErrorBlockModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [
-    ForecastHarvestChartsComponent, ForecastHarvestComponent, ForecastHarvestFactorComponent
-  ]
+    imports: [
+        TranslateModule,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MultiselectDropdownModule,
+        ChartsModule,
+        DirectivesModule,
+        FormErrorBlockModule,
+        RouterModule.forChild(routes)
+    ],
+    declarations: [
+        ForecastHarvestChartsComponent, ForecastHarvestComponent, ForecastHarvestFactorComponent
+    ]
 })
 
 export class ForecastModule {
