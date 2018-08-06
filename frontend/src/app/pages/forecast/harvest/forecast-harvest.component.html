@@ -36,8 +36,9 @@
                                 <label class="col-sm-3 form-control-label m-t-5" translate>crop.category</label>
                                 <div class="col-sm-8 text-left">
                                     <div class="form-group">
-                                        <!--<label for="work-type" translate>reminder.event-type</label>-->
-                                        <select id="crop-category" class="form-control custom-select" formControlName="cropCategoryId">
+                                        <select id="crop-category" class="form-control custom-select"
+                                                (change)="onCropCategoryChange()"
+                                                formControlName="cropCategoryId">
                                             <option selected></option>
                                             <option *ngFor="let category of categoryModels"
                                                     [ngValue]="category.id">{{category.nameRo}}
@@ -52,8 +53,9 @@
                                 <label class="col-sm-3 form-control-label m-t-5" translate>crop.name</label>
                                 <div class="col-sm-8 text-left">
                                     <div class="form-group">
-                                        <!--<label for="work-type" translate>reminder.event-type</label>-->
-                                        <select id="crop-name" class="form-control custom-select" formControlName="cropId" required>
+                                        <select id="crop-name" class="form-control custom-select"
+                                                (change)="onCropChange()"
+                                                formControlName="cropId" required>
                                             <option selected></option>
                                             <option *ngFor="let crop of cropModels"
                                                     [ngValue]="crop.id">{{crop.nameRo}}
@@ -97,11 +99,8 @@
                                 </div>
                             </div>
                         </form>
-
-
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
