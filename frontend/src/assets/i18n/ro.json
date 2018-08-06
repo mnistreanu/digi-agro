@@ -1,10 +1,10 @@
 {
 	"action": {
 		"cancel": "Anulare",
-		"confirm": "A confirma",
-		"create": "Crea",
-		"remove": "Șterge",
-		"save": "Salvați"
+		"confirm": "Confirmare",
+		"create": "Creare",
+		"remove": "Ștergere",
+		"save": "Salvare"
 	},
 	"reminder": {
 		"enter-new-event": "Doar introduceți numele evenimentului",
@@ -42,7 +42,7 @@
 	},
 	"info": {
 		"description": "Descriere",
-		"name": "Nume"
+		"name": "Denumire"
 	},
 	"language": {
 		"language": "Limba"

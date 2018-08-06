@@ -28,9 +28,9 @@ public class ParcelController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<List<ParcelModel>> find(HttpSession session) {
-        Long tenant = (Long) session.getAttribute("tenant");
+        Long tenantId = (Long) session.getAttribute("tenant");
 
-        List<Parcel> parcels = parcelService.find(tenant);
+        List<Parcel> parcels = parcelService.find(tenantId);
         List<ParcelModel> models = new ArrayList<>();
 
         for (Parcel parcel : parcels) {

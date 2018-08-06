@@ -19,12 +19,20 @@
                         <form (ngSubmit)="onSubmit(myForm)" [formGroup]="myForm">
 
                             <div class="form-group row text-sm-right">
-                                <label class="col-sm-3 form-control-label m-t-5" translate>forecast.name</label>
+                                <label class="col-sm-3 form-control-label m-t-5" translate>parcel.parcels</label>
                                 <div class="col-sm-8 text-left">
-                                    <input class="form-control checking-field" type="text" formControlName="name" required>
-                                    <span class="help-block text-danger" *ngIf="myForm.get('name').touched && myForm.get('name').hasError('required')">Field is required</span>
+                                    <div class="form-group">
+                                        <ss-multiselect-dropdown [options]="parcelControlOptions" [texts]="parcelControlTexts" [settings]="parcelControlSettings" [(ngModel)]="parcelControlModel"></ss-multiselect-dropdown>
+                                        <!--<select multiple id="parcels" class="form-control custom-select" formControlName="cropCategoryId">-->
+                                            <!--<option selected></option>-->
+                                            <!--<option *ngFor="let category of categoryModels"-->
+                                                    <!--[ngValue]="category.id">{{category.nameRo}}-->
+                                            <!--</option>-->
+                                        <!--</select>-->
+                                    </div>
                                 </div>
                             </div>
+
 
                             <div class="form-group row text-sm-right">
                                 <label class="col-sm-3 form-control-label m-t-5" translate>crop.category</label>
@@ -32,6 +40,7 @@
                                     <div class="form-group">
                                         <!--<label for="work-type" translate>reminder.event-type</label>-->
                                         <select id="crop-category" class="form-control custom-select" formControlName="cropCategoryId">
+                                            <option selected></option>
                                             <option *ngFor="let category of categoryModels"
                                                     [ngValue]="category.id">{{category.nameRo}}
                                             </option>
@@ -46,7 +55,8 @@
                                 <div class="col-sm-8 text-left">
                                     <div class="form-group">
                                         <!--<label for="work-type" translate>reminder.event-type</label>-->
-                                        <select id="crop-name" class="form-control custom-select" formControlName="cropId">
+                                        <select id="crop-name" class="form-control custom-select" formControlName="cropId" required>
+                                            <option selected></option>
                                             <option *ngFor="let crop of cropModels"
                                                     [ngValue]="crop.id">{{crop.nameRo}}
                                             </option>
@@ -59,6 +69,7 @@
                                 <label class="col-sm-3 form-control-label m-t-5" translate>crop.variety</label>
                                 <div class="col-sm-8 text-left">
                                     <select id="crop-variety" class="form-control custom-select" formControlName="cropVarietyId">
+                                        <option selected></option>
                                         <option *ngFor="let variety of varietyModels"
                                                 [ngValue]="variety.id">{{variety.nameRo}}
                                         </option>
@@ -68,15 +79,23 @@
 
 
                             <div class="form-group row text-sm-right">
+                                <label class="col-sm-3 form-control-label m-t-5" translate>forecast.name</label>
+                                <div class="col-sm-8 text-left">
+                                    <input class="form-control checking-field" type="text" formControlName="name" required>
+                                    <span class="help-block text-danger" *ngIf="myForm.get('name').touched && myForm.get('name').hasError('required')">Field is required</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row text-sm-right">
                                 <label class="col-sm-3 form-control-label m-t-5" translate>forecast.description</label>
                                 <div class="col-sm-8 text-left">
-                                    <textarea class="form-control checking-field" type="text" formControlName="description" required></textarea>
+                                    <textarea class="form-control checking-field" type="text" formControlName="description"></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-8 mx-auto text-center">
-                                    <button class="btn btn-main" type="submit" [disabled]="myForm.invalid">Validate &amp; Submit</button>
+                                    <button class="btn btn-main" type="submit" [disabled]="myForm.invalid" translate>action.save</button>
                                 </div>
                             </div>
                         </form>

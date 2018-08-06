@@ -6,8 +6,9 @@ import { DirectivesModule } from '../../theme/directives/directives.module';
 import {ForecastHarvestChartsComponent} from './harvest/forecast-harvest-charts.component';
 import {ForecastHarvestComponent} from './harvest/forecast-harvest.component';
 import {ChartsModule} from "ng2-charts";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TranslateModule} from '@ngx-translate/core';
+import {MultiselectDropdownModule} from "angular-2-dropdown-multiselect";
 
 export const routes = [
   { path: '', redirectTo: 'forecasting', pathMatch: 'full' },
@@ -21,7 +22,9 @@ export const routes = [
   imports: [
     TranslateModule,
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
+    MultiselectDropdownModule,
     ChartsModule,
     DirectivesModule,
     RouterModule.forChild(routes)
