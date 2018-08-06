@@ -27,7 +27,7 @@
 		"variety": "Variety"
 	},
 	"forecast": {
-		"description": "Description",
+		"description": "Additional information",
 		"name": "Forecast name"
 	},
 	"general": {

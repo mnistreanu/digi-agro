@@ -22,11 +22,12 @@ public class CropVariety {
     @Column(name = "name_ru")
     private String nameRu;
 
-    @Column(name = "description_ru")
+    @Column(name = "description_ro", length = 4000)
+    private String descriptionRo;
+
+    @Column(name = "description_ru", length = 4000)
     private String descriptionRu;
 
-    @Column(name = "description_ro")
-    private String descriptionRo;
 
     public CropVariety() {
     }

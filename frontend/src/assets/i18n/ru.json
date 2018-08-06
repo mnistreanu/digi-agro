@@ -27,7 +27,7 @@
 		"variety": "Сорт"
 	},
 	"forecast": {
-		"description": "Описание прогноза",
+		"description": "Дополнительная информация",
 		"name": "Название прогноза"
 	},
 	"general": {

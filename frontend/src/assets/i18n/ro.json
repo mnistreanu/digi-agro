@@ -27,7 +27,7 @@
 		"variety": "Soi"
 	},
 	"forecast": {
-		"description": "Descrierea prognozei",
+		"description": "Informații suplimnetare",
 		"name": "Denumire prognoză"
 	},
 	"general": {
