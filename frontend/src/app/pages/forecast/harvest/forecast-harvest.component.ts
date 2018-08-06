@@ -16,11 +16,12 @@ import {ParcelService} from "../../../services/parcel.service";
 export class ForecastHarvestComponent implements OnInit {
 
     private form: FormGroup;
+    private formSubmitted: boolean = false;
 
-    private parcels: IMultiSelectOption[] = [];
-    private categoryModels: CropCategoryModel[] = [];
-    private cropModels: CropModel[] = [];
-    private varietyModels: CropVarietyModel[] = [];
+    private parcels: IMultiSelectOption[];
+    private categories: CropCategoryModel[] = [];
+    private crops: CropModel[] = [];
+    private cropVarieties: CropVarietyModel[] = [];
 
     public parcelControlSettings: IMultiSelectSettings = {
         checkedStyle: 'fontawesome',
@@ -49,8 +50,6 @@ export class ForecastHarvestComponent implements OnInit {
         this.buildForm();
         this.setupParcels();
         this.setupCropCategories();
-        // this.findCrops(1);
-        // this.findVarieties(1);
     }
 
     private buildForm() {
@@ -79,15 +78,15 @@ export class ForecastHarvestComponent implements OnInit {
         this.cropService.findCategories().subscribe(payloadModel => {
             let status = payloadModel.status;
             let message = payloadModel.message;
-            this.categoryModels = payloadModel.payload;
+            this.categories = payloadModel.payload;
         });
     }
 
     private onCropCategoryChange() {
         let cropCategoryId = this.form.controls['cropCategoryId'].value;
         this.setupCrops(cropCategoryId);
-        this.cropModels = [];
-        this.varietyModels = [];
+        this.crops = [];
+        this.cropVarieties = [];
         this.form.controls['cropId'].setValue(null);
         this.form.controls['cropVarietyId'].setValue(null);
     }
@@ -96,27 +95,32 @@ export class ForecastHarvestComponent implements OnInit {
         this.cropService.findCrops(categoryId).subscribe(payloadModel => {
             let status = payloadModel.status;
             let message = payloadModel.message;
-            this.cropModels = payloadModel.payload;
+            this.crops = payloadModel.payload;
         });
     }
 
     private onCropChange() {
         let cropId = this.form.controls['cropId'].value;
-        this.setupVarieties(cropId);
-        this.varietyModels = [];
+        this.setupCropVarieties(cropId);
+        this.cropVarieties = [];
         this.form.controls['cropVarietyId'].setValue(null);
     }
 
-    private setupVarieties(cropId: number) {
+    private setupCropVarieties(cropId: number) {
         this.cropService.findVarieties(cropId).subscribe(payloadModel => {
             let status = payloadModel.status;
             let message = payloadModel.message;
-            this.varietyModels = payloadModel.payload;
+            this.cropVarieties = payloadModel.payload;
         });
     }
 
     onSubmit({value, valid}: { value: ForecastHarvestForm, valid: boolean }) {
         console.log(value, valid);
+        this.formSubmitted = true;
+        if (!valid) {
+            return;
+        }
+        // todo: save
     }
 
 }

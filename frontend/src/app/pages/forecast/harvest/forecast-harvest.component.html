@@ -13,94 +13,104 @@
             </div>
             <div class="card-body widget-body">
 
-                <div class="row justify-content-center">
-                    <div class="col-md-9 col-12">
+                <form (ngSubmit)="onSubmit(form)" [formGroup]="form" *ngIf="form">
 
-                        <form (ngSubmit)="onSubmit(form)" [formGroup]="form" *ngIf="form">
-
-                            <div class="form-group row text-sm-right">
-                                <label class="col-sm-3 form-control-label m-t-5" translate>parcel.parcels</label>
-                                <div class="col-sm-8 text-left">
-                                    <div class="form-group">
-                                        <ss-multiselect-dropdown [options]="parcels"
-                                                                 [texts]="parcelControlTexts"
-                                                                 [settings]="parcelControlSettings"
-                                                                 formControlName="parcels">
-                                        </ss-multiselect-dropdown>
-                                    </div>
-                                </div>
+                    <div class="form-group row text-sm-right">
+                        <label class="col-sm-3 form-control-label m-t-5" translate>parcel.parcels</label>
+                        <div class="col-sm-9 text-left">
+                            <div class="form-group">
+                                <ss-multiselect-dropdown [options]="parcels" *ngIf="parcels"
+                                                         [texts]="parcelControlTexts"
+                                                         [settings]="parcelControlSettings"
+                                                         formControlName="parcels">
+                                </ss-multiselect-dropdown>
+                                <form-error-block [control]="form.get('parcels')"
+                                                  [formSubmitted]="formSubmitted">
+                                </form-error-block>
                             </div>
-
-
-                            <div class="form-group row text-sm-right">
-                                <label class="col-sm-3 form-control-label m-t-5" translate>crop.category</label>
-                                <div class="col-sm-8 text-left">
-                                    <div class="form-group">
-                                        <select id="crop-category" class="form-control custom-select"
-                                                (change)="onCropCategoryChange()"
-                                                formControlName="cropCategoryId">
-                                            <option selected></option>
-                                            <option *ngFor="let category of categoryModels"
-                                                    [ngValue]="category.id">{{category.nameRo}}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group row text-sm-right">
-                                <label class="col-sm-3 form-control-label m-t-5" translate>crop.name</label>
-                                <div class="col-sm-8 text-left">
-                                    <div class="form-group">
-                                        <select id="crop-name" class="form-control custom-select"
-                                                (change)="onCropChange()"
-                                                formControlName="cropId" required>
-                                            <option selected></option>
-                                            <option *ngFor="let crop of cropModels"
-                                                    [ngValue]="crop.id">{{crop.nameRo}}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group row text-sm-right">
-                                <label class="col-sm-3 form-control-label m-t-5" translate>crop.variety</label>
-                                <div class="col-sm-8 text-left">
-                                    <select id="crop-variety" class="form-control custom-select" formControlName="cropVarietyId">
-                                        <option selected></option>
-                                        <option *ngFor="let variety of varietyModels"
-                                                [ngValue]="variety.id">{{variety.nameRo}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group row text-sm-right">
-                                <label class="col-sm-3 form-control-label m-t-5" translate>forecast.name</label>
-                                <div class="col-sm-8 text-left">
-                                    <input class="form-control checking-field" type="text" formControlName="name" required>
-                                    <span class="help-block text-danger" *ngIf="form.get('name').touched && form.get('name').hasError('required')">Field is required</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group row text-sm-right">
-                                <label class="col-sm-3 form-control-label m-t-5" translate>forecast.description</label>
-                                <div class="col-sm-8 text-left">
-                                    <textarea class="form-control checking-field" type="text" formControlName="description"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-sm-8 mx-auto text-center">
-                                    <button class="btn btn-main" type="submit" [disabled]="form.invalid" translate>action.save</button>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="form-group row text-sm-right">
+                        <label class="col-sm-3 form-control-label m-t-5" translate>crop.category</label>
+                        <div class="col-sm-9 text-left">
+                            <div class="form-group">
+                                <select id="crop-category" class="form-control custom-select"
+                                        (change)="onCropCategoryChange()"
+                                        formControlName="cropCategoryId">
+                                    <option selected></option>
+                                    <option *ngFor="let category of categories"
+                                            [ngValue]="category.id">{{category.nameRo}}
+                                    </option>
+                                </select>
+                                <form-error-block [control]="form.get('cropCategoryId')"
+                                                  [formSubmitted]="formSubmitted">
+                                </form-error-block>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row text-sm-right">
+                        <label class="col-sm-3 form-control-label m-t-5" translate>crop.name</label>
+                        <div class="col-sm-9 text-left">
+                            <div class="form-group">
+                                <select id="crop-name" class="form-control custom-select"
+                                        (change)="onCropChange()"
+                                        formControlName="cropId" required>
+                                    <option selected></option>
+                                    <option *ngFor="let crop of crops"
+                                            [ngValue]="crop.id">{{crop.nameRo}}
+                                    </option>
+                                </select>
+                                <form-error-block [control]="form.get('cropId')"
+                                                  [formSubmitted]="formSubmitted">
+                                </form-error-block>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row text-sm-right">
+                        <label class="col-sm-3 form-control-label m-t-5" translate>crop.variety</label>
+                        <div class="col-sm-9 text-left">
+                            <select id="crop-variety" class="form-control custom-select"
+                                    formControlName="cropVarietyId">
+                                <option selected></option>
+                                <option *ngFor="let variety of cropVarieties"
+                                        [ngValue]="variety.id">{{variety.nameRo}}
+                                </option>
+                                <form-error-block [control]="form.get('cropVarietyId')"
+                                                  [formSubmitted]="formSubmitted">
+                                </form-error-block>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row text-sm-right">
+                        <label class="col-sm-3 form-control-label m-t-5" translate>forecast.name</label>
+                        <div class="col-sm-9 text-left">
+                            <input class="form-control checking-field" formControlName="name">
+                            <form-error-block [control]="form.get('name')"
+                                              [formSubmitted]="formSubmitted">
+                            </form-error-block>
+                        </div>
+                    </div>
+
+                    <div class="form-group row text-sm-right">
+                        <label class="col-sm-3 form-control-label m-t-5" translate>forecast.description</label>
+                        <div class="col-sm-9 text-left">
+                            <textarea class="form-control checking-field"
+                                      formControlName="description">
+                            </textarea>
+                            <form-error-block [control]="form.get('description')"
+                                              [formSubmitted]="formSubmitted">
+                            </form-error-block>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-main pull-right" type="submit" translate>action.save</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
