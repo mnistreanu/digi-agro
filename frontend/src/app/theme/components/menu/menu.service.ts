@@ -134,6 +134,10 @@ export class MenuService {
                         routerLink: 'forecasting/harvesting-form',
                     },
                     {
+                        title: 'nav.harvesting-forecasting-factor',
+                        routerLink: 'forecasting/harvesting-factor',
+                    },
+                    {
                         title: 'nav.costs-forecasting',
                         routerLink: 'forecasting/costs',
                     },

@@ -38,7 +38,7 @@
 		"country": "Страна",
 		"county": "Округ",
 		"map": "Карта",
-		"village-city": "Деревня Город"
+		"village-city": "Деревня/Город"
 	},
 	"info": {
 		"description": "Описание",
@@ -65,6 +65,7 @@
 		"dashboard": "Главная",
 		"forecasts": "Прогнозирование",
 		"harvesting-forecasting": "Прогнозирование урожая",
+		"harvesting-forecasting-factor": "Прогнозирование урожая FACTOR",
 		"harvesting-forecasting-form": "Прогнозирование урожая FORM",
 		"machines": "Машины",
 		"notifications": "Уведомления",
