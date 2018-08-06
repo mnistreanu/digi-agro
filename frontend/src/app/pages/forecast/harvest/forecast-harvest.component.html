@@ -16,19 +16,17 @@
                 <div class="row justify-content-center">
                     <div class="col-md-9 col-12">
 
-                        <form (ngSubmit)="onSubmit(myForm)" [formGroup]="myForm">
+                        <form (ngSubmit)="onSubmit(form)" [formGroup]="form" *ngIf="form">
 
                             <div class="form-group row text-sm-right">
                                 <label class="col-sm-3 form-control-label m-t-5" translate>parcel.parcels</label>
                                 <div class="col-sm-8 text-left">
                                     <div class="form-group">
-                                        <ss-multiselect-dropdown [options]="parcelControlOptions" [texts]="parcelControlTexts" [settings]="parcelControlSettings" [(ngModel)]="parcelControlModel"></ss-multiselect-dropdown>
-                                        <!--<select multiple id="parcels" class="form-control custom-select" formControlName="cropCategoryId">-->
-                                            <!--<option selected></option>-->
-                                            <!--<option *ngFor="let category of categoryModels"-->
-                                                    <!--[ngValue]="category.id">{{category.nameRo}}-->
-                                            <!--</option>-->
-                                        <!--</select>-->
+                                        <ss-multiselect-dropdown [options]="parcels"
+                                                                 [texts]="parcelControlTexts"
+                                                                 [settings]="parcelControlSettings"
+                                                                 formControlName="parcels">
+                                        </ss-multiselect-dropdown>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +80,7 @@
                                 <label class="col-sm-3 form-control-label m-t-5" translate>forecast.name</label>
                                 <div class="col-sm-8 text-left">
                                     <input class="form-control checking-field" type="text" formControlName="name" required>
-                                    <span class="help-block text-danger" *ngIf="myForm.get('name').touched && myForm.get('name').hasError('required')">Field is required</span>
+                                    <span class="help-block text-danger" *ngIf="form.get('name').touched && form.get('name').hasError('required')">Field is required</span>
                                 </div>
                             </div>
 
@@ -95,7 +93,7 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-8 mx-auto text-center">
-                                    <button class="btn btn-main" type="submit" [disabled]="myForm.invalid" translate>action.save</button>
+                                    <button class="btn btn-main" type="submit" [disabled]="form.invalid" translate>action.save</button>
                                 </div>
                             </div>
                         </form>

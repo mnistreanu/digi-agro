@@ -1,28 +1,27 @@
-import {Component, ViewEncapsulation, OnInit, NgModule} from '@angular/core';
-import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ForecastHarvestForm } from './forecast-harvest.interface';
+import {Component, OnInit} from "@angular/core";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ForecastHarvestForm} from "./forecast-harvest.interface";
 import {CropService} from "../../../services/crop.service";
 import {CropCategoryModel} from "../../crop/crop-category.model";
 import {CropModel} from "../../crop/crop.model";
 import {CropVarietyModel} from "../../crop/crop-variety.model";
-import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts } from 'angular-2-dropdown-multiselect';
+import {IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts} from "angular-2-dropdown-multiselect";
 import {ParcelService} from "../../../services/parcel.service";
-import {ParcelModel} from "../../telemetry/parcel.model";
 
 @Component({
     selector: 'az-forecast-harvest',
-    encapsulation: ViewEncapsulation.None,
     templateUrl: './forecast-harvest.component.html'
 })
 
-export class ForecastHarvestComponent implements OnInit  {
-    myForm: FormGroup;
-    private categoryModels : CropCategoryModel[];
-    private cropModels : CropModel[];
-    private varietyModels : CropVarietyModel[];
-    public parcelControlOptions: IMultiSelectOption[];
+export class ForecastHarvestComponent implements OnInit {
 
-    public parcelIdModel: number[];
+    private form: FormGroup;
+
+    private parcels: IMultiSelectOption[];
+    private categoryModels: CropCategoryModel[];
+    private cropModels: CropModel[];
+    private varietyModels: CropVarietyModel[];
+
     public parcelControlSettings: IMultiSelectSettings = {
         checkedStyle: 'fontawesome',
         buttonClasses: 'btn btn-secondary btn-block',
@@ -31,6 +30,7 @@ export class ForecastHarvestComponent implements OnInit  {
         showCheckAll: true,
         showUncheckAll: true
     };
+
     public parcelControlTexts: IMultiSelectTexts = {
         checkAll: 'Select all',
         uncheckAll: 'Unselect all',
@@ -40,50 +40,39 @@ export class ForecastHarvestComponent implements OnInit  {
         allSelected: 'All selected',
     };
 
-
-    public parcelControlOptions: IMultiSelectOption[] = [
-        { id: 1, name: 'Sweden'},
-        { id: 2, name: 'Norway' },
-        { id: 3, name: 'Canada' },
-        { id: 4, name: 'USA' }
-    ];
-
     constructor(private formBuilder: FormBuilder,
                 private cropService: CropService,
-                private parcelService: ParcelService
-    ) {
-
+                private parcelService: ParcelService) {
     }
 
     ngOnInit() {
-        this.myForm = this.formBuilder.group({
-            name: ['', Validators.compose([Validators.required,  Validators.maxLength(256)])],
-            cropCategoryId: ['', Validators.required],
-            cropId: ['', Validators.required],
-            cropVarietyId: [''],
-            description: ['', Validators.compose([Validators.required,  Validators.maxLength(1024)])],
-        });
-
-//        this.findParcels();
+        this.buildForm();
+        this.findParcels();
         this.findCropCategories();
         this.findCrops(1);
         this.findVarieties(1);
     }
 
-    private findParcels() {
-        this.parcelService.find().subscribe(parcelModels => {
-            // let status = payloadModel.status;
-            // let message = payloadModel.message;
-            // this.parcelModels = payloadModel.payload;
-            debugger;
+    private buildForm() {
+        this.form = this.formBuilder.group({
+            parcels: [null, Validators.required],
+            name: [null, Validators.compose([Validators.required, Validators.maxLength(256)])],
+            cropCategoryId: [null, Validators.required],
+            cropId: [null, Validators.required],
+            cropVarietyId: [null],
+            description: [null, Validators.compose([Validators.required, Validators.maxLength(1024)])],
+        });
+    }
 
-            parcelModels.forEach((model) => {
-                let option : IMultiSelectOption;
-                option.id = model.id;
-                option.name = model.name;
-                this.parcelControlOptions.push(option);
+    private findParcels() {
+        this.parcelService.find().subscribe(models => {
+            this.parcels = models.map((model) => {
+                return {
+                    id: model.id,
+                    name: model.name
+                };
             });
-        })
+        });
     }
 
     private findCropCategories() {
@@ -99,7 +88,7 @@ export class ForecastHarvestComponent implements OnInit  {
             let status = payloadModel.status;
             let message = payloadModel.message;
             this.cropModels = payloadModel.payload;
-        })
+        });
     }
 
     private findVarieties(cropId: number) {
@@ -107,10 +96,10 @@ export class ForecastHarvestComponent implements OnInit  {
             let status = payloadModel.status;
             let message = payloadModel.message;
             this.varietyModels = payloadModel.payload;
-        })
+        });
     }
 
-    onSubmit({ value, valid }: { value: ForecastHarvestForm, valid: boolean }) {
+    onSubmit({value, valid}: { value: ForecastHarvestForm, valid: boolean }) {
         console.log(value, valid);
     }
 
