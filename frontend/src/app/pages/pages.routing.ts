@@ -33,6 +33,7 @@ export const routes: Routes = [
             { path: 'manage-brands', loadChildren: 'app/pages/manage-brands/manage-brands.module#ManageBrandsModule', data: { breadcrumb: 'Manage Brands' }, canActivate: [AdminGuard] },
             { path: 'manage-machines', loadChildren: 'app/pages/manage-machines/manage-machines.module#ManageMachinesModule', data: { breadcrumb: 'Manage Machines' }, canActivate: [AdminGuard] },
             { path: 'telemetry', loadChildren: 'app/pages/telemetry/telemetry.module#TelemetryModule', data: { breadcrumb: 'Telemetry' }, canActivate: [AuthGuard] },
+            { path: 'crop', loadChildren: 'app/pages/crop/crop-variety.module#CropVarietyModule', data: { breadcrumb: 'Crops Varieties' }, canActivate: [AuthGuard]  },
 
             { path: 'manage-tenants', loadChildren: 'app/pages/manage-tenants/manage-tenants.module#ManageTenantsModule', data: { breadcrumb: 'Manage Tenants' }, canActivate: [SuperAdminGuard] },
             { path: 'manage-branches', loadChildren: 'app/pages/manage-branches/manage-branches.module#ManageBranchesModule', data: { breadcrumb: 'Manage Branches' }, canActivate: [AdminGuard] },

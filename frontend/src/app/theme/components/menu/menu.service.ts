@@ -90,8 +90,6 @@ export class MenuService {
             });
         }
 
-
-
         if (isAdmin || isUser) {
             menuItems.push({
                 title: 'nav.work-agenda',
@@ -102,6 +100,21 @@ export class MenuService {
             });
         }
 
+        if (isAdmin || isUser) {
+            menuItems.push({
+                title: 'nav.crops',
+                routerLink: '/pages/crop',
+                icon: 'fa fa-leaf',
+                selected: false,
+                expanded: false
+                // subMenu: [
+                //     {
+                //         title: 'nav.crops-varieties',
+                //         routerLink: 'crop/crops-varieties',
+                //     },
+                // ]
+            });
+        }
 
         // other menu items from template
         menuItems = menuItems.concat(<any>[
