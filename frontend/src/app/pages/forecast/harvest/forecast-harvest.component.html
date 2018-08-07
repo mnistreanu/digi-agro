@@ -13,7 +13,7 @@
             </div>
             <div class="card-body widget-body">
 
-                <form (ngSubmit)="onSubmit(form)" [formGroup]="form" *ngIf="form">
+                <form (ngSubmit)="onSubmit()" [formGroup]="form" *ngIf="form">
 
                     <div class="form-group row text-sm-right">
                         <label class="col-sm-3 form-control-label m-t-5" translate>parcel.parcels</label>
@@ -86,8 +86,8 @@
                     <div class="form-group row text-sm-right">
                         <label class="col-sm-3 form-control-label m-t-5" translate>forecast.name</label>
                         <div class="col-sm-9 text-left">
-                            <input class="form-control checking-field" formControlName="name">
-                            <form-error-block [control]="form.get('name')"
+                            <input class="form-control checking-field" formControlName="forecastName">
+                            <form-error-block [control]="form.get('forecastName')"
                                               [formSubmitted]="formSubmitted">
                             </form-error-block>
                         </div>
@@ -102,6 +102,13 @@
                             <form-error-block [control]="form.get('description')"
                                               [formSubmitted]="formSubmitted">
                             </form-error-block>
+                        </div>
+                    </div>
+
+                    <div class="form-group row text-sm-right">
+                        <label class="col-sm-3 form-control-label m-t-5" translate>forecast.price</label>
+                        <div class="col-sm-9 text-left">
+                            <input class="form-control checking-field" type="number" formControlName="unitPrice">
                         </div>
                     </div>
 

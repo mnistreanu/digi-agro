@@ -1,12 +1,17 @@
 import {Component, OnInit} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ForecastHarvestForm} from "./forecast-harvest.interface";
 import {CropService} from "../../../services/crop.service";
 import {CropCategoryModel} from "../../crop/crop-category.model";
 import {CropModel} from "../../crop/crop.model";
 import {CropVarietyModel} from "../../crop/crop-variety.model";
 import {IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts} from "angular-2-dropdown-multiselect";
 import {ParcelService} from "../../../services/parcel.service";
+import {LangService} from "../../../services/lang.service";
+import {ToastrService} from "ngx-toastr";
+import {Messages} from "../../../common/messages";
+import {Router} from "@angular/router";
+import {ForecastService} from "../../../services/forecast.service";
+import {ForecastModel} from "../forecast.model";
 
 @Component({
     selector: 'az-forecast-harvest',
@@ -41,25 +46,39 @@ export class ForecastHarvestComponent implements OnInit {
         allSelected: 'All selected',
     };
 
-    constructor(private formBuilder: FormBuilder,
+    labelSaved: string;
+    labelValidationFail: string;
+
+    constructor(private router: Router,
+                private formBuilder: FormBuilder,
+                private forecastService: ForecastService,
                 private cropService: CropService,
-                private parcelService: ParcelService) {
+                private parcelService: ParcelService,
+                private langService: LangService,
+                private toastrService: ToastrService,) {
     }
 
     ngOnInit() {
+        this.setupLabels();
         this.buildForm();
         this.setupParcels();
         this.setupCropCategories();
     }
 
+    private setupLabels() {
+        this.langService.get(Messages.SAVED).subscribe((message) => this.labelSaved = message);
+        this.langService.get(Messages.VALIDATION_FAIL).subscribe((message) => this.labelValidationFail = message);
+    }
+
     private buildForm() {
         this.form = this.formBuilder.group({
             parcels: [null, Validators.required],
-            name: [null, Validators.compose([Validators.required, Validators.maxLength(256)])],
+            forecastName: [null, Validators.compose([Validators.required, Validators.maxLength(256)])],
             cropCategoryId: [null, Validators.required],
             cropId: [null, Validators.required],
             cropVarietyId: [null],
             description: [null, Validators.compose([Validators.required, Validators.maxLength(1024)])],
+            unitPrice: [null]
         });
     }
 
@@ -114,13 +133,23 @@ export class ForecastHarvestComponent implements OnInit {
         });
     }
 
-    onSubmit({value, valid}: { value: ForecastHarvestForm, valid: boolean }) {
-        console.log(value, valid);
+    onSubmit() {
         this.formSubmitted = true;
-        if (!valid) {
+
+        if (!this.form.valid) {
+            this.toastrService.warning(this.labelValidationFail);
             return;
         }
-        // todo: save
+
+        let forecastModel = new ForecastModel();
+        Object.assign(forecastModel, this.form.value);
+
+        this.formSubmitted = false;
+
+        this.forecastService.save(forecastModel).subscribe(() => {
+            this.toastrService.success(this.labelSaved);
+            this.router.navigate(['/pages/forecasting/harvesting']);
+        });
     }
 
 }

@@ -28,7 +28,8 @@
 	},
 	"forecast": {
 		"description": "Informații suplimnetare",
-		"name": "Denumire prognoză"
+		"name": "Denumire prognoză",
+		"price": "Preț unitar"
 	},
 	"general": {
 		"form": "Forma",

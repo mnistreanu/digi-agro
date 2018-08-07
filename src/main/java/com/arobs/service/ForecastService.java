@@ -2,12 +2,16 @@ package com.arobs.service;
 
 import com.arobs.entity.*;
 import com.arobs.interfaces.HasRepository;
-import com.arobs.model.reminder.ReminderModel;
+import com.arobs.model.forecast.ForecastModel;
 import com.arobs.repository.*;
+import com.arobs.repository.custom.ForecastSnapshotCustomRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +25,10 @@ public class ForecastService implements HasRepository<ForecastRepository> {
     private ForecastRepository forecastRepository;
 
     @Autowired
-    private ForecastSnapshotRepository snapshotRepository;
+    private ForecastSnapshotRepository forecastSnapshotRepository;
+
+    @Autowired
+    private ForecastSnapshotCustomRepository forecastSnapshotCustomRepository;
 
     @Autowired
     private ForecastParcelRepository forecastParcelRepository;
@@ -45,7 +52,7 @@ public class ForecastService implements HasRepository<ForecastRepository> {
     }
 
     public List<ForecastSnapshot> findSnapshots(Long forecastId) {
-        return snapshotRepository.find(forecastId);
+        return forecastSnapshotRepository.find(forecastId);
     }
 
     public List<ForecastParcel> findSnapshotParcels(Long forecastSnapshotId) {
@@ -59,41 +66,80 @@ public class ForecastService implements HasRepository<ForecastRepository> {
     public Forecast findOne(Long id) {
         return getRepository().findOne(id);
     }
-//
-//    @Transactional
-//    public void remove(Long id) {
-//        getRepository().remove(id);
-//    }
-//
-//    @Transactional(rollbackOn = Exception.class)
-//    public Reminder save(ReminderModel model) {
-//        Reminder entity;
-//
-//        if (model.getId() == null) {
-//            entity = new Reminder();
-//            entity.setCreatedBy(authService.getCurrentUser().getId());
-//            entity.setTenantId(model.getTenantId());
-//        }
-//        else {
-//            entity = findOne(model.getId());
-//        }
-//
-//        copyValues(entity, model);
-//
-//        return getRepository().save(entity);
-//    }
-//
-//    @Transactional
-//    private void copyValues(Reminder entity, ReminderModel model) {
-//        entity.setTitle(model.getTitle());
-//        entity.setDescription(model.getDescription());
-//        entity.setStarting(model.getStarting());
-//        entity.setEnding(model.getEnding());
-//        entity.setWorkType(agroWorkTypeService.findOne(model.getWorkTypeId()));
-//    }
-//
-//    @Transactional
-//    public void changeSchedule(Long id, Date start, Date end) {
-//        getRepository().changeSchedule(id, start, end);
-//    }
+
+    @Transactional(rollbackOn = Exception.class)
+    public void create(ForecastModel model, Long tenantId) {
+
+        Forecast forecast = new Forecast();
+        forecast.setTenantId(tenantId);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        forecast.setHarvestingYear(calendar.get(Calendar.YEAR));
+        forecast.setCreatedAt(calendar.getTime());
+        forecast.setCreatedBy(authService.getCurrentUser().getId());
+
+        forecast.setCropId(model.getCropId());
+        forecast.setCropVarietyId(model.getCropVarietyId());
+
+        forecast.setName(model.getForecastName());
+        forecast.setDescription(model.getDescription());
+
+        forecast = saveForecast(forecast);
+
+        createSnapshot(forecast.getId(), model, calendar.getTime());
+    }
+
+    @Transactional
+    public void createSnapshot(Long forecastId, ForecastModel forecastModel, Date date) {
+        ForecastSnapshot lastSnapshot = getLastSnapshot(forecastId);
+
+        ForecastSnapshot snapshot = new ForecastSnapshot();
+
+        if (lastSnapshot == null) {
+            snapshot.setForecastId(forecastId);
+
+            // todo: may be need come from model
+            snapshot.setUnitOfMeasure("tone");
+        }
+        else {
+            BeanUtils.copyProperties(lastSnapshot, snapshot);
+            snapshot.setId(null);
+        }
+
+        snapshot.setUnitPrice(forecastModel.getUnitPrice());
+        snapshot.setCreatedAt(date);
+
+        snapshot = saveSnapshot(snapshot);
+
+        List<ForecastParcel> forecastParcels = new ArrayList<>();
+        for (Long parcelId : forecastModel.getParcels()) {
+            ForecastParcel fp = new ForecastParcel();
+            fp.setForecastSnapshotId(snapshot.getId());
+            fp.setParcelId(parcelId);
+            forecastParcels.add(fp);
+        }
+
+        saveForecastParcels(forecastParcels);
+    }
+
+    private ForecastSnapshot getLastSnapshot(Long forecastId) {
+        return forecastSnapshotCustomRepository.getLastSnapshot(forecastId);
+    }
+
+    @Transactional
+    public Forecast saveForecast(Forecast forecast) {
+        return getRepository().save(forecast);
+    }
+
+    @Transactional
+    public ForecastSnapshot saveSnapshot(ForecastSnapshot snapshot) {
+        return forecastSnapshotRepository.save(snapshot);
+    }
+
+    @Transactional
+    public List<ForecastParcel> saveForecastParcels(List<ForecastParcel> items) {
+        return forecastParcelRepository.save(items);
+    }
+
 }

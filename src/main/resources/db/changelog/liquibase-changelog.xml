@@ -468,6 +468,24 @@
         </sql>
     </changeSet>
 
+    <changeSet id="adjust-forecast-sequences" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <sql>
+            select nextval('forecast_id_seq');
+
+            <!--8-->
+            select nextval('forecast_snapshot_id_seq');
+            select nextval('forecast_snapshot_id_seq');
+            select nextval('forecast_snapshot_id_seq');
+            select nextval('forecast_snapshot_id_seq');
+            select nextval('forecast_snapshot_id_seq');
+            select nextval('forecast_snapshot_id_seq');
+            select nextval('forecast_snapshot_id_seq');
+            select nextval('forecast_snapshot_id_seq');
+
+        </sql>
+    </changeSet>
+
+
     <changeSet id="map-event-table-drop-machine-id" author="maxim.nistreanu" failOnError="true" runOnChange="true">
         <sql>
             ALTER TABLE map_event DROP CONSTRAINT fkrba9q61il5j634jk31uhe2wc9;

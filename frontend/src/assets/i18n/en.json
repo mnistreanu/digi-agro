@@ -28,7 +28,8 @@
 	},
 	"forecast": {
 		"description": "Additional information",
-		"name": "Forecast name"
+		"name": "Forecast name",
+		"price": "Price"
 	},
 	"general": {
 		"form": "Form",

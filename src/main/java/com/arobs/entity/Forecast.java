@@ -23,6 +23,9 @@ public class Forecast {
     @Column(name = "crop_id")
     private Long cropId;
 
+    @Column(name = "crop_variety_id")
+    private Long cropVarietyId;
+
     @Column(name = "name", length = 256)
     private String name;
 
@@ -119,5 +122,13 @@ public class Forecast {
 
     public void setDeletedBy(Long deletedBy) {
         this.deletedBy = deletedBy;
+    }
+
+    public Long getCropVarietyId() {
+        return cropVarietyId;
+    }
+
+    public void setCropVarietyId(Long cropVarietyId) {
+        this.cropVarietyId = cropVarietyId;
     }
 }
