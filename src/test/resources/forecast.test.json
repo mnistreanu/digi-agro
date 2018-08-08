@@ -1,0 +1,42 @@
+{
+  "coord": {
+    "lon": 29.3,
+    "lat": 47.15
+  },
+  "weather": [
+    {
+      "id": 801,
+      "main": "Clouds",
+      "description": "few clouds",
+      "icon": "02d"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 296.15,
+    "pressure": 1016,
+    "humidity": 78,
+    "temp_min": 296.15,
+    "temp_max": 296.15
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 2.6,
+    "deg": 340
+  },
+  "clouds": {
+    "all": 20
+  },
+  "dt": 1533619800,
+  "sys": {
+    "type": 1,
+    "id": 6086,
+    "message": 0.0023,
+    "country": "MD",
+    "sunrise": 1533610155,
+    "sunset": 1533662820
+  },
+  "id": 618234,
+  "name": "Grigoriopol",
+  "cod": 200
+}

@@ -1,42 +1,94 @@
-package com.arobs.scheduler;
+package com.arobs.scheduler.weather;
 
+import java.util.Date;
 import java.util.List;
 
-import com.arobs.scheduler.weather.Clouds;
-import com.arobs.scheduler.weather.Coord;
-import com.arobs.scheduler.weather.Main;
-import com.arobs.scheduler.weather.Sys;
-import com.arobs.scheduler.weather.Weather;
-import com.arobs.scheduler.weather.Wind;
+import com.arobs.scheduler.weather.snapshot.Clouds;
+import com.arobs.scheduler.weather.snapshot.Coord;
+import com.arobs.scheduler.weather.snapshot.Main;
+import com.arobs.scheduler.weather.snapshot.Sys;
+import com.arobs.scheduler.weather.snapshot.Weather;
+import com.arobs.scheduler.weather.snapshot.Wind;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "coord", "weather", "base", "main", "wind", "clouds", "dt", "sys", "id", "name", "cod" })
-public class WeatherJson {
-	@JsonProperty("coord")
-	private Coord coord;
-	@JsonProperty("weather")
-	private List<Weather> weather = null;
-	@JsonProperty("base")
-	private String base;
-	@JsonProperty("main")
-	private Main main;
-	@JsonProperty("wind")
-	private Wind wind;
-	@JsonProperty("clouds")
-	private Clouds clouds;
-	@JsonProperty("dt")
-	private Integer dt;
-	@JsonProperty("sys")
-	private Sys sys;
+@JsonPropertyOrder({"id", "name", "cod", "dt", "base", "coord", "weather", "main", "wind", "clouds", "sys"})
+public class WeatherSnapshotJson {
 	@JsonProperty("id")
 	private Integer id;
 	@JsonProperty("name")
 	private String name;
 	@JsonProperty("cod")
 	private Integer cod;
+	@JsonProperty("dt")
+	private Integer dt;
+	@JsonProperty("base")
+	private String base;
+	
+	@JsonProperty("coord")
+	private Coord coord;
+	@JsonProperty("weather")
+	private List<Weather> weather = null;
+	@JsonProperty("main")
+	private Main main;
+	@JsonProperty("wind")
+	private Wind wind;
+	@JsonProperty("clouds")
+	private Clouds clouds;
+	@JsonProperty("sys")
+	private Sys sys;
+
+	@JsonProperty("id")
+	public Integer getId() {
+		return id;
+	}
+
+	@JsonProperty("id")
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@JsonProperty("name")
+	public String getName() {
+		return name;
+	}
+
+	@JsonProperty("name")
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@JsonProperty("cod")
+	public Integer getCod() {
+		return cod;
+	}
+
+	@JsonProperty("cod")
+	public void setCod(Integer cod) {
+		this.cod = cod;
+	}
+	
+	@JsonProperty("dt")
+	public Date getDt() {
+		return new Date(dt * 1000L);
+	}
+
+	@JsonProperty("dt")
+	public void setDt(Integer dt) {
+		this.dt = dt;
+	}
+
+	@JsonProperty("base")
+	public String getBase() {
+		return base;
+	}
+
+	@JsonProperty("base")
+	public void setBase(String base) {
+		this.base = base;
+	}
 
 	@JsonProperty("coord")
 	public Coord getCoord() {
@@ -56,16 +108,6 @@ public class WeatherJson {
 	@JsonProperty("weather")
 	public void setWeather(List<Weather> weather) {
 		this.weather = weather;
-	}
-
-	@JsonProperty("base")
-	public String getBase() {
-		return base;
-	}
-
-	@JsonProperty("base")
-	public void setBase(String base) {
-		this.base = base;
 	}
 
 	@JsonProperty("main")
@@ -98,16 +140,6 @@ public class WeatherJson {
 		this.clouds = clouds;
 	}
 
-	@JsonProperty("dt")
-	public Integer getDt() {
-		return dt;
-	}
-
-	@JsonProperty("dt")
-	public void setDt(Integer dt) {
-		this.dt = dt;
-	}
-
 	@JsonProperty("sys")
 	public Sys getSys() {
 		return sys;
@@ -116,35 +148,5 @@ public class WeatherJson {
 	@JsonProperty("sys")
 	public void setSys(Sys sys) {
 		this.sys = sys;
-	}
-
-	@JsonProperty("id")
-	public Integer getId() {
-		return id;
-	}
-
-	@JsonProperty("id")
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	@JsonProperty("name")
-	public String getName() {
-		return name;
-	}
-
-	@JsonProperty("name")
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	@JsonProperty("cod")
-	public Integer getCod() {
-		return cod;
-	}
-
-	@JsonProperty("cod")
-	public void setCod(Integer cod) {
-		this.cod = cod;
 	}
 }

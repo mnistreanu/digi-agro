@@ -1,4 +1,4 @@
-package com.arobs.scheduler.weather;
+package com.arobs.scheduler.weather.location;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,9 +7,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "lon", "lat" })
 public class Coord {
-	@JsonProperty("lon")
 	private Double lon;
-	@JsonProperty("lat")
 	private Double lat;
 
 	@JsonProperty("lon")
@@ -17,7 +15,6 @@ public class Coord {
 		return lon;
 	}
 
-	@JsonProperty("lon")
 	public void setLon(Double lon) {
 		this.lon = lon;
 	}
@@ -27,8 +24,10 @@ public class Coord {
 		return lat;
 	}
 
-	@JsonProperty("lat")
 	public void setLat(Double lat) {
 		this.lat = lat;
+	}
+
+	public Coord() {
 	}
 }

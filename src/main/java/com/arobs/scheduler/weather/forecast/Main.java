@@ -1,4 +1,4 @@
-package com.arobs.scheduler.weather;
+package com.arobs.scheduler.weather.forecast;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "temp", "pressure", "humidity", "temp_min", "temp_max", "sea_level", "grnd_level" })
 public class Main {
+
 	@JsonProperty("temp")
 	private Double temp;
 	@JsonProperty("pressure")
@@ -17,10 +18,6 @@ public class Main {
 	private Double tempMin;
 	@JsonProperty("temp_max")
 	private Double tempMax;
-	@JsonProperty("sea_level")
-	private Double seaLevel;
-	@JsonProperty("grnd_level")
-	private Double grndLevel;
 
 	@JsonProperty("temp")
 	public Double getTemp() {
@@ -70,25 +67,5 @@ public class Main {
 	@JsonProperty("temp_max")
 	public void setTempMax(Double tempMax) {
 		this.tempMax = tempMax;
-	}
-
-	@JsonProperty("sea_level")
-	public Double getSeaLevel() {
-		return seaLevel;
-	}
-
-	@JsonProperty("sea_level")
-	public void setSeaLevel(Double seaLevel) {
-		this.seaLevel = seaLevel;
-	}
-
-	@JsonProperty("grnd_level")
-	public Double getGrndLevel() {
-		return grndLevel;
-	}
-
-	@JsonProperty("grnd_level")
-	public void setGrndLevel(Double grndLevel) {
-		this.grndLevel = grndLevel;
 	}
 }

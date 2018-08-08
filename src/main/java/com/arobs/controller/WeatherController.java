@@ -1,6 +1,6 @@
 package com.arobs.controller;
 
-import com.arobs.entity.Weather;
+import com.arobs.entity.WeatherSnapshot;
 import com.arobs.model.PayloadModel;
 import com.arobs.model.WeatherModel;
 import com.arobs.service.WeatherService;
@@ -34,7 +34,7 @@ public class WeatherController {
         PayloadModel<WeatherModel> payloadModel = new PayloadModel<>();
 
         try {
-            List<Weather> weathers = weatherService.find(parcelId, dateFrom, dateTo);
+            List<WeatherSnapshot> weathers = weatherService.find(parcelId, dateFrom, dateTo);
             if (!weathers.isEmpty()) {
                 List<WeatherModel> models = weathers.stream().map(WeatherModel::new).collect(Collectors.toList());
                 WeatherModel[] payload = models.toArray(new WeatherModel[models.size()]);

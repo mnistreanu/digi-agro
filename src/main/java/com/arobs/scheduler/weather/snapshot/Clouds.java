@@ -1,4 +1,4 @@
-package com.arobs.scheduler.weather;
+package com.arobs.scheduler.weather.snapshot;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

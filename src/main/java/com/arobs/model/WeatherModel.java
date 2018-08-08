@@ -1,65 +1,114 @@
 package com.arobs.model;
 
 
-import com.arobs.entity.Weather;
+import com.arobs.entity.WeatherSnapshot;
+import com.arobs.scheduler.weather.WeatherSnapshotJson;
+import com.arobs.scheduler.weather.snapshot.Clouds;
+import com.arobs.scheduler.weather.snapshot.Coord;
+import com.arobs.scheduler.weather.snapshot.Main;
+import com.arobs.scheduler.weather.snapshot.Sys;
+import com.arobs.scheduler.weather.snapshot.Weather;
+import com.arobs.scheduler.weather.snapshot.Wind;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class WeatherModel implements Serializable {
+	private static final long serialVersionUID = -7674789177108074899L;
 
-    private Long id;
-
+	private Long id;
     private Long parcelId;
-
     private BigDecimal lat;
-
     private BigDecimal lon;
-
+    private Integer weatherId;
     private String main;
-
     private String description;
-
     private String icon;
-
-    private Integer tempMax;
-
-    private Integer tempMin;
-
-    private Integer pressure;
-
-    private Integer humidityAir;
-
-    private Integer humiditySoil;
-
-    private Double windSpeed;
-
+    private Double temp;
+    private Double pressure;
+    private Integer humidity;
+    private Double tempMin;
+    private Double tempMax;
+    private Double seaLevel;
+    private Double grndLevel;
+    private BigDecimal windSpeed;
     private BigDecimal windDeg;
-
-    /**
-     * Rain during last 3 hours
-     */
+    /** Rain during last 3 hours */
     private BigDecimal rain3h;
-
     private Integer clouds;
-
+    private BigDecimal message;
     private Integer sourceId;
-
     private Date dt;
-
-    private String countyId;
-
-    private String countryId;
-
+    private String country;
+    private Date sunrise;
+    private Date sunset;
+    private Integer code;
     private String name;
-
+    private String base;
     public WeatherModel () {
-
     }
 
-    public WeatherModel (Weather w) {
+    public WeatherModel(WeatherSnapshot w) {
         this.id = w.getId();
+    }
+
+    public static WeatherModel buildWeatherModel(WeatherSnapshotJson weather) {
+    	WeatherModel weatherModel = new WeatherModel(); 
+    	
+    	weatherModel.setId(weather.getId().longValue());
+    	weatherModel.setName(weather.getName());
+    	weatherModel.setCode(weather.getCod());
+    	weatherModel.setBase(weather.getBase());
+    	weatherModel.setDt(weather.getDt());
+    	
+    	buildWeatherModel(weatherModel, weather.getWeather().get(0));
+    	buildWeatherModel(weatherModel, weather.getCoord());
+    	buildWeatherModel(weatherModel, weather.getMain());
+    	buildWeatherModel(weatherModel, weather.getWind());
+    	buildWeatherModel(weatherModel, weather.getClouds());
+    	buildWeatherModel(weatherModel, weather.getSys());
+    	
+    	return weatherModel;
+    }
+    
+    private static void buildWeatherModel(WeatherModel weatherModel, Coord coord) {
+    	weatherModel.setLon(BigDecimal.valueOf(coord.getLon()));
+    	weatherModel.setLat(BigDecimal.valueOf(coord.getLat()));
+    }
+
+    private static void buildWeatherModel(WeatherModel weatherModel, Weather weather) {
+    	weatherModel.setWeatherId(weather.getId());
+    	weatherModel.setMain(weather.getMain());
+    	weatherModel.setDescription(weather.getDescription());
+    	weatherModel.setIcon(weather.getIcon());
+    }
+
+    //temp, pressure, humidity, temp_min, temp_max, sea_level, grnd_level
+    private static void buildWeatherModel(WeatherModel weatherModel, Main main) {
+    	weatherModel.setTemp(main.getTemp());
+    	weatherModel.setPressure(main.getPressure());
+    	weatherModel.setHumidity(main.getHumidity());
+    	weatherModel.setTempMin(main.getTempMin());
+    	weatherModel.setTempMax(main.getTempMax());
+    	weatherModel.setSeaLevel(main.getSeaLevel());
+    	weatherModel.setGrndLevel(main.getGrndLevel());
+    }
+
+    private static void buildWeatherModel(WeatherModel weatherModel, Wind wind) {
+    	weatherModel.setWindSpeed(BigDecimal.valueOf(wind.getSpeed()));
+    	weatherModel.setWindDeg(BigDecimal.valueOf(wind.getDeg()));
+    }
+
+    private static void buildWeatherModel(WeatherModel weatherModel, Clouds clouds) {
+    	weatherModel.setClouds(clouds.getAll());
+    }
+
+    private static void buildWeatherModel(WeatherModel weatherModel, Sys sys) {
+    	weatherModel.setMessage(BigDecimal.valueOf(sys.getMessage()));
+    	weatherModel.setCountry(sys.getCountry());
+    	weatherModel.setSunrise(sys.getSunrise());
+    	weatherModel.setSunset(sys.getSunset());
     }
 
     public Long getId() {
@@ -94,7 +143,15 @@ public class WeatherModel implements Serializable {
         this.lon = lon;
     }
 
-    public String getMain() {
+    public Integer getWeatherId() {
+		return weatherId;
+	}
+
+	public void setWeatherId(Integer weatherId) {
+		this.weatherId = weatherId;
+	}
+
+	public String getMain() {
         return main;
     }
 
@@ -118,11 +175,11 @@ public class WeatherModel implements Serializable {
         this.icon = icon;
     }
 
-    public Integer getTempMax() {
+    public Double getTemp() {
         return tempMax;
     }
 
-    public void setTempMax(Integer tempMax) {
+    public void setTemp(Double temp) {
         this.tempMax = tempMax;
     }
 
@@ -134,35 +191,59 @@ public class WeatherModel implements Serializable {
         this.tempMin = tempMin;
     }
 
-    public Integer getPressure() {
+    public Double getPressure() {
         return pressure;
     }
 
-    public void setPressure(Integer pressure) {
+    public void setPressure(Double pressure) {
         this.pressure = pressure;
     }
 
-    public Integer getHumidityAir() {
-        return humidityAir;
-    }
+    public Integer getHumidity() {
+		return humidity;
+	}
 
-    public void setHumidityAir(Integer humidityAir) {
-        this.humidityAir = humidityAir;
-    }
+	public void setHumidity(Integer humidity) {
+		this.humidity = humidity;
+	}
 
-    public Integer getHumiditySoil() {
-        return humiditySoil;
-    }
+	public Double getTempMin() {
+		return tempMin;
+	}
 
-    public void setHumiditySoil(Integer humiditySoil) {
-        this.humiditySoil = humiditySoil;
-    }
+	public void setTempMin(Double tempMin) {
+		this.tempMin = tempMin;
+	}
 
-    public Double getWindSpeed() {
+	public Double getTempMax() {
+		return tempMax;
+	}
+
+	public void setTempMax(Double tempMax) {
+		this.tempMax = tempMax;
+	}
+
+	public Double getSeaLevel() {
+		return seaLevel;
+	}
+
+	public void setSeaLevel(Double seaLevel) {
+		this.seaLevel = seaLevel;
+	}
+
+	public Double getGrndLevel() {
+		return grndLevel;
+	}
+
+	public void setGrndLevel(Double grndLevel) {
+		this.grndLevel = grndLevel;
+	}
+
+    public BigDecimal getWindSpeed() {
         return windSpeed;
     }
 
-    public void setWindSpeed(Double windSpeed) {
+    public void setWindSpeed(BigDecimal windSpeed) {
         this.windSpeed = windSpeed;
     }
 
@@ -190,7 +271,15 @@ public class WeatherModel implements Serializable {
         this.clouds = clouds;
     }
 
-    public Integer getSourceId() {
+    public BigDecimal getMessage() {
+		return message;
+	}
+
+	public void setMessage(BigDecimal message) {
+		this.message = message;
+	}
+
+	public Integer getSourceId() {
         return sourceId;
     }
 
@@ -206,27 +295,51 @@ public class WeatherModel implements Serializable {
         this.dt = dt;
     }
 
-    public String getCountyId() {
-        return countyId;
+    public String getCountry() {
+        return country;
     }
 
-    public void setCountyId(String countyId) {
-        this.countyId = countyId;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public String getCountryId() {
-        return countryId;
-    }
+    public Date getSunrise() {
+		return sunrise;
+	}
 
-    public void setCountryId(String countryId) {
-        this.countryId = countryId;
-    }
+	public void setSunrise(Date sunrise) {
+		this.sunrise = sunrise;
+	}
 
-    public String getName() {
+	public Date getSunset() {
+		return sunset;
+	}
+
+	public void setSunset(Date sunset) {
+		this.sunset = sunset;
+	}
+
+	public Integer getCode() {
+		return code;
+	}
+
+	public void setCode(Integer code) {
+		this.code = code;
+	}
+
+	public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
+
+	public String getBase() {
+		return base;
+	}
+
+	public void setBase(String base) {
+		this.base = base;
+	}
 }
