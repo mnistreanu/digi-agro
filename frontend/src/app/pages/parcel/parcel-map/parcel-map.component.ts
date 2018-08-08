@@ -35,7 +35,9 @@ export class ParcelMapComponent implements OnInit {
         this.infoParcel = parcel;
 
         if (this.infoWindow == null) {
-            this.infoWindow = new google.maps.InfoWindow();
+            this.infoWindow = new google.maps.InfoWindow({
+                disableAutoPan: true
+            });
         }
 
         this.infoWindow.setContent(this.infoBody.nativeElement);
