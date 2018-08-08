@@ -12,12 +12,15 @@
     <ngui-map zoom="15" [center]="center" mapTypeId="terrain" scrollwheel="true">
       <polygon *ngFor="let p of parcels"
                (click)="onParcelClick(p, $event)"
+               (mouseover)="onParcelUp($event)"
+               (mouseout)="onParcelOut($event)"
                [paths]="p.paths"
-               [strokeColor]="'#FFC107'"
+               [strokeColor]="defaultStrokeColor"
                [strokeOpacity]="0.8"
                [strokeWeight]="2"
                [fillColor]="p.fillColor"
-               [fillOpacity]="0.35">
+               [fillOpacity]="0.35"
+               [zIndex]="defaultZIndex">
       </polygon>
     </ngui-map>
 
@@ -26,26 +29,26 @@
 
 <div #infoBody>
   <br>
-  <table class="table table-bordered table-hover small-table" *ngIf="infoParcel">
+  <table class="table table-bordered table-hover small-table" *ngIf="parcel">
     <tr>
       <td translate>parcel.name</td>
-      <td>{{ infoParcel.name }}</td>
+      <td>{{ parcel.name }}</td>
     </tr>
     <tr>
       <td translate>parcel.cadaster-number</td>
-      <td>{{ infoParcel.cadasterNumber }}</td>
+      <td>{{ parcel.cadasterNumber }}</td>
     </tr>
     <tr>
       <td translate>parcel.land-worthiness-points</td>
-      <td>{{ infoParcel.landWorthinessPoints }}</td>
+      <td>{{ parcel.landWorthinessPoints }}</td>
     </tr>
     <tr>
       <td translate>parcel.area</td>
-      <td>{{ infoParcel.area }}</td>
+      <td>{{ parcel.area }}</td>
     </tr>
     <tr>
       <td translate>parcel.description</td>
-      <td>{{ infoParcel.description }}</td>
+      <td>{{ parcel.description }}</td>
     </tr>
   </table>
 </div>

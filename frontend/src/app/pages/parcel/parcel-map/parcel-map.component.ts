@@ -13,7 +13,10 @@ export class ParcelMapComponent implements OnInit {
 
     @ViewChild('infoBody') infoBody: ElementRef;
 
-    private infoParcel: ParcelModel;
+    private defaultStrokeColor: string = '#FFC107';
+    private defaultZIndex: number = 1;
+
+    private parcel: ParcelModel;
     private infoWindow;
 
     constructor() {
@@ -32,7 +35,7 @@ export class ParcelMapComponent implements OnInit {
     }
 
     private onParcelClick(parcel, event) {
-        this.infoParcel = parcel;
+        this.parcel = parcel;
 
         if (this.infoWindow == null) {
             this.infoWindow = new google.maps.InfoWindow({
@@ -46,6 +49,20 @@ export class ParcelMapComponent implements OnInit {
             lng: event.latLng.lng()
         });
         this.infoWindow.open(event.target.map);
+    }
+
+    private onParcelUp(event) {
+        event.target.setOptions({
+            strokeColor: '#F00',
+            zIndex: this.defaultZIndex + 1
+        });
+    }
+
+    private onParcelOut(event) {
+        event.target.setOptions({
+            strokeColor: this.defaultStrokeColor,
+            zIndex: this.defaultZIndex
+        });
     }
 
 }
