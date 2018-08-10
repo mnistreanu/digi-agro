@@ -28,4 +28,7 @@ export class CropService {
         return this.http.get<PayloadModel>(this.api + '/varieties?cropId=' + cropId);
     }
 
+    public findVarietiesTree(): Observable<PayloadModel> {
+        return this.http.get<PayloadModel>(this.api + '/tree');
+    }
 }

@@ -20,24 +20,25 @@ export class CropVarietyComponent {
     context;
 
     cropCategoryId;
-    cropCategories: MultiLanguageItem[];
+    treeModel: MultiLanguageItem[];
 
     constructor(private router: Router,
                 private cropService: CropService) {
     }
 
     ngOnInit() {
-        this.setupCropCategories();
+        this.setupCropsTree();
         this.setupGrid();
     }
 
-    private setupCropCategories() {
-        this.cropService.findCategories().subscribe(payloadModel => {
-            this.cropCategories = payloadModel.payload;
-            if (this.cropCategories.length > 0) {
-                this.cropCategoryId = this.cropCategories[0].id;
-                this.setupRows();
-            }
+    private setupCropsTree() {
+        this.cropService.findVarietiesTree().subscribe(payloadModel => {
+            this.treeModel = payloadModel.payload;
+            debugger;
+            // if (this.treeModel.length > 0) {
+            //     this.cropCategoryId = this.treeModel[0].id;
+            //     this.setupRows();
+            // }
         });
     }
 
@@ -61,12 +62,11 @@ export class CropVarietyComponent {
 
 
     private setupRows() {
-        this.cropService.findCrops(this.cropCategoryId).subscribe(payloadModel => {
-            let models = payloadModel.payload;
-            models = this.adjustTreeModels(models);
-            this.options.api.setRowData(models);
-            debugger;
-        })
+        // this.cropService.findCrops(this.cropCategoryId).subscribe(payloadModel => {
+        //     let models = payloadModel.payload;
+        //     models = this.adjustTreeModels(models);
+        //     this.options.api.setRowData(models);
+        // })
     }
 
     private adjustTreeModels(models: CropModel[]) {

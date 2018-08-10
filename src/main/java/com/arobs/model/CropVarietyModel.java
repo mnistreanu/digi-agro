@@ -1,13 +1,16 @@
 package com.arobs.model;
 
+import com.arobs.entity.Crop;
+import com.arobs.entity.CropCategory;
 import com.arobs.entity.CropVariety;
 
 import java.io.Serializable;
 
 public class CropVarietyModel implements Serializable {
 
-    private Long id;
+    private Long cropCategoryId;
     private Long cropId;
+    private Long id;
     private String nameRo;
     private String nameRu;
     private String descriptionRo;
@@ -15,6 +18,23 @@ public class CropVarietyModel implements Serializable {
 
     public CropVarietyModel() {
     }
+
+    public CropVarietyModel(CropCategory category) {
+        this.id = category.getId();
+//        this.cropCategoryId = category.getId();
+        this.nameRo = category.getNameRo();
+        this.nameRu = category.getNameRu();
+    }
+
+
+    public CropVarietyModel(Crop crop) {
+        this.id = crop.getId();
+        this.cropCategoryId = crop.getCropCategoryId();
+//        this.cropId = crop.getId();
+        this.nameRo = crop.getNameRo();
+        this.nameRu = crop.getNameRu();
+    }
+
 
     public CropVarietyModel(CropVariety cropVariety) {
         this.id = cropVariety.getId();
@@ -25,12 +45,12 @@ public class CropVarietyModel implements Serializable {
         this.descriptionRu = cropVariety.getDescriptionRu();
     }
 
-    public Long getId() {
-        return id;
+    public Long getCropCategoryId() {
+        return cropCategoryId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCropCategoryId(Long cropCategoryId) {
+        this.cropCategoryId = cropCategoryId;
     }
 
     public Long getCropId() {
@@ -39,6 +59,14 @@ public class CropVarietyModel implements Serializable {
 
     public void setCropId(Long cropId) {
         this.cropId = cropId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNameRo() {
