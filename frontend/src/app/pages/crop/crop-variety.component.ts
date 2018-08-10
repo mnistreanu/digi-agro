@@ -1,6 +1,13 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { AppConfig } from "../../app.config";
 import 'style-loader!fullcalendar/dist/fullcalendar.min.css';
+import {CropModel} from "./crop.model";
+import {ColDef, GridOptions} from "ag-grid";
+import {ListItem} from "../../interfaces/list-item.interface";
+import {Router} from "@angular/router";
+import {CropService} from "../../services/crop.service";
+import {MultiLanguageItem} from "../../interfaces/multi-language-item.interface";
+import {EditRendererComponent} from "../../modules/aggrid/edit-renderer/edit-renderer.component";
 
 @Component({
   selector: 'az-crop-variety',
@@ -8,169 +15,143 @@ import 'style-loader!fullcalendar/dist/fullcalendar.min.css';
   templateUrl: './crop-variety.component.html'
 })
 export class CropVarietyComponent {
-    public config:any;
-    public configFn:any; 
 
-    calendarOptions: any;
-    $calendar: any;
-    dragOptions: Object = { zIndex: 999, revert: true, revertDuration: 0 };
-    event: any = {};
-    createEvent: any;
+    options: GridOptions;
+    context;
 
-    constructor(private _appConfig:AppConfig) {
-        this.config = this._appConfig.config;
-        this.configFn = this._appConfig;
+    cropCategoryId;
+    cropCategories: MultiLanguageItem[];
 
-        let date = new Date();
-        let d = date.getDate();
-        let m = date.getMonth();
-        let y = date.getFullYear();
+    constructor(private router: Router,
+                private cropService: CropService) {
+    }
 
-        this.calendarOptions = {
-            header: {
-                left: 'today prev,next',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay,listMonth'
-            },
-            events: [
-                {
-                    title: 'All Day Event',
-                    start: new Date(y, m, 1),
-                    backgroundColor: this.config.colors.primary,
-                    textColor: this.config.colors.default,
-                    description: 'Will be busy throughout the whole day'
-                },
-                {
-                    title: 'Long Event',
-                    start: new Date(y, m, d + 5),
-                    end: new Date(y, m, d + 7),
-                    description: 'This conference should be worse visiting'
-                },
-                {
-                    id: 999,
-                    title: 'Blah Blah Car',
-                    start: new Date(y, m, d - 3, 16, 0),
-                    allDay: false,
-                    description: 'Agree with this guy on arrival time'
-                },
-                {
-                    id: 1000,
-                    title: 'Buy this template',
-                    start: new Date(y, m, d + 3, 12, 0),
-                    allDay: false,
-                    backgroundColor: this.config.colors.warning,
-                    textColor: this.config.colors.default,
-                    description: 'Make sure everything is consistent first'
-                },
-                {
-                    title: 'Got to school',
-                    start: new Date(y, m, d + 16, 12, 0),
-                    end: new Date(y, m, d + 16, 13, 0),
-                    backgroundColor:  this.config.colors.danger,
-                    textColor: this.config.colors.default,
-                    description: 'Time to go back'
-                },
-                {
-                    title: 'Study some Node',
-                    start: new Date(y, m, d + 18, 12, 0),
-                    end: new Date(y, m, d + 18, 13, 0),
-                    backgroundColor: this.config.colors.success,
-                    textColor: this.config.colors.default,
-                    description: 'Node.js is a platform built ' +
-                    'on Chrome\'s JavaScript runtime for easily' +
-                    ' building fast, scalable network applications.' +
-                    ' Node.js uses an event-driven, non-blocking' +
-                    ' I/O payloadModel that makes it lightweight and' +
-                    ' efficient, perfect for data-intensive real-time' +
-                    ' applications that run across distributed devices.'
-                },
-                {
-                    title: 'Azimuth link',
-                    start: new Date(y, m, 28),
-                    end: new Date(y, m, 29),
-                    url: 'http://themeseason.com/',
-                    backgroundColor: this.config.colors.info,
-                    textColor: this.config.colors.default,
-                    description: this.config.title
+    ngOnInit() {
+        this.setupCropCategories();
+        this.setupGrid();
+    }
+
+    private setupCropCategories() {
+        this.cropService.findCategories().subscribe(payloadModel => {
+            this.cropCategories = payloadModel.payload;
+            if (this.cropCategories.length > 0) {
+                this.cropCategoryId = this.cropCategories[0].id;
+                this.setupRows();
+            }
+        });
+    }
+
+    public onCropCategoryChange() {
+        if (this.cropCategoryId == null) {
+            return;
+        }
+        this.setupRows();
+    }
+
+    private setupGrid() {
+        this.options = <GridOptions>{};
+
+        this.options.enableColResize = true;
+        this.options.enableSorting = true;
+        this.options.enableFilter = true;
+        this.options.columnDefs = this.setupHeaders();
+        this.context = {componentParent: this};
+
+    }
+
+
+    private setupRows() {
+        this.cropService.findCrops(this.cropCategoryId).subscribe(payloadModel => {
+            let models = payloadModel.payload;
+            models = this.adjustTreeModels(models);
+            this.options.api.setRowData(models);
+            debugger;
+        })
+    }
+
+    private adjustTreeModels(models: CropModel[]) {
+        let treeModels = [];
+        let modelMap = {};
+        for (let model of models) {
+            modelMap[model.id] = model;
+            if (model.cropCategoryId == null) {
+                treeModels.push(model);
+            }
+            else {
+                let category = modelMap[model.cropCategoryId];
+                if (!category.participants) {
+                    category.participants = [];
                 }
-            ],
-            eventColor: this.config.colors.info,
-            selectable: true,
-            selectHelper: true,
-            select: (start, end, allDay): void => {               
-                this.createEvent = () => {
-                    let title = this.event.title;
-                    if (title) {
-                        this.$calendar.fullCalendar('renderEvent',
-                        {
-                            title: title,
-                            start: start,
-                            end: end,
-                            allDay: allDay,
-                            backgroundColor: this.config.colors.success,
-                            textColor: this.config.colors.default
-                        },
-                        true // make the event "stick"
-                        );
-                    }
-                    this.$calendar.fullCalendar('unselect');
-                    jQuery('#create-event-modal').modal('hide');
-                };
+                category.participants.push(model);
+            }
+        }
+        return treeModels;
+    }
 
-                jQuery('#create-event-modal').modal('show');
+    private getNodeChildDetails(rowItem) {
+        if (rowItem.participants) {
+            return {
+                group: true,
+                expanded: false,
+                children: rowItem.participants,
+                key: rowItem.group
+            };
+        }
+        else {
+            return null;
+        }
+    }
+
+    public onGridReady() {
+        this.options.api.sizeColumnsToFit();
+    }
+
+    public adjustGridSize() {
+        setTimeout(() => {this.options.api.sizeColumnsToFit();}, 500);
+    }
+
+    public add() {
+        // this.router.navigate(['/pages/manage-branches/branch/-1']);
+    }
+
+    public onEdit(node) {
+        // let model = node.data;
+        // this.router.navigate(['/pages/manage-branches/branch/' + model.id]);
+    }
+
+
+    private setupHeaders() {
+
+        let headers: ColDef[] = [
+            {
+                field: 'edit',
+                width: 24,
+                minWidth: 24,
+                maxWidth: 30,
+                editable: false,
+                suppressResize: true,
+                suppressMenu: true,
+                cellRendererFramework: EditRendererComponent,
+                cellStyle: () => {return {padding: 0};}
             },
-            eventClick: (event): void => {
-                this.event = event;
-                jQuery('#show-event-modal').modal('show');
+            {
+                headerName: 'Name',
+                field: 'nameRo',
+                width: 200,
+                minWidth: 200,
+                cellRenderer: "agGroupCellRenderer"
             },
-            editable: true,
-            droppable: true,
-
-            drop: (dateItem, event): void => { // this function is called when something is dropped
-                // retrieve the dropped element's stored Event Object
-                let originalEventObject = {
-                    // use the element's text as the event title
-                    title: jQuery.trim(jQuery(event.target).text())
-                };
-
-                // we need to copy it, so that multiple events don't have a reference to the same object
-                let copiedEventObject = jQuery.extend({}, originalEventObject);
-
-                // assign it the date that was reported
-                copiedEventObject.start = dateItem;
-                copiedEventObject.allDay = !dateItem.hasTime();
-
-                let $categoryClass = jQuery(event.target).data('event-class');
-                if ($categoryClass) { copiedEventObject.className = [$categoryClass]; }
-
-                // render the event on the calendar
-                // the last `true` argument determines if
-                // the event 'sticks'
-                // http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-                this.$calendar.fullCalendar('renderEvent', copiedEventObject, true);
-
-                jQuery(event.target).remove();
-
+            {
+                headerName: 'Name',
+                field: 'nameRu',
+                width: 200,
+                minWidth: 200,
+                cellRenderer: "agGroupCellRenderer"
             },
-            dayRender: function (date, cell) { 
-                let today = new Date().toDateString(); 
-                let compareDate = date.toDate().toDateString(); 
-                if (today == compareDate) {
-                    cell.css("background-color", "#ccc");
-                }          
-            } 
-        };
-    };
 
-    addEvent(event): void {
-        this.calendarOptions.events.push(event);
-    };
+        ];
 
-    ngOnInit(): void {
-        this.$calendar = jQuery('#calendar');
-        this.$calendar.fullCalendar(this.calendarOptions);
-        jQuery('.draggable').draggable(this.dragOptions);
-
+        return headers;
     }
 
 }

@@ -1,7 +1,10 @@
 export class CropModel {
 
     id: number;
-    categoryId: number;
+    cropCategoryId: number;
+    cropId: number;
     nameRo:string;
     nameRu: string;
+    desriptionRo:string;
+    desriptionRu: string;
 }
