@@ -5,7 +5,8 @@ export class ForecastModel {
     cropId: number;
     cropVarietyId: number;
 
-    forecastName: string;
+    id: number;
+    name: string;
     description: string;
 
     harvestingYear: number;

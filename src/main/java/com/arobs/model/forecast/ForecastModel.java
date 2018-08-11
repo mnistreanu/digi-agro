@@ -1,5 +1,7 @@
 package com.arobs.model.forecast;
 
+import com.arobs.entity.Forecast;
+
 import java.util.List;
 
 public class ForecastModel {
@@ -10,12 +12,28 @@ public class ForecastModel {
     private Long cropId;
     private Long cropVarietyId;
 
-    private String forecastName;
+    private Long id;
+    private String name;
     private String description;
     private Integer harvestingYear;
     private Double unitPrice;
     private String unitOfMeasure;
     private Double quantityHectar;
+
+    public ForecastModel(Forecast forecast) {
+        this.id = forecast.getId();
+        this.name = forecast.getName();
+        this.harvestingYear = forecast.getHarvestingYear();
+        //TODO de pus restul campurilor
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public List<Long> getParcels() {
         return parcels;
@@ -49,12 +67,12 @@ public class ForecastModel {
         this.cropVarietyId = cropVarietyId;
     }
 
-    public String getForecastName() {
-        return forecastName;
+    public String getName() {
+        return name;
     }
 
-    public void setForecastName(String forecastName) {
-        this.forecastName = forecastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
