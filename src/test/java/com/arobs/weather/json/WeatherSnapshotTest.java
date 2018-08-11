@@ -1,68 +1,36 @@
-package com.arobs.weather.snapshot;
+package com.arobs.weather.json;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.Query;
 
 import org.jdto.DTOBinder;
 import org.jdto.DTOBinderFactory;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.junit4.SpringRunner;
 
+import com.arobs.entity.WeatherForecast;
 import com.arobs.entity.WeatherSnapshot;
 import com.arobs.scheduler.weather.WeatherSnapshotJson;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@RunWith(SpringRunner.class)
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = Replace.NONE)
-@AutoConfigureWebClient 
 public class WeatherSnapshotTest {
+	private static final String SNAPSHOT_JSON = "snapshot.json";
 	private static final Logger logger = LoggerFactory.getLogger(WeatherSnapshotTest.class); 
 
-	@Autowired
-	private TestEntityManager entityManager;
-
 	@Test
-	public void testEntityManager() {
-		assertNotNull(entityManager);
-	}
-
-	@Test
-	@Rollback(false)
-	public void testListMachinery() {
-		Query query = entityManager.getEntityManager().createQuery("SELECT weatherSnapshot FROM WeatherSnapshot weatherSnapshot");
-		@SuppressWarnings("unchecked")
-		List<WeatherSnapshot> list = query.getResultList();
-		assertNotNull(list);
-	}
-
-	@Test
-	public void testReadJson() throws JsonParseException, JsonMappingException, IOException {
-		Resource resource = new ClassPathResource("snapshot.test.json");
-		File file = resource.getFile(); 
-		ObjectMapper objectMapper = new ObjectMapper();
-		WeatherSnapshotJson weatherSnapshotJson = objectMapper.readValue(file,  WeatherSnapshotJson.class);
+	public void testJsonCoordObject() throws JsonParseException, JsonMappingException, IOException {
+		WeatherSnapshotJson weatherSnapshotJson = getJsonObject(SNAPSHOT_JSON, WeatherSnapshotJson.class);
 		logger.info("Snapshot. ID: {}, Name: {}", weatherSnapshotJson.getId(), weatherSnapshotJson.getName());
 		assertEquals(Integer.valueOf(618510), weatherSnapshotJson.getId());
 		assertEquals("Briceni", weatherSnapshotJson.getName());
@@ -99,18 +67,45 @@ public class WeatherSnapshotTest {
 	}
 
 	@Test
-	public void testDTOBinder() throws JsonParseException, JsonMappingException, IOException {
-		Resource resource = new ClassPathResource("snapshot.test.json");
+	public void testCoordBinding() throws JsonParseException, JsonMappingException, IOException {
+		WeatherSnapshotJson snapshotJson = getJsonObject(SNAPSHOT_JSON, WeatherSnapshotJson.class);
+		DTOBinder binder = DTOBinderFactory.getBinder();
+		WeatherSnapshot snapshotEntity = binder.bindFromBusinessObject(WeatherSnapshot.class, snapshotJson);
+		logger.info("location. Lon(): {}, Lat(): {}, Country: {}", snapshotEntity.getLon(), snapshotEntity.getLat(), snapshotEntity.getCountryCode());
+		assertEquals(snapshotJson.getSys().getCountry(), snapshotEntity.getCountryCode());
+		assertEquals(snapshotJson.getName(), snapshotEntity.getName());
+		assertEquals(snapshotJson.getCoord().getLon(), snapshotEntity.getLon());
+		assertEquals(snapshotJson.getCoord().getLat(), snapshotEntity.getLat());
+	}
+	
+	@Test
+	public void testJsonLocationObject() throws JsonParseException, JsonMappingException, IOException {
+		WeatherSnapshotJson weatherForecast = getJsonObject(SNAPSHOT_JSON, WeatherSnapshotJson.class);
+		assertNotNull(weatherForecast);
+		assertEquals(Integer.valueOf(618510), weatherForecast.getId());
+	}
+
+	@Test
+	public void testLocationBinding() throws JsonParseException, JsonMappingException, IOException {
+		WeatherSnapshotJson weatherForecast = getJsonObject(SNAPSHOT_JSON, WeatherSnapshotJson.class);
+		
+		assertNotNull(weatherForecast);
+		List<WeatherSnapshotJson> weatherForecasts = new ArrayList<>();
+		weatherForecasts.add(weatherForecast);
+		
+		DTOBinder binder = DTOBinderFactory.getBinder();
+		List<WeatherForecast> results = binder.bindFromBusinessObjectList(WeatherForecast.class, weatherForecasts);
+		assertNotNull(results);
+		WeatherForecast result = binder.bindFromBusinessObject(WeatherForecast.class, weatherForecast);
+		assertNotNull(result);
+	}
+
+
+	private <T> T getJsonObject(String jsonFileName, Class<T> clazz) throws IOException, JsonParseException, JsonMappingException {
+		Resource resource = new ClassPathResource(jsonFileName);
 		File file = resource.getFile(); 
 		ObjectMapper objectMapper = new ObjectMapper();
-		WeatherSnapshotJson snapshotJson = objectMapper.readValue(file,  WeatherSnapshotJson.class);
-		DTOBinder binder = DTOBinderFactory.getBinder();
-		WeatherSnapshot snapshot = binder.bindFromBusinessObject(WeatherSnapshot.class, snapshotJson);
-		logger.info("location. Lon(): {}, Lat(): {}, Country: {}", snapshot.getLon(), snapshot.getLat(), snapshot.getCountryCode());
-//		assertEquals(snapshotJson.getId(), snapshot.getId());
-		assertEquals(snapshotJson.getSys().getCountry(), snapshot.getCountryCode());
-		assertEquals(snapshotJson.getName(), snapshot.getName());
-		assertEquals(snapshotJson.getCoord().getLon(), snapshot.getLon());
-		assertEquals(snapshotJson.getCoord().getLat(), snapshot.getLat());
+		T weatherSnapshotJson = objectMapper.readValue(file,  clazz);
+		return weatherSnapshotJson;
 	}
 }

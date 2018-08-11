@@ -21,14 +21,17 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.arobs.entity.WeatherForecast;
 import com.arobs.entity.WeatherLocation;
 import com.arobs.scheduler.WeatherForecastRepository;
-import com.arobs.scheduler.weather.WeatherForecastJson;
+import com.arobs.scheduler.weather.WeatherSnapshotJson;
 import com.arobs.scheduler.weather.WeatherLocationJson;
+import com.arobs.scheduler.weather.forecast.hour.WeatherHourForecast;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -63,16 +66,17 @@ public class WeatherForecastRepositoryTest {
 	
 	@Test
 	public void testFindOne() {
-		Integer id = 617077;
+		Long id = 617077L;
 		WeatherForecast location = repository.findOne(id);
 		assertEquals("Raionul Edineţ", location.getName());
 	}
 	
 	@Test
-	@Ignore
+//	@Ignore
 	public void testDTOBinder() throws JsonParseException, JsonMappingException, IOException {
+		Resource resource = new ClassPathResource("location.test.json");
+		File file = resource.getFile(); 
 		ObjectMapper objectMapper = new ObjectMapper();
-		File file = new File("R:\\digi-agro\\city.list.json");
 		CollectionType listType = objectMapper.getTypeFactory().constructCollectionType(List.class, WeatherLocationJson.class);
 		List<WeatherLocationJson> weatherLocations = objectMapper.readValue(file,  listType);
 		DTOBinder binder = DTOBinderFactory.getBinder();
@@ -89,63 +93,17 @@ public class WeatherForecastRepositoryTest {
 	}
 	
 	@Test
-	@Rollback(false)
-	public void testBinder() throws JsonParseException, JsonMappingException, IOException {
+//	@Ignore
+	public void testWeatherHourForecast() throws JsonParseException, JsonMappingException, IOException {
+		Resource resource = new ClassPathResource("forecast.hour.json");
+		File file = resource.getFile(); 
 		ObjectMapper objectMapper = new ObjectMapper();
-		WeatherForecastJson weatherForecast = objectMapper.readValue(locationContent,  WeatherForecastJson.class);
-		assertNotNull(weatherForecast);
-		List<WeatherForecastJson> weatherForecasts = new ArrayList<>();
-		weatherForecasts.add(weatherForecast);
-		
-		List<WeatherForecast> results = binder.bindFromBusinessObjectList(WeatherForecast.class, weatherForecasts);
-		assertNotNull(results);
-		WeatherForecast result = binder.bindFromBusinessObject(WeatherForecast.class, weatherForecast);
-		assertNotNull(result);
-		repository.deleteAll();
-		repository.save(results);
+//		CollectionType listType = objectMapper.getTypeFactory().constructCollectionType(List.class, WeatherHourForecast.class);
+//		List<WeatherHourForecast> weatherHourForecasts = objectMapper.readValue(file,  listType);
+		WeatherHourForecast weatherHourForecasts = objectMapper.readValue(file,  WeatherHourForecast.class);
+		DTOBinder binder = DTOBinderFactory.getBinder();
+		WeatherHourForecast hourForecasts = binder.bindFromBusinessObject(WeatherHourForecast.class, weatherHourForecasts);
+		assertNotNull(hourForecasts);
 	}
 	
-	private String locationContent = "{" + 
-			"  \"coord\": {" + 
-			"    \"lon\": 29.3," + 
-			"    \"lat\": 47.15" + 
-			"  }," + 
-			"  \"weather\": [" + 
-			"    {" + 
-			"      \"id\": 802," + 
-			"      \"main\": \"Clouds\"," + 
-			"      \"description\": \"scattered clouds\"," + 
-			"      \"icon\": \"03d\"" + 
-			"    }" + 
-			"  ]," + 
-			"  \"base\": \"stations\"," + 
-			"  \"main\": {" + 
-			"    \"temp\": 303.15," + 
-			"    \"pressure\": 1015," + 
-			"    \"humidity\": 40," + 
-			"    \"temp_min\": 303.15," + 
-			"    \"temp_max\": 303.15" + 
-			"  }," + 
-			"  \"visibility\": 10000," + 
-			"  \"wind\": {" + 
-			"    \"speed\": 3.1," + 
-			"    \"deg\": 310" + 
-			"  }," + 
-			"  \"clouds\": {" + 
-			"    \"all\": 40" + 
-			"  }," + 
-			"  \"dt\": 1533391200," + 
-			"  \"sys\": {" + 
-			"    \"type\": 1," + 
-			"    \"id\": 6086," + 
-			"    \"message\": 0.0026," + 
-			"    \"country\": \"MD\"," + 
-			"    \"sunrise\": 1533350754," + 
-			"    \"sunset\": 1533403858" + 
-			"  }," + 
-			"  \"id\": 618234," + 
-			"  \"name\": \"Grigoriopol\"," + 
-			"  \"cod\": 200" + 
-			"}";
-
 }

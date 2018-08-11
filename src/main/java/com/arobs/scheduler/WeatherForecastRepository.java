@@ -11,7 +11,7 @@ import com.arobs.entity.WeatherForecast;
 import java.util.List;
 
 @Repository
-public interface WeatherForecastRepository extends JpaRepository<WeatherForecast, Integer> {
+public interface WeatherForecastRepository extends JpaRepository<WeatherForecast, Long> {
 
     @Query("SELECT weatherForecast FROM WeatherForecast weatherForecast " +
             "WHERE weatherForecast.name LIKE :name " +

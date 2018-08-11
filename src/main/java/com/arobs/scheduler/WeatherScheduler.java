@@ -18,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import com.arobs.entity.WeatherLocation;
 import com.arobs.model.WeatherModel;
 import com.arobs.scheduler.weather.WeatherLocationJson;
-import com.arobs.scheduler.weather.WeatherSnapshotJson;
+import com.arobs.scheduler.weather.WeatherSnapshotLocationJson3;
 import com.arobs.service.WeatherService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
@@ -62,7 +62,7 @@ public class WeatherScheduler {
 		String url = String.format(weatherUrl, Double.valueOf(weatherLat), Double.valueOf(weatherLon), weatherAppid, weatherUnits);
 		logger.info("Este ora: {}, URL: {}", new Date(), url);
 		RestTemplate restTemplate = new RestTemplate();
-		WeatherSnapshotJson weather = restTemplate.getForObject(url, WeatherSnapshotJson.class);
+		WeatherSnapshotLocationJson3 weather = restTemplate.getForObject(url, WeatherSnapshotLocationJson3.class);
 		WeatherModel weatherModel = WeatherModel.buildWeatherModel(weather);
 		weatherService.save(weatherModel);
         logger.info(weather.toString());
@@ -75,7 +75,7 @@ public class WeatherScheduler {
 		List<WeatherModel> weatherModels = new ArrayList<>();
 		for (WeatherLocation weatreLocation : weatherLocations) {
 			String url = openWeatherUrl + "?" + "id=" + weatreLocation.getId() + "&appid=" + weatherAppid;
-			WeatherSnapshotJson weather = restTemplate.getForObject(url, WeatherSnapshotJson.class);
+			WeatherSnapshotLocationJson3 weather = restTemplate.getForObject(url, WeatherSnapshotLocationJson3.class);
 			
 			
 			CollectionType listType = objectMapper.getTypeFactory().constructCollectionType(List.class, WeatherLocationJson.class);

@@ -18,6 +18,10 @@ public class Main {
 	private Double tempMin;
 	@JsonProperty("temp_max")
 	private Double tempMax;
+    @JsonProperty("sea_level")
+    private Double seaLevel;
+    @JsonProperty("grnd_level")
+    private Double grndLevel;
 
 	@JsonProperty("temp")
 	public Double getTemp() {
@@ -68,4 +72,21 @@ public class Main {
 	public void setTempMax(Double tempMax) {
 		this.tempMax = tempMax;
 	}
+
+	public Double getSeaLevel() {
+		return seaLevel;
+	}
+
+	public void setSeaLevel(Double seaLevel) {
+		this.seaLevel = seaLevel;
+	}
+
+	public Double getGrndLevel() {
+		return grndLevel;
+	}
+
+	public void setGrndLevel(Double grndLevel) {
+		this.grndLevel = grndLevel;
+	}
+	
 }

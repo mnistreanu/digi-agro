@@ -21,6 +21,7 @@
     "sea_level": 1033.01,
     "grnd_level": 1003.99
   },
+  "visibility": 10000,
   "wind": {
     "speed": 0.91,
     "deg": 264.002
@@ -30,6 +31,8 @@
   },
   "dt": 1533684016,
   "sys": {
+    "id": 6086,
+    "type": 1,
     "message": 0.0332,
     "country": "MD",
     "sunrise": 1533610542,

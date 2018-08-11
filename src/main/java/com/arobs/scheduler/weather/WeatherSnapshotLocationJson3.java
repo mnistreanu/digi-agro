@@ -3,19 +3,19 @@ package com.arobs.scheduler.weather;
 import java.util.Date;
 import java.util.List;
 
-import com.arobs.scheduler.weather.forecast.Clouds;
-import com.arobs.scheduler.weather.forecast.Coord;
-import com.arobs.scheduler.weather.forecast.Main;
-import com.arobs.scheduler.weather.forecast.Sys;
-import com.arobs.scheduler.weather.forecast.Weather;
-import com.arobs.scheduler.weather.forecast.Wind;
+import com.arobs.scheduler.weather.snapshot.Clouds;
+import com.arobs.scheduler.weather.snapshot.Coord;
+import com.arobs.scheduler.weather.snapshot.Main;
+import com.arobs.scheduler.weather.snapshot.Sys;
+import com.arobs.scheduler.weather.snapshot.Weather;
+import com.arobs.scheduler.weather.snapshot.Wind;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"id", "name", "cod", "dt", "base", "visibility", "coord", "weather", "main", "wind", "clouds", "sys"})
-public class WeatherForecastJson {
+@JsonPropertyOrder({"id", "name", "cod", "dt", "base", "coord", "weather", "main", "wind", "clouds", "sys"})
+public class WeatherSnapshotLocationJson3 {
 	@JsonProperty("id")
 	private Integer id;
 	@JsonProperty("name")
@@ -26,8 +26,6 @@ public class WeatherForecastJson {
 	private Integer dt;
 	@JsonProperty("base")
 	private String base;
-	@JsonProperty("visibility")
-	private Integer visibility;
 	
 	@JsonProperty("coord")
 	private Coord coord;
@@ -71,7 +69,7 @@ public class WeatherForecastJson {
 	public void setCod(Integer cod) {
 		this.cod = cod;
 	}
-
+	
 	@JsonProperty("dt")
 	public Date getDt() {
 		return new Date(dt * 1000L);
@@ -90,16 +88,6 @@ public class WeatherForecastJson {
 	@JsonProperty("base")
 	public void setBase(String base) {
 		this.base = base;
-	}
-
-	@JsonProperty("visibility")
-	public Integer getVisibility() {
-		return visibility;
-	}
-
-	@JsonProperty("visibility")
-	public void setVisibility(Integer visibility) {
-		this.visibility = visibility;
 	}
 
 	@JsonProperty("coord")
@@ -161,5 +149,4 @@ public class WeatherForecastJson {
 	public void setSys(Sys sys) {
 		this.sys = sys;
 	}
-
 }

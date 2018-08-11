@@ -1,5 +1,7 @@
 package com.arobs.scheduler.weather.forecast;
 
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -57,8 +59,8 @@ public class Sys {
 	}
 
 	@JsonProperty("sunrise")
-	public Integer getSunrise() {
-		return sunrise;
+	public Date getSunrise() {
+		return new Date(sunrise * 1000L);
 	}
 
 	@JsonProperty("sunrise")
@@ -67,8 +69,8 @@ public class Sys {
 	}
 
 	@JsonProperty("sunset")
-	public Integer getSunset() {
-		return sunset;
+	public Date getSunset() {
+		return new Date(sunset * 1000L);
 	}
 
 	@JsonProperty("sunset")
