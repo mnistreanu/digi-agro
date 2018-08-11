@@ -36,7 +36,7 @@ export class BranchComponent implements OnInit {
         this.route.params.subscribe(params => {
             const id = params['id'];
 
-            if (id === -1) {
+            if (id == -1) {
                 this.prepareNewModel();
             } else {
                 this.setupModel(id);
