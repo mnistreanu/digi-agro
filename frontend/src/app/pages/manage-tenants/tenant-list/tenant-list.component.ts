@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import {TenantService} from "../../../services/tenant.service";
-import {Router} from "@angular/router";
-import {ColDef, GridOptions} from "ag-grid";
-import {EditRendererComponent} from "../../../modules/aggrid/edit-renderer/edit-renderer.component";
+import {Component, OnInit} from '@angular/core';
+import {TenantService} from '../../../services/tenant.service';
+import {Router} from '@angular/router';
+import {ColDef, GridOptions} from 'ag-grid';
+import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 
 @Component({
-  selector: 'az-tenant-list',
-  templateUrl: './tenant-list.component.html',
-  styleUrls: ['./tenant-list.component.scss']
+    selector: 'app-tenant-list',
+    templateUrl: './tenant-list.component.html',
+    styleUrls: ['./tenant-list.component.scss']
 })
 export class TenantListComponent implements OnInit {
 
@@ -37,7 +37,7 @@ export class TenantListComponent implements OnInit {
 
     private setupHeaders() {
 
-        let headers: ColDef[] = [
+        const headers: ColDef[] = [
             {
                 field: 'edit',
                 width: 24,
@@ -47,7 +47,9 @@ export class TenantListComponent implements OnInit {
                 suppressResize: true,
                 suppressMenu: true,
                 cellRendererFramework: EditRendererComponent,
-                cellStyle: () => {return {padding: 0};}
+                cellStyle: () => {
+                    return {padding: 0};
+                }
             },
             {
                 headerName: 'Name',
@@ -105,7 +107,7 @@ export class TenantListComponent implements OnInit {
     private setupRows() {
         this.tenantService.find().subscribe(models => {
             this.options.api.setRowData(models);
-        })
+        });
     }
 
     public onGridReady() {
@@ -113,7 +115,9 @@ export class TenantListComponent implements OnInit {
     }
 
     public adjustGridSize() {
-        setTimeout(() => {this.options.api.sizeColumnsToFit();}, 500);
+        setTimeout(() => {
+            this.options.api.sizeColumnsToFit();
+        }, 500);
     }
 
     public add() {
@@ -121,7 +125,7 @@ export class TenantListComponent implements OnInit {
     }
 
     public onEdit(node) {
-        let model = node.data;
+        const model = node.data;
         this.router.navigate(['/pages/manage-tenants/tenant/' + model.id]);
     }
 

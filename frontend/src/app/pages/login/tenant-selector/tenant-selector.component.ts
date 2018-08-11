@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ListItem} from "../../../interfaces/list-item.interface";
-import {StorageService} from "../../../services/storage.service";
-import {Constants} from "../../../common/constants";
+import {ListItem} from '../../../interfaces/list-item.interface';
+import {StorageService} from '../../../services/storage.service';
+import {Constants} from '../../../common/constants';
 
 @Component({
-    selector: 'tenant-selector',
+    selector: 'app-tenant-selector',
     templateUrl: './tenant-selector.component.html',
     styleUrls: ['./tenant-selector.component.scss']
 })

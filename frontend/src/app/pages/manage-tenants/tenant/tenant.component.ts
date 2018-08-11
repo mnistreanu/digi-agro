@@ -1,20 +1,20 @@
 import {Component, OnInit} from '@angular/core';
-import {TenantModel} from "./tenant.model";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {TenantService} from "../../../services/tenant.service";
-import {ToastrService} from "ngx-toastr";
-import {Messages} from "../../../common/messages";
+import {TenantModel} from './tenant.model';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {TenantService} from '../../../services/tenant.service';
+import {ToastrService} from 'ngx-toastr';
+import {Messages} from '../../../common/messages';
 
 @Component({
-    selector: 'az-tenant',
+    selector: 'app-tenant',
     templateUrl: './tenant.component.html',
     styleUrls: ['./tenant.component.scss']
 })
 export class TenantComponent implements OnInit {
 
     form: FormGroup;
-    submitted: boolean = false;
+    submitted = false;
 
     model: TenantModel;
     isNew: boolean;
@@ -28,7 +28,7 @@ export class TenantComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            let id = params['id'];
+            const id = params['id'];
 
             if (id == -1) {
                 this.prepareNewModel();
@@ -67,10 +67,10 @@ export class TenantComponent implements OnInit {
     }
 
     public onNameChange() {
-        let control = this.form.controls.name;
+        const control = this.form.controls.name;
         this.tenantService.validateName(this.model.id, control.value).subscribe((isUnique) => {
             if (!isUnique) {
-                let errors = control.errors || {};
+                const errors = control.errors || {};
                 errors.unique = !isUnique;
                 control.setErrors(errors);
             }
@@ -78,10 +78,10 @@ export class TenantComponent implements OnInit {
     }
 
     public onFiscalCodeChange() {
-        let control = this.form.controls.fiscalCode;
+        const control = this.form.controls.fiscalCode;
         this.tenantService.validateFiscalCode(this.model.id, control.value).subscribe((isUnique) => {
             if (!isUnique) {
-                let errors = control.errors || {};
+                const errors = control.errors || {};
                 errors.unique = !isUnique;
                 control.setErrors(errors);
             }

@@ -1,22 +1,22 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {UserAccountModel} from "../user/user-account.model";
-import {emailValidator} from "../../../theme/validators/email.validator";
-import {matchPasswordValidator} from "../../../theme/validators/match-password.validator";
-import {ToastrService} from "ngx-toastr";
-import {UserService} from "../../../services/user.service";
-import {AuthService} from "../../../services/auth/auth.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {TenantService} from "../../../services/tenant.service";
-import {ListItem} from "../../../interfaces/list-item.interface";
-import {IMultiSelectSettings} from "angular-2-dropdown-multiselect";
-import {BranchService} from "../../../services/branch.service";
-import {Messages} from "../../../common/messages";
-import {Authorities} from "../../../common/authorities";
-import {LangService} from "../../../services/lang.service";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UserAccountModel} from '../user/user-account.model';
+import {emailValidator} from '../../../theme/validators/email.validator';
+import {matchPasswordValidator} from '../../../theme/validators/match-password.validator';
+import {ToastrService} from 'ngx-toastr';
+import {UserService} from '../../../services/user.service';
+import {AuthService} from '../../../services/auth/auth.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {TenantService} from '../../../services/tenant.service';
+import {ListItem} from '../../../interfaces/list-item.interface';
+import {IMultiSelectSettings} from 'angular-2-dropdown-multiselect';
+import {BranchService} from '../../../services/branch.service';
+import {Messages} from '../../../common/messages';
+import {Authorities} from '../../../common/authorities';
+import {LangService} from '../../../services/lang.service';
 
 @Component({
-    selector: 'az-user-form',
+    selector: 'app-user-form',
     templateUrl: './user-form.component.html',
     styleUrls: ['./user-form.component.scss']
 })
@@ -56,7 +56,7 @@ export class UserFormComponent implements OnInit {
         this.setupLabels();
         this.setupTenants();
         this.route.params.subscribe(params => {
-            let id = params['id'];
+            const id = params['id'];
 
             if (id == -1) {
                 this.prepareNewModel();
@@ -79,7 +79,7 @@ export class UserFormComponent implements OnInit {
     }
 
     private setupBranches() {
-        let tenants = this.tenantForm.controls.tenants.value;
+        const tenants = this.tenantForm.controls.tenants.value;
         if (tenants.length == 0) {
             this.branches = [];
             this.tenantForm.controls.branches.setValue(null);
@@ -136,12 +136,13 @@ export class UserFormComponent implements OnInit {
     }
 
     public next() {
-        let accountForm = this.accountForm;
-        let personalForm = this.personalForm;
-        let tenantForm = this.tenantForm;
+        const accountForm = this.accountForm;
+        const personalForm = this.personalForm;
+        const tenantForm = this.tenantForm;
 
-        if (this.steps[this.steps.length - 1].active)
+        if (this.steps[this.steps.length - 1].active) {
             return false;
+        }
 
         this.steps.some(function (step, index, steps) {
             if (index < steps.length - 1) {
@@ -185,8 +186,9 @@ export class UserFormComponent implements OnInit {
     }
 
     public prev() {
-        if (this.steps[0].active)
+        if (this.steps[0].active) {
             return false;
+        }
         this.steps.some(function (step, index, steps) {
             if (index != 0) {
                 if (step.active) {
@@ -199,10 +201,10 @@ export class UserFormComponent implements OnInit {
     }
 
     public onUsernameChange() {
-        let control = this.accountForm.controls.username;
+        const control = this.accountForm.controls.username;
         this.userService.validateUsername(this.model.id || -1, control.value).subscribe((isUnique) => {
             if (!isUnique) {
-                let errors = control.errors || {};
+                const errors = control.errors || {};
                 errors.unique = !isUnique;
                 control.setErrors(errors);
             }

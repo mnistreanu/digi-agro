@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AbstractControl} from "@angular/forms";
+import {AbstractControl} from '@angular/forms';
 
 @Component({
-    selector: 'form-error-block',
+    selector: 'app-form-error-block',
     templateUrl: './form-error-block.component.html',
     styleUrls: ['./form-error-block.component.scss']
 })

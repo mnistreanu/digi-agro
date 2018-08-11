@@ -41,8 +41,8 @@
                     <input id="username" class="form-control checking-field" formControlName="username"
                            (change)="onUsernameChange()">
                   </div>
-                  <form-error-block [control]="accountForm.get('username')" [formSubmitted]="step.submitted"
-                                    [title]="'Username'"></form-error-block>
+                  <app-form-error-block [control]="accountForm.get('username')" [formSubmitted]="step.submitted"
+                                        [title]="'Username'"></app-form-error-block>
                 </div>
               </div>
             </div>
@@ -57,8 +57,8 @@
                     </div>
                     <input id="password" class="form-control checking-field" formControlName="password" type="password">
                   </div>
-                  <form-error-block [control]="accountForm.get('password')" [formSubmitted]="step.submitted"
-                                    [title]="'Password'"></form-error-block>
+                  <app-form-error-block [control]="accountForm.get('password')" [formSubmitted]="step.submitted"
+                                        [title]="'Password'"></app-form-error-block>
                 </div>
               </div>
             </div>
@@ -73,8 +73,8 @@
                     </div>
                     <input id="confirmPassword" class="form-control checking-field" formControlName="confirmPassword" type="password">
                   </div>
-                  <form-error-block [control]="accountForm.get('confirmPassword')" [formSubmitted]="step.submitted"
-                                    [title]="'Confirm Password'"></form-error-block>
+                  <app-form-error-block [control]="accountForm.get('confirmPassword')" [formSubmitted]="step.submitted"
+                                        [title]="'Confirm Password'"></app-form-error-block>
                 </div>
               </div>
             </div>
@@ -89,8 +89,8 @@
                     </div>
                     <input id="email" class="form-control checking-field" formControlName="email">
                   </div>
-                  <form-error-block [control]="accountForm.get('email')" [formSubmitted]="step.submitted"
-                                    [title]="'Email'"></form-error-block>
+                  <app-form-error-block [control]="accountForm.get('email')" [formSubmitted]="step.submitted"
+                                        [title]="'Email'"></app-form-error-block>
                 </div>
               </div>
             </div>
@@ -163,8 +163,8 @@
                                            formControlName="tenants">
 
                   </ss-multiselect-dropdown>
-                  <form-error-block [control]="tenantForm.get('tenants')" [formSubmitted]="step.submitted"
-                                    [title]="'Tenant'"></form-error-block>
+                  <app-form-error-block [control]="tenantForm.get('tenants')" [formSubmitted]="step.submitted"
+                                        [title]="'Tenant'"></app-form-error-block>
                 </div>
               </div>
             </div>
@@ -179,8 +179,8 @@
                                            formControlName="branches">
 
                   </ss-multiselect-dropdown>
-                  <form-error-block [control]="tenantForm.get('branches')" [formSubmitted]="step.submitted"
-                                    [title]="'Branch'"></form-error-block>
+                  <app-form-error-block [control]="tenantForm.get('branches')" [formSubmitted]="step.submitted"
+                                        [title]="'Branch'"></app-form-error-block>
                 </div>
               </div>
             </div>

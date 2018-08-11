@@ -1,8 +1,9 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 
 @Component({
-  selector: 'az-list-group',
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: './list-group.component.html'
+    selector: 'app-list-group',
+    encapsulation: ViewEncapsulation.None,
+    templateUrl: './list-group.component.html'
 })
-export class ListGroupComponent { }
+export class ListGroupComponent {
+}

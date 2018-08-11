@@ -1,20 +1,20 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {OwnerService} from "../../../services/owner.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {OwnerModel} from "./owner.model";
-import {ToastrService} from "ngx-toastr";
-import {Messages} from "../../../common/messages";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {OwnerService} from '../../../services/owner.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {OwnerModel} from './owner.model';
+import {ToastrService} from 'ngx-toastr';
+import {Messages} from '../../../common/messages';
 
 @Component({
-    selector: 'az-owner',
+    selector: 'app-owner',
     templateUrl: './owner.component.html',
     styleUrls: ['./owner.component.scss']
 })
 export class OwnerComponent implements OnInit {
 
     form: FormGroup;
-    submitted: boolean = false;
+    submitted = false;
 
     model: OwnerModel;
     isNew: boolean;
@@ -28,7 +28,7 @@ export class OwnerComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            let id = params['id'];
+            const id = params['id'];
 
             if (id == -1) {
                 this.prepareNewModel();
@@ -61,10 +61,10 @@ export class OwnerComponent implements OnInit {
     }
 
     public onNameChange() {
-        let control = this.form.controls.name;
+        const control = this.form.controls.name;
         this.ownerService.validateName(this.model.id || -1, control.value).subscribe((isUnique) => {
             if (!isUnique) {
-                let errors = control.errors || {};
+                const errors = control.errors || {};
                 errors.unique = !isUnique;
                 control.setErrors(errors);
             }

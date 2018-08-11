@@ -1,16 +1,16 @@
-import {Injectable} from "@angular/core";
-import {Constants} from "../common/constants";
-import {HttpClient} from "@angular/common/http";
-import {TenantModel} from "../pages/manage-tenants/tenant/tenant.model";
-import {Observable} from "rxjs/Rx";
-import {ListItem} from "../interfaces/list-item.interface";
+import {Injectable} from '@angular/core';
+import {Constants} from '../common/constants';
+import {HttpClient} from '@angular/common/http';
+import {TenantModel} from '../pages/manage-tenants/tenant/tenant.model';
+import {Observable} from 'rxjs/Rx';
+import {ListItem} from '../interfaces/list-item.interface';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class TenantService {
 
-    private api: string = Constants.API_URL + "/tenant";
+    private api: string = Constants.API_URL + '/tenant';
 
     constructor(private http: HttpClient) {
     }
@@ -40,7 +40,7 @@ export class TenantService {
     }
 
     find(): Observable<TenantModel[]> {
-        let filterModel = {};
+        const filterModel = {};
         return this.http.post<TenantModel[]>(this.api + '/find-by', filterModel);
     }
 

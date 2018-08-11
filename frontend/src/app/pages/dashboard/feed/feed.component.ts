@@ -1,28 +1,29 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { FeedService } from './feed.service';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {FeedService} from './feed.service';
 
 @Component({
-  selector: 'az-feed',
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: './feed.component.html',
-  styleUrls: ['./feed.component.scss'],
-  providers: [ FeedService ]
+    selector: 'app-feed',
+    encapsulation: ViewEncapsulation.None,
+    templateUrl: './feed.component.html',
+    styleUrls: ['./feed.component.scss'],
+    providers: [FeedService]
 })
-export class FeedComponent  {  
-  public feed:Array<Object>;
+export class FeedComponent implements OnInit {
+    public feed: Array<Object>;
 
-  constructor(private _feedService:FeedService) {  }
+    constructor(private _feedService: FeedService) {
+    }
 
-  ngOnInit() {
-    this._loadFeed();
-  }
+    ngOnInit() {
+        this._loadFeed();
+    }
 
-  expandMessage (message){
-    message.expanded = !message.expanded;
-  }
+    expandMessage(message) {
+        message.expanded = !message.expanded;
+    }
 
-  private _loadFeed() {
-    this.feed = this._feedService.getData();
-  }
+    private _loadFeed() {
+        this.feed = this._feedService.getData();
+    }
 
 }

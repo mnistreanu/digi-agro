@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
-import {Constants} from "../../common/constants";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs/Rx";
-import {NotificationSubscriptionModel} from "../../pages/notifications/subscription/notification-subscription.model";
+import {Constants} from '../../common/constants';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Rx';
+import {NotificationSubscriptionModel} from '../../pages/notifications/subscription/notification-subscription.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class NotificationSubscriptionService {
 
-    private api: string = Constants.API_URL + "/notification-subscription";
+    private api: string = Constants.API_URL + '/notification-subscription';
 
     constructor(private http: HttpClient) {
     }
@@ -19,7 +19,7 @@ export class NotificationSubscriptionService {
     }
 
     changeSubscription(typeId: number, subscribed: boolean): Observable<void> {
-        let body = {
+        const body = {
             typeId: typeId,
             subscribed: subscribed
         };

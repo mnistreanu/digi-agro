@@ -88,7 +88,7 @@ body::before{
     }   
 }
 
-.az-overlay{
+.app-overlay{
     position: fixed;
     top:0;left:0;bottom: 0; right: 0;
     z-index: 8;
@@ -107,7 +107,7 @@ body::before{
     .main{
         min-height: calc(100vh - 240px);   
     }
-    .az-overlay{
+    .app-overlay{
         display: block;
     }
     .footer .footer-main, .footer .created{
@@ -119,7 +119,7 @@ body::before{
     .main-wrapper, .main-wrapper.menu-collapsed{
        margin-left: 50px;
     } 
-    .az-overlay{
+    .app-overlay{
         display: block;
     }
 } 

@@ -1,12 +1,13 @@
 export class MachineTelemetryModel {
 
-  constructor() {}
+    id: number;
+    machineIdentifier: string;
 
-  id: number;
-  machineIdentifier: string;
+    latitude: number;
+    longitude: number;
 
-  latitude: number;
-  longitude: number;
+    createdAt: Date;
 
-  createdAt: Date;
+    constructor() {
+    }
 }

@@ -24,9 +24,9 @@
                                                          [settings]="parcelControlSettings"
                                                          formControlName="parcels">
                                 </ss-multiselect-dropdown>
-                                <form-error-block [control]="form.get('parcels')"
-                                                  [formSubmitted]="formSubmitted">
-                                </form-error-block>
+                                <app-form-error-block [control]="form.get('parcels')"
+                                                      [formSubmitted]="formSubmitted">
+                                </app-form-error-block>
                             </div>
                         </div>
                     </div>
@@ -42,9 +42,9 @@
                                             [ngValue]="category.id">{{category.nameRo}}
                                     </option>
                                 </select>
-                                <form-error-block [control]="form.get('cropCategoryId')"
-                                                  [formSubmitted]="formSubmitted">
-                                </form-error-block>
+                                <app-form-error-block [control]="form.get('cropCategoryId')"
+                                                      [formSubmitted]="formSubmitted">
+                                </app-form-error-block>
                             </div>
                         </div>
 
@@ -58,9 +58,9 @@
                                             [ngValue]="crop.id">{{crop.nameRo}}
                                     </option>
                                 </select>
-                                <form-error-block [control]="form.get('cropId')"
-                                                  [formSubmitted]="formSubmitted">
-                                </form-error-block>
+                                <app-form-error-block [control]="form.get('cropId')"
+                                                      [formSubmitted]="formSubmitted">
+                                </app-form-error-block>
                             </div>
                         </div>
                     </div>
@@ -82,9 +82,9 @@
                                 <option *ngFor="let variety of cropVarieties"
                                         [ngValue]="variety.id">{{variety.nameRo}}
                                 </option>
-                                <form-error-block [control]="form.get('cropVarietyId')"
-                                                  [formSubmitted]="formSubmitted">
-                                </form-error-block>
+                                <app-form-error-block [control]="form.get('cropVarietyId')"
+                                                      [formSubmitted]="formSubmitted">
+                                </app-form-error-block>
                             </select>
                         </div>
                     </div>
@@ -93,9 +93,9 @@
                         <label class="col-sm-3 form-control-label m-t-5" translate>forecast.name</label>
                         <div class="col-sm-9 text-left">
                             <input class="form-control checking-field" formControlName="forecastName">
-                            <form-error-block [control]="form.get('forecastName')"
-                                              [formSubmitted]="formSubmitted">
-                            </form-error-block>
+                            <app-form-error-block [control]="form.get('forecastName')"
+                                                  [formSubmitted]="formSubmitted">
+                            </app-form-error-block>
                         </div>
                     </div>
 

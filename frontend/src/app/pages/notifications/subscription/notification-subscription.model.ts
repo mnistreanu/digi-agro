@@ -1,4 +1,4 @@
-import {NotificationTypeModel} from "./notification-type.model";
+import {NotificationTypeModel} from './notification-type.model';
 
 export class NotificationSubscriptionModel {
 

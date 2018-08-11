@@ -1,8 +1,9 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 
 @Component({
-  selector: 'az-basic-tables',
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: './basic-tables.component.html'
+    selector: 'app-basic-tables',
+    encapsulation: ViewEncapsulation.None,
+    templateUrl: './basic-tables.component.html'
 })
-export class BasicTablesComponent { }
+export class BasicTablesComponent {
+}

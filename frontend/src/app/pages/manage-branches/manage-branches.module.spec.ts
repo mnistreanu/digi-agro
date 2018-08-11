@@ -1,13 +1,13 @@
-import { ManageBranchesModule } from './manage-branches.module';
+import {ManageBranchesModule} from './manage-branches.module';
 
 describe('ManageBranchesModule', () => {
-  let manageBranchesModule: ManageBranchesModule;
+    let manageBranchesModule: ManageBranchesModule;
 
-  beforeEach(() => {
-    manageBranchesModule = new ManageBranchesModule();
-  });
+    beforeEach(() => {
+        manageBranchesModule = new ManageBranchesModule();
+    });
 
-  it('should create an instance', () => {
-    expect(manageBranchesModule).toBeTruthy();
-  });
+    it('should create an instance', () => {
+        expect(manageBranchesModule).toBeTruthy();
+    });
 });

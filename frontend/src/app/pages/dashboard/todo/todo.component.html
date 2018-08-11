@@ -15,7 +15,7 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <ul class="todo-list" slim-scroll [slimScrollOptions]="{height: 347}">
+            <ul class="todo-list" slimScroll [slimScrollOptions]="{height: 347}">
                 <li *ngFor="let item of getNotDeleted()" [ngClass]="{checked: item.isChecked, active: item.isActive}"
                     (mouseenter)="item.isActive=true" (mouseleave)="item.isActive=false">
                     <input type="checkbox" [(ngModel)]="item.isChecked">

@@ -1,8 +1,9 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 
 @Component({
-  selector: 'az-search',
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: './search.component.html'
+    selector: 'app-search',
+    encapsulation: ViewEncapsulation.None,
+    templateUrl: './search.component.html'
 })
-export class SearchComponent {}
+export class SearchComponent {
+}

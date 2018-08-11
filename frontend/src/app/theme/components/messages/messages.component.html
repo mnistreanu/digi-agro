@@ -14,7 +14,7 @@
                 <!--<a href="javascript:void(0);" class="transition">Mark All as Read</a>-->
                 <!--<a href="javascript:void(0);" class="transition">Settings</a>-->
             <!--</div>-->
-            <!--<div class="list" slim-scroll [slimScrollOptions]="{height: 250}">-->
+            <!--<div class="list" slimScroll [slimScrollOptions]="{height: 250}">-->
                 <!--<a *ngFor="let message of messages" href class="transition">-->
                     <!--<img src="{{ ( message.image || (message.name | profilePicture)) }}">                    -->
                     <!--<div class="list-content">-->
@@ -44,7 +44,7 @@
                    translate>notification.mark-all-as-read</a>
                 <a routerLink="/pages/notification-subscription" class="transition" translate>general.settings</a>
             </div>
-            <div class="list" slim-scroll [slimScrollOptions]="{height: 250}">
+            <div class="list" slimScroll [slimScrollOptions]="{height: 250}">
                 <div *ngIf="!hasNotifications" class="text-center" translate>notification.no-new-notifications</div>
                 <a href="javascript:void(0);" *ngFor="let notification of notificationModels" class="transition">
                     <img [src]="notification.image">
@@ -73,7 +73,7 @@
                 <!--<a href="javascript:void(0);" class="transition" translate>notification.mark-all-as-read</a>-->
                 <!--<a href="javascript:void(0);" class="transition" translate>general.settings</a>-->
             </div>
-            <div class="list" slim-scroll [slimScrollOptions]="{height: 250}">
+            <div class="list" slimScroll [slimScrollOptions]="{height: 250}">
                 <a *ngFor="let task of reminders" href class="transition">
                     <h3>{{task.text}} <span class="pull-right">{{task.value}}</span></h3>
                     <div class="progress progress-sm">
