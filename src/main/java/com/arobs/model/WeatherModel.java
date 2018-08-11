@@ -2,7 +2,7 @@ package com.arobs.model;
 
 
 import com.arobs.entity.WeatherSnapshot;
-import com.arobs.scheduler.weather.WeatherSnapshotLocationJson3;
+import com.arobs.scheduler.weather.WeatherSnapshotJson;
 import com.arobs.scheduler.weather.snapshot.Clouds;
 import com.arobs.scheduler.weather.snapshot.Coord;
 import com.arobs.scheduler.weather.snapshot.Main;
@@ -53,7 +53,7 @@ public class WeatherModel implements Serializable {
         this.id = w.getId();
     }
 
-    public static WeatherModel buildWeatherModel(WeatherSnapshotLocationJson3 weather) {
+    public static WeatherModel buildWeatherModel(WeatherSnapshotJson weather) {
     	WeatherModel weatherModel = new WeatherModel(); 
     	
     	weatherModel.setId(weather.getId().longValue());

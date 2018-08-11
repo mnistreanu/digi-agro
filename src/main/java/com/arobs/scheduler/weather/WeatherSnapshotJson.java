@@ -3,12 +3,12 @@ package com.arobs.scheduler.weather;
 import java.util.Date;
 import java.util.List;
 
-import com.arobs.scheduler.weather.forecast.Clouds;
-import com.arobs.scheduler.weather.forecast.Coord;
-import com.arobs.scheduler.weather.forecast.Main;
-import com.arobs.scheduler.weather.forecast.Sys;
-import com.arobs.scheduler.weather.forecast.Weather;
-import com.arobs.scheduler.weather.forecast.Wind;
+import com.arobs.scheduler.weather.snapshot.Clouds;
+import com.arobs.scheduler.weather.snapshot.Coord;
+import com.arobs.scheduler.weather.snapshot.Main;
+import com.arobs.scheduler.weather.snapshot.Sys;
+import com.arobs.scheduler.weather.snapshot.Wind;
+import com.arobs.scheduler.weather.snapshot.Weather;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
