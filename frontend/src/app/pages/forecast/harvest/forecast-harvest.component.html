@@ -21,9 +21,9 @@
                                                          [settings]="parcelControlSettings"
                                                          formControlName="parcels">
                                 </ss-multiselect-dropdown>
-                                <form-error-block [control]="form.get('parcels')"
+                                <app-form-error-block [control]="form.get('parcels')"
                                                   [formSubmitted]="formSubmitted">
-                                </form-error-block>
+                                </app-form-error-block>
                             </div>
                         </div>
                     </div>
@@ -39,9 +39,9 @@
                                             [ngValue]="category.id">{{category.nameRo}}
                                     </option>
                                 </select>
-                                <form-error-block [control]="form.get('cropCategoryId')"
+                                <app-form-error-block [control]="form.get('cropCategoryId')"
                                                   [formSubmitted]="formSubmitted">
-                                </form-error-block>
+                                </app-form-error-block>
                             </div>
                         </div>
 
@@ -55,9 +55,9 @@
                                             [ngValue]="crop.id">{{crop.nameRo}}
                                     </option>
                                 </select>
-                                <form-error-block [control]="form.get('cropId')"
+                                <app-form-error-block [control]="form.get('cropId')"
                                                   [formSubmitted]="formSubmitted">
-                                </form-error-block>
+                                </app-form-error-block>
                             </div>
                         </div>
                     </div>
@@ -66,9 +66,9 @@
                         <label class="col-sm-3 form-control-label m-t-5" translate>forecast.harvesting_year</label>
                         <div class="col-sm-3 text-left">
                             <input class="form-control checking-field" type="number" formControlName="harvestingYear">
-                            <form-error-block [control]="form.get('harvestingYear')"
+                            <app-form-error-block [control]="form.get('harvestingYear')"
                                               [formSubmitted]="formSubmitted">
-                            </form-error-block>
+                            </app-form-error-block>
                         </div>
 
                         <label class="col-sm-3 form-control-label m-t-5" *ngIf="cropVarieties && cropVarieties.length > 0" translate>crop.variety</label>
@@ -79,9 +79,9 @@
                                 <option *ngFor="let variety of cropVarieties"
                                         [ngValue]="variety.id">{{variety.nameRo}}
                                 </option>
-                                <form-error-block [control]="form.get('cropVarietyId')"
+                                <app-form-error-block [control]="form.get('cropVarietyId')"
                                                   [formSubmitted]="formSubmitted">
-                                </form-error-block>
+                                </app-form-error-block>
                             </select>
                         </div>
                     </div>
@@ -90,9 +90,9 @@
                         <label class="col-sm-3 form-control-label m-t-5" translate>forecast.name</label>
                         <div class="col-sm-9 text-left">
                             <input class="form-control checking-field" formControlName="forecastName">
-                            <form-error-block [control]="form.get('forecastName')"
+                            <app-form-error-block [control]="form.get('forecastName')"
                                               [formSubmitted]="formSubmitted">
-                            </form-error-block>
+                            </app-form-error-block>
                         </div>
                     </div>
 
@@ -102,9 +102,9 @@
                             <textarea class="form-control"
                                       formControlName="description">
                             </textarea>
-                            <form-error-block [control]="form.get('description')"
+                            <app-form-error-block [control]="form.get('description')"
                                               [formSubmitted]="formSubmitted">
-                            </form-error-block>
+                            </app-form-error-block>
                         </div>
                     </div>
 
@@ -112,9 +112,9 @@
                         <label class="col-sm-3 form-control-label m-t-5" translate><span translate>forecast.harvest</span> / <span translate>forecast.hectar</span> </label>
                         <div class="col-sm-3 text-left">
                             <input class="form-control checking-field" type="number" formControlName="quantityHectar">
-                            <form-error-block [control]="form.get('quantityHectar')"
+                            <app-form-error-block [control]="form.get('quantityHectar')"
                                               [formSubmitted]="formSubmitted">
-                            </form-error-block>
+                            </app-form-error-block>
                         </div>
 
                         <label class="col-sm-3 form-control-label m-t-5" translate>forecast.unit_of_measure</label>
@@ -125,9 +125,9 @@
                                 <option value="kg" translate>unit-of-measure.kg</option>
                             </select>
 
-                            <form-error-block [control]="form.get('unitOfMeasure')"
+                            <app-form-error-block [control]="form.get('unitOfMeasure')"
                                               [formSubmitted]="formSubmitted">
-                            </form-error-block>
+                            </app-form-error-block>
                         </div>
                     </div>
 
@@ -135,9 +135,9 @@
                         <label class="col-sm-3 form-control-label m-t-5" translate>forecast.selling_price</label>
                         <div class="col-sm-3 text-left">
                             <input class="form-control checking-field" type="number" formControlName="unitPrice">
-                            <form-error-block [control]="form.get('unitPrice')"
+                            <app-form-error-block [control]="form.get('unitPrice')"
                                               [formSubmitted]="formSubmitted">
-                            </form-error-block>
+                            </app-form-error-block>
                         </div>
 
                         <label class="col-sm-3 form-control-label m-t-5" translate>forecast.currency</label>
@@ -148,9 +148,9 @@
                                 <option value="ron" translate>unit-of-measure.ron</option>
                             </select>
 
-                            <form-error-block [control]="form.get('currency')"
+                            <app-form-error-block [control]="form.get('currency')"
                                               [formSubmitted]="formSubmitted">
-                            </form-error-block>
+                            </app-form-error-block>
                         </div>
                     </div>
 
