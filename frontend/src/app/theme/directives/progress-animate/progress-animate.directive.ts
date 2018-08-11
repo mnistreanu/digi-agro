@@ -1,49 +1,34 @@
-import { Directive, ElementRef } from '@angular/core';
+import {Directive, ElementRef, OnInit} from '@angular/core';
 
-@Directive ({
-  selector: '[progress-animate]'
+@Directive({
+    selector: '[progressAnimate]'
 })
 
-export class ProgressAnimate {
+export class ProgressAnimateDirective implements OnInit {
     public element: any;
 
     constructor(private _elementRef: ElementRef) {
         this.element = jQuery(_elementRef.nativeElement);
     }
 
-    ngOnInit(): void { 
-        let elem = this.element,
-            progress = 0,   
-            timeout = 0,     
-            increment = 1, 
-            maxprogress = elem.attr('aria-valuenow'); 
-        function animate() {        
+    ngOnInit(): void {
+        const elem = this.element;
+        const timeout = 0;
+        const increment = 1;
+        const maxprogress = elem.attr('aria-valuenow');
+        let progress = 0;
+
+        function animate() {
             setTimeout(() => {
                 progress += increment;
-                if(progress < maxprogress) {
-                    elem.css('width', progress+'%');
+                if (progress < maxprogress) {
+                    elem.css('width', progress + '%');
                     animate();
                 }
             }, timeout);
-        };
+        }
+
         animate();
     }
 
-    // ngOnInit(): void {
-    //     let width = this.element.attr('aria-valuenow'),
-    //     $bar = this.element;
-    //     $bar.css('opacity', 0);
-    //     setTimeout(() => {
-    //         $bar.css({
-    //             transition: 'none',
-    //             width: 0,
-    //             opacity: 1
-    //         });
-    //         setTimeout(() => {
-    //             $bar.css('transition', '').css('width', width+'%');
-    //         });
-    //     });
-    // }
-
-   
 }

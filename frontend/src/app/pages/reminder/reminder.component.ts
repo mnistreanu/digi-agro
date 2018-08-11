@@ -1,20 +1,20 @@
-import {Component} from "@angular/core";
-import {AppConfig} from "../../app.config";
-import {ReminderService} from "../../services/reminder.service";
-import "style-loader!fullcalendar/dist/fullcalendar.min.css";
-import {ReminderModel} from "./reminder.model";
-import {LangService} from "../../services/lang.service";
-import {AgroWorkTypeModel} from "./agro-work-type.model";
-import {ToastrService} from "ngx-toastr";
-import {Messages} from "../../common/messages";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {AppConfig} from '../../app.config';
+import {ReminderService} from '../../services/reminder.service';
+import 'style-loader!fullcalendar/dist/fullcalendar.min.css';
+import {ReminderModel} from './reminder.model';
+import {LangService} from '../../services/lang.service';
+import {AgroWorkTypeModel} from './agro-work-type.model';
+import {ToastrService} from 'ngx-toastr';
+import {Messages} from '../../common/messages';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-    selector: 'az-reminder',
+    selector: 'app-reminder',
     templateUrl: './reminder.component.html',
     styleUrls: ['./reminder.component.scss']
 })
-export class ReminderComponent {
+export class ReminderComponent implements OnInit {
 
     config: any;
 
@@ -27,7 +27,7 @@ export class ReminderComponent {
 
     event: any = {};
     eventForm: FormGroup;
-    formSubmitted: boolean = false;
+    formSubmitted = false;
 
     labelValidationFail: string;
     labelRemoved: string;
@@ -78,10 +78,10 @@ export class ReminderComponent {
             editable: true,
             droppable: true,
             dayRender: function (date, cell) {
-                let today = new Date().toDateString();
-                let compareDate = date.toDate().toDateString();
+                const today = new Date().toDateString();
+                const compareDate = date.toDate().toDateString();
                 if (today == compareDate) {
-                    cell.css("background-color", "#ccc");
+                    cell.css('background-color', '#ccc');
                 }
             }
         };
@@ -89,20 +89,20 @@ export class ReminderComponent {
 
     private findAgroWorkTypes() {
         this.reminderService.findWorkTypes().subscribe(payloadModel => {
-            let status = payloadModel.status;
-            let message = payloadModel.message;
+            const status = payloadModel.status;
+            const message = payloadModel.message;
             this.workTypeModels = payloadModel.payload;
-        })
+        });
     }
 
     private findReminders() {
         this.reminderService.find().subscribe(payloadModel => {
-            let status = payloadModel.status;
-            let message = payloadModel.message;
+            const status = payloadModel.status;
+            const message = payloadModel.message;
             this.reminderModels = payloadModel.payload || [];
 
             this.reminderModels.forEach((model) => {
-                let event: any = {};
+                const event: any = {};
                 event.id = model.id;
                 event.workTypeId = model.workTypeId;
                 event.title = model.title;
@@ -132,9 +132,9 @@ export class ReminderComponent {
     }
 
     prepareNewEvent(start, end) {
-        let allDay = !start.hasTime() && !end.hasTime();
+        const allDay = !start.hasTime() && !end.hasTime();
 
-        let event = {
+        const event = {
             start: start,
             end: end,
             backgroundColor: this.config.colors.success,
@@ -155,7 +155,7 @@ export class ReminderComponent {
 
         Object.assign(this.event, this.eventForm.value);
         this.event.backgroundColor = this.getEventBackgroundColor(this.event.workTypeId);
-        let isNew = this.event.id == null;
+        const isNew = this.event.id == null;
 
         this.reminderService.save(this.event).subscribe(data => {
             this.event.id = data.id;
@@ -182,9 +182,9 @@ export class ReminderComponent {
     }
 
     private onEventTimeChange(event) {
-        let id = event.id;
-        let start = event.start;
-        let end = event.end;
+        const id = event.id;
+        const start = event.start;
+        const end = event.end;
         this.reminderService.changeEventTime(id, start, end).subscribe(() => {
             this.toaStrService.success(this.labelSaved);
         });

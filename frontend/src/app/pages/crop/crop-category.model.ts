@@ -1,6 +1,6 @@
 export class CropCategoryModel {
 
     id: number;
-    nameRo:string;
+    nameRo: string;
     nameRu: string;
 }

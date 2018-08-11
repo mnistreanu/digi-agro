@@ -163,11 +163,11 @@
   "defaultProject": "azimuth",
   "schematics": {
     "@schematics/angular:component": {
-      "prefix": "az",
+      "prefix": "app",
       "styleext": "scss"
     },
     "@schematics/angular:directive": {
-      "prefix": "az"
+      "prefix": "app"
     }
   }
 }

@@ -32,8 +32,8 @@
                                 <input id="username" class="form-control checking-field" formControlName="username"
                                        (change)="onUsernameChange()">
                             </div>
-                            <form-error-block [control]="form.get('username')" [formSubmitted]="submitted"
-                                              [title]="'user.username'"></form-error-block>
+                            <app-form-error-block [control]="form.get('username')" [formSubmitted]="submitted"
+                                                  [title]="'user.username'"></app-form-error-block>
                         </div>
                         <div class="col-sm-12">
                             <label for="password" translate>user.password</label>
@@ -44,8 +44,8 @@
                                 <input id="password" class="form-control checking-field"
                                        formControlName="password" type="password" autocomplete="new-password">
                             </div>
-                            <form-error-block [control]="form.get('password')" [formSubmitted]="submitted"
-                                              [title]="'Password'"></form-error-block>
+                            <app-form-error-block [control]="form.get('password')" [formSubmitted]="submitted"
+                                                  [title]="'Password'"></app-form-error-block>
                         </div>
                         <div class="col-sm-12">
                             <label for="language" translate>language.language</label>
@@ -85,8 +85,8 @@
                         </div>
                         <input id="email" class="form-control checking-field" formControlName="email">
                     </div>
-                    <form-error-block [control]="form.get('email')" [formSubmitted]="submitted"
-                                      [title]="'Email'"></form-error-block>
+                    <app-form-error-block [control]="form.get('email')" [formSubmitted]="submitted"
+                                          [title]="'Email'"></app-form-error-block>
                 </div>
                 <div class="col-sm-6">
                     <label for="address" translate>user.address</label>

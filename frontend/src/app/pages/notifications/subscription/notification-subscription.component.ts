@@ -1,12 +1,12 @@
-import {Component, OnInit} from "@angular/core";
-import {ToastrService} from "ngx-toastr";
-import {LangService} from "../../../services/lang.service";
-import {Messages} from "../../../common/messages";
-import {NotificationSubscriptionService} from "../../../services/notification/notification-subscription.service";
-import {NotificationSubscriptionModel} from "./notification-subscription.model";
+import {Component, OnInit} from '@angular/core';
+import {ToastrService} from 'ngx-toastr';
+import {LangService} from '../../../services/lang.service';
+import {Messages} from '../../../common/messages';
+import {NotificationSubscriptionService} from '../../../services/notification/notification-subscription.service';
+import {NotificationSubscriptionModel} from './notification-subscription.model';
 
 @Component({
-    selector: 'az-notification-subscription',
+    selector: 'app-notification-subscription',
     templateUrl: './notification-subscription.component.html',
     styleUrls: ['./notification-subscription.component.scss']
 })
@@ -36,7 +36,7 @@ export class NotificationSubscriptionComponent implements OnInit {
             this.models.forEach((model) => {
                 model.typeModel.image = '../assets/img/notifications/' + model.typeModel.key + '.png';
             });
-        })
+        });
     }
 
     changeSubscription(event, model) {

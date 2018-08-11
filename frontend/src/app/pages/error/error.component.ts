@@ -1,16 +1,16 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
-import {ErrorService} from "../../services/error.service";
-import {Constants} from "../../common/constants";
+import {ErrorService} from '../../services/error.service';
+import {Constants} from '../../common/constants';
 
 @Component({
-    selector: 'az-error',
+    selector: 'app-error',
     encapsulation: ViewEncapsulation.None,
     templateUrl: './error.component.html'
 })
 export class ErrorComponent implements OnInit {
 
-    error:Error = null;
+    error: Error = null;
 
     constructor(private router: Router,
                 private errorService: ErrorService) {

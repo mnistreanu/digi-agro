@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {AuthService} from "./services/auth/auth.service";
-import {LangService} from "./services/lang.service";
+import {AuthService} from './services/auth/auth.service';
+import {LangService} from './services/lang.service';
 
 @Component({
-    selector: 'az-root',
+    selector: 'app-root',
     encapsulation: ViewEncapsulation.None,
     template: `<router-outlet></router-outlet>`,
     styleUrls: ['./app.component.scss']

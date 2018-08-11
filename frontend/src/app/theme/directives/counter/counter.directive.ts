@@ -1,30 +1,31 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import {AfterViewInit, Directive, ElementRef, Input} from '@angular/core';
 
-@Directive ({
-  selector: '[counter]'
+@Directive({
+    selector: '[counter]'
 })
 
-export class Counter {
-  element: any;
-  @Input() count: number;
-  @Input() interval: number;
-  @Input() increment: number;
+export class CounterDirective implements AfterViewInit {
+    element: any;
+    @Input() count: number;
+    @Input() interval: number;
+    @Input() increment: number;
 
-  constructor(_elementRef: ElementRef) {
-    this.element = jQuery(_elementRef.nativeElement);
-  }
+    constructor(_elementRef: ElementRef) {
+        this.element = jQuery(_elementRef.nativeElement);
+    }
 
-  ngAfterViewInit(): void {
-      let elem = this.element,
-          count = this.count,
-          increment = this.increment,
-          interval = this.interval;
+    ngAfterViewInit(): void {
+        const elem = this.element;
+        const increment = this.increment;
+        const interval = this.interval;
+        let count = this.count;
 
-      function counter(){
-          count = count + increment;
-          setTimeout(() => counter(), interval * 1000);          
-          elem.html(count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-      }
-      counter();
-  }
+        function counter() {
+            count = count + increment;
+            setTimeout(() => counter(), interval * 1000);
+            elem.html(count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+        }
+
+        counter();
+    }
 }

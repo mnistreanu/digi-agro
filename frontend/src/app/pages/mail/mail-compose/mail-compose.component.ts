@@ -1,8 +1,9 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 
 @Component({
-  selector: 'az-mail-compose',
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: './mail-compose.component.html'
+    selector: 'app-mail-compose',
+    encapsulation: ViewEncapsulation.None,
+    templateUrl: './mail-compose.component.html'
 })
-export class MailComposeComponent { }
+export class MailComposeComponent {
+}

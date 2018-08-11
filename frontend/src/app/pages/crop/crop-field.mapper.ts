@@ -8,12 +8,12 @@ export class CropFieldMapper {
     }
 
     public getName() {
-        let field = 'name'; // nameEn
+        const field = 'name'; // nameEn
         return field + this.lang;
     }
 
     public getDescription() {
-        let field = 'description';
+        const field = 'description';
         return field + this.lang;
     }
 }

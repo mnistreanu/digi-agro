@@ -1,16 +1,15 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs/Rx";
-import {PayloadModel} from "../../pages/payload.model";
-import {Constants} from "../../common/constants";
-import {NotificationModel} from "../../pages/notifications/notification.model";
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Rx';
+import {Constants} from '../../common/constants';
+import {NotificationModel} from '../../pages/notifications/notification.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class NotificationService {
 
-    private api: string = Constants.API_URL + "/notification";
+    private api: string = Constants.API_URL + '/notification';
 
     constructor(private http: HttpClient) {
     }
@@ -24,7 +23,7 @@ export class NotificationService {
     }
 
     see(models: NotificationModel[]): Observable<void> {
-        let ids = models.map(model => model.id);
+        const ids = models.map(model => model.id);
         return this.http.post<void>(this.api + '/see', ids);
     }
 

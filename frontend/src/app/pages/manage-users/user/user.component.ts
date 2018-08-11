@@ -1,23 +1,23 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {UserService} from "../../../services/user.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {UserAccountModel} from "./user-account.model";
-import {emailValidator} from "../../../theme/validators/email.validator";
-import {ToastrService} from "ngx-toastr";
-import {Messages} from "../../../common/messages";
-import {AuthService} from "../../../services/auth/auth.service";
-import {Authorities} from "../../../common/authorities";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UserService} from '../../../services/user.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {UserAccountModel} from './user-account.model';
+import {emailValidator} from '../../../theme/validators/email.validator';
+import {ToastrService} from 'ngx-toastr';
+import {Messages} from '../../../common/messages';
+import {AuthService} from '../../../services/auth/auth.service';
+import {Authorities} from '../../../common/authorities';
 
 @Component({
-    selector: 'az-user',
+    selector: 'app-user',
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
 
     form: FormGroup;
-    submitted: boolean = false;
+    submitted = false;
 
     model: UserAccountModel;
     isNew: boolean;
@@ -33,7 +33,7 @@ export class UserComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            let id = params['id'];
+            const id = params['id'];
 
             if (id == -1) {
                 this.prepareNewModel();
@@ -77,10 +77,10 @@ export class UserComponent implements OnInit {
     }
 
     public onUsernameChange() {
-        let control = this.form.controls.username;
+        const control = this.form.controls.username;
         this.userService.validateUsername(this.model.id || -1, control.value).subscribe((isUnique) => {
             if (!isUnique) {
-                let errors = control.errors || {};
+                const errors = control.errors || {};
                 errors.unique = !isUnique;
                 control.setErrors(errors);
             }

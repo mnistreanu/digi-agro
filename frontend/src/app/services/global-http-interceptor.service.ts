@@ -1,11 +1,8 @@
-import {Injectable} from "@angular/core";
-import {
-    HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest,
-    HttpResponse
-} from "@angular/common/http";
-import {Observable} from "rxjs/Rx";
-import {AuthService} from "./auth/auth.service";
-import {ErrorService} from "./error.service";
+import {Injectable} from '@angular/core';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs/Rx';
+import {AuthService} from './auth/auth.service';
+import {ErrorService} from './error.service';
 
 @Injectable()
 export class GlobalHttpInterceptorService implements HttpInterceptor {

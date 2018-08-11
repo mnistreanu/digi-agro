@@ -1,5 +1,5 @@
 <div class="chat-container">
-    <ul class="media-list" id="media-list" slim-scroll [slimScrollOptions]="{height: 435}">
+    <ul class="media-list" id="media-list" slimScroll [slimScrollOptions]="{height: 435}">
         <li *ngFor="let item of chatList" class="media">
             <div *ngIf="item.side=='left'" class="media-left">
                 <img class="media-object rounded-circle" src="{{item.image}}" alt="author image">

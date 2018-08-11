@@ -1,7 +1,7 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-.nav.az-navbar{
+.nav.app-navbar{
     height: 60px;
     align-items: center;
     background-color: $main-color;
@@ -129,7 +129,7 @@
 
 
 @media (max-width: 767px){ 
-    .nav.az-navbar .navbar-brand{
+    .nav.app-navbar .navbar-brand{
         width: auto;
     }
 }

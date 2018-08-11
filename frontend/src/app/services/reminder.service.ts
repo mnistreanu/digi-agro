@@ -1,14 +1,14 @@
-import {Injectable} from "@angular/core";
-import {Constants} from "../common/constants";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs/Rx";
-import {PayloadModel} from "../pages/payload.model";
-import {ReminderModel} from "../pages/reminder/reminder.model";
+import {Injectable} from '@angular/core';
+import {Constants} from '../common/constants';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Rx';
+import {PayloadModel} from '../pages/payload.model';
+import {ReminderModel} from '../pages/reminder/reminder.model';
 
 @Injectable()
 export class ReminderService {
 
-    private api: string = Constants.API_URL + "/reminder";
+    private api: string = Constants.API_URL + '/reminder';
 
     constructor(private http: HttpClient) {
     }
@@ -22,7 +22,7 @@ export class ReminderService {
     }
 
     changeEventTime(id, start, end): Observable<void> {
-        let body = {
+        const body = {
             id: id,
             start: start,
             end: end
@@ -33,7 +33,7 @@ export class ReminderService {
 
     save(event): Observable<ReminderModel> {
 
-        let model = {
+        const model = {
             id: event.id,
             workTypeId: event.workTypeId,
             title: event.title,

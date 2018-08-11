@@ -1,22 +1,22 @@
-import {Injectable} from "@angular/core";
-import {Constants} from "../common/constants";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs/Rx";
-import {BranchModel} from "../pages/manage-branches/branch/branch.model";
-import {ListItem} from "../interfaces/list-item.interface";
+import {Injectable} from '@angular/core';
+import {Constants} from '../common/constants';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Rx';
+import {BranchModel} from '../pages/manage-branches/branch/branch.model';
+import {ListItem} from '../interfaces/list-item.interface';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class BranchService {
 
-    private api: string = Constants.API_URL + "/tenant-branch";
+    private api: string = Constants.API_URL + '/tenant-branch';
 
     constructor(private http: HttpClient) {
     }
 
     validateName(id: number, name: string): Observable<boolean> {
-        let queryParams = `?id=${id}&name=${name}`;
+        const queryParams = `?id=${id}&name=${name}`;
         return this.http.get<boolean>(this.api + '/validate-name' + queryParams);
     }
 
@@ -25,7 +25,7 @@ export class BranchService {
     }
 
     find(tenantId: number): Observable<BranchModel[]> {
-        let filterModel = {
+        const filterModel = {
             tenantId: tenantId
         };
         return this.http.post<BranchModel[]>(this.api + '/find-by', filterModel);

@@ -1,16 +1,16 @@
-import {EventEmitter, Injectable} from "@angular/core";
-import {Observable} from "rxjs/Rx";
-import {Constants} from "../../common/constants";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/catch";
-import {Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
-import {Authorities} from "../../common/authorities";
-import {UserAccountModel} from "../../pages/manage-users/user/user-account.model";
-import {LangService} from "../lang.service";
-import {StorageService} from "../storage.service";
-import {AuthResponseModel} from "./auth-response.model";
-import {AuthRequestModel} from "./auth-request.model";
+import {EventEmitter, Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Rx';
+import {Constants} from '../../common/constants';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import {Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {Authorities} from '../../common/authorities';
+import {UserAccountModel} from '../../pages/manage-users/user/user-account.model';
+import {LangService} from '../lang.service';
+import {StorageService} from '../storage.service';
+import {AuthResponseModel} from './auth-response.model';
+import {AuthRequestModel} from './auth-request.model';
 
 
 @Injectable({
@@ -18,7 +18,7 @@ import {AuthRequestModel} from "./auth-request.model";
 })
 export class AuthService {
 
-    private api: string = Constants.API_URL + "/auth";
+    private api: string = Constants.API_URL + '/auth';
 
     userChanged: EventEmitter<void> = new EventEmitter();
 
@@ -35,11 +35,11 @@ export class AuthService {
     }
 
     login(model: AuthRequestModel): Observable<AuthResponseModel> {
-        return this.http.post<AuthResponseModel>(this.api + '/login', model)
+        return this.http.post<AuthResponseModel>(this.api + '/login', model);
     }
 
     finishLogin(authData: AuthResponseModel) {
-        let userData = {username: authData.username, token: authData.token, logoUrl: authData.logoUrl};
+        const userData = {username: authData.username, token: authData.token, logoUrl: authData.logoUrl};
         this.storageService.setItem(Constants.USER_DATA, JSON.stringify(userData));
         this.langService.setLanguage(authData.language);
         this.setupAuthorities(authData.authorities);
@@ -48,7 +48,7 @@ export class AuthService {
 
     setupAuthorities(authorities: string[]) {
         this.storageService.setItem(Authorities.AUTHORITY_OBJECT, '{}');
-        let authorityObject = {};
+        const authorityObject = {};
         authorities.forEach(authority => {
             authorityObject[authority] = true;
         });
@@ -67,7 +67,7 @@ export class AuthService {
     }
 
     getUsername(): string {
-        let userData = JSON.parse(this.storageService.getItem(Constants.USER_DATA));
+        const userData = JSON.parse(this.storageService.getItem(Constants.USER_DATA));
         if (userData) {
             return userData.username;
         }
@@ -83,14 +83,14 @@ export class AuthService {
     }
 
     getToken(): String {
-        let userData = JSON.parse(this.storageService.getItem(Constants.USER_DATA));
-        return userData && userData.token ? userData.token : "";
+        const userData = JSON.parse(this.storageService.getItem(Constants.USER_DATA));
+        return userData && userData.token ? userData.token : '';
     }
 
     createTokenHeader() {
-        let headers = {};
+        const headers = {};
         headers[Constants.AUTH_HEADER] = Constants.TOKEN_PREFIX + this.getToken();
-        let tenant = this.storageService.getItem(Constants.TENANT);
+        const tenant = this.storageService.getItem(Constants.TENANT);
         if (tenant) {
             headers[Constants.TENANT] = tenant;
         }
@@ -98,7 +98,7 @@ export class AuthService {
     }
 
     hasAuthority(authorityName) {
-        let authorityObject = this.storageService.getItem(Authorities.AUTHORITY_OBJECT);
+        const authorityObject = this.storageService.getItem(Authorities.AUTHORITY_OBJECT);
         return this.isAuthenticated() && JSON.parse(authorityObject)[authorityName];
     }
 
@@ -111,7 +111,7 @@ export class AuthService {
     }
 
     updateUser(model: UserAccountModel) {
-        let userData = JSON.parse(this.storageService.getItem(Constants.USER_DATA));
+        const userData = JSON.parse(this.storageService.getItem(Constants.USER_DATA));
         userData.logoUrl = model.logoUrl;
         this.storageService.setItem(Constants.USER_DATA, JSON.stringify(userData));
         this.langService.setLanguage(model.language);

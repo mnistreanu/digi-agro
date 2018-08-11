@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ToastrService} from "ngx-toastr";
-import {Messages} from "../../../common/messages";
-import {BranchModel} from "./branch.model";
-import {BranchService} from "../../../services/branch.service";
-import {ListItem} from "../../../interfaces/list-item.interface";
-import {TenantService} from "../../../services/tenant.service";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {Messages} from '../../../common/messages';
+import {BranchModel} from './branch.model';
+import {BranchService} from '../../../services/branch.service';
+import {ListItem} from '../../../interfaces/list-item.interface';
+import {TenantService} from '../../../services/tenant.service';
 
 @Component({
-  selector: 'az-branch',
-  templateUrl: './branch.component.html',
-  styleUrls: ['./branch.component.scss']
+    selector: 'app-branch',
+    templateUrl: './branch.component.html',
+    styleUrls: ['./branch.component.scss']
 })
 export class BranchComponent implements OnInit {
     form: FormGroup;
-    submitted: boolean = false;
+    submitted = false;
 
     model: BranchModel;
     isNew: boolean;
@@ -34,12 +34,11 @@ export class BranchComponent implements OnInit {
     ngOnInit() {
         this.fetchTenantListItems();
         this.route.params.subscribe(params => {
-            let id = params['id'];
+            const id = params['id'];
 
-            if (id == -1) {
+            if (id === -1) {
                 this.prepareNewModel();
-            }
-            else {
+            } else {
                 this.setupModel(id);
             }
         });
@@ -81,10 +80,10 @@ export class BranchComponent implements OnInit {
     }
 
     public onNameChange() {
-        let control = this.form.controls.name;
+        const control = this.form.controls.name;
         this.branchService.validateName(this.model.id || -1, control.value).subscribe((isUnique) => {
             if (!isUnique) {
-                let errors = control.errors || {};
+                const errors = control.errors || {};
                 errors.unique = !isUnique;
                 control.setErrors(errors);
             }
@@ -97,7 +96,7 @@ export class BranchComponent implements OnInit {
     }
 
     private fetchParentListItems() {
-        let tenant = this.form.controls['tenantId'].value;
+        const tenant = this.form.controls['tenantId'].value;
         this.branchService.fetchListItems(tenant, this.model.id).subscribe(parents => {
             parents.unshift({id: null, name: 'None'});
             this.parents = parents;

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Constants} from "../common/constants";
-import {Authorities} from "../common/authorities";
+import {Constants} from '../common/constants';
+import {Authorities} from '../common/authorities';
 
 @Injectable({
     providedIn: 'root'

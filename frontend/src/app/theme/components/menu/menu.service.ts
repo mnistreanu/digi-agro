@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {AuthService} from "../../../services/auth/auth.service";
-import {Authorities} from "../../../common/authorities";
+import {AuthService} from '../../../services/auth/auth.service';
+import {Authorities} from '../../../common/authorities';
 
 @Injectable()
 export class MenuService {
@@ -34,7 +34,7 @@ export class MenuService {
         }
 
         if (isSuperAdmin || isAdmin) {
-            menuItems.push( {
+            menuItems.push({
                 title: 'nav.users',
                 routerLink: '/pages/manage-users',
                 icon: 'fa-users',

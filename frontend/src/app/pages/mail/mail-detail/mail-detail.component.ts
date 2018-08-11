@@ -1,13 +1,11 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Mail, MailService }  from '../mail.service';
-import { Output, Input } from '@angular/core';
-import { EventEmitter } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {Mail, MailService} from '../mail.service';
 
 @Component({
-  selector: 'az-mail-detail',
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: './mail-detail.component.html'
+    selector: 'app-mail-detail',
+    encapsulation: ViewEncapsulation.None,
+    templateUrl: './mail-detail.component.html'
 })
 export class MailDetailComponent implements OnInit {
     public mail: Mail;
@@ -16,13 +14,13 @@ export class MailDetailComponent implements OnInit {
 
     constructor(private service: MailService,
                 private route: ActivatedRoute,
-                private router: Router){     
-    } 
+                private router: Router) {
+    }
 
     ngOnInit() {
         this.route.params
-        .switchMap((params: Params) => this.service.getMail(+params['id']))
-        .subscribe((mail: Mail) => this.mail = mail);
+            .switchMap((params: Params) => this.service.getMail(+params['id']))
+            .subscribe((mail: Mail) => this.mail = mail);
     }
 
     goToReply(mail): void {
@@ -33,10 +31,10 @@ export class MailDetailComponent implements OnInit {
         this.service.getMail(id).then((mail) => {
             mail.trash = true;
             mail.sent = false;
-            mail.draft = false; 
-            mail.starred = false;           
-        });        
+            mail.draft = false;
+            mail.starred = false;
+        });
         this.router.navigate(['pages/mail/mail-list/inbox']);
-    }    
+    }
 
 }

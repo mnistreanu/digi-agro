@@ -1,13 +1,13 @@
-import { ImageRendererModule } from './image-renderer.module';
+import {ImageRendererModule} from './image-renderer.module';
 
 describe('ImageRendererModule', () => {
-  let imageRendererModule: ImageRendererModule;
+    let imageRendererModule: ImageRendererModule;
 
-  beforeEach(() => {
-    imageRendererModule = new ImageRendererModule();
-  });
+    beforeEach(() => {
+        imageRendererModule = new ImageRendererModule();
+    });
 
-  it('should create an instance', () => {
-    expect(imageRendererModule).toBeTruthy();
-  });
+    it('should create an instance', () => {
+        expect(imageRendererModule).toBeTruthy();
+    });
 });

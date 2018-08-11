@@ -1,13 +1,13 @@
-import {ManageTenantsModule} from "./manage-tenants.module";
+import {ManageTenantsModule} from './manage-tenants.module';
 
 describe('ManageTenantsModule', () => {
-  let manageTenantsModule: ManageTenantsModule;
+    let manageTenantsModule: ManageTenantsModule;
 
-  beforeEach(() => {
-      manageTenantsModule = new ManageTenantsModule();
-  });
+    beforeEach(() => {
+        manageTenantsModule = new ManageTenantsModule();
+    });
 
-  it('should create an instance', () => {
-    expect(manageTenantsModule).toBeTruthy();
-  });
+    it('should create an instance', () => {
+        expect(manageTenantsModule).toBeTruthy();
+    });
 });
