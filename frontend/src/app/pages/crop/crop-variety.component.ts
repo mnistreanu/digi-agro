@@ -1,53 +1,77 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { AppConfig } from "../../app.config";
-import 'style-loader!fullcalendar/dist/fullcalendar.min.css';
-import {CropModel} from "./crop.model";
+import {Component, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from "ag-grid";
-import {ListItem} from "../../interfaces/list-item.interface";
-import {Router} from "@angular/router";
 import {CropService} from "../../services/crop.service";
-import {MultiLanguageItem} from "../../interfaces/multi-language-item.interface";
-import {EditRendererComponent} from "../../modules/aggrid/edit-renderer/edit-renderer.component";
+import {CropVarietyModel} from "./crop-variety.model";
+import {LangService} from "../../services/lang.service";
+import {CropFieldMapper} from "./crop-field.mapper";
 
 @Component({
-  selector: 'az-crop-variety',
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: './crop-variety.component.html'
+    selector: 'az-crop-variety',
+    templateUrl: './crop-variety.component.html'
 })
-export class CropVarietyComponent {
+export class CropVarietyComponent implements OnInit {
 
-    options: GridOptions;
-    context;
+    private options: GridOptions;
+    private context;
 
-    cropCategoryId;
-    treeModel: MultiLanguageItem[];
+    private labelName: string;
+    private labelDescription: string;
 
-    constructor(private router: Router,
+    private fieldMapper: CropFieldMapper;
+
+    constructor(private langService: LangService,
                 private cropService: CropService) {
     }
 
     ngOnInit() {
-        this.setupCropsTree();
+        this.fieldMapper = new CropFieldMapper(this.langService.getLanguage());
+        this.setupLabels();
         this.setupGrid();
+        this.setupCropsTree();
+    }
+
+    private setupLabels() {
+        this.langService.get('info.name').subscribe(msg => this.labelName = msg);
+        this.langService.get('info.description').subscribe(msg => this.labelDescription = msg);
     }
 
     private setupCropsTree() {
         this.cropService.findVarietiesTree().subscribe(payloadModel => {
-            this.treeModel = payloadModel.payload;
-            debugger;
-            // if (this.treeModel.length > 0) {
-            //     this.cropCategoryId = this.treeModel[0].id;
-            //     this.setupRows();
-            // }
+            this.adjustTree(payloadModel.payload);
         });
     }
 
-    public onCropCategoryChange() {
-        if (this.cropCategoryId == null) {
-            return;
-        }
-        this.setupRows();
+    private adjustTree(models: CropVarietyModel[]) {
+
+        let rows = [];
+        let categories = {};
+        let crops = {};
+
+        let parent;
+        models.forEach(model => {
+            if (model.cropCategoryId == null && model.cropId == null) {
+                // category
+                categories[model.id] = model;
+                rows.push(model);
+            }
+            else if (model.cropCategoryId != null) {
+                // crop
+                parent = categories[model.cropCategoryId];
+                parent.children = parent.children || [];
+                parent.children.push(model);
+                crops[model.id] = model;
+            }
+            else {
+                // variety
+                parent = crops[model.cropId];
+                parent.children = parent.children || [];
+                parent.children.push(model);
+            }
+        });
+
+        this.options.api.setRowData(rows);
     }
+
 
     private setupGrid() {
         this.options = <GridOptions>{};
@@ -57,43 +81,35 @@ export class CropVarietyComponent {
         this.options.enableFilter = true;
         this.options.columnDefs = this.setupHeaders();
         this.context = {componentParent: this};
-
     }
 
+    private setupHeaders() {
 
-    private setupRows() {
-        // this.cropService.findCrops(this.cropCategoryId).subscribe(payloadModel => {
-        //     let models = payloadModel.payload;
-        //     models = this.adjustTreeModels(models);
-        //     this.options.api.setRowData(models);
-        // })
-    }
+        let headers: ColDef[] = [
+            {
+                headerName: this.labelName,
+                field: this.fieldMapper.getName(),
+                cellRenderer: "agGroupCellRenderer",
+                width: 200,
+                minWidth: 200
+            },
+            {
+                headerName: this.labelDescription,
+                field: this.fieldMapper.getDescription(),
+                width: 200,
+                minWidth: 200
+            }
+        ];
 
-    private adjustTreeModels(models: CropModel[]) {
-        let treeModels = [];
-        let modelMap = {};
-        for (let model of models) {
-            modelMap[model.id] = model;
-            if (model.cropCategoryId == null) {
-                treeModels.push(model);
-            }
-            else {
-                let category = modelMap[model.cropCategoryId];
-                if (!category.participants) {
-                    category.participants = [];
-                }
-                category.participants.push(model);
-            }
-        }
-        return treeModels;
+        return headers;
     }
 
     private getNodeChildDetails(rowItem) {
-        if (rowItem.participants) {
+        if (rowItem.children) {
             return {
                 group: true,
                 expanded: false,
-                children: rowItem.participants,
+                children: rowItem.children,
                 key: rowItem.group
             };
         }
@@ -107,51 +123,10 @@ export class CropVarietyComponent {
     }
 
     public adjustGridSize() {
-        setTimeout(() => {this.options.api.sizeColumnsToFit();}, 500);
+        setTimeout(() => {
+            this.options.api.sizeColumnsToFit();
+        }, 500);
     }
 
-    public add() {
-        // this.router.navigate(['/pages/manage-branches/branch/-1']);
-    }
-
-    public onEdit(node) {
-        // let model = node.data;
-        // this.router.navigate(['/pages/manage-branches/branch/' + model.id]);
-    }
-
-
-    private setupHeaders() {
-
-        let headers: ColDef[] = [
-            {
-                field: 'edit',
-                width: 24,
-                minWidth: 24,
-                maxWidth: 30,
-                editable: false,
-                suppressResize: true,
-                suppressMenu: true,
-                cellRendererFramework: EditRendererComponent,
-                cellStyle: () => {return {padding: 0};}
-            },
-            {
-                headerName: 'Name',
-                field: 'nameRo',
-                width: 200,
-                minWidth: 200,
-                cellRenderer: "agGroupCellRenderer"
-            },
-            {
-                headerName: 'Name',
-                field: 'nameRu',
-                width: 200,
-                minWidth: 200,
-                cellRenderer: "agGroupCellRenderer"
-            },
-
-        ];
-
-        return headers;
-    }
 
 }

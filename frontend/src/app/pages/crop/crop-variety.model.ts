@@ -1,7 +1,14 @@
 export class CropVarietyModel {
 
-    id: number;
+
+    cropCategoryId: number;
     cropId: number;
-    nameRo:string;
+    id: number;
+
+    nameRo: string;
     nameRu: string;
+    descriptionRo: string;
+    descriptionRu: string;
+
+    children: CropVarietyModel[];
 }
