@@ -20,9 +20,11 @@
 	},
 	"forecast": {
 		"additional_info": "Informații suplimnetare",
+		"currency": "Monedă",
 		"harvesting_year": "Anul recoltei",
 		"name": "Denumire prognoză",
-		"quantity_hectar": "Cantitatea la hectar",
+		"harvest": "Recoltă",
+		"hectar": "hectar",
 		"unit_of_measure": "Unitatea de măsură",
 		"selling_price": "Preț de vînzare"
 	},
@@ -123,9 +125,12 @@
 		"parent": "Părinte"
 	},
 	"unit-of-measure": {
+		"eur": "Euro",
 		"kg": "Kg",
 		"l": "Litru",
+		"mdl": "Lei",
 		"q": "Chintal",
+		"ron": "Lei",
 		"t": "Tonă"
 	},
 	"user": {

@@ -16,9 +16,9 @@ public class ForecastSnapshot {
     @Column(name = "forecast_id")
     private Long forecastId;
 
-    @Column(name = "quantity_hectar")
-    private Double quantityHectar;
-
+//    @Column(name = "quantity_hectar")
+//    private Double quantityHectar;
+//
     @Column(name = "unit_of_measure")
     private String unitOfMeasure;
 
@@ -44,13 +44,13 @@ public class ForecastSnapshot {
         this.forecastId = forecastId;
     }
 
-    public Double getQuantityHectar() {
-        return quantityHectar;
-    }
-
-    public void setQuantityHectar(Double quantityHectar) {
-        this.quantityHectar = quantityHectar;
-    }
+//    public Double getQuantityHectar() {
+//        return quantityHectar;
+//    }
+//
+//    public void setQuantityHectar(Double quantityHectar) {
+//        this.quantityHectar = quantityHectar;
+//    }
 
     public String getUnitOfMeasure() {
         return unitOfMeasure;

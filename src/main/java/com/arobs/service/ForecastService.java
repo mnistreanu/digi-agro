@@ -69,14 +69,13 @@ public class ForecastService implements HasRepository<ForecastRepository> {
 
     @Transactional(rollbackOn = Exception.class)
     public void create(ForecastModel model, Long tenantId) {
+        Date createdAt = new Date();
 
         Forecast forecast = new Forecast();
         forecast.setTenantId(tenantId);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        forecast.setHarvestingYear(calendar.get(Calendar.YEAR));
-        forecast.setCreatedAt(calendar.getTime());
+        forecast.setHarvestingYear(model.getHarvestingYear());
+        forecast.setCreatedAt(createdAt);
         forecast.setCreatedBy(authService.getCurrentUser().getId());
 
         forecast.setCropId(model.getCropId());
@@ -87,40 +86,51 @@ public class ForecastService implements HasRepository<ForecastRepository> {
 
         forecast = saveForecast(forecast);
 
-        createSnapshot(forecast.getId(), model, calendar.getTime());
+        createSnapshot(forecast.getId(), model, createdAt);
     }
 
     @Transactional
-    public void createSnapshot(Long forecastId, ForecastModel forecastModel, Date date) {
+    public void createSnapshot(Long forecastId, ForecastModel forecastModel, Date createdAt) {
         ForecastSnapshot lastSnapshot = getLastSnapshot(forecastId);
 
-        ForecastSnapshot snapshot = new ForecastSnapshot();
+        ForecastSnapshot newSnapshot = new ForecastSnapshot();
 
         if (lastSnapshot == null) {
-            snapshot.setForecastId(forecastId);
-
-            // todo: may be need come from model
-            snapshot.setUnitOfMeasure("tone");
+            newSnapshot.setForecastId(forecastId);
         }
         else {
-            BeanUtils.copyProperties(lastSnapshot, snapshot);
-            snapshot.setId(null);
+            BeanUtils.copyProperties(lastSnapshot, newSnapshot);
+            newSnapshot.setId(null);
         }
 
-        snapshot.setUnitPrice(forecastModel.getUnitPrice());
-        snapshot.setCreatedAt(date);
+        newSnapshot.setUnitOfMeasure(forecastModel.getUnitOfMeasure());
+        newSnapshot.setUnitPrice(forecastModel.getUnitPrice());
+//        newSnapshot.setQuantityHectar(forecastModel.getQuantityHectar());
+        newSnapshot.setCreatedAt(createdAt);
 
-        snapshot = saveSnapshot(snapshot);
+        newSnapshot = saveSnapshot(newSnapshot);
 
         List<ForecastParcel> forecastParcels = new ArrayList<>();
         for (Long parcelId : forecastModel.getParcels()) {
             ForecastParcel fp = new ForecastParcel();
-            fp.setForecastSnapshotId(snapshot.getId());
+            fp.setForecastSnapshotId(newSnapshot.getId());
             fp.setParcelId(parcelId);
             forecastParcels.add(fp);
         }
 
-        saveForecastParcels(forecastParcels);
+        this.saveForecastParcels(forecastParcels);
+
+        /**
+         * Salveaza in BD prognoza initiala
+         */
+        ForecastHarvest fh = new ForecastHarvest();
+        fh.setForecastSnapshotId(newSnapshot.getId());
+        fh.setCreatedAt(createdAt);
+        fh.setCreatedBy(authService.getCurrentUser().getId());
+        fh.setFactorName("Prognoza initiala");
+        fh.setQuantity(forecastModel.getQuantityHectar());
+
+        this.saveForecastHarvest(fh);
     }
 
     private ForecastSnapshot getLastSnapshot(Long forecastId) {
@@ -142,4 +152,8 @@ public class ForecastService implements HasRepository<ForecastRepository> {
         return forecastParcelRepository.save(items);
     }
 
+    @Transactional
+    public ForecastHarvest saveForecastHarvest(ForecastHarvest item) {
+        return harvestRepository.save(item);
+    }
 }

@@ -20,9 +20,11 @@
 	},
 	"forecast": {
 		"additional_info": "Additional information",
+		"currency": "Currency",
 		"harvesting_year": "Harvesting year",
 		"name": "Forecast name",
-		"quantity_hectar": "Quantity/hectar",
+		"harvest": "Harvest",
+		"hectar": "hectar",
 		"unit_of_measure": "Unit of measure",
 		"selling_price": "Selling price"
 	},
@@ -123,9 +125,12 @@
 		"parent": "Parent"
 	},
 	"unit-of-measure": {
+		"eur": "EUR",
 		"kg": "Kg",
 		"l": "Litre",
+		"mdl": "Lei",
 		"q": "Quintal",
+		"ron": "Lei",
 		"t": "Ton"
 	},
 	"user": {

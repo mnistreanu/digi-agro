@@ -105,13 +105,21 @@
                             <textarea class="form-control"
                                       formControlName="description">
                             </textarea>
-                            <!--<form-error-block [control]="form.get('description')"-->
-                                              <!--[formSubmitted]="formSubmitted">-->
-                            <!--</form-error-block>-->
+                            <form-error-block [control]="form.get('description')"
+                                              [formSubmitted]="formSubmitted">
+                            </form-error-block>
                         </div>
                     </div>
 
                     <div class="form-group row text-sm-right">
+                        <label class="col-sm-3 form-control-label m-t-5" translate><span translate>forecast.harvest</span> / <span translate>forecast.hectar</span> </label>
+                        <div class="col-sm-3 text-left">
+                            <input class="form-control checking-field" type="number" formControlName="quantityHectar">
+                            <form-error-block [control]="form.get('quantityHectar')"
+                                              [formSubmitted]="formSubmitted">
+                            </form-error-block>
+                        </div>
+
                         <label class="col-sm-3 form-control-label m-t-5" translate>forecast.unit_of_measure</label>
                         <div class="col-sm-3 text-left">
                             <select class="form-control checking-field" formControlName="unitOfMeasure">
@@ -135,10 +143,15 @@
                             </form-error-block>
                         </div>
 
-                        <label class="col-sm-3 form-control-label m-t-5" translate>forecast.quantity_hectar</label>
+                        <label class="col-sm-3 form-control-label m-t-5" translate>forecast.currency</label>
                         <div class="col-sm-3 text-left">
-                            <input class="form-control checking-field" type="number" formControlName="quantityHectar">
-                            <form-error-block [control]="form.get('quantityHectar')"
+                            <select class="form-control checking-field" formControlName="currency">
+                                <option value="mdl" translate>unit-of-measure.mdl</option>
+                                <option value="eur" translate>unit-of-measure.eur</option>
+                                <option value="ron" translate>unit-of-measure.ron</option>
+                            </select>
+
+                            <form-error-block [control]="form.get('currency')"
                                               [formSubmitted]="formSubmitted">
                             </form-error-block>
                         </div>
