@@ -6,14 +6,6 @@
 		"remove": "Ștergere",
 		"save": "Salvare"
 	},
-	"reminder": {
-		"enter-new-event": "Doar introduceți numele evenimentului",
-		"event": "Activitate",
-		"event-description": "Descrierea",
-		"event-title": "Denumirea",
-		"event-type": "Tipul lucrării agricole",
-		"title": "Agenda lucrărilor agricole"
-	},
 	"auth": {
 		"login": "Logare",
 		"logout": "Ieșire"
@@ -27,9 +19,12 @@
 		"variety": "Soi"
 	},
 	"forecast": {
-		"description": "Informații suplimnetare",
+		"additional_info": "Informații suplimnetare",
+		"harvesting_year": "Anul recoltei",
 		"name": "Denumire prognoză",
-		"price": "Preț unitar"
+		"quantity_hectar": "Cantitatea la hectar",
+		"unit_of_measure": "Unitatea de măsură",
+		"selling_price": "Preț de vînzare"
 	},
 	"general": {
 		"form": "Forma",
@@ -58,7 +53,6 @@
 		"сonsumption": "Consum"
 	},
 	"nav": {
-		"work-agenda": "Agenda lucrărilor",
 		"branches": "Subdiviziuni",
 		"brands": "Brands",
 		"costs-forecasting": "Prognoză costuri",
@@ -78,7 +72,8 @@
 		"tasks": "Sarcini",
 		"telemetry": "Telemetrie",
 		"tenants": "Clienți",
-		"users": "Utilizatori"
+		"users": "Utilizatori",
+		"work-agenda": "Agenda lucrărilor"
 	},
 	"notification": {
 		"mark-all-as-read": "Marcheaza toate ca fiind citite",
@@ -103,6 +98,14 @@
 		"name": "Nume",
 		"parcels": "Parcele"
 	},
+	"reminder": {
+		"enter-new-event": "Doar introduceți numele evenimentului",
+		"event": "Activitate",
+		"event-description": "Descrierea",
+		"event-title": "Denumirea",
+		"event-type": "Tipul lucrării agricole",
+		"title": "Agenda lucrărilor agricole"
+	},
 	"response": {
 		"added": "A fost adăugat",
 		"removed": "A fost șters",
@@ -118,6 +121,12 @@
 	},
 	"tree": {
 		"parent": "Părinte"
+	},
+	"unit-of-measure": {
+		"kg": "Kg",
+		"l": "Litru",
+		"q": "Chintal",
+		"t": "Tonă"
 	},
 	"user": {
 		"account-information": "Informații despre cont",

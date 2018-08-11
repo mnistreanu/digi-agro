@@ -74,11 +74,14 @@ export class ForecastHarvestComponent implements OnInit {
         this.form = this.formBuilder.group({
             parcels: [null, Validators.required],
             forecastName: [null, Validators.compose([Validators.required, Validators.maxLength(256)])],
+            harvestingYear: [null, Validators.required],
             cropCategoryId: [null, Validators.required],
             cropId: [null, Validators.required],
             cropVarietyId: [null],
             description: [null, Validators.compose([Validators.required, Validators.maxLength(1024)])],
-            unitPrice: [null]
+            unitPrice: [null, Validators.required],
+            unitOfMeasure: [null, Validators.required],
+            quantityHectar: [null, Validators.required]
         });
     }
 

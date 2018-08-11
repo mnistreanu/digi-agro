@@ -6,14 +6,6 @@
 		"remove": "Удалить",
 		"save": "Сохранить"
 	},
-	"reminder": {
-		"enter-new-event": "Просто введите название события",
-		"event": "Задача",
-		"event-description": "Описание",
-		"event-title": "Название",
-		"event-type": "Тип сельскохозяйственной работы",
-		"title": "План сельскохозяйственных работ"
-	},
 	"auth": {
 		"login": "Вход",
 		"logout": "Выход"
@@ -27,9 +19,12 @@
 		"variety": "Сорт"
 	},
 	"forecast": {
-		"description": "Дополнительная информация",
+		"additional_info": "Дополнительная информация",
+		"harvesting_year": "Год сбора урожая",
 		"name": "Название прогноза",
-		"price": "Цена"
+		"quantity_hectar": "Количество на гектар",
+		"unit_of_measure": "Единица измерения",
+		"selling_price": "Цена при продажи"
 	},
 	"general": {
 		"form": "Форма",
@@ -58,7 +53,6 @@
 		"сonsumption": "Расход"
 	},
 	"nav": {
-		"work-agenda": "Повестка работ",
 		"branches": "Подразделения",
 		"brands": "Бренды",
 		"costs-forecasting": "Прогнозирование затрат",
@@ -78,7 +72,8 @@
 		"tasks": "Задания",
 		"telemetry": "Телеметрия",
 		"tenants": "Клиенты",
-		"users": "Пользователями"
+		"users": "Пользователями",
+		"work-agenda": "Повестка работ"
 	},
 	"notification": {
 		"mark-all-as-read": "Отметить все как прочитанные",
@@ -103,6 +98,14 @@
 		"name": "Имя",
 		"parcels": "Участки"
 	},
+	"reminder": {
+		"enter-new-event": "Просто введите название события",
+		"event": "Задача",
+		"event-description": "Описание",
+		"event-title": "Название",
+		"event-type": "Тип сельскохозяйственной работы",
+		"title": "План сельскохозяйственных работ"
+	},
 	"response": {
 		"added": "Добавлен",
 		"removed": "Удалено",
@@ -118,6 +121,12 @@
 	},
 	"tree": {
 		"parent": "Родитель"
+	},
+	"unit-of-measure": {
+		"kg": "Кг",
+		"l": "Литр",
+		"q": "Центнер",
+		"t": "Тонна"
 	},
 	"user": {
 		"account-information": "Информация об аккаунте",

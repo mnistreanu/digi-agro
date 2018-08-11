@@ -96,7 +96,7 @@ export class CropVarietyComponent implements OnInit {
             {
                 headerName: this.labelDescription,
                 field: this.fieldMapper.getDescription(),
-                width: 200,
+                width: 600,
                 minWidth: 200
             }
         ];

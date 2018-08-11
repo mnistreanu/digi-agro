@@ -6,14 +6,6 @@
 		"remove": "Remove",
 		"save": "Save"
 	},
-	"reminder": {
-		"enter-new-event": "Just enter event name to create a new one",
-		"event": "Event",
-		"event-description": "Description",
-		"event-title": "Title",
-		"event-type": "Type of work",
-		"title": "Agenda of agricultural works"
-	},
 	"auth": {
 		"login": "Login",
 		"logout": "Logout"
@@ -27,9 +19,12 @@
 		"variety": "Variety"
 	},
 	"forecast": {
-		"description": "Additional information",
+		"additional_info": "Additional information",
+		"harvesting_year": "Harvesting year",
 		"name": "Forecast name",
-		"price": "Price"
+		"quantity_hectar": "Quantity/hectar",
+		"unit_of_measure": "Unit of measure",
+		"selling_price": "Selling price"
 	},
 	"general": {
 		"form": "Form",
@@ -58,7 +53,6 @@
 		"сonsumption": "Consumption"
 	},
 	"nav": {
-		"work-agenda": "Work agenda",
 		"branches": "Branches",
 		"brands": "Brands",
 		"costs-forecasting": "Costs forecasting",
@@ -78,7 +72,8 @@
 		"tasks": "Tasks",
 		"telemetry": "Telemetry",
 		"tenants": "Tenants",
-		"users": "Users"
+		"users": "Users",
+		"work-agenda": "Work agenda"
 	},
 	"notification": {
 		"mark-all-as-read": "Mark All as Read",
@@ -103,6 +98,14 @@
 		"name": "Name",
 		"parcels": "Parcels"
 	},
+	"reminder": {
+		"enter-new-event": "Just enter event name to create a new one",
+		"event": "Event",
+		"event-description": "Description",
+		"event-title": "Title",
+		"event-type": "Type of work",
+		"title": "Agenda of agricultural works"
+	},
 	"response": {
 		"added": "Added",
 		"removed": "Removed",
@@ -118,6 +121,12 @@
 	},
 	"tree": {
 		"parent": "Parent"
+	},
+	"unit-of-measure": {
+		"kg": "Kg",
+		"l": "Litre",
+		"q": "Quintal",
+		"t": "Ton"
 	},
 	"user": {
 		"account-information": "Account Information",

@@ -4,11 +4,11 @@
             <div class="card-header">
                 <span translate>nav.harvesting-forecasting</span>
                 <div class="widget-controls">
-                    <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
-                    <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
+                    <!--<a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>-->
+                    <!--<a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>-->
                     <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
                     <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>
-                    <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+                    <!--<a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>-->
                 </div>
             </div>
             <div class="card-body widget-body">
@@ -33,7 +33,7 @@
 
                     <div class="form-group row text-sm-right">
                         <label class="col-sm-3 form-control-label m-t-5" translate>crop.category</label>
-                        <div class="col-sm-9 text-left">
+                        <div class="col-sm-3 text-left">
                             <div class="form-group">
                                 <select id="crop-category" class="form-control custom-select"
                                         (change)="onCropCategoryChange()"
@@ -47,11 +47,9 @@
                                 </form-error-block>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-group row text-sm-right">
                         <label class="col-sm-3 form-control-label m-t-5" translate>crop.name</label>
-                        <div class="col-sm-9 text-left">
+                        <div class="col-sm-3 text-left">
                             <div class="form-group">
                                 <select id="crop-name" class="form-control custom-select"
                                         (change)="onCropChange()"
@@ -67,9 +65,17 @@
                         </div>
                     </div>
 
-                    <div class="form-group row text-sm-right" *ngIf="cropVarieties && cropVarieties.length > 0">
-                        <label class="col-sm-3 form-control-label m-t-5" translate>crop.variety</label>
-                        <div class="col-sm-9 text-left">
+                    <div class="form-group row text-sm-right" >
+                        <label class="col-sm-3 form-control-label m-t-5" translate>forecast.harvesting_year</label>
+                        <div class="col-sm-3 text-left">
+                            <input class="form-control checking-field" type="number" formControlName="harvestingYear">
+                            <form-error-block [control]="form.get('harvestingYear')"
+                                              [formSubmitted]="formSubmitted">
+                            </form-error-block>
+                        </div>
+
+                        <label class="col-sm-3 form-control-label m-t-5" *ngIf="cropVarieties && cropVarieties.length > 0" translate>crop.variety</label>
+                        <div class="col-sm-3 text-left" *ngIf="cropVarieties && cropVarieties.length > 0">
                             <select id="crop-variety" class="form-control custom-select"
                                     formControlName="cropVarietyId">
                                 <option selected></option>
@@ -94,21 +100,47 @@
                     </div>
 
                     <div class="form-group row text-sm-right">
-                        <label class="col-sm-3 form-control-label m-t-5" translate>forecast.description</label>
+                        <label class="col-sm-3 form-control-label m-t-5" translate>forecast.additional_info</label>
                         <div class="col-sm-9 text-left">
-                            <textarea class="form-control checking-field"
+                            <textarea class="form-control"
                                       formControlName="description">
                             </textarea>
-                            <form-error-block [control]="form.get('description')"
+                            <!--<form-error-block [control]="form.get('description')"-->
+                                              <!--[formSubmitted]="formSubmitted">-->
+                            <!--</form-error-block>-->
+                        </div>
+                    </div>
+
+                    <div class="form-group row text-sm-right">
+                        <label class="col-sm-3 form-control-label m-t-5" translate>forecast.unit_of_measure</label>
+                        <div class="col-sm-3 text-left">
+                            <select class="form-control checking-field" formControlName="unitOfMeasure">
+                                <option value="t" translate>unit-of-measure.t</option>
+                                <option value="q" translate>unit-of-measure.q</option>
+                                <option value="kg" translate>unit-of-measure.kg</option>
+                            </select>
+
+                            <form-error-block [control]="form.get('unitOfMeasure')"
                                               [formSubmitted]="formSubmitted">
                             </form-error-block>
                         </div>
                     </div>
 
                     <div class="form-group row text-sm-right">
-                        <label class="col-sm-3 form-control-label m-t-5" translate>forecast.price</label>
-                        <div class="col-sm-9 text-left">
+                        <label class="col-sm-3 form-control-label m-t-5" translate>forecast.selling_price</label>
+                        <div class="col-sm-3 text-left">
                             <input class="form-control checking-field" type="number" formControlName="unitPrice">
+                            <form-error-block [control]="form.get('unitPrice')"
+                                              [formSubmitted]="formSubmitted">
+                            </form-error-block>
+                        </div>
+
+                        <label class="col-sm-3 form-control-label m-t-5" translate>forecast.quantity_hectar</label>
+                        <div class="col-sm-3 text-left">
+                            <input class="form-control checking-field" type="number" formControlName="quantityHectar">
+                            <form-error-block [control]="form.get('quantityHectar')"
+                                              [formSubmitted]="formSubmitted">
+                            </form-error-block>
                         </div>
                     </div>
 
