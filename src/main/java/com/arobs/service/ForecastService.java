@@ -121,7 +121,7 @@ public class ForecastService implements HasRepository<ForecastRepository> {
         this.saveForecastParcels(forecastParcels);
 
         /**
-         * Salveaza in BD prognoza initiala
+         * Salveaza in baza de date prognoza initiala
          */
         ForecastHarvest fh = new ForecastHarvest();
         fh.setForecastSnapshotId(newSnapshot.getId());

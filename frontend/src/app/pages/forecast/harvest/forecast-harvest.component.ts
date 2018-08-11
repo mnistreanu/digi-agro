@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CropService} from '../../../services/crop.service';
 import {CropCategoryModel} from '../../crop/crop-category.model';
@@ -9,7 +10,6 @@ import {ParcelService} from '../../../services/parcel.service';
 import {LangService} from '../../../services/lang.service';
 import {ToastrService} from 'ngx-toastr';
 import {Messages} from '../../../common/messages';
-import {Router} from '@angular/router';
 import {ForecastService} from '../../../services/forecast.service';
 import {ForecastModel} from '../forecast.model';
 
