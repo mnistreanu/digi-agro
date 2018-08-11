@@ -73,10 +73,9 @@ public class ForecastService implements HasRepository<ForecastRepository> {
         Forecast forecast = new Forecast();
         forecast.setTenantId(tenantId);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        forecast.setHarvestingYear(calendar.get(Calendar.YEAR));
-        forecast.setCreatedAt(calendar.getTime());
+        Date now = new Date();
+        forecast.setHarvestingYear(model.getHarvestingYear());
+        forecast.setCreatedAt(now);
         forecast.setCreatedBy(authService.getCurrentUser().getId());
 
         forecast.setCropId(model.getCropId());
@@ -87,7 +86,7 @@ public class ForecastService implements HasRepository<ForecastRepository> {
 
         forecast = saveForecast(forecast);
 
-        createSnapshot(forecast.getId(), model, calendar.getTime());
+        createSnapshot(forecast.getId(), model, now);
     }
 
     @Transactional
@@ -98,16 +97,15 @@ public class ForecastService implements HasRepository<ForecastRepository> {
 
         if (lastSnapshot == null) {
             snapshot.setForecastId(forecastId);
-
-            // todo: may be need come from model
-            snapshot.setUnitOfMeasure("tone");
         }
         else {
             BeanUtils.copyProperties(lastSnapshot, snapshot);
             snapshot.setId(null);
         }
 
+        snapshot.setUnitOfMeasure(forecastModel.getUnitOfMeasure());
         snapshot.setUnitPrice(forecastModel.getUnitPrice());
+        snapshot.setQuantityHectar(forecastModel.getQuantityHectar());
         snapshot.setCreatedAt(date);
 
         snapshot = saveSnapshot(snapshot);

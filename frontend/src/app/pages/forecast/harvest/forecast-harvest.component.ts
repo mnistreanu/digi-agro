@@ -145,8 +145,6 @@ export class ForecastHarvestComponent implements OnInit {
             return;
         }
 
-        // todo: save unit of measure
-
         const forecastModel = new ForecastModel();
         Object.assign(forecastModel, this.form.value);
 

@@ -13,7 +13,11 @@ public class ForecastModel {
     private String forecastName;
     private String description;
 
+    private Integer harvestingYear;
+
+    private String unitOfMeasure;
     private Double unitPrice;
+    private Double quantityHectar;
 
     public List<Long> getParcels() {
         return parcels;
@@ -69,5 +73,29 @@ public class ForecastModel {
 
     public void setUnitPrice(Double unitPrice) {
         this.unitPrice = unitPrice;
+    }
+
+    public String getUnitOfMeasure() {
+        return unitOfMeasure;
+    }
+
+    public void setUnitOfMeasure(String unitOfMeasure) {
+        this.unitOfMeasure = unitOfMeasure;
+    }
+
+    public Double getQuantityHectar() {
+        return quantityHectar;
+    }
+
+    public void setQuantityHectar(Double quantityHectar) {
+        this.quantityHectar = quantityHectar;
+    }
+
+    public Integer getHarvestingYear() {
+        return harvestingYear;
+    }
+
+    public void setHarvestingYear(Integer harvestingYear) {
+        this.harvestingYear = harvestingYear;
     }
 }

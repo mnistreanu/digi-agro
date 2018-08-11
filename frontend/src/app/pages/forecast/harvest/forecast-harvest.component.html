@@ -69,9 +69,9 @@
                         <label class="col-sm-3 form-control-label m-t-5" translate>forecast.harvesting_year</label>
                         <div class="col-sm-3 text-left">
                             <input class="form-control checking-field" type="number" formControlName="harvestingYear">
-                            <form-error-block [control]="form.get('harvestingYear')"
+                            <app-form-error-block [control]="form.get('harvestingYear')"
                                               [formSubmitted]="formSubmitted">
-                            </form-error-block>
+                            </app-form-error-block>
                         </div>
 
                         <label class="col-sm-3 form-control-label m-t-5" *ngIf="cropVarieties && cropVarieties.length > 0" translate>crop.variety</label>
@@ -120,9 +120,9 @@
                                 <option value="kg" translate>unit-of-measure.kg</option>
                             </select>
 
-                            <form-error-block [control]="form.get('unitOfMeasure')"
+                            <app-form-error-block [control]="form.get('unitOfMeasure')"
                                               [formSubmitted]="formSubmitted">
-                            </form-error-block>
+                            </app-form-error-block>
                         </div>
                     </div>
 
@@ -130,17 +130,17 @@
                         <label class="col-sm-3 form-control-label m-t-5" translate>forecast.selling_price</label>
                         <div class="col-sm-3 text-left">
                             <input class="form-control checking-field" type="number" formControlName="unitPrice">
-                            <form-error-block [control]="form.get('unitPrice')"
+                            <app-form-error-block [control]="form.get('unitPrice')"
                                               [formSubmitted]="formSubmitted">
-                            </form-error-block>
+                            </app-form-error-block>
                         </div>
 
                         <label class="col-sm-3 form-control-label m-t-5" translate>forecast.quantity_hectar</label>
                         <div class="col-sm-3 text-left">
                             <input class="form-control checking-field" type="number" formControlName="quantityHectar">
-                            <form-error-block [control]="form.get('quantityHectar')"
+                            <app-form-error-block [control]="form.get('quantityHectar')"
                                               [formSubmitted]="formSubmitted">
-                            </form-error-block>
+                            </app-form-error-block>
                         </div>
                     </div>
 

@@ -8,5 +8,9 @@ export class ForecastModel {
     forecastName: string;
     description: string;
 
+    harvestingYear: number;
+
+    unitOfMeasure: string;
     unitPrice: number;
+    quantityHectar: number;
 }
