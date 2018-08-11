@@ -5,5 +5,5 @@ export interface MyForm {
     email: string;
     password: string;
     confirmPassword: string;
-    website: string;   
+    website: string;
 }

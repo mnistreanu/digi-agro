@@ -1,9 +1,9 @@
 import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {ParcelService} from "../../../services/parcel.service";
-import {ParcelModel} from "../parcel.model";
+import {ParcelService} from '../../../services/parcel.service';
+import {ParcelModel} from '../parcel.model';
 
 @Component({
-    selector: 'az-telemetry-map',
+    selector: 'app-telemetry-map',
     templateUrl: './telemetry-map.component.html',
     styleUrls: ['./telemetry-map.component.scss']
 })
@@ -35,7 +35,7 @@ export class TelemetryMapComponent implements OnInit, OnChanges {
 
     private setupCenter() {
         if (this.polylinePath && this.polylinePath.length > 0) {
-            let first = this.polylinePath[0];
+            const first = this.polylinePath[0];
             this.center = first.lat + ',' + first.lng;
         }
         else {
@@ -50,7 +50,7 @@ export class TelemetryMapComponent implements OnInit, OnChanges {
                 parcel.fillColor = this.randomColor();
                 parcel.paths = [];
                 parcel.coordinates.forEach((c) => {
-                    let latLng = {
+                    const latLng = {
                         lat: c[0],
                         lng: c[1]
                     };

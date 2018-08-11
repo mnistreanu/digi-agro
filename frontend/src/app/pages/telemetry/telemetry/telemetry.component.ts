@@ -1,9 +1,9 @@
-import {Component, OnInit} from "@angular/core";
-import {MapEventModel} from "../map-events/map-event.model";
-import {MachineTelemetryModel} from "../machine-telemetry/machine-telemetry.model";
+import {Component, OnInit} from '@angular/core';
+import {MapEventModel} from '../map-events/map-event.model';
+import {MachineTelemetryModel} from '../machine-telemetry/machine-telemetry.model';
 
 @Component({
-    selector: 'az-telemetry',
+    selector: 'app-telemetry',
     templateUrl: './telemetry.component.html',
     styleUrls: ['./telemetry.component.scss']
 })

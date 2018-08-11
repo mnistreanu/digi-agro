@@ -1,20 +1,20 @@
-import { Directive, ElementRef } from '@angular/core';
+import {Directive, ElementRef, OnInit} from '@angular/core';
 import 'metrojs/release/MetroJs.Full/MetroJs';
 
-@Directive ({
-  selector: '[live-tile]'
+@Directive({
+    selector: '[live-tile]'
 })
 
-export class LiveTile {
-  $el: any;
+export class LiveTileDirective implements OnInit {
+    $el: any;
 
-  constructor(el: ElementRef) {
-    this.$el = jQuery(el.nativeElement);
-  }
+    constructor(el: ElementRef) {
+        this.$el = jQuery(el.nativeElement);
+    }
 
-  ngOnInit(): void {
-    this.$el
-      .css('height', this.$el.data('height'))
-      .liveTile();
-  }
+    ngOnInit(): void {
+        this.$el
+            .css('height', this.$el.data('height'))
+            .liveTile();
+    }
 }

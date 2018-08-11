@@ -1,13 +1,14 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {EditRendererComponent} from "./edit-renderer.component";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {EditRendererComponent} from './edit-renderer.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-  ],
-  declarations: [EditRendererComponent],
-  exports: [EditRendererComponent]
+    imports: [
+        CommonModule,
+    ],
+    declarations: [EditRendererComponent],
+    exports: [EditRendererComponent]
 })
 
-export class EditRendererModule { }
+export class EditRendererModule {
+}

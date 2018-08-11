@@ -35,14 +35,14 @@
                                     [ngValue]="workType.id">{{workType.nameRo}}
                             </option>
                         </select>
-                        <form-error-block [control]="eventForm.get('workTypeId')" [formSubmitted]="formSubmitted">
-                        </form-error-block>
+                        <app-form-error-block [control]="eventForm.get('workTypeId')" [formSubmitted]="formSubmitted">
+                        </app-form-error-block>
                     </div>
                     <div class="form-group">
                         <label for="work-type" translate>reminder.event-title</label>
                         <input class="form-control" formControlName="title">
-                        <form-error-block [control]="eventForm.get('title')" [formSubmitted]="formSubmitted"
-                                          [title]="'agro-task-calendar.event-title'"></form-error-block>
+                        <app-form-error-block [control]="eventForm.get('title')" [formSubmitted]="formSubmitted"
+                                              [title]="'agro-task-calendar.event-title'"></app-form-error-block>
                     </div>
                     <div class="form-group">
                         <label for="work-type" translate>reminder.event-description</label>

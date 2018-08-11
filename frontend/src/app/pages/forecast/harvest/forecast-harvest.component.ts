@@ -1,27 +1,27 @@
-import {Component, OnInit} from "@angular/core";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {CropService} from "../../../services/crop.service";
-import {CropCategoryModel} from "../../crop/crop-category.model";
-import {CropModel} from "../../crop/crop.model";
-import {CropVarietyModel} from "../../crop/crop-variety.model";
-import {IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts} from "angular-2-dropdown-multiselect";
-import {ParcelService} from "../../../services/parcel.service";
-import {LangService} from "../../../services/lang.service";
-import {ToastrService} from "ngx-toastr";
-import {Messages} from "../../../common/messages";
-import {Router} from "@angular/router";
-import {ForecastService} from "../../../services/forecast.service";
-import {ForecastModel} from "../forecast.model";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CropService} from '../../../services/crop.service';
+import {CropCategoryModel} from '../../crop/crop-category.model';
+import {CropModel} from '../../crop/crop.model';
+import {CropVarietyModel} from '../../crop/crop-variety.model';
+import {IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts} from 'angular-2-dropdown-multiselect';
+import {ParcelService} from '../../../services/parcel.service';
+import {LangService} from '../../../services/lang.service';
+import {ToastrService} from 'ngx-toastr';
+import {Messages} from '../../../common/messages';
+import {Router} from '@angular/router';
+import {ForecastService} from '../../../services/forecast.service';
+import {ForecastModel} from '../forecast.model';
 
 @Component({
-    selector: 'az-forecast-harvest',
+    selector: 'app-forecast-harvest',
     templateUrl: './forecast-harvest.component.html'
 })
 
 export class ForecastHarvestComponent implements OnInit {
 
     private form: FormGroup;
-    private formSubmitted: boolean = false;
+    private formSubmitted = false;
 
     private parcels: IMultiSelectOption[];
     private categories: CropCategoryModel[] = [];
@@ -55,7 +55,7 @@ export class ForecastHarvestComponent implements OnInit {
                 private cropService: CropService,
                 private parcelService: ParcelService,
                 private langService: LangService,
-                private toastrService: ToastrService,) {
+                private toastrService: ToastrService) {
     }
 
     ngOnInit() {
@@ -64,6 +64,7 @@ export class ForecastHarvestComponent implements OnInit {
         this.setupParcels();
         this.setupCropCategories();
     }
+
 
     private setupLabels() {
         this.langService.get(Messages.SAVED).subscribe((message) => this.labelSaved = message);
@@ -95,14 +96,14 @@ export class ForecastHarvestComponent implements OnInit {
 
     private setupCropCategories() {
         this.cropService.findCategories().subscribe(payloadModel => {
-            let status = payloadModel.status;
-            let message = payloadModel.message;
+            const status = payloadModel.status;
+            const message = payloadModel.message;
             this.categories = payloadModel.payload;
         });
     }
 
     private onCropCategoryChange() {
-        let cropCategoryId = this.form.controls['cropCategoryId'].value;
+        const cropCategoryId = this.form.controls['cropCategoryId'].value;
         this.setupCrops(cropCategoryId);
         this.crops = [];
         this.cropVarieties = [];
@@ -112,14 +113,14 @@ export class ForecastHarvestComponent implements OnInit {
 
     private setupCrops(categoryId: number) {
         this.cropService.findCrops(categoryId).subscribe(payloadModel => {
-            let status = payloadModel.status;
-            let message = payloadModel.message;
+            const status = payloadModel.status;
+            const message = payloadModel.message;
             this.crops = payloadModel.payload;
         });
     }
 
     private onCropChange() {
-        let cropId = this.form.controls['cropId'].value;
+        const cropId = this.form.controls['cropId'].value;
         this.setupCropVarieties(cropId);
         this.cropVarieties = [];
         this.form.controls['cropVarietyId'].setValue(null);
@@ -127,8 +128,8 @@ export class ForecastHarvestComponent implements OnInit {
 
     private setupCropVarieties(cropId: number) {
         this.cropService.findVarieties(cropId).subscribe(payloadModel => {
-            let status = payloadModel.status;
-            let message = payloadModel.message;
+            const status = payloadModel.status;
+            const message = payloadModel.message;
             this.cropVarieties = payloadModel.payload;
         });
     }
@@ -141,7 +142,9 @@ export class ForecastHarvestComponent implements OnInit {
             return;
         }
 
-        let forecastModel = new ForecastModel();
+        // todo: save unit of measure
+
+        const forecastModel = new ForecastModel();
         Object.assign(forecastModel, this.form.value);
 
         this.formSubmitted = false;

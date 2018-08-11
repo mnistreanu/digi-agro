@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core'
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class MessagesService {
@@ -86,7 +86,7 @@ export class MessagesService {
             class: 'info'
         },
         {
-            text:'Create a nice theme',
+            text: 'Create a nice theme',
             value: '40%',
             class: 'danger'
         },
@@ -112,15 +112,15 @@ export class MessagesService {
         }
     ];
 
-    public getMessages():Array<Object> {
+    public getMessages(): Array<Object> {
         return this._messages;
     }
 
-    public getNotifications():Array<Object> {
+    public getNotifications(): Array<Object> {
         return this._notifications;
     }
 
-    public getTasks():Array<Object> {
+    public getTasks(): Array<Object> {
         return this._tasks;
     }
 

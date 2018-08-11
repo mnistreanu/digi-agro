@@ -1,9 +1,9 @@
 <div>
 
-    <machine-telemetry (coordinateChanged)="processCoordinates($event)"></machine-telemetry>
+    <app-machine-telemetry (coordinateChanged)="processCoordinates($event)"></app-machine-telemetry>
 
-    <az-map-events (mapEventChanged)="processEvents($event)"></az-map-events>
+    <app-map-events (mapEventChanged)="processEvents($event)"></app-map-events>
 
-    <az-telemetry-map [polylinePath]="mapPolylinePath" [markers]="mapMarkers"></az-telemetry-map>
+    <app-telemetry-map [polylinePath]="mapPolylinePath" [markers]="mapMarkers"></app-telemetry-map>
 
 </div>

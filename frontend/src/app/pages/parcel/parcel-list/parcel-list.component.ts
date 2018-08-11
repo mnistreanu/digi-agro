@@ -1,11 +1,11 @@
-import {Component, EventEmitter, OnInit, Output} from "@angular/core";
-import {ColDef, GridOptions} from "ag-grid";
-import {LangService} from "../../../services/lang.service";
-import {ParcelModel} from "../../telemetry/parcel.model";
-import {ParcelService} from "../../../services/parcel.service";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ColDef, GridOptions} from 'ag-grid';
+import {LangService} from '../../../services/lang.service';
+import {ParcelModel} from '../../telemetry/parcel.model';
+import {ParcelService} from '../../../services/parcel.service';
 
 @Component({
-    selector: 'parcel-list',
+    selector: 'app-parcel-list',
     templateUrl: './parcel-list.component.html',
     styleUrls: ['./parcel-list.component.scss']
 })
@@ -58,7 +58,7 @@ export class ParcelListComponent implements OnInit {
 
     private setupHeaders() {
 
-        let headers: ColDef[] = [
+        const headers: ColDef[] = [
             {
                 headerName: this.labelName,
                 field: 'name',
@@ -133,8 +133,8 @@ export class ParcelListComponent implements OnInit {
     }
 
     private onSelectionChanged(event) {
-        let model = this.options.api.getSelectedRows()[0];
-        let firstCoord = model.paths[0];
+        const model = this.options.api.getSelectedRows()[0];
+        const firstCoord = model.paths[0];
         this.centerChanged.emit(firstCoord);
     }
 

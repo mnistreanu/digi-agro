@@ -2,33 +2,33 @@ import {Component, ViewEncapsulation} from '@angular/core';
 
 import {MessagesService} from '../../../services/messages.service';
 import {ReminderService} from '../../../services/reminder.service';
-import {ReminderModel} from "../../../pages/reminder/reminder.model";
-import {NotificationModel} from "../../../pages/notifications/notification.model";
-import {NotificationService} from "../../../services/notification/notification.service";
-import {TranslateService} from "@ngx-translate/core";
-import {LangService} from "../../../services/lang.service";
+import {ReminderModel} from '../../../pages/reminder/reminder.model';
+import {NotificationModel} from '../../../pages/notifications/notification.model';
+import {NotificationService} from '../../../services/notification/notification.service';
+import {TranslateService} from '@ngx-translate/core';
+import {LangService} from '../../../services/lang.service';
 
 @Component({
-    selector: 'az-messages',
+    selector: 'app-messages',
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./messages.component.scss'],
     templateUrl: './messages.component.html',
     providers: [MessagesService, NotificationService, ReminderService, TranslateService]
 })
 
-export class MessagesComponent{     
-    public messages:Array<Object> = [];
+export class MessagesComponent {
+    public messages: Array<Object> = [];
 
-    public hasNotifications: boolean = false;
+    public hasNotifications = false;
     public notificationModels: NotificationModel[] = [];
 
-    public reminders:Array<Object> = [];
+    public reminders: Array<Object> = [];
     public reminderModels: ReminderModel[];
 
-    constructor (private messagesService:MessagesService,
-                 private reminderService:ReminderService,
-                 private notificationService: NotificationService,
-                 private langService: LangService){
+    constructor(private messagesService: MessagesService,
+                private reminderService: ReminderService,
+                private notificationService: NotificationService,
+                private langService: LangService) {
         this.messages = messagesService.getMessages();
         this.findNotifications();
         this.findReminders();
@@ -40,12 +40,12 @@ export class MessagesComponent{
         // task.class: 'info'
 
         this.reminderService.find().subscribe(payloadModel => {
-            let status = payloadModel.status;
-            let message = payloadModel.message;
+            const status = payloadModel.status;
+            const message = payloadModel.message;
             this.reminderModels = payloadModel.payload || [];
 
             this.reminderModels.forEach((model) => {
-                let agroTask: any = {};
+                const agroTask: any = {};
                 agroTask.id = model.id;
                 agroTask.workTypeId = model.workTypeId;
                 agroTask.text = model.title;
@@ -84,7 +84,7 @@ export class MessagesComponent{
             this.notificationModels.forEach((model) => {
                 this.langService.get('notification.remaining-time', {days: model.durationDays, hours: model.durationHours})
                     .subscribe(msg => model.remainingTime = msg);
-                model.image = '../assets/img/notifications/' + model.translationKey+ '.png';
+                model.image = '../assets/img/notifications/' + model.translationKey + '.png';
             });
         });
     }

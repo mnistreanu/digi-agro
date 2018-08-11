@@ -1,16 +1,17 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 
 @Component({
-  selector: 'az-typography',
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: './typography.component.html',
-  styleUrls: ['./typography.component.scss']
+    selector: 'app-typography',
+    encapsulation: ViewEncapsulation.None,
+    templateUrl: './typography.component.html',
+    styleUrls: ['./typography.component.scss']
 })
 export class TypographyComponent implements OnInit {
 
-  constructor() { }
+    constructor() {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }

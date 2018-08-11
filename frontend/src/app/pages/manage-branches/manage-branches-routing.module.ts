@@ -1,15 +1,16 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {BranchListComponent} from "./branch-list/branch-list.component";
-import {BranchComponent} from "./branch/branch.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {BranchListComponent} from './branch-list/branch-list.component';
+import {BranchComponent} from './branch/branch.component';
 
 const routes: Routes = [
-    { path: '', component: BranchListComponent },
-    { path: 'branch/:id', component: BranchComponent, data: { breadcrumb: 'Branch Form' }}
+    {path: '', component: BranchListComponent},
+    {path: 'branch/:id', component: BranchComponent, data: {breadcrumb: 'Branch Form'}}
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
-export class ManageBranchesRoutingModule { }
+export class ManageBranchesRoutingModule {
+}

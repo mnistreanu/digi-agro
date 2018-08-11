@@ -1,35 +1,36 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { SlimScroll } from './slim-scroll/slim-scroll.directive';
-import { Widget } from './widget/widget.directive';
-import { Skycon } from './skycon/skycon.directive';
-import { Counter } from './counter/counter.directive';
-import { LiveTile } from './live-tile/live-tile.directive';
-import { ProgressAnimate } from './progress-animate/progress-animate.directive';
-import { DropzoneUpload } from './dropzone/dropzone.directive';
+import {SlimScrollDirective} from './slim-scroll/slim-scroll.directive';
+import {WidgetDirective} from './widget/widget.directive';
+import {SkyconDirective} from './skycon/skycon.directive';
+import {CounterDirective} from './counter/counter.directive';
+import {LiveTileDirective} from './live-tile/live-tile.directive';
+import {ProgressAnimateDirective} from './progress-animate/progress-animate.directive';
+import {DropzoneUploadDirective} from './dropzone/dropzone.directive';
 
 @NgModule({
-    imports: [ 
-        CommonModule 
+    imports: [
+        CommonModule
     ],
-    declarations: [ 
-        SlimScroll,
-        Widget,
-        Skycon,
-        Counter,
-        LiveTile,
-        ProgressAnimate,
-        DropzoneUpload
+    declarations: [
+        SlimScrollDirective,
+        WidgetDirective,
+        SkyconDirective,
+        CounterDirective,
+        LiveTileDirective,
+        ProgressAnimateDirective,
+        DropzoneUploadDirective
     ],
-    exports: [ 
-        SlimScroll,
-        Widget,
-        Skycon,
-        Counter,
-        LiveTile,
-        ProgressAnimate,
-        DropzoneUpload
+    exports: [
+        SlimScrollDirective,
+        WidgetDirective,
+        SkyconDirective,
+        CounterDirective,
+        LiveTileDirective,
+        ProgressAnimateDirective,
+        DropzoneUploadDirective
     ]
 })
-export class DirectivesModule { }
+export class DirectivesModule {
+}

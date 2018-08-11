@@ -1,47 +1,48 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd, Params } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { Mail, MailService }  from './mail.service';
-import { AppState } from "../../app.state";
+import {Component, ViewEncapsulation} from '@angular/core';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
+import {Mail, MailService} from './mail.service';
+import {AppState} from '../../app.state';
 
 @Component({
-  selector: 'az-mail',
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: './mail.component.html',
-  styleUrls: ['./mail.component.scss'],
-  providers: [ MailService ] 
+    selector: 'app-mail',
+    encapsulation: ViewEncapsulation.None,
+    templateUrl: './mail.component.html',
+    styleUrls: ['./mail.component.scss'],
+    providers: [MailService]
 })
-export class MailComponent { 
+export class MailComponent {
     public mails: Observable<Mail[]>;
     public id: number;
-    public type: string; 
-    public markAsRead: boolean = false;
-    public markAsUnRead: boolean = false;
-    public deleteChecked: boolean = false;
+    public type: string;
+    public markAsRead = false;
+    public markAsUnRead = false;
+    public deleteChecked = false;
 
     constructor(private service: MailService,
                 private route: ActivatedRoute,
                 public router: Router,
-                private state:AppState){
-                     
+                private state: AppState) {
+
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
-                this.id = this.route.snapshot.firstChild.params['id'];             
+                this.id = this.route.snapshot.firstChild.params['id'];
                 this.type = this.route.snapshot.firstChild.params['type'];
-                setTimeout(() =>{
-                    jQuery('[data-toggle="tooltip"]').tooltip({ trigger: "hover" });
+                setTimeout(() => {
+                    jQuery('[data-toggle="tooltip"]').tooltip({trigger: 'hover'});
                 });
-            }           
-        });   
-      
-    } 
+            }
+        });
+
+    }
 
 
     public getBack() {
-        if(this.type)
-            this.router.navigate(['pages/mail/mail-list/'+ this.type]);
-        else
+        if (this.type) {
+            this.router.navigate(['pages/mail/mail-list/' + this.type]);
+        } else {
             this.router.navigate(['pages/mail/mail-list/inbox']);
+        }
     }
 
     public trash() {
@@ -50,26 +51,25 @@ export class MailComponent {
             mail.trash = true;
             mail.sent = false;
             mail.draft = false;
-            mail.starred = false; 
-        });        
+            mail.starred = false;
+        });
         this.router.navigate(['pages/mail/mail-list/inbox']);
     }
 
-    public setAsRead(){
+    public setAsRead() {
         this.markAsRead = !this.markAsRead;
-        this.state.notifyDataChanged('markAsRead', this.markAsRead); 
+        this.state.notifyDataChanged('markAsRead', this.markAsRead);
     }
 
-    public setAsUnRead(){
+    public setAsUnRead() {
         this.markAsUnRead = !this.markAsUnRead;
-        this.state.notifyDataChanged('markAsUnRead', this.markAsUnRead); 
+        this.state.notifyDataChanged('markAsUnRead', this.markAsUnRead);
     }
 
-    public deleteCheckedMail(){
+    public deleteCheckedMail() {
         this.deleteChecked = !this.deleteChecked;
-        this.state.notifyDataChanged('deleteChecked', this.deleteChecked); 
+        this.state.notifyDataChanged('deleteChecked', this.deleteChecked);
     }
 
 
-   
 }

@@ -1,25 +1,25 @@
-import "pace";
-import {BrowserModule} from "@angular/platform-browser";
-import {NgModule} from "@angular/core";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import 'pace';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import {AgmCoreModule} from "@agm/core";
+import {AgmCoreModule} from '@agm/core';
 
-import {routing} from "./app.routing";
-import {AppConfig} from "./app.config";
+import {routing} from './app.routing';
+import {AppConfig} from './app.config';
 
-import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
-import {AppComponent} from "./app.component";
-import {ErrorComponent} from "./pages/error/error.component";
-import {AuthService} from "./services/auth/auth.service";
-import {ErrorService} from "./services/error.service";
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
-import {UserService} from "./services/user.service";
-import {ToastrModule} from "ngx-toastr";
-import {LangService} from "./services/lang.service";
-import {GlobalHttpInterceptorService} from "./services/global-http-interceptor.service";
+import {AppComponent} from './app.component';
+import {ErrorComponent} from './pages/error/error.component';
+import {AuthService} from './services/auth/auth.service';
+import {ErrorService} from './services/error.service';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import {UserService} from './services/user.service';
+import {ToastrModule} from 'ngx-toastr';
+import {LangService} from './services/lang.service';
+import {GlobalHttpInterceptorService} from './services/global-http-interceptor.service';
 
 @NgModule({
     declarations: [

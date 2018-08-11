@@ -1,17 +1,17 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { AppPicturePipe } from './appPicture/appPicture.pipe';
-import { ProfilePicturePipe } from './profilePicture/profilePicture.pipe';
-import { MailSearchPipe } from './search/mail-search.pipe';
-import { SearchPipe } from './search/search.pipe';
+import {AppPicturePipe} from './appPicture/appPicture.pipe';
+import {ProfilePicturePipe} from './profilePicture/profilePicture.pipe';
+import {MailSearchPipe} from './search/mail-search.pipe';
+import {SearchPipe} from './search/search.pipe';
 
 @NgModule({
-    imports: [ 
-        CommonModule 
+    imports: [
+        CommonModule
     ],
     declarations: [
-        AppPicturePipe, 
+        AppPicturePipe,
         ProfilePicturePipe,
         MailSearchPipe,
         SearchPipe
@@ -23,4 +23,5 @@ import { SearchPipe } from './search/search.pipe';
         SearchPipe
     ]
 })
-export class PipesModule { }
+export class PipesModule {
+}

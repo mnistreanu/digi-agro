@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ColDef, GridOptions} from "ag-grid";
-import {CropService} from "../../services/crop.service";
-import {CropVarietyModel} from "./crop-variety.model";
-import {LangService} from "../../services/lang.service";
-import {CropFieldMapper} from "./crop-field.mapper";
+import {ColDef, GridOptions} from 'ag-grid';
+import {CropService} from '../../services/crop.service';
+import {CropVarietyModel} from './crop-variety.model';
+import {LangService} from '../../services/lang.service';
+import {CropFieldMapper} from './crop-field.mapper';
 
 @Component({
-    selector: 'az-crop-variety',
+    selector: 'app-crop-variety',
     templateUrl: './crop-variety.component.html'
 })
 export class CropVarietyComponent implements OnInit {
@@ -43,9 +43,9 @@ export class CropVarietyComponent implements OnInit {
 
     private adjustTree(models: CropVarietyModel[]) {
 
-        let rows = [];
-        let categories = {};
-        let crops = {};
+        const rows = [];
+        const categories = {};
+        const crops = {};
 
         let parent;
         models.forEach(model => {
@@ -53,15 +53,13 @@ export class CropVarietyComponent implements OnInit {
                 // category
                 categories[model.id] = model;
                 rows.push(model);
-            }
-            else if (model.cropCategoryId != null) {
+            } else if (model.cropCategoryId != null) {
                 // crop
                 parent = categories[model.cropCategoryId];
                 parent.children = parent.children || [];
                 parent.children.push(model);
                 crops[model.id] = model;
-            }
-            else {
+            } else {
                 // variety
                 parent = crops[model.cropId];
                 parent.children = parent.children || [];
@@ -85,11 +83,11 @@ export class CropVarietyComponent implements OnInit {
 
     private setupHeaders() {
 
-        let headers: ColDef[] = [
+        const headers: ColDef[] = [
             {
                 headerName: this.labelName,
                 field: this.fieldMapper.getName(),
-                cellRenderer: "agGroupCellRenderer",
+                cellRenderer: 'agGroupCellRenderer',
                 width: 200,
                 minWidth: 200
             },
@@ -112,8 +110,7 @@ export class CropVarietyComponent implements OnInit {
                 children: rowItem.children,
                 key: rowItem.group
             };
-        }
-        else {
+        } else {
             return null;
         }
     }

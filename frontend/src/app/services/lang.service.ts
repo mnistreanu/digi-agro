@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {TranslateService} from "@ngx-translate/core";
-import {Constants} from "../common/constants";
-import {StorageService} from "./storage.service";
+import {TranslateService} from '@ngx-translate/core';
+import {Constants} from '../common/constants';
+import {StorageService} from './storage.service';
 
 @Injectable({
     providedIn: 'root'
@@ -21,12 +21,11 @@ export class LangService {
     }
 
     restoreLanguage() {
-        let language = this.storageService.getItem(Constants.LANGUAGE_KEY);
+        const language = this.storageService.getItem(Constants.LANGUAGE_KEY);
         if (language) {
             this.translate.use(language);
             moment.locale(language);
-        }
-        else {
+        } else {
             this.setupDefault();
         }
     }
@@ -36,8 +35,7 @@ export class LangService {
             this.storageService.setItem(Constants.LANGUAGE_KEY, language);
             this.translate.use(language);
             moment.locale(language);
-        }
-        else {
+        } else {
             this.setupDefault();
         }
     }

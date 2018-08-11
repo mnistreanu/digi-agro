@@ -1,13 +1,13 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {Constants} from "../common/constants";
-import {Observable} from "rxjs/Rx";
-import {MachineTelemetryModel} from "../pages/telemetry/machine-telemetry/machine-telemetry.model";
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Constants} from '../common/constants';
+import {Observable} from 'rxjs/Rx';
+import {MachineTelemetryModel} from '../pages/telemetry/machine-telemetry/machine-telemetry.model';
 
 @Injectable()
 export class MachineTelemetryService {
 
-    private api: string = Constants.API_URL + "/machine-telemetry";
+    private api: string = Constants.API_URL + '/machine-telemetry';
 
     constructor(private http: HttpClient) {
     }
@@ -18,7 +18,7 @@ export class MachineTelemetryService {
 
 
     find(machineIdentifier): Observable<MachineTelemetryModel[]> {
-        let query = `?machineIdentifier=${machineIdentifier}`;
+        const query = `?machineIdentifier=${machineIdentifier}`;
         return this.http.get<MachineTelemetryModel[]>(this.api + '/' + query);
     }
 
@@ -31,7 +31,7 @@ export class MachineTelemetryService {
     }
 
     updateCoordinate(id, field: any, value: any): Observable<void> {
-        let model = {
+        const model = {
             id: id,
             field: field,
             value: value

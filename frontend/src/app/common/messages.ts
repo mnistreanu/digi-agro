@@ -1,13 +1,11 @@
 export class Messages {
 
-  // todo: introduce i18n
+    public static UNAUTHORIZED = 'Unauthorized';
+    public static FORBIDDEN = 'Forbidden';
 
-  public static UNAUTHORIZED: string = 'Unauthorized';
-  public static FORBIDDEN: string = 'Forbidden';
-
-  public static VALIDATION_FAIL: string = 'validation.fail';
-  public static ADDED: string = 'response.added';
-  public static SAVED: string = 'response.saved';
-  public static REMOVED: string = 'response.removed';
+    public static VALIDATION_FAIL = 'validation.fail';
+    public static ADDED = 'response.added';
+    public static SAVED = 'response.saved';
+    public static REMOVED = 'response.removed';
 
 }

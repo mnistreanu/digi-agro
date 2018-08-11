@@ -1,24 +1,24 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ToastrService} from "ngx-toastr";
-import {UserService} from "../../services/user.service";
-import {AuthService} from "../../services/auth/auth.service";
-import {emailValidator} from "../../theme/validators/email.validator";
-import {UserAccountModel} from "../manage-users/user/user-account.model";
-import {Messages} from "../../common/messages";
-import {Router} from "@angular/router";
-import {Constants} from "../../common/constants";
-import {LangService} from "../../services/lang.service";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
+import {UserService} from '../../services/user.service';
+import {AuthService} from '../../services/auth/auth.service';
+import {emailValidator} from '../../theme/validators/email.validator';
+import {UserAccountModel} from '../manage-users/user/user-account.model';
+import {Messages} from '../../common/messages';
+import {Router} from '@angular/router';
+import {Constants} from '../../common/constants';
+import {LangService} from '../../services/lang.service';
 
 @Component({
-    selector: 'az-user-profile',
+    selector: 'app-user-profile',
     templateUrl: './user-profile.component.html',
     styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
 
     form: FormGroup;
-    submitted: boolean = false;
+    submitted = false;
     model: UserAccountModel;
 
     logoFile: File;
@@ -69,10 +69,10 @@ export class UserProfileComponent implements OnInit {
     }
 
     public onUsernameChange() {
-        let control = this.form.controls.username;
+        const control = this.form.controls.username;
         this.userService.validateUsername(this.model.id || -1, control.value).subscribe((isUnique) => {
             if (!isUnique) {
-                let errors = control.errors || {};
+                const errors = control.errors || {};
                 errors.unique = !isUnique;
                 control.setErrors(errors);
             }
@@ -93,7 +93,7 @@ export class UserProfileComponent implements OnInit {
             return;
         }
 
-        let usernameChanged = this.model.username != form.controls.username.value;
+        const usernameChanged = this.model.username != form.controls.username.value;
 
         Object.assign(this.model, form.value);
         this.submitted = false;
@@ -118,9 +118,9 @@ export class UserProfileComponent implements OnInit {
 
         this.logoFile = event.target.files[0];
 
-        let reader = new FileReader();
-        reader.onload = (event: ProgressEvent) => {
-            this.logoUrl = (<FileReader>event.target).result;
+        const reader = new FileReader();
+        reader.onload = (progressEvent: ProgressEvent) => {
+            this.logoUrl = (<FileReader>progressEvent.target).result;
         };
 
         reader.readAsDataURL(event.target.files[0]);

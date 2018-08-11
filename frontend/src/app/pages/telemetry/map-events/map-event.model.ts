@@ -1,12 +1,13 @@
 export class MapEventModel {
 
-  constructor() {}
+    id: number;
+    message: string;
 
-  id: number;
-  message: string;
+    latitude: number;
+    longitude: number;
 
-  latitude: number;
-  longitude: number;
+    createdAt: Date;
 
-  createdAt: Date;
+    constructor() {
+    }
 }

@@ -1,9 +1,9 @@
 export function matchPasswordValidator(passwordKey: string, passwordConfirmationKey: string) {
     return (group) => {
-        let password= group.controls[passwordKey];
-        let passwordConfirmation= group.controls[passwordConfirmationKey];
+        const password = group.controls[passwordKey];
+        const passwordConfirmation = group.controls[passwordConfirmationKey];
         if (password.value !== passwordConfirmation.value) {
-            return passwordConfirmation.setErrors({mismatchedPasswords: true})
+            return passwordConfirmation.setErrors({mismatchedPasswords: true});
         }
-    }
+    };
 }

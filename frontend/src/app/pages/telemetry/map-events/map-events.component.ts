@@ -1,16 +1,16 @@
-import {Component, EventEmitter, OnInit, Output} from "@angular/core";
-import {MapEventModel} from "./map-event.model";
-import {ColDef, GridOptions} from "ag-grid";
-import {MapEventService} from "../../../services/map-event.service";
-import {ToastrService} from "ngx-toastr";
-import {DeleteRendererComponent} from "../../../modules/aggrid/delete-renderer/delete-renderer.component";
-import {DateUtil} from "../../../common/dateUtil";
-import {Messages} from "../../../common/messages";
-import {NumericUtil} from "../../../common/numericUtil";
-import {LangService} from "../../../services/lang.service";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {MapEventModel} from './map-event.model';
+import {ColDef, GridOptions} from 'ag-grid';
+import {MapEventService} from '../../../services/map-event.service';
+import {ToastrService} from 'ngx-toastr';
+import {DeleteRendererComponent} from '../../../modules/aggrid/delete-renderer/delete-renderer.component';
+import {DateUtil} from '../../../common/dateUtil';
+import {Messages} from '../../../common/messages';
+import {NumericUtil} from '../../../common/numericUtil';
+import {LangService} from '../../../services/lang.service';
 
 @Component({
-    selector: 'az-map-events',
+    selector: 'app-map-events',
     templateUrl: './map-events.component.html',
     styleUrls: ['./map-events.component.scss']
 })
@@ -59,7 +59,7 @@ export class MapEventsComponent implements OnInit {
 
     private setupHeaders() {
 
-        let headers: ColDef[] = [
+        const headers: ColDef[] = [
             {
                 headerName: 'Message',
                 field: 'message',
@@ -114,7 +114,7 @@ export class MapEventsComponent implements OnInit {
     }
 
     private coordinateValueSetter(params) {
-        let newValue = params.newValue;
+        const newValue = params.newValue;
         if (newValue == params.oldValue) {
             return false;
         }
@@ -123,7 +123,7 @@ export class MapEventsComponent implements OnInit {
             return false;
         }
 
-        let field = params.colDef.field;
+        const field = params.colDef.field;
         params.data[field] = newValue;
 
         return true;
@@ -131,9 +131,9 @@ export class MapEventsComponent implements OnInit {
 
     private onDataChange(params) {
 
-        let model = params.data;
-        let field = params.colDef.field;
-        let value = params.newValue;
+        const model = params.data;
+        const field = params.colDef.field;
+        const value = params.newValue;
 
         this.mapEventService.update(model.id, field, value).subscribe(() => {
             this.toastr.success(this.labelSaved);
@@ -162,7 +162,7 @@ export class MapEventsComponent implements OnInit {
     }
 
     public add() {
-        let item = new MapEventModel();
+        const item = new MapEventModel();
 
         item.createdAt = new Date();
         item.latitude = 0;
@@ -182,7 +182,7 @@ export class MapEventsComponent implements OnInit {
     }
 
     public onDelete(node) {
-        let model = node.data;
+        const model = node.data;
         this.options.api.updateRowData({remove: [model]});
 
         this.mapEventService.remove(model).subscribe(() => {

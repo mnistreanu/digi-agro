@@ -1,8 +1,8 @@
-import {Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild} from "@angular/core";
-import {ParcelModel} from "../../telemetry/parcel.model";
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {ParcelModel} from '../../telemetry/parcel.model';
 
 @Component({
-    selector: 'parcel-map',
+    selector: 'app-parcel-map',
     templateUrl: './parcel-map.component.html',
     styleUrls: ['./parcel-map.component.scss']
 })
@@ -13,8 +13,8 @@ export class ParcelMapComponent implements OnInit {
 
     @ViewChild('infoBody') infoBody: ElementRef;
 
-    private defaultStrokeColor: string = '#FFC107';
-    private defaultZIndex: number = 1;
+    private defaultStrokeColor = '#FFC107';
+    private defaultZIndex = 1;
 
     private parcel: ParcelModel;
     private infoWindow;
@@ -27,8 +27,6 @@ export class ParcelMapComponent implements OnInit {
         this.parcels = [];
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
-    }
 
     private setupCenter() {
         this.center = 'Moldova, Chisinau';

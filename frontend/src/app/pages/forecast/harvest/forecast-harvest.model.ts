@@ -1,7 +1,7 @@
-export class ForecastHarvestModelZZZ {
+export class ForecastHarvestModel {
 
     id: number;
     cropCategoryId: number;
-    cropId:number;
-    cropVarietyId:number;
+    cropId: number;
+    cropVarietyId: number;
 }

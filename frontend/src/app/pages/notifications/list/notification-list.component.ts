@@ -1,15 +1,15 @@
-import {Component, OnInit} from "@angular/core";
-import {NotificationService} from "../../../services/notification/notification.service";
-import {Router} from "@angular/router";
-import {ColDef, GridOptions} from "ag-grid";
-import {NotificationModel} from "../notification.model";
-import {ImageRendererComponent} from "../../../modules/aggrid/image-renderer/image-renderer.component";
-import {LangService} from "../../../services/lang.service";
+import {Component, OnInit} from '@angular/core';
+import {NotificationService} from '../../../services/notification/notification.service';
+import {Router} from '@angular/router';
+import {ColDef, GridOptions} from 'ag-grid';
+import {NotificationModel} from '../notification.model';
+import {ImageRendererComponent} from '../../../modules/aggrid/image-renderer/image-renderer.component';
+import {LangService} from '../../../services/lang.service';
 
 @Component({
-  selector: 'az-notification-list',
-  templateUrl: './notification-list.component.html',
-  styleUrls: ['./notification-list.component.scss']
+    selector: 'app-notification-list',
+    templateUrl: './notification-list.component.html',
+    styleUrls: ['./notification-list.component.scss']
 })
 export class NotificationListComponent implements OnInit {
 
@@ -39,12 +39,14 @@ export class NotificationListComponent implements OnInit {
 
     private setupHeaders() {
 
-        let headers: ColDef[] = [
+        const headers: ColDef[] = [
             {
                 headerName: '',
                 field: 'image',
                 cellRendererFramework: ImageRendererComponent,
-                cellStyle: () => {return {padding: 0}},
+                cellStyle: () => {
+                    return {padding: 0};
+                },
                 width: 50,
                 minWidth: 50,
                 maxWidth: 50,
@@ -80,13 +82,13 @@ export class NotificationListComponent implements OnInit {
                 field: 'seenAt',
                 filter: 'agDateColumnFilter',
                 filterParams: {
-                    comparator: function(filterDate, cellValue) {
-                        let filterDateWithoutTime = new Date(filterDate.getFullYear(), filterDate.getMonth(), filterDate.getDate());
-                        let cellDate = new Date(cellValue);
-                        let cellDateWithoutTime = new Date(cellDate.getFullYear(), cellDate.getMonth(), cellDate.getDate());
+                    comparator: function (filterDate, cellValue) {
+                        const filterDateWithoutTime = new Date(filterDate.getFullYear(), filterDate.getMonth(), filterDate.getDate());
+                        const cellDate = new Date(cellValue);
+                        const cellDateWithoutTime = new Date(cellDate.getFullYear(), cellDate.getMonth(), cellDate.getDate());
 
-                        let a = cellDateWithoutTime.getTime();
-                        let b = filterDateWithoutTime.getTime();
+                        const a = cellDateWithoutTime.getTime();
+                        const b = filterDateWithoutTime.getTime();
 
                         if (a == b) {
                             return 0;
@@ -136,7 +138,9 @@ export class NotificationListComponent implements OnInit {
     }
 
     public adjustGridSize() {
-        setTimeout(() => {this.options.api.sizeColumnsToFit();}, 500);
+        setTimeout(() => {
+            this.options.api.sizeColumnsToFit();
+        }, 500);
     }
 
 }

@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'tenant-list-filter',
-  templateUrl: './tenant-list-filter.component.html',
-  styleUrls: ['./tenant-list-filter.component.scss']
+    selector: 'app-tenant-list-filter',
+    templateUrl: './tenant-list-filter.component.html',
+    styleUrls: ['./tenant-list-filter.component.scss']
 })
 export class TenantListFilterComponent implements OnInit {
 
-  constructor() { }
+    constructor() {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }

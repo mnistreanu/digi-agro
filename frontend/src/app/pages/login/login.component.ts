@@ -1,11 +1,10 @@
-import {Component, OnInit, ViewEncapsulation} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../services/auth/auth.service";
-import {Constants} from "../../common/constants";
-import {ListItem} from "../../interfaces/list-item.interface";
-import {AuthResponseModel} from "../../services/auth/auth-response.model";
-import {StorageService} from "../../services/storage.service";
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../services/auth/auth.service';
+import {Constants} from '../../common/constants';
+import {AuthResponseModel} from '../../services/auth/auth-response.model';
+import {StorageService} from '../../services/storage.service';
 
 @Component({
     selector: 'app-login',
@@ -16,7 +15,7 @@ import {StorageService} from "../../services/storage.service";
 export class LoginComponent implements OnInit {
 
     private form: FormGroup;
-    private badCredentials: boolean = false;
+    private badCredentials = false;
     private returnUrl: String;
 
     private authenticated: boolean;
@@ -59,12 +58,11 @@ export class LoginComponent implements OnInit {
 
     private processTenants() {
         if (this.authData.tenants.length <= 1) {
-            if (this.authData.tenants.length == 1) {
+            if (this.authData.tenants.length === 1) {
                 this.storageService.setItem(Constants.TENANT, this.authData.tenants[0].id);
             }
             this.finishLogin();
-        }
-        else {
+        } else {
             this.needShowTenantSelector = true;
         }
     }

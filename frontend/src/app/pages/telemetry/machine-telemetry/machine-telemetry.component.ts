@@ -1,17 +1,17 @@
-import {Component, EventEmitter, OnInit, Output} from "@angular/core";
-import {ColDef, GridOptions} from "ag-grid";
-import {MachineTelemetryModel} from "./machine-telemetry.model";
-import {ToastrService} from "ngx-toastr";
-import {NumericUtil} from "../../../common/numericUtil";
-import {DeleteRendererComponent} from "../../../modules/aggrid/delete-renderer/delete-renderer.component";
-import {Messages} from "../../../common/messages";
-import {DateUtil} from "../../../common/dateUtil";
-import {MachineService} from "../../../services/machine.service";
-import {LangService} from "../../../services/lang.service";
-import {MachineTelemetryService} from "../../../services/machine-telemetry.service";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ColDef, GridOptions} from 'ag-grid';
+import {MachineTelemetryModel} from './machine-telemetry.model';
+import {ToastrService} from 'ngx-toastr';
+import {NumericUtil} from '../../../common/numericUtil';
+import {DeleteRendererComponent} from '../../../modules/aggrid/delete-renderer/delete-renderer.component';
+import {Messages} from '../../../common/messages';
+import {DateUtil} from '../../../common/dateUtil';
+import {MachineService} from '../../../services/machine.service';
+import {LangService} from '../../../services/lang.service';
+import {MachineTelemetryService} from '../../../services/machine-telemetry.service';
 
 @Component({
-    selector: 'machine-telemetry',
+    selector: 'app-machine-telemetry',
     templateUrl: './machine-telemetry.component.html',
     styleUrls: ['./machine-telemetry.component.scss']
 })
@@ -59,7 +59,7 @@ export class MachineTelemetryComponent implements OnInit {
             }
 
             this.machineIdentifier = this.availableMachineIdentifiers[0];
-        })
+        });
     }
 
     public setupGrid() {
@@ -76,7 +76,7 @@ export class MachineTelemetryComponent implements OnInit {
 
     private setupHeaders() {
 
-        let headers: ColDef[] = [
+        const headers: ColDef[] = [
             {
                 headerName: 'Machine Identifier',
                 field: 'machineIdentifier',
@@ -129,7 +129,7 @@ export class MachineTelemetryComponent implements OnInit {
     }
 
     private coordinateValueSetter(params) {
-        let newValue = params.newValue;
+        const newValue = params.newValue;
         if (newValue == params.oldValue) {
             return false;
         }
@@ -138,7 +138,7 @@ export class MachineTelemetryComponent implements OnInit {
             return false;
         }
 
-        let field = params.colDef.field;
+        const field = params.colDef.field;
         params.data[field] = newValue;
 
         return true;
@@ -146,9 +146,9 @@ export class MachineTelemetryComponent implements OnInit {
 
     private onCoordinateChange(params) {
 
-        let model = params.data;
-        let field = params.colDef.field;
-        let value = params.newValue;
+        const model = params.data;
+        const field = params.colDef.field;
+        const value = params.newValue;
 
         this.machineTelemetryService.updateCoordinate(model.id, field, value).subscribe(() => {
             this.toastr.success(this.labelSaved);
@@ -176,7 +176,7 @@ export class MachineTelemetryComponent implements OnInit {
     }
 
     public add() {
-        let item = new MachineTelemetryModel();
+        const item = new MachineTelemetryModel();
 
         item.machineIdentifier = this.machineIdentifier;
         item.createdAt = new Date();
@@ -195,7 +195,7 @@ export class MachineTelemetryComponent implements OnInit {
     }
 
     public onDelete(node) {
-        let model = node.data;
+        const model = node.data;
         this.options.api.updateRowData({remove: [model]});
 
         this.machineTelemetryService.remove(model).subscribe(() => {

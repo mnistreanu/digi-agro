@@ -1,20 +1,20 @@
 import {Component, OnInit} from '@angular/core';
-import {BrandService} from "../../../services/brand.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {BrandModel} from "./brand.model";
-import {ToastrService} from "ngx-toastr";
-import {Messages} from "../../../common/messages";
+import {BrandService} from '../../../services/brand.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {BrandModel} from './brand.model';
+import {ToastrService} from 'ngx-toastr';
+import {Messages} from '../../../common/messages';
 
 @Component({
-    selector: 'az-brand',
+    selector: 'app-brand',
     templateUrl: './brand.component.html',
     styleUrls: ['./brand.component.scss']
 })
 export class BrandComponent implements OnInit {
 
     form: FormGroup;
-    submitted: boolean = false;
+    submitted = false;
 
     model: BrandModel;
     isNew: boolean;
@@ -28,7 +28,7 @@ export class BrandComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            let id = params['id'];
+            const id = params['id'];
 
             if (id == -1) {
                 this.prepareNewModel();
@@ -60,10 +60,10 @@ export class BrandComponent implements OnInit {
     }
 
     public onNameChange() {
-        let control = this.form.controls.name;
+        const control = this.form.controls.name;
         this.brandService.validateName(this.model.id || -1, control.value).subscribe((isUnique) => {
             if (!isUnique) {
-                let errors = control.errors || {};
+                const errors = control.errors || {};
                 errors.unique = !isUnique;
                 control.setErrors(errors);
             }

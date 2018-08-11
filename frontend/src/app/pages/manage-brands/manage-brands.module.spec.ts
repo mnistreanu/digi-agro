@@ -1,13 +1,13 @@
-import { ManageBrandsModule } from './manage-brands.module';
+import {ManageBrandsModule} from './manage-brands.module';
 
 describe('ManageBrandsModule', () => {
-  let manageBrandsModule: ManageBrandsModule;
+    let manageBrandsModule: ManageBrandsModule;
 
-  beforeEach(() => {
-    manageBrandsModule = new ManageBrandsModule();
-  });
+    beforeEach(() => {
+        manageBrandsModule = new ManageBrandsModule();
+    });
 
-  it('should create an instance', () => {
-    expect(manageBrandsModule).toBeTruthy();
-  });
+    it('should create an instance', () => {
+        expect(manageBrandsModule).toBeTruthy();
+    });
 });

@@ -1,8 +1,8 @@
-import {Component, OnInit} from "@angular/core";
-import {ParcelModel} from "../../telemetry/parcel.model";
+import {Component, OnInit} from '@angular/core';
+import {ParcelModel} from '../../telemetry/parcel.model';
 
 @Component({
-    selector: 'az-parcel',
+    selector: 'app-parcel',
     templateUrl: './parcel.component.html',
     styleUrls: ['./parcel.component.scss']
 })

@@ -1,16 +1,17 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 
 @Component({
-  selector: 'az-blank',
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: './blank.component.html',
-  styleUrls: ['./blank.component.scss']
+    selector: 'app-blank',
+    encapsulation: ViewEncapsulation.None,
+    templateUrl: './blank.component.html',
+    styleUrls: ['./blank.component.scss']
 })
 export class BlankComponent implements OnInit {
 
-  constructor() { }
+    constructor() {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }

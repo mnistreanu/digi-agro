@@ -1,4 +1,5 @@
-import {ListItem} from "../../interfaces/list-item.interface";
+import {ListItem} from '../../interfaces/list-item.interface';
+
 export class AuthResponseModel {
 
     username: string;

@@ -20,8 +20,8 @@
             <input id="name" class="form-control checking-field" formControlName="name"
                    (change)="onNameChange()">
           </div>
-          <form-error-block [control]="form.get('name')" [formSubmitted]="submitted"
-                            [title]="'Name'"></form-error-block>
+          <app-form-error-block [control]="form.get('name')" [formSubmitted]="submitted"
+                                [title]="'Name'"></app-form-error-block>
         </div>
       </div>
 
@@ -31,8 +31,8 @@
           <div>
             <textarea id="description" class="form-control" formControlName="description"></textarea>
           </div>
-          <form-error-block [control]="form.get('description')" [formSubmitted]="submitted"
-                            [title]="'Description'"></form-error-block>
+          <app-form-error-block [control]="form.get('description')" [formSubmitted]="submitted"
+                                [title]="'Description'"></app-form-error-block>
         </div>
       </div>
 
@@ -43,8 +43,8 @@
             <input id="fiscalCode" class="form-control checking-field" formControlName="fiscalCode"
                    (change)="onFiscalCodeChange()">
           </div>
-          <form-error-block [control]="form.get('fiscalCode')" [formSubmitted]="submitted"
-                            [title]="'Fiscal Code'"></form-error-block>
+          <app-form-error-block [control]="form.get('fiscalCode')" [formSubmitted]="submitted"
+                                [title]="'Fiscal Code'"></app-form-error-block>
         </div>
       </div>
 
@@ -54,8 +54,8 @@
           <div>
             <input id="country" class="form-control checking-field" formControlName="country" maxlength="2">
           </div>
-          <form-error-block [control]="form.get('country')" [formSubmitted]="submitted"
-                            [title]="'Country'"></form-error-block>
+          <app-form-error-block [control]="form.get('country')" [formSubmitted]="submitted"
+                                [title]="'Country'"></app-form-error-block>
         </div>
 
         <div class="col-sm-4">
@@ -63,8 +63,8 @@
           <div>
             <input id="county" class="form-control checking-field" formControlName="county" maxlength="2">
           </div>
-          <form-error-block [control]="form.get('county')" [formSubmitted]="submitted"
-                            [title]="'County'"></form-error-block>
+          <app-form-error-block [control]="form.get('county')" [formSubmitted]="submitted"
+                                [title]="'County'"></app-form-error-block>
         </div>
 
         <div class="col-sm-4">
@@ -72,8 +72,8 @@
           <div>
             <input id="villageCity" class="form-control checking-field" formControlName="villageCity">
           </div>
-          <form-error-block [control]="form.get('villageCity')" [formSubmitted]="submitted"
-                            [title]="'Village City'"></form-error-block>
+          <app-form-error-block [control]="form.get('villageCity')" [formSubmitted]="submitted"
+                                [title]="'Village City'"></app-form-error-block>
         </div>
       </div>
 
@@ -83,16 +83,16 @@
           <div>
             <input id="address" class="form-control checking-field" formControlName="address">
           </div>
-          <form-error-block [control]="form.get('address')" [formSubmitted]="submitted"
-                            [title]="'Address'"></form-error-block>
+          <app-form-error-block [control]="form.get('address')" [formSubmitted]="submitted"
+                                [title]="'Address'"></app-form-error-block>
         </div>
         <div class="col-sm-6">
           <label for="phones">Phones</label>
           <div>
             <input id="phones" class="form-control checking-field" formControlName="phones">
           </div>
-          <form-error-block [control]="form.get('phones')" [formSubmitted]="submitted"
-                            [title]="'Phones'"></form-error-block>
+          <app-form-error-block [control]="form.get('phones')" [formSubmitted]="submitted"
+                                [title]="'Phones'"></app-form-error-block>
         </div>
       </div>
 

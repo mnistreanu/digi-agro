@@ -1,13 +1,13 @@
-import { ParcelModule } from './parcel.module';
+import {ParcelModule} from './parcel.module';
 
 describe('ParcelModule', () => {
-  let parcelModule: ParcelModule;
+    let parcelModule: ParcelModule;
 
-  beforeEach(() => {
-    parcelModule = new ParcelModule();
-  });
+    beforeEach(() => {
+        parcelModule = new ParcelModule();
+    });
 
-  it('should create an instance', () => {
-    expect(parcelModule).toBeTruthy();
-  });
+    it('should create an instance', () => {
+        expect(parcelModule).toBeTruthy();
+    });
 });

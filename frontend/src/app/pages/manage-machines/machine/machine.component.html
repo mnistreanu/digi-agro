@@ -22,8 +22,8 @@
               <option *ngFor="let t of machineTypes" [ngValue]="t">{{ t }}</option>
             </select>
           </div>
-          <form-error-block [control]="form.get('type')" [formSubmitted]="submitted"
-                               [title]="'Type'"></form-error-block>
+          <app-form-error-block [control]="form.get('type')" [formSubmitted]="submitted"
+                                [title]="'Type'"></app-form-error-block>
         </div>
 
         <div class="col-sm-6">
@@ -32,8 +32,8 @@
             <input id="owner" class="form-control checking-field"
                    formControlName="owner" auto-complete [source]="owners">
           </div>
-          <form-error-block [control]="form.get('owner')" [formSubmitted]="submitted"
-                               [title]="'Owner'"></form-error-block>
+          <app-form-error-block [control]="form.get('owner')" [formSubmitted]="submitted"
+                                [title]="'Owner'"></app-form-error-block>
         </div>
       </div>
 
@@ -44,8 +44,8 @@
             <input id="brand" class="form-control checking-field"
                    formControlName="brand" auto-complete [source]="brands">
           </div>
-          <form-error-block [control]="form.get('brand')" [formSubmitted]="submitted"
-                               [title]="'Brand'"></form-error-block>
+          <app-form-error-block [control]="form.get('brand')" [formSubmitted]="submitted"
+                                [title]="'Brand'"></app-form-error-block>
         </div>
 
         <div class="col-sm-6">
@@ -53,8 +53,8 @@
           <div>
             <input id="name" class="form-control checking-field" formControlName="name">
           </div>
-          <form-error-block [control]="form.get('name')" [formSubmitted]="submitted"
-                               [title]="'Name'"></form-error-block>
+          <app-form-error-block [control]="form.get('name')" [formSubmitted]="submitted"
+                                [title]="'Name'"></app-form-error-block>
         </div>
       </div>
 
@@ -64,8 +64,8 @@
           <div>
             <input id="identifier" class="form-control checking-field" formControlName="identifier" (change)="onIdentifierChange()">
           </div>
-          <form-error-block [control]="form.get('identifier')" [formSubmitted]="submitted"
-                               [title]="'Identifier'"></form-error-block>
+          <app-form-error-block [control]="form.get('identifier')" [formSubmitted]="submitted"
+                                [title]="'Identifier'"></app-form-error-block>
         </div>
       </div>
 
@@ -95,8 +95,8 @@
               <option *ngFor="let t of motorTypes" [ngValue]="t">{{ t }}</option>
             </select>
           </div>
-          <form-error-block [control]="form.get('motorType')" [formSubmitted]="submitted"
-                               [title]="'Motor'"></form-error-block>
+          <app-form-error-block [control]="form.get('motorType')" [formSubmitted]="submitted"
+                                [title]="'Motor'"></app-form-error-block>
         </div>
 
         <div class="col-sm-6">

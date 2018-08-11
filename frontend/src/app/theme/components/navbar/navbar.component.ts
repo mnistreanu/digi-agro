@@ -1,26 +1,26 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import { AppState } from '../../../app.state';
-import { SidebarService } from '../sidebar/sidebar.service';
-import {AuthService} from "../../../services/auth/auth.service";
-import {Constants} from "../../../common/constants";
+import {AppState} from '../../../app.state';
+import {SidebarService} from '../sidebar/sidebar.service';
+import {AuthService} from '../../../services/auth/auth.service';
+import {Constants} from '../../../common/constants';
 
 @Component({
-  selector: 'az-navbar',
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss'],
-  providers: [ SidebarService ]
+    selector: 'app-navbar',
+    encapsulation: ViewEncapsulation.None,
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.scss'],
+    providers: [SidebarService]
 })
 
 export class NavbarComponent implements OnInit {
-    public isMenuCollapsed:boolean = false;
+    public isMenuCollapsed = false;
 
     username: string;
     logoUrl: string;
 
     constructor(private authService: AuthService,
-                private _state:AppState,
-                private _sidebarService:SidebarService) {
+                private _state: AppState,
+                private _sidebarService: SidebarService) {
     }
 
     ngOnInit(): void {
@@ -36,7 +36,7 @@ export class NavbarComponent implements OnInit {
     }
 
     private setupUserData() {
-        let userData = this.authService.getUserData();
+        const userData = this.authService.getUserData();
         if (userData == null) {
             return;
         }
@@ -44,14 +44,14 @@ export class NavbarComponent implements OnInit {
         this.logoUrl = Constants.API_URL + userData.logoUrl;
     }
 
-    public closeSubMenus(){
-       /* when using <az-sidebar> instead of <az-menu> uncomment this line */
-      // this._sidebarService.closeAllSubMenus();
+    public closeSubMenus() {
+        /* when using <app-sidebar> instead of <app-menu> uncomment this line */
+        // this._sidebarService.closeAllSubMenus();
     }
 
     public toggleMenu() {
-        this.isMenuCollapsed = !this.isMenuCollapsed; 
-        this._state.notifyDataChanged('menu.isCollapsed', this.isMenuCollapsed);        
+        this.isMenuCollapsed = !this.isMenuCollapsed;
+        this._state.notifyDataChanged('menu.isCollapsed', this.isMenuCollapsed);
     }
 
 }

@@ -3,9 +3,9 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {DirectivesModule} from '../../theme/directives/directives.module';
-import {ReminderComponent} from "./reminder.component";
+import {ReminderComponent} from './reminder.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {FormErrorBlockModule} from "../../modules/form-error-block/form-error-block.module";
+import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-block.module';
 
 export const routes = [
     {path: '', component: ReminderComponent}

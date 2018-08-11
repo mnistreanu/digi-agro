@@ -1,22 +1,22 @@
-import {Component, OnInit} from "@angular/core";
-import {MachineService} from "../../../services/machine.service";
-import {BrandService} from "../../../services/brand.service";
-import {OwnerService} from "../../../services/owner.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MachineModel} from "./machine.model";
-import {ToastrService} from "ngx-toastr";
-import {Messages} from "../../../common/messages";
+import {Component, OnInit} from '@angular/core';
+import {MachineService} from '../../../services/machine.service';
+import {BrandService} from '../../../services/brand.service';
+import {OwnerService} from '../../../services/owner.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MachineModel} from './machine.model';
+import {ToastrService} from 'ngx-toastr';
+import {Messages} from '../../../common/messages';
 
 @Component({
-    selector: 'az-machine',
+    selector: 'app-machine',
     templateUrl: './machine.component.html',
     styleUrls: ['./machine.component.scss']
 })
 export class MachineComponent implements OnInit {
 
     form: FormGroup;
-    submitted: boolean = false;
+    submitted = false;
 
     model: MachineModel;
     isNew: boolean;
@@ -27,7 +27,7 @@ export class MachineComponent implements OnInit {
     brands: string[];
 
     motorTypes: string[];
-    disableMotorCharacteristic: boolean = true;
+    disableMotorCharacteristic = true;
 
     availableWorkTypes: string[] = ['SOWING', 'PLOWING', 'GATHERING', 'WATERING', 'SPRAY'];
 
@@ -46,7 +46,7 @@ export class MachineComponent implements OnInit {
         this.setupOwners();
         this.setupBrands();
         this.route.params.subscribe(params => {
-            let id = params['id'];
+            const id = params['id'];
 
             if (id == -1) {
                 this.prepareNewModel();
@@ -124,10 +124,10 @@ export class MachineComponent implements OnInit {
     }
 
     public onIdentifierChange() {
-        let control = this.form.controls.identifier;
+        const control = this.form.controls.identifier;
         this.machineService.validateIdentifier(this.model.id || -1, control.value).subscribe((isUnique) => {
             if (!isUnique) {
-                let errors = control.errors || {};
+                const errors = control.errors || {};
                 errors.unique = !isUnique;
                 control.setErrors(errors);
             }
@@ -158,7 +158,7 @@ export class MachineComponent implements OnInit {
     }
 
     private prepareWorkTypesForSubmit(form: FormGroup) {
-        let workTypes: string[] = [];
+        const workTypes: string[] = [];
 
         // array of boolean items. true is selected
         form.value.workTypesIndices.forEach((item, index) => {
@@ -178,10 +178,10 @@ export class MachineComponent implements OnInit {
     }
 
     public onMotorTypeChange(event) {
-        let motorType = this.form.controls['motorType'].value;
+        const motorType = this.form.controls['motorType'].value;
         this.disableMotorCharacteristic = motorType == 'NONE';
 
-        let action = this.disableMotorCharacteristic ? 'disable' : 'enable';
+        const action = this.disableMotorCharacteristic ? 'disable' : 'enable';
         this.form.controls['consumption'][action]();
         this.form.controls['power'][action]();
 

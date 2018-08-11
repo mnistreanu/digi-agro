@@ -1,6 +1,6 @@
 {
-  "name": "azimuth",
-  "version": "2.3.0",
+  "name": "digi-agro",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",

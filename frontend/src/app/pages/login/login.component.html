@@ -30,6 +30,6 @@
     </div>
 </div>
 
-<tenant-selector *ngIf="needShowTenantSelector"
+<app-tenant-selector *ngIf="needShowTenantSelector"
                  [tenants]="authData.tenants"
-                 (tenantSelected)="onTenantSelected()"></tenant-selector>
+                 (tenantSelected)="onTenantSelected()"></app-tenant-selector>

@@ -3,8 +3,8 @@ export class CropModel {
     id: number;
     cropCategoryId: number;
     cropId: number;
-    nameRo:string;
+    nameRo: string;
     nameRu: string;
-    desriptionRo:string;
+    desriptionRo: string;
     desriptionRu: string;
 }

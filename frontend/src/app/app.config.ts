@@ -1,20 +1,20 @@
-import { Injectable } from '@angular/core';
-import { Color, RGB, HEX } from './app.color';
+import {Injectable} from '@angular/core';
+import {Color, HEX} from './app.color';
 import 'sass-to-js/js/src/sass-to-js.js';
 
 @Injectable()
 export class AppConfig {
 
-   sassVariables:any; 
-   config:any;
+   sassVariables: any;
+   config: any;
 
-   constructor(){
+   constructor() {
         this.sassVariables = this.getSassVariables();
         this.config = {
             name: 'Digi Agro',
             title: 'Digi Agro',
-            version: '2.3.0',
-            colors:{
+            version: '1.0.0',
+            colors: {
                 main: this.sassVariables['main-color'],
                 default: this.sassVariables['default-color'],
                 dark: this.sassVariables['dark-color'],
@@ -27,25 +27,24 @@ export class AppConfig {
                 gray: this.sassVariables['gray'],
                 grayLight: this.sassVariables['gray-light']
             }
-        }
-   }   
+        };
+   }
 
     getSassVariables() {
-        let variables = jQuery('body').sassToJs({pseudoEl:"::after", cssProperty: "content"});
-        return variables;         
+        const variables = jQuery('body').sassToJs({pseudoEl: '::after', cssProperty: 'content'});
+        return variables;
     }
- 
-    rgba(color, opacity){
-        if(color.indexOf('#') >= 0){
-            if(color.slice(1).length == 3){
-                color= '#' + color.slice(1) + '' + color.slice(1);
-            }            
+
+    rgba(color, opacity) {
+        if (color.indexOf('#') >= 0) {
+            if (color.slice(1).length == 3) {
+                color = '#' + color.slice(1) + '' + color.slice(1);
+            }
             return new Color(new HEX(color)).setAlpha(opacity).toString();
-        } 
-        else{
-            console.log("incorrect color: " + color); 
-            return 'rgba(255,255,255,0.7)'; 
-        }     
+        } else {
+            console.log('incorrect color: ' + color);
+            return 'rgba(255,255,255,0.7)';
+        }
     }
 
 }

@@ -20,8 +20,8 @@
             <input id="name" class="form-control checking-field" formControlName="name"
                    (change)="onNameChange()">
           </div>
-          <form-error-block [control]="form.get('name')" [formSubmitted]="submitted"
-                            [title]="'Name'"></form-error-block>
+          <app-form-error-block [control]="form.get('name')" [formSubmitted]="submitted"
+                                [title]="'Name'"></app-form-error-block>
         </div>
       </div>
 

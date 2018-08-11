@@ -1,8 +1,9 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 
 @Component({
-  selector: 'az-froala',
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: './froala.component.html'
+    selector: 'app-froala',
+    encapsulation: ViewEncapsulation.None,
+    templateUrl: './froala.component.html'
 })
-export class FroalaComponent { }
+export class FroalaComponent {
+}
