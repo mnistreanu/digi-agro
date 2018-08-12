@@ -3,13 +3,14 @@ import {Constants} from '../common/constants';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import {OwnerModel} from '../pages/manage-owners/owner/owner.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class OwnerService {
 
-    private api: string = Constants.API_URL + '/owner';
+    private api: string = environment.apiUrl + '/owner';
 
     constructor(private http: HttpClient) {
     }
