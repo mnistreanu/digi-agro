@@ -14,4 +14,5 @@ export class ForecastModel {
     unitOfMeasure: string;
     unitPrice: number;
     quantityHectar: number;
+    currency: string;
 }

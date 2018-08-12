@@ -1,8 +1,6 @@
 package com.arobs.controller;
 
-import com.arobs.entity.Crop;
 import com.arobs.entity.Forecast;
-import com.arobs.model.CropVarietyModel;
 import com.arobs.model.PayloadModel;
 import com.arobs.model.forecast.ForecastModel;
 import com.arobs.service.CropCategoryService;

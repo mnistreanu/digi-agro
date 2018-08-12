@@ -20,6 +20,11 @@ public class ForecastModel {
     private String unitOfMeasure;
     private Double quantityHectar;
 
+    private String currency;
+
+    public ForecastModel() {
+    }
+
     public ForecastModel(Forecast forecast) {
         this.id = forecast.getId();
         this.name = forecast.getName();
@@ -113,5 +118,13 @@ public class ForecastModel {
 
     public void setQuantityHectar(Double quantityHectar) {
         this.quantityHectar = quantityHectar;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }
