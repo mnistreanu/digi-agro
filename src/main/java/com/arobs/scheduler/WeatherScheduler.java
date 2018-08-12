@@ -17,9 +17,9 @@ import org.springframework.web.client.RestTemplate;
 
 import com.arobs.entity.WeatherLocation;
 import com.arobs.model.WeatherModel;
-import com.arobs.scheduler.weather.WeatherLocationJson;
-import com.arobs.scheduler.weather.WeatherSnapshotJson;
 import com.arobs.service.WeatherService;
+import com.arobs.weather.location.WeatherLocationJson;
+import com.arobs.weather.snapshot.WeatherSnapshotJson;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 

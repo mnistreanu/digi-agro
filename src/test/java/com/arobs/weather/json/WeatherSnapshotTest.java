@@ -1,13 +1,10 @@
 package com.arobs.weather.json;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.jdto.DTOBinder;
 import org.jdto.DTOBinderFactory;
@@ -17,9 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-import com.arobs.entity.WeatherForecast;
 import com.arobs.entity.WeatherSnapshot;
-import com.arobs.scheduler.weather.WeatherSnapshotJson;
+import com.arobs.weather.snapshot.WeatherSnapshotJson;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,7 +25,7 @@ public class WeatherSnapshotTest {
 	private static final Logger logger = LoggerFactory.getLogger(WeatherSnapshotTest.class); 
 
 	@Test
-	public void testJsonCoordObject() throws JsonParseException, JsonMappingException, IOException {
+	public void testJsonObject() throws JsonParseException, JsonMappingException, IOException {
 		WeatherSnapshotJson weatherSnapshotJson = getJsonObject(SNAPSHOT_JSON, WeatherSnapshotJson.class);
 		logger.info("Snapshot. ID: {}, Name: {}", weatherSnapshotJson.getId(), weatherSnapshotJson.getName());
 		assertEquals(Integer.valueOf(618510), weatherSnapshotJson.getId());
@@ -67,7 +63,7 @@ public class WeatherSnapshotTest {
 	}
 
 	@Test
-	public void testCoordBinding() throws JsonParseException, JsonMappingException, IOException {
+	public void testBinding() throws JsonParseException, JsonMappingException, IOException {
 		WeatherSnapshotJson snapshotJson = getJsonObject(SNAPSHOT_JSON, WeatherSnapshotJson.class);
 		DTOBinder binder = DTOBinderFactory.getBinder();
 		WeatherSnapshot snapshotEntity = binder.bindFromBusinessObject(WeatherSnapshot.class, snapshotJson);
@@ -78,29 +74,6 @@ public class WeatherSnapshotTest {
 		assertEquals(snapshotJson.getCoord().getLat(), snapshotEntity.getLat());
 	}
 	
-	@Test
-	public void testJsonLocationObject() throws JsonParseException, JsonMappingException, IOException {
-		WeatherSnapshotJson weatherForecast = getJsonObject(SNAPSHOT_JSON, WeatherSnapshotJson.class);
-		assertNotNull(weatherForecast);
-		assertEquals(Integer.valueOf(618510), weatherForecast.getId());
-	}
-
-	@Test
-	public void testLocationBinding() throws JsonParseException, JsonMappingException, IOException {
-		WeatherSnapshotJson weatherForecast = getJsonObject(SNAPSHOT_JSON, WeatherSnapshotJson.class);
-		
-		assertNotNull(weatherForecast);
-		List<WeatherSnapshotJson> weatherForecasts = new ArrayList<>();
-		weatherForecasts.add(weatherForecast);
-		
-		DTOBinder binder = DTOBinderFactory.getBinder();
-		List<WeatherForecast> results = binder.bindFromBusinessObjectList(WeatherForecast.class, weatherForecasts);
-		assertNotNull(results);
-		WeatherForecast result = binder.bindFromBusinessObject(WeatherForecast.class, weatherForecast);
-		assertNotNull(result);
-	}
-
-
 	private <T> T getJsonObject(String jsonFileName, Class<T> clazz) throws IOException, JsonParseException, JsonMappingException {
 		Resource resource = new ClassPathResource(jsonFileName);
 		File file = resource.getFile(); 

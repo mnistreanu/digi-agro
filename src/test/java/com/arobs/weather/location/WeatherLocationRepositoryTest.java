@@ -24,7 +24,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.arobs.entity.WeatherLocation;
 import com.arobs.scheduler.WeatherLocationRepository;
-import com.arobs.scheduler.weather.WeatherLocationJson;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

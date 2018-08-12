@@ -2,13 +2,13 @@ package com.arobs.model;
 
 
 import com.arobs.entity.WeatherSnapshot;
-import com.arobs.scheduler.weather.WeatherSnapshotJson;
-import com.arobs.scheduler.weather.snapshot.Clouds;
-import com.arobs.scheduler.weather.snapshot.Coord;
-import com.arobs.scheduler.weather.snapshot.Main;
-import com.arobs.scheduler.weather.snapshot.Sys;
-import com.arobs.scheduler.weather.snapshot.Weather;
-import com.arobs.scheduler.weather.snapshot.Wind;
+import com.arobs.weather.snapshot.Clouds;
+import com.arobs.weather.snapshot.Coord;
+import com.arobs.weather.snapshot.Main;
+import com.arobs.weather.snapshot.Sys;
+import com.arobs.weather.snapshot.Weather;
+import com.arobs.weather.snapshot.WeatherSnapshotJson;
+import com.arobs.weather.snapshot.Wind;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

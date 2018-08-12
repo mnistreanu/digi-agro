@@ -29,9 +29,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.arobs.entity.WeatherForecast;
 import com.arobs.entity.WeatherLocation;
 import com.arobs.scheduler.WeatherForecastRepository;
-import com.arobs.scheduler.weather.WeatherSnapshotJson;
-import com.arobs.scheduler.weather.WeatherLocationJson;
-import com.arobs.scheduler.weather.forecast.hour.WeatherHourForecast;
+import com.arobs.weather.forecast.hour.WeatherForecastHourJson;
+import com.arobs.weather.location.WeatherLocationJson;
+import com.arobs.weather.snapshot.WeatherSnapshotJson;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -100,9 +100,9 @@ public class WeatherForecastRepositoryTest {
 		ObjectMapper objectMapper = new ObjectMapper();
 //		CollectionType listType = objectMapper.getTypeFactory().constructCollectionType(List.class, WeatherHourForecast.class);
 //		List<WeatherHourForecast> weatherHourForecasts = objectMapper.readValue(file,  listType);
-		WeatherHourForecast weatherHourForecasts = objectMapper.readValue(file,  WeatherHourForecast.class);
+		WeatherForecastHourJson weatherHourForecasts = objectMapper.readValue(file,  WeatherForecastHourJson.class);
 		DTOBinder binder = DTOBinderFactory.getBinder();
-		WeatherHourForecast hourForecasts = binder.bindFromBusinessObject(WeatherHourForecast.class, weatherHourForecasts);
+		WeatherForecastHourJson hourForecasts = binder.bindFromBusinessObject(WeatherForecastHourJson.class, weatherHourForecasts);
 		assertNotNull(hourForecasts);
 	}
 	

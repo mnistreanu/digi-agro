@@ -16,8 +16,8 @@ import org.springframework.core.io.Resource;
 
 import com.arobs.entity.WeatherForecast;
 import com.arobs.entity.WeatherLocation;
-import com.arobs.scheduler.weather.WeatherSnapshotJson;
-import com.arobs.scheduler.weather.WeatherLocationJson;
+import com.arobs.weather.location.WeatherLocationJson;
+import com.arobs.weather.snapshot.WeatherSnapshotJson;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
