@@ -4,8 +4,6 @@ import {ColDef, GridOptions} from 'ag-grid';
 import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {BranchService} from '../../../services/branch.service';
 import {BranchModel} from '../branch/branch.model';
-import {ListItem} from '../../../interfaces/list-item.interface';
-import {TenantService} from '../../../services/tenant.service';
 
 @Component({
     selector: 'app-branch-list',
@@ -17,34 +15,12 @@ export class BranchListComponent implements OnInit {
     options: GridOptions;
     context;
 
-    tenantId;
-    tenants: ListItem[];
-
     constructor(private router: Router,
-                private tenantService: TenantService,
                 private branchService: BranchService) {
     }
 
     ngOnInit() {
-        this.setupTenants();
         this.setupGrid();
-    }
-
-    private setupTenants() {
-        this.tenantService.fetchListItems().subscribe(data => {
-            this.tenants = data;
-            if (this.tenants.length > 0) {
-                this.tenantId = this.tenants[0].id;
-                this.setupRows();
-            }
-        });
-    }
-
-    public onTenantChange() {
-        if (this.tenantId == null) {
-            return;
-        }
-        this.setupRows();
     }
 
     private setupGrid() {
@@ -56,6 +32,7 @@ export class BranchListComponent implements OnInit {
         this.options.columnDefs = this.setupHeaders();
         this.context = {componentParent: this};
 
+        this.setupRows();
     }
 
     private setupHeaders() {
@@ -123,7 +100,7 @@ export class BranchListComponent implements OnInit {
     }
 
     private setupRows() {
-        this.branchService.find(this.tenantId).subscribe(models => {
+        this.branchService.find().subscribe(models => {
             models = this.adjustTreeModels(models);
             this.options.api.setRowData(models);
         });
@@ -139,21 +116,21 @@ export class BranchListComponent implements OnInit {
                 treeModels.push(model);
             } else {
                 const parent = modelMap[model.parentId];
-                if (!parent.participants) {
-                    parent.participants = [];
+                if (!parent.children) {
+                    parent.children = [];
                 }
-                parent.participants.push(model);
+                parent.children.push(model);
             }
         }
         return treeModels;
     }
 
     private getNodeChildDetails(rowItem) {
-        if (rowItem.participants) {
+        if (rowItem.children) {
             return {
                 group: true,
                 expanded: false,
-                children: rowItem.participants,
+                children: rowItem.children,
                 key: rowItem.group
             };
         } else {

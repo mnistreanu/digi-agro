@@ -85,7 +85,7 @@ export class UserFormComponent implements OnInit {
             this.tenantForm.controls.branches.setValue(null);
         }
         else {
-            this.branchService.findByTenants(tenants).subscribe((data) => {
+            this.branchService.fetchListItems(null, tenants).subscribe((data) => {
                 this.branches = data;
             });
         }

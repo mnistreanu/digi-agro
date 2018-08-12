@@ -94,7 +94,7 @@ public class UserAccountService implements HasRepository<UserAccountRepository> 
         }
 
         if (model.getBranches() != null) {
-            List<TenantBranch> branches = tenantBranchService.findByIds(model.getBranches());
+            List<TenantBranch> branches = tenantBranchService.findAll(model.getBranches());
             if (userAccount.getBranches() == null) {
                 userAccount.setBranches(branches);
             }

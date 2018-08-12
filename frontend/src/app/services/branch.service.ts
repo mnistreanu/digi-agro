@@ -10,25 +10,25 @@ import {ListItem} from '../interfaces/list-item.interface';
 })
 export class BranchService {
 
-    private api: string = Constants.API_URL + '/tenant-branch';
+    private api: string = Constants.API_URL + '/branch';
 
     constructor(private http: HttpClient) {
     }
 
-    validateName(id: number, name: string): Observable<boolean> {
-        const queryParams = `?id=${id}&name=${name}`;
-        return this.http.get<boolean>(this.api + '/validate-name' + queryParams);
+    validateName(id: number, value: string): Observable<boolean> {
+        let queryParams = `?field=name&value=${value}`;
+        if (id) {
+            queryParams += `&id=${id}`;
+        }
+        return this.http.get<boolean>(this.api + '/unique' + queryParams);
     }
 
     findOne(id: number): Observable<BranchModel> {
         return this.http.get<BranchModel>(this.api + '/' + id);
     }
 
-    find(tenantId: number): Observable<BranchModel[]> {
-        const filterModel = {
-            tenantId: tenantId
-        };
-        return this.http.post<BranchModel[]>(this.api + '/find-by', filterModel);
+    find(): Observable<BranchModel[]> {
+        return this.http.get<BranchModel[]>(this.api + '/');
     }
 
     save(model: BranchModel): Observable<BranchModel> {
@@ -39,15 +39,14 @@ export class BranchService {
         return this.http.delete<void>(this.api + '/' + model.id);
     }
 
-    fetchListItems(tenantId: number, skipId: number): Observable<ListItem[]> {
-        let query = `?tenantId=${tenantId}`;
-        if (skipId != null) {
-            query += `&skipId=${skipId}`;
-        }
-        return this.http.get<ListItem[]>(this.api + '/list-items' + query);
+    fetchListItems(skipRootId: number, tenants: number[]): Observable<ListItem[]> {
+
+        const model = {
+            skipRootId: skipRootId,
+            tenants: tenants
+        };
+
+        return this.http.post<ListItem[]>(this.api + '/list-items', model);
     }
 
-    findByTenants(tenants: number[]): Observable<ListItem[]> {
-        return this.http.post<ListItem[]>(this.api + '/find-by-tenants', tenants);
-    }
 }

@@ -7,6 +7,8 @@ import {BranchModel} from './branch.model';
 import {BranchService} from '../../../services/branch.service';
 import {ListItem} from '../../../interfaces/list-item.interface';
 import {TenantService} from '../../../services/tenant.service';
+import {StorageService} from '../../../services/storage.service';
+import {Constants} from '../../../common/constants';
 
 @Component({
     selector: 'app-branch',
@@ -21,32 +23,25 @@ export class BranchComponent implements OnInit {
     isNew: boolean;
 
     parents: ListItem[];
-    tenants: ListItem[];
 
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
                 private branchService: BranchService,
-                private tenantService: TenantService,
+                private storageService: StorageService,
                 private toastr: ToastrService) {
     }
 
     ngOnInit() {
-        this.fetchTenantListItems();
         this.route.params.subscribe(params => {
             const id = params['id'];
 
             if (id == -1) {
                 this.prepareNewModel();
-            } else {
+            }
+            else {
                 this.setupModel(id);
             }
-        });
-    }
-
-    private fetchTenantListItems() {
-        this.tenantService.fetchListItems().subscribe(tenants => {
-            this.tenants = tenants;
         });
     }
 
@@ -61,6 +56,7 @@ export class BranchComponent implements OnInit {
     private prepareNewModel() {
         this.model = new BranchModel();
         this.isNew = true;
+        this.fetchParentListItems();
         this.buildForm();
     }
 
@@ -74,7 +70,6 @@ export class BranchComponent implements OnInit {
             villageCity: [this.model.villageCity, Validators.maxLength(255)],
             address: [this.model.address, Validators.maxLength(1024)],
             phones: [this.model.phones, Validators.maxLength(128)],
-            tenantId: [this.model.tenantId, Validators.required],
             parentId: [this.model.parentId]
         });
     }
@@ -90,14 +85,10 @@ export class BranchComponent implements OnInit {
         });
     }
 
-    public onTenantChange() {
-        this.form.controls['parentId'].setValue(null);
-        this.fetchParentListItems();
-    }
-
     private fetchParentListItems() {
-        const tenant = this.form.controls['tenantId'].value;
-        this.branchService.fetchListItems(tenant, this.model.id).subscribe(parents => {
+        const tenants = [];
+        tenants.push(this.storageService.getItem(Constants.TENANT));
+        this.branchService.fetchListItems(this.model.id, tenants).subscribe(parents => {
             parents.unshift({id: null, name: 'None'});
             this.parents = parents;
         });

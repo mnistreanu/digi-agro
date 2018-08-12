@@ -39,11 +39,6 @@ public class TenantController {
         return ResponseEntity.ok(new TenantModel(tenantService.findOne(id)));
     }
 
-//    @RequestMapping(value = "/validate-name", method = RequestMethod.GET)
-//    public ResponseEntity<Boolean> validateName(@RequestParam("id") Long id, @RequestParam("name") String name) {
-//        return ResponseEntity.ok(tenantService.validateName(id, name));
-//    }
-
     @RequestMapping(value = "/unique", method = RequestMethod.GET)
     public ResponseEntity<Boolean> isUnique(@RequestParam(value = "id", required = false) Long id,
                                             @RequestParam("field") String field, @RequestParam("value") String value) {
