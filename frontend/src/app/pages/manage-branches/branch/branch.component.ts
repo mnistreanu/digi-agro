@@ -9,6 +9,7 @@ import {ListItem} from '../../../interfaces/list-item.interface';
 import {TenantService} from '../../../services/tenant.service';
 import {StorageService} from '../../../services/storage.service';
 import {Constants} from '../../../common/constants';
+import {LangService} from '../../../services/lang.service';
 
 @Component({
     selector: 'app-branch',
@@ -24,15 +25,21 @@ export class BranchComponent implements OnInit {
 
     parents: ListItem[];
 
+    private labelSaved: string;
+    private labelRemoved: string;
+    private labelValidationError: string;
+
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
                 private branchService: BranchService,
                 private storageService: StorageService,
+                private langService: LangService,
                 private toastr: ToastrService) {
     }
 
     ngOnInit() {
+        this.setupLabels();
         this.route.params.subscribe(params => {
             const id = params['id'];
 
@@ -43,6 +50,12 @@ export class BranchComponent implements OnInit {
                 this.setupModel(id);
             }
         });
+    }
+
+    private setupLabels() {
+        this.langService.get(Messages.SAVED).subscribe(m => this.labelSaved = m);
+        this.langService.get(Messages.REMOVED).subscribe(m => this.labelRemoved = m);
+        this.langService.get(Messages.VALIDATION_FAIL).subscribe(m => this.labelValidationError = m);
     }
 
     private setupModel(id) {
@@ -76,7 +89,7 @@ export class BranchComponent implements OnInit {
 
     public onNameChange() {
         const control = this.form.controls.name;
-        this.branchService.validateName(this.model.id || -1, control.value).subscribe((isUnique) => {
+        this.branchService.validateName(this.model.id, control.value).subscribe((isUnique) => {
             if (!isUnique) {
                 const errors = control.errors || {};
                 errors.unique = !isUnique;
@@ -99,7 +112,7 @@ export class BranchComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.toastr.warning(Messages.VALIDATION_FAIL);
+            this.toastr.warning(this.labelValidationError);
             return;
         }
 
@@ -109,14 +122,14 @@ export class BranchComponent implements OnInit {
 
         this.branchService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.toastr.success(Messages.SAVED);
+            this.toastr.success(this.labelSaved);
         });
 
     }
 
     public remove() {
         this.branchService.remove(this.model).subscribe(() => {
-            this.toastr.success(Messages.REMOVED);
+            this.toastr.success(this.labelRemoved);
             this.router.navigate(['/pages/manage-branches']);
         });
     }
