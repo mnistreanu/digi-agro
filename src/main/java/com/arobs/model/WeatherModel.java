@@ -1,7 +1,7 @@
 package com.arobs.model;
 
 
-import com.arobs.entity.WeatherSnapshot;
+import com.arobs.weather.entity.WeatherSnapshot;
 import com.arobs.weather.snapshot.Clouds;
 import com.arobs.weather.snapshot.Coord;
 import com.arobs.weather.snapshot.Main;

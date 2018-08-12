@@ -1,4 +1,4 @@
-package com.arobs.entity;
+package com.arobs.weather.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -11,8 +11,8 @@ import javax.persistence.Table;
 import org.jdto.annotation.Source;
 
 @Entity
-@Table(name = "weather_forecast")
-public class WeatherForecast {
+@Table(name = "weather_forecast_hour")
+public class WeatherForecastHour {
     @Id
     @Column(name="id")
     private Long id;

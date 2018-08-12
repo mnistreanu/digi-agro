@@ -22,8 +22,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.arobs.entity.WeatherLocation;
 import com.arobs.scheduler.WeatherLocationRepository;
+import com.arobs.weather.entity.WeatherLocation;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

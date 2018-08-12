@@ -26,9 +26,9 @@ import org.springframework.core.io.Resource;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.arobs.entity.WeatherForecast;
-import com.arobs.entity.WeatherLocation;
 import com.arobs.scheduler.WeatherForecastRepository;
+import com.arobs.weather.entity.WeatherForecastHour;
+import com.arobs.weather.entity.WeatherLocation;
 import com.arobs.weather.forecast.hour.WeatherForecastHourJson;
 import com.arobs.weather.location.WeatherLocationJson;
 import com.arobs.weather.snapshot.WeatherSnapshotJson;
@@ -60,14 +60,14 @@ public class WeatherForecastRepositoryTest {
 	
 	@Test
 	public void testFindAll() {
-		List<WeatherForecast> weatherForecasts = repository.findAll();
+		List<WeatherForecastHour> weatherForecasts = repository.findAll();
 		assertNotNull(weatherForecasts);
 	}
 	
 	@Test
 	public void testFindOne() {
 		Long id = 617077L;
-		WeatherForecast location = repository.findOne(id);
+		WeatherForecastHour location = repository.findOne(id);
 		assertEquals("Raionul Edineţ", location.getName());
 	}
 	

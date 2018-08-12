@@ -1,4 +1,4 @@
-package com.arobs.entity;
+package com.arobs.weather.entity;
 
 import javax.persistence.*;
 

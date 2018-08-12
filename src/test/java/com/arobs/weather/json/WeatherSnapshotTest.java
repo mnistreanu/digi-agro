@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-import com.arobs.entity.WeatherSnapshot;
+import com.arobs.weather.entity.WeatherSnapshot;
 import com.arobs.weather.snapshot.WeatherSnapshotJson;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;

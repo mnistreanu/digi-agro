@@ -15,9 +15,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.arobs.entity.WeatherLocation;
 import com.arobs.model.WeatherModel;
 import com.arobs.service.WeatherService;
+import com.arobs.weather.entity.WeatherLocation;
 import com.arobs.weather.location.WeatherLocationJson;
 import com.arobs.weather.snapshot.WeatherSnapshotJson;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -6,17 +6,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.arobs.entity.WeatherForecast;
+import com.arobs.weather.entity.WeatherForecastHour;
 
 import java.util.List;
 
 @Repository
-public interface WeatherForecastRepository extends JpaRepository<WeatherForecast, Long> {
+public interface WeatherForecastRepository extends JpaRepository<WeatherForecastHour, Long> {
 
     @Query("SELECT weatherForecast FROM WeatherForecast weatherForecast " +
             "WHERE weatherForecast.name LIKE :name " +
             "ORDER BY weatherForecast.name ")
-    List<WeatherForecast> find(@Param("name") String name);
+    List<WeatherForecastHour> find(@Param("name") String name);
 
 //    @Modifying
 //    @Query("delete from User u where u.active = false")

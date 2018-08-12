@@ -1,9 +1,9 @@
 package com.arobs.service;
 
-import com.arobs.entity.WeatherSnapshot;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.WeatherModel;
 import com.arobs.repository.WeatherRepository;
+import com.arobs.weather.entity.WeatherSnapshot;
 
 import org.jdto.DTOBinder;
 import org.springframework.beans.factory.annotation.Autowired;

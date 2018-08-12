@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"cod", "message", "cnt", "list","city"})
+@JsonPropertyOrder({"cod", "message", "cnt", "list", "city"})
 public class WeatherForecastHourJson {
 
     @JsonProperty("cod")

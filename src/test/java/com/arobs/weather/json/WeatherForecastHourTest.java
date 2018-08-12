@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-import com.arobs.entity.WeatherForecast;
+import com.arobs.weather.entity.WeatherForecastHour;
 import com.arobs.weather.forecast.WeatherForecastRepositoryTest;
 import com.arobs.weather.forecast.hour.WeatherForecastHourJson;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -37,7 +37,7 @@ public class WeatherForecastHourTest {
 	public void testBinding() throws JsonParseException, JsonMappingException, IOException {
 		WeatherForecastHourJson weatherHourForecast = getJsonObject();
 		
-		WeatherForecast forecasts = binder.bindFromBusinessObject(WeatherForecast.class, weatherHourForecast);
+		WeatherForecastHour forecasts = binder.bindFromBusinessObject(WeatherForecastHour.class, weatherHourForecast);
 		assertNotNull(forecasts);
 		logger.info("Au fost salvate {} articole", forecasts);
 	}

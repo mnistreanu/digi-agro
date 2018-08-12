@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-import com.arobs.entity.WeatherForecast;
-import com.arobs.entity.WeatherLocation;
+import com.arobs.weather.entity.WeatherForecastHour;
+import com.arobs.weather.entity.WeatherLocation;
 import com.arobs.weather.location.WeatherLocationJson;
 import com.arobs.weather.snapshot.WeatherSnapshotJson;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -48,7 +48,7 @@ public class WeatherForecastTest {
 		WeatherSnapshotJson weatherForecasts = objectMapper.readValue(file,  WeatherSnapshotJson.class);
 
 		
-		WeatherForecast forecasts = binder.bindFromBusinessObject(WeatherForecast.class, weatherForecasts);
+		WeatherForecastHour forecasts = binder.bindFromBusinessObject(WeatherForecastHour.class, weatherForecasts);
 		assertNotNull(forecasts);
 		logger.info("Au fost salvate {} articole", forecasts);
 		logger.info("Au fost salvate {} articole", weatherForecasts);

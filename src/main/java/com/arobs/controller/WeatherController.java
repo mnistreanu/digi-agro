@@ -1,9 +1,10 @@
 package com.arobs.controller;
 
-import com.arobs.entity.WeatherSnapshot;
 import com.arobs.model.PayloadModel;
 import com.arobs.model.WeatherModel;
 import com.arobs.service.WeatherService;
+import com.arobs.weather.entity.WeatherSnapshot;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
