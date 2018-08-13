@@ -64,9 +64,9 @@ export class ForecastChartsComponent implements OnInit {
             {data: [48, 40, 19, 75, 27, 80], label: 'Venituri'}
         ];
         this.horizontalBarChartData = [
-            {data: [59, 80, 72, 56, 55, 40], label: 'AAA'},
-            {data: [48, 40, 19, 75, 27, 80], label: 'BBB'},
-            {data: [54, 47, 59, 71, 37, 70], label: 'CCC'}
+            {data: [59, 80, 72, 56, 55, 40], label: 'Grâu'},
+            {data: [48, 40, 19, 75, 27, 80], label: 'Porumb'},
+            {data: [54, 47, 59, 71, 37, 70], label: 'Floarea soarelui'}
         ];
         this.barChartColors = [
             {

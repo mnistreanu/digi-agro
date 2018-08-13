@@ -21,12 +21,12 @@
 	"forecast": {
 		"additional_info": "Informații suplimnetare",
 		"currency": "Monedă",
-		"harvesting_year": "Anul recoltei",
-		"name": "Denumire prognoză",
 		"harvest": "Recoltă",
+		"harvesting_year": "Anul recoltei",
 		"hectar": "hectar",
-		"unit_of_measure": "Unitatea de măsură",
-		"selling_price": "Preț de vînzare"
+		"name": "Denumire prognoză",
+		"selling_price": "Preț de vînzare",
+		"unit_of_measure": "Unitatea de măsură"
 	},
 	"general": {
 		"form": "Forma",
@@ -76,6 +76,9 @@
 		"telemetry": "Telemetrie",
 		"tenants": "Clienți",
 		"users": "Utilizatori",
+		"weather": "Date meteo",
+		"weather-forecast": "Prognoza meteo",
+		"weather-history": "Date meteo istorice",
 		"work-agenda": "Agenda lucrărilor"
 	},
 	"notification": {
@@ -160,5 +163,13 @@
 		"password-do-not-match": "Parolele nu se potrivesc",
 		"required": "Camp obligatoriu",
 		"unique": "Unic"
+	},
+	"weather": {
+		"condition": "Condiții",
+		"date": "Data",
+		"humidity": "Umiditatea",
+		"location": "Locația",
+		"temperature": "Temperatura",
+		"wind": "Vîntul"
 	}
 }
