@@ -46,7 +46,7 @@
                 <div class="col-sm-4">
                     <label for="country">Country</label>
                     <select id="country" class="form-control custom-select"
-                            (change)="onCountryChange()" formControlName="country">
+                            formControlName="country" (change)="onCountryChange()">
                         <option *ngFor="let item of countries" [ngValue]="item.id">{{ item.name }}</option>
                     </select>
                     <app-form-error-block [control]="form.get('country')"

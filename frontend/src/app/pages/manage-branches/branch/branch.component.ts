@@ -10,6 +10,9 @@ import {TenantService} from '../../../services/tenant.service';
 import {StorageService} from '../../../services/storage.service';
 import {Constants} from '../../../common/constants';
 import {LangService} from '../../../services/lang.service';
+import {GeoLocalizedItem} from '../../../interfaces/geo-localized-item.interface';
+import {GeoService} from '../../../services/geo.service';
+import {TenantModel} from '../../manage-tenants/tenant/tenant.model';
 
 @Component({
     selector: 'app-branch',
@@ -25,6 +28,12 @@ export class BranchComponent implements OnInit {
 
     parents: ListItem[];
 
+    countries: GeoLocalizedItem[];
+    counties: GeoLocalizedItem[];
+    cities: GeoLocalizedItem[];
+
+    private tenant: TenantModel;
+
     private labelSaved: string;
     private labelRemoved: string;
     private labelValidationError: string;
@@ -35,20 +44,26 @@ export class BranchComponent implements OnInit {
                 private branchService: BranchService,
                 private storageService: StorageService,
                 private langService: LangService,
+                private geoService: GeoService,
+                private tenantService: TenantService,
                 private toastr: ToastrService) {
     }
 
     ngOnInit() {
         this.setupLabels();
-        this.route.params.subscribe(params => {
-            const id = params['id'];
+        const tenantId = this.storageService.getItem(Constants.TENANT);
+        this.tenantService.findOne(tenantId).subscribe(tenant => {
+            this.tenant = tenant;
+            this.route.params.subscribe(params => {
+                const id = params['id'];
 
-            if (id == -1) {
-                this.prepareNewModel();
-            }
-            else {
-                this.setupModel(id);
-            }
+                if (id == -1) {
+                    this.prepareNewModel();
+                }
+                else {
+                    this.setupModel(id);
+                }
+            });
         });
     }
 
@@ -69,8 +84,53 @@ export class BranchComponent implements OnInit {
     private prepareNewModel() {
         this.model = new BranchModel();
         this.isNew = true;
+        this.model.country = this.tenant.country;
+        this.model.county = this.tenant.county;
+        this.model.city = this.tenant.city;
         this.fetchParentListItems();
         this.buildForm();
+    }
+
+    private setupCountries() {
+        const locale = this.langService.getLanguage();
+        this.geoService.getCountries().subscribe(data => {
+            this.countries = data.map((item) => new GeoLocalizedItem(item, locale));
+        });
+    }
+
+    public onCountryChange() {
+        this.form.controls['county'].setValue(null);
+        this.form.controls['city'].setValue(null);
+        this.setupCounties(this.form.controls['country'].value);
+    }
+
+    private setupCounties(country) {
+        if (!country) {
+            this.counties = [];
+            return;
+        }
+        const locale = this.langService.getLanguage();
+        this.geoService.getCounties(country).subscribe(data => {
+            this.counties = data.map((item) => new GeoLocalizedItem(item, locale));
+        });
+    }
+
+    public onCountyChange() {
+        this.form.controls['city'].setValue(null);
+        const country = this.form.controls['country'].value;
+        const county = this.form.controls['county'].value;
+        this.setupCities(country, county);
+    }
+
+    private setupCities(country, county) {
+        if (!country || !county) {
+            this.cities = [];
+            return;
+        }
+        const locale = this.langService.getLanguage();
+        this.geoService.getCities(country, county).subscribe(data => {
+            this.cities = data.map((item) => new GeoLocalizedItem(item, locale));
+        });
     }
 
     private buildForm() {
@@ -85,6 +145,10 @@ export class BranchComponent implements OnInit {
             phones: [this.model.phones, Validators.maxLength(128)],
             parentId: [this.model.parentId]
         });
+
+        this.setupCountries();
+        this.setupCounties(this.model.country);
+        this.setupCities(this.model.country, this.model.county);
     }
 
     public onNameChange() {
@@ -100,7 +164,7 @@ export class BranchComponent implements OnInit {
 
     private fetchParentListItems() {
         const tenants = [];
-        tenants.push(this.storageService.getItem(Constants.TENANT));
+        tenants.push(this.tenant.id);
         this.branchService.fetchListItems(this.model.id, tenants).subscribe(parents => {
             parents.unshift({id: null, name: 'None'});
             this.parents = parents;
