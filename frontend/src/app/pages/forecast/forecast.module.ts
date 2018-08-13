@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import 'chart.js/dist/Chart.js';
 import {DirectivesModule} from '../../theme/directives/directives.module';
-import {ForecastHarvestChartsComponent} from './harvest/forecast-harvest-charts.component';
+import {ForecastChartsComponent} from './charts/forecast-charts.component';
 import {ForecastHarvestComponent} from './harvest/forecast-harvest.component';
 import {ChartsModule} from 'ng2-charts';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -16,9 +16,9 @@ export const routes = [
     {path: '', redirectTo: 'forecasting', pathMatch: 'full'},
     {path: 'harvesting-form', component: ForecastHarvestComponent, data: {breadcrumb: 'harvesting-form'}},
     {path: 'harvesting-factor', component: ForecastHarvestFactorComponent, data: {breadcrumb: 'harvesting-factor'}},
-    {path: 'harvesting', component: ForecastHarvestChartsComponent, data: {breadcrumb: 'harvesting'}},
+    {path: 'charts', component: ForecastChartsComponent, data: {breadcrumb: 'charts'}},
     {path: 'costs-form', component: ForecastHarvestComponent, data: {breadcrumb: 'costs-form'}},
-    {path: 'costs', component: ForecastHarvestChartsComponent, data: {breadcrumb: 'costs'}}
+    {path: 'costs', component: ForecastChartsComponent, data: {breadcrumb: 'costs'}}
 ];
 
 @NgModule({
@@ -34,7 +34,7 @@ export const routes = [
         RouterModule.forChild(routes)
     ],
     declarations: [
-        ForecastHarvestChartsComponent, ForecastHarvestComponent, ForecastHarvestFactorComponent
+        ForecastChartsComponent, ForecastHarvestComponent, ForecastHarvestFactorComponent
     ]
 })
 
