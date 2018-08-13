@@ -117,13 +117,13 @@ export class MenuService {
         }
 
         if (isAdmin || isUser) {
-            menuItems.push({
+            menuItems.push(<any>{
                 title: 'nav.weather',
                 routerLink: 'weather',
                 icon: 'fa fa-cloud',
                 selected: false,
                 expanded: false,
-                subMenu: [
+                subMenu: <any>[
                     {
                         title: 'nav.weather-history',
                         routerLink: 'weather/history',
