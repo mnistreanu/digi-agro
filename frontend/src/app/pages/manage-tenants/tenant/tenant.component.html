@@ -2,7 +2,7 @@
 
     <div widget class="card bottom-30">
         <div class="card-header">
-            <span>Tenant</span>
+            <span translate>tenant.tenant</span>
             <div class="widget-controls">
                 <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
                 <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
@@ -15,7 +15,7 @@
 
             <div class="form-group row">
                 <div class="col-sm-12">
-                    <label for="name">Name</label>
+                    <label for="name" translate>info.name</label>
                     <input id="name" class="form-control checking-field" formControlName="name"
                            (change)="onNameChange()">
                     <app-form-error-block [control]="form.get('name')"
@@ -25,7 +25,7 @@
 
             <div class="form-group row">
                 <div class="col-sm-12">
-                    <label for="description">Description</label>
+                    <label for="description" translate>info.description</label>
                     <textarea id="description" class="form-control" formControlName="description"></textarea>
                     <app-form-error-block [control]="form.get('description')"
                                           [formSubmitted]="submitted"></app-form-error-block>
@@ -34,7 +34,7 @@
 
             <div class="form-group row">
                 <div class="col-sm-12">
-                    <label for="fiscalCode">Fiscal Code</label>
+                    <label for="fiscalCode" translate>tenant.fiscal-code</label>
                     <input id="fiscalCode" class="form-control checking-field"
                            formControlName="fiscalCode" (change)="onFiscalCodeChange()">
                     <app-form-error-block [control]="form.get('fiscalCode')"
@@ -44,7 +44,7 @@
 
             <div class="form-group row">
                 <div class="col-sm-4">
-                    <label for="country">Country</label>
+                    <label for="country" translate>geo.country</label>
                     <select id="country" class="form-control custom-select"
                             formControlName="country" (change)="onCountryChange()">
                         <option *ngFor="let item of countries" [ngValue]="item.id">{{ item.name }}</option>
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="col-sm-4">
-                    <label for="county">County</label>
+                    <label for="county"translate>geo.county</label>
                     <select id="county" class="form-control custom-select"
                             formControlName="county" (change)="onCountyChange()">
                         <option *ngFor="let item of counties" [ngValue]="item.id">{{ item.name }}</option>
@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="col-sm-4">
-                    <label for="city">Village City</label>
+                    <label for="city" translate>geo.village-city</label>
                     <select id="city" class="form-control custom-select" formControlName="city">
                         <option *ngFor="let item of cities" [ngValue]="item.id">{{ item.name }}</option>
                     </select>
@@ -75,13 +75,13 @@
 
             <div class="form-group row">
                 <div class="col-sm-6">
-                    <label for="address">Address</label>
+                    <label for="address" translate>geo.address</label>
                     <input id="address" class="form-control checking-field" formControlName="address">
                     <app-form-error-block [control]="form.get('address')"
                                           [formSubmitted]="submitted"></app-form-error-block>
                 </div>
                 <div class="col-sm-6">
-                    <label for="phones">Phones</label>
+                    <label for="phones" translate>contact.phone</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-phone"></i></span>
@@ -94,8 +94,8 @@
             </div>
 
             <div class="form-group">
-                <button class="btn btn-danger" *ngIf="!isNew" (click)="remove()">Remove</button>
-                <button class="btn btn-success pull-right" (click)="save(form)">Save</button>
+                <button class="btn btn-danger" *ngIf="!isNew" (click)="remove()" translate>action.remove</button>
+                <button class="btn btn-success pull-right" (click)="save(form)" translate>action.save</button>
             </div>
 
         </div>

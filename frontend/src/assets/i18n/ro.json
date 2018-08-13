@@ -13,6 +13,9 @@
 	"branch": {
 		"branch": "Subdiviziune"
 	},
+	"contact": {
+		"phone": "Telefon"
+	},
 	"crop": {
 		"category": "Categoria",
 		"name": "Cultura agricolă",
@@ -21,18 +24,19 @@
 	"forecast": {
 		"additional_info": "Informații suplimnetare",
 		"currency": "Monedă",
-		"harvesting_year": "Anul recoltei",
-		"name": "Denumire prognoză",
 		"harvest": "Recoltă",
+		"harvesting_year": "Anul recoltei",
 		"hectar": "hectar",
-		"unit_of_measure": "Unitatea de măsură",
-		"selling_price": "Preț de vînzare"
+		"name": "Denumire prognoză",
+		"selling_price": "Preț de vînzare",
+		"unit_of_measure": "Unitatea de măsură"
 	},
 	"general": {
 		"form": "Forma",
 		"settings": "Setări"
 	},
 	"geo": {
+		"address": "Adresa",
 		"country": "Țară",
 		"county": "Județ",
 		"map": "Hartă",
@@ -119,7 +123,9 @@
 		"prev": "Înapoi"
 	},
 	"tenant": {
-		"tenant": "Client"
+		"fiscal-code": "Cod Fiscal",
+		"tenant": "Client",
+		"tenants": "Clienți"
 	},
 	"tree": {
 		"parent": "Părinte"

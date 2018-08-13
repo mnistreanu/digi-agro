@@ -13,6 +13,9 @@
 	"branch": {
 		"branch": "Branch"
 	},
+	"contact": {
+		"phone": "Phone"
+	},
 	"crop": {
 		"category": "Category",
 		"name": "Agricultural crop",
@@ -21,18 +24,19 @@
 	"forecast": {
 		"additional_info": "Additional information",
 		"currency": "Currency",
-		"harvesting_year": "Harvesting year",
-		"name": "Forecast name",
 		"harvest": "Harvest",
+		"harvesting_year": "Harvesting year",
 		"hectar": "hectar",
-		"unit_of_measure": "Unit of measure",
-		"selling_price": "Selling price"
+		"name": "Forecast name",
+		"selling_price": "Selling price",
+		"unit_of_measure": "Unit of measure"
 	},
 	"general": {
 		"form": "Form",
 		"settings": "Settings"
 	},
 	"geo": {
+		"address": "Address",
 		"country": "Country",
 		"county": "County",
 		"map": "Map",
@@ -119,7 +123,9 @@
 		"prev": "Prev"
 	},
 	"tenant": {
-		"tenant": "Tenant"
+		"fiscal-code": "Fiscal Code",
+		"tenant": "Tenant",
+		"tenants": "Tenants"
 	},
 	"tree": {
 		"parent": "Parent"

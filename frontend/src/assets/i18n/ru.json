@@ -13,6 +13,9 @@
 	"branch": {
 		"branch": "Подразделение"
 	},
+	"contact": {
+		"phone": "Телефон"
+	},
 	"crop": {
 		"category": "Категория",
 		"name": "Сельскохозяйственная культура",
@@ -21,18 +24,19 @@
 	"forecast": {
 		"additional_info": "Дополнительная информация",
 		"currency": "Валюта",
-		"harvesting_year": "Год сбора урожая",
-		"name": "Название прогноза",
 		"harvest": "Урожай",
+		"harvesting_year": "Год сбора урожая",
 		"hectar": "гектар",
-		"unit_of_measure": "Единица измерения",
-		"selling_price": "Цена при продажи"
+		"name": "Название прогноза",
+		"selling_price": "Цена при продажи",
+		"unit_of_measure": "Единица измерения"
 	},
 	"general": {
 		"form": "Форма",
 		"settings": "Настройки"
 	},
 	"geo": {
+		"address": "Адрес",
 		"country": "Страна",
 		"county": "Округ",
 		"map": "Карта",
@@ -119,7 +123,9 @@
 		"prev": "Пред."
 	},
 	"tenant": {
-		"tenant": "Клиент"
+		"fiscal-code": "Фискальный код",
+		"tenant": "Клиент",
+		"tenants": "Клиенты"
 	},
 	"tree": {
 		"parent": "Родитель"
