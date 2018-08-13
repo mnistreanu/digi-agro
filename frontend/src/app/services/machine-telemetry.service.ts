@@ -3,11 +3,12 @@ import {HttpClient} from '@angular/common/http';
 import {Constants} from '../common/constants';
 import {Observable} from 'rxjs/Rx';
 import {MachineTelemetryModel} from '../pages/telemetry/machine-telemetry/machine-telemetry.model';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class MachineTelemetryService {
 
-    private api: string = Constants.API_URL + '/machine-telemetry';
+    private api: string = environment.apiUrl + '/machine-telemetry';
 
     constructor(private http: HttpClient) {
     }

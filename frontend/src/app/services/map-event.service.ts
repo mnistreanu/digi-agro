@@ -3,11 +3,12 @@ import {Constants} from '../common/constants';
 import {MapEventModel} from '../pages/telemetry/map-events/map-event.model';
 import {Observable} from 'rxjs/Rx';
 import {HttpClient} from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class MapEventService {
 
-    private api: string = Constants.API_URL + '/map-event';
+    private api: string = environment.apiUrl + '/map-event';
 
     constructor(private http: HttpClient) {
     }

@@ -11,6 +11,7 @@ import {LangService} from '../lang.service';
 import {StorageService} from '../storage.service';
 import {AuthResponseModel} from './auth-response.model';
 import {AuthRequestModel} from './auth-request.model';
+import { environment } from '../../../environments/environment';
 
 
 @Injectable({
@@ -18,7 +19,7 @@ import {AuthRequestModel} from './auth-request.model';
 })
 export class AuthService {
 
-    private api: string = Constants.API_URL + '/auth';
+    private api: string = environment.apiUrl + '/auth';
 
     userChanged: EventEmitter<void> = new EventEmitter();
 

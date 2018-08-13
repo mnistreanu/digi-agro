@@ -3,6 +3,7 @@ import {AppState} from '../../../app.state';
 import {SidebarService} from '../sidebar/sidebar.service';
 import {AuthService} from '../../../services/auth/auth.service';
 import {Constants} from '../../../common/constants';
+import { environment } from '../../../../environments/environment';
 
 @Component({
     selector: 'app-navbar',
@@ -41,7 +42,7 @@ export class NavbarComponent implements OnInit {
             return;
         }
         this.username = userData.username;
-        this.logoUrl = Constants.API_URL + userData.logoUrl;
+        this.logoUrl = environment.apiUrl + userData.logoUrl;
     }
 
     public closeSubMenus() {

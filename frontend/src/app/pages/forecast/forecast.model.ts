@@ -5,7 +5,8 @@ export class ForecastModel {
     cropId: number;
     cropVarietyId: number;
 
-    forecastName: string;
+    id: number;
+    name: string;
     description: string;
 
     harvestingYear: number;
@@ -13,4 +14,5 @@ export class ForecastModel {
     unitOfMeasure: string;
     unitPrice: number;
     quantityHectar: number;
+    currency: string;
 }

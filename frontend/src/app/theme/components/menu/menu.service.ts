@@ -139,8 +139,8 @@ export class MenuService {
                 expanded: false,
                 subMenu: [
                     {
-                        title: 'nav.harvesting-forecasting',
-                        routerLink: 'forecasting/harvesting',
+                        title: 'nav.forecasting-charts',
+                        routerLink: 'forecasting/charts',
                     },
                     {
                         title: 'nav.harvesting-forecasting-form',

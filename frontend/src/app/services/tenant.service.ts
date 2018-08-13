@@ -4,13 +4,14 @@ import {HttpClient} from '@angular/common/http';
 import {TenantModel} from '../pages/manage-tenants/tenant/tenant.model';
 import {Observable} from 'rxjs/Rx';
 import {ListItem} from '../interfaces/list-item.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class TenantService {
 
-    private api: string = Constants.API_URL + '/tenant';
+    private api: string = environment.apiUrl + '/tenant';
 
     constructor(private http: HttpClient) {
     }

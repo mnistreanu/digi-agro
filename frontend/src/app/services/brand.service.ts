@@ -3,11 +3,12 @@ import {Observable} from 'rxjs/Rx';
 import {HttpClient} from '@angular/common/http';
 import {Constants} from '../common/constants';
 import {BrandModel} from '../pages/manage-brands/brand/brand.model';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class BrandService {
 
-    private api: string = Constants.API_URL + '/brand';
+    private api: string = environment.apiUrl + '/brand';
 
     constructor(private http: HttpClient) {
     }
