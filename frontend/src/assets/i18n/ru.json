@@ -21,12 +21,12 @@
 	"forecast": {
 		"additional_info": "Дополнительная информация",
 		"currency": "Валюта",
-		"harvesting_year": "Год сбора урожая",
-		"name": "Название прогноза",
 		"harvest": "Урожай",
+		"harvesting_year": "Год сбора урожая",
 		"hectar": "гектар",
-		"unit_of_measure": "Единица измерения",
-		"selling_price": "Цена при продажи"
+		"name": "Название прогноза",
+		"selling_price": "Цена при продажи",
+		"unit_of_measure": "Единица измерения"
 	},
 	"general": {
 		"form": "Форма",
@@ -76,6 +76,9 @@
 		"telemetry": "Телеметрия",
 		"tenants": "Клиенты",
 		"users": "Пользователями",
+		"weather": "Погода",
+		"weather-forecast": "Прогноз погоды",
+		"weather-history": "Исторические данные",
 		"work-agenda": "Повестка работ"
 	},
 	"notification": {
@@ -160,5 +163,13 @@
 		"password-do-not-match": "Пароли не совпадают",
 		"required": "Обязательное поле",
 		"unique": "Уникальное поле"
+	},
+	"weather": {
+		"condition": "Условия",
+		"date": "Дата",
+		"humidity": "Влажность",
+		"location": "Место расположения",
+		"temperature": "Температура",
+		"wind": "Ветер"
 	}
 }

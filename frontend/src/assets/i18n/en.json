@@ -21,12 +21,12 @@
 	"forecast": {
 		"additional_info": "Additional information",
 		"currency": "Currency",
-		"harvesting_year": "Harvesting year",
-		"name": "Forecast name",
 		"harvest": "Harvest",
+		"harvesting_year": "Harvesting year",
 		"hectar": "hectar",
-		"unit_of_measure": "Unit of measure",
-		"selling_price": "Selling price"
+		"name": "Forecast name",
+		"selling_price": "Selling price",
+		"unit_of_measure": "Unit of measure"
 	},
 	"general": {
 		"form": "Form",
@@ -76,6 +76,9 @@
 		"telemetry": "Telemetry",
 		"tenants": "Tenants",
 		"users": "Users",
+		"weather": "Weather",
+		"weather-forecast": "Weather forecast",
+		"weather-history": "Weather history",
 		"work-agenda": "Work agenda"
 	},
 	"notification": {
@@ -160,5 +163,13 @@
 		"password-do-not-match": "Passwords do not match",
 		"required": "Required field",
 		"unique": "Unique field"
+	},
+	"weather": {
+		"condition": "Condition",
+		"date": "Date",
+		"humidity": "Humidity",
+		"location": "Location",
+		"temperature": "Temperature",
+		"wind": "Wind"
 	}
 }

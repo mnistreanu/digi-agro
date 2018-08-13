@@ -116,6 +116,26 @@ export class MenuService {
             });
         }
 
+        if (isAdmin || isUser) {
+            menuItems.push({
+                title: 'nav.weather',
+                routerLink: 'weather',
+                icon: 'fa fa-cloud',
+                selected: false,
+                expanded: false,
+                subMenu: [
+                    {
+                        title: 'nav.weather-history',
+                        routerLink: 'weather/history',
+                    },
+                    {
+                        title: 'nav.weather-forecast',
+                        routerLink: 'weather/forecast',
+                    },
+                ]
+            });
+        }
+
         // other menu items from template
         menuItems = menuItems.concat(<any>[
             {

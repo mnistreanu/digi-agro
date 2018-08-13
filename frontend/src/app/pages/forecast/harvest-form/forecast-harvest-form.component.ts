@@ -15,7 +15,7 @@ import {ForecastModel} from '../forecast.model';
 
 @Component({
     selector: 'app-forecast-harvest',
-    templateUrl: './forecast-harvest.component.html'
+    templateUrl: './forecast-harvest-form.component.html'
 })
 
 export class ForecastHarvestComponent implements OnInit {

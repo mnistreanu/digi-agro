@@ -1,11 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ForecastHarvestForm} from './forecast-harvest.interface';
-import {CropService} from '../../../services/crop.service';
-import {CropCategoryModel} from '../../crop/crop-category.model';
-import {CropModel} from '../../crop/crop.model';
-import {CropVarietyModel} from '../../crop/crop-variety.model';
-import {ParcelService} from '../../../services/parcel.service';
 import {ForecastService} from "../../../services/forecast.service";
 import {ForecastModel} from "../forecast.model";
 
