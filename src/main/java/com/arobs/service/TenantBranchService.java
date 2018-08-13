@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,7 +82,7 @@ public class TenantBranchService implements HasRepository<TenantBranchRepository
         entity.setDescription(model.getDescription());
         entity.setCountry(model.getCountry());
         entity.setCounty(model.getCounty());
-        entity.setVillageCity(model.getVillageCity());
+        entity.setCity(model.getCity());
         entity.setAddress(model.getAddress());
         entity.setPhones(model.getPhones());
         entity.setParent(model.getParentId() == null ? null : findOne(model.getParentId()));

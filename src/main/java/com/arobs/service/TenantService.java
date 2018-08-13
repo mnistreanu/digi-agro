@@ -2,18 +2,18 @@ package com.arobs.service;
 
 import com.arobs.entity.Tenant;
 import com.arobs.interfaces.HasRepository;
-import com.arobs.model.ListItemModel;
 import com.arobs.model.tenant.TenantFilterModel;
 import com.arobs.model.tenant.TenantModel;
 import com.arobs.repository.TenantRepository;
+import com.arobs.repository.custom.CommonCustomRepository;
 import com.arobs.repository.custom.TenantCustomRepository;
+import com.arobs.utils.StaticUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TenantService implements HasRepository<TenantRepository> {
@@ -22,6 +22,8 @@ public class TenantService implements HasRepository<TenantRepository> {
     private TenantRepository tenantRepository;
     @Autowired
     private TenantCustomRepository tenantCustomRepository;
+    @Autowired
+    private CommonCustomRepository commonCustomRepository;
     @Autowired
     private AuthService authService;
 
@@ -43,13 +45,8 @@ public class TenantService implements HasRepository<TenantRepository> {
         }
     }
 
-    public List<TenantModel> findByFilter(TenantFilterModel filterRequestModel) {
-        List<TenantModel> list = new ArrayList<>();
-        List<Tenant> tenants = tenantCustomRepository.find(filterRequestModel);
-        for (Tenant t:tenants) {
-            list.add(new TenantModel(t));
-        }
-        return list;
+    public List<Tenant> find(TenantFilterModel filterModel) {
+        return tenantCustomRepository.find(filterModel);
     }
 
     public boolean isUnique(Long currentId, String field, String value) {
@@ -57,7 +54,7 @@ public class TenantService implements HasRepository<TenantRepository> {
             throw new IllegalArgumentException("Invalid field name");
         }
 
-        return tenantCustomRepository.isUnique(currentId, field, value);
+        return commonCustomRepository.isUnique("Tenant", currentId, field, value);
     }
 
     @Transactional
@@ -83,7 +80,7 @@ public class TenantService implements HasRepository<TenantRepository> {
         entity.setFiscalCode(model.getFiscalCode());
         entity.setCountry(model.getCountry());
         entity.setCounty(model.getCounty());
-//        entity.setVillageCity(model.getVillageCity());
+        entity.setCityId(model.getCityId());
         entity.setAddress(model.getAddress());
         entity.setPhones(model.getPhones());
     }
@@ -98,10 +95,10 @@ public class TenantService implements HasRepository<TenantRepository> {
         getRepository().remove(id, userId);
     }
 
-    public List<Tenant> findByIds(List<Long> ids) {
-        if (ids == null || ids.isEmpty()) {
+    public List<Tenant> findAll(List<Long> ids) {
+        if (StaticUtil.isEmpty(ids)) {
             return new ArrayList<>();
         }
-        return getRepository().find(ids);
+        return getRepository().findAll(ids);
     }
 }

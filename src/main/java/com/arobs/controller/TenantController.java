@@ -4,6 +4,7 @@ import com.arobs.entity.Tenant;
 import com.arobs.model.ListItemModel;
 import com.arobs.model.tenant.TenantFilterModel;
 import com.arobs.model.tenant.TenantModel;
+import com.arobs.service.AuthService;
 import com.arobs.service.TenantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -20,6 +20,8 @@ public class TenantController {
 
     @Autowired
     private TenantService tenantService;
+    @Autowired
+    private AuthService authService;
 
     @RequestMapping(value = "/list-items", method = RequestMethod.GET)
     public ResponseEntity<List<ListItemModel>> fetchListItems() {
@@ -30,7 +32,8 @@ public class TenantController {
 
     @RequestMapping(value = "/find-by", method = RequestMethod.POST)
     public ResponseEntity<List<TenantModel>> getModels(@RequestBody TenantFilterModel filterRequestModel) {
-        List<TenantModel> models = tenantService.findByFilter(filterRequestModel);
+        List<Tenant> tenants = tenantService.find(filterRequestModel);
+        List<TenantModel> models = tenants.stream().map(TenantModel::new).collect(Collectors.toList());
         return ResponseEntity.ok(models);
     }
 
@@ -54,7 +57,7 @@ public class TenantController {
     @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void remove(@PathVariable Long id) {
-        tenantService.remove(id, 1L);
+        tenantService.remove(id, authService.getCurrentUser().getId());
     }
 
 }

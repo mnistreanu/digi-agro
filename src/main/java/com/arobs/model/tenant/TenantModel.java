@@ -11,7 +11,7 @@ public class TenantModel {
     private String fiscalCode;
     private String country;
     private String county;
-    private String villageCity;
+    private Long cityId;
     private String address;
     private String phones;
 
@@ -25,7 +25,7 @@ public class TenantModel {
         fiscalCode = entity.getFiscalCode();
         country = entity.getCountry();
         county = entity.getCounty();
-//        villageCity = entity.getVillageCity();
+        cityId = entity.getCityId();
         address = entity.getAddress();
         phones = entity.getPhones();
     }
@@ -78,12 +78,12 @@ public class TenantModel {
         this.county = county;
     }
 
-    public String getVillageCity() {
-        return villageCity;
+    public Long getCityId() {
+        return cityId;
     }
 
-    public void setVillageCity(String villageCity) {
-        this.villageCity = villageCity;
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
     }
 
     public String getAddress() {

@@ -31,8 +31,8 @@ public class Tenant {
     @Column(name = "county_id", columnDefinition = "char(2)")
     private String county;
 
-    @Column(name = "city_village_id")
-    private Long cityVillageId;
+    @Column(name = "city_id")
+    private Long cityId;
 
     @Column(name = "address", columnDefinition = "varchar(1024)")
     private String address;
@@ -106,12 +106,12 @@ public class Tenant {
         this.county = county;
     }
 
-    public Long getCityVillageId() {
-        return cityVillageId;
+    public Long getCityId() {
+        return cityId;
     }
 
-    public void setCityVillageId(Long cityVillageId) {
-        this.cityVillageId = cityVillageId;
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
     }
 
     public String getAddress() {

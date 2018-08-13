@@ -10,7 +10,7 @@ public class TenantBranchModel {
     private String description;
     private String country;
     private String county;
-    private String villageCity;
+    private String city;
     private String address;
     private String phones;
 
@@ -26,7 +26,7 @@ public class TenantBranchModel {
         description = entity.getDescription();
         country = entity.getCountry();
         county = entity.getCounty();
-        villageCity = entity.getVillageCity();
+        city = entity.getCity();
         address = entity.getAddress();
         phones = entity.getPhones();
         if (entity.getParent() != null) {
@@ -77,12 +77,12 @@ public class TenantBranchModel {
         this.county = county;
     }
 
-    public String getVillageCity() {
-        return villageCity;
+    public String getCity() {
+        return city;
     }
 
-    public void setVillageCity(String villageCity) {
-        this.villageCity = villageCity;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getAddress() {

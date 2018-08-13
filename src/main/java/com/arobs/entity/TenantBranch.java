@@ -33,8 +33,8 @@ public class TenantBranch {
     @Column(name = "county_id", columnDefinition = "char(2)")
     private String county;
 
-    @Column(name = "village_city_id")
-    private String villageCity;
+    @Column(name = "city")
+    private String city;
 
     @Column(name = "address", columnDefinition = "varchar(1024)")
     private String address;
@@ -96,12 +96,12 @@ public class TenantBranch {
         this.county = county;
     }
 
-    public String getVillageCity() {
-        return villageCity;
+    public String getCity() {
+        return city;
     }
 
-    public void setVillageCity(String villageCity) {
-        this.villageCity = villageCity;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getAddress() {

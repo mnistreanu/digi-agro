@@ -83,7 +83,7 @@ export class TenantListComponent implements OnInit {
             },
             {
                 headerName: 'Village City',
-                field: 'villageCity',
+                field: 'city',
                 width: 200,
                 minWidth: 200
             },

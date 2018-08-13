@@ -80,7 +80,7 @@ export class BranchComponent implements OnInit {
             description: new FormControl(this.model.description, [Validators.maxLength(1024)]),
             country: new FormControl(this.model.country, [Validators.required, Validators.maxLength(2)]),
             county: [this.model.county, Validators.maxLength(2)],
-            villageCity: [this.model.villageCity, Validators.maxLength(255)],
+            city: [this.model.city, Validators.maxLength(255)],
             address: [this.model.address, Validators.maxLength(1024)],
             phones: [this.model.phones, Validators.maxLength(128)],
             parentId: [this.model.parentId]

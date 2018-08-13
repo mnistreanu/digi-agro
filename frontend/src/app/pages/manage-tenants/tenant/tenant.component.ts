@@ -5,6 +5,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {TenantService} from '../../../services/tenant.service';
 import {ToastrService} from 'ngx-toastr';
 import {Messages} from '../../../common/messages';
+import {GeoService} from '../../../services/geo.service';
+import {LangService} from '../../../services/lang.service';
+import {GeoLocalizedItem} from '../../../interfaces/geo-localized-item.interface';
 
 @Component({
     selector: 'app-tenant',
@@ -19,14 +22,25 @@ export class TenantComponent implements OnInit {
     model: TenantModel;
     isNew: boolean;
 
+    countries: GeoLocalizedItem[];
+    counties: GeoLocalizedItem[];
+    cities: GeoLocalizedItem[];
+
+    private labelSaved: string;
+    private labelRemoved: string;
+    private labelValidationError: string;
+
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
+                private geoService: GeoService,
+                private langService: LangService,
                 private tenantService: TenantService,
                 private toastr: ToastrService) {
     }
 
     ngOnInit() {
+        this.setupLabels();
         this.route.params.subscribe(params => {
             const id = params['id'];
 
@@ -38,6 +52,13 @@ export class TenantComponent implements OnInit {
             }
         });
     }
+
+    private setupLabels() {
+        this.langService.get(Messages.SAVED).subscribe(m => this.labelSaved = m);
+        this.langService.get(Messages.REMOVED).subscribe(m => this.labelRemoved = m);
+        this.langService.get(Messages.VALIDATION_FAIL).subscribe(m => this.labelValidationError = m);
+    }
+
 
     private setupModel(id) {
         this.tenantService.findOne(id).subscribe(model => {
@@ -52,18 +73,63 @@ export class TenantComponent implements OnInit {
         this.buildForm();
     }
 
-    private buildForm() {
+    private setupCountries() {
+        const locale = this.langService.getLanguage();
+        this.geoService.getCountries().subscribe(data => {
+            this.countries = data.map((item) => new GeoLocalizedItem(item, locale));
+        });
+    }
 
+    public onCountryChange() {
+        this.form.controls['county'].setValue(null);
+        this.form.controls['city'].setValue(null);
+        this.setupCounties(this.form.controls['country'].value);
+    }
+
+    private setupCounties(country) {
+        if (!country) {
+            this.counties = [];
+            return;
+        }
+        const locale = this.langService.getLanguage();
+        this.geoService.getCounties(country).subscribe(data => {
+            this.counties = data.map((item) => new GeoLocalizedItem(item, locale));
+        });
+    }
+
+    public onCountyChange() {
+        this.form.controls['city'].setValue(null);
+        const country = this.form.controls['country'].value;
+        const county = this.form.controls['county'].value;
+        this.setupCities(country, county);
+    }
+
+    private setupCities(country, county) {
+        if (!country || !county) {
+            this.cities = [];
+            return;
+        }
+        const locale = this.langService.getLanguage();
+        this.geoService.getCities(country, county).subscribe(data => {
+            this.cities = data.map((item) => new GeoLocalizedItem(item, locale));
+        });
+    }
+
+    private buildForm() {
         this.form = this.fb.group({
             name: new FormControl(this.model.name, [Validators.required, Validators.maxLength(128)]),
             description: new FormControl(this.model.description, [Validators.maxLength(1024)]),
             fiscalCode: [this.model.fiscalCode],
             country: new FormControl(this.model.country, [Validators.required, Validators.maxLength(2)]),
             county: [this.model.county, Validators.maxLength(2)],
-            villageCity: [this.model.villageCity, Validators.maxLength(255)],
+            city: [this.model.city, Validators.maxLength(255)],
             address: [this.model.address, Validators.maxLength(1024)],
             phones: [this.model.phones, Validators.maxLength(128)],
         });
+
+        this.setupCountries();
+        this.setupCounties(this.model.country);
+        this.setupCities(this.model.country, this.model.county);
     }
 
     public onNameChange() {
@@ -93,7 +159,7 @@ export class TenantComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.toastr.warning(Messages.VALIDATION_FAIL);
+            this.toastr.warning(this.labelValidationError);
             return;
         }
 
@@ -103,14 +169,14 @@ export class TenantComponent implements OnInit {
 
         this.tenantService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.toastr.success(Messages.SAVED);
+            this.toastr.success(this.labelSaved);
         });
 
     }
 
     public remove() {
         this.tenantService.remove(this.model).subscribe(() => {
-            this.toastr.success(Messages.REMOVED);
+            this.toastr.success(this.labelRemoved);
             this.router.navigate(['/pages/manage-tenants']);
         });
     }

@@ -49,7 +49,7 @@ public class WeatherService implements HasRepository<WeatherRepository> {
 //        entity.setFiscalCode(model.getFiscalCode());
 //        entity.setCountry(model.getCountry());
 //        entity.setCounty(model.getCounty());
-////        entity.setVillageCity(model.getVillageCity());
+////        entity.setCity(model.getCity());
 //        entity.setAddress(model.getAddress());
 //        entity.setPhones(model.getPhones());
     }
