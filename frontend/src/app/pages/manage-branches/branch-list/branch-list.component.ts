@@ -4,6 +4,7 @@ import {ColDef, GridOptions} from 'ag-grid';
 import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {BranchService} from '../../../services/branch.service';
 import {BranchModel} from '../branch/branch.model';
+import {LangService} from "../../../services/lang.service";
 
 @Component({
     selector: 'app-branch-list',
@@ -16,6 +17,7 @@ export class BranchListComponent implements OnInit {
     context;
 
     constructor(private router: Router,
+                private langService: LangService,
                 private branchService: BranchService) {
     }
 
@@ -52,49 +54,55 @@ export class BranchListComponent implements OnInit {
                 }
             },
             {
-                headerName: 'Name',
+                headerName: 'info.name',
                 field: 'name',
                 width: 200,
                 minWidth: 200,
                 cellRenderer: 'agGroupCellRenderer'
             },
             {
-                headerName: 'Description',
+                headerName: 'info.description',
                 field: 'description',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'Country',
+                headerName: 'geo.country',
                 field: 'country',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'County',
+                headerName: 'geo.county',
                 field: 'county',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'Village City',
+                headerName: 'geo.village-city',
                 field: 'city',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'Address',
+                headerName: 'geo.address',
                 field: 'address',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'Phones',
+                headerName: 'contact.phone',
                 field: 'phones',
                 width: 200,
                 minWidth: 200
             }
         ];
+
+        headers.forEach((h) => {
+            if (h.headerName) {
+                this.langService.get(h.headerName).subscribe(m => h.headerName = m);
+            }
+        });
 
         return headers;
     }

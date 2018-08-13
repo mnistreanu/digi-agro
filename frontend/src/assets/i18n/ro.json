@@ -11,7 +11,8 @@
 		"logout": "Ieșire"
 	},
 	"branch": {
-		"branch": "Subdiviziune"
+		"branch": "Filial",
+		"branches": "Filiale"
 	},
 	"contact": {
 		"phone": "Telefon"
@@ -59,7 +60,7 @@
 		"сonsumption": "Consum"
 	},
 	"nav": {
-		"branches": "Subdiviziuni",
+		"branches": "Filiale",
 		"brands": "Brands",
 		"costs-forecasting": "Prognoză costuri",
 		"costs-forecasting-form": "Prognoză costuri FORM",

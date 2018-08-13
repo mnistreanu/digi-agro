@@ -11,7 +11,8 @@
 		"logout": "Logout"
 	},
 	"branch": {
-		"branch": "Branch"
+		"branch": "Branch",
+		"branches": "Branches"
 	},
 	"contact": {
 		"phone": "Phone"

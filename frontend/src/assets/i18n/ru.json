@@ -11,7 +11,8 @@
 		"logout": "Выход"
 	},
 	"branch": {
-		"branch": "Подразделение"
+		"branch": "Филиал",
+		"branches": "Филиалы"
 	},
 	"contact": {
 		"phone": "Телефон"
@@ -59,7 +60,7 @@
 		"сonsumption": "Расход"
 	},
 	"nav": {
-		"branches": "Подразделения",
+		"branches": "Филиалы",
 		"brands": "Бренды",
 		"costs-forecasting": "Прогнозирование затрат",
 		"costs-forecasting-form": "Прогнозирование затрат FORM",
