@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AuthService} from '../../../services/auth/auth.service';
 import {Authorities} from '../../../common/authorities';
+import {MenuItem} from '../../../interfaces/menu-item.iterface';
 
 @Injectable()
 export class MenuService {
@@ -8,14 +9,14 @@ export class MenuService {
     constructor(private authService: AuthService) {
     }
 
-    public getMenuItems(): Array<any> {
+    public getMenuItems(): MenuItem[] {
 
         const isSuperAdmin = this.authService.hasAuthority(Authorities.ROLE_SUPER_ADMIN);
         const isAdmin = this.authService.hasAuthority(Authorities.ROLE_ADMIN);
         const isUser = this.authService.hasAuthority(Authorities.ROLE_USER);
 
 
-        let menuItems = [{
+        let menuItems: MenuItem[] = [{
             title: 'nav.dashboard',
             routerLink: 'dashboard',
             icon: 'fa-home',
@@ -117,13 +118,13 @@ export class MenuService {
         }
 
         if (isAdmin || isUser) {
-            menuItems.push(<any>{
+            menuItems.push({
                 title: 'nav.weather',
                 routerLink: 'weather',
                 icon: 'fa fa-cloud',
                 selected: false,
                 expanded: false,
-                subMenu: <any>[
+                subMenu: [
                     {
                         title: 'nav.weather-history',
                         routerLink: 'weather/history',
@@ -137,7 +138,7 @@ export class MenuService {
         }
 
         // other menu items from template
-        menuItems = menuItems.concat(<any>[
+        menuItems = menuItems.concat([
             {
                 title: 'Charts',
                 routerLink: 'charts',
