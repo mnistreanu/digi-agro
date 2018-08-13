@@ -2,6 +2,7 @@ package com.arobs.scheduler;
 
 import com.arobs.interfaces.HasRepository;
 import com.arobs.weather.entity.WeatherLocation;
+import com.arobs.weather.location.WeatherLocationRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

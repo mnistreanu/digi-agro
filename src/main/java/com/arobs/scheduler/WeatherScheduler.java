@@ -19,6 +19,7 @@ import com.arobs.model.WeatherModel;
 import com.arobs.service.WeatherService;
 import com.arobs.weather.entity.WeatherLocation;
 import com.arobs.weather.location.WeatherLocationJson;
+import com.arobs.weather.location.WeatherLocationService;
 import com.arobs.weather.snapshot.WeatherSnapshotJson;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
@@ -54,8 +55,8 @@ public class WeatherScheduler {
 	@Autowired
 	private WeatherLocationService weatherLocationService;  
 	
-	@Autowired
-	private WeatherForecastService weatherForecastService;  
+//	@Autowired
+//	private WeatherForecastService weatherForecastService;  
 	
 //	@Scheduled(cron = "${cron.weather}")
 	public void readWeather() {
@@ -68,26 +69,25 @@ public class WeatherScheduler {
         logger.info(weather.toString());
 	}
 	
-	@Scheduled(cron = "${cron.weather.forecast}")
+//	@Scheduled(cron = "${cron.weather.forecast}")
 	public void readWeatherForecast() {
-		List<WeatherLocation> weatherLocations = weatherLocationService.findAllMdRo();
+		List<WeatherLocation> weatherLocationss = weatherLocationService.findAllMdRo();
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<WeatherModel> weatherModels = new ArrayList<>();
-		for (WeatherLocation weatreLocation : weatherLocations) {
+		for (WeatherLocation weatreLocation : weatherLocationss) {
 			String url = openWeatherUrl + "?" + "id=" + weatreLocation.getId() + "&appid=" + weatherAppid;
 			WeatherSnapshotJson weather = restTemplate.getForObject(url, WeatherSnapshotJson.class);
 			
 			
 			CollectionType listType = objectMapper.getTypeFactory().constructCollectionType(List.class, WeatherLocationJson.class);
-//			List<WeatherLocationJson> weatherLocations = objectMapper.readValue(file,  listType);
+			
+			
+			
 			DTOBinder binder = DTOBinderFactory.getBinder();
-			List<WeatherLocation> locations = binder.bindFromBusinessObjectList(WeatherLocation.class, weatherLocations);
+			List<WeatherLocation> locations = binder.bindFromBusinessObjectList(WeatherLocation.class, weatherLocationss);
 			
-			
-			
-			
-			WeatherModel weatherModel = WeatherModel.buildWeatherModel(weather);
-			weatherModels.add(weatherModel);
+//			WeatherModel weatherModel = WeatherModel.buildWeatherModel(locations);
+//			weatherModels.add(weatherModel);
 		}
 //		weatherForecastService.getRepository().save((Iterable<WeatherModel>) weatherModels);
 	}

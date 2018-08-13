@@ -1,6 +1,8 @@
 
 package com.arobs.weather.forecast.daily;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -16,7 +18,7 @@ public class WeatherForecastDailyJson {
     @JsonProperty("cnt")
     private Integer cnt;
     @JsonProperty("list")
-    private java.util.List<com.arobs.weather.forecast.daily.List> list = null;
+    private List<ForecastItemJson> list = null;
     @JsonProperty("city")
     private City city;
 
@@ -51,12 +53,12 @@ public class WeatherForecastDailyJson {
     }
 
     @JsonProperty("list")
-    public java.util.List<com.arobs.weather.forecast.daily.List> getList() {
+    public List<ForecastItemJson> getList() {
         return list;
     }
 
     @JsonProperty("list")
-    public void setList(java.util.List<com.arobs.weather.forecast.daily.List> list) {
+    public void setList(List<ForecastItemJson> list) {
         this.list = list;
     }
 

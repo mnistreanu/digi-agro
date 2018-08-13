@@ -67,11 +67,33 @@ public class WeatherSnapshotTest {
 		WeatherSnapshotJson snapshotJson = getJsonObject(SNAPSHOT_JSON, WeatherSnapshotJson.class);
 		DTOBinder binder = DTOBinderFactory.getBinder();
 		WeatherSnapshot snapshotEntity = binder.bindFromBusinessObject(WeatherSnapshot.class, snapshotJson);
-		logger.info("location. Lon(): {}, Lat(): {}, Country: {}", snapshotEntity.getLon(), snapshotEntity.getLat(), snapshotEntity.getCountryCode());
-		assertEquals(snapshotJson.getSys().getCountry(), snapshotEntity.getCountryCode());
+		logger.info("location. Lon(): {}, Lat(): {}, Main: {}", snapshotEntity.getLon(), snapshotEntity.getLat(), snapshotEntity.getMain());
+		assertEquals(snapshotJson.getId(), snapshotEntity.getOpenweatherId());
 		assertEquals(snapshotJson.getName(), snapshotEntity.getName());
+		assertEquals(snapshotJson.getCod(), snapshotEntity.getCod());
+		assertEquals(snapshotJson.getDt(), snapshotEntity.getDt());
+		assertEquals(snapshotJson.getBase(), snapshotEntity.getBase());
+		assertEquals(snapshotJson.getRain().get3h(), snapshotEntity.getRain3h());
 		assertEquals(snapshotJson.getCoord().getLon(), snapshotEntity.getLon());
 		assertEquals(snapshotJson.getCoord().getLat(), snapshotEntity.getLat());
+		assertEquals(snapshotJson.getWeather().get(0).getId(), snapshotEntity.getWeatherId());
+		assertEquals(snapshotJson.getWeather().get(0).getMain(), snapshotEntity.getMain());
+		assertEquals(snapshotJson.getWeather().get(0).getDescription(), snapshotEntity.getDescription());
+		assertEquals(snapshotJson.getWeather().get(0).getIcon(), snapshotEntity.getIcon());
+		assertEquals(snapshotJson.getMain().getTemp(), snapshotEntity.getTemp());
+		assertEquals(snapshotJson.getMain().getPressure(), snapshotEntity.getPressure());
+		assertEquals(snapshotJson.getMain().getHumidity(), snapshotEntity.getHumidity());
+		assertEquals(snapshotJson.getMain().getTempMin(), snapshotEntity.getTempMin());
+		assertEquals(snapshotJson.getMain().getTempMax(), snapshotEntity.getTempMax());
+		assertEquals(snapshotJson.getMain().getSeaLevel(), snapshotEntity.getSeaLevel());
+		assertEquals(snapshotJson.getMain().getGrndLevel(), snapshotEntity.getGrndLevel());
+		assertEquals(snapshotJson.getWind().getSpeed(), snapshotEntity.getSpeed());
+		assertEquals(snapshotJson.getWind().getDeg(), snapshotEntity.getDeg());
+		assertEquals(snapshotJson.getClouds().getAll(), snapshotEntity.getClouds());
+		assertEquals(snapshotJson.getSys().getMessage(), snapshotEntity.getMessage());
+		assertEquals(snapshotJson.getSys().getCountry(), snapshotEntity.getCountryCode());
+		assertEquals(snapshotJson.getSys().getSunrise(), snapshotEntity.getSunrise());
+		assertEquals(snapshotJson.getSys().getSunset(), snapshotEntity.getSunset());
 	}
 	
 	private <T> T getJsonObject(String jsonFileName, Class<T> clazz) throws IOException, JsonParseException, JsonMappingException {

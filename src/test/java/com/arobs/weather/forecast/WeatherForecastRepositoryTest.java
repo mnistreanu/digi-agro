@@ -5,12 +5,10 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.jdto.DTOBinder;
 import org.jdto.DTOBinderFactory;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -23,15 +21,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.arobs.scheduler.WeatherForecastRepository;
-import com.arobs.weather.entity.WeatherForecastHour;
+import com.arobs.scheduler.WeatherForecastDailyRepository;
+import com.arobs.weather.entity.WeatherForecastDaily;
 import com.arobs.weather.entity.WeatherLocation;
 import com.arobs.weather.forecast.hour.WeatherForecastHourJson;
 import com.arobs.weather.location.WeatherLocationJson;
-import com.arobs.weather.snapshot.WeatherSnapshotJson;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,13 +41,10 @@ public class WeatherForecastRepositoryTest {
 	private static final Logger logger = LoggerFactory.getLogger(WeatherForecastRepositoryTest.class); 
 
 	@Autowired
-	private DTOBinder binder;
-
-	@Autowired
 	private TestEntityManager entityManager;
 
 	@Autowired
-	public WeatherForecastRepository repository;
+	public WeatherForecastDailyRepository repository;
 	
 	@Test
 	public void testEntityManager() {
@@ -60,15 +53,15 @@ public class WeatherForecastRepositoryTest {
 	
 	@Test
 	public void testFindAll() {
-		List<WeatherForecastHour> weatherForecasts = repository.findAll();
+		List<WeatherForecastDaily> weatherForecasts = repository.findAll();
 		assertNotNull(weatherForecasts);
 	}
 	
 	@Test
 	public void testFindOne() {
 		Long id = 617077L;
-		WeatherForecastHour location = repository.findOne(id);
-		assertEquals("Raionul Edineţ", location.getName());
+		WeatherForecastDaily forecast = repository.findOne(id);
+		assertEquals("Raionul Edineţ", forecast.getCode());
 	}
 	
 	@Test

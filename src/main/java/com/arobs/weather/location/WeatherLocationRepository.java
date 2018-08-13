@@ -1,4 +1,4 @@
-package com.arobs.scheduler;
+package com.arobs.weather.location;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 //import org.springframework.data.jpa.repository.Modifying;

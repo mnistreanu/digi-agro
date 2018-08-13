@@ -1,43 +1,35 @@
 
 package com.arobs.weather.forecast.daily;
 
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"dt", "temp", "pressure", "humidity", "weather"})
-public class List {
+@JsonPropertyOrder({"dt", "pressure", "humidity", "temp", "weather"})
+public class ForecastItemJson {
 
     @JsonProperty("dt")
     private Integer dt;
-    @JsonProperty("temp")
-    private Temp temp;
     @JsonProperty("pressure")
     private Double pressure;
     @JsonProperty("humidity")
     private Integer humidity;
+    @JsonProperty("temp")
+    private Temp temp;
     @JsonProperty("weather")
     private java.util.List<Weather> weather = null;
 
     @JsonProperty("dt")
-    public Integer getDt() {
-        return dt;
+    public Date getDt() {
+        return new Date(dt * 1000L);
     }
 
     @JsonProperty("dt")
     public void setDt(Integer dt) {
         this.dt = dt;
-    }
-
-    @JsonProperty("temp")
-    public Temp getTemp() {
-        return temp;
-    }
-
-    @JsonProperty("temp")
-    public void setTemp(Temp temp) {
-        this.temp = temp;
     }
 
     @JsonProperty("pressure")
@@ -58,6 +50,16 @@ public class List {
     @JsonProperty("humidity")
     public void setHumidity(Integer humidity) {
         this.humidity = humidity;
+    }
+
+    @JsonProperty("temp")
+    public Temp getTemp() {
+        return temp;
+    }
+
+    @JsonProperty("temp")
+    public void setTemp(Temp temp) {
+        this.temp = temp;
     }
 
     @JsonProperty("weather")

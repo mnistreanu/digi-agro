@@ -2,11 +2,14 @@ package com.arobs.weather.entity;
 
 import javax.persistence.*;
 
+import org.jdto.annotation.DTOCascade;
 import org.jdto.annotation.DTOTransient;
 import org.jdto.annotation.Source;
 
-import java.math.BigDecimal;
+import com.arobs.weather.snapshot.Weather;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by mihail.gorgos on 31.07.2018.
@@ -20,21 +23,23 @@ public class WeatherSnapshot {
     @Column(name="id")
     @DTOTransient
     private Long id;
+    @Column(name="openweatherId")
+	@Source("id")
+    private Integer openweatherId;
     @Column(name="parcel_id")
     @DTOTransient
     private Long parcelId;
     @Column(name="name")
     private String name;
     @Column(name="cod")
-    private String cod;
+    private Integer cod;
     @Column(name="dt")
     private Date dt;
     @Column(name="base")
     private String base;
-    /** Rain during last 3 hours */
     @Column(name="rain_3h")
-    @DTOTransient
-    private BigDecimal rain3h;
+	@Source("rain.3h")
+    private Double rain3h;
     @Column(name="source_id")
     @DTOTransient
     private Integer sourceId;
@@ -49,17 +54,22 @@ public class WeatherSnapshot {
 	@Source("coord.lon")
     private Double lon;
 
+    @Transient
+    @DTOCascade
+	@Source("weather")
+    private List<Weather> weather;
+
     @Column(name="weather_id")
-	@Source( "weather[0].id")
-    private String weatherId;
+	@DTOTransient
+    private Integer weatherId;
     @Column(name="main")
-	@Source( "weather[0].main")
+	@DTOTransient
     private String main;
     @Column(name="description")
-	@Source( "weather[0].description")
+	@DTOTransient
     private String description;
     @Column(name="icon")
-	@Source( "weather[0].icon")
+	@DTOTransient
     private String icon;
 
     @Column(name="temp")
@@ -122,7 +132,15 @@ public class WeatherSnapshot {
         this.id = id;
     }
 
-    public Long getParcelId() {
+    public Integer getOpenweatherId() {
+		return openweatherId;
+	}
+
+	public void setOpenweatherId(Integer openweatherId) {
+		this.openweatherId = openweatherId;
+	}
+
+	public Long getParcelId() {
         return parcelId;
     }
 
@@ -138,11 +156,11 @@ public class WeatherSnapshot {
         this.name = name;
     }
     
-    public String getCod() {
+    public Integer getCod() {
 		return cod;
 	}
 
-	public void setCod(String cod) {
+	public void setCod(Integer cod) {
 		this.cod = cod;
 	}
 
@@ -162,11 +180,11 @@ public class WeatherSnapshot {
 		this.base = base;
 	}
 
-	public BigDecimal getRain3h() {
+	public Double getRain3h() {
         return rain3h;
     }
 
-    public void setRain3h(BigDecimal rain3h) {
+    public void setRain3h(Double rain3h) {
         this.rain3h = rain3h;
     }
 
@@ -202,11 +220,24 @@ public class WeatherSnapshot {
         this.lon = lon;
     }
 
-    public String getWeatherId() {
+    public List<Weather> getWeather() {
+		return weather;
+	}
+
+	public void setWeather(List<Weather> weather) {
+		this.weather = weather;
+		Weather weatherItem = weather.get(0);
+		this.weatherId = weatherItem.getId();
+		this.main = weatherItem.getMain();
+		this.description = weatherItem.getDescription();
+		this.icon = weatherItem.getIcon();
+	}
+
+	public Integer getWeatherId() {
 		return weatherId;
 	}
 
-	public void setWeatherId(String weatherId) {
+	public void setWeatherId(Integer weatherId) {
 		this.weatherId = weatherId;
 	}
 

@@ -1,4 +1,4 @@
-package com.arobs.weather.location;
+package com.arobs.weather.location.item;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

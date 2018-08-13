@@ -1,7 +1,6 @@
 package com.arobs.weather.json;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,25 +29,30 @@ public class WeatherLocationTest {
 	@Test
 	public void testJsonObject() throws JsonParseException, JsonMappingException, IOException {
 		List<WeatherLocationJson> locations = getJsonObject();
-		logger.info("location. Lon(): {}, Country: {}", locations.get(0).getCoord().getLon(), locations.get(0).getCountry());
+		logger.info("Location. {} articole", locations.size());
 		assertEquals(3, locations.size());
+		WeatherLocationJson location = locations.get(0);
+		assertEquals(Integer.valueOf(707860), location.getId());
+		assertEquals("Hurzuf", location.getName());
+		assertEquals("UA", location.getCountry());
+		assertEquals(Double.valueOf(34.283333), location.getCoord().getLon());
+		assertEquals(Double.valueOf(44.549999), location.getCoord().getLat());
 	}
 
 	@Test
 	public void testBinding() throws JsonParseException, JsonMappingException, IOException {
-		List<WeatherLocationJson> locations = getJsonObject();
+		List<WeatherLocationJson> locationsJson = getJsonObject();
 		
-		List<WeatherLocation> locationEntities = binder.bindFromBusinessObjectList(WeatherLocation.class, locations);
-		assertTrue(locations.size() > 0);
-		assertEquals(locations.size(), locationEntities.size());
-		WeatherLocationJson city = locations.get(0);
-		WeatherLocation location = locationEntities.get(0);
-		assertEquals(city.getId(), location.getId());
-		assertEquals(city.getCountry(), location.getCountryCode());
-		assertEquals(city.getName(), location.getName());
-		assertEquals(city.getCoord().getLon(), location.getLon());
-		assertEquals(city.getCoord().getLat(), location.getLat());
-		logger.info("location. Lon(): {}, Lat(): {}, Country: {}", locationEntities.get(0).getLon(), locationEntities.get(0).getLat(), locationEntities.get(0).getCountryCode());
+		List<WeatherLocation> locationsEntity = binder.bindFromBusinessObjectList(WeatherLocation.class, locationsJson);
+		assertEquals(3, locationsEntity.size());
+		assertEquals(locationsJson.size(), locationsEntity.size());
+		WeatherLocationJson locationJson = locationsJson.get(0);
+		WeatherLocation locationEntity = locationsEntity.get(0);
+		assertEquals(locationJson.getId(), locationEntity.getId());
+		assertEquals(locationJson.getCountry(), locationEntity.getCountryCode());
+		assertEquals(locationJson.getName(), locationEntity.getName());
+		assertEquals(locationJson.getCoord().getLon(), locationEntity.getLon());
+		assertEquals(locationJson.getCoord().getLat(), locationEntity.getLat());
 	}
 	
 	private List<WeatherLocationJson> getJsonObject() throws IOException, JsonParseException, JsonMappingException {
@@ -60,5 +64,4 @@ public class WeatherLocationTest {
 		List<WeatherLocationJson> locations = objectMapper.readValue(file,  listType);
 		return locations;
 	}
-	
 }

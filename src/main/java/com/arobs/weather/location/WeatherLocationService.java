@@ -1,4 +1,4 @@
-package com.arobs.scheduler;
+package com.arobs.weather.location;
 
 import com.arobs.interfaces.HasRepository;
 import com.arobs.weather.entity.WeatherLocation;
