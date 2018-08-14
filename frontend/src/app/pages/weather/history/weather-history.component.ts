@@ -65,12 +65,6 @@ export class WeatherHistoryComponent implements OnInit {
                 width: 80,
                 minWidth: 80
             },
-            {
-                headerName: '',
-                field: 'icon',
-                width: 80,
-                minWidth: 80
-            },
             // {
             //     headerName: this.labelLocation,
             //     field: 'location',
@@ -125,7 +119,7 @@ export class WeatherHistoryComponent implements OnInit {
                 const model = new WeatherHistoryModel();
                 model.date = new Date(data.dt).toLocaleDateString();
                 model.icon = '/assets/img/notifications/weather-rain-alert.png';
-                model.temperature = data.tempMax + ' / ' + data.tempMin;
+                model.temperature = data.tempMax + '\u00B0C / ' + data.tempMin + '\u00B0C';
                 model.condition = data.main; //TODO de tradus din resurse, de exemplu: clouds, rain
                 model.location = 'Nisporeni';
                 model.humidity = data.humidityAir + ' %';
