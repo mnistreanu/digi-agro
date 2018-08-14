@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ImageRendererComponent} from './image-renderer.component';
+import {CustomImageRendererComponent} from './custom-image-renderer.component';
 
 describe('CustomImageRendererComponent', () => {
-    let component: ImageRendererComponent;
-    let fixture: ComponentFixture<ImageRendererComponent>;
+    let component: CustomImageRendererComponent;
+    let fixture: ComponentFixture<CustomImageRendererComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ImageRendererComponent]
+            declarations: [CustomImageRendererComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ImageRendererComponent);
+        fixture = TestBed.createComponent(CustomImageRendererComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

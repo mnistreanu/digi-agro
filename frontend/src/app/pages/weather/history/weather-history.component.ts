@@ -1,9 +1,9 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {WeatherService} from '../../../services/weather.service';
-import {WeatherModel} from '../weather.model';
 import {WeatherHistoryModel} from './weather-history.model';
+import {CustomImageRendererComponent} from '../../../modules/aggrid/custom-image-renderer/custom-image-renderer.component';
 
 @Component({
     selector: 'app-weather-history',
@@ -96,6 +96,11 @@ export class WeatherHistoryComponent implements OnInit {
             {
                 headerName: this.labelCondition,
                 field: 'condition',
+                cellRendererFramework: CustomImageRendererComponent,
+                cellRendererParams: {
+                    textField: 'condition',
+                    iconField: 'icon'
+                },
                 width: 200,
                 minWidth: 200,
             },
@@ -119,8 +124,7 @@ export class WeatherHistoryComponent implements OnInit {
             const rows = payloadModel.payload.map(data => {
                 const model = new WeatherHistoryModel();
                 model.date = new Date(data.dt).toLocaleDateString();
-                model.icon = '<canvas skycon [weather]="weather.icon" [color]="config.colors.gray" width="22" height="22"></canvas>';
-                debugger;
+                model.icon = '/assets/img/notifications/weather-rain-alert.png';
                 model.temperature = data.tempMax + ' / ' + data.tempMin;
                 model.condition = data.main; //TODO de tradus din resurse, de exemplu: clouds, rain
                 model.location = 'Nisporeni';

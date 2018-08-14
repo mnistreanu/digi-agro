@@ -7,6 +7,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {DirectivesModule} from '../../theme/directives/directives.module';
 import {WeatherHistoryComponent} from './history/weather-history.component';
+import {CustomImageRendererModule} from '../../modules/aggrid/custom-image-renderer/custom-image-renderer.module';
+import {CustomImageRendererComponent} from '../../modules/aggrid/custom-image-renderer/custom-image-renderer.component';
 
 export const routes = [
     {path: '', redirectTo: 'weather', pathMatch: 'full'},
@@ -21,7 +23,8 @@ export const routes = [
         FormsModule,
         ReactiveFormsModule,
         DirectivesModule,
-        AgGridModule.withComponents([]),
+        CustomImageRendererModule,
+        AgGridModule.withComponents([CustomImageRendererComponent]),
         NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyC_u-ujFg1xhXlOnOV0GyptTlory-KvlFY'}),
         RouterModule.forChild(routes)
     ],
