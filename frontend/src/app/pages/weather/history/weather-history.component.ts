@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
-import {WeatherService} from "../../../services/weather.service";
-import {WeatherModel} from "../weather.model";
-import {WeatherHistoryModel} from "./weather-history.model";
+import {WeatherService} from '../../../services/weather.service';
+import {WeatherModel} from '../weather.model';
+import {WeatherHistoryModel} from './weather-history.model';
 
 @Component({
     selector: 'app-weather-history',
@@ -109,25 +109,19 @@ export class WeatherHistoryComponent implements OnInit {
 
 
     public setupRows() {
-        const rows = [];
-        debugger;
-        this.weatherService.findWeatherHistory().subscribe(paloadModel => {
-            let weatherModels = paloadModel.payload;
-            debugger;
-            paloadModel.payload.forEach(model => {
-                let whModel: WeatherHistoryModel;
-                whModel.date = model.dt;
-                whModel.temperature = model.tempMin + '/' + model.tempMax;
-                whModel.condition = model.main;
-                whModel.location = 'Nisporeni';
-                whModel.humidity = model.humidityAir;
-                whModel.wind = model.windSpeed + ' NW';
-                rows.push(whModel);
+        this.weatherService.findWeatherHistory().subscribe(payloadModel => {
+            const rows = payloadModel.payload.map(data => {
+                const model = new WeatherHistoryModel();
+                model.date = data.dt;
+                model.temperature = data.tempMin + '/' + data.tempMax;
+                model.condition = data.main;
+                model.location = 'Nisporeni';
+                model.humidity = data.humidityAir;
+                model.wind = data.windSpeed + ' NW';
+                return model;
             });
+            this.options.api.setRowData(rows);
         });
-
-        this.options.api.setRowData(rows);
-        this.adjustGridSize();
     }
 
     public onGridReady() {
