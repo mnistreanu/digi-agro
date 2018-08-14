@@ -22,8 +22,8 @@ export class CustomImageRendererComponent implements ICellRendererAngularComp {
 
     agInit(params: ICellRendererParams): void {
         this.params = params;
-        this.imagePath = params.data[params.iconField];
-        this.text = params.data[params.textField];
+        this.imagePath = params.data[params['iconField']];
+        this.text = params.data[params['textField']];
     }
 
 }
