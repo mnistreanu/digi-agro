@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 })
 export class BranchService {
 
-    private api: string = environment + '/branch';
+    private api: string = environment.apiUrl + '/branch';
 
     constructor(private http: HttpClient) {
     }
