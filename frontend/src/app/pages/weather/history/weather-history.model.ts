@@ -1,5 +1,6 @@
 export class WeatherHistoryModel {
-    date: string;
+    date: String;
+    icon:String;
     location: string;
     temperature: string;
     humidity: string;

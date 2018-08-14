@@ -62,15 +62,21 @@ export class WeatherHistoryComponent implements OnInit {
             {
                 headerName: this.labelDate,
                 field: 'date',
-                width: 100,
-                minWidth: 100
+                width: 80,
+                minWidth: 80
             },
             {
-                headerName: this.labelLocation,
-                field: 'location',
-                width: 200,
-                minWidth: 200
+                headerName: '',
+                field: 'icon',
+                width: 80,
+                minWidth: 80
             },
+            // {
+            //     headerName: this.labelLocation,
+            //     field: 'location',
+            //     width: 200,
+            //     minWidth: 200
+            // },
             {
                 headerName: this.labelTemperature,
                 field: 'temperature',
@@ -112,12 +118,14 @@ export class WeatherHistoryComponent implements OnInit {
         this.weatherService.findWeatherHistory().subscribe(payloadModel => {
             const rows = payloadModel.payload.map(data => {
                 const model = new WeatherHistoryModel();
-                model.date = data.dt;
-                model.temperature = data.tempMin + '/' + data.tempMax;
-                model.condition = data.main;
+                model.date = new Date(data.dt).toLocaleDateString();
+                model.icon = '<canvas skycon [weather]="weather.icon" [color]="config.colors.gray" width="22" height="22"></canvas>';
+                debugger;
+                model.temperature = data.tempMax + ' / ' + data.tempMin;
+                model.condition = data.main; //TODO de tradus din resurse, de exemplu: clouds, rain
                 model.location = 'Nisporeni';
-                model.humidity = data.humidityAir;
-                model.wind = data.windSpeed + ' NW';
+                model.humidity = data.humidityAir + ' %';
+                model.wind = data.windSpeed + ' km/h NW';
                 return model;
             });
             this.options.api.setRowData(rows);
