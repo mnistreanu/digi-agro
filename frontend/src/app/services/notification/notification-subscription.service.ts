@@ -3,13 +3,14 @@ import {Constants} from '../../common/constants';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import {NotificationSubscriptionModel} from '../../pages/notifications/subscription/notification-subscription.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class NotificationSubscriptionService {
 
-    private api: string = Constants.API_URL + '/notification-subscription';
+    private api: string = environment.apiUrl + '/notification-subscription';
 
     constructor(private http: HttpClient) {
     }

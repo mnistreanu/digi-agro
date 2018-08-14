@@ -67,6 +67,7 @@
 		"crops": "Crops",
 		"crops-varieties": "Crops & Varieties",
 		"dashboard": "Dashboard",
+		"forecasting-charts": "Forecasting charts",
 		"forecasts": "Forecasts",
 		"harvesting-forecasting": "Harvesting forecasting",
 		"harvesting-forecasting-factor": "Harvesting forecasting FACTOR",
@@ -80,6 +81,9 @@
 		"telemetry": "Telemetry",
 		"tenants": "Tenants",
 		"users": "Users",
+		"weather": "Weather",
+		"weather-forecast": "Weather forecast",
+		"weather-history": "Weather history",
 		"work-agenda": "Work agenda"
 	},
 	"notification": {
@@ -166,5 +170,13 @@
 		"password-do-not-match": "Passwords do not match",
 		"required": "Required field",
 		"unique": "Unique field"
+	},
+	"weather": {
+		"condition": "Condition",
+		"date": "Date",
+		"humidity": "Humidity",
+		"location": "Location",
+		"temperature": "Temperature",
+		"wind": "Wind"
 	}
 }

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -47,8 +46,12 @@ public class ForecastService implements HasRepository<ForecastRepository> {
         return forecastRepository;
     }
 
-    public List<Forecast> findForecasts(Long tenantId) {
-        return getRepository().find(tenantId);
+    public List<Forecast> findForecasts(Long tenantId, boolean onlyActive) {
+        if (onlyActive) {
+            return getRepository().findActiveForecasts(tenantId);
+        } else {
+            return getRepository().findAllForecasts(tenantId);
+        }
     }
 
     public List<ForecastSnapshot> findSnapshots(Long forecastId) {
@@ -81,7 +84,7 @@ public class ForecastService implements HasRepository<ForecastRepository> {
         forecast.setCropId(model.getCropId());
         forecast.setCropVarietyId(model.getCropVarietyId());
 
-        forecast.setName(model.getForecastName());
+        forecast.setName(model.getName());
         forecast.setDescription(model.getDescription());
 
         forecast = saveForecast(forecast);

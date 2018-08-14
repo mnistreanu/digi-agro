@@ -15,7 +15,7 @@ import {ForecastModel} from '../forecast.model';
 
 @Component({
     selector: 'app-forecast-harvest',
-    templateUrl: './forecast-harvest.component.html'
+    templateUrl: './forecast-harvest-form.component.html'
 })
 
 export class ForecastHarvestComponent implements OnInit {
@@ -74,7 +74,7 @@ export class ForecastHarvestComponent implements OnInit {
     private buildForm() {
         this.form = this.formBuilder.group({
             parcels: [null, Validators.required],
-            forecastName: [null, Validators.compose([Validators.required, Validators.maxLength(256)])],
+            name: [null, Validators.compose([Validators.required, Validators.maxLength(256)])],
             harvestingYear: [null, Validators.required],
             cropCategoryId: [null, Validators.required],
             cropId: [null, Validators.required],
@@ -153,7 +153,7 @@ export class ForecastHarvestComponent implements OnInit {
 
         this.forecastService.save(forecastModel).subscribe(() => {
             this.toastrService.success(this.labelSaved);
-            this.router.navigate(['/pages/forecasting/harvesting']);
+            this.router.navigate(['/pages/forecasting/harvesting-factor']);
         });
     }
 

@@ -2,13 +2,13 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {AppConfig} from '../../../app.config';
 
 @Component({
-    selector: 'app-forecast-harvest-charts',
+    selector: 'app-forecast-charts',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: './forecast-harvest-charts.component.html'
+    templateUrl: './forecast-charts.component.html'
 })
 
 
-export class ForecastHarvestChartsComponent implements OnInit {
+export class ForecastChartsComponent implements OnInit {
     public config: any;
     public configFn: any;
 
@@ -16,7 +16,8 @@ export class ForecastHarvestChartsComponent implements OnInit {
     public barChartTypeH = 'horizontalBar';
     public barChartLegend = true;
     public barChartLabels: string[];
-    public barChartData: Array<any>;
+    public verticalBarChartData: Array<any>;
+    public horizontalBarChartData: Array<any>;
     public barChartColors: any[];
     public barChartOptions: any;
 
@@ -57,10 +58,15 @@ export class ForecastHarvestChartsComponent implements OnInit {
 
     ngOnInit() {
         // --- Bar Chart ---
-        this.barChartLabels = ['2007', '2008', '2009', '2010', '2011', '2012'];
-        this.barChartData = [
-            {data: [59, 80, 72, 56, 55, 40], label: 'Series A'},
-            {data: [48, 40, 19, 75, 27, 80], label: 'Series B'}
+        this.barChartLabels = ['2013', '2014', '2015', '2016', '2017', '2018'];
+        this.verticalBarChartData = [
+            {data: [59, 80, 72, 56, 55, 40], label: 'Cheltuieli'},
+            {data: [48, 40, 19, 75, 27, 80], label: 'Venituri'}
+        ];
+        this.horizontalBarChartData = [
+            {data: [59, 80, 72, 56, 55, 40], label: 'Grâu'},
+            {data: [48, 40, 19, 75, 27, 80], label: 'Porumb'},
+            {data: [54, 47, 59, 71, 37, 70], label: 'Floarea soarelui'}
         ];
         this.barChartColors = [
             {

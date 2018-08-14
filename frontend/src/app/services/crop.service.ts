@@ -3,13 +3,14 @@ import {Constants} from '../common/constants';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import {PayloadModel} from '../pages/payload.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CropService {
 
-    private api: string = Constants.API_URL + '/crop';
+    private api: string = environment.apiUrl + '/crop';
 
     constructor(private http: HttpClient) {
     }

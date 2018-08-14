@@ -3,13 +3,14 @@ import {HttpClient} from '@angular/common/http';
 import {Constants} from '../common/constants';
 import {Observable} from 'rxjs/Rx';
 import {MachineModel} from '../pages/manage-machines/machine/machine.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MachineService {
 
-    private api: string = Constants.API_URL + '/machine';
+    private api: string = environment.apiUrl + '/machine';
 
     constructor(private http: HttpClient) {
     }

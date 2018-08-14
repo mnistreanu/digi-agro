@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core';
-import {Constants} from '../common/constants';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import {BranchModel} from '../pages/manage-branches/branch/branch.model';
 import {ListItem} from '../interfaces/list-item.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class BranchService {
 
-    private api: string = Constants.API_URL + '/branch';
+    private api: string = environment + '/branch';
 
     constructor(private http: HttpClient) {
     }

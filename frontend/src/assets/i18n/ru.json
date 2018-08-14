@@ -67,6 +67,7 @@
 		"crops": "Сельхоз. культуры",
 		"crops-varieties": "Сельскохозяйственные культуры и сорта",
 		"dashboard": "Главная",
+		"forecasting-charts": "Прогнозные графики",
 		"forecasts": "Прогнозирование",
 		"harvesting-forecasting": "Прогнозирование урожая",
 		"harvesting-forecasting-factor": "Прогнозирование урожая FACTOR",
@@ -80,6 +81,9 @@
 		"telemetry": "Телеметрия",
 		"tenants": "Клиенты",
 		"users": "Пользователями",
+		"weather": "Погода",
+		"weather-forecast": "Прогноз погоды",
+		"weather-history": "Исторические данные",
 		"work-agenda": "Повестка работ"
 	},
 	"notification": {
@@ -166,5 +170,13 @@
 		"password-do-not-match": "Пароли не совпадают",
 		"required": "Обязательное поле",
 		"unique": "Уникальное поле"
+	},
+	"weather": {
+		"condition": "Условия",
+		"date": "Дата",
+		"humidity": "Влажность",
+		"location": "Место расположения",
+		"temperature": "Температура",
+		"wind": "Ветер"
 	}
 }

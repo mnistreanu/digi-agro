@@ -4,11 +4,12 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import {PayloadModel} from '../pages/payload.model';
 import {ReminderModel} from '../pages/reminder/reminder.model';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ReminderService {
 
-    private api: string = Constants.API_URL + '/reminder';
+    private api: string = environment.apiUrl + '/reminder';
 
     constructor(private http: HttpClient) {
     }

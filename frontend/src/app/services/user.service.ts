@@ -4,13 +4,14 @@ import {Constants} from '../common/constants';
 import {HttpClient} from '@angular/common/http';
 import {UserList} from '../interfaces/user-list.interface';
 import {UserAccountModel} from '../pages/manage-users/user/user-account.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
 
-    private api: string = Constants.API_URL + '/user';
+    private api: string = environment.apiUrl + '/user';
 
     constructor(private http: HttpClient) {
     }

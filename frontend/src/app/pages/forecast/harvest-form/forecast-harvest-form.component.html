@@ -14,7 +14,7 @@
 
                     <div class="form-group row text-sm-right">
                         <label class="col-sm-3 form-control-label m-t-5" translate>parcel.parcels</label>
-                        <div class="col-sm-9 text-left">
+                        <div class="col-sm-7 text-left">
                             <div class="form-group">
                                 <ss-multiselect-dropdown [options]="parcels" *ngIf="parcels"
                                                          [texts]="parcelControlTexts"
@@ -26,6 +26,7 @@
                                 </app-form-error-block>
                             </div>
                         </div>
+                        <label class="col-sm-2 form-control-label m-t-5" translate>345.5 Ha</label>
                     </div>
 
                     <div class="form-group row text-sm-right">
@@ -50,7 +51,7 @@
                             <div class="form-group">
                                 <select id="crop-name" class="form-control custom-select"
                                         (change)="onCropChange()"
-                                        formControlName="cropId" required>
+                                        formControlName="cropId">
                                     <option *ngFor="let crop of crops"
                                             [ngValue]="crop.id">{{crop.nameRo}}
                                     </option>
@@ -89,8 +90,8 @@
                     <div class="form-group row text-sm-right">
                         <label class="col-sm-3 form-control-label m-t-5" translate>forecast.name</label>
                         <div class="col-sm-9 text-left">
-                            <input class="form-control checking-field" formControlName="forecastName">
-                            <app-form-error-block [control]="form.get('forecastName')"
+                            <input class="form-control checking-field" formControlName="name">
+                            <app-form-error-block [control]="form.get('name')"
                                               [formSubmitted]="formSubmitted">
                             </app-form-error-block>
                         </div>

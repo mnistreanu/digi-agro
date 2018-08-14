@@ -9,6 +9,7 @@ import {Messages} from '../../common/messages';
 import {Router} from '@angular/router';
 import {Constants} from '../../common/constants';
 import {LangService} from '../../services/lang.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
     selector: 'app-user-profile',
@@ -41,7 +42,7 @@ export class UserProfileComponent implements OnInit {
         this.setupLabels();
         this.authService.fetchCurrentUser().subscribe(data => {
             this.model = data;
-            this.logoUrl = Constants.API_URL + this.model.logoUrl;
+            this.logoUrl = environment.apiUrl + this.model.logoUrl;
             console.log('logo', this.logoUrl);
             this.buildForm();
         });

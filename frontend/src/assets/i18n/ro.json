@@ -67,6 +67,7 @@
 		"crops": "Culturi agricole",
 		"crops-varieties": "Culturi agricole și soiuri",
 		"dashboard": "Dashboard",
+		"forecasting-charts": "Diagrame de prognoză",
 		"forecasts": "Prognoze",
 		"harvesting-forecasting": "Prognoză recoltă",
 		"harvesting-forecasting-factor": "Prognoză recoltă FACTOR",
@@ -80,6 +81,9 @@
 		"telemetry": "Telemetrie",
 		"tenants": "Clienți",
 		"users": "Utilizatori",
+		"weather": "Date meteo",
+		"weather-forecast": "Prognoza meteo",
+		"weather-history": "Date meteo istorice",
 		"work-agenda": "Agenda lucrărilor"
 	},
 	"notification": {
@@ -166,5 +170,13 @@
 		"password-do-not-match": "Parolele nu se potrivesc",
 		"required": "Camp obligatoriu",
 		"unique": "Unic"
+	},
+	"weather": {
+		"condition": "Condiții",
+		"date": "Data",
+		"humidity": "Umiditatea",
+		"location": "Locația",
+		"temperature": "Temperatura",
+		"wind": "Vîntul"
 	}
 }

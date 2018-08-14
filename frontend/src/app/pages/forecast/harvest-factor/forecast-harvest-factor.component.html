@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col">
+        <div widget class="card">
+            <!--<div class="card-header">-->
+                <!--<span translate>nav.harvesting-forecasting-factor</span>-->
+                <!--<div class="widget-controls">-->
+                    <!--<a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>-->
+                    <!--<a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>-->
+                    <!--<a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>-->
+                    <!--<a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>-->
+                    <!--<a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="card-body widget-body">-->
+
+                <div *ngFor="let f of forecastModels; let i = index; " id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="card">
+                        <div class="card-header" role="tab" [attr.id]="'heading_'+f.id">
+                            <h5 class="mb-0">
+                                <a data-toggle="collapse" [attr.href]="'#collapse_'+f.id" aria-expanded="false" [attr.aria-controls]="'collapse_'+f.id" >
+                                    {{ f.name }}
+                                </a>
+                            </h5>
+                        </div>
+                        <div [attr.id]="'collapse_'+f.id" [attr.class]="'collapse ' + (i==0 ? 'show' : 'hide')" data-parent="#accordion" role="tabpanel" [attr.aria-labelledby]="'heading_'+f.id">
+                            <div class="card-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            <!--</div>-->
+        </div>
+    </div>
+</div>
