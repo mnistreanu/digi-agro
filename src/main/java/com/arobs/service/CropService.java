@@ -1,8 +1,10 @@
 package com.arobs.service;
 
 import com.arobs.entity.Crop;
+import com.arobs.entity.Tenant;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.CropModel;
+import com.arobs.model.tenant.TenantModel;
 import com.arobs.repository.CropRepository;
 import com.arobs.repository.custom.CropCustomRepository;
 import com.google.gson.Gson;
@@ -19,6 +21,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import sun.tools.tree.BooleanExpression;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -75,22 +78,6 @@ public class CropService implements HasRepository<CropRepository> {
         return response;
     }
 
-    public Page<Crop> findAll(int page, int size, List<String> sorts) {
-
-        Sort.Direction direction = Sort.Direction.ASC;
-        Set<String> pojoProperties = new HashSet<String>();
-
-        for (String sort : sorts) {
-            String[] part = sort.split(";");
-            pojoProperties.add(part[0]);
-            if (part[1].equals(SORT_DESC)) {
-                direction = Sort.Direction.DESC;
-            }
-        }
-
-        return  cropRepository.findAll(new PageRequest(page, size, new Sort(direction, new ArrayList<>(pojoProperties))));
-    }
-
     public JSONObject findAll(int page, int size, List<String> filters, List<String> sorts) {
 
 
@@ -112,6 +99,33 @@ public class CropService implements HasRepository<CropRepository> {
 
         return response;
     }
+
+    public Crop save(CropModel model) {
+
+        Crop crop;
+
+        if (model.getId() == null) {
+            crop = new Crop();
+        } else {
+            crop = getRepository().findOne(model.getId());
+        }
+
+        crop.setCropCategoryId(model.getCropCategoryId());
+        crop.setNameRo(model.getNameRo());
+        crop.setNameRu(model.getNameRu());
+
+        return getRepository().save(crop);
+    }
+
+    public Crop findOne(Long id) {
+        return getRepository().findOne(id);
+    }
+
+    public void delete(Long id) {
+        getRepository().delete(id);
+    }
+
+
 
 
 }

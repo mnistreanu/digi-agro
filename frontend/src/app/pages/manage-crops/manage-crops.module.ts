@@ -7,11 +7,11 @@ import {EditRendererModule} from '../../modules/aggrid/edit-renderer/edit-render
 import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-block.module';
 import {DirectivesModule} from '../../theme/directives/directives.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-//import {TenantComponent} from './tenant/tenant.component';
 import {ManageCropsRoutingModule} from './manage-crops-routing.module';
 //import {TenantListFilterComponent} from './tenant-list-filter/tenant-list-filter.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {DatatableComponent, NgxDatatableModule} from '@swimlane/ngx-datatable';
+import { CropComponent } from './crop/crop.component';
 
 @NgModule({
     imports: [
@@ -26,7 +26,7 @@ import {DatatableComponent, NgxDatatableModule} from '@swimlane/ngx-datatable';
         NgxDatatableModule,
         AgGridModule.withComponents([EditRendererComponent])
     ],
-    declarations: [CropsComponent
+    declarations: [CropsComponent, CropComponent
     //    TenantComponent, TenantListFilterComponent
     ]
 })

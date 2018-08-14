@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import { CropsComponent } from './crops/crops.component';
-//import {TenantComponent} from './tenant/tenant.component';
+import {CropComponent} from './crop/crop.component';
 
 const routes: Routes = [
     {path: '', component: CropsComponent},
-    //{path: 'tenant/:id', component: TenantComponent, data: {breadcrumb: 'Tenant Form'}}
+    {path: ':id', component: CropComponent, data: {breadcrumb: 'Crop Form'}}
 ];
 
 @NgModule({

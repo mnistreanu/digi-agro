@@ -6,6 +6,7 @@ import {PayloadModel} from '../pages/payload.model';
 import { environment } from '../../environments/environment';
 import {CropDTO} from '../dto/crop/crop.dto'
 import { SelectItem } from '../dto/select-item.dto';
+import { CropModel } from '../pages/crop/crop.model';
 
 @Injectable({
     providedIn: 'root'
@@ -51,5 +52,21 @@ export class CropService {
 
     public findVarietiesTree(): Observable<PayloadModel> {
         return this.http.get<PayloadModel>(this.api + '/tree');
+    }
+
+    create(model: FormData): Observable<CropModel> {
+        return this.http.post<CropModel>(this.api, model);
+    }
+
+    update(id:number, model: FormData): Observable<CropModel> {
+        return this.http.put<CropModel>(this.api + '/' + id, model);
+    }
+
+    findOne(id: number): Observable<CropModel> {
+        return this.http.get<CropModel>(this.api + '/' + id);
+    }
+
+    remove(id: number): Observable<void> {
+        return this.http.delete<void>(this.api + '/' + id);
     }
 }

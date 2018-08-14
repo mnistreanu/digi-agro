@@ -3,9 +3,11 @@ package com.arobs.controller;
 import com.arobs.entity.Crop;
 import com.arobs.entity.CropCategory;
 import com.arobs.entity.CropVariety;
+import com.arobs.model.CropModel;
 import com.arobs.model.CropVarietyModel;
 import com.arobs.model.ListItemModel;
 import com.arobs.model.PayloadModel;
+import com.arobs.model.tenant.TenantModel;
 import com.arobs.service.CropCategoryService;
 import com.arobs.service.CropService;
 import com.arobs.service.CropVarietyService;
@@ -13,6 +15,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Column;
@@ -32,6 +35,25 @@ public class CropController {
 
     @Autowired
     private CropVarietyService cropVarietyService;
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<CropModel> findById(@PathVariable("id") final Long id) {
+
+        Crop crop = cropService.findOne(id);
+
+        if (crop != null) {
+            return ResponseEntity.ok(new CropModel(crop));
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void remove(@PathVariable Long id) {
+        cropService.delete(id);
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
@@ -60,6 +82,24 @@ public class CropController {
     @RequestMapping(value = "/categories/select_items", method = RequestMethod.GET)
     public ResponseEntity<List<ListItemModel>> getCropCategories() {
         return ResponseEntity.ok(cropCategoryService.fetchItems());
+    }
+
+    //@PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<CropModel> save(@RequestBody CropModel model) {
+        return ResponseEntity.ok(new CropModel(cropService.save(model)));
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<CropModel> update(@PathVariable("id") final Long id, @RequestBody final CropModel resource) {
+        Crop crop = cropService.findOne(id);
+
+        if (crop == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(new CropModel(cropService.save(resource)));
     }
 
     @RequestMapping(value = "/crops", method = RequestMethod.GET)

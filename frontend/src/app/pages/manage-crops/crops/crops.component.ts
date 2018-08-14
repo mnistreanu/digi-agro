@@ -99,6 +99,15 @@ export class CropsComponent implements OnInit {
         this.fetchData();
     }
 
+    getCropCategoryLabelById(id: number) {
+        for (let item of this.cropCategorySelectItems) {
+            if (item.id == id) {
+                return item.name;
+            }
+        }
+        return 'UNKNOWN';
+    }
+
     onSelect({selected}) {
         console.log('Select Event', selected, this.selected);
         this.selected.splice(0, this.selected.length);
@@ -107,10 +116,17 @@ export class CropsComponent implements OnInit {
 
     onActivate(event) {
         console.log('Activate Event', event);
+        if (event.type == 'click') {
+            this.router.navigate(['/pages/manage-crops/' + event.row.id]);
+        }
     }
 
     public sort(event: any) {
         console.log(event);
+    }
+
+    public add() {
+        this.router.navigate(['/pages/manage-crops/-1']);
     }
 
 

@@ -100,9 +100,9 @@ export class ForecastHarvestComponent implements OnInit {
 
     private setupCropCategories() {
         this.cropService.findCategories().subscribe(payloadModel => {
-            const status = payloadModel.status;
-            const message = payloadModel.message;
-            this.categories = payloadModel.payload;
+            const status = payloadModel['status'];
+            const message = payloadModel['message'];
+            this.categories = payloadModel['payload'];
         });
     }
 

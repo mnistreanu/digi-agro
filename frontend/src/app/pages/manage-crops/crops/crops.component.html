@@ -2,7 +2,7 @@
     <div class="col">
         <div widget class="card">
             <div class="card-header">
-                <span class="text-uppercase">Ngx datatable</span>
+                <span class="text-uppercase">Crops</span>
                 <div class="widget-controls"> 
                     <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
                     <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
@@ -12,6 +12,10 @@
                 </div>        
             </div>
             <div class="card-body widget-body">
+
+                    <div>
+                        <button class="btn btn-sm btn-primary" (click)="add()" translate>action.create</button>
+                    </div>
                 
                 <ngx-datatable
                     #table
@@ -22,13 +26,10 @@
                     [footerHeight]="50"
                     [rowHeight]="'auto'"
                     [rows]="rows"
-                    [selected]="selected"
-                    [selectionType]="'checkbox'"
                     [count] = "totalRecords"
                     [externalPaging] = "true"
                     [externalSorting] = "true"
                     (activate)="onActivate($event)"
-                    (select)='onSelect($event)'
                     (page)='setPage($event)'>
 
                     <ngx-datatable-column name="cropCategoryId">
@@ -46,7 +47,7 @@
                             title="Double click to edit"
                             (dblclick)="editing[rowIndex + '-name'] = true"
                             *ngIf="!editing[rowIndex + '-name']">
-                            {{value}}
+                            {{getCropCategoryLabelById(value)}}
                             </span>
                             <input
                             autofocus
