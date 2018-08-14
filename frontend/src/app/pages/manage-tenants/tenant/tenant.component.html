@@ -1,107 +1,104 @@
 <form [formGroup]="form" *ngIf="model" (keydown.enter)="$event.preventDefault()">
 
-  <div widget class="card bottom-30">
-    <div class="card-header">
-      <span>Tenant</span>
-      <div class="widget-controls">
-        <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
-        <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
-        <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
-        <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>
-        <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
-      </div>
+    <div widget class="card bottom-30">
+        <div class="card-header">
+            <span translate>tenant.tenant</span>
+            <div class="widget-controls">
+                <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
+                <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
+                <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
+                <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>
+                <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+            </div>
+        </div>
+        <div class="card-body widget-body">
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <label for="name" translate>info.name</label>
+                    <input id="name" class="form-control checking-field" formControlName="name"
+                           (change)="onNameChange()">
+                    <app-form-error-block [control]="form.get('name')"
+                                          [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <label for="description" translate>info.description</label>
+                    <textarea id="description" class="form-control" formControlName="description"></textarea>
+                    <app-form-error-block [control]="form.get('description')"
+                                          [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <label for="fiscalCode" translate>tenant.fiscal-code</label>
+                    <input id="fiscalCode" class="form-control checking-field"
+                           formControlName="fiscalCode" (change)="onFiscalCodeChange()">
+                    <app-form-error-block [control]="form.get('fiscalCode')"
+                                          [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <label for="country" translate>geo.country</label>
+                    <select id="country" class="form-control custom-select"
+                            formControlName="country" (change)="onCountryChange()">
+                        <option *ngFor="let item of countries" [ngValue]="item.id">{{ item.name }}</option>
+                    </select>
+                    <app-form-error-block [control]="form.get('country')"
+                                          [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+
+                <div class="col-sm-4">
+                    <label for="county"translate>geo.county</label>
+                    <select id="county" class="form-control custom-select"
+                            formControlName="county" (change)="onCountyChange()">
+                        <option *ngFor="let item of counties" [ngValue]="item.id">{{ item.name }}</option>
+                    </select>
+                    <app-form-error-block [control]="form.get('county')"
+                                          [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+
+                <div class="col-sm-4">
+                    <label for="city" translate>geo.village-city</label>
+                    <select id="city" class="form-control custom-select" formControlName="city">
+                        <option *ngFor="let item of cities" [ngValue]="item.id">{{ item.name }}</option>
+                    </select>
+                    <app-form-error-block [control]="form.get('city')"
+                                          [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="address" translate>geo.address</label>
+                    <input id="address" class="form-control checking-field" formControlName="address">
+                    <app-form-error-block [control]="form.get('address')"
+                                          [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+                <div class="col-sm-6">
+                    <label for="phones" translate>contact.phone</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                        </div>
+                        <input id="phones" class="form-control" formControlName="phones">
+                    </div>
+                    <app-form-error-block [control]="form.get('phones')"
+                                          [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-danger" *ngIf="!isNew" (click)="remove()" translate>action.remove</button>
+                <button class="btn btn-success pull-right" (click)="save(form)" translate>action.save</button>
+            </div>
+
+        </div>
     </div>
-    <div class="card-body widget-body">
-
-      <div class="form-group row">
-        <div class="col-sm-12">
-          <label for="name">Name</label>
-          <div>
-            <input id="name" class="form-control checking-field" formControlName="name"
-                   (change)="onNameChange()">
-          </div>
-          <app-form-error-block [control]="form.get('name')" [formSubmitted]="submitted"
-                                [title]="'Name'"></app-form-error-block>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <div class="col-sm-12">
-          <label for="description">Description</label>
-          <div>
-            <textarea id="description" class="form-control" formControlName="description"></textarea>
-          </div>
-          <app-form-error-block [control]="form.get('description')" [formSubmitted]="submitted"
-                                [title]="'Description'"></app-form-error-block>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <div class="col-sm-12">
-          <label for="fiscalCode">Fiscal Code</label>
-          <div>
-            <input id="fiscalCode" class="form-control checking-field" formControlName="fiscalCode"
-                   (change)="onFiscalCodeChange()">
-          </div>
-          <app-form-error-block [control]="form.get('fiscalCode')" [formSubmitted]="submitted"
-                                [title]="'Fiscal Code'"></app-form-error-block>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <div class="col-sm-4">
-          <label for="country">Country</label>
-          <div>
-            <input id="country" class="form-control checking-field" formControlName="country" maxlength="2">
-          </div>
-          <app-form-error-block [control]="form.get('country')" [formSubmitted]="submitted"
-                                [title]="'Country'"></app-form-error-block>
-        </div>
-
-        <div class="col-sm-4">
-          <label for="county">County</label>
-          <div>
-            <input id="county" class="form-control checking-field" formControlName="county" maxlength="2">
-          </div>
-          <app-form-error-block [control]="form.get('county')" [formSubmitted]="submitted"
-                                [title]="'County'"></app-form-error-block>
-        </div>
-
-        <div class="col-sm-4">
-          <label for="villageCity">Village City</label>
-          <div>
-            <input id="villageCity" class="form-control checking-field" formControlName="villageCity">
-          </div>
-          <app-form-error-block [control]="form.get('villageCity')" [formSubmitted]="submitted"
-                                [title]="'Village City'"></app-form-error-block>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <div class="col-sm-6">
-          <label for="address">Address</label>
-          <div>
-            <input id="address" class="form-control checking-field" formControlName="address">
-          </div>
-          <app-form-error-block [control]="form.get('address')" [formSubmitted]="submitted"
-                                [title]="'Address'"></app-form-error-block>
-        </div>
-        <div class="col-sm-6">
-          <label for="phones">Phones</label>
-          <div>
-            <input id="phones" class="form-control checking-field" formControlName="phones">
-          </div>
-          <app-form-error-block [control]="form.get('phones')" [formSubmitted]="submitted"
-                                [title]="'Phones'"></app-form-error-block>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <button class="btn btn-danger" *ngIf="!isNew" (click)="remove()">Remove</button>
-        <button class="btn btn-success pull-right" (click)="save(form)">Save</button>
-      </div>
-
-    </div>
-  </div>
 
 </form>

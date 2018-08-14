@@ -4,8 +4,7 @@ import {ColDef, GridOptions} from 'ag-grid';
 import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {BranchService} from '../../../services/branch.service';
 import {BranchModel} from '../branch/branch.model';
-import {ListItem} from '../../../interfaces/list-item.interface';
-import {TenantService} from '../../../services/tenant.service';
+import {LangService} from "../../../services/lang.service";
 
 @Component({
     selector: 'app-branch-list',
@@ -17,34 +16,13 @@ export class BranchListComponent implements OnInit {
     options: GridOptions;
     context;
 
-    tenantId;
-    tenants: ListItem[];
-
     constructor(private router: Router,
-                private tenantService: TenantService,
+                private langService: LangService,
                 private branchService: BranchService) {
     }
 
     ngOnInit() {
-        this.setupTenants();
         this.setupGrid();
-    }
-
-    private setupTenants() {
-        this.tenantService.fetchListItems().subscribe(data => {
-            this.tenants = data;
-            if (this.tenants.length > 0) {
-                this.tenantId = this.tenants[0].id;
-                this.setupRows();
-            }
-        });
-    }
-
-    public onTenantChange() {
-        if (this.tenantId == null) {
-            return;
-        }
-        this.setupRows();
     }
 
     private setupGrid() {
@@ -56,6 +34,7 @@ export class BranchListComponent implements OnInit {
         this.options.columnDefs = this.setupHeaders();
         this.context = {componentParent: this};
 
+        this.setupRows();
     }
 
     private setupHeaders() {
@@ -75,55 +54,61 @@ export class BranchListComponent implements OnInit {
                 }
             },
             {
-                headerName: 'Name',
+                headerName: 'info.name',
                 field: 'name',
                 width: 200,
                 minWidth: 200,
                 cellRenderer: 'agGroupCellRenderer'
             },
             {
-                headerName: 'Description',
+                headerName: 'info.description',
                 field: 'description',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'Country',
+                headerName: 'geo.country',
                 field: 'country',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'County',
+                headerName: 'geo.county',
                 field: 'county',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'Village City',
-                field: 'villageCity',
+                headerName: 'geo.village-city',
+                field: 'city',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'Address',
+                headerName: 'geo.address',
                 field: 'address',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'Phones',
+                headerName: 'contact.phone',
                 field: 'phones',
                 width: 200,
                 minWidth: 200
             }
         ];
 
+        headers.forEach((h) => {
+            if (h.headerName) {
+                this.langService.get(h.headerName).subscribe(m => h.headerName = m);
+            }
+        });
+
         return headers;
     }
 
     private setupRows() {
-        this.branchService.find(this.tenantId).subscribe(models => {
+        this.branchService.find().subscribe(models => {
             models = this.adjustTreeModels(models);
             this.options.api.setRowData(models);
         });
@@ -139,21 +124,21 @@ export class BranchListComponent implements OnInit {
                 treeModels.push(model);
             } else {
                 const parent = modelMap[model.parentId];
-                if (!parent.participants) {
-                    parent.participants = [];
+                if (!parent.children) {
+                    parent.children = [];
                 }
-                parent.participants.push(model);
+                parent.children.push(model);
             }
         }
         return treeModels;
     }
 
     private getNodeChildDetails(rowItem) {
-        if (rowItem.participants) {
+        if (rowItem.children) {
             return {
                 group: true,
                 expanded: false,
-                children: rowItem.participants,
+                children: rowItem.children,
                 key: rowItem.group
             };
         } else {

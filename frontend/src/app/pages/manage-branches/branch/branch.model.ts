@@ -5,7 +5,7 @@ export class BranchModel {
     description: string;
     country: string;
     county: string;
-    villageCity: string;
+    city: string;
     address: string;
     phones: string;
     parentId: number;

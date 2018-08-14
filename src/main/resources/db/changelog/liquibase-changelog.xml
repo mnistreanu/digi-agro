@@ -43,6 +43,13 @@
         </sql>
     </changeSet>
 
+    <changeSet id="insert-countries" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <sql>
+            INSERT INTO country (id, name_ro, name_ru) VALUES ('MD', 'Moldova', 'Молдова');
+            INSERT INTO country (id, name_ro, name_ru) VALUES ('RO', 'România', 'Румыния');
+        </sql>
+    </changeSet>
+
     <!--
         Lista de raioane din Moldova, in limba romana si rusa
     -->
@@ -503,6 +510,13 @@
         <sql>
             UPDATE parcel SET land_worthiness_points = landworthiness_points;
             ALTER TABLE parcel DROP COLUMN landworthiness_points;
+        </sql>
+    </changeSet>
+
+    <changeSet id="update-country-id" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <sql>
+            UPDATE parcel SET country_id = 'MD' WHERE country_id = 'md';
+            UPDATE tenant SET country_id = 'MD' WHERE country_id = 'md';
         </sql>
     </changeSet>
 

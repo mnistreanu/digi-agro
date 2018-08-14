@@ -1,4 +1,4 @@
-package com.arobs.service;
+package com.arobs.service.geo;
 
 import com.arobs.entity.County;
 import com.arobs.interfaces.HasRepository;
@@ -14,12 +14,12 @@ public class CountyService implements HasRepository<CountyRepository> {
     @Autowired
     private CountyRepository countyRepository;
 
-    private List<County> find(String countyId) {
-        return getRepository().find(countyId);
+    public List<County> find(String countryId) {
+        return getRepository().find(countryId);
     }
 
-    private List<County> find(String countyId, String name) {
-        return getRepository().find(countyId, '%' + name + '%');
+    public List<County> find(String countryId, String name) {
+        return getRepository().find(countryId, '%' + name + '%');
     }
 
     @Override

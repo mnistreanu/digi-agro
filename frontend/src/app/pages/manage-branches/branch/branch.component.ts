@@ -7,6 +7,12 @@ import {BranchModel} from './branch.model';
 import {BranchService} from '../../../services/branch.service';
 import {ListItem} from '../../../interfaces/list-item.interface';
 import {TenantService} from '../../../services/tenant.service';
+import {StorageService} from '../../../services/storage.service';
+import {Constants} from '../../../common/constants';
+import {LangService} from '../../../services/lang.service';
+import {GeoLocalizedItem} from '../../../interfaces/geo-localized-item.interface';
+import {GeoService} from '../../../services/geo.service';
+import {TenantModel} from '../../manage-tenants/tenant/tenant.model';
 
 @Component({
     selector: 'app-branch',
@@ -21,33 +27,50 @@ export class BranchComponent implements OnInit {
     isNew: boolean;
 
     parents: ListItem[];
-    tenants: ListItem[];
+
+    countries: GeoLocalizedItem[];
+    counties: GeoLocalizedItem[];
+    cities: GeoLocalizedItem[];
+
+    private tenant: TenantModel;
+
+    private labelSaved: string;
+    private labelRemoved: string;
+    private labelValidationError: string;
 
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
                 private branchService: BranchService,
+                private storageService: StorageService,
+                private langService: LangService,
+                private geoService: GeoService,
                 private tenantService: TenantService,
                 private toastr: ToastrService) {
     }
 
     ngOnInit() {
-        this.fetchTenantListItems();
-        this.route.params.subscribe(params => {
-            const id = params['id'];
+        this.setupLabels();
+        const tenantId = this.storageService.getItem(Constants.TENANT);
+        this.tenantService.findOne(tenantId).subscribe(tenant => {
+            this.tenant = tenant;
+            this.route.params.subscribe(params => {
+                const id = params['id'];
 
-            if (id === -1) {
-                this.prepareNewModel();
-            } else {
-                this.setupModel(id);
-            }
+                if (id == -1) {
+                    this.prepareNewModel();
+                }
+                else {
+                    this.setupModel(id);
+                }
+            });
         });
     }
 
-    private fetchTenantListItems() {
-        this.tenantService.fetchListItems().subscribe(tenants => {
-            this.tenants = tenants;
-        });
+    private setupLabels() {
+        this.langService.get(Messages.SAVED).subscribe(m => this.labelSaved = m);
+        this.langService.get(Messages.REMOVED).subscribe(m => this.labelRemoved = m);
+        this.langService.get(Messages.VALIDATION_FAIL).subscribe(m => this.labelValidationError = m);
     }
 
     private setupModel(id) {
@@ -61,7 +84,53 @@ export class BranchComponent implements OnInit {
     private prepareNewModel() {
         this.model = new BranchModel();
         this.isNew = true;
+        this.model.country = this.tenant.country;
+        this.model.county = this.tenant.county;
+        this.model.city = this.tenant.city;
+        this.fetchParentListItems();
         this.buildForm();
+    }
+
+    private setupCountries() {
+        const locale = this.langService.getLanguage();
+        this.geoService.getCountries().subscribe(data => {
+            this.countries = data.map((item) => new GeoLocalizedItem(item, locale));
+        });
+    }
+
+    public onCountryChange() {
+        this.form.controls['county'].setValue(null);
+        this.form.controls['city'].setValue(null);
+        this.setupCounties(this.form.controls['country'].value);
+    }
+
+    private setupCounties(country) {
+        if (!country) {
+            this.counties = [];
+            return;
+        }
+        const locale = this.langService.getLanguage();
+        this.geoService.getCounties(country).subscribe(data => {
+            this.counties = data.map((item) => new GeoLocalizedItem(item, locale));
+        });
+    }
+
+    public onCountyChange() {
+        this.form.controls['city'].setValue(null);
+        const country = this.form.controls['country'].value;
+        const county = this.form.controls['county'].value;
+        this.setupCities(country, county);
+    }
+
+    private setupCities(country, county) {
+        if (!country || !county) {
+            this.cities = [];
+            return;
+        }
+        const locale = this.langService.getLanguage();
+        this.geoService.getCities(country, county).subscribe(data => {
+            this.cities = data.map((item) => new GeoLocalizedItem(item, locale));
+        });
     }
 
     private buildForm() {
@@ -71,17 +140,20 @@ export class BranchComponent implements OnInit {
             description: new FormControl(this.model.description, [Validators.maxLength(1024)]),
             country: new FormControl(this.model.country, [Validators.required, Validators.maxLength(2)]),
             county: [this.model.county, Validators.maxLength(2)],
-            villageCity: [this.model.villageCity, Validators.maxLength(255)],
+            city: [this.model.city, Validators.maxLength(255)],
             address: [this.model.address, Validators.maxLength(1024)],
             phones: [this.model.phones, Validators.maxLength(128)],
-            tenantId: [this.model.tenantId, Validators.required],
             parentId: [this.model.parentId]
         });
+
+        this.setupCountries();
+        this.setupCounties(this.model.country);
+        this.setupCities(this.model.country, this.model.county);
     }
 
     public onNameChange() {
         const control = this.form.controls.name;
-        this.branchService.validateName(this.model.id || -1, control.value).subscribe((isUnique) => {
+        this.branchService.validateName(this.model.id, control.value).subscribe((isUnique) => {
             if (!isUnique) {
                 const errors = control.errors || {};
                 errors.unique = !isUnique;
@@ -90,14 +162,10 @@ export class BranchComponent implements OnInit {
         });
     }
 
-    public onTenantChange() {
-        this.form.controls['parentId'].setValue(null);
-        this.fetchParentListItems();
-    }
-
     private fetchParentListItems() {
-        const tenant = this.form.controls['tenantId'].value;
-        this.branchService.fetchListItems(tenant, this.model.id).subscribe(parents => {
+        const tenants = [];
+        tenants.push(this.tenant.id);
+        this.branchService.fetchListItems(this.model.id, tenants).subscribe(parents => {
             parents.unshift({id: null, name: 'None'});
             this.parents = parents;
         });
@@ -108,7 +176,7 @@ export class BranchComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.toastr.warning(Messages.VALIDATION_FAIL);
+            this.toastr.warning(this.labelValidationError);
             return;
         }
 
@@ -118,14 +186,14 @@ export class BranchComponent implements OnInit {
 
         this.branchService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.toastr.success(Messages.SAVED);
+            this.toastr.success(this.labelSaved);
         });
 
     }
 
     public remove() {
         this.branchService.remove(this.model).subscribe(() => {
-            this.toastr.success(Messages.REMOVED);
+            this.toastr.success(this.labelRemoved);
             this.router.navigate(['/pages/manage-branches']);
         });
     }

@@ -1,7 +1,6 @@
 package com.arobs.model;
 
 
-import com.arobs.entity.AgroWorkType;
 import com.arobs.entity.Weather;
 
 import java.io.Serializable;
@@ -24,7 +23,9 @@ public class WeatherModel implements Serializable {
 
     private String icon;
 
-    private Integer temp;
+    private Integer tempMax;
+
+    private Integer tempMin;
 
     private Integer pressure;
 
@@ -117,12 +118,20 @@ public class WeatherModel implements Serializable {
         this.icon = icon;
     }
 
-    public Integer getTemp() {
-        return temp;
+    public Integer getTempMax() {
+        return tempMax;
     }
 
-    public void setTemp(Integer temp) {
-        this.temp = temp;
+    public void setTempMax(Integer tempMax) {
+        this.tempMax = tempMax;
+    }
+
+    public Integer getTempMin() {
+        return tempMin;
+    }
+
+    public void setTempMin(Integer tempMin) {
+        this.tempMin = tempMin;
     }
 
     public Integer getPressure() {

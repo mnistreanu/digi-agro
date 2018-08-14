@@ -7,7 +7,7 @@ public class TenantFilterModel {
     private Long fiscalCode;
     private String country;
     private String county;
-    private String villageCity;
+    private String city;
     private String address;
     private String phones;
 
@@ -54,12 +54,12 @@ public class TenantFilterModel {
         this.county = county;
     }
 
-    public String getVillageCity() {
-        return villageCity;
+    public String getCity() {
+        return city;
     }
 
-    public void setVillageCity(String villageCity) {
-        this.villageCity = villageCity;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getAddress() {

@@ -11,7 +11,11 @@
 		"logout": "Ieșire"
 	},
 	"branch": {
-		"branch": "Subdiviziune"
+		"branch": "Filial",
+		"branches": "Filiale"
+	},
+	"contact": {
+		"phone": "Telefon"
 	},
 	"crop": {
 		"category": "Categoria",
@@ -21,18 +25,19 @@
 	"forecast": {
 		"additional_info": "Informații suplimnetare",
 		"currency": "Monedă",
-		"harvesting_year": "Anul recoltei",
-		"name": "Denumire prognoză",
 		"harvest": "Recoltă",
+		"harvesting_year": "Anul recoltei",
 		"hectar": "hectar",
-		"unit_of_measure": "Unitatea de măsură",
-		"selling_price": "Preț de vînzare"
+		"name": "Denumire prognoză",
+		"selling_price": "Preț de vînzare",
+		"unit_of_measure": "Unitatea de măsură"
 	},
 	"general": {
 		"form": "Forma",
 		"settings": "Setări"
 	},
 	"geo": {
+		"address": "Adresa",
 		"country": "Țară",
 		"county": "Județ",
 		"map": "Hartă",
@@ -55,13 +60,14 @@
 		"сonsumption": "Consum"
 	},
 	"nav": {
-		"branches": "Subdiviziuni",
+		"branches": "Filiale",
 		"brands": "Brands",
 		"costs-forecasting": "Prognoză costuri",
 		"costs-forecasting-form": "Prognoză costuri FORM",
 		"crops": "Culturi agricole",
 		"crops-varieties": "Culturi agricole și soiuri",
 		"dashboard": "Dashboard",
+		"forecasting-charts": "Diagrame de prognoză",
 		"forecasts": "Prognoze",
 		"harvesting-forecasting": "Prognoză recoltă",
 		"harvesting-forecasting-factor": "Prognoză recoltă FACTOR",
@@ -75,6 +81,9 @@
 		"telemetry": "Telemetrie",
 		"tenants": "Clienți",
 		"users": "Utilizatori",
+		"weather": "Date meteo",
+		"weather-forecast": "Prognoza meteo",
+		"weather-history": "Date meteo istorice",
 		"work-agenda": "Agenda lucrărilor"
 	},
 	"notification": {
@@ -119,7 +128,9 @@
 		"prev": "Înapoi"
 	},
 	"tenant": {
-		"tenant": "Client"
+		"fiscal-code": "Cod Fiscal",
+		"tenant": "Client",
+		"tenants": "Clienți"
 	},
 	"tree": {
 		"parent": "Părinte"
@@ -159,5 +170,13 @@
 		"password-do-not-match": "Parolele nu se potrivesc",
 		"required": "Camp obligatoriu",
 		"unique": "Unic"
+	},
+	"weather": {
+		"condition": "Condiții",
+		"date": "Data",
+		"humidity": "Umiditatea",
+		"location": "Locația",
+		"temperature": "Temperatura",
+		"wind": "Vîntul"
 	}
 }

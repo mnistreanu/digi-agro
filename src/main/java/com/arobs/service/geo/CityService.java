@@ -1,18 +1,18 @@
-package com.arobs.service;
+package com.arobs.service.geo;
 
-import com.arobs.entity.CityVillage;
+import com.arobs.entity.City;
 import com.arobs.interfaces.HasRepository;
-import com.arobs.repository.CityVillageRepository;
+import com.arobs.repository.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CityVillageService implements HasRepository<CityVillageRepository> {
+public class CityService implements HasRepository<CityRepository> {
 
     @Autowired
-    private CityVillageRepository cityVillageRepository;
+    private CityRepository cityRepository;
 
     /**
      * Cauta lista de sate si orase dupa tara si raion/judet
@@ -20,7 +20,7 @@ public class CityVillageService implements HasRepository<CityVillageRepository> 
      * @param countyId
      * @return
      */
-    private List<CityVillage> find(String countryId, String countyId) {
+    public List<City> find(String countryId, String countyId) {
         return getRepository().find(countryId, countyId);
     }
 
@@ -31,12 +31,12 @@ public class CityVillageService implements HasRepository<CityVillageRepository> 
      * @param name
      * @return
      */
-    private List<CityVillage> find(String countryId, String countyId, String name) {
+    public List<City> find(String countryId, String countyId, String name) {
         return getRepository().find(countryId, countyId, '%' + name + '%');
     }
 
     @Override
-    public CityVillageRepository getRepository() {
-        return cityVillageRepository;
+    public CityRepository getRepository() {
+        return cityRepository;
     }
 }

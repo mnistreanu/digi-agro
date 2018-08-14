@@ -3,6 +3,7 @@ import {TenantService} from '../../../services/tenant.service';
 import {Router} from '@angular/router';
 import {ColDef, GridOptions} from 'ag-grid';
 import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
+import {LangService} from "../../../services/lang.service";
 
 @Component({
     selector: 'app-tenant-list',
@@ -15,6 +16,7 @@ export class TenantListComponent implements OnInit {
     context;
 
     constructor(private router: Router,
+                private langService: LangService,
                 private tenantService: TenantService) {
     }
 
@@ -52,54 +54,60 @@ export class TenantListComponent implements OnInit {
                 }
             },
             {
-                headerName: 'Name',
+                headerName: 'info.name',
                 field: 'name',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'Description',
+                headerName: 'info.description',
                 field: 'description',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'Fiscal Code',
+                headerName: 'tenant.fiscal-code',
                 field: 'fiscalCode',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'Country',
+                headerName: 'geo.country',
                 field: 'country',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'County',
+                headerName: 'geo.county',
                 field: 'county',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'Village City',
-                field: 'villageCity',
+                headerName: 'geo.village-city',
+                field: 'city',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'Address',
+                headerName: 'geo.address',
                 field: 'address',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'Phones',
+                headerName: 'contact.phone',
                 field: 'phones',
                 width: 200,
                 minWidth: 200
             }
         ];
+
+        headers.forEach((h) => {
+            if (h.headerName) {
+                this.langService.get(h.headerName).subscribe(m => h.headerName = m);
+            }
+        });
 
         return headers;
     }

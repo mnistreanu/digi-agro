@@ -63,6 +63,12 @@ export const routes: Routes = [
                 data: {breadcrumb: 'Crops Varieties'},
                 canActivate: [AuthGuard]
             },
+            {
+                path: 'weather',
+                loadChildren: 'app/pages/weather/weather.module#WeatherModule',
+                data: {breadcrumb: 'Weather'},
+                canActivate: [AuthGuard]
+            },
 
             {
                 path: 'manage-tenants',

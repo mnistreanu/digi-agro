@@ -4,12 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 
 /**
  * Created by mihail.gorgos on 25.07.2018.
  *
  * Ppentru definirea geometriei parcelei se va folosi tabelul PARCEL_COORDS.Fiecare parcela are un
- * set de coordonate aferent acestei parcele. Respectiv perimetrul va defini hotarele parcelei.
+ * set de coordonate aferent acestei parcele si centrul geografic. Respectiv perimetrul va defini hotarele parcelei.
  */
 @Entity
 @Table(name = "parcel_geometry")
@@ -21,6 +22,12 @@ public class ParcelGeometry {
 
     @Column(name = "coordinates", length = 4096)
     private String coordinates;
+
+    @Column(name = "lat_center")
+    private BigDecimal latCenter;
+
+    @Column(name = "lon_center")
+    private BigDecimal lonCenter;
 
     public Long getParcelId() {
         return parcelId;
@@ -38,4 +45,19 @@ public class ParcelGeometry {
         this.coordinates = coordinates;
     }
 
+    public BigDecimal getLatCenter() {
+        return latCenter;
+    }
+
+    public void setLatCenter(BigDecimal latCenter) {
+        this.latCenter = latCenter;
+    }
+
+    public BigDecimal getLonCenter() {
+        return lonCenter;
+    }
+
+    public void setLonCenter(BigDecimal lonCenter) {
+        this.lonCenter = lonCenter;
+    }
 }

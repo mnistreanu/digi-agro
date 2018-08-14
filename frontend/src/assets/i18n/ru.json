@@ -11,7 +11,11 @@
 		"logout": "Выход"
 	},
 	"branch": {
-		"branch": "Подразделение"
+		"branch": "Филиал",
+		"branches": "Филиалы"
+	},
+	"contact": {
+		"phone": "Телефон"
 	},
 	"crop": {
 		"category": "Категория",
@@ -21,18 +25,19 @@
 	"forecast": {
 		"additional_info": "Дополнительная информация",
 		"currency": "Валюта",
-		"harvesting_year": "Год сбора урожая",
-		"name": "Название прогноза",
 		"harvest": "Урожай",
+		"harvesting_year": "Год сбора урожая",
 		"hectar": "гектар",
-		"unit_of_measure": "Единица измерения",
-		"selling_price": "Цена при продажи"
+		"name": "Название прогноза",
+		"selling_price": "Цена при продажи",
+		"unit_of_measure": "Единица измерения"
 	},
 	"general": {
 		"form": "Форма",
 		"settings": "Настройки"
 	},
 	"geo": {
+		"address": "Адрес",
 		"country": "Страна",
 		"county": "Округ",
 		"map": "Карта",
@@ -55,13 +60,14 @@
 		"сonsumption": "Расход"
 	},
 	"nav": {
-		"branches": "Подразделения",
+		"branches": "Филиалы",
 		"brands": "Бренды",
 		"costs-forecasting": "Прогнозирование затрат",
 		"costs-forecasting-form": "Прогнозирование затрат FORM",
 		"crops": "Сельхоз. культуры",
 		"crops-varieties": "Сельскохозяйственные культуры и сорта",
 		"dashboard": "Главная",
+		"forecasting-charts": "Прогнозные графики",
 		"forecasts": "Прогнозирование",
 		"harvesting-forecasting": "Прогнозирование урожая",
 		"harvesting-forecasting-factor": "Прогнозирование урожая FACTOR",
@@ -75,6 +81,9 @@
 		"telemetry": "Телеметрия",
 		"tenants": "Клиенты",
 		"users": "Пользователями",
+		"weather": "Погода",
+		"weather-forecast": "Прогноз погоды",
+		"weather-history": "Исторические данные",
 		"work-agenda": "Повестка работ"
 	},
 	"notification": {
@@ -119,7 +128,9 @@
 		"prev": "Пред."
 	},
 	"tenant": {
-		"tenant": "Клиент"
+		"fiscal-code": "Фискальный код",
+		"tenant": "Клиент",
+		"tenants": "Клиенты"
 	},
 	"tree": {
 		"parent": "Родитель"
@@ -159,5 +170,13 @@
 		"password-do-not-match": "Пароли не совпадают",
 		"required": "Обязательное поле",
 		"unique": "Уникальное поле"
+	},
+	"weather": {
+		"condition": "Условия",
+		"date": "Дата",
+		"humidity": "Влажность",
+		"location": "Место расположения",
+		"temperature": "Температура",
+		"wind": "Ветер"
 	}
 }

@@ -49,8 +49,8 @@ public class Parcel {
     @Column(name = "county_id", length = 2)
     private String countyId;
 
-    @Column(name = "city_village_id")
-    private Long cityVillageId;
+    @Column(name = "city_id")
+    private Long cityId;
 
     @Column(name = "created_at")
     private Date createdAt;
@@ -127,12 +127,12 @@ public class Parcel {
         this.countyId = countyId;
     }
 
-    public Long getCityVillageId() {
-        return cityVillageId;
+    public Long getCityId() {
+        return cityId;
     }
 
-    public void setCityVillageId(Long cityVillageId) {
-        this.cityVillageId = cityVillageId;
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
     }
 
     public Date getCreatedAt() {

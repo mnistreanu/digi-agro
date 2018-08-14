@@ -6,7 +6,7 @@ export class TenantModel {
     fiscalCode: string;
     country: string;
     county: string;
-    villageCity: string;
+    city: string;
     address: string;
     phones: string;
 }

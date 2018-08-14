@@ -6,8 +6,8 @@ import javax.persistence.*;
  * Created by mihail.gorgos on 14.07.2018.
  */
 @Entity
-@Table(name = "city_village")
-public class CityVillage {
+@Table(name = "city")
+public class City {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class CityVillage {
     @Column (name = "name_ru")
     private String nameRu;
 
-    public CityVillage() {
+    public City() {
     }
 
     public Long getId() {

@@ -83,7 +83,7 @@ public class UserAccountService implements HasRepository<UserAccountRepository> 
         copyProfileValues(userAccount, model);
 
         if (model.getTenants() != null) {
-            List<Tenant> tenants = tenantService.findByIds(model.getTenants());
+            List<Tenant> tenants = tenantService.findAll(model.getTenants());
             if (userAccount.getTenants() == null) {
                 userAccount.setTenants(tenants);
             }
@@ -94,7 +94,7 @@ public class UserAccountService implements HasRepository<UserAccountRepository> 
         }
 
         if (model.getBranches() != null) {
-            List<TenantBranch> branches = tenantBranchService.findByIds(model.getBranches());
+            List<TenantBranch> branches = tenantBranchService.findAll(model.getBranches());
             if (userAccount.getBranches() == null) {
                 userAccount.setBranches(branches);
             }
