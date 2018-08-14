@@ -126,12 +126,12 @@ export class MenuService {
                 expanded: false,
                 subMenu: [
                     {
-                        title: 'nav.weather-history',
-                        routerLink: 'weather/history',
-                    },
-                    {
                         title: 'nav.weather-forecast',
                         routerLink: 'weather/forecast',
+                    },
+                    {
+                        title: 'nav.weather-history',
+                        routerLink: 'weather/history',
                     },
                 ]
             });

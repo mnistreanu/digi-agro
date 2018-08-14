@@ -3,6 +3,7 @@ import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {WeatherService} from "../../../services/weather.service";
 import {WeatherModel} from "../weather.model";
+import {WeatherHistoryModel} from "./weather-history.model";
 
 @Component({
     selector: 'app-weather-history',
@@ -14,7 +15,7 @@ export class WeatherHistoryComponent implements OnInit {
     options: GridOptions;
     context;
 
-    models: WeatherModel[] = [];
+    // models: WeatherModel[] = [];
 
     labelDate: string;
     labelLocation: string;
@@ -61,8 +62,8 @@ export class WeatherHistoryComponent implements OnInit {
             {
                 headerName: this.labelDate,
                 field: 'date',
-                width: 200,
-                minWidth: 200
+                width: 100,
+                minWidth: 100
             },
             {
                 headerName: this.labelLocation,
@@ -73,26 +74,32 @@ export class WeatherHistoryComponent implements OnInit {
             {
                 headerName: this.labelTemperature,
                 field: 'temperature',
-                width: 200,
-                minWidth: 200
+                width: 100,
+                minWidth: 100,
+                suppressFilter: true,
+                suppressSorting : true,
             },
             {
                 headerName: this.labelHumidity,
                 field: 'humidity',
-                width: 200,
-                minWidth: 200
+                width: 100,
+                minWidth: 100,
+                suppressFilter: true,
+                suppressSorting : true,
             },
             {
                 headerName: this.labelCondition,
                 field: 'condition',
                 width: 200,
-                minWidth: 200
+                minWidth: 200,
             },
             {
                 headerName: this.labelWind,
                 field: 'wind',
-                width: 200,
-                minWidth: 200
+                width: 100,
+                minWidth: 100,
+                suppressFilter: true,
+                suppressSorting : true,
             }
 
         ];
@@ -102,25 +109,25 @@ export class WeatherHistoryComponent implements OnInit {
 
 
     public setupRows() {
-        // this.weatherService.find().subscribe(models => {
-        //     this.options.api.setRowData(models);
-        //     this.models = models;
-        //     this.adjustGridSize();
-        //
-        //     this.models.forEach((parcel) => {
-        //         parcel.fillColor = this.randomColor();
-        //         parcel.paths = [];
-        //         parcel.coordinates.forEach((c) => {
-        //             parcel.paths.push({
-        //                 lat: c[0],
-        //                 lng: c[1]
-        //             });
-        //         });
-        //     });
-        //
-        //
-        //     this.dataChanged.emit(this.models);
-        // });
+        const rows = [];
+        debugger;
+        this.weatherService.findWeatherHistory().subscribe(paloadModel => {
+            let weatherModels = paloadModel.payload;
+            debugger;
+            paloadModel.payload.forEach(model => {
+                let whModel: WeatherHistoryModel;
+                whModel.date = model.dt;
+                whModel.temperature = model.tempMin + '/' + model.tempMax;
+                whModel.condition = model.main;
+                whModel.location = 'Nisporeni';
+                whModel.humidity = model.humidityAir;
+                whModel.wind = model.windSpeed + ' NW';
+                rows.push(whModel);
+            });
+        });
+
+        this.options.api.setRowData(rows);
+        this.adjustGridSize();
     }
 
     public onGridReady() {
