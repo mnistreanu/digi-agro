@@ -1,0 +1,152 @@
+<div class="row">
+    <div class="col">
+        <div widget class="card">
+            <div class="card-header">
+                <span class="text-uppercase">Ngx datatable</span>
+                <div class="widget-controls"> 
+                    <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
+                    <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
+                    <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
+                    <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>                          
+                    <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+                </div>        
+            </div>
+            <div class="card-body widget-body">
+                
+                <ngx-datatable
+                    #table
+                    class="bootstrap"
+                    [headerHeight]="50"
+                    [limit]="10"
+                    [columnMode]="'force'"
+                    [footerHeight]="50"
+                    [rowHeight]="'auto'"
+                    [rows]="rows"
+                    [selected]="selected"
+                    [selectionType]="'checkbox'"
+                    [count] = "totalRecords"
+                    [externalPaging] = "true"
+                    [externalSorting] = "true"
+                    (activate)="onActivate($event)"
+                    (select)='onSelect($event)'
+                    (page)='setPage($event)'>
+
+                    <ngx-datatable-column name="cropCategoryId">
+                        <ng-template let-column="column" ngx-datatable-header-template>
+                            <span class="datatable-header-cell-label draggable" (click)="sort($event)">Crop Category</span> <span class="sort-btn"></span><br />
+                            <!-- <input type="text" (keyup)="updateColumnFilter($event, 'cropCategory', 'contains')" /> -->
+                            <select (change)="updateColumnFilter($event, 'cropCategoryId', 'equals')" [value]="value">
+                                <option value="">Select Value</option>
+                                <option *ngFor="let c of cropCategorySelectItems" value="{{c.id}}">{{c.name}}</option>
+                            </select>
+                        </ng-template>
+
+                        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                            <span
+                            title="Double click to edit"
+                            (dblclick)="editing[rowIndex + '-name'] = true"
+                            *ngIf="!editing[rowIndex + '-name']">
+                            {{value}}
+                            </span>
+                            <input
+                            autofocus
+                            (blur)="updateValue($event, 'name', rowIndex)"
+                            *ngIf="editing[rowIndex+ '-name']"
+                            type="text"
+                            [value]="value"
+                            />
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="nameRo">
+
+                        <ng-template let-column="column" ngx-datatable-header-template>
+                            <span class="datatable-header-cell-label draggable" (click)="sort($event)">Name Ro</span> <span class="sort-btn"></span><br />
+                            <input type="text" (keyup)="updateColumnFilter($event, 'nameRo', 'contains')" />
+                        </ng-template>
+
+                        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+                            <span
+                            title="Double click to edit"
+                            (dblclick)="editing[rowIndex + '-gender'] = true"
+                            *ngIf="!editing[rowIndex + '-gender']">
+                            {{value}}
+                            </span>
+                            <select
+                            *ngIf="editing[rowIndex + '-gender']"
+                            (change)="updateValue($event, 'gender', rowIndex)"
+                            [value]="value">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            </select>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="nameRu">
+                            <ng-template let-column="column" ngx-datatable-header-template>
+                                    <span class="datatable-header-cell-label draggable" (click)="sort($event)">Name Ru</span> <span class="sort-btn"></span><br />
+                                    <input type="text" (keyup)="updateColumnFilter($event, 'nameRu', 'contains')" />
+                                </ng-template>
+        
+                                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+                                    <span
+                                    title="Double click to edit"
+                                    (dblclick)="editing[rowIndex + '-gender'] = true"
+                                    *ngIf="!editing[rowIndex + '-gender']">
+                                    {{value}}
+                                    </span>
+                                    <select
+                                    *ngIf="editing[rowIndex + '-gender']"
+                                    (change)="updateValue($event, 'gender', rowIndex)"
+                                    [value]="value">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    </select>
+                                </ng-template>
+                    </ngx-datatable-column>
+
+                    <!-- <ngx-datatable-footer>
+                            <ng-template 
+                              let-curPage="curPage" 
+                              let-offset="offset" 
+                              let-pageSize="pageSize" 
+                              let-rowCount="rowCount" 
+                              let-selectedCount="selectedCount" 
+                              ngx-datatable-footer-template>
+                            </ng-template>
+                            <datatable-pager 
+                              [count]="rowCount" 
+                              [page]="curPage" 
+                              [size]="pageSize" 
+                              (change)="handlePageChange($event)">
+                            </datatable-pager>
+                          </ngx-datatable-footer> -->
+
+                          <!-- <ngx-datatable-footer>
+                                <ng-template 
+                                  ngx-datatable-footer-template 
+                                  let-rowCount="rowCount"
+                                  let-pageSize="pageSize"
+                                  let-selectedCount="selectedCount"
+                                  let-curPage="curPage"
+                                  let-offset="offset">
+                                  <div style="padding: 5px 10px">
+                                    <div>
+                                      <strong>Summary</strong>: Gender: Female
+                                    </div>
+                                    <hr style="width:100%" />
+                                    <div>
+                                      Rows: {{rowCount}} |
+                                      Size: {{pageSize}} |
+                                      Current: {{curPage}} |
+                                      Offset: {{offset}}
+                                    </div>
+                                  </div>
+                                </ng-template>
+                              </ngx-datatable-footer> -->
+
+                </ngx-datatable>  
+            </div>
+        </div>
+    </div>
+</div>

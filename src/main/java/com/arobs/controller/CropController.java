@@ -4,23 +4,24 @@ import com.arobs.entity.Crop;
 import com.arobs.entity.CropCategory;
 import com.arobs.entity.CropVariety;
 import com.arobs.model.CropVarietyModel;
+import com.arobs.model.ListItemModel;
 import com.arobs.model.PayloadModel;
 import com.arobs.service.CropCategoryService;
 import com.arobs.service.CropService;
 import com.arobs.service.CropVarietyService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/crop")
+@RequestMapping("/crops")
 public class CropController {
 
     @Autowired
@@ -32,27 +33,33 @@ public class CropController {
     @Autowired
     private CropVarietyService cropVarietyService;
 
+    @RequestMapping(method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity<String> getCrops(@RequestParam(value = "page_no", required = false) final Integer page,
+                                               @RequestParam(value = "rows_per_page", required = false) final Integer rowsPerPage,
+                                               @RequestParam(value = "sort", required = false) final List<String> sorts,
+                                               @RequestParam(value = "filter", required = false) final List<String> filters) {
 
-    @RequestMapping(value = "/categories", method = RequestMethod.GET)
-    public ResponseEntity<PayloadModel> getCropCategories() {
-        PayloadModel<CropVarietyModel> payloadModel = new PayloadModel<>();
-
-        try {
-            List<CropCategory> categories = cropCategoryService.find();
-            if (!categories.isEmpty()) {
-                List<CropVarietyModel> models = categories.stream().map(CropVarietyModel::new).collect(Collectors.toList());
-                CropVarietyModel[] payload = models.toArray(new CropVarietyModel[models.size()]);
-                payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
-                payloadModel.setPayload(payload);
-            } else {
-                payloadModel.setStatus(PayloadModel.STATUS_WARNING);
-            }
-        } catch (Exception e) {
-            payloadModel.setStatus(PayloadModel.STATUS_ERROR);
-            payloadModel.setMessage(e.getLocalizedMessage());
+        if (page != null && rowsPerPage != null && sorts != null && filters != null) {
+            return ResponseEntity.ok(cropService.findAll(page, rowsPerPage, filters, sorts).toString());
         }
 
-        return ResponseEntity.ok(payloadModel);
+        if (page != null && rowsPerPage != null && filters != null) {
+            return ResponseEntity.ok(cropService.findAll(page, rowsPerPage, filters, new ArrayList<>()).toString());
+        }
+
+        if (page != null && rowsPerPage != null) {
+            return ResponseEntity.ok(cropService.findAll(page, rowsPerPage, new ArrayList<>(), new ArrayList<>()).toString());
+        }
+
+        return ResponseEntity.ok(cropService.findAll().toString());
+    }
+
+
+    @RequestMapping(value = "/categories/select_items", method = RequestMethod.GET)
+    public ResponseEntity<List<ListItemModel>> getCropCategories() {
+        return ResponseEntity.ok(cropCategoryService.fetchItems());
     }
 
     @RequestMapping(value = "/crops", method = RequestMethod.GET)

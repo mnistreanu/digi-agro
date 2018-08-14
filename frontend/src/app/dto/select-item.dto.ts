@@ -1,0 +1,1 @@
+export interface SelectItem {id : number , name : number}

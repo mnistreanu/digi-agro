@@ -35,6 +35,16 @@ export class MenuService {
 
         if (isSuperAdmin || isAdmin) {
             menuItems.push({
+                title: 'nav.crops',
+                routerLink: '/pages/manage-crops',
+                icon: 'fas fa-user-tie',
+                selected: false,
+                expanded: false
+            });
+        }
+
+        if (isSuperAdmin || isAdmin) {
+            menuItems.push({
                 title: 'nav.users',
                 routerLink: '/pages/manage-users',
                 icon: 'fa-users',

@@ -113,6 +113,13 @@ export const routes: Routes = [
                 data: {breadcrumb: 'Parcel'},
                 canActivate: [AuthGuard]
             }
+            ,
+            {
+                path: 'manage-crops',
+                loadChildren: 'app/pages/manage-crops/manage-crops.module#ManageCropsModule',
+                data: {breadcrumb: 'Crops'},
+                canActivate: [AuthGuard]
+            }
         ]
     }
 ];
