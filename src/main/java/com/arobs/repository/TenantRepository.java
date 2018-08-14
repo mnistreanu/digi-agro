@@ -19,6 +19,10 @@ public interface TenantRepository extends JpaRepository<Tenant, Long> {
             "WHERE t.id = :id")
     void remove(@Param("id") Long id, @Param("userId") Long userId);
 
+    @Modifying
+    @Query(value = "DELETE FROM tenant_user WHERE tenant_id = :id", nativeQuery = true)
+    void unSubscribeUsers(@Param("id") Long id);
+
     @Query("SELECT t FROM Tenant t WHERE t.deletedAt IS NULL")
     List<Tenant> findAll();
 

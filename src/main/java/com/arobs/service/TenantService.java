@@ -93,6 +93,7 @@ public class TenantService implements HasRepository<TenantRepository> {
     @Transactional
     public void remove(Long id, Long userId) {
         getRepository().remove(id, userId);
+        getRepository().unSubscribeUsers(id);
     }
 
     public List<Tenant> findAll(List<Long> ids) {
