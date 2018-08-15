@@ -3,7 +3,6 @@ package com.arobs.repository.custom;
 
 import com.arobs.entity.Crop;
 import com.arobs.model.CropModel;
-import com.arobs.model.tenantBranch.TenantBranchFilterRequestModel;
 import com.arobs.model.tenantBranch.TenantBranchModel;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
