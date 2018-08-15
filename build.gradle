@@ -27,7 +27,6 @@ test {
 	ignoreFailures = true
 }
 
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.liquibase:liquibase-core')

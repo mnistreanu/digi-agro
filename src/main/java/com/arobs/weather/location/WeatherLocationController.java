@@ -2,8 +2,8 @@ package com.arobs.weather.location;
 
 import com.arobs.model.PayloadModel;
 import com.arobs.model.WeatherModel;
-import com.arobs.service.WeatherService;
 import com.arobs.weather.entity.WeatherSnapshot;
+import com.arobs.weather.snapshot.WeatherSnapshotService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class WeatherLocationController {
 
     @Autowired
-    private WeatherService weatherService;
+    private WeatherSnapshotService weatherService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<PayloadModel> getWeathers(@RequestParam("parcelId") Long parcelId,

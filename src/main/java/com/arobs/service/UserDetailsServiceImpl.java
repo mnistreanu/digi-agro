@@ -1,8 +1,9 @@
 package com.arobs.service;
 
 import com.arobs.entity.UserAccount;
-import com.arobs.repository.UserAccountRepository;
 import com.arobs.security.JwtUserFactory;
+import com.arobs.weather.snapshot.UserAccountRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

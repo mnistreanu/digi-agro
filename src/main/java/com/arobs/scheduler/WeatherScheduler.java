@@ -1,6 +1,5 @@
 package com.arobs.scheduler;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,10 +15,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.arobs.model.WeatherModel;
-import com.arobs.service.WeatherService;
 import com.arobs.weather.entity.WeatherLocation;
 import com.arobs.weather.location.WeatherLocationJson;
 import com.arobs.weather.location.WeatherLocationService;
+import com.arobs.weather.snapshot.WeatherSnapshotService;
 import com.arobs.weather.snapshot.WeatherSnapshotJson;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
@@ -50,7 +49,7 @@ public class WeatherScheduler {
 	private RestTemplate restTemplate;
 	
 	@Autowired
-	private WeatherService weatherService;  
+	private WeatherSnapshotService weatherService;  
 	
 	@Autowired
 	private WeatherLocationService weatherLocationService;  
