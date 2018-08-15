@@ -58,12 +58,6 @@ export const routes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
-                path: 'crop',
-                loadChildren: 'app/pages/crop/crop-variety.module#CropVarietyModule',
-                data: {breadcrumb: 'Crops Varieties'},
-                canActivate: [AuthGuard]
-            },
-            {
                 path: 'weather',
                 loadChildren: 'app/pages/weather/weather.module#WeatherModule',
                 data: {breadcrumb: 'Weather'},
@@ -112,14 +106,12 @@ export const routes: Routes = [
                 data: {breadcrumb: 'Costs'},
                 canActivate: [AuthGuard]
             },
-
             {
                 path: 'parcel',
                 loadChildren: 'app/pages/parcel/parcel.module#ParcelModule',
                 data: {breadcrumb: 'Parcel'},
                 canActivate: [AuthGuard]
-            }
-            ,
+            },
             {
                 path: 'manage-crops',
                 loadChildren: 'app/pages/manage-crops/manage-crops.module#ManageCropsModule',

@@ -8,10 +8,10 @@ import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-bl
 import {DirectivesModule} from '../../theme/directives/directives.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ManageCropsRoutingModule} from './manage-crops-routing.module';
-//import {TenantListFilterComponent} from './tenant-list-filter/tenant-list-filter.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {DatatableComponent, NgxDatatableModule} from '@swimlane/ngx-datatable';
 import { CropComponent } from './crop/crop.component';
+import { CropVarietyComponent } from './crop-variety/crop-variety.component';
 
 @NgModule({
     imports: [
@@ -24,11 +24,14 @@ import { CropComponent } from './crop/crop.component';
         FormErrorBlockModule,
         EditRendererModule,
         NgxDatatableModule,
+        EditRendererModule,
+        TranslateModule,
+        CommonModule,
+        FormsModule,
+        DirectivesModule,
         AgGridModule.withComponents([EditRendererComponent])
     ],
-    declarations: [CropsComponent, CropComponent
-    //    TenantComponent, TenantListFilterComponent
-    ]
+    declarations: [CropsComponent, CropComponent, CropVarietyComponent]
 })
 export class ManageCropsModule {
 }

@@ -36,16 +36,6 @@ export class MenuService {
 
         if (isSuperAdmin || isAdmin) {
             menuItems.push({
-                title: 'nav.crops',
-                routerLink: '/pages/manage-crops',
-                icon: 'fas fa-user-tie',
-                selected: false,
-                expanded: false
-            });
-        }
-
-        if (isSuperAdmin || isAdmin) {
-            menuItems.push({
                 title: 'nav.users',
                 routerLink: '/pages/manage-users',
                 icon: 'fa-users',
@@ -111,19 +101,59 @@ export class MenuService {
             });
         }
 
-        if (isAdmin || isUser) {
+        // if (isUser) {
+        //     menuItems.push({
+        //         title: 'nav.crops',
+        //         routerLink: '/pages/manage-crops/crop-varieties',
+        //         icon: 'fa fa-leaf',
+        //         selected: false,
+        //         expanded: false
+        //         // subMenu: [
+        //         //     {
+        //         //         title: 'nav.crops-varieties',
+        //         //         routerLink: 'crop/crops-varieties',
+        //         //     },
+        //         // ]
+        //     });
+        // }
+
+        // if (isSuperAdmin || isAdmin) {
+        //     menuItems.push({
+        //         title: 'nav.crops',
+        //         routerLink: '/pages/manage-crops',
+        //         icon: 'fas fa-user-tie',
+        //         selected: false,
+        //         expanded: false
+        //     });
+        // }
+
+        if (isUser) {
             menuItems.push({
                 title: 'nav.crops',
-                routerLink: '/pages/crop',
+                routerLink: '/pages/manage-crops/crop-varieties',
                 icon: 'fa fa-leaf',
                 selected: false,
                 expanded: false
-                // subMenu: [
-                //     {
-                //         title: 'nav.crops-varieties',
-                //         routerLink: 'crop/crops-varieties',
-                //     },
-                // ]
+            });
+        }
+
+        if (isSuperAdmin || isAdmin) {
+            menuItems.push({
+                title: 'nav.crops',
+                routerLink: 'manage-crops',
+                icon: 'fas fa-leaf',
+                selected: false,
+                expanded: false,
+                subMenu: [
+                    {
+                        title: 'nav.crops',
+                        routerLink: 'manage-crops',
+                    },
+                    {
+                        title: 'nav.crops-varieties',
+                        routerLink: 'manage-crops/crop-varieties',
+                    }
+                ]
             });
         }
 

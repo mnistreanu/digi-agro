@@ -6,7 +6,7 @@ import {PayloadModel} from '../pages/payload.model';
 import { environment } from '../../environments/environment';
 import {CropDTO} from '../dto/crop/crop.dto'
 import { SelectItem } from '../dto/select-item.dto';
-import { CropModel } from '../pages/crop/crop.model';
+import { CropModel } from '../pages/manage-crops/crop-variety/crop.model';
 
 @Injectable({
     providedIn: 'root'

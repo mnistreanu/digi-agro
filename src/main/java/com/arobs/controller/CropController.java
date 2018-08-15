@@ -84,7 +84,7 @@ public class CropController {
         return ResponseEntity.ok(cropCategoryService.fetchItems());
     }
 
-    //@PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<CropModel> save(@RequestBody CropModel model) {
         return ResponseEntity.ok(new CropModel(cropService.save(model)));

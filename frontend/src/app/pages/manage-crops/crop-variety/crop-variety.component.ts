@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
-import {CropService} from '../../services/crop.service';
+import {CropService} from '../../../services/crop.service';
 import {CropVarietyModel} from './crop-variety.model';
-import {LangService} from '../../services/lang.service';
+import {LangService} from '../../../services/lang.service';
 import {CropFieldMapper} from './crop-field.mapper';
 
 @Component({
