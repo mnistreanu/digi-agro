@@ -176,21 +176,21 @@ public class WeatherModel implements Serializable {
     }
 
     public Double getTemp() {
-        return tempMax;
+        return temp;
     }
 
     public void setTemp(Double temp) {
-        this.tempMax = tempMax;
+        this.temp = temp;
     }
 
-    public Integer getTempMin() {
-        return tempMin;
-    }
-
-    public void setTempMin(Integer tempMin) {
-        this.tempMin = tempMin;
-    }
-
+//    public Integer getTempMin() {
+//        return tempMin;
+//    }
+//
+//    public void setTempMin(Integer tempMin) {
+//        this.tempMin = tempMin;
+//    }
+//
     public Double getPressure() {
         return pressure;
     }
