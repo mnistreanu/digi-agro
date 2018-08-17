@@ -103,9 +103,10 @@
 	},
 	"parcel": {
 		"area": "Area",
-		"cadaster-number": "Cadaster №",
+		"cadaster-number": "Cadaster Nr.",
 		"description": "Description",
-		"land-worthiness-points": "Land Worthiness Points",
+		"ha": "hectare",
+		"land-worthiness-points": "Landworthiness",
 		"name": "Name",
 		"parcels": "Parcels",
 		"the-parcels": "the parcels"

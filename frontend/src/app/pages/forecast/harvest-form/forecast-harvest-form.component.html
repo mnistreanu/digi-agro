@@ -14,7 +14,7 @@
 
                     <div class="form-group row text-sm-right">
                         <label class="col-sm-3 form-control-label m-t-5" translate>parcel.parcels</label>
-                        <div class="col-sm-7 text-left">
+                        <div class="col-sm-6 text-left">
                             <div class="form-group">
                                 <ss-multiselect-dropdown [options]="parcels" *ngIf="parcels"
                                                          [texts]="parcelControlTexts"
@@ -27,7 +27,7 @@
                                 </app-form-error-block>
                             </div>
                         </div>
-                        <label class="col-sm-2 form-control-label m-t-5">{{ area | number }} Ha</label>
+                        <label class="col-sm-3 form-control-label m-t-5" >{{ area | number }} <span translate>parcel.ha</span></label>
                     </div>
 
                     <div class="form-group row text-sm-right">

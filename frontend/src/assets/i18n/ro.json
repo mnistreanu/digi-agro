@@ -103,9 +103,10 @@
 	},
 	"parcel": {
 		"area": "Arie",
-		"cadaster-number": "№ Cadaster",
+		"cadaster-number": "Nr. cadastral",
 		"description": "Descriere",
-		"land-worthiness-points": "Valabilitatea Terenului",
+		"ha": "ha",
+		"land-worthiness-points": "Bonitatea",
 		"name": "Nume",
 		"parcels": "Parcele",
 		"the-parcels": "parcelele"
