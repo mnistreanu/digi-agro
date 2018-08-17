@@ -23,6 +23,8 @@ export class ForecastHarvestComponent implements OnInit {
     private form: FormGroup;
     private formSubmitted = false;
 
+    private area: number;
+    private parcelMap;
     private parcels: IMultiSelectOption[];
     private categories: CropCategoryModel[] = [];
     private crops: CropModel[] = [];
@@ -88,13 +90,25 @@ export class ForecastHarvestComponent implements OnInit {
     }
 
     private setupParcels() {
+        this.area = 0;
         this.parcelService.find().subscribe(models => {
-            this.parcels = models.map((model) => {
-                return {
+            this.parcelMap = {};
+            this.parcels = [];
+            models.forEach((model) => {
+                this.parcelMap[model.id] = model;
+                this.parcels.push({
                     id: model.id,
                     name: model.name
-                };
+                });
             });
+        });
+    }
+
+    public onParcelChange() {
+        this.area = 0;
+        const selectedParcels = this.form.controls['parcels'].value;
+        selectedParcels.forEach(parcelId => {
+            this.area += this.parcelMap[parcelId].area;
         });
     }
 
