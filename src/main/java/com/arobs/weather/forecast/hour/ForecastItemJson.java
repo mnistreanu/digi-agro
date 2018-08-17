@@ -1,20 +1,25 @@
 
 package com.arobs.weather.forecast.hour;
 
+import java.util.Date;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"dt", "main", "weather", "clouds", "wind", "rain", "sys", "dt_txt"})
-public class List {
+public class ForecastItemJson {
 
     @JsonProperty("dt")
     private Integer dt;
+    @JsonProperty("dt_txt")
+    private String dtTxt;
     @JsonProperty("main")
     private Main main;
     @JsonProperty("weather")
-    private java.util.List<Weather> weather = null;
+    private List<Weather> weather = null;
     @JsonProperty("clouds")
     private Clouds clouds;
     @JsonProperty("wind")
@@ -23,12 +28,10 @@ public class List {
     private Rain rain;
     @JsonProperty("sys")
     private Sys sys;
-    @JsonProperty("dt_txt")
-    private String dtTxt;
 
     @JsonProperty("dt")
-    public Integer getDt() {
-        return dt;
+    public Date getDt() {
+        return new Date(dt * 1000L);
     }
 
     @JsonProperty("dt")

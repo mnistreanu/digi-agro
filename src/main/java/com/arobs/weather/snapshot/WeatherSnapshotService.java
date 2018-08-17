@@ -33,7 +33,7 @@ public class WeatherSnapshotService implements HasRepository<WeatherSnapshotRepo
     @Autowired
 	private RestTemplate restTemplate;
 	@Autowired
-    DTOBinder binder;
+    private DTOBinder binder;
     @Autowired
     private WeatherLocationRepository weatherLocationRepository;
     @Autowired
@@ -48,8 +48,7 @@ public class WeatherSnapshotService implements HasRepository<WeatherSnapshotRepo
 			WeatherSnapshotJson weatherSnapshotJson = restTemplate.getForObject(url, WeatherSnapshotJson.class);
 			WeatherSnapshot weatherSnapshot = binder.bindFromBusinessObject(WeatherSnapshot.class, weatherSnapshotJson);
 			weatherSnapshots.add(weatherSnapshot);
-//			weatherSnapshotRepository.save(weatherSnapshot);
-//			break;
+			break; //TODO de eliminat
 		}
 		weatherSnapshotRepository.save(weatherSnapshots);
 		logger.debug("Au fost inscrise in BD {} articole", weatherSnapshots.size());

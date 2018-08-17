@@ -2,6 +2,7 @@ package com.arobs.weather.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +20,7 @@ import org.jdto.annotation.Source;
 @Table(name = "weather_forecast_daily")
 public class WeatherForecastDaily {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.AUTO)
     @Column(name="id")
     @DTOTransient
     private Long id;
@@ -33,7 +34,7 @@ public class WeatherForecastDaily {
 	@Source("cnt")
     private Integer cnt;
     @DTOCascade
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "forecastDaily")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "forecastDaily", cascade = CascadeType.ALL, orphanRemoval = true)
 	@Source("list")
     private List<ForecastDailyItem> forecastItems = null;
     @Column(name="city_id")

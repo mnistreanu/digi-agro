@@ -37,6 +37,7 @@ public class WeatherForecastDailyTest {
 		assertEquals("200", forecastDailyJson.getCod());
 		assertEquals(Double.valueOf(0.0032), forecastDailyJson.getMessage());
 		assertEquals(Integer.valueOf(2), forecastDailyJson.getCnt());
+		
 		assertEquals(new Date(1406080800 * 1000L), forecastDailyJson.getList().get(0).getDt());
 		assertEquals(Double.valueOf(925.04), forecastDailyJson.getList().get(0).getPressure());
 		assertEquals(Integer.valueOf(76), forecastDailyJson.getList().get(0).getHumidity());
@@ -50,6 +51,7 @@ public class WeatherForecastDailyTest {
 		assertEquals("Clouds", forecastDailyJson.getList().get(0).getWeather().get(0).getMain());
 		assertEquals("broken clouds", forecastDailyJson.getList().get(0).getWeather().get(0).getDescription());
 		assertEquals("04d", forecastDailyJson.getList().get(0).getWeather().get(0).getIcon());
+		
 		assertEquals(Integer.valueOf(1851632), forecastDailyJson.getCity().getId());
 		assertEquals("Shuzenji", forecastDailyJson.getCity().getName());
 		assertEquals("JP", forecastDailyJson.getCity().getCountry());
@@ -69,6 +71,7 @@ public class WeatherForecastDailyTest {
 		for (int i=0; i<forecastDailyJson.getList().size(); i++) {
 			ForecastDailyItem forecastDailyItem = forecastDailyEntity.getForecastItems().get(i);
 			ForecastItemJson forecastJsonItem = forecastDailyJson.getList().get(i);
+			
 			assertEquals(forecastJsonItem.getDt(), forecastDailyItem.getDt());
 			assertEquals(forecastJsonItem.getPressure(), forecastDailyItem.getPressure());
 			assertEquals(forecastJsonItem.getHumidity(), forecastDailyItem.getHumidity());

@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.arobs.scheduler.WeatherForecastService;
 import com.arobs.weather.LocationFileDownloader;
 import com.arobs.weather.location.WeatherLocationService;
 import com.arobs.weather.snapshot.WeatherSnapshotService;
@@ -27,6 +28,9 @@ public class ApplicationTests {
 
 	@Autowired
 	public WeatherSnapshotService weatherSnapshotService;
+
+	@Autowired
+	public WeatherForecastService weatherForecastService;
 
 	@Test
 	public void testDownloader() {
@@ -50,6 +54,17 @@ public class ApplicationTests {
 		weatherSnapshotService.synchronizeWeatherSnapshots();
 	}
 	
+	@Test
+	@Rollback(false)
+	public void testSynchronizWeatherForecastsHour() throws IOException {
+		weatherForecastService.synchronizeWeatherForecastsHour();
+	}
+	
+	@Test
+	@Rollback(false)
+	public void testSynchronizWeatherForecastsDaily() throws IOException {
+		weatherForecastService.synchronizeWeatherForecastsDaily();
+	}
 	
 	@Test
 	@Ignore
