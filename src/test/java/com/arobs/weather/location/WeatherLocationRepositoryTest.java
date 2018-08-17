@@ -73,7 +73,7 @@ public class WeatherLocationRepositoryTest {
 	@Test
 	public void testFindAllMdRo() {
 		List<WeatherLocation> locations = repository.findAllMdRo();
-		assertEquals(70, locations.size());
+		assertEquals(67, locations.size());
 	}
 	
 	@Test

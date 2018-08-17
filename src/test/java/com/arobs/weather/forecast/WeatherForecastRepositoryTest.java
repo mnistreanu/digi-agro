@@ -2,6 +2,7 @@ package com.arobs.weather.forecast;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -59,15 +60,18 @@ public class WeatherForecastRepositoryTest {
 	
 	@Test
 	public void testFindOne() {
-		Long id = 617077L;
+		List<WeatherForecastDaily> weatherForecasts = repository.findAll();
+		assertNotNull(weatherForecasts);
+		assertTrue(weatherForecasts.size() > 0);
+		Long id = weatherForecasts.get(0).getId();
 		WeatherForecastDaily forecast = repository.findOne(id);
-		assertEquals("Raionul Edineţ", forecast.getCode());
+		assertEquals("Moscow", forecast.getName());
 	}
 	
 	@Test
 //	@Ignore
 	public void testDTOBinder() throws JsonParseException, JsonMappingException, IOException {
-		Resource resource = new ClassPathResource("location.test.json");
+		Resource resource = new ClassPathResource("locations.json");
 		File file = resource.getFile(); 
 		ObjectMapper objectMapper = new ObjectMapper();
 		CollectionType listType = objectMapper.getTypeFactory().constructCollectionType(List.class, WeatherLocationJson.class);
@@ -75,7 +79,7 @@ public class WeatherForecastRepositoryTest {
 		DTOBinder binder = DTOBinderFactory.getBinder();
 		List<WeatherLocation> locations = binder.bindFromBusinessObjectList(WeatherLocation.class, weatherLocations);
 		assertNotNull(locations);
-		int count = 0;
+		int count = 0; //TODO de restabilit
 //		for (WeatherLocation location : locations) {
 //			if (location.getCountryCode().equalsIgnoreCase("md") || location.getCountryCode().equalsIgnoreCase("ro")) {
 //				repository.save(location);
@@ -85,7 +89,7 @@ public class WeatherForecastRepositoryTest {
 		logger.info("Au fost salvate {} articole", count);
 	}
 	
-	@Test
+	@Test //TODO de restabilit
 //	@Ignore
 	public void testWeatherHourForecast() throws JsonParseException, JsonMappingException, IOException {
 		Resource resource = new ClassPathResource("forecast.hour.json");
