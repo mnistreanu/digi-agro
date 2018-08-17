@@ -27,7 +27,6 @@ test {
 	ignoreFailures = true
 }
 
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.liquibase:liquibase-core')
@@ -38,6 +37,9 @@ dependencies {
 
 	compile('com.google.code.gson:gson:2.8.2')
 	compile 'org.json:json:20171018'
+
+    compile('org.jdto:jdto:1.4')
+    compile('commons-lang:commons-lang:2.6')
 
 	runtime('org.postgresql:postgresql')
 	compile 'mysql:mysql-connector-java'
