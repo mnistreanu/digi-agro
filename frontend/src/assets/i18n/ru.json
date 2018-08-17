@@ -107,7 +107,8 @@
 		"description": "Описание",
 		"land-worthiness-points": "Земельная ценность",
 		"name": "Имя",
-		"parcels": "Участки"
+		"parcels": "Участки",
+		"the-parcels": "участки"
 	},
 	"reminder": {
 		"enter-new-event": "Просто введите название события",
@@ -119,8 +120,14 @@
 	},
 	"response": {
 		"added": "Добавлен",
+		"item-selected": "элемент выбран",
+		"items-selected": "элементы выбраны",
+		"all-selected": "Выбраны все",
+		"please-select": "Выберите",
 		"removed": "Удалено",
 		"saved": "Сохранено",
+		"select-all": "Выбрать все",
+		"unselect-all": "Снять все",
 		"username-changed-relogin": "Имя пользователя было изменено! Пожалуйста, перезайдите в систему"
 	},
 	"slider": {

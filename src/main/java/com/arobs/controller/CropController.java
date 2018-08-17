@@ -79,8 +79,30 @@ public class CropController {
     }
 
 
+    @RequestMapping(value = "/categories", method = RequestMethod.GET)
+    public ResponseEntity<PayloadModel> getCropCategories() {
+        PayloadModel<CropVarietyModel> payloadModel = new PayloadModel<>();
+
+        try {
+            List<CropCategory> categories = cropCategoryService.find();
+            if (!categories.isEmpty()) {
+                List<CropVarietyModel> models = categories.stream().map(CropVarietyModel::new).collect(Collectors.toList());
+                CropVarietyModel[] payload = models.toArray(new CropVarietyModel[models.size()]);
+                payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
+                payloadModel.setPayload(payload);
+            } else {
+                payloadModel.setStatus(PayloadModel.STATUS_WARNING);
+            }
+        } catch (Exception e) {
+            payloadModel.setStatus(PayloadModel.STATUS_ERROR);
+            payloadModel.setMessage(e.getLocalizedMessage());
+        }
+
+        return ResponseEntity.ok(payloadModel);
+    }
+
     @RequestMapping(value = "/categories/select_items", method = RequestMethod.GET)
-    public ResponseEntity<List<ListItemModel>> getCropCategories() {
+    public ResponseEntity<List<ListItemModel>> getCropCategoryListItems() {
         return ResponseEntity.ok(cropCategoryService.fetchItems());
     }
 

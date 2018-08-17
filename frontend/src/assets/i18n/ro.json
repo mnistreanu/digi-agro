@@ -107,7 +107,8 @@
 		"description": "Descriere",
 		"land-worthiness-points": "Valabilitatea Terenului",
 		"name": "Nume",
-		"parcels": "Parcele"
+		"parcels": "Parcele",
+		"the-parcels": "parcelele"
 	},
 	"reminder": {
 		"enter-new-event": "Doar introduceți numele evenimentului",
@@ -119,8 +120,14 @@
 	},
 	"response": {
 		"added": "A fost adăugat",
+		"item-selected": "element selectat",
+		"items-selected": "elemente selectate",
+		"all-selected": "Toate sunt selectate",
+		"please-select": "Selectați",
 		"removed": "A fost șters",
 		"saved": "A fost salvat",
+		"select-all": "Selectează toate",
+		"unselect-all": "Deselectează toate",
 		"username-changed-relogin": "Numele de utilizatorul a fost modificata! Reintrați în sistem"
 	},
 	"slider": {

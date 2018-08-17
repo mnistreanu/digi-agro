@@ -38,7 +38,11 @@ export class CropService {
         return this.http.get<CropDTO[]>( url );
     }
 
-    public findCategories(): Observable<SelectItem[]> {
+    public findCategories(): Observable<PayloadModel> {
+        return this.http.get<PayloadModel>(this.api + '/categories');
+    }
+
+    public findCategoryItems(): Observable<SelectItem[]> {
         return this.http.get<SelectItem[]>(this.api + '/categories/select_items');
     }
 
