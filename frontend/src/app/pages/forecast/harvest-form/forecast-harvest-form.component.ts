@@ -38,12 +38,12 @@ export class ForecastHarvestComponent implements OnInit {
     };
 
     public parcelControlTexts: IMultiSelectTexts = {
-        checkAll: this.langService.get(Messages.SELECT_ALL).value,
-        uncheckAll: this.langService.get(Messages.UNSELECT_ALL).value,
-        checked: this.langService.get(Messages.ITEM_SELECTED).value,
-        checkedPlural: this.langService.get(Messages.ITEMS_SELECTED).value,
-        defaultTitle: this.langService.get(Messages.PLEASE_SELECT).value + ' ' + this.langService.get(Messages.THE_PARCELS).value,
-        allSelected: this.langService.get(Messages.ALL_SELECTED).value,
+        checkAll: this.langService.instant(Messages.SELECT_ALL),
+        uncheckAll: this.langService.instant(Messages.UNSELECT_ALL),
+        checked: this.langService.instant(Messages.ITEM_SELECTED),
+        checkedPlural: this.langService.instant(Messages.ITEMS_SELECTED),
+        defaultTitle: this.langService.instant(Messages.PLEASE_SELECT) + ' ' + this.langService.instant(Messages.THE_PARCELS),
+        allSelected: this.langService.instant(Messages.ALL_SELECTED),
     };
 
     labelSaved: string;
