@@ -301,6 +301,18 @@
         </sql>
     </changeSet>
 
+    <changeSet id="update_parcels_geo_center" author="mgorgos" failOnError="true" runOnChange="true">
+        <sql>
+            UPDATE parcel_geometry SET lat_center= 46.806277, lon_center=28.639881 WHERE parcel_id=1;
+            UPDATE parcel_geometry SET lat_center= 46.812229, lon_center=28.642183 WHERE parcel_id=2;
+            UPDATE parcel_geometry SET lat_center= 46.808621, lon_center=28.644148 WHERE parcel_id=3;
+            UPDATE parcel_geometry SET lat_center= 47.069773, lon_center=28.146284 WHERE parcel_id=4;
+            UPDATE parcel_geometry SET lat_center= 47.068758, lon_center=28.147786 WHERE parcel_id=5;
+            UPDATE parcel_geometry SET lat_center= 47.067853, lon_center=28.149274 WHERE parcel_id=6;
+            UPDATE parcel_geometry SET lat_center= 47.066702, lon_center=28.151290 WHERE parcel_id=7;
+        </sql>
+    </changeSet>
+
     <changeSet id="insert-8-weather-alerts" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO notification_type(id, translation_key) VALUES (1, 'weather-heat-alert');

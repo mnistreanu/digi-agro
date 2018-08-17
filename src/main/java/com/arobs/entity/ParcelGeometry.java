@@ -23,10 +23,10 @@ public class ParcelGeometry {
     @Column(name = "coordinates", length = 4096)
     private String coordinates;
 
-    @Column(name = "lat_center")
+    @Column(name = "lat_center", precision = 10, scale = 6)
     private BigDecimal latCenter;
 
-    @Column(name = "lon_center")
+    @Column(name = "lon_center", precision = 10, scale = 6)
     private BigDecimal lonCenter;
 
     public Long getParcelId() {

@@ -19,10 +19,10 @@ public class Weather {
     @Column(name="parcel_id")
     private Long parcelId;
 
-    @Column(name="lat")
+    @Column(name="lat", precision = 10, scale = 6)
     private BigDecimal lat;
 
-    @Column(name="lon")
+    @Column(name="lon", precision = 10, scale = 6)
     private BigDecimal lon;
 
     @Column(name="main")
