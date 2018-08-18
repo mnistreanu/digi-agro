@@ -57,33 +57,33 @@ public class WeatherController {
     public ResponseEntity<PayloadModel> findWeatherHistory() {
         PayloadModel<WeatherModel> payloadModel = new PayloadModel<>();
 
-//        WeatherModel[] wModels = new WeatherModel[2];
-//
-//        WeatherModel wm0 = new WeatherModel();
-//        wm0.setDt(new Date());
-//        wm0.setCountryId("md");
+        WeatherModel[] wModels = new WeatherModel[2];
+
+        WeatherModel wm0 = new WeatherModel();
+        wm0.setDt(new Date());
+        wm0.setCountry("md");
 //        wm0.setCountyId("ns");
-//        wm0.setTempMax(32);
-//        wm0.setTempMin(17);
-//        wm0.setWindSpeed(14.0);
-//        wm0.setWindDeg(BigDecimal.valueOf(187.002));
-//        wm0.setMain("clouds");
-//        wm0.setHumidityAir(89);
-//        wModels[0] = wm0;
-//
-//        WeatherModel wm1 = new WeatherModel();
-//        wm1.setDt(new Date(System.currentTimeMillis() - 1000*60*60*4));
-//        wm1.setCountryId("md");
+        wm0.setTempMax(32.0);
+        wm0.setTempMin(17.0);
+        wm0.setWindSpeed(BigDecimal.valueOf(14.0));
+        wm0.setWindDeg(BigDecimal.valueOf(187.002));
+        wm0.setMain("clouds");
+        wm0.setHumidity(89);
+        wModels[0] = wm0;
+
+        WeatherModel wm1 = new WeatherModel();
+        wm1.setDt(new Date(System.currentTimeMillis() - 1000*60*60*4));
+        wm1.setCountry("md");
 //        wm1.setCountyId("ns");
-//        wm1.setTempMax(31);
-//        wm1.setTempMin(16);
-//        wm1.setWindSpeed(18.0);
-//        wm1.setWindDeg(BigDecimal.valueOf(180.002));
-//        wm1.setMain("clouds");
-//        wm1.setHumidityAir(91);
-//        wModels[1] = wm1;
-//
-//        payloadModel.setPayload(wModels);
+        wm1.setTempMax(31.0);
+        wm1.setTempMin(16.0);
+        wm1.setWindSpeed(BigDecimal.valueOf(18.0));
+        wm1.setWindDeg(BigDecimal.valueOf(80.002));
+        wm1.setMain("clouds");
+        wm1.setHumidity(91);
+        wModels[1] = wm1;
+
+        payloadModel.setPayload(wModels);
         return ResponseEntity.ok(payloadModel);
     }
 }
