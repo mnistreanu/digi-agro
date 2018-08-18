@@ -24,7 +24,7 @@ import com.arobs.weather.forecast.hour.Weather;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@Table(name = "forecast_hour_item")
+@Table(name = "weather_forecast_hour_item")
 public class ForecastHourItem {
 
     @Id

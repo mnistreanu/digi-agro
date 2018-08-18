@@ -4,7 +4,6 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +20,16 @@ import com.arobs.weather.snapshot.WeatherSnapshotService;
 @SpringBootTest
 public class ApplicationTests {
 	@Autowired
-	public LocationFileDownloader downloader;
+	private LocationFileDownloader downloader;
 	
 	@Autowired
-	public WeatherLocationService weatherLocationService;
+	private WeatherLocationService weatherLocationService;
 
 	@Autowired
-	public WeatherSnapshotService weatherSnapshotService;
+	private WeatherSnapshotService weatherSnapshotService;
 
 	@Autowired
-	public WeatherForecastService weatherForecastService;
+	private WeatherForecastService weatherForecastService;
 
 	@Test
 	public void testDownloader() {
@@ -65,11 +64,4 @@ public class ApplicationTests {
 	public void testSynchronizWeatherForecastsDaily() throws IOException {
 		weatherForecastService.synchronizeWeatherForecastsDaily();
 	}
-	
-	@Test
-	@Ignore
-	public void testDownloadFile() throws IOException {
-		downloader.downloadFile(null, null);
-	}
-
 }

@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DownloadTest {
+public class DownloadGZipTest {
 
 	@Autowired
 	public LocationFileDownloader downloader;

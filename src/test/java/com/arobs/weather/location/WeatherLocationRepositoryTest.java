@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.jdto.DTOBinder;
 import org.jdto.DTOBinderFactory;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -20,6 +19,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.arobs.weather.entity.WeatherLocation;
@@ -77,10 +78,10 @@ public class WeatherLocationRepositoryTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testDTOBinder() throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper objectMapper = new ObjectMapper();
-		File file = new File("R:\\digi-agro\\city.list.json");
+		Resource resource = new ClassPathResource("locations.json");
+		File file = resource.getFile(); 
 		CollectionType listType = objectMapper.getTypeFactory().constructCollectionType(List.class, WeatherLocationJson.class);
 		List<WeatherLocationJson> locationsJson = objectMapper.readValue(file,  listType);
 		DTOBinder binder = DTOBinderFactory.getBinder();
@@ -88,7 +89,7 @@ public class WeatherLocationRepositoryTest {
 		int count = 0;
 		for (WeatherLocation location : locations) {
 			if (location.getCountryCode().equalsIgnoreCase("md") || location.getCountryCode().equalsIgnoreCase("ro")) {
-				repository.save(location);
+//				repository.save(location); //TODO de revazut
 				count++;
 			}
 		}
