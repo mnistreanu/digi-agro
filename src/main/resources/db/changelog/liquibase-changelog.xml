@@ -237,7 +237,7 @@
     <!--
         Adaugat 3 parcele cu coordonate la tenant_id=1
     -->
-    <changeSet id="insert-3-parcels-tenant-1" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="insert-3-parcels-tenant-1" author="mgorgos" failOnError="false" runOnChange="true">
         <sql>
             INSERT INTO parcel(id, cadaster_number, city_village_id, country_id, county_id, created_at, description, landworthiness_points, name, parent_id, tenant_id)
             VALUES (1, 'AB-34567-ZB-12356', null, 'md', 'HN', '2018-07-26 12:45:00', 'sus in deal', 89, 'Floarea soarelui', null, 1);
@@ -262,7 +262,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert-4-parcels-tenant-2" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="insert-4-parcels-tenant-2" author="mgorgos" failOnError="false" runOnChange="true">
         <sql>
             INSERT INTO parcel(id, cadaster_number, city_village_id, country_id, county_id, created_at, description, landworthiness_points, name, parent_id, tenant_id)
             VALUES (4, 'AB-34567-NS-12356', null, 'md', 'NS', '2018-07-26 12:45:00', 'sus in deal', 89, 'Floarea soarelui', null, 2);
@@ -499,14 +499,14 @@
     </changeSet>
 
 
-    <changeSet id="map-event-table-drop-machine-id" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+    <changeSet id="map-event-table-drop-machine-id" author="maxim.nistreanu" failOnError="false" runOnChange="true">
         <sql>
             ALTER TABLE map_event DROP CONSTRAINT fkrba9q61il5j634jk31uhe2wc9;
             ALTER TABLE map_event DROP COLUMN machine_id;
         </sql>
     </changeSet>
 
-    <changeSet id="parcel-table-changes" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+    <changeSet id="parcel-table-changes" author="maxim.nistreanu" failOnError="false" runOnChange="true">
         <sql>
             UPDATE parcel SET land_worthiness_points = landworthiness_points;
             ALTER TABLE parcel DROP COLUMN landworthiness_points;
