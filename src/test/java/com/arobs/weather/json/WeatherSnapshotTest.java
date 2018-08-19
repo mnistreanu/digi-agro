@@ -56,6 +56,8 @@ public class WeatherSnapshotTest {
 		
 		assertEquals(Integer.valueOf(0), weatherSnapshotJson.getClouds().getAll());
 		
+		assertEquals(Integer.valueOf(6086), weatherSnapshotJson.getSys().getId());
+		assertEquals(Integer.valueOf(1), weatherSnapshotJson.getSys().getType());
 		assertEquals(Double.valueOf(0.0332), weatherSnapshotJson.getSys().getMessage());
 		assertEquals("MD", weatherSnapshotJson.getSys().getCountry());
 		assertEquals(new Date(1533610542L * 1000), weatherSnapshotJson.getSys().getSunrise());
@@ -90,6 +92,8 @@ public class WeatherSnapshotTest {
 		assertEquals(snapshotJson.getWind().getSpeed(), snapshotEntity.getSpeed());
 		assertEquals(snapshotJson.getWind().getDeg(), snapshotEntity.getDeg());
 		assertEquals(snapshotJson.getClouds().getAll(), snapshotEntity.getClouds());
+		assertEquals(snapshotJson.getSys().getId(), snapshotEntity.getSysId());
+		assertEquals(snapshotJson.getSys().getType(), snapshotEntity.getSysType());
 		assertEquals(snapshotJson.getSys().getMessage(), snapshotEntity.getMessage());
 		assertEquals(snapshotJson.getSys().getCountry(), snapshotEntity.getCountryCode());
 		assertEquals(snapshotJson.getSys().getSunrise(), snapshotEntity.getSunrise());

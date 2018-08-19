@@ -12,11 +12,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by mihail.gorgos on 31.07.2018.
+ * Date istorice. Se transfera zilnic din tabelul "weather_snapshot"
  */
 @Entity
-@Table(name = "weather_snaphost")
-public class WeatherSnapshot {
+@Table(name = "weather_history")
+public class WeatherHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -111,13 +111,6 @@ public class WeatherSnapshot {
 	@Source( "clouds.all")
     private Integer clouds;
 
-    @Column(name="sys_id")
-	@Source( "sys.id")
-	private Integer sysId;
-    @Column(name="sys_type")
-	@Source( "sys.type")
-	private Integer sysType;
-    
     @Column(name="message")
 	@Source( "sys.message")
 	private Double message;
@@ -368,23 +361,7 @@ public class WeatherSnapshot {
         this.clouds = clouds;
     }
 
-    public Integer getSysId() {
-		return sysId;
-	}
-
-	public void setSysId(Integer sysId) {
-		this.sysId = sysId;
-	}
-
-	public Integer getSysType() {
-		return sysType;
-	}
-
-	public void setSysType(Integer sysType) {
-		this.sysType = sysType;
-	}
-
-	public Double getMessage() {
+    public Double getMessage() {
 		return message;
 	}
 
