@@ -16,13 +16,20 @@ export class ForecastService {
     constructor(private http: HttpClient) {
     }
 
-    save(forecastModel: ForecastModel): Observable<void> {
-        return this.http.post<void>(this.api + '/', forecastModel);
+    save(forecastModel: ForecastModel): Observable<ForecastModel> {
+        return this.http.post<ForecastModel>(this.api + '/', forecastModel);
     }
 
-    public findForecasts(tenantId: number): Observable<PayloadModel> {
-        return this.http.get<PayloadModel>(this.api + '/active-forecasts?tenantId=1');
+    public find(): Observable<ForecastModel[]> {
+        return this.http.get<ForecastModel[]>(this.api + '/');
     }
 
+    public findOne(id): Observable<ForecastModel> {
+        return this.http.get<ForecastModel>(this.api + '/' + id);
+    }
+
+    public remove(id): Observable<void> {
+        return this.http.delete<void>(this.api + '/' + id);
+    }
 
 }

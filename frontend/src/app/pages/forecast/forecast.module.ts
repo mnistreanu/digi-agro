@@ -4,20 +4,22 @@ import {RouterModule} from '@angular/router';
 import 'chart.js/dist/Chart.js';
 import {DirectivesModule} from '../../theme/directives/directives.module';
 import {ForecastChartsComponent} from './charts/forecast-charts.component';
-import {ForecastHarvestComponent} from './harvest-form/forecast-harvest-form.component';
+import {ForecastFormComponent} from './forecast-form/forecast-form.component';
 import {ChartsModule} from 'ng2-charts';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {MultiselectDropdownModule} from 'angular-2-dropdown-multiselect';
 import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-block.module';
-import {ForecastHarvestFactorComponent} from './harvest-factor/forecast-harvest-factor.component';
+import {HarvestFactorComponent} from './harvest-factor/harvest-factor.component';
+import {AgGridModule} from 'ag-grid-angular';
+import {ForecastListComponent} from './forecast-list/forecast-list.component';
 
 export const routes = [
-    {path: '', redirectTo: 'forecasting', pathMatch: 'full'},
-    {path: 'harvesting-form', component: ForecastHarvestComponent, data: {breadcrumb: 'harvesting-form'}},
-    {path: 'harvesting-factor', component: ForecastHarvestFactorComponent, data: {breadcrumb: 'harvesting-factor'}},
+    {path: '', component: ForecastListComponent, pathMatch: 'full'},
+    {path: 'harvesting/:id', component: ForecastFormComponent, data: {breadcrumb: 'form'}},
+
     {path: 'charts', component: ForecastChartsComponent, data: {breadcrumb: 'charts'}},
-    {path: 'costs-form', component: ForecastHarvestComponent, data: {breadcrumb: 'costs-form'}},
+    {path: 'costs-form', component: ForecastFormComponent, data: {breadcrumb: 'costs-form'}},
     {path: 'costs', component: ForecastChartsComponent, data: {breadcrumb: 'costs'}}
 ];
 
@@ -31,10 +33,14 @@ export const routes = [
         ChartsModule,
         DirectivesModule,
         FormErrorBlockModule,
+        AgGridModule.withComponents([]),
         RouterModule.forChild(routes)
     ],
     declarations: [
-        ForecastChartsComponent, ForecastHarvestComponent, ForecastHarvestFactorComponent
+        ForecastChartsComponent,
+        ForecastFormComponent,
+        HarvestFactorComponent,
+        ForecastListComponent
     ]
 })
 

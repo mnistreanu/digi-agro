@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CropService} from '../../../services/crop.service';
 import {CropCategoryModel} from '../../manage-crops/crop-variety/crop-category.model';
@@ -12,16 +12,19 @@ import {ToastrService} from 'ngx-toastr';
 import {Messages} from '../../../common/messages';
 import {ForecastService} from '../../../services/forecast.service';
 import {ForecastModel} from '../forecast.model';
+import {ForecastSnapshotModel} from '../forecast-snapshot.model';
+import {ForecastHarvestModel} from '../forecast-harvest.model';
 
 @Component({
-    selector: 'app-forecast-harvest',
-    templateUrl: './forecast-harvest-form.component.html'
+    selector: 'app-forecast-form',
+    templateUrl: './forecast-form.component.html'
 })
-
-export class ForecastHarvestComponent implements OnInit {
+export class ForecastFormComponent implements OnInit {
 
     private form: FormGroup;
     private formSubmitted = false;
+
+    private model: ForecastModel;
 
     private area: number;
     private parcelMap;
@@ -49,9 +52,11 @@ export class ForecastHarvestComponent implements OnInit {
     };
 
     labelSaved: string;
+    labelRemoved: string;
     labelValidationFail: string;
 
     constructor(private router: Router,
+                private route: ActivatedRoute,
                 private formBuilder: FormBuilder,
                 private forecastService: ForecastService,
                 private cropService: CropService,
@@ -61,36 +66,71 @@ export class ForecastHarvestComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        this.route.params.subscribe(params => {
+            const id = params['id'];
+            if (id == -1) {
+                this.prepareNew();
+            }
+            else {
+                this.setupModel(id);
+            }
+        });
+
         this.setupLabels();
-        this.buildForm();
-        this.setupParcels();
-        this.setupCropCategories();
     }
 
 
     private setupLabels() {
         this.langService.get(Messages.SAVED).subscribe((message) => this.labelSaved = message);
         this.langService.get(Messages.VALIDATION_FAIL).subscribe((message) => this.labelValidationFail = message);
+        this.langService.get(Messages.REMOVED).subscribe((message) => this.labelRemoved = message);
+    }
+
+    private prepareNew() {
+        this.model = new ForecastModel();
+        this.model.snapshot = new ForecastSnapshotModel();
+        const initialHarvest = new ForecastHarvestModel();
+        initialHarvest.createdAt = new Date();
+        initialHarvest.factorName = this.langService.instant('forecast.initial-forecast');
+        initialHarvest.quantity = 0;
+        this.model.snapshot.harvests = [initialHarvest];
+        this.buildForm();
+    }
+
+    private setupModel(id) {
+        this.forecastService.findOne(id).subscribe(data => {
+            this.model = data;
+            this.buildForm();
+        });
     }
 
     private buildForm() {
         this.form = this.formBuilder.group({
-            parcels: [null, Validators.required],
-            name: [null, Validators.compose([Validators.required, Validators.maxLength(256)])],
-            harvestingYear: [null, Validators.required],
-            cropCategoryId: [null, Validators.required],
-            cropId: [null, Validators.required],
-            cropVarietyId: [null],
-            description: [null, Validators.maxLength(1024)],
-            unitPrice: [null, Validators.required],
-            currency: [null, Validators.required],
-            unitOfMeasure: [null, Validators.required],
-            quantityHectar: [null, Validators.required]
+            name: [this.model.name, Validators.compose([Validators.required, Validators.maxLength(256)])],
+            description: [this.model.description, Validators.maxLength(1024)],
+            cropCategoryId: [this.model.cropCategoryId, Validators.required],
+            cropId: [this.model.cropId, Validators.required],
+            cropVarietyId: [this.model.cropVarietyId],
+            harvestingYear: [this.model.harvestingYear, Validators.required],
+            parcels: [this.model.snapshot.parcels, Validators.required],
+            unitOfMeasure: [this.model.snapshot.unitOfMeasure, Validators.required],
+            currency: [this.model.snapshot.currency, Validators.required],
+            unitPrice: [this.model.snapshot.unitPrice, Validators.required]
         });
+
+        this.setupParcels();
+
+        this.setupCropCategories();
+        if (this.model.cropCategoryId != null) {
+            this.setupCrops(this.model.cropCategoryId);
+            if (this.model.cropVarietyId != null) {
+                this.setupCropVarieties(this.model.cropId);
+            }
+        }
     }
 
     private setupParcels() {
-        this.area = 0;
         this.parcelService.find().subscribe(models => {
             this.parcelMap = {};
             this.parcels = [];
@@ -101,15 +141,22 @@ export class ForecastHarvestComponent implements OnInit {
                     name: model.name
                 });
             });
+            this.calcArea(this.model.snapshot.parcels);
         });
     }
 
     public onParcelChange() {
-        this.area = 0;
         const selectedParcels = this.form.controls['parcels'].value;
-        selectedParcels.forEach(parcelId => {
-            this.area += this.parcelMap[parcelId].area;
-        });
+        this.calcArea(selectedParcels);
+    }
+
+    private calcArea(parcels) {
+        if (parcels) {
+            this.area = parcels.reduce((prevValue, parcelId) => prevValue + this.parcelMap[parcelId].area, 0);
+        }
+        else {
+            this.area = 0;
+        }
     }
 
     private setupCropCategories() {
@@ -120,7 +167,7 @@ export class ForecastHarvestComponent implements OnInit {
         });
     }
 
-    private onCropCategoryChange() {
+    public onCropCategoryChange() {
         const cropCategoryId = this.form.controls['cropCategoryId'].value;
         this.setupCrops(cropCategoryId);
         this.crops = [];
@@ -137,7 +184,7 @@ export class ForecastHarvestComponent implements OnInit {
         });
     }
 
-    private onCropChange() {
+    public onCropChange() {
         const cropId = this.form.controls['cropId'].value;
         this.setupCropVarieties(cropId);
         this.cropVarieties = [];
@@ -160,14 +207,30 @@ export class ForecastHarvestComponent implements OnInit {
             return;
         }
 
-        const forecastModel = new ForecastModel();
-        Object.assign(forecastModel, this.form.value);
+        const formValue = this.form.value;
+        this.model.name = formValue.name;
+        this.model.description = formValue.description;
+        this.model.cropCategoryId = formValue.cropCategoryId;
+        this.model.cropId = formValue.cropId;
+        this.model.cropVarietyId = formValue.cropVarietyId;
+        this.model.harvestingYear = formValue.harvestingYear;
+        this.model.snapshot.parcels = formValue.parcels;
+        this.model.snapshot.unitOfMeasure = formValue.unitOfMeasure;
+        this.model.snapshot.currency = formValue.currency;
+        this.model.snapshot.unitPrice = formValue.unitPrice;
 
         this.formSubmitted = false;
 
-        this.forecastService.save(forecastModel).subscribe(() => {
+        this.forecastService.save(this.model).subscribe((model) => {
+            this.model = model;
             this.toastrService.success(this.labelSaved);
-            this.router.navigate(['/pages/forecasting/harvesting-factor']);
+        });
+    }
+
+    onRemove() {
+        this.forecastService.remove(this.model.id).subscribe(() => {
+            this.toastrService.success(this.labelRemoved);
+            this.router.navigate(['/pages/forecasting']);
         });
     }
 

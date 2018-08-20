@@ -1,5 +1,6 @@
 {
 	"action": {
+		"add": "Добавить",
 		"cancel": "Отмена",
 		"confirm": "Подтвердить",
 		"create": "Создать",
@@ -25,6 +26,8 @@
 	"forecast": {
 		"additional_info": "Дополнительная информация",
 		"currency": "Валюта",
+		"factors": "Факторы",
+		"initial-forecast": "Изначальный прогноз",
 		"harvest": "Урожай",
 		"harvesting_year": "Год сбора урожая",
 		"hectar": "гектар",
@@ -69,6 +72,7 @@
 		"dashboard": "Главная",
 		"forecasting-charts": "Прогнозные графики",
 		"forecasts": "Прогнозирование",
+		"forecast-list": "Список",
 		"harvesting-forecasting": "Прогнозирование урожая",
 		"harvesting-forecasting-factor": "Прогнозирование урожая FACTOR",
 		"harvesting-forecasting-form": "Прогнозирование урожая FORM",

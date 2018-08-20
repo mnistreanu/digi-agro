@@ -1,18 +1,15 @@
+import {ForecastSnapshotModel} from './forecast-snapshot.model';
+
 export class ForecastModel {
-    parcels: number[];
+
+    id: number;
+    name: string;
+    description: string;
+    harvestingYear: number;
 
     cropCategoryId: number;
     cropId: number;
     cropVarietyId: number;
 
-    id: number;
-    name: string;
-    description: string;
-
-    harvestingYear: number;
-
-    unitOfMeasure: string;
-    unitPrice: number;
-    quantityHectar: number;
-    currency: string;
+    snapshot: ForecastSnapshotModel;
 }
