@@ -26,13 +26,14 @@
 	"forecast": {
 		"additional_info": "Additional information",
 		"currency": "Currency",
-		"factors": "Factors",
+		"factor": "Factor",
 		"initial-forecast": "Initial Forecast",
 		"harvest": "Harvest",
 		"harvesting_year": "Harvesting year",
 		"hectar": "hectar",
 		"name": "Forecast name",
 		"selling_price": "Selling price",
+		"quantity": "Quantity",
 		"unit_of_measure": "Unit of measure"
 	},
 	"general": {
@@ -47,6 +48,7 @@
 		"village-city": "Village/City"
 	},
 	"info": {
+		"creation-time": "Creation Time",
 		"description": "Description",
 		"name": "Name"
 	},

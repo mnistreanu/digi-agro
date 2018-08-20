@@ -26,13 +26,14 @@
 	"forecast": {
 		"additional_info": "Informații suplimnetare",
 		"currency": "Monedă",
-		"factors": "Factori",
+		"factor": "Factor",
 		"initial-forecast": "Prognoza inițială",
 		"harvest": "Recoltă",
 		"harvesting_year": "Anul recoltei",
 		"hectar": "hectar",
 		"name": "Denumire prognoză",
 		"selling_price": "Preț de vînzare",
+		"quantity": "Сantitate",
 		"unit_of_measure": "Unitatea de măsură"
 	},
 	"general": {
@@ -47,6 +48,7 @@
 		"village-city": "Sat/Oraș"
 	},
 	"info": {
+		"creation-time": "Timpul de creație",
 		"description": "Descriere",
 		"name": "Denumire"
 	},

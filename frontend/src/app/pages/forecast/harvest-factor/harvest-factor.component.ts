@@ -3,6 +3,7 @@ import {ColDef, GridOptions} from 'ag-grid';
 import {DateUtil} from '../../../common/dateUtil';
 import {NumericUtil} from '../../../common/numericUtil';
 import {ForecastHarvestModel} from '../forecast-harvest.model';
+import {LangService} from '../../../services/lang.service';
 
 @Component({
     selector: 'app-harvest-factor',
@@ -16,7 +17,7 @@ export class HarvestFactorComponent implements OnInit {
     options: GridOptions;
     context;
 
-    constructor() {
+    constructor(private langService: LangService) {
     }
 
     ngOnInit() {
@@ -39,14 +40,14 @@ export class HarvestFactorComponent implements OnInit {
 
         const headers: ColDef[] = [
             {
-                headerName: 'Factor',
+                headerName: 'forecast.factor',
                 field: 'factorName',
                 editable: true,
                 width: 250,
                 minWidth: 200
             },
             {
-                headerName: 'Quantity',
+                headerName: 'forecast.quantity',
                 field: 'quantity',
                 editable: true,
                 valueSetter: this.numberSetter,
@@ -54,7 +55,7 @@ export class HarvestFactorComponent implements OnInit {
                 minWidth: 150
             },
             {
-                headerName: 'Created At',
+                headerName: 'info.creation-time',
                 field: 'createdAt',
                 width: 160,
                 minWidth: 160,
@@ -65,6 +66,10 @@ export class HarvestFactorComponent implements OnInit {
                 valueFormatter: params => DateUtil.formatLocalizedDate(params.value)
             }
         ];
+
+        headers.forEach((header) => {
+           this.langService.get(header.headerName).subscribe(m => header.headerName = m);
+        });
 
         return headers;
     }
@@ -97,7 +102,6 @@ export class HarvestFactorComponent implements OnInit {
 
     public onAdd() {
         const harvest = new ForecastHarvestModel();
-        harvest.factorName = 'new factor';
         harvest.createdAt = new Date();
         this.models.push(harvest);
         this.options.api.updateRowData({

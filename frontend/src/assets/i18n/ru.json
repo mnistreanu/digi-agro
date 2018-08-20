@@ -26,13 +26,14 @@
 	"forecast": {
 		"additional_info": "Дополнительная информация",
 		"currency": "Валюта",
-		"factors": "Факторы",
+		"factor": "Фактор",
 		"initial-forecast": "Изначальный прогноз",
 		"harvest": "Урожай",
 		"harvesting_year": "Год сбора урожая",
 		"hectar": "гектар",
 		"name": "Название прогноза",
 		"selling_price": "Цена при продажи",
+		"quantity": "Количество",
 		"unit_of_measure": "Единица измерения"
 	},
 	"general": {
@@ -47,6 +48,7 @@
 		"village-city": "Деревня/Город"
 	},
 	"info": {
+		"creation-time": "Время создания",
 		"description": "Описание",
 		"name": "Наименование"
 	},
