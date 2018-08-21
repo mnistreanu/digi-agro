@@ -117,7 +117,10 @@ public class WeatherSnapshot {
     @Column(name="sys_type")
 	@Source( "sys.type")
 	private Integer sysType;
+<<<<<<< HEAD
     
+=======
+>>>>>>> f6206a3cd29670f17f3463f11661f6e90febf8f5
     @Column(name="message")
 	@Source( "sys.message")
 	private Double message;

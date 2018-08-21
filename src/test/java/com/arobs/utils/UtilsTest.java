@@ -1,7 +1,9 @@
 package com.arobs.utils;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.jdto.DTOBinder;
@@ -15,10 +17,15 @@ public class UtilsTest {
 	
 	@Test
 	public void testDTProperty() {
-		Long unixTimestamp = //1533161231L;
-		                     1533508200L;
-		Date date =  new Date(unixTimestamp * 1000);
-		logger.info("DT attribute: {}", date);
+		Long unixTimestamp = 1533508200L;
+		Calendar calendar = Calendar.getInstance();
+		calendar.clear();
+		calendar.set(2018, 8-1, 6, 1, 30, 0);
+		Date calendarDate = calendar.getTime();   
+		Date timestampDate =  new Date(unixTimestamp * 1000);
+		assertEquals(calendarDate, timestampDate);
+		logger.info("DT attribute: {}", timestampDate);
+		logger.debug("DT attribute: {}", timestampDate);
 	}
 
 	@Test
