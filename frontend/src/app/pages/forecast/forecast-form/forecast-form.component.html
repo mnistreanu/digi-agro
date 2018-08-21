@@ -139,7 +139,8 @@
             <div class="form-group row text-sm-right">
                 <label class="col-sm-3 form-control-label m-t-5" translate>forecast.selling_price</label>
                 <div class="col-sm-3 text-left">
-                    <input class="form-control checking-field" type="number" formControlName="unitPrice">
+                    <input class="form-control checking-field" type="number"
+                           formControlName="unitPrice" (change)="onUnitPriceChange()">
                     <app-form-error-block [control]="form.get('unitPrice')"
                                           [formSubmitted]="formSubmitted">
                     </app-form-error-block>
@@ -149,10 +150,15 @@
     </div>
 </div>
 
-<app-harvest-factor *ngIf="model" [models]="model.snapshot.harvests"></app-harvest-factor>
+<app-harvest-factor *ngIf="model" [models]="model.snapshot.harvests"
+                    (amountChanged)="registerHarvestAmount($event)">
+</app-harvest-factor>
 
 <div class="card mt-3">
     <div class="card-body">
+
+        <app-forecast-summary *ngIf="model" [unitPrice]="unitPrice" [summaryAmount]="harvestAmount"></app-forecast-summary>
+
         <button class="btn btn-danger pull-left"
                 *ngIf="model && model.id != null"
                 (click)="onRemove()" translate>action.remove</button>

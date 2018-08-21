@@ -33,6 +33,9 @@
 		"hectar": "гектар",
 		"name": "Название прогноза",
 		"selling_price": "Цена при продажи",
+		"summary": "Итог прогноза",
+		"summary-amount": "Количество урожая",
+		"summary-price": "Цена",
 		"quantity": "Количество",
 		"unit_of_measure": "Единица измерения"
 	},

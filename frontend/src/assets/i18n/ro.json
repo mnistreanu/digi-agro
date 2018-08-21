@@ -33,6 +33,9 @@
 		"hectar": "hectar",
 		"name": "Denumire prognoză",
 		"selling_price": "Preț de vînzare",
+		"summary": "Total prognozat",
+		"summary-amount": "Cantitatea de recoltă",
+		"summary-price": "Preț",
 		"quantity": "Сantitate",
 		"unit_of_measure": "Unitatea de măsură"
 	},

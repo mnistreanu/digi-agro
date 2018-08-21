@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {DateUtil} from '../../../common/dateUtil';
 import {NumericUtil} from '../../../common/numericUtil';
@@ -13,15 +13,19 @@ import {LangService} from '../../../services/lang.service';
 export class HarvestFactorComponent implements OnInit {
 
     @Input() models: ForecastHarvestModel[];
+    @Output() amountChanged: EventEmitter<number> = new EventEmitter<number>();
 
     options: GridOptions;
     context;
+
+    private harvestAmount;
 
     constructor(private langService: LangService) {
     }
 
     ngOnInit() {
         this.setupGrid();
+        this.setupAmount();
     }
 
     private setupGrid() {
@@ -34,6 +38,11 @@ export class HarvestFactorComponent implements OnInit {
         this.context = {componentParent: this};
 
         this.options.rowData = this.models;
+    }
+
+    private setupAmount() {
+        this.harvestAmount = this.models.reduce((prev, model) => prev + model.quantity, 0);
+        this.amountChanged.emit(this.harvestAmount);
     }
 
     private setupHeaders() {
@@ -51,6 +60,7 @@ export class HarvestFactorComponent implements OnInit {
                 field: 'quantity',
                 editable: true,
                 valueSetter: this.numberSetter,
+                onCellValueChanged: (params) => this.onQuantityChange(params),
                 width: 150,
                 minWidth: 150
             },
@@ -88,6 +98,11 @@ export class HarvestFactorComponent implements OnInit {
         params.data[field] = newValue;
 
         return true;
+    }
+
+    private onQuantityChange(params) {
+        this.harvestAmount += (params.newValue || 0) - (params.oldValue || 0);
+        this.amountChanged.emit(this.harvestAmount);
     }
 
     public onGridReady() {

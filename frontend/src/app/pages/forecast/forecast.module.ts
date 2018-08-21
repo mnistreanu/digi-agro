@@ -13,6 +13,7 @@ import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-bl
 import {HarvestFactorComponent} from './harvest-factor/harvest-factor.component';
 import {AgGridModule} from 'ag-grid-angular';
 import {ForecastListComponent} from './forecast-list/forecast-list.component';
+import { ForecastSummaryComponent } from './forecast-form/forecast-summary/forecast-summary.component';
 
 export const routes = [
     {path: '', component: ForecastListComponent, pathMatch: 'full'},
@@ -40,7 +41,8 @@ export const routes = [
         ForecastChartsComponent,
         ForecastFormComponent,
         HarvestFactorComponent,
-        ForecastListComponent
+        ForecastListComponent,
+        ForecastSummaryComponent
     ]
 })
 

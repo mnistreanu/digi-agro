@@ -33,6 +33,9 @@ export class ForecastFormComponent implements OnInit {
     private crops: CropModel[] = [];
     private cropVarieties: CropVarietyModel[] = [];
 
+    private harvestAmount;
+    private unitPrice;
+
     public parcelControlSettings: IMultiSelectSettings = {
         checkedStyle: 'fontawesome',
         buttonClasses: 'btn btn-secondary btn-block',
@@ -119,6 +122,8 @@ export class ForecastFormComponent implements OnInit {
             unitPrice: [this.model.snapshot.unitPrice, Validators.required]
         });
 
+        this.unitPrice = this.model.snapshot.unitPrice;
+
         this.setupParcels();
 
         this.setupCropCategories();
@@ -159,6 +164,10 @@ export class ForecastFormComponent implements OnInit {
         }
     }
 
+    public onUnitPriceChange() {
+        this.unitPrice = this.form.controls['unitPrice'].value;
+    }
+
     private setupCropCategories() {
         this.cropService.findCategories().subscribe(payloadModel => {
             const status = payloadModel['status'];
@@ -197,6 +206,10 @@ export class ForecastFormComponent implements OnInit {
             const message = payloadModel.message;
             this.cropVarieties = payloadModel.payload;
         });
+    }
+
+    registerHarvestAmount(amount) {
+        this.harvestAmount = amount;
     }
 
     onSubmit() {

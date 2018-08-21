@@ -30,9 +30,12 @@
 		"initial-forecast": "Initial Forecast",
 		"harvest": "Harvest",
 		"harvesting_year": "Harvesting year",
-		"hectar": "hectar",
+		"hectar": "hectare",
 		"name": "Forecast name",
 		"selling_price": "Selling price",
+		"summary": "Forecast Summary",
+		"summary-amount": "Amount of harvest",
+		"summary-price": "Price",
 		"quantity": "Quantity",
 		"unit_of_measure": "Unit of measure"
 	},
