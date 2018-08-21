@@ -538,6 +538,11 @@
         </sql>
     </changeSet>
 
+    <changeSet id="adjust-forecast-crops" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <sql>
+            UPDATE forecast SET crop_category_id = 1 WHERE id IN (1, 2);
+        </sql>
+    </changeSet>
 
     <changeSet id="map-event-table-drop-machine-id" author="maxim.nistreanu" failOnError="true" runOnChange="true">
         <sql>

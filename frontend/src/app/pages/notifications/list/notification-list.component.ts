@@ -5,6 +5,7 @@ import {ColDef, GridOptions} from 'ag-grid';
 import {NotificationModel} from '../notification.model';
 import {ImageRendererComponent} from '../../../modules/aggrid/image-renderer/image-renderer.component';
 import {LangService} from '../../../services/lang.service';
+import {DateUtil} from '../../../common/dateUtil';
 
 @Component({
     selector: 'app-notification-list',
@@ -82,35 +83,15 @@ export class NotificationListComponent implements OnInit {
                 field: 'seenAt',
                 filter: 'agDateColumnFilter',
                 filterParams: {
-                    comparator: function (filterDate, cellValue) {
-                        const filterDateWithoutTime = new Date(filterDate.getFullYear(), filterDate.getMonth(), filterDate.getDate());
-                        const cellDate = new Date(cellValue);
-                        const cellDateWithoutTime = new Date(cellDate.getFullYear(), cellDate.getMonth(), cellDate.getDate());
-
-                        const a = cellDateWithoutTime.getTime();
-                        const b = filterDateWithoutTime.getTime();
-
-                        if (a == b) {
-                            return 0;
-                        }
-
-                        return a > b ? 1 : -1;
-                    }
+                    comparator: (d1, d2) => DateUtil.compareWithoutTime(d1, d2)
                 },
-                valueFormatter: params => this.formatDate(params),
+                valueFormatter: params => DateUtil.formatLocalizedDate(params.value),
                 width: 200,
                 minWidth: 160
             }
         ];
 
         return headers;
-    }
-
-    private formatDate(params) {
-        if (!params.value) {
-            return '';
-        }
-        return moment(params.value).format('D MMMM, hh:mm');
     }
 
     private setupRows() {
