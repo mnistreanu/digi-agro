@@ -24,8 +24,11 @@
             </polygon>
 
             <marker *ngFor="let p of parcels"
-                    [position]="p.paths[0]"
-                    [label]="p.name"
+                    [position]="p.center"
+                    [label]="{
+                        fontSize: '10px',
+                        text: p.name
+                    }"
                     [icon]="{
                         url: '/assets/img/crops/sunflower.png',
                         labelOrigin:  [16, -5],

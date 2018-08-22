@@ -27,7 +27,6 @@ export class ParcelMapComponent implements OnInit {
         this.parcels = [];
     }
 
-
     private setupCenter() {
         this.center = 'Moldova, Chisinau';
     }

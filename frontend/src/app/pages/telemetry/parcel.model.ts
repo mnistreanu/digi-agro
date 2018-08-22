@@ -11,4 +11,5 @@ export class ParcelModel {
 
     paths: any[];
     fillColor: string;
+    center: any;
 }

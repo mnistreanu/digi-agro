@@ -104,18 +104,34 @@ export class ParcelListComponent implements OnInit {
 
             this.models.forEach((parcel) => {
                 parcel.fillColor = this.randomColor();
-                parcel.paths = [];
-                parcel.coordinates.forEach((c) => {
-                    parcel.paths.push({
+                parcel.paths = parcel.coordinates.map((c) => {
+                    return {
                         lat: c[0],
                         lng: c[1]
-                    });
+                    };
                 });
+                parcel.center = this.getCenterOfPolygon(parcel.paths);
             });
-
 
             this.dataChanged.emit(this.models);
         });
+    }
+
+    private getCenterOfPolygon(paths) {
+
+        const pointCount = paths.length;
+        let lat = 0;
+        let lng = 0;
+
+        paths.forEach(point => {
+            lat += point.lat;
+            lng += point.lng;
+        });
+
+        return {
+            lat: lat / pointCount,
+            lng: lng / pointCount
+        };
     }
 
     public onGridReady() {
