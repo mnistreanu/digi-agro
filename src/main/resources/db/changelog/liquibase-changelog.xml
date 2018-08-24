@@ -565,4 +565,29 @@
         </sql>
     </changeSet>
 
+    <changeSet id="update-18-crop-icons" author="mihai.gorgos" failOnError="true" runOnChange="true">
+        <sql>
+
+            UPDATE crop SET icon='wheat.png' WHERE id=1;
+            UPDATE crop SET icon='rye.png'   WHERE id=2;
+            UPDATE crop SET icon='triticale.png'   WHERE id=3;
+            UPDATE crop SET icon='barley.png'   WHERE id=4;
+            UPDATE crop SET icon='oat.png'   WHERE id=5;
+            UPDATE crop SET icon='corn.png'   WHERE id=6;
+            UPDATE crop SET icon='sorghum.png'   WHERE id=7;
+            UPDATE crop SET icon='millet.png'   WHERE id=8;
+            UPDATE crop SET icon='rice.png'   WHERE id=9;
+            UPDATE crop SET icon='buckwheat.png'   WHERE id=10;
+            UPDATE crop SET icon='sunflower.png'   WHERE id=11;
+            UPDATE crop SET icon='colza.png'   WHERE id=12;
+            UPDATE crop SET icon='sugarbeet.png'   WHERE id=13;
+            UPDATE crop SET icon='linen.png'   WHERE id=14;
+            UPDATE crop SET icon='cannabis.png'   WHERE id=15;
+            UPDATE crop SET icon='tobacco.png'   WHERE id=16;
+            UPDATE crop SET icon='hop.png'   WHERE id=17;
+            UPDATE crop SET icon='soy.png'   WHERE id=18;
+        </sql>
+    </changeSet>
+
+
 </databaseChangeLog>

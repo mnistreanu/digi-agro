@@ -22,6 +22,9 @@ public class Crop {
     @Column(name = "name_ru")
     private String nameRu;
 
+    @Column(name = "icon")
+    private String icon;
+
     public Crop() {
     }
 
@@ -55,6 +58,14 @@ public class Crop {
 
     public void setNameRu(String nameRu) {
         this.nameRu = nameRu;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 }
 
