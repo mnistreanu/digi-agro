@@ -589,7 +589,37 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert-10-parcel-crop-2018" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+    <changeSet id="insert-10-parcel-crop-2016" author="mihai.gorgos" failOnError="true" runOnChange="true">
+        <sql>
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 2, 3, 1, '2016-02-28');
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 2, 5, 2, '2016-03-03');
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 2, 7, 3, '2016-03-06');
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 2, 7, 4, '2016-03-08');
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 4, 1, 5, '2016-02-28');
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 4, 1, 6,  '2016-03-01');
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 4, 1, 7,  '2016-03-06');
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 2, 10, 8, '2016-02-24');
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 2, 12, 9, '2016-02-26');
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 2, 13, 10, '2016-02-28');
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert-10-parcel-crop-2017" author="mihai.gorgos" failOnError="true" runOnChange="true">
+        <sql>
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 2, 2, 1, '2017-02-28');
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 2, 4, 2, '2017-03-03');
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 2, 12, 3, '2017-03-06');
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 2, 7, 4, '2017-03-08');
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 4, 2, 5, '2017-02-28');
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 4, 5, 6,  '2017-03-01');
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 4, 7, 7,  '2017-03-06');
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 2, 9, 8, '2017-02-24');
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 2, 12, 9, '2017-02-26');
+            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 2, 13, 10, '2017-02-28');
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert-10-parcel-crop-2018" author="mihai.gorgos" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES (NOW(), 2, 1, 1, '2018-02-28');
             INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES (NOW(), 2, 15, 2, '2018-03-03');
@@ -603,6 +633,5 @@
             INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES (NOW(), 2, 11, 10, '2018-02-28');
         </sql>
     </changeSet>
-
 
 </databaseChangeLog>
