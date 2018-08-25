@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ParcelModel} from '../../telemetry/parcel.model';
 
 @Component({
@@ -6,7 +6,7 @@ import {ParcelModel} from '../../telemetry/parcel.model';
     templateUrl: './parcel-map.component.html',
     styleUrls: ['./parcel-map.component.scss']
 })
-export class ParcelMapComponent implements OnInit {
+export class ParcelMapComponent implements OnInit, OnChanges {
 
     @Input() parcels: any[];
     @Input() center: any;
@@ -27,11 +27,23 @@ export class ParcelMapComponent implements OnInit {
         this.parcels = [];
     }
 
-    private setupCenter() {
-        this.center = 'Moldova, Chisinau'; //TODO de facut centrarea pe prima parcela din lista
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes['parcels']) {
+            this.setupCenter();
+        }
     }
 
-    private onParcelClick(parcel, event) {
+    private setupCenter() {
+        if (this.parcels && this.parcels.length > 0) {
+            this.center = this.parcels[0].paths[0];
+        }
+        else {
+            this.center = 'Moldova, Chisinau';
+        }
+    }
+
+    onParcelClick(parcel, event) {
         this.parcel = parcel;
 
         if (this.infoWindow == null) {
@@ -48,14 +60,14 @@ export class ParcelMapComponent implements OnInit {
         this.infoWindow.open(event.target.map);
     }
 
-    private onParcelUp(event) {
+    onParcelUp(event) {
         event.target.setOptions({
             strokeColor: '#F00',
             zIndex: this.defaultZIndex + 1
         });
     }
 
-    private onParcelOut(event) {
+    onParcelOut(event) {
         event.target.setOptions({
             strokeColor: this.defaultStrokeColor,
             zIndex: this.defaultZIndex
