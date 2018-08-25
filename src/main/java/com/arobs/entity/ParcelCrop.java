@@ -27,7 +27,7 @@ public class ParcelCrop {
     private Long cropVarietyId;
 
     @Column(name = "planted_at")
-    private Date plantedt;
+    private Date plantedAt;
 
     @Column(name = "rows_on_parcel")
     private Integer rowsOnParcel;

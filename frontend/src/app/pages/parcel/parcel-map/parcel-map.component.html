@@ -10,7 +10,7 @@
     <div class="card-body widget-body">
 
         <ngui-map zoom="15" [center]="center" mapTypeId="terrain" scrollwheel="true">
-            <polygon *ngFor="let p of parcels"
+            <polygon *ngFor="let p of models"
                      (click)="onParcelClick(p, $event)"
                      (mouseover)="onParcelUp($event)"
                      (mouseout)="onParcelOut($event)"
@@ -23,14 +23,14 @@
                      [zIndex]="defaultZIndex">
             </polygon>
 
-            <marker *ngFor="let p of parcels"
+            <marker *ngFor="let p of models"
                     [position]="p.center"
                     [label]="{
                         fontSize: '10px',
                         text: p.name
                     }"
                     [icon]="{
-                        url: '/assets/img/crops/sunflower.png',
+                        url: p.icon,
                         labelOrigin:  [16, -5],
                         scaledSize: [32, 32],
                         size: [32, 32]
@@ -44,26 +44,26 @@
 
 <div #infoBody>
     <br>
-    <table class="table table-bordered table-hover small-table" *ngIf="parcel">
+    <table class="table table-bordered table-hover small-table" *ngIf="model">
         <tr>
             <td translate>parcel.name</td>
-            <td>{{ parcel.name }}</td>
+            <td>{{ model.name }}</td>
         </tr>
         <tr>
             <td translate>parcel.cadaster-number</td>
-            <td>{{ parcel.cadasterNumber }}</td>
+            <td>{{ model.cadasterNumber }}</td>
         </tr>
         <tr>
             <td translate>parcel.land-worthiness-points</td>
-            <td>{{ parcel.landWorthinessPoints }}</td>
+            <td>{{ model.landWorthinessPoints }}</td>
         </tr>
         <tr>
             <td translate>parcel.area</td>
-            <td>{{ parcel.area }}</td>
+            <td>{{ model.area }}</td>
         </tr>
         <tr>
             <td translate>parcel.description</td>
-            <td>{{ parcel.description }}</td>
+            <td>{{ model.description }}</td>
         </tr>
     </table>
 </div>
