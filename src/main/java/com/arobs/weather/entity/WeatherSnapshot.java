@@ -43,7 +43,7 @@ public class WeatherSnapshot {
     @Column(name="source_id")
     @DTOTransient
     private Integer sourceId;
-    @Column(name="countyId")
+    @Column(name="county_id")
 	@DTOTransient
     private String countyId;
     
@@ -117,7 +117,6 @@ public class WeatherSnapshot {
     @Column(name="sys_type")
 	@Source( "sys.type")
 	private Integer sysType;
-    
     @Column(name="message")
 	@Source( "sys.message")
 	private Double message;

@@ -27,10 +27,10 @@
 	</appender>	
 
 	<logger name="com.arobs" level="debug"/>
-<!-- 	<logger name="org.hibernate.SQL" level="debug"/> -->
-<!-- 	<logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="trace"/> -->
-    <logger name="org.hibernate.SQL" level="error"/>
-    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="error"/>
+	<logger name="org.hibernate.SQL" level="debug"/>
+	<logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="trace"/>
+<!--     <logger name="org.hibernate.SQL" level="error"/> -->
+<!--     <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="error"/> -->
 
 	<root level="error" >
 		<appender-ref ref="STDOUT" />	

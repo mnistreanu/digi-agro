@@ -23,7 +23,7 @@ public class WeatherHistory {
     @Column(name="id")
     @DTOTransient
     private Long id;
-    @Column(name="openweatherId")
+    @Column(name="openweather_id")
 	@Source("id")
     private Integer openweatherId;
     @Column(name="parcel_id")
@@ -43,7 +43,7 @@ public class WeatherHistory {
     @Column(name="source_id")
     @DTOTransient
     private Integer sourceId;
-    @Column(name="countyId")
+    @Column(name="county_id")
 	@DTOTransient
     private String countyId;
     
@@ -111,6 +111,12 @@ public class WeatherHistory {
 	@Source( "clouds.all")
     private Integer clouds;
 
+    @Column(name="sys_id")
+	@Source( "sys.id")
+	private Integer sysId;
+    @Column(name="sys_type")
+	@Source( "sys.type")
+	private Integer sysType;
     @Column(name="message")
 	@Source( "sys.message")
 	private Double message;
