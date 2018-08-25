@@ -28,7 +28,7 @@ export class ParcelMapComponent implements OnInit {
     }
 
     private setupCenter() {
-        this.center = 'Moldova, Chisinau';
+        this.center = 'Moldova, Chisinau'; //TODO de facut centrarea pe prima parcela din lista
     }
 
     private onParcelClick(parcel, event) {
