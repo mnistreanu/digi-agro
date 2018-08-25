@@ -589,7 +589,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert-10-parcel-crop" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+    <changeSet id="insert-10-parcel-crop-2018" author="maxim.nistreanu" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES (NOW(), 2, 1, 1, '2018-02-28');
             INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES (NOW(), 2, 15, 2, '2018-03-03');
