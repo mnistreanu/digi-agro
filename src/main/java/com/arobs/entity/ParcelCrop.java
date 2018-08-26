@@ -148,4 +148,12 @@ public class ParcelCrop {
     public void setDeletedBy(Long deletedBy) {
         this.deletedBy = deletedBy;
     }
+
+    public Date getPlantedAt() {
+        return plantedAt;
+    }
+
+    public void setPlantedAt(Date plantedAt) {
+        this.plantedAt = plantedAt;
+    }
 }
