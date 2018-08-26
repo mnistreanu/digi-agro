@@ -66,6 +66,7 @@ export class CropVarietyComponent implements OnInit {
                 parent.children.push(model);
             }
         });
+        
 
         this.options.api.setRowData(rows);
     }

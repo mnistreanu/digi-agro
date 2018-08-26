@@ -33,7 +33,7 @@ export class CropsComponent implements OnInit {
     ngOnInit() {
         this.fetchData();
 
-        this.cropService.findCategories().subscribe(data => {
+        this.cropService.findCategoryItems().subscribe(data => {
             this.cropCategorySelectItems = data;
         });
     }

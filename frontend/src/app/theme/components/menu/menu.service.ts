@@ -147,11 +147,11 @@ export class MenuService {
                 subMenu: [
                     {
                         title: 'nav.crops',
-                        routerLink: 'manage-crops',
+                        routerLink: 'manage-crops'
                     },
                     {
                         title: 'nav.crops-varieties',
-                        routerLink: 'manage-crops/crop-varieties',
+                        routerLink: 'manage-crops/crop-varieties'
                     }
                 ]
             });

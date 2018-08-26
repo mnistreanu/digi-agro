@@ -3,6 +3,8 @@ package com.arobs.config;
 import com.arobs.security.CorsFilter;
 import com.arobs.security.JwtAuthenticationEntryPoint;
 import com.arobs.security.JwtAuthenticationTokenFilter;
+import com.arobs.weather.LocationFileDownloader;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -50,6 +52,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public CorsFilter corsFilter() throws Exception {
         return new CorsFilter();
     }
+	
+	@Bean
+	public LocationFileDownloader locationFileDownloader() {
+		return new LocationFileDownloader();
+	}
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {

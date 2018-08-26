@@ -47,4 +47,14 @@ export class LangService {
     get(key, params?: Object) {
         return this.translate.get(key, params);
     }
+
+    /*
+    * https://github.com/ngx-translate/core
+    * This method is synchronous and the default file loader is asynchronous.
+    * You are responsible for knowing when your translations have been loaded and it is safe to use this method.
+    * If you are not sure then you should use the get method instead
+    * */
+    instant(key, params?: Object) {
+        return this.translate.instant(key, params);
+    }
 }

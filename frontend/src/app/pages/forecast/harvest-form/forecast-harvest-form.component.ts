@@ -23,6 +23,8 @@ export class ForecastHarvestComponent implements OnInit {
     private form: FormGroup;
     private formSubmitted = false;
 
+    private area: number;
+    private parcelMap;
     private parcels: IMultiSelectOption[];
     private categories: CropCategoryModel[] = [];
     private crops: CropModel[] = [];
@@ -38,12 +40,12 @@ export class ForecastHarvestComponent implements OnInit {
     };
 
     public parcelControlTexts: IMultiSelectTexts = {
-        checkAll: 'Select all',
-        uncheckAll: 'Unselect all',
-        checked: 'item selected',
-        checkedPlural: 'items selected',
-        defaultTitle: 'Select parcels',
-        allSelected: 'All selected',
+        checkAll: this.langService.instant(Messages.SELECT_ALL),
+        uncheckAll: this.langService.instant(Messages.UNSELECT_ALL),
+        checked: this.langService.instant(Messages.ITEM_SELECTED),
+        checkedPlural: this.langService.instant(Messages.ITEMS_SELECTED),
+        defaultTitle: this.langService.instant(Messages.PLEASE_SELECT) + ' ' + this.langService.instant(Messages.THE_PARCELS),
+        allSelected: this.langService.instant(Messages.ALL_SELECTED),
     };
 
     labelSaved: string;
@@ -88,13 +90,25 @@ export class ForecastHarvestComponent implements OnInit {
     }
 
     private setupParcels() {
+        this.area = 0;
         this.parcelService.find().subscribe(models => {
-            this.parcels = models.map((model) => {
-                return {
+            this.parcelMap = {};
+            this.parcels = [];
+            models.forEach((model) => {
+                this.parcelMap[model.id] = model;
+                this.parcels.push({
                     id: model.id,
                     name: model.name
-                };
+                });
             });
+        });
+    }
+
+    public onParcelChange() {
+        this.area = 0;
+        const selectedParcels = this.form.controls['parcels'].value;
+        selectedParcels.forEach(parcelId => {
+            this.area += this.parcelMap[parcelId].area;
         });
     }
 

@@ -6,8 +6,9 @@ import com.arobs.entity.TenantBranch;
 import com.arobs.entity.UserAccount;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.userAccount.UserAccountModel;
-import com.arobs.repository.UserAccountRepository;
 import com.arobs.security.SecurityUtil;
+import com.arobs.weather.snapshot.UserAccountRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

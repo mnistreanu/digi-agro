@@ -1,9 +1,10 @@
 package com.arobs.controller;
 
-import com.arobs.entity.Weather;
 import com.arobs.model.PayloadModel;
 import com.arobs.model.WeatherModel;
-import com.arobs.service.WeatherService;
+import com.arobs.weather.entity.WeatherSnapshot;
+import com.arobs.weather.snapshot.WeatherSnapshotService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,7 @@ import java.util.stream.Collectors;
 public class WeatherController {
 
     @Autowired
-    private WeatherService weatherService;
+    private WeatherSnapshotService weatherService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<PayloadModel> getWeathers(@RequestParam("parcelId") Long parcelId,
@@ -34,7 +35,7 @@ public class WeatherController {
         PayloadModel<WeatherModel> payloadModel = new PayloadModel<>();
 
         try {
-            List<Weather> weathers = weatherService.find(parcelId, dateFrom, dateTo);
+            List<WeatherSnapshot> weathers = weatherService.find(parcelId, dateFrom, dateTo);
             if (!weathers.isEmpty()) {
                 List<WeatherModel> models = weathers.stream().map(WeatherModel::new).collect(Collectors.toList());
                 WeatherModel[] payload = models.toArray(new WeatherModel[models.size()]);
@@ -52,37 +53,37 @@ public class WeatherController {
     }
 
 
-    @RequestMapping(value = "/history", method = RequestMethod.GET)
+    @RequestMapping(value = "/history", method = RequestMethod.GET) // TODO de revazut
     public ResponseEntity<PayloadModel> findWeatherHistory() {
         PayloadModel<WeatherModel> payloadModel = new PayloadModel<>();
 
-        WeatherModel[] wModels = new WeatherModel[2];
-
-        WeatherModel wm0 = new WeatherModel();
-        wm0.setDt(new Date());
-        wm0.setCountryId("md");
-        wm0.setCountyId("ns");
-        wm0.setTempMax(32);
-        wm0.setTempMin(17);
-        wm0.setWindSpeed(14.0);
-        wm0.setWindDeg(BigDecimal.valueOf(187.002));
-        wm0.setMain("clouds");
-        wm0.setHumidityAir(89);
-        wModels[0] = wm0;
-
-        WeatherModel wm1 = new WeatherModel();
-        wm1.setDt(new Date(System.currentTimeMillis() - 1000*60*60*4));
-        wm1.setCountryId("md");
-        wm1.setCountyId("ns");
-        wm1.setTempMax(31);
-        wm1.setTempMin(16);
-        wm1.setWindSpeed(18.0);
-        wm1.setWindDeg(BigDecimal.valueOf(180.002));
-        wm1.setMain("clouds");
-        wm1.setHumidityAir(91);
-        wModels[1] = wm1;
-
-        payloadModel.setPayload(wModels);
+//        WeatherModel[] wModels = new WeatherModel[2];
+//
+//        WeatherModel wm0 = new WeatherModel();
+//        wm0.setDt(new Date());
+//        wm0.setCountryId("md");
+//        wm0.setCountyId("ns");
+//        wm0.setTempMax(32);
+//        wm0.setTempMin(17);
+//        wm0.setWindSpeed(14.0);
+//        wm0.setWindDeg(BigDecimal.valueOf(187.002));
+//        wm0.setMain("clouds");
+//        wm0.setHumidityAir(89);
+//        wModels[0] = wm0;
+//
+//        WeatherModel wm1 = new WeatherModel();
+//        wm1.setDt(new Date(System.currentTimeMillis() - 1000*60*60*4));
+//        wm1.setCountryId("md");
+//        wm1.setCountyId("ns");
+//        wm1.setTempMax(31);
+//        wm1.setTempMin(16);
+//        wm1.setWindSpeed(18.0);
+//        wm1.setWindDeg(BigDecimal.valueOf(180.002));
+//        wm1.setMain("clouds");
+//        wm1.setHumidityAir(91);
+//        wModels[1] = wm1;
+//
+//        payloadModel.setPayload(wModels);
         return ResponseEntity.ok(payloadModel);
     }
 }

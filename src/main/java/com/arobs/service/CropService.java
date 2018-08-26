@@ -1,10 +1,8 @@
 package com.arobs.service;
 
 import com.arobs.entity.Crop;
-import com.arobs.entity.Tenant;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.CropModel;
-import com.arobs.model.tenant.TenantModel;
 import com.arobs.repository.CropRepository;
 import com.arobs.repository.custom.CropCustomRepository;
 import com.google.gson.Gson;
@@ -15,15 +13,10 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class CropService implements HasRepository<CropRepository> {

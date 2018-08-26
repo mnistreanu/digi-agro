@@ -42,7 +42,7 @@ export class CropComponent implements OnInit {
     ngOnInit() {
         this.setupLabels();
 
-        this.cropService.findCategories().subscribe(data => {
+        this.cropService.findCategoryItems().subscribe(data => {
             this.cropCategorySelectItems = data;
         });
 
