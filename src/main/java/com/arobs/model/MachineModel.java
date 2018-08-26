@@ -1,11 +1,10 @@
 package com.arobs.model;
 
 
+import com.arobs.entity.AgroWorkType;
 import com.arobs.entity.Machine;
-import com.arobs.entity.WorkType;
 import com.arobs.enums.MachineType;
 import com.arobs.enums.MotorType;
-import com.arobs.enums.WorkName;
 
 import java.util.Date;
 import java.util.List;
@@ -32,7 +31,7 @@ public class MachineModel {
     private Double speedOnRoad;
     private Double speedInWork;
 
-    private List<WorkName> workTypes;
+    private List<String> workTypes;
 
     public MachineModel() {
     }
@@ -58,7 +57,7 @@ public class MachineModel {
         speedInWork = entity.getSpeedInWork();
 
         if (entity.getWorkTypes() != null) {
-            workTypes = entity.getWorkTypes().stream().map(WorkType::getName).collect(Collectors.toList());
+            workTypes = entity.getWorkTypes().stream().map(AgroWorkType::getNameRo).collect(Collectors.toList());
         }
     }
 
@@ -166,11 +165,11 @@ public class MachineModel {
         this.speedInWork = speedInWork;
     }
 
-    public List<WorkName> getWorkTypes() {
+    public List<String> getWorkTypes() {
         return workTypes;
     }
 
-    public void setWorkTypes(List<WorkName> workTypes) {
+    public void setWorkTypes(List<String> workTypes) {
         this.workTypes = workTypes;
     }
 }

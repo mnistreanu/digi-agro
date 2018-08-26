@@ -8,8 +8,8 @@ import {ParcelModel} from '../../telemetry/parcel.model';
 })
 export class ParcelComponent implements OnInit {
 
-    private parcels: ParcelModel[];
-    private center: any;
+    parcels: ParcelModel[];
+    center: any;
 
     constructor() {
     }

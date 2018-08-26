@@ -15,12 +15,12 @@ public class ParcelModel {
     private String description;
 
     private List<BigDecimal[]> coordinates;
+    private String icon;
 
     public ParcelModel() {
     }
 
     public ParcelModel(Parcel entity) {
-
         id = entity.getId();
         cadasterNumber = entity.getCadasterNumber();
         landWorthinessPoints = entity.getLandWorthinessPoints();
@@ -83,5 +83,13 @@ public class ParcelModel {
 
     public void setCoordinates(List<BigDecimal[]> coordinates) {
         this.coordinates = coordinates;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 }

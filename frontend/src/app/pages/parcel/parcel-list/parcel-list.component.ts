@@ -19,29 +19,13 @@ export class ParcelListComponent implements OnInit {
 
     models: ParcelModel[] = [];
 
-    labelName: string;
-    labelCadasterNumber: string;
-    labelLandWorthinessPoints: string;
-    labelArea: string;
-    labelDescription: string;
-
     constructor(private parcelService: ParcelService,
                 private langService: LangService) {
     }
 
     ngOnInit() {
-        this.setupLabels();
         this.setupGrid();
     }
-
-    private setupLabels() {
-        this.langService.get('parcel.name').subscribe(msg => this.labelName = msg);
-        this.langService.get('parcel.cadaster-number').subscribe(msg => this.labelCadasterNumber = msg);
-        this.langService.get('parcel.land-worthiness-points').subscribe(msg => this.labelLandWorthinessPoints = msg);
-        this.langService.get('parcel.area').subscribe(msg => this.labelArea = msg);
-        this.langService.get('parcel.description').subscribe(msg => this.labelDescription = msg);
-    }
-
 
     private setupGrid() {
         this.options = <GridOptions>{};
@@ -60,37 +44,41 @@ export class ParcelListComponent implements OnInit {
 
         const headers: ColDef[] = [
             {
-                headerName: this.labelName,
+                headerName: 'parcel.name',
                 field: 'name',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: this.labelCadasterNumber,
+                headerName: 'parcel.cadaster-number',
                 field: 'cadasterNumber',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: this.labelLandWorthinessPoints,
+                headerName: 'parcel.land-worthiness-points',
                 field: 'landWorthinessPoints',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: this.labelArea,
+                headerName: 'parcel.area',
                 field: 'area',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: this.labelDescription,
+                headerName: 'parcel.description',
                 field: 'description',
                 width: 200,
                 minWidth: 200
             }
 
         ];
+
+        headers.forEach(h => {
+            this.langService.get(h.headerName).subscribe(m => h.headerName = m);
+        });
 
         return headers;
     }
@@ -104,18 +92,35 @@ export class ParcelListComponent implements OnInit {
 
             this.models.forEach((parcel) => {
                 parcel.fillColor = this.randomColor();
-                parcel.paths = [];
-                parcel.coordinates.forEach((c) => {
-                    parcel.paths.push({
+                parcel.icon = '/assets/img/crops/' + parcel.icon;
+                parcel.paths = parcel.coordinates.map((c) => {
+                    return {
                         lat: c[0],
                         lng: c[1]
-                    });
+                    };
                 });
+                parcel.center = this.getCenterOfPolygon(parcel.paths);
             });
-
 
             this.dataChanged.emit(this.models);
         });
+    }
+
+    private getCenterOfPolygon(paths) {
+
+        const pointCount = paths.length;
+        let lat = 0;
+        let lng = 0;
+
+        paths.forEach(point => {
+            lat += point.lat;
+            lng += point.lng;
+        });
+
+        return {
+            lat: lat / pointCount,
+            lng: lng / pointCount
+        };
     }
 
     public onGridReady() {
@@ -132,7 +137,7 @@ export class ParcelListComponent implements OnInit {
         return '#' + Math.random().toString(16).slice(-3);
     }
 
-    private onSelectionChanged(event) {
+    onSelectionChanged() {
         const model = this.options.api.getSelectedRows()[0];
         const firstCoord = model.paths[0];
         this.centerChanged.emit(firstCoord);

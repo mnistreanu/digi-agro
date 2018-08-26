@@ -48,7 +48,7 @@ public class Machine {
     @JoinTable(name = "machine_work_types",
             joinColumns = { @JoinColumn(name = "machine_id") },
             inverseJoinColumns = { @JoinColumn(name = "work_type_id") })
-    private List<WorkType> workTypes = new ArrayList<>();
+    private List<AgroWorkType> workTypes = new ArrayList<>();
 
     @Column(columnDefinition = "boolean default true")
     private boolean active = true;
@@ -151,11 +151,11 @@ public class Machine {
         this.speedInWork = speedInWork;
     }
 
-    public List<WorkType> getWorkTypes() {
+    public List<AgroWorkType> getWorkTypes() {
         return workTypes;
     }
 
-    public void setWorkTypes(List<WorkType> workTypes) {
+    public void setWorkTypes(List<AgroWorkType> workTypes) {
         this.workTypes = workTypes;
     }
 

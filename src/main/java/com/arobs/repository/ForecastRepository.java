@@ -17,19 +17,19 @@ public interface ForecastRepository extends JpaRepository<Forecast, Long> {
             "WHERE f.tenantId = :tenantId " +
             "AND f.deletedAt IS NULL " +
             "ORDER BY f.harvestingYear ")
-    List<Forecast> findActiveForecasts(@Param("tenantId") Long tenantId);
+    List<Forecast> findActive(@Param("tenantId") Long tenantId);
 
     @Query("SELECT f FROM Forecast f " +
             "WHERE f.tenantId = :tenantId " +
             "ORDER BY f.harvestingYear ")
-    List<Forecast> findAllForecasts(@Param("tenantId") Long tenantId);
+    List<Forecast> findAll(@Param("tenantId") Long tenantId);
 
-    //    @Modifying
-//    @Query("DELETE FROM Forecast r WHERE r.id = :id")
-//    void remove(@Param("id") Long id);
-//
     @Modifying
     @Query("UPDATE Forecast f SET f.name = :name, f.description = :description WHERE f.id = :id ")
     void update(@Param("id") Long id, @Param("name") String name, @Param("description") String description);
+
+    @Modifying
+    @Query("UPDATE Forecast f SET f.deletedAt = :now, f.deletedBy = :userId WHERE f.id = :id")
+    void remove(@Param("id") Long id, @Param("userId") Long userId, @Param("now") Date now);
 }
 

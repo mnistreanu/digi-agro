@@ -2,25 +2,18 @@ package com.arobs.model.forecast;
 
 import com.arobs.entity.Forecast;
 
-import java.util.List;
-
 public class ForecastModel {
-
-    private List<Long> parcels;
-
-    private Long cropCategoryId;
-    private Long cropId;
-    private Long cropVarietyId;
 
     private Long id;
     private String name;
     private String description;
     private Integer harvestingYear;
-    private Double unitPrice;
-    private String unitOfMeasure;
-    private Double quantityHectar;
 
-    private String currency;
+    private Long cropCategoryId;
+    private Long cropId;
+    private Long cropVarietyId;
+
+    private ForecastSnapshotModel snapshot;
 
     public ForecastModel() {
     }
@@ -28,8 +21,12 @@ public class ForecastModel {
     public ForecastModel(Forecast forecast) {
         this.id = forecast.getId();
         this.name = forecast.getName();
+        this.description = forecast.getDescription();
         this.harvestingYear = forecast.getHarvestingYear();
-        //TODO de pus restul campurilor
+
+        this.cropCategoryId = forecast.getCropCategoryId();
+        this.cropId = forecast.getCropId();
+        this.cropVarietyId = forecast.getCropVarietyId();
     }
 
     public Long getId() {
@@ -38,14 +35,6 @@ public class ForecastModel {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public List<Long> getParcels() {
-        return parcels;
-    }
-
-    public void setParcels(List<Long> parcels) {
-        this.parcels = parcels;
     }
 
     public Long getCropCategoryId() {
@@ -88,14 +77,6 @@ public class ForecastModel {
         this.description = description;
     }
 
-    public Double getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(Double unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
     public Integer getHarvestingYear() {
         return harvestingYear;
     }
@@ -104,27 +85,11 @@ public class ForecastModel {
         this.harvestingYear = harvestingYear;
     }
 
-    public String getUnitOfMeasure() {
-        return unitOfMeasure;
+    public ForecastSnapshotModel getSnapshot() {
+        return snapshot;
     }
 
-    public void setUnitOfMeasure(String unitOfMeasure) {
-        this.unitOfMeasure = unitOfMeasure;
-    }
-
-    public Double getQuantityHectar() {
-        return quantityHectar;
-    }
-
-    public void setQuantityHectar(Double quantityHectar) {
-        this.quantityHectar = quantityHectar;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setSnapshot(ForecastSnapshotModel snapshot) {
+        this.snapshot = snapshot;
     }
 }

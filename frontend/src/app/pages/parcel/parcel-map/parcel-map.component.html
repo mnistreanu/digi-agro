@@ -1,54 +1,69 @@
 <div widget class="card bottom-30">
-  <div class="card-header">
-    <span translate>geo.map</span>
-    <div class="widget-controls">
-      <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
-      <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
-      <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+    <div class="card-header">
+        <span translate>geo.map</span>
+        <div class="widget-controls">
+            <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
+            <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
+            <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+        </div>
     </div>
-  </div>
-  <div class="card-body widget-body">
+    <div class="card-body widget-body">
 
-    <ngui-map zoom="15" [center]="center" mapTypeId="terrain" scrollwheel="true">
-      <polygon *ngFor="let p of parcels"
-               (click)="onParcelClick(p, $event)"
-               (mouseover)="onParcelUp($event)"
-               (mouseout)="onParcelOut($event)"
-               [paths]="p.paths"
-               [strokeColor]="defaultStrokeColor"
-               [strokeOpacity]="0.8"
-               [strokeWeight]="2"
-               [fillColor]="p.fillColor"
-               [fillOpacity]="0.35"
-               [zIndex]="defaultZIndex">
-      </polygon>
-    </ngui-map>
+        <ngui-map zoom="15" [center]="center" mapTypeId="terrain" scrollwheel="true">
+            <polygon *ngFor="let p of models"
+                     (click)="onParcelClick(p, $event)"
+                     (mouseover)="onParcelUp($event)"
+                     (mouseout)="onParcelOut($event)"
+                     [paths]="p.paths"
+                     [strokeColor]="defaultStrokeColor"
+                     [strokeOpacity]="0.8"
+                     [strokeWeight]="2"
+                     [fillColor]="p.fillColor"
+                     [fillOpacity]="0.35"
+                     [zIndex]="defaultZIndex">
+            </polygon>
 
-  </div>
+            <marker *ngFor="let p of models"
+                    [position]="p.center"
+                    [label]="{
+                        fontSize: '10px',
+                        text: p.name
+                    }"
+                    [icon]="{
+                        url: p.icon,
+                        labelOrigin:  [16, -5],
+                        scaledSize: [32, 32],
+                        size: [32, 32]
+                    }">
+            </marker>
+
+        </ngui-map>
+
+    </div>
 </div>
 
 <div #infoBody>
-  <br>
-  <table class="table table-bordered table-hover small-table" *ngIf="parcel">
-    <tr>
-      <td translate>parcel.name</td>
-      <td>{{ parcel.name }}</td>
-    </tr>
-    <tr>
-      <td translate>parcel.cadaster-number</td>
-      <td>{{ parcel.cadasterNumber }}</td>
-    </tr>
-    <tr>
-      <td translate>parcel.land-worthiness-points</td>
-      <td>{{ parcel.landWorthinessPoints }}</td>
-    </tr>
-    <tr>
-      <td translate>parcel.area</td>
-      <td>{{ parcel.area }}</td>
-    </tr>
-    <tr>
-      <td translate>parcel.description</td>
-      <td>{{ parcel.description }}</td>
-    </tr>
-  </table>
+    <br>
+    <table class="table table-bordered table-hover small-table" *ngIf="model">
+        <tr>
+            <td translate>parcel.name</td>
+            <td>{{ model.name }}</td>
+        </tr>
+        <tr>
+            <td translate>parcel.cadaster-number</td>
+            <td>{{ model.cadasterNumber }}</td>
+        </tr>
+        <tr>
+            <td translate>parcel.land-worthiness-points</td>
+            <td>{{ model.landWorthinessPoints }}</td>
+        </tr>
+        <tr>
+            <td translate>parcel.area</td>
+            <td>{{ model.area }}</td>
+        </tr>
+        <tr>
+            <td translate>parcel.description</td>
+            <td>{{ model.description }}</td>
+        </tr>
+    </table>
 </div>

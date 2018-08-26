@@ -200,16 +200,12 @@ export class MenuService {
                 expanded: false,
                 subMenu: [
                     {
+                        title: 'nav.forecast-list',
+                        routerLink: 'forecasting',
+                    },
+                    {
                         title: 'nav.forecasting-charts',
                         routerLink: 'forecasting/charts',
-                    },
-                    {
-                        title: 'nav.harvesting-forecasting-form',
-                        routerLink: 'forecasting/harvesting-form',
-                    },
-                    {
-                        title: 'nav.harvesting-forecasting-factor',
-                        routerLink: 'forecasting/harvesting-factor',
                     },
                     {
                         title: 'nav.costs-forecasting',
