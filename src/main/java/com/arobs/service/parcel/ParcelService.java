@@ -1,4 +1,4 @@
-package com.arobs.service;
+package com.arobs.service.parcel;
 
 import com.arobs.entity.Parcel;
 import com.arobs.entity.ParcelGeometry;

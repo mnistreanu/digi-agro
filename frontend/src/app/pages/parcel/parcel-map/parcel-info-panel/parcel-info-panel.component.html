@@ -27,6 +27,47 @@
                 <td translate>info.description</td>
                 <td>{{ model.description }}</td>
             </tr>
+
+            <tr>
+                <td translate>crop.name</td>
+                <td>{{ model.cropNameRo }}</td>
+            </tr>
+
+            <tr>
+                <td translate>plantedAt</td>
+                <td>{{ model.plantedAt | date : 'dd/MM/yyyy' }}</td>
+            </tr>
+
+            <tr>
+                <td translate>rowsOnParcel</td>
+                <td>{{ model.rowsOnParcel }}</td>
+            </tr>
+
+            <tr>
+                <td translate>plantsOnRow</td>
+                <td>{{ model.plantsOnRow }}</td>
+            </tr>
+
+            <tr>
+                <td translate>spaceBetweenRows</td>
+                <td>{{ model.spaceBetweenRows }}</td>
+            </tr>
+
+            <tr>
+                <td translate>spaceBetweenPlants</td>
+                <td>{{ model.spaceBetweenPlants }}</td>
+            </tr>
+
+            <tr>
+                <td translate>lastWorkTypeRo</td>
+                <td>{{ model.lastWorkTypeRo }}</td>
+            </tr>
+
+            <tr>
+                <td translate>lastWorkDate</td>
+                <td>{{ model.lastWorkDate | date : 'dd/MM/yyyy' }}</td>
+            </tr>
+
         </table>
 
     </div>

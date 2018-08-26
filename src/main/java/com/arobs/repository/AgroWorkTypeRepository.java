@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AgroWorkTypeRepository extends JpaRepository<AgroWorkType, Integer> {
+public interface AgroWorkTypeRepository extends JpaRepository<AgroWorkType, Long> {
 
     @Query("SELECT t FROM AgroWorkType t " +
             "WHERE t.tenantId IS NULL " +

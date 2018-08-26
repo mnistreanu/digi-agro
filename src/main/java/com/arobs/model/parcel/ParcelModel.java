@@ -1,8 +1,9 @@
 package com.arobs.model.parcel;
 
-import com.arobs.entity.Parcel;
+import com.arobs.entity.*;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 public class ParcelModel {
@@ -15,7 +16,18 @@ public class ParcelModel {
     private String description;
 
     private List<BigDecimal[]> coordinates;
+
     private String icon;
+    private String cropNameRo, cropNameRu;
+
+    private Date plantedAt;
+    private Integer rowsOnParcel;
+    private Integer plantsOnRow;
+    private Integer spaceBetweenRows;
+    private Integer spaceBetweenPlants;
+
+    private String lastWorkTypeRo, lastWorkTypeRu;
+    private Date lastWorkDate;
 
     public ParcelModel() {
     }
@@ -27,6 +39,24 @@ public class ParcelModel {
         area = entity.getArea();
         name = entity.getName();
         description = entity.getDescription();
+    }
+
+    public void setupCropInfo(ParcelCrop parcelCrop, Crop crop) {
+        plantedAt = parcelCrop.getPlantedAt();
+        rowsOnParcel = parcelCrop.getRowsOnParcel();
+        plantsOnRow = parcelCrop.getPlantsOnRow();
+        spaceBetweenPlants = parcelCrop.getSpaceBetweenPlants();
+        spaceBetweenPlants = parcelCrop.getSpaceBetweenPlants();
+
+        icon = crop.getIcon();
+        cropNameRo = crop.getNameRo();
+        cropNameRu = crop.getNameRu();
+    }
+
+    public void setupLastCropWork(ParcelCropWork parcelCropWork, AgroWorkType workType) {
+        lastWorkDate = parcelCropWork.getCreatedAt();
+        lastWorkTypeRo = workType.getNameRo();
+        lastWorkTypeRu = workType.getNameRu();
     }
 
     public Long getId() {
@@ -91,5 +121,85 @@ public class ParcelModel {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public Date getPlantedAt() {
+        return plantedAt;
+    }
+
+    public void setPlantedAt(Date plantedAt) {
+        this.plantedAt = plantedAt;
+    }
+
+    public Integer getRowsOnParcel() {
+        return rowsOnParcel;
+    }
+
+    public void setRowsOnParcel(Integer rowsOnParcel) {
+        this.rowsOnParcel = rowsOnParcel;
+    }
+
+    public Integer getPlantsOnRow() {
+        return plantsOnRow;
+    }
+
+    public void setPlantsOnRow(Integer plantsOnRow) {
+        this.plantsOnRow = plantsOnRow;
+    }
+
+    public Integer getSpaceBetweenRows() {
+        return spaceBetweenRows;
+    }
+
+    public void setSpaceBetweenRows(Integer spaceBetweenRows) {
+        this.spaceBetweenRows = spaceBetweenRows;
+    }
+
+    public Integer getSpaceBetweenPlants() {
+        return spaceBetweenPlants;
+    }
+
+    public void setSpaceBetweenPlants(Integer spaceBetweenPlants) {
+        this.spaceBetweenPlants = spaceBetweenPlants;
+    }
+
+    public String getCropNameRo() {
+        return cropNameRo;
+    }
+
+    public void setCropNameRo(String cropNameRo) {
+        this.cropNameRo = cropNameRo;
+    }
+
+    public String getCropNameRu() {
+        return cropNameRu;
+    }
+
+    public void setCropNameRu(String cropNameRu) {
+        this.cropNameRu = cropNameRu;
+    }
+
+    public String getLastWorkTypeRo() {
+        return lastWorkTypeRo;
+    }
+
+    public void setLastWorkTypeRo(String lastWorkTypeRo) {
+        this.lastWorkTypeRo = lastWorkTypeRo;
+    }
+
+    public String getLastWorkTypeRu() {
+        return lastWorkTypeRu;
+    }
+
+    public void setLastWorkTypeRu(String lastWorkTypeRu) {
+        this.lastWorkTypeRu = lastWorkTypeRu;
+    }
+
+    public Date getLastWorkDate() {
+        return lastWorkDate;
+    }
+
+    public void setLastWorkDate(Date lastWorkDate) {
+        this.lastWorkDate = lastWorkDate;
     }
 }
