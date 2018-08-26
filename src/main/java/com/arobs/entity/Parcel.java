@@ -55,6 +55,10 @@ public class Parcel {
     @Column(name = "created_at")
     private Date createdAt;
 
+    @Column(name = "current_work_type_id")
+    private Long currentWorkTypeId;
+
+
     public Long getId() {
         return id;
     }
@@ -149,5 +153,13 @@ public class Parcel {
 
     public void setArea(Double area) {
         this.area = area;
+    }
+
+    public Long getCurrentWorkTypeId() {
+        return currentWorkTypeId;
+    }
+
+    public void setCurrentWorkTypeId(Long currentWorkTypeId) {
+        this.currentWorkTypeId = currentWorkTypeId;
     }
 }

@@ -20,7 +20,7 @@ public class MachineService implements HasRepository<MachineRepository> {
     @Autowired
     private OwnerService ownerService;
     @Autowired
-    private WorkTypeService workTypeService;
+    private AgroWorkTypeService workTypeService;
 
 
     public boolean validateIdentifier(Long id, String value) {
@@ -89,7 +89,7 @@ public class MachineService implements HasRepository<MachineRepository> {
         entity.setBrand(brandService.register(model.getBrand()));
 
         entity.getWorkTypes().clear();
-        entity.getWorkTypes().addAll(workTypeService.findByNames(model.getWorkTypes()));
+        entity.getWorkTypes().addAll(workTypeService.find());
     }
 
     @Override
