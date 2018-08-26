@@ -52,11 +52,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new CorsFilter();
     }
 	
-//	@Bean
-//	public LocationFileDownloader locationFileDownloader() {
-//		return new LocationFileDownloader();
-//	}
-
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
