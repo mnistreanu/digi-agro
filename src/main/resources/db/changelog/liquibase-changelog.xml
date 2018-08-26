@@ -637,13 +637,15 @@
 
     <changeSet id="insert-parcel-works-10-parcels-2018" author="mihai.gorgos" failOnError="true" runOnChange="true">
         <sql>
+            DELETE FROM parcel_crop_work;
+
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-11-28', 2, 31, 1); -- Aratul
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-11-30', 2, 31, 2); -- Lucrarea cu grapa
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-02-05', 2, 31, 3); -- Pragatirea pat germinativ
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-02-28', 2, 31, 4); -- Semanatul
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-04-04', 2, 31, 5); -- Pulverizare chimicate
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-08-08', 2, 31, 7); -- Cules roada
-            UPDATE parcel SET current_work_type_id=7 WHERE id=1;
+            UPDATE parcel SET last_work_type_id=7 WHERE id=1;
 
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-11-28', 2, 32, 1); -- Aratul
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-11-30', 2, 32, 2); -- Lucrarea cu grapa
@@ -651,56 +653,62 @@
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-03-03', 2, 32, 4); -- Semanatul
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-05-05', 2, 32, 5); -- Pulverizare chimicate
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-07-07', 2, 32, 5); -- Pulverizare chimicate
-            UPDATE parcel SET current_work_type_id=5 WHERE id=2;
+            UPDATE parcel SET last_work_type_id=5 WHERE id=2;
 
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-11-29', 2, 33, 1); -- Aratul
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-12-01', 2, 33, 2); -- Lucrarea cu grapa
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-03-05', 2, 33, 3); -- Pragatirea pat germinativ
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-03-06', 2, 33, 4); -- Semanatul
-            UPDATE parcel SET current_work_type_id=4 WHERE id=3;
+            UPDATE parcel SET last_work_type_id=4 WHERE id=3;
 
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-11-29', 2, 34, 1); -- Aratul
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-12-01', 2, 34, 2); -- Lucrarea cu grapa
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-03-05', 2, 34, 3); -- Pragatirea pat germinativ
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-03-08', 2, 34, 4); -- Semanatul
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-05-08', 2, 34, 5); -- Pulverizare chimicate
-            UPDATE parcel SET current_work_type_id=5 WHERE id=4;
+            UPDATE parcel SET last_work_type_id=5 WHERE id=4;
 
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-11-28', 4, 35, 1); -- Aratul
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-11-30', 4, 35, 2); -- Lucrarea cu grapa
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-02-05', 4, 35, 3); -- Pragatirea pat germinativ
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-02-28', 4, 35, 4); -- Semanatul
-            UPDATE parcel SET current_work_type_id=4 WHERE id=5;
+            UPDATE parcel SET last_work_type_id=4 WHERE id=5;
 
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-11-28', 4, 36, 1); -- Aratul
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-11-30', 4, 36, 2); -- Lucrarea cu grapa
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-02-01', 4, 36, 3); -- Pragatirea pat germinativ
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-03-21', 4, 36, 4); -- Semanatul
-            UPDATE parcel SET current_work_type_id=4 WHERE id=6;
+            UPDATE parcel SET last_work_type_id=4 WHERE id=6;
 
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-11-29', 4, 37, 1); -- Aratul
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-12-01', 4, 37, 2); -- Lucrarea cu grapa
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-02-05', 4, 37, 3); -- Pragatirea pat germinativ
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-03-06', 4, 37, 4); -- Semanatul
-            UPDATE parcel SET current_work_type_id=4 WHERE id=7;
+            UPDATE parcel SET last_work_type_id=4 WHERE id=7;
 
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-11-28', 2, 38, 1); -- Aratul
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-11-30', 2, 38, 2); -- Lucrarea cu grapa
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-02-05', 2, 38, 3); -- Pragatirea pat germinativ
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-02-24', 2, 38, 4); -- Semanatul
-            UPDATE parcel SET current_work_type_id=4 WHERE id=8;
+            UPDATE parcel SET last_work_type_id=4 WHERE id=8;
 
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-11-28', 2, 39, 1); -- Aratul
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-11-30', 2, 39, 2); -- Lucrarea cu grapa
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-02-01', 2, 39, 3); -- Pragatirea pat germinativ
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-02-26', 2, 39, 4); -- Semanatul
-            UPDATE parcel SET current_work_type_id=4 WHERE id=9;
+            UPDATE parcel SET last_work_type_id=4 WHERE id=9;
 
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-11-29', 2, 40, 1); -- Aratul
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-12-01', 2, 40, 2); -- Lucrarea cu grapa
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-02-05', 2, 40, 3); -- Pragatirea pat germinativ
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2018-02-28', 2, 40, 4); -- Semanatul
-            UPDATE parcel SET current_work_type_id=4 WHERE id=10;
+            UPDATE parcel SET last_work_type_id=4 WHERE id=10;
+        </sql>
+    </changeSet>
+
+    <changeSet id="parcel_drop_current_work_type_id" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <sql>
+            ALTER TABLE parcel DROP COLUMN current_work_type_id;
         </sql>
     </changeSet>
 

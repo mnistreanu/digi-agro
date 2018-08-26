@@ -55,8 +55,8 @@ public class Parcel {
     @Column(name = "created_at")
     private Date createdAt;
 
-    @Column(name = "current_work_type_id")
-    private Long currentWorkTypeId;
+    @Column(name = "last_work_type_id")
+    private Long lastWorkTypeId;
 
 
     public Long getId() {
@@ -155,11 +155,11 @@ public class Parcel {
         this.area = area;
     }
 
-    public Long getCurrentWorkTypeId() {
-        return currentWorkTypeId;
+    public Long getLastWorkTypeId() {
+        return lastWorkTypeId;
     }
 
-    public void setCurrentWorkTypeId(Long currentWorkTypeId) {
-        this.currentWorkTypeId = currentWorkTypeId;
+    public void setLastWorkTypeId(Long lastWorkTypeId) {
+        this.lastWorkTypeId = lastWorkTypeId;
     }
 }
