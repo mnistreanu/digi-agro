@@ -81,7 +81,9 @@ export class BrandListComponent implements OnInit {
 
     public adjustGridSize() {
         setTimeout(() => {
-            this.options.api.sizeColumnsToFit();
+            if (this.options && this.options.api) {
+                this.options.api.sizeColumnsToFit();
+            }
         }, 500);
     }
 

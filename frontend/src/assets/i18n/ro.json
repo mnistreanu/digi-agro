@@ -1,5 +1,6 @@
 {
 	"action": {
+		"add": "Adăuga",
 		"cancel": "Anulare",
 		"confirm": "Confirmare",
 		"create": "Creare",
@@ -25,11 +26,17 @@
 	"forecast": {
 		"additional_info": "Informații suplimnetare",
 		"currency": "Monedă",
+		"factor": "Factor",
+		"initial-forecast": "Prognoza inițială",
 		"harvest": "Recoltă",
 		"harvesting_year": "Anul recoltei",
 		"hectar": "hectar",
 		"name": "Denumire prognoză",
 		"selling_price": "Preț de vînzare",
+		"summary": "Total prognozat",
+		"summary-amount": "Cantitatea de recoltă",
+		"summary-price": "Preț",
+		"quantity": "Сantitate",
 		"unit_of_measure": "Unitatea de măsură"
 	},
 	"general": {
@@ -44,7 +51,9 @@
 		"village-city": "Sat/Oraș"
 	},
 	"info": {
+		"creation-time": "Timpul de creație",
 		"description": "Descriere",
+		"information": "Informație",
 		"name": "Denumire"
 	},
 	"language": {
@@ -69,6 +78,7 @@
 		"dashboard": "Dashboard",
 		"forecasting-charts": "Diagrame de prognoză",
 		"forecasts": "Prognoze",
+		"forecast-list": "Lista",
 		"harvesting-forecasting": "Prognoză recoltă",
 		"harvesting-forecasting-factor": "Prognoză recoltă FACTOR",
 		"harvesting-forecasting-form": "Prognoză recoltă FORM",

@@ -20,7 +20,7 @@ import org.jdto.annotation.Source;
 @Table(name = "weather_forecast_daily")
 public class WeatherForecastDaily {
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name="id")
     @DTOTransient
     private Long id;

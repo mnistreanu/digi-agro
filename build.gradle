@@ -7,13 +7,33 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath ("net.saliman:gradle-cobertura-plugin:2.5.4")
 	}
+}
+
+plugins {
+  id "net.saliman.cobertura" version "2.5.4"
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+//apply plugin: 'net.saliman.cobertura'
+
+apply plugin: net.saliman.gradle.plugin.cobertura.CoberturaPlugin
+
+def jobpath = new File(buildDir.toString() + "/reports/cobertura")
+mkdir jobpath
+
+cobertura {
+    coverageFormats = ['html', 'xml']               
+    coverageIgnores = ['org.slf4j.Logger.*']    //only an example to skip instrumentation
+    coverageReportDir = jobpath
+}
+
+test.finalizedBy(project.tasks.cobertura)
+logger.info('DONE Configuring Cobertura Plugin')
 
 group = 'com.arobs'
 version = '0.0.1-SNAPSHOT'
@@ -21,6 +41,9 @@ sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+	maven {
+      url "https://plugins.gradle.org/m2/"
+    }
 }
 
 test {
@@ -42,7 +65,7 @@ dependencies {
     compile('commons-lang:commons-lang:2.6')
 
 	runtime('org.postgresql:postgresql')
-	compile 'mysql:mysql-connector-java'
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile ("net.saliman:gradle-cobertura-plugin:2.5.4")
 }

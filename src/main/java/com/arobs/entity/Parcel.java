@@ -55,6 +55,10 @@ public class Parcel {
     @Column(name = "created_at")
     private Date createdAt;
 
+    @Column(name = "last_work_type_id")
+    private Long lastWorkTypeId;
+
+
     public Long getId() {
         return id;
     }
@@ -149,5 +153,13 @@ public class Parcel {
 
     public void setArea(Double area) {
         this.area = area;
+    }
+
+    public Long getLastWorkTypeId() {
+        return lastWorkTypeId;
+    }
+
+    public void setLastWorkTypeId(Long lastWorkTypeId) {
+        this.lastWorkTypeId = lastWorkTypeId;
     }
 }

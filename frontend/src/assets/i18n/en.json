@@ -1,5 +1,6 @@
 {
 	"action": {
+		"add": "Add",
 		"cancel": "Cancel",
 		"confirm": "Confirm",
 		"create": "Add",
@@ -25,11 +26,17 @@
 	"forecast": {
 		"additional_info": "Additional information",
 		"currency": "Currency",
+		"factor": "Factor",
+		"initial-forecast": "Initial Forecast",
 		"harvest": "Harvest",
 		"harvesting_year": "Harvesting year",
-		"hectar": "hectar",
+		"hectar": "hectare",
 		"name": "Forecast name",
 		"selling_price": "Selling price",
+		"summary": "Forecast Summary",
+		"summary-amount": "Amount of harvest",
+		"summary-price": "Price",
+		"quantity": "Quantity",
 		"unit_of_measure": "Unit of measure"
 	},
 	"general": {
@@ -44,7 +51,9 @@
 		"village-city": "Village/City"
 	},
 	"info": {
+		"creation-time": "Creation Time",
 		"description": "Description",
+		"information": "Information",
 		"name": "Name"
 	},
 	"language": {
@@ -69,6 +78,7 @@
 		"dashboard": "Dashboard",
 		"forecasting-charts": "Forecasting charts",
 		"forecasts": "Forecasts",
+		"forecast-list": "List",
 		"harvesting-forecasting": "Harvesting forecasting",
 		"harvesting-forecasting-factor": "Harvesting forecasting FACTOR",
 		"harvesting-forecasting-form": "Harvesting forecasting FORM",

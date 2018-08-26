@@ -22,17 +22,20 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.arobs.scheduler.WeatherForecastDailyRepository;
+import com.arobs.weather.entity.ForecastDailyItem;
+import com.arobs.weather.entity.ForecastHourItem;
 import com.arobs.weather.entity.WeatherForecastDaily;
-import com.arobs.weather.entity.WeatherLocation;
+import com.arobs.weather.entity.WeatherForecastHour;
+import com.arobs.weather.forecast.daily.WeatherForecastDailyJson;
+import com.arobs.weather.forecast.daily.WeatherForecastDailyRepository;
 import com.arobs.weather.forecast.hour.WeatherForecastHourJson;
-import com.arobs.weather.location.WeatherLocationJson;
+import com.arobs.weather.forecast.hour.WeatherForecastHourRepository;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.CollectionType;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -43,9 +46,10 @@ public class WeatherForecastRepositoryTest {
 
 	@Autowired
 	private TestEntityManager entityManager;
-
 	@Autowired
-	public WeatherForecastDailyRepository repository;
+	public WeatherForecastHourRepository hourRepository;
+	@Autowired
+	public WeatherForecastDailyRepository dailyRepository;
 	
 	@Test
 	public void testEntityManager() {
@@ -54,53 +58,54 @@ public class WeatherForecastRepositoryTest {
 	
 	@Test
 	public void testFindAll() {
-		List<WeatherForecastDaily> weatherForecasts = repository.findAll();
+		List<WeatherForecastDaily> weatherForecasts = dailyRepository.findAll();
 		assertNotNull(weatherForecasts);
 	}
 	
 	@Test
 	public void testFindOne() {
-		List<WeatherForecastDaily> weatherForecasts = repository.findAll();
+		List<WeatherForecastDaily> weatherForecasts = dailyRepository.findAll();
 		assertNotNull(weatherForecasts);
 		assertTrue(weatherForecasts.size() > 0);
 		Long id = weatherForecasts.get(0).getId();
-		WeatherForecastDaily forecast = repository.findOne(id);
+		WeatherForecastDaily forecast = dailyRepository.findOne(id);
 		assertEquals("Moscow", forecast.getName());
 	}
 	
 	@Test
-//	@Ignore
-	public void testDTOBinder() throws JsonParseException, JsonMappingException, IOException {
-		Resource resource = new ClassPathResource("locations.json");
-		File file = resource.getFile(); 
-		ObjectMapper objectMapper = new ObjectMapper();
-		CollectionType listType = objectMapper.getTypeFactory().constructCollectionType(List.class, WeatherLocationJson.class);
-		List<WeatherLocationJson> weatherLocations = objectMapper.readValue(file,  listType);
-		DTOBinder binder = DTOBinderFactory.getBinder();
-		List<WeatherLocation> locations = binder.bindFromBusinessObjectList(WeatherLocation.class, weatherLocations);
-		assertNotNull(locations);
-		int count = 0; //TODO de restabilit
-//		for (WeatherLocation location : locations) {
-//			if (location.getCountryCode().equalsIgnoreCase("md") || location.getCountryCode().equalsIgnoreCase("ro")) {
-//				repository.save(location);
-//				count++;
-//			}
-//		}
-		logger.info("Au fost salvate {} articole", count);
-	}
-	
-	@Test //TODO de restabilit
-//	@Ignore
+	@Rollback(false)
 	public void testWeatherHourForecast() throws JsonParseException, JsonMappingException, IOException {
 		Resource resource = new ClassPathResource("forecast.hour.json");
 		File file = resource.getFile(); 
 		ObjectMapper objectMapper = new ObjectMapper();
-//		CollectionType listType = objectMapper.getTypeFactory().constructCollectionType(List.class, WeatherHourForecast.class);
-//		List<WeatherHourForecast> weatherHourForecasts = objectMapper.readValue(file,  listType);
 		WeatherForecastHourJson weatherHourForecasts = objectMapper.readValue(file,  WeatherForecastHourJson.class);
 		DTOBinder binder = DTOBinderFactory.getBinder();
-		WeatherForecastHourJson hourForecasts = binder.bindFromBusinessObject(WeatherForecastHourJson.class, weatherHourForecasts);
-		assertNotNull(hourForecasts);
+		WeatherForecastHour hourForecast = binder.bindFromBusinessObject(WeatherForecastHour.class, weatherHourForecasts);
+		assertNotNull(hourForecast);
+		for (ForecastHourItem forecastHourItem : hourForecast.getForecastItems()) {
+			forecastHourItem.setForecastHour(hourForecast);
+		}
+		WeatherForecastHour savedHourForecast = hourRepository.save(hourForecast);
+		assertNotNull(savedHourForecast.getId());
+		logger.debug("ID prognoza salvata: {}", savedHourForecast.getId());
+	}
+	
+	@Test
+	@Rollback(false)
+	public void testWeatherDailyForecast() throws JsonParseException, JsonMappingException, IOException {
+		Resource resource = new ClassPathResource("forecast.daily.json");
+		File file = resource.getFile(); 
+		ObjectMapper objectMapper = new ObjectMapper();
+		WeatherForecastDailyJson weatherDailyForecast = objectMapper.readValue(file,  WeatherForecastDailyJson.class);
+		DTOBinder binder = DTOBinderFactory.getBinder();
+		WeatherForecastDaily dailyForecast = binder.bindFromBusinessObject(WeatherForecastDaily.class, weatherDailyForecast);
+		assertNotNull(dailyForecast);
+		for (ForecastDailyItem forecastDailyItem : dailyForecast.getForecastItems()) {
+			forecastDailyItem.setForecastDaily(dailyForecast);
+		}
+		WeatherForecastDaily savedDailyForecast = dailyRepository.save(dailyForecast);
+		assertNotNull(savedDailyForecast.getId());
+		logger.debug("ID prognoza salvata: {}", savedDailyForecast.getId());
 	}
 	
 }

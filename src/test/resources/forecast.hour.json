@@ -77,10 +77,10 @@
   "city": {
     "id": 524901,
     "name": "Moscow",
+    "country": "RU",
     "coord": {
       "lat": 55.7522,
       "lon": 37.6156
-    },
-    "country": "RU"
+    }
   }
 }

@@ -20,6 +20,9 @@ public class Forecast {
     @Column(name = "harvesting_year")
     private Integer harvestingYear;
 
+    @Column(name = "crop_category_id")
+    private Long cropCategoryId;
+
     @Column(name = "crop_id")
     private Long cropId;
 
@@ -130,5 +133,13 @@ public class Forecast {
 
     public void setCropVarietyId(Long cropVarietyId) {
         this.cropVarietyId = cropVarietyId;
+    }
+
+    public Long getCropCategoryId() {
+        return cropCategoryId;
+    }
+
+    public void setCropCategoryId(Long cropCategoryId) {
+        this.cropCategoryId = cropCategoryId;
     }
 }

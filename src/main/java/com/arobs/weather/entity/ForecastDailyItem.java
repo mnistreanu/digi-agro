@@ -24,11 +24,11 @@ import com.arobs.weather.forecast.daily.Weather;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@Table(name = "forecast_daily_item")
+@Table(name = "weather_forecast_daily_item")
 public class ForecastDailyItem {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name="id")
     @DTOTransient
     private Long id;

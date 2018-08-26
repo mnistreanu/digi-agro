@@ -20,7 +20,7 @@ import org.jdto.annotation.Source;
 @Table(name = "weather_forecast_hour")
 public class WeatherForecastHour {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Long id;
     @Column(name="code")

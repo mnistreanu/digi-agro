@@ -26,6 +26,21 @@ public class ParcelCrop {
     @Column(name = "crop_variety_id")
     private Long cropVarietyId;
 
+    @Column(name = "planted_at")
+    private Date plantedAt;
+
+    @Column(name = "rows_on_parcel")
+    private Integer rowsOnParcel;
+
+    @Column(name = "plants_on_rows")
+    private Integer plantsOnRow;
+
+    @Column(name = "space_between_rows")
+    private Integer spaceBetweenRows;
+
+    @Column(name = "space_between_plants")
+    private Integer spaceBetweenPlants;
+
     @Column(name = "created_at")
     private Date createdAt;
 
@@ -70,6 +85,38 @@ public class ParcelCrop {
         this.cropVarietyId = cropVarietyId;
     }
 
+    public Integer getRowsOnParcel() {
+        return rowsOnParcel;
+    }
+
+    public void setRowsOnParcel(Integer rowsOnParcel) {
+        this.rowsOnParcel = rowsOnParcel;
+    }
+
+    public Integer getPlantsOnRow() {
+        return plantsOnRow;
+    }
+
+    public void setPlantsOnRow(Integer plantsOnRow) {
+        this.plantsOnRow = plantsOnRow;
+    }
+
+    public Integer getSpaceBetweenRows() {
+        return spaceBetweenRows;
+    }
+
+    public void setSpaceBetweenRows(Integer spaceBetweenRows) {
+        this.spaceBetweenRows = spaceBetweenRows;
+    }
+
+    public Integer getSpaceBetweenPlants() {
+        return spaceBetweenPlants;
+    }
+
+    public void setSpaceBetweenPlants(Integer spaceBetweenPlants) {
+        this.spaceBetweenPlants = spaceBetweenPlants;
+    }
+
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -100,5 +147,13 @@ public class ParcelCrop {
 
     public void setDeletedBy(Long deletedBy) {
         this.deletedBy = deletedBy;
+    }
+
+    public Date getPlantedAt() {
+        return plantedAt;
+    }
+
+    public void setPlantedAt(Date plantedAt) {
+        this.plantedAt = plantedAt;
     }
 }

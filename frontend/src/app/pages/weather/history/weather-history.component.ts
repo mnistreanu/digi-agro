@@ -122,7 +122,7 @@ export class WeatherHistoryComponent implements OnInit {
                 model.temperature = data.tempMax + '\u00B0C / ' + data.tempMin + '\u00B0C';
                 model.condition = data.main; //TODO de tradus din resurse, de exemplu: clouds, rain
                 model.location = 'Nisporeni';
-                model.humidity = data.humidityAir + ' %';
+                model.humidity = data.humidity + ' %';
                 model.wind = data.windSpeed + ' km/h NW';
                 return model;
             });
@@ -136,7 +136,9 @@ export class WeatherHistoryComponent implements OnInit {
 
     public adjustGridSize() {
         setTimeout(() => {
-            this.options.api.sizeColumnsToFit();
+            if (this.options && this.options.api) {
+                this.options.api.sizeColumnsToFit();
+            }
         }, 500);
     }
 

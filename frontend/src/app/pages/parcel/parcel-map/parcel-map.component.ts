@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ParcelModel} from '../../telemetry/parcel.model';
 
 @Component({
@@ -6,9 +6,9 @@ import {ParcelModel} from '../../telemetry/parcel.model';
     templateUrl: './parcel-map.component.html',
     styleUrls: ['./parcel-map.component.scss']
 })
-export class ParcelMapComponent implements OnInit {
+export class ParcelMapComponent implements OnInit, OnChanges {
 
-    @Input() parcels: any[];
+    @Input() models: any[];
     @Input() center: any;
 
     @ViewChild('infoBody') infoBody: ElementRef;
@@ -16,51 +16,52 @@ export class ParcelMapComponent implements OnInit {
     private defaultStrokeColor = '#FFC107';
     private defaultZIndex = 1;
 
-    private parcel: ParcelModel;
-    private infoWindow;
+    private model: ParcelModel;
 
     constructor() {
     }
 
     ngOnInit() {
         this.setupCenter();
-        this.parcels = [];
+        this.models = [];
     }
 
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes['models']) {
+            this.setupCenter();
+        }
+    }
 
     private setupCenter() {
-        this.center = 'Moldova, Chisinau';
-    }
-
-    private onParcelClick(parcel, event) {
-        this.parcel = parcel;
-
-        if (this.infoWindow == null) {
-            this.infoWindow = new google.maps.InfoWindow({
-                disableAutoPan: true
-            });
+        if (this.models && this.models.length > 0) {
+            this.center = this.models[0].paths[0];
         }
-
-        this.infoWindow.setContent(this.infoBody.nativeElement);
-        this.infoWindow.setPosition({
-            lat: event.latLng.lat(),
-            lng: event.latLng.lng()
-        });
-        this.infoWindow.open(event.target.map);
+        else {
+            this.center = 'Moldova, Chisinau';
+        }
     }
 
-    private onParcelUp(event) {
+    onParcelClick(model) {
+        this.model = model;
+    }
+
+    onParcelUp(event) {
         event.target.setOptions({
             strokeColor: '#F00',
             zIndex: this.defaultZIndex + 1
         });
     }
 
-    private onParcelOut(event) {
+    onParcelOut(event) {
         event.target.setOptions({
             strokeColor: this.defaultStrokeColor,
             zIndex: this.defaultZIndex
         });
+    }
+
+    closeParcelInfo() {
+        this.model = null;
     }
 
 }

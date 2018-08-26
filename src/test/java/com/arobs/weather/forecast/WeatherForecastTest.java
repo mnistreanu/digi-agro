@@ -1,5 +1,6 @@
 package com.arobs.weather.forecast;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
@@ -14,8 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-import com.arobs.weather.entity.WeatherForecastHour;
 import com.arobs.weather.entity.WeatherLocation;
+import com.arobs.weather.entity.WeatherSnapshot;
 import com.arobs.weather.location.WeatherLocationJson;
 import com.arobs.weather.snapshot.WeatherSnapshotJson;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -42,18 +43,17 @@ public class WeatherForecastTest {
 	}
 	
 	@Test
-	public void testForecasts() throws JsonParseException, JsonMappingException, IOException {
+	public void testSnapshot() throws JsonParseException, JsonMappingException, IOException {
 		Resource resource = new ClassPathResource(SNAPSHOT_JSON);
-		File file = resource.getFile(); 
+		File file = resource.getFile();
+		
 		ObjectMapper objectMapper = new ObjectMapper();
+		WeatherSnapshotJson jsonSnapshot = objectMapper.readValue(file,  WeatherSnapshotJson.class);
 		
-		WeatherSnapshotJson weatherForecasts = objectMapper.readValue(file,  WeatherSnapshotJson.class);
-
-		
-		WeatherForecastHour forecasts = binder.bindFromBusinessObject(WeatherForecastHour.class, weatherForecasts);
-		assertNotNull(forecasts);
-		logger.info("Au fost salvate {} articole", forecasts);
-		logger.info("Au fost salvate {} articole", weatherForecasts);
+		WeatherSnapshot entitySnapshot = binder.bindFromBusinessObject(WeatherSnapshot.class, jsonSnapshot);
+		assertNotNull(jsonSnapshot);
+		assertNotNull(entitySnapshot);
+		assertEquals(jsonSnapshot.getId(), entitySnapshot.getOpenweatherId());
 	}
 	
 }
