@@ -17,7 +17,6 @@ export class ParcelMapComponent implements OnInit, OnChanges {
     private defaultZIndex = 1;
 
     private model: ParcelModel;
-    private infoWindow;
 
     constructor() {
     }
@@ -43,21 +42,8 @@ export class ParcelMapComponent implements OnInit, OnChanges {
         }
     }
 
-    onParcelClick(model, event) {
+    onParcelClick(model) {
         this.model = model;
-
-        if (this.infoWindow == null) {
-            this.infoWindow = new google.maps.InfoWindow({
-                disableAutoPan: true
-            });
-        }
-
-        this.infoWindow.setContent(this.infoBody.nativeElement);
-        this.infoWindow.setPosition({
-            lat: event.latLng.lat(),
-            lng: event.latLng.lng()
-        });
-        this.infoWindow.open(event.target.map);
     }
 
     onParcelUp(event) {
@@ -72,6 +58,10 @@ export class ParcelMapComponent implements OnInit, OnChanges {
             strokeColor: this.defaultStrokeColor,
             zIndex: this.defaultZIndex
         });
+    }
+
+    closeParcelInfo() {
+        this.model = null;
     }
 
 }

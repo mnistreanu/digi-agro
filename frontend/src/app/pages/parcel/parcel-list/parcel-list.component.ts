@@ -44,7 +44,7 @@ export class ParcelListComponent implements OnInit {
 
         const headers: ColDef[] = [
             {
-                headerName: 'parcel.name',
+                headerName: 'info.name',
                 field: 'name',
                 width: 200,
                 minWidth: 200
@@ -68,7 +68,7 @@ export class ParcelListComponent implements OnInit {
                 minWidth: 200
             },
             {
-                headerName: 'parcel.description',
+                headerName: 'info.description',
                 field: 'description',
                 width: 200,
                 minWidth: 200
@@ -129,7 +129,9 @@ export class ParcelListComponent implements OnInit {
 
     public adjustGridSize() {
         setTimeout(() => {
-            this.options.api.sizeColumnsToFit();
+            if (this.options && this.options.api) {
+                this.options.api.sizeColumnsToFit();
+            }
         }, 500);
     }
 
