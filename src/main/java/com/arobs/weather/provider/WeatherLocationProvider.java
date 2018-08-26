@@ -1,9 +1,10 @@
-package com.arobs.weather.location;
+package com.arobs.weather.provider;
 
 import com.arobs.interfaces.HasRepository;
 import com.arobs.weather.GZipFile;
-import com.arobs.weather.LocationFileDownloader;
 import com.arobs.weather.entity.WeatherLocation;
+import com.arobs.weather.location.WeatherLocationJson;
+import com.arobs.weather.location.WeatherLocationRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 
@@ -14,10 +15,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,8 +47,11 @@ import java.util.stream.Collectors;
  * @see com.arobs.weather.entity.WeatherLocation
  */
 @Service
-public class WeatherLocationService implements HasRepository<WeatherLocationRepository> {
-	private static final Logger logger = LoggerFactory.getLogger(WeatherLocationService.class);
+public class WeatherLocationProvider implements HasRepository<WeatherLocationRepository> {
+	private static final Logger logger = LoggerFactory.getLogger(WeatherLocationProvider.class);
+	private static final String FILE_URL = "http://bulk.openweathermap.org/sample/city.list.json.gz";
+	private static final String LOCAL_FILE = "r:/digi-agro/city.list.json.gz";
+
 	
 	@Value("${weather.location.url}")
 	private String weatherLocationUrl;
@@ -43,8 +59,6 @@ public class WeatherLocationService implements HasRepository<WeatherLocationRepo
 	private String locationZipFile;
 	@Value("${location.json.file}")
 	private String locationJsonFile;
-	@Autowired
-	private LocationFileDownloader fileDownloader;
 	@Autowired
 	private GZipFile zipFileExtractor;
     @Autowired
@@ -56,7 +70,7 @@ public class WeatherLocationService implements HasRepository<WeatherLocationRepo
 	private ObjectMapper objectMapper = new ObjectMapper();
 	
     public int synchronizeLocations() throws IOException {
-    	String downloadFile = fileDownloader.downloadFile(weatherLocationUrl, locationZipFile);
+    	String downloadFile = downloadFile(weatherLocationUrl, locationZipFile);
     	logger.debug("Fisierul {} a fost descarcat", downloadFile);
     	String unzipedFile = zipFileExtractor.unzip(locationZipFile, locationJsonFile);
     	logger.debug("Fisierul {} a fost creat", unzipedFile);
@@ -81,6 +95,40 @@ public class WeatherLocationService implements HasRepository<WeatherLocationRepo
 		return locationsEntities.size();
     }
 
+	/**
+	 * Download ZIP Location de pe OpenWeather 
+	 * @param fileUrl
+	 * @param localFilePath
+	 * @return - returneaza numele fisierului salvat
+	 * @throws IOException
+	 */
+	public String downloadFile(String fileUrl, String localFilePath) throws IOException {
+		if (StringUtils.isEmpty(fileUrl)) {
+			fileUrl = FILE_URL;
+		}
+		if (StringUtils.isEmpty(localFilePath)) {
+			localFilePath = LOCAL_FILE;
+		}
+	    RestTemplate restTemplate = new RestTemplate();
+	    restTemplate.getMessageConverters().add(new ByteArrayHttpMessageConverter());
+
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.setAccept(Arrays.asList(MediaType.APPLICATION_OCTET_STREAM));
+
+	    HttpEntity<String> entity = new HttpEntity<String>(headers);
+
+	    ResponseEntity<byte[]> response = restTemplate.exchange(fileUrl, HttpMethod.GET, entity, byte[].class, "1");
+
+	    if (response.getStatusCode() == HttpStatus.OK) {
+	        Files.write(Paths.get(localFilePath), response.getBody());
+	        logger.debug("Fisierul {} a fost salvat", localFilePath);
+	        return localFilePath;
+	    } else {
+	        logger.error("Fisierul {} nu a putut fi citit", localFilePath);
+	        return "Error";
+	    }
+	}
+	
     public List<WeatherLocation> find(String countyCode, String name) {
         return getRepository().find(countyCode, '%' + name + '%');
     }

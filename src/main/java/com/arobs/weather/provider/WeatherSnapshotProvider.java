@@ -1,4 +1,4 @@
-package com.arobs.weather.snapshot;
+package com.arobs.weather.provider;
 
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.WeatherModel;
@@ -6,6 +6,7 @@ import com.arobs.repository.WeatherSnapshotRepository;
 import com.arobs.weather.entity.WeatherLocation;
 import com.arobs.weather.entity.WeatherSnapshot;
 import com.arobs.weather.location.WeatherLocationRepository;
+import com.arobs.weather.snapshot.WeatherSnapshotJson;
 
 import org.jdto.DTOBinder;
 import org.slf4j.Logger;
@@ -21,10 +22,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//http://api.openweathermap.org/data/2.5/weather?id=618510&appid=101db96830e0a1520f5274ed6c10b742
 @Service
-public class WeatherSnapshotService implements HasRepository<WeatherSnapshotRepository> {
-	private static final Logger logger = LoggerFactory.getLogger(WeatherSnapshotService.class);
+public class WeatherSnapshotProvider implements HasRepository<WeatherSnapshotRepository> {
+	private static final Logger logger = LoggerFactory.getLogger(WeatherSnapshotProvider.class);
 	
 	@Value("${weather.snapshot.url}")
 	private String weatherSnapshotUrl;

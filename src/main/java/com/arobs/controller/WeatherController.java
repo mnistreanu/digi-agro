@@ -3,7 +3,7 @@ package com.arobs.controller;
 import com.arobs.model.PayloadModel;
 import com.arobs.model.WeatherModel;
 import com.arobs.weather.entity.WeatherSnapshot;
-import com.arobs.weather.snapshot.WeatherSnapshotService;
+import com.arobs.weather.provider.WeatherSnapshotProvider;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class WeatherController {
 
     @Autowired
-    private WeatherSnapshotService weatherService;
+    private WeatherSnapshotProvider weatherSnapshotProvider;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<PayloadModel> getWeathers(@RequestParam("parcelId") Long parcelId,
@@ -35,7 +35,7 @@ public class WeatherController {
         PayloadModel<WeatherModel> payloadModel = new PayloadModel<>();
 
         try {
-            List<WeatherSnapshot> weathers = weatherService.find(parcelId, dateFrom, dateTo);
+            List<WeatherSnapshot> weathers = weatherSnapshotProvider.find(parcelId, dateFrom, dateTo);
             if (!weathers.isEmpty()) {
                 List<WeatherModel> models = weathers.stream().map(WeatherModel::new).collect(Collectors.toList());
                 WeatherModel[] payload = models.toArray(new WeatherModel[models.size()]);

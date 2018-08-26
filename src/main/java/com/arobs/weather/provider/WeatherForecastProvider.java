@@ -1,4 +1,4 @@
-package com.arobs.scheduler;
+package com.arobs.weather.provider;
 
 import com.arobs.interfaces.HasRepository;
 import com.arobs.weather.entity.ForecastDailyItem;
@@ -7,7 +7,9 @@ import com.arobs.weather.entity.WeatherForecastDaily;
 import com.arobs.weather.entity.WeatherForecastHour;
 import com.arobs.weather.entity.WeatherLocation;
 import com.arobs.weather.forecast.daily.WeatherForecastDailyJson;
+import com.arobs.weather.forecast.daily.WeatherForecastDailyRepository;
 import com.arobs.weather.forecast.hour.WeatherForecastHourJson;
+import com.arobs.weather.forecast.hour.WeatherForecastHourRepository;
 import com.arobs.weather.location.WeatherLocationRepository;
 
 import org.jdto.DTOBinder;
@@ -22,8 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class WeatherForecastService implements HasRepository<WeatherLocationRepository> {
-	private static final Logger logger = LoggerFactory.getLogger(WeatherForecastService.class);
+public class WeatherForecastProvider implements HasRepository<WeatherLocationRepository> {
+	private static final Logger logger = LoggerFactory.getLogger(WeatherForecastProvider.class);
 	@Value("${weather.forecast.hour.url}")
 	private String weatherForecastHourUrl;
 	@Value("${weather.forecast.hour.appid}")

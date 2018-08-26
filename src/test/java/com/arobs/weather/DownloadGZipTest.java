@@ -8,18 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.arobs.weather.provider.WeatherLocationProvider;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DownloadGZipTest {
 
 	@Autowired
-	public LocationFileDownloader downloader;
+	public WeatherLocationProvider weatherLocationProvider;
 	@Autowired
 	public GZipFile zipFile; 
 	
 	@Test
 	public void downloadFile() throws IOException {
-		downloader.downloadFile(null, null);
+		weatherLocationProvider.downloadFile(null, null);
 	}
 	
 	@Test

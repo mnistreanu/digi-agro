@@ -11,57 +11,48 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.arobs.scheduler.WeatherForecastService;
-import com.arobs.weather.LocationFileDownloader;
-import com.arobs.weather.location.WeatherLocationService;
-import com.arobs.weather.snapshot.WeatherSnapshotService;
+import com.arobs.weather.provider.WeatherForecastProvider;
+import com.arobs.weather.provider.WeatherLocationProvider;
+import com.arobs.weather.provider.WeatherSnapshotProvider;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ApplicationTests {
 	@Autowired
-	private LocationFileDownloader downloader;
-	
-	@Autowired
-	private WeatherLocationService weatherLocationService;
+	private WeatherLocationProvider weatherLocationProvider;
 
 	@Autowired
-	private WeatherSnapshotService weatherSnapshotService;
+	private WeatherSnapshotProvider weatherSnapshotProvider;
 
 	@Autowired
-	private WeatherForecastService weatherForecastService;
-
-	@Test
-	public void testDownloader() {
-		assertNotNull(downloader);
-	}
+	private WeatherForecastProvider weatherForecastProvider;
 
 	@Test
 	public void testWeatherLocationService() {
-		assertNotNull(weatherLocationService);
+		assertNotNull(weatherLocationProvider);
 	}
 
 	@Test
 	@Rollback(false)
-	public void testSynchronizeLocations() throws IOException {
-		weatherLocationService.synchronizeLocations();
+	public void testSynchronizeWeatherLocations() throws IOException {
+		weatherLocationProvider.synchronizeLocations();
 	}
 	
 	@Test
 	@Rollback(false)
 	public void testSynchronizeWeatherSnapshots() throws IOException {
-		weatherSnapshotService.synchronizeWeatherSnapshots();
+		weatherSnapshotProvider.synchronizeWeatherSnapshots();
 	}
 	
 	@Test
 	@Rollback(false)
-	public void testSynchronizWeatherForecastsHour() throws IOException {
-		weatherForecastService.synchronizeWeatherForecastsHour();
+	public void testSynchronizeWeatherForecastsHour() throws IOException {
+		weatherForecastProvider.synchronizeWeatherForecastsHour();
 	}
 	
 	@Test
 	@Rollback(false)
 	public void testSynchronizWeatherForecastsDaily() throws IOException {
-		weatherForecastService.synchronizeWeatherForecastsDaily();
+		weatherForecastProvider.synchronizeWeatherForecastsDaily();
 	}
 }

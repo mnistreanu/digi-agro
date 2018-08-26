@@ -17,8 +17,8 @@ import org.springframework.web.client.RestTemplate;
 import com.arobs.model.WeatherModel;
 import com.arobs.weather.entity.WeatherLocation;
 import com.arobs.weather.location.WeatherLocationJson;
-import com.arobs.weather.location.WeatherLocationService;
-import com.arobs.weather.snapshot.WeatherSnapshotService;
+import com.arobs.weather.provider.WeatherLocationProvider;
+import com.arobs.weather.provider.WeatherSnapshotProvider;
 import com.arobs.weather.snapshot.WeatherSnapshotJson;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
@@ -49,10 +49,10 @@ public class WeatherScheduler {
 	private RestTemplate restTemplate;
 	
 	@Autowired
-	private WeatherSnapshotService weatherService;  
+	private WeatherSnapshotProvider weatherSnapshotProvider;  
 	
 	@Autowired
-	private WeatherLocationService weatherLocationService;  
+	private WeatherLocationProvider weatherLocationProvider;  
 	
 //	@Autowired
 //	private WeatherForecastService weatherForecastService;  
@@ -64,13 +64,13 @@ public class WeatherScheduler {
 		RestTemplate restTemplate = new RestTemplate();
 		WeatherSnapshotJson weather = restTemplate.getForObject(url, WeatherSnapshotJson.class);
 		WeatherModel weatherModel = WeatherModel.buildWeatherModel(weather);
-		weatherService.save(weatherModel);
+		weatherSnapshotProvider.save(weatherModel);
         logger.info(weather.toString());
 	}
 	
 //	@Scheduled(cron = "${cron.weather.forecast}")
 	public void readWeatherForecast() {
-		List<WeatherLocation> weatherLocationss = weatherLocationService.findAllMdRo();
+		List<WeatherLocation> weatherLocationss = weatherLocationProvider.findAllMdRo();
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<WeatherModel> weatherModels = new ArrayList<>();
 		for (WeatherLocation weatreLocation : weatherLocationss) {

@@ -29,7 +29,6 @@ public class WeatherLocationTest {
 	@Test
 	public void testJsonObject() throws JsonParseException, JsonMappingException, IOException {
 		List<WeatherLocationJson> locations = getJsonObject();
-		logger.info("Location. {} articole", locations.size());
 		assertEquals(5, locations.size());
 		WeatherLocationJson location = locations.get(0);
 		assertEquals(Integer.valueOf(618426), location.getId());
@@ -37,12 +36,12 @@ public class WeatherLocationTest {
 		assertEquals("MD", location.getCountry());
 		assertEquals(Double.valueOf(28.8575), location.getCoord().getLon());
 		assertEquals(Double.valueOf(47.005562), location.getCoord().getLat());
+		logger.debug("Location. {} articole", locations.size());
 	}
 
 	@Test
 	public void testBinding() throws JsonParseException, JsonMappingException, IOException {
 		List<WeatherLocationJson> locationsJson = getJsonObject();
-		
 		List<WeatherLocation> locationsEntity = binder.bindFromBusinessObjectList(WeatherLocation.class, locationsJson);
 		assertEquals(5, locationsEntity.size());
 		assertEquals(locationsJson.size(), locationsEntity.size());

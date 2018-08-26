@@ -46,7 +46,7 @@ public class WeatherHistoryRepositoryImpl implements WeatherHistoryRepositoryCus
 		setParameters(query, calendar);
 		query.executeUpdate();
 		
-		String insertSql = "insert into WeatherHistory (" + 
+		String insertSql = "INSERT INTO WeatherHistory (" + 
 				"    openweatherId," + 
 				"    parcelId," + 
 				"    name," + 
@@ -81,7 +81,7 @@ public class WeatherHistoryRepositoryImpl implements WeatherHistoryRepositoryCus
 				"    sunrise," + 
 				"    sunset" + 
 				")" + 
-				"select" + 
+				"SELECT" + 
 				"    openweatherId," + 
 				"    parcelId," + 
 				"    name," + 
