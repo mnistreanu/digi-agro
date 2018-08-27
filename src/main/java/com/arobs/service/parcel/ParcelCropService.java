@@ -1,4 +1,4 @@
-package com.arobs.service;
+package com.arobs.service.parcel;
 
 import com.arobs.entity.ParcelCrop;
 import com.arobs.interfaces.HasRepository;

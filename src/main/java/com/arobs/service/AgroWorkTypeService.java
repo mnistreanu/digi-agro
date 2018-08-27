@@ -14,7 +14,7 @@ public class AgroWorkTypeService implements HasRepository<AgroWorkTypeRepository
     @Autowired
     private AgroWorkTypeRepository agroWorkTypeRepository;
 
-    public AgroWorkType findOne(Integer id) {
+    public AgroWorkType findOne(Long id) {
         return getRepository().findOne(id);
     }
 

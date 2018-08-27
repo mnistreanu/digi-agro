@@ -119,6 +119,12 @@
         </sql>
     </changeSet>
 
+    <changeSet id="agro-work-type-change-pk-type" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <sql>
+            ALTER TABLE agro_work_type ALTER COLUMN id TYPE bigint;
+        </sql>
+    </changeSet>
+
 
     <changeSet id="insert-reminder-iulie-august-2018" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
@@ -610,6 +616,7 @@
     <changeSet id="insert-parcel-works-10-parcels-2018" author="mihai.gorgos" failOnError="true" runOnChange="true">
         <sql>
             DELETE FROM parcel_crop_work;
+            SELECT setval('parcel_crop_work_id_seq', 1);
 
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-11-28', 2, 31, 1); -- Aratul
             INSERT INTO parcel_crop_work(created_at, created_by, parcel_crop_id, work_type_id) VALUES ('2017-11-30', 2, 31, 2); -- Lucrarea cu grapa
@@ -678,7 +685,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="parcel_drop_current_work_type_id" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+    <changeSet id="parcel_drop_current_work_type_id" author="maxim.nistreanu" failOnError="false" runOnChange="true">
         <sql>
             ALTER TABLE parcel DROP COLUMN current_work_type_id;
         </sql>
