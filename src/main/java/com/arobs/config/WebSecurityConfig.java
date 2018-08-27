@@ -61,8 +61,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .authorizeRequests()
                 .antMatchers("/auth/login").permitAll()
-                .antMatchers("/auth/**").authenticated()
+                .antMatchers("/auth/**").permitAll()
                 .antMatchers("/file").permitAll()
+                .antMatchers("/crops/**").permitAll()
                 .anyRequest().authenticated();
 
         httpSecurity.addFilterBefore(corsFilter(), UsernamePasswordAuthenticationFilter.class);

@@ -66,6 +66,7 @@ export class CropVarietyComponent implements OnInit {
                 parent.children.push(model);
             }
         });
+        
 
         this.options.api.setRowData(rows);
     }
@@ -121,7 +122,9 @@ export class CropVarietyComponent implements OnInit {
 
     public adjustGridSize() {
         setTimeout(() => {
-            this.options.api.sizeColumnsToFit();
+            if (this.options && this.options.api) {
+                this.options.api.sizeColumnsToFit();
+            }
         }, 500);
     }
 

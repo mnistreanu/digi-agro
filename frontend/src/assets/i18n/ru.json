@@ -53,6 +53,7 @@
 	"info": {
 		"creation-time": "Время создания",
 		"description": "Описание",
+		"information": "Информация",
 		"name": "Наименование"
 	},
 	"language": {

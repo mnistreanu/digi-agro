@@ -1,0 +1,36 @@
+<div class="card" *ngIf="model">
+    <div class="card-header">
+        <span translate>info.information</span>
+        <div class="widget-controls">
+            <a href="#" (click)="close($event)"><i class="fa fa-times"></i></a>
+        </div>
+    </div>
+    <div class="card-body p-1">
+        <table class="table table-bordered table-hover small-table">
+            <tr>
+                <td translate>info.name</td>
+                <td>{{ model.name }}</td>
+            </tr>
+            <tr>
+                <td translate>parcel.cadaster-number</td>
+                <td>{{ model.cadasterNumber }}</td>
+            </tr>
+            <tr>
+                <td translate>parcel.land-worthiness-points</td>
+                <td>{{ model.landWorthinessPoints }}</td>
+            </tr>
+            <tr>
+                <td translate>parcel.area</td>
+                <td>{{ model.area }}</td>
+            </tr>
+            <tr>
+                <td translate>info.description</td>
+                <td>{{ model.description }}</td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+
+
