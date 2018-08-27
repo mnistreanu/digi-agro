@@ -41,7 +41,7 @@ public class ApplicationTests {
 	@Test
 	@Rollback(false)
 	public void testSynchronizeWeatherSnapshots() throws IOException {
-		weatherSnapshotProvider.synchronizeWeatherSnapshots();
+		weatherSnapshotProvider.synchronizeWeatherSnapshotsByCity();
 	}
 	
 	@Test

@@ -71,6 +71,9 @@ public class WeatherForecastProvider implements HasRepository<WeatherLocationRep
 			String url = String.format(weatherForecastDailyUrl, location.getId(), weatherForecastDailyAppid);
 			WeatherForecastDailyJson weatherForecastDailyJson = restTemplate.getForObject(url, WeatherForecastDailyJson.class);
 			WeatherForecastDaily weatherForecastDaily = binder.bindFromBusinessObject(WeatherForecastDaily.class, weatherForecastDailyJson);
+			if (weatherForecastDaily.getForecastItems() == null) {
+				continue;
+			}
 			for (ForecastDailyItem item : weatherForecastDaily.getForecastItems()) {
 				item.setForecastDaily(weatherForecastDaily);
 			}

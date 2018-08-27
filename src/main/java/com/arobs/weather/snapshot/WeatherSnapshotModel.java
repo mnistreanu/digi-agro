@@ -1,20 +1,13 @@
-package com.arobs.model;
+package com.arobs.weather.snapshot;
 
 
 import com.arobs.weather.entity.WeatherSnapshot;
-import com.arobs.weather.snapshot.Clouds;
-import com.arobs.weather.snapshot.Coord;
-import com.arobs.weather.snapshot.Main;
-import com.arobs.weather.snapshot.Sys;
-import com.arobs.weather.snapshot.Weather;
-import com.arobs.weather.snapshot.WeatherSnapshotJson;
-import com.arobs.weather.snapshot.Wind;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class WeatherModel implements Serializable {
+public class WeatherSnapshotModel implements Serializable {
 	private static final long serialVersionUID = -7674789177108074899L;
 
 	private Long id;
@@ -46,15 +39,15 @@ public class WeatherModel implements Serializable {
     private Integer code;
     private String name;
     private String base;
-    public WeatherModel () {
+    public WeatherSnapshotModel () {
     }
 
-    public WeatherModel(WeatherSnapshot w) {
+    public WeatherSnapshotModel(WeatherSnapshot w) {
         this.id = w.getId();
     }
 
-    public static WeatherModel buildWeatherModel(WeatherSnapshotJson weather) {
-    	WeatherModel weatherModel = new WeatherModel(); 
+    public static WeatherSnapshotModel buildWeatherModel(WeatherSnapshotJson weather) {
+    	WeatherSnapshotModel weatherModel = new WeatherSnapshotModel(); 
     	
     	weatherModel.setId(weather.getId().longValue());
     	weatherModel.setName(weather.getName());
@@ -72,12 +65,12 @@ public class WeatherModel implements Serializable {
     	return weatherModel;
     }
     
-    private static void buildWeatherModel(WeatherModel weatherModel, Coord coord) {
+    private static void buildWeatherModel(WeatherSnapshotModel weatherModel, Coord coord) {
     	weatherModel.setLon(BigDecimal.valueOf(coord.getLon()));
     	weatherModel.setLat(BigDecimal.valueOf(coord.getLat()));
     }
 
-    private static void buildWeatherModel(WeatherModel weatherModel, Weather weather) {
+    private static void buildWeatherModel(WeatherSnapshotModel weatherModel, Weather weather) {
     	weatherModel.setWeatherId(weather.getId());
     	weatherModel.setMain(weather.getMain());
     	weatherModel.setDescription(weather.getDescription());
@@ -85,7 +78,7 @@ public class WeatherModel implements Serializable {
     }
 
     //temp, pressure, humidity, temp_min, temp_max, sea_level, grnd_level
-    private static void buildWeatherModel(WeatherModel weatherModel, Main main) {
+    private static void buildWeatherModel(WeatherSnapshotModel weatherModel, Main main) {
     	weatherModel.setTemp(main.getTemp());
     	weatherModel.setPressure(main.getPressure());
     	weatherModel.setHumidity(main.getHumidity());
@@ -95,16 +88,16 @@ public class WeatherModel implements Serializable {
     	weatherModel.setGrndLevel(main.getGrndLevel());
     }
 
-    private static void buildWeatherModel(WeatherModel weatherModel, Wind wind) {
+    private static void buildWeatherModel(WeatherSnapshotModel weatherModel, Wind wind) {
     	weatherModel.setWindSpeed(BigDecimal.valueOf(wind.getSpeed()));
     	weatherModel.setWindDeg(BigDecimal.valueOf(wind.getDeg()));
     }
 
-    private static void buildWeatherModel(WeatherModel weatherModel, Clouds clouds) {
+    private static void buildWeatherModel(WeatherSnapshotModel weatherModel, Clouds clouds) {
     	weatherModel.setClouds(clouds.getAll());
     }
 
-    private static void buildWeatherModel(WeatherModel weatherModel, Sys sys) {
+    private static void buildWeatherModel(WeatherSnapshotModel weatherModel, Sys sys) {
     	weatherModel.setMessage(BigDecimal.valueOf(sys.getMessage()));
     	weatherModel.setCountry(sys.getCountry());
     	weatherModel.setSunrise(sys.getSunrise());
