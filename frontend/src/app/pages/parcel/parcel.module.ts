@@ -9,7 +9,6 @@ import {DirectivesModule} from '../../theme/directives/directives.module';
 import {ParcelListComponent} from './parcel-list/parcel-list.component';
 import {ParcelMapComponent} from './parcel-map/parcel-map.component';
 import {ParcelComponent} from './parcel/parcel.component';
-import { ParcelInfoPanelComponent } from './parcel-map/parcel-info-panel/parcel-info-panel.component';
 
 export const routes = [
     {path: '', component: ParcelComponent, pathMatch: 'full'}
@@ -26,7 +25,7 @@ export const routes = [
         NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyC_u-ujFg1xhXlOnOV0GyptTlory-KvlFY'}),
         RouterModule.forChild(routes),
     ],
-    declarations: [ParcelListComponent, ParcelMapComponent, ParcelComponent, ParcelInfoPanelComponent]
+    declarations: [ParcelListComponent, ParcelMapComponent, ParcelComponent]
 })
 export class ParcelModule {
 }
