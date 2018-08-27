@@ -13,6 +13,7 @@ export class ParcelModel {
     center: any;
     icon: string;
 
+    cropName: string;
     cropNameRo: string;
     cropNameRu: string;
 
@@ -22,7 +23,9 @@ export class ParcelModel {
     spaceBetweenRows: number;
     spaceBetweenPlants: number;
 
+    lastWorkType: string;
     lastWorkTypeRo: string;
     lastWorkTypeRu: string;
+
     lastWorkDate: Date;
 }

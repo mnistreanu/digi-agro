@@ -45,7 +45,7 @@ public class ParcelModel {
         plantedAt = parcelCrop.getPlantedAt();
         rowsOnParcel = parcelCrop.getRowsOnParcel();
         plantsOnRow = parcelCrop.getPlantsOnRow();
-        spaceBetweenPlants = parcelCrop.getSpaceBetweenPlants();
+        spaceBetweenRows = parcelCrop.getSpaceBetweenRows();
         spaceBetweenPlants = parcelCrop.getSpaceBetweenPlants();
 
         icon = crop.getIcon();

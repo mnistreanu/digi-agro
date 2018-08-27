@@ -3,6 +3,7 @@ import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {ParcelModel} from '../../telemetry/parcel.model';
 import {ParcelService} from '../../../services/parcel.service';
+import {FieldMapper} from "../../../common/field.mapper";
 
 @Component({
     selector: 'app-parcel-list',
@@ -90,6 +91,10 @@ export class ParcelListComponent implements OnInit {
             this.models = models;
             this.adjustGridSize();
 
+            const fieldMapper = new FieldMapper(this.langService.getLanguage());
+            const lastWorkTypeField = fieldMapper.get('lastWorkType');
+            const cropNameField = fieldMapper.get('cropName');
+
             this.models.forEach((parcel) => {
                 parcel.fillColor = this.randomColor();
                 parcel.icon = '/assets/img/crops/' + parcel.icon;
@@ -100,6 +105,8 @@ export class ParcelListComponent implements OnInit {
                     };
                 });
                 parcel.center = this.getCenterOfPolygon(parcel.paths);
+                parcel.lastWorkType = parcel[lastWorkTypeField];
+                parcel.cropName = parcel[cropNameField];
             });
 
             this.dataChanged.emit(this.models);
