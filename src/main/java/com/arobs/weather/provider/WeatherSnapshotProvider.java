@@ -1,12 +1,12 @@
 package com.arobs.weather.provider;
 
 import com.arobs.interfaces.HasRepository;
-import com.arobs.model.WeatherModel;
 import com.arobs.repository.WeatherSnapshotRepository;
 import com.arobs.weather.entity.WeatherLocation;
 import com.arobs.weather.entity.WeatherSnapshot;
 import com.arobs.weather.location.WeatherLocationRepository;
 import com.arobs.weather.snapshot.WeatherSnapshotJson;
+import com.arobs.weather.snapshot.WeatherSnapshotModel;
 
 import org.jdto.DTOBinder;
 import org.slf4j.Logger;
@@ -26,8 +26,10 @@ import java.util.List;
 public class WeatherSnapshotProvider implements HasRepository<WeatherSnapshotRepository> {
 	private static final Logger logger = LoggerFactory.getLogger(WeatherSnapshotProvider.class);
 	
-	@Value("${weather.snapshot.url}")
-	private String weatherSnapshotUrl;
+	@Value("${weather.snapshot.city.url}")
+	private String weatherSnapshotCityUrl;
+	@Value("${weather.snapshot.coord.url}")
+	private String weatherSnapshotCoordUrl;
 	@Value("${weather.snapshot.appid}")
 	private String weatherSnapshotAppid;
     @Autowired
@@ -40,18 +42,32 @@ public class WeatherSnapshotProvider implements HasRepository<WeatherSnapshotRep
     private WeatherSnapshotRepository weatherSnapshotRepository;
 
 	
-	public void synchronizeWeatherSnapshots() {
+	public int synchronizeWeatherSnapshotsByCity() {
 		List<WeatherLocation> locations = weatherLocationRepository.findAll();
 		List<WeatherSnapshot> weatherSnapshots = new ArrayList<>();
 		for (WeatherLocation location : locations) {
-			String url = String.format(weatherSnapshotUrl, location.getId(), weatherSnapshotAppid);
+			String url = String.format(weatherSnapshotCityUrl, location.getId(), weatherSnapshotAppid);
 			WeatherSnapshotJson weatherSnapshotJson = restTemplate.getForObject(url, WeatherSnapshotJson.class);
 			WeatherSnapshot weatherSnapshot = binder.bindFromBusinessObject(WeatherSnapshot.class, weatherSnapshotJson);
 			weatherSnapshots.add(weatherSnapshot);
-			break; //TODO de eliminat
 		}
 		weatherSnapshotRepository.save(weatherSnapshots);
 		logger.debug("Au fost inscrise in BD {} articole", weatherSnapshots.size());
+		return weatherSnapshots.size();
+	}
+
+	public int synchronizeWeatherSnapshotsByCoord() {
+		List<WeatherLocation> locations = weatherLocationRepository.findAll();
+		List<WeatherSnapshot> weatherSnapshots = new ArrayList<>();
+		for (WeatherLocation location : locations) {
+			String url = String.format(weatherSnapshotCoordUrl, location.getLat(), location.getLon(), weatherSnapshotAppid);
+			WeatherSnapshotJson weatherSnapshotJson = restTemplate.getForObject(url, WeatherSnapshotJson.class);
+			WeatherSnapshot weatherSnapshot = binder.bindFromBusinessObject(WeatherSnapshot.class, weatherSnapshotJson);
+			weatherSnapshots.add(weatherSnapshot);
+		}
+		weatherSnapshotRepository.save(weatherSnapshots);
+		logger.debug("Au fost inscrise in BD {} articole", weatherSnapshots.size());
+		return weatherSnapshots.size();
 	}
 
 	@Override
@@ -72,14 +88,8 @@ public class WeatherSnapshotProvider implements HasRepository<WeatherSnapshotRep
     }
 
     @Transactional
-    public WeatherSnapshot save(WeatherModel model) {
+    public WeatherSnapshot save(WeatherSnapshotModel model) {
         WeatherSnapshot weather = binder.bindFromBusinessObject(WeatherSnapshot.class, model);
         return getRepository().save(weather);
     }
-
-//    @Transactional
-//    public Weather save(List<WeatherModel> models) {
-//        List<Weather> weather = dtoBinder.bindFromBusinessObjectList(Weather.class, models);
-//        return getRepository().save(weather);
-//    }
 }
