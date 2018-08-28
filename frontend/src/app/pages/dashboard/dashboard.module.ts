@@ -9,6 +9,7 @@ import {TodoComponent} from './todo/todo.component';
 import {ChatComponent} from './chat/chat.component';
 import {FeedComponent} from './feed/feed.component';
 import {DatamapComponent} from './datamap/datamap.component';
+import {ParcelMapComponent} from './parcelmap/parcelmap.component';
 import {DynamicChartComponent} from './dynamic-chart/dynamic-chart.component';
 import {ChartsModule} from 'ng2-charts';
 import 'chart.js/dist/Chart.js';
@@ -32,6 +33,7 @@ export const routes = [
         ChatComponent,
         FeedComponent,
         DatamapComponent,
+        ParcelMapComponent,
         DynamicChartComponent
     ]
 })
