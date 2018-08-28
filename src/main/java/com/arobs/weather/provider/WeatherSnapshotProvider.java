@@ -1,12 +1,12 @@
 package com.arobs.weather.provider;
 
 import com.arobs.interfaces.HasRepository;
-import com.arobs.repository.WeatherSnapshotRepository;
 import com.arobs.weather.entity.WeatherLocation;
 import com.arobs.weather.entity.WeatherSnapshot;
 import com.arobs.weather.location.WeatherLocationRepository;
 import com.arobs.weather.snapshot.WeatherSnapshotJson;
 import com.arobs.weather.snapshot.WeatherSnapshotModel;
+import com.arobs.weather.snapshot.WeatherSnapshotRepository;
 
 import org.jdto.DTOBinder;
 import org.slf4j.Logger;

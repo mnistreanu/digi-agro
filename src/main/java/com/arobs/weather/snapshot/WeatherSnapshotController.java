@@ -1,9 +1,8 @@
-package com.arobs.controller;
+package com.arobs.weather.snapshot;
 
 import com.arobs.model.PayloadModel;
 import com.arobs.weather.entity.WeatherSnapshot;
 import com.arobs.weather.provider.WeatherSnapshotProvider;
-import com.arobs.weather.snapshot.WeatherSnapshotModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +18,12 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/weather")
-public class WeatherController {
+public class WeatherSnapshotController {
 
     @Autowired
     private WeatherSnapshotProvider weatherSnapshotProvider;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/snapshot0", method = RequestMethod.GET)
     public ResponseEntity<PayloadModel> getWeathers(@RequestParam("parcelId") Long parcelId,
                                                     @RequestParam("dateFrom") Date dateFrom,
                                                     @RequestParam("dateTo") Date dateTo) {
@@ -52,8 +51,32 @@ public class WeatherController {
         return ResponseEntity.ok(payloadModel);
     }
 
+    @RequestMapping(value = "/snapshot2", method = RequestMethod.GET)
+    public ResponseEntity<PayloadModel> getWeathers2(@RequestParam("parcelId") Long parcelId, @RequestParam("date_from") Date dateFrom) {
+        parcelId = parcelId == null ? 1L : parcelId;
 
-    @RequestMapping(value = "/history", method = RequestMethod.GET) // TODO de revazut
+        PayloadModel<WeatherSnapshotModel> payloadModel = new PayloadModel<>();
+
+        try {
+            WeatherSnapshot weathers = weatherSnapshotProvider.findOne(parcelId);
+            if (weathers != null) {
+                WeatherSnapshotModel models = new WeatherSnapshotModel(weathers);
+                WeatherSnapshotModel[] payload = new WeatherSnapshotModel[1];
+                payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
+                payloadModel.setPayload(payload);
+            } else {
+                payloadModel.setStatus(PayloadModel.STATUS_WARNING);
+            }
+        } catch (Exception e) {
+            payloadModel.setStatus(PayloadModel.STATUS_ERROR);
+            payloadModel.setMessage(e.getLocalizedMessage());
+        }
+
+        return ResponseEntity.ok(payloadModel);
+    }
+
+
+    @RequestMapping(value = "/snapshot", method = RequestMethod.GET) // TODO de revazut
     public ResponseEntity<PayloadModel> findWeatherHistory() {
         PayloadModel<WeatherSnapshotModel> payloadModel = new PayloadModel<>();
 
