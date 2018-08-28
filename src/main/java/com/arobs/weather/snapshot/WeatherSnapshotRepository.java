@@ -1,4 +1,4 @@
-package com.arobs.repository;
+package com.arobs.weather.snapshot;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
