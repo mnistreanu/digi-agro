@@ -678,7 +678,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="parcel_drop_current_work_type_id" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+    <changeSet id="parcel_drop_current_work_type_id" author="maxim.nistreanu" failOnError="false" runOnChange="true">
         <sql>
             ALTER TABLE parcel DROP COLUMN current_work_type_id;
         </sql>
