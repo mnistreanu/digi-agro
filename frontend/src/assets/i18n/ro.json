@@ -69,6 +69,8 @@
 		"сonsumption": "Consum"
 	},
 	"nav": {
+		"expenses-management": "Evidența cheltuielilor",
+		"agricultural-works": "Lucrări agricole",
 		"branches": "Filiale",
 		"brands": "Brands",
 		"costs-forecasting": "Prognoză costuri",
@@ -79,6 +81,7 @@
 		"forecast-list": "Lista",
 		"forecasting-charts": "Diagrame de prognoză",
 		"forecasts": "Prognoze",
+		"fuel": "Combustibil",
 		"harvesting-forecasting": "Prognoză recoltă",
 		"harvesting-forecasting-factor": "Prognoză recoltă FACTOR",
 		"harvesting-forecasting-form": "Prognoză recoltă FORM",
@@ -91,10 +94,12 @@
 		"telemetry": "Telemetrie",
 		"tenants": "Clienți",
 		"users": "Utilizatori",
+		"various-chemicals": "Diverse chimicale",
 		"weather": "Date meteo",
 		"weather-forecast": "Prognoza meteo",
 		"weather-history": "Date meteo istorice",
-		"work-agenda": "Agenda lucrărilor"
+		"work-agenda": "Agenda lucrărilor",
+		"agricultural-machinery": "Maşini agricole"
 	},
 	"notification": {
 		"mark-all-as-read": "Marcheaza toate ca fiind citite",

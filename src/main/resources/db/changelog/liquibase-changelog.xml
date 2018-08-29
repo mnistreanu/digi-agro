@@ -6,7 +6,8 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="insert-2-tenants" author="mihai.gorgos" failOnError="true">
+    <changeSet id="insert-2-tenants" author="mihai.gorgos" failOnError="true" runOnChange="false" onValidationFail="MARK_RAN" >
+        <validCheckSum>ANY</validCheckSum>
         <sql>
             INSERT INTO tenant (id, name, country_id, fiscal_code, description, county_id, city_id, address, phones)
             VALUES (1, 'Gospodăria Ţărănească Orhei', 'md', '9842367810452', 'Gospodăria Ţărănească Orhei este super-puper', 'OR', null, 'str.Solidaritatii 14', '0-232-12345 0-232-12346');
@@ -243,7 +244,8 @@
     <!--
         Adaugat 3 parcele cu coordonate la tenant_id=1
     -->
-    <changeSet id="insert-3-parcels-tenant-1" author="mgorgos" failOnError="false">
+    <changeSet id="insert-3-parcels-tenant-1" author="mgorgos" failOnError="false" onValidationFail="MARK_RAN">
+        <validCheckSum>ANY</validCheckSum>
         <sql>
             INSERT INTO parcel(id, cadaster_number, city_id, country_id, county_id, created_at, description, land_worthiness_points, name, parent_id, tenant_id)
             VALUES (1, 'AB-34567-ZB-12356', null, 'md', 'HN', '2018-07-26 12:45:00', 'sus in deal', 89, 'Floarea soarelui', null, 1);
@@ -268,7 +270,8 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert-4-parcels-tenant-2" author="mgorgos" failOnError="false">
+    <changeSet id="insert-4-parcels-tenant-2" author="mgorgos" failOnError="false" onValidationFail="MARK_RAN">
+        <validCheckSum>ANY</validCheckSum>
         <sql>
             INSERT INTO parcel(id, cadaster_number, city_id, country_id, county_id, created_at, description, land_worthiness_points, name, parent_id, tenant_id)
             VALUES (4, 'AB-34567-NS-12356', null, 'md', 'NS', '2018-07-26 12:45:00', 'sus in deal', 89, 'Floarea soarelui', null, 2);
@@ -430,7 +433,8 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert-harvesting-forecast-wheat-2018" author="mihai.gorgos" failOnError="true" runOnChange="false">
+    <changeSet id="insert-harvesting-forecast-wheat-2018" author="mihai.gorgos" failOnError="true" runOnChange="false" onValidationFail="MARK_RAN">
+        <validCheckSum>ANY</validCheckSum>
         <sql>
             INSERT INTO forecast(id, crop_id, tenant_id, harvesting_year, name, description)
             VALUES (1, 1, 1, 2018, 'Prognoza de grîu in 2018', 'Prognoza de grîu in 2018 pe terenurile din Calarasi si Strășeni');

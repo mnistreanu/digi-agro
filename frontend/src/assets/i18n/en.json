@@ -69,6 +69,8 @@
 		"сonsumption": "Consumption"
 	},
 	"nav": {
+		"expenses-management": "Expenses management",
+		"agricultural-works": "Agricultural works",
 		"branches": "Branches",
 		"brands": "Brands",
 		"costs-forecasting": "Costs forecasting",
@@ -79,6 +81,7 @@
 		"forecast-list": "List",
 		"forecasting-charts": "Forecasting charts",
 		"forecasts": "Forecasts",
+		"fuel": "Fuel",
 		"harvesting-forecasting": "Harvesting forecasting",
 		"harvesting-forecasting-factor": "Harvesting forecasting FACTOR",
 		"harvesting-forecasting-form": "Harvesting forecasting FORM",
@@ -91,10 +94,12 @@
 		"telemetry": "Telemetry",
 		"tenants": "Tenants",
 		"users": "Users",
+		"various-chemicals": "Various chemicals",
 		"weather": "Weather",
 		"weather-forecast": "Weather forecast",
 		"weather-history": "Weather history",
-		"work-agenda": "Work agenda"
+		"work-agenda": "Work agenda",
+		"agricultural-machinery": "Agricultural machinery"
 	},
 	"notification": {
 		"mark-all-as-read": "Mark All as Read",

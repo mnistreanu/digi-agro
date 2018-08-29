@@ -69,6 +69,8 @@
 		"сonsumption": "Расход"
 	},
 	"nav": {
+		"expenses-management": "Учет затрат",
+		"agricultural-works": "Сельхоз. работы",
 		"branches": "Филиалы",
 		"brands": "Бренды",
 		"costs-forecasting": "Прогнозирование затрат",
@@ -79,6 +81,7 @@
 		"forecast-list": "Список",
 		"forecasting-charts": "Прогнозные графики",
 		"forecasts": "Прогнозирование",
+		"fuel": "Топливо",
 		"harvesting-forecasting": "Прогнозирование урожая",
 		"harvesting-forecasting-factor": "Прогнозирование урожая FACTOR",
 		"harvesting-forecasting-form": "Прогнозирование урожая FORM",
@@ -91,10 +94,12 @@
 		"telemetry": "Телеметрия",
 		"tenants": "Клиенты",
 		"users": "Пользователями",
+		"various-chemicals": "Различные химикаты",
 		"weather": "Погода",
 		"weather-forecast": "Прогноз погоды",
 		"weather-history": "Исторические данные",
-		"work-agenda": "Повестка работ"
+		"work-agenda": "Повестка работ",
+		"agricultural-machinery": "Сельх. техника"
 	},
 	"notification": {
 		"mark-all-as-read": "Отметить все как прочитанные",
