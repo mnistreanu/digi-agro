@@ -60,16 +60,32 @@
 		"language": "Язык"
 	},
 	"machine": {
+		"brand": "Марка",
+		"consumption": "Расход",
+		"fabrication-country": "Страна изготовления",
+		"fabrication-date": "Дата изготовления",
+		"identifier": "Идентификатор",
+		"machine": "Машина",
 		"motor": "Мотор",
 		"power": "Сила",
-		"speed-in-work": "Скорость в работе",
+		"speed-in-work": "Рабочая скорость",
 		"speed-on-road": "Скорость на дороге",
 		"type": "Тип",
-		"work-types": "Виды работы",
-		"сonsumption": "Расход"
+		"work-types": "Виды работы"
+	},
+	"machine-motor": {
+		"benzine": "Бензин",
+		"diesel": "Дизель",
+		"electric": "Электрический",
+		"none": "Нет"
+	},
+	"machine-type": {
+		"combine": "Комбайн",
+		"sowing": "Сеялка",
+		"tractor": "Трактор"
 	},
 	"nav": {
-		"expenses-management": "Учет затрат",
+		"agricultural-machinery": "Сельх. техника",
 		"agricultural-works": "Сельхоз. работы",
 		"branches": "Филиалы",
 		"brands": "Бренды",
@@ -78,6 +94,7 @@
 		"crops": "Сельхоз. культуры",
 		"crops-varieties": "Сельскохозяйственные культуры и сорта",
 		"dashboard": "Главная",
+		"expenses-management": "Учет затрат",
 		"forecast-list": "Список",
 		"forecasting-charts": "Прогнозные графики",
 		"forecasts": "Прогнозирование",
@@ -98,8 +115,7 @@
 		"weather": "Погода",
 		"weather-forecast": "Прогноз погоды",
 		"weather-history": "Исторические данные",
-		"work-agenda": "Повестка работ",
-		"agricultural-machinery": "Сельх. техника"
+		"work-agenda": "Повестка работ"
 	},
 	"notification": {
 		"mark-all-as-read": "Отметить все как прочитанные",

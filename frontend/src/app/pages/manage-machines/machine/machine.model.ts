@@ -6,7 +6,6 @@ export class MachineModel {
 
     type: string;
 
-    owner: string;
     brand: string;
 
     fabricationDate: Date;

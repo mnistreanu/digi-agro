@@ -60,16 +60,32 @@
 		"language": "Limba"
 	},
 	"machine": {
+		"brand": "Brand",
+		"consumption": "Consum",
+		"fabrication-country": "Țara de origine",
+		"fabrication-date": "Data de fabricație",
+		"identifier": "Identificator",
+		"machine": "Mașină",
 		"motor": "Motor",
 		"power": "Putere",
 		"speed-in-work": "Viteză în munca",
 		"speed-on-road": "Viteza pe drum",
 		"type": "Tip",
-		"work-types": "Tipuri de lucrul",
-		"сonsumption": "Consum"
+		"work-types": "Tipuri de lucrul"
+	},
+	"machine-motor": {
+		"benzine": "Benzină",
+		"diesel": "Motorină",
+		"electric": "Electrica",
+		"none": "Nu este"
+	},
+	"machine-type": {
+		"combine": "Combină",
+		"sowing": "Semănătoare",
+		"tractor": "Tractor"
 	},
 	"nav": {
-		"expenses-management": "Evidența cheltuielilor",
+		"agricultural-machinery": "Maşini agricole",
 		"agricultural-works": "Lucrări agricole",
 		"branches": "Filiale",
 		"brands": "Brands",
@@ -78,6 +94,7 @@
 		"crops": "Culturi agricole",
 		"crops-varieties": "Culturi agricole și soiuri",
 		"dashboard": "Dashboard",
+		"expenses-management": "Evidența cheltuielilor",
 		"forecast-list": "Lista",
 		"forecasting-charts": "Diagrame de prognoză",
 		"forecasts": "Prognoze",
@@ -98,8 +115,7 @@
 		"weather": "Date meteo",
 		"weather-forecast": "Prognoza meteo",
 		"weather-history": "Date meteo istorice",
-		"work-agenda": "Agenda lucrărilor",
-		"agricultural-machinery": "Maşini agricole"
+		"work-agenda": "Agenda lucrărilor"
 	},
 	"notification": {
 		"mark-all-as-read": "Marcheaza toate ca fiind citite",
