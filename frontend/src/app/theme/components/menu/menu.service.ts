@@ -159,6 +159,34 @@ export class MenuService {
 
         if (isAdmin || isUser) {
             menuItems.push({
+                title: 'nav.expenses-management',
+                routerLink: 'weather',
+                icon: 'fa fa-money',
+                selected: false,
+                expanded: false,
+                subMenu: [
+                    {
+                        title: 'nav.agricultural-machinery',
+                        routerLink: 'weather/forecast',
+                    },
+                    {
+                        title: 'nav.fuel',
+                        routerLink: 'weather/forecast',
+                    },
+                    {
+                        title: 'nav.agricultural-works',
+                        routerLink: 'weather/forecast',
+                    },
+                    {
+                        title: 'nav.various-chemicals',
+                        routerLink: 'weather/history',
+                    },
+                ]
+            });
+        }
+
+        if (isAdmin || isUser) {
+            menuItems.push({
                 title: 'nav.weather',
                 routerLink: 'weather',
                 icon: 'fa fa-cloud',

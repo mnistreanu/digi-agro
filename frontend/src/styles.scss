@@ -166,3 +166,15 @@
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
+
+//----------------------------------------------------------------------------
+// toastr
+.toast-custom {
+  background: #4b646b !important;
+  font-size: 11px;
+}
+.toast-custom-icon {
+  margin-left: -35px;
+  float: left;
+}
+//----------------------------------------------------------------------------

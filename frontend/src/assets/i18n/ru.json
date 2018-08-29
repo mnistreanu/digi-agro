@@ -27,16 +27,16 @@
 		"additional_info": "Дополнительная информация",
 		"currency": "Валюта",
 		"factor": "Фактор",
-		"initial-forecast": "Изначальный прогноз",
 		"harvest": "Урожай",
 		"harvesting_year": "Год сбора урожая",
 		"hectar": "гектар",
+		"initial-forecast": "Изначальный прогноз",
 		"name": "Название прогноза",
+		"quantity": "Количество",
 		"selling_price": "Цена при продажи",
 		"summary": "Итог прогноза",
 		"summary-amount": "Количество урожая",
 		"summary-price": "Цена",
-		"quantity": "Количество",
 		"unit_of_measure": "Единица измерения"
 	},
 	"general": {
@@ -69,6 +69,8 @@
 		"сonsumption": "Расход"
 	},
 	"nav": {
+		"expenses-management": "Учет затрат",
+		"agricultural-works": "Сельхоз. работы",
 		"branches": "Филиалы",
 		"brands": "Бренды",
 		"costs-forecasting": "Прогнозирование затрат",
@@ -76,9 +78,10 @@
 		"crops": "Сельхоз. культуры",
 		"crops-varieties": "Сельскохозяйственные культуры и сорта",
 		"dashboard": "Главная",
+		"forecast-list": "Список",
 		"forecasting-charts": "Прогнозные графики",
 		"forecasts": "Прогнозирование",
-		"forecast-list": "Список",
+		"fuel": "Топливо",
 		"harvesting-forecasting": "Прогнозирование урожая",
 		"harvesting-forecasting-factor": "Прогнозирование урожая FACTOR",
 		"harvesting-forecasting-form": "Прогнозирование урожая FORM",
@@ -91,10 +94,12 @@
 		"telemetry": "Телеметрия",
 		"tenants": "Клиенты",
 		"users": "Пользователями",
+		"various-chemicals": "Различные химикаты",
 		"weather": "Погода",
 		"weather-forecast": "Прогноз погоды",
 		"weather-history": "Исторические данные",
-		"work-agenda": "Повестка работ"
+		"work-agenda": "Повестка работ",
+		"agricultural-machinery": "Сельх. техника"
 	},
 	"notification": {
 		"mark-all-as-read": "Отметить все как прочитанные",
@@ -172,8 +177,15 @@
 		"description": "Описание",
 		"ha": "га",
 		"land-worthiness-points": "Земельная ценность",
-		"name": "Имя",
+		"last-work": "Последняя работа",
+		"last-work-date": "Дата последней работы",
+		"name": "Участок",
 		"parcels": "Участки",
+		"planted-at": "Дата посадки",
+		"plants-count": "Количество растений",
+		"rows-count": "Количество рядов",
+		"space-between-plants": "Пространство между растениями",
+		"space-between-rows": "Пространство между рядами",
 		"the-parcels": "участки"
 	},
 	"reminder": {
@@ -186,9 +198,9 @@
 	},
 	"response": {
 		"added": "Добавлен",
+		"all-selected": "Выбраны все",
 		"item-selected": "элемент выбран",
 		"items-selected": "элементы выбраны",
-		"all-selected": "Выбраны все",
 		"please-select": "Выберите",
 		"removed": "Удалено",
 		"saved": "Сохранено",

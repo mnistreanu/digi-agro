@@ -1,9 +1,9 @@
 package com.arobs.controller;
 
 import com.arobs.model.PayloadModel;
-import com.arobs.model.WeatherModel;
 import com.arobs.weather.entity.WeatherSnapshot;
 import com.arobs.weather.provider.WeatherSnapshotProvider;
+import com.arobs.weather.snapshot.WeatherSnapshotModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,13 +32,13 @@ public class WeatherController {
         dateFrom = dateFrom == null ? new Date(System.currentTimeMillis() - 1000*60*60*24*365) : dateFrom;
         dateTo = dateTo == null ? new Date() : dateTo;
 
-        PayloadModel<WeatherModel> payloadModel = new PayloadModel<>();
+        PayloadModel<WeatherSnapshotModel> payloadModel = new PayloadModel<>();
 
         try {
             List<WeatherSnapshot> weathers = weatherSnapshotProvider.find(parcelId, dateFrom, dateTo);
             if (!weathers.isEmpty()) {
-                List<WeatherModel> models = weathers.stream().map(WeatherModel::new).collect(Collectors.toList());
-                WeatherModel[] payload = models.toArray(new WeatherModel[models.size()]);
+                List<WeatherSnapshotModel> models = weathers.stream().map(WeatherSnapshotModel::new).collect(Collectors.toList());
+                WeatherSnapshotModel[] payload = models.toArray(new WeatherSnapshotModel[models.size()]);
                 payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
                 payloadModel.setPayload(payload);
             } else {
@@ -55,11 +55,11 @@ public class WeatherController {
 
     @RequestMapping(value = "/history", method = RequestMethod.GET) // TODO de revazut
     public ResponseEntity<PayloadModel> findWeatherHistory() {
-        PayloadModel<WeatherModel> payloadModel = new PayloadModel<>();
+        PayloadModel<WeatherSnapshotModel> payloadModel = new PayloadModel<>();
 
-        WeatherModel[] wModels = new WeatherModel[2];
+        WeatherSnapshotModel[] wModels = new WeatherSnapshotModel[2];
 
-        WeatherModel wm0 = new WeatherModel();
+        WeatherSnapshotModel wm0 = new WeatherSnapshotModel();
         wm0.setDt(new Date());
         wm0.setCountry("md");
 //        wm0.setCountyId("ns");
@@ -71,7 +71,7 @@ public class WeatherController {
         wm0.setHumidity(89);
         wModels[0] = wm0;
 
-        WeatherModel wm1 = new WeatherModel();
+        WeatherSnapshotModel wm1 = new WeatherSnapshotModel();
         wm1.setDt(new Date(System.currentTimeMillis() - 1000*60*60*4));
         wm1.setCountry("md");
 //        wm1.setCountyId("ns");

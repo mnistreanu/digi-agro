@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public class AgroWorkTypeModel implements Serializable {
 
-    private Integer id;
+    private Long id;
     private Long tenantId;
     private Integer parentId;
     private String nameRo;
@@ -24,11 +24,11 @@ public class AgroWorkTypeModel implements Serializable {
         this.nameRu = workType.getNameRu();
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -9,7 +9,7 @@ import java.util.Date;
 public class ReminderModel implements Serializable {
 
     private Long id;
-    private Integer workTypeId;
+    private Long workTypeId;
     private String title;
     private String description;
     private Long tenantId;
@@ -39,11 +39,11 @@ public class ReminderModel implements Serializable {
         this.id = id;
     }
 
-    public Integer getWorkTypeId() {
+    public Long getWorkTypeId() {
         return workTypeId;
     }
 
-    public void setWorkTypeId(Integer workTypeId) {
+    public void setWorkTypeId(Long workTypeId) {
         this.workTypeId = workTypeId;
     }
 

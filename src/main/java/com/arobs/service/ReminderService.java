@@ -61,7 +61,6 @@ public class ReminderService implements HasRepository<ReminderRepository> {
         return getRepository().save(entity);
     }
 
-    @Transactional
     private void copyValues(Reminder entity, ReminderModel model) {
         entity.setTitle(model.getTitle());
         entity.setDescription(model.getDescription());

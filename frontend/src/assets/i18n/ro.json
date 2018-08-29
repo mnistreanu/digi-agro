@@ -27,16 +27,16 @@
 		"additional_info": "Informații suplimnetare",
 		"currency": "Monedă",
 		"factor": "Factor",
-		"initial-forecast": "Prognoza inițială",
 		"harvest": "Recoltă",
 		"harvesting_year": "Anul recoltei",
 		"hectar": "hectar",
+		"initial-forecast": "Prognoza inițială",
 		"name": "Denumire prognoză",
+		"quantity": "Сantitate",
 		"selling_price": "Preț de vînzare",
 		"summary": "Total prognozat",
 		"summary-amount": "Cantitatea de recoltă",
 		"summary-price": "Preț",
-		"quantity": "Сantitate",
 		"unit_of_measure": "Unitatea de măsură"
 	},
 	"general": {
@@ -69,6 +69,8 @@
 		"сonsumption": "Consum"
 	},
 	"nav": {
+		"expenses-management": "Evidența cheltuielilor",
+		"agricultural-works": "Lucrări agricole",
 		"branches": "Filiale",
 		"brands": "Brands",
 		"costs-forecasting": "Prognoză costuri",
@@ -76,9 +78,10 @@
 		"crops": "Culturi agricole",
 		"crops-varieties": "Culturi agricole și soiuri",
 		"dashboard": "Dashboard",
+		"forecast-list": "Lista",
 		"forecasting-charts": "Diagrame de prognoză",
 		"forecasts": "Prognoze",
-		"forecast-list": "Lista",
+		"fuel": "Combustibil",
 		"harvesting-forecasting": "Prognoză recoltă",
 		"harvesting-forecasting-factor": "Prognoză recoltă FACTOR",
 		"harvesting-forecasting-form": "Prognoză recoltă FORM",
@@ -91,10 +94,12 @@
 		"telemetry": "Telemetrie",
 		"tenants": "Clienți",
 		"users": "Utilizatori",
+		"various-chemicals": "Diverse chimicale",
 		"weather": "Date meteo",
 		"weather-forecast": "Prognoza meteo",
 		"weather-history": "Date meteo istorice",
-		"work-agenda": "Agenda lucrărilor"
+		"work-agenda": "Agenda lucrărilor",
+		"agricultural-machinery": "Maşini agricole"
 	},
 	"notification": {
 		"mark-all-as-read": "Marcheaza toate ca fiind citite",
@@ -172,8 +177,15 @@
 		"description": "Descriere",
 		"ha": "ha",
 		"land-worthiness-points": "Bonitatea",
-		"name": "Nume",
+		"last-work": "Ultima lucrare",
+		"last-work-date": "Ultima dată de lucru",
+		"name": "Parcela",
 		"parcels": "Parcele",
+		"planted-at": "Data plantării",
+		"plants-count": "Numărul de plante",
+		"rows-count": "Numărul de rânduri",
+		"space-between-plants": "Spațiu între plante",
+		"space-between-rows": "Spațiu între rânduri",
 		"the-parcels": "parcelele"
 	},
 	"reminder": {
@@ -186,9 +198,9 @@
 	},
 	"response": {
 		"added": "A fost adăugat",
+		"all-selected": "Toate sunt selectate",
 		"item-selected": "element selectat",
 		"items-selected": "elemente selectate",
-		"all-selected": "Toate sunt selectate",
 		"please-select": "Selectați",
 		"removed": "A fost șters",
 		"saved": "A fost salvat",

@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.type.CollectionType;
 
 public class WeatherLocationTest {
 	private static final Logger logger = LoggerFactory.getLogger(WeatherLocationTest.class); 
-	private static final String FORECAST_DAILY_JSON = "locations.json";
+	private static final String LOCATION_JSON = "locations.json";
 	private DTOBinder binder = DTOBinderFactory.getBinder();
 
 	@Test
@@ -55,7 +55,7 @@ public class WeatherLocationTest {
 	}
 	
 	private List<WeatherLocationJson> getJsonObject() throws IOException, JsonParseException, JsonMappingException {
-		Resource resource = new ClassPathResource(FORECAST_DAILY_JSON);
+		Resource resource = new ClassPathResource(LOCATION_JSON);
 		File file = resource.getFile(); 
 		ObjectMapper objectMapper = new ObjectMapper();
 		

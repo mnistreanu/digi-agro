@@ -27,16 +27,16 @@
 		"additional_info": "Additional information",
 		"currency": "Currency",
 		"factor": "Factor",
-		"initial-forecast": "Initial Forecast",
 		"harvest": "Harvest",
 		"harvesting_year": "Harvesting year",
 		"hectar": "hectare",
+		"initial-forecast": "Initial Forecast",
 		"name": "Forecast name",
+		"quantity": "Quantity",
 		"selling_price": "Selling price",
 		"summary": "Forecast Summary",
 		"summary-amount": "Amount of harvest",
 		"summary-price": "Price",
-		"quantity": "Quantity",
 		"unit_of_measure": "Unit of measure"
 	},
 	"general": {
@@ -69,6 +69,8 @@
 		"сonsumption": "Consumption"
 	},
 	"nav": {
+		"expenses-management": "Expenses management",
+		"agricultural-works": "Agricultural works",
 		"branches": "Branches",
 		"brands": "Brands",
 		"costs-forecasting": "Costs forecasting",
@@ -76,9 +78,10 @@
 		"crops": "Crops",
 		"crops-varieties": "Crops & Varieties",
 		"dashboard": "Dashboard",
+		"forecast-list": "List",
 		"forecasting-charts": "Forecasting charts",
 		"forecasts": "Forecasts",
-		"forecast-list": "List",
+		"fuel": "Fuel",
 		"harvesting-forecasting": "Harvesting forecasting",
 		"harvesting-forecasting-factor": "Harvesting forecasting FACTOR",
 		"harvesting-forecasting-form": "Harvesting forecasting FORM",
@@ -91,10 +94,12 @@
 		"telemetry": "Telemetry",
 		"tenants": "Tenants",
 		"users": "Users",
+		"various-chemicals": "Various chemicals",
 		"weather": "Weather",
 		"weather-forecast": "Weather forecast",
 		"weather-history": "Weather history",
-		"work-agenda": "Work agenda"
+		"work-agenda": "Work agenda",
+		"agricultural-machinery": "Agricultural machinery"
 	},
 	"notification": {
 		"mark-all-as-read": "Mark All as Read",
@@ -172,8 +177,15 @@
 		"description": "Description",
 		"ha": "hectare",
 		"land-worthiness-points": "Landworthiness",
-		"name": "Name",
+		"last-work": "Last Work",
+		"last-work-date": "Last Work Date",
+		"name": "Parcel",
 		"parcels": "Parcels",
+		"planted-at": "Planted At",
+		"plants-count": "Number of plants",
+		"rows-count": "Number of rows",
+		"space-between-plants": "Space Between Plants",
+		"space-between-rows": "Space Between Rows",
 		"the-parcels": "the parcels"
 	},
 	"reminder": {
@@ -186,9 +198,9 @@
 	},
 	"response": {
 		"added": "Added",
+		"all-selected": "All selected",
 		"item-selected": "item selected",
 		"items-selected": "items selected",
-		"all-selected": "All selected",
 		"please-select": "Select",
 		"removed": "Removed",
 		"saved": "Saved",

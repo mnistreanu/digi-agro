@@ -12,6 +12,10 @@ import {DatamapComponent} from './datamap/datamap.component';
 import {DynamicChartComponent} from './dynamic-chart/dynamic-chart.component';
 import {ChartsModule} from 'ng2-charts';
 import 'chart.js/dist/Chart.js';
+import {BriefParcelMapComponent} from './brief-parcel-map/brief-parcel-map.component';
+import {NguiMapModule} from '@ngui/map';
+import {TranslateModule} from '@ngx-translate/core';
+import {Constants} from '../../common/constants';
 
 export const routes = [
     {path: '', component: DashboardComponent, pathMatch: 'full'}
@@ -24,7 +28,9 @@ export const routes = [
         ChartsModule,
         DirectivesModule,
         PipesModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        TranslateModule,
+        NguiMapModule.forRoot({apiUrl: Constants.GOOGLE_MAP_API})
     ],
     declarations: [
         DashboardComponent,
@@ -32,9 +38,9 @@ export const routes = [
         ChatComponent,
         FeedComponent,
         DatamapComponent,
-        DynamicChartComponent
+        DynamicChartComponent,
+        BriefParcelMapComponent
     ]
 })
-
 export class DashboardModule {
 }

@@ -21,8 +21,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class WeatherSnapshotTest {
-	private static final String SNAPSHOT_JSON = "snapshot.json";
 	private static final Logger logger = LoggerFactory.getLogger(WeatherSnapshotTest.class); 
+	public static final String SNAPSHOT_JSON = "snapshot.json";
 
 	@Test
 	public void testJsonObject() throws JsonParseException, JsonMappingException, IOException {
@@ -100,7 +100,7 @@ public class WeatherSnapshotTest {
 		assertEquals(snapshotJson.getSys().getSunset(), snapshotEntity.getSunset());
 	}
 	
-	private <T> T getJsonObject(String jsonFileName, Class<T> clazz) throws IOException, JsonParseException, JsonMappingException {
+	public static <T> T getJsonObject(String jsonFileName, Class<T> clazz) throws IOException, JsonParseException, JsonMappingException {
 		Resource resource = new ClassPathResource(jsonFileName);
 		File file = resource.getFile(); 
 		ObjectMapper objectMapper = new ObjectMapper();
