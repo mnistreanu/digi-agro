@@ -1,20 +1,19 @@
-import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from "@angular/core";
-import {ParcelModel} from "../../telemetry/parcel.model";
-import {ToastrService} from "ngx-toastr";
-import {DateUtil} from "../../../common/dateUtil";
-import {LangService} from "../../../services/lang.service";
+import {Component, OnInit} from '@angular/core';
+import {ParcelModel} from '../../telemetry/parcel.model';
+import {ToastrService} from 'ngx-toastr';
+import {DateUtil} from '../../../common/dateUtil';
+import {LangService} from '../../../services/lang.service';
+import {ParcelService} from '../../../services/parcel.service';
 
 @Component({
     selector: 'app-brief-parcel-map',
     templateUrl: './brief-parcel-map.component.html',
     styleUrls: ['./brief-parcel-map.component.scss']
 })
-export class BriefParcelMapComponent implements OnInit, OnChanges {
+export class BriefParcelMapComponent implements OnInit {
 
-    @Input() models: any[];
-    @Input() center: any;
-
-    @ViewChild('infoBody') infoBody: ElementRef;
+    models: any[];
+    center: any;
 
     private defaultStrokeColor = '#FFC107';
     private defaultZIndex = 1;
@@ -23,20 +22,13 @@ export class BriefParcelMapComponent implements OnInit, OnChanges {
     private labels: any;
 
     constructor(private toastr: ToastrService,
+                private parcelService: ParcelService,
                 private langService: LangService) {
     }
 
     ngOnInit() {
         this.setupLabels();
-        this.setupCenter();
-        this.models = [];
-    }
-
-
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes['models']) {
-            this.setupCenter();
-        }
+        this.setupModels();
     }
 
     private setupLabels() {
@@ -49,6 +41,14 @@ export class BriefParcelMapComponent implements OnInit, OnChanges {
         this.langService.get('parcel.planted-at').subscribe(m => this.labels['plantedAt'] = m);
         this.langService.get('parcel.last-work').subscribe(m => this.labels['lastWorkType'] = m);
         this.langService.get('parcel.last-work-date').subscribe(m => this.labels['lastWorkDate'] = m);
+    }
+
+    private setupModels() {
+        this.parcelService.find().subscribe(models => {
+            this.models = models;
+            this.parcelService.adjust(models);
+            this.setupCenter();
+        });
     }
 
     private setupCenter() {

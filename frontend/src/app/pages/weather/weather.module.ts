@@ -9,6 +9,7 @@ import {DirectivesModule} from '../../theme/directives/directives.module';
 import {WeatherHistoryComponent} from './history/weather-history.component';
 import {CustomImageRendererModule} from '../../modules/aggrid/custom-image-renderer/custom-image-renderer.module';
 import {CustomImageRendererComponent} from '../../modules/aggrid/custom-image-renderer/custom-image-renderer.component';
+import {Constants} from '../../common/constants';
 
 export const routes = [
     {path: '', redirectTo: 'weather', pathMatch: 'full'},
@@ -25,7 +26,7 @@ export const routes = [
         DirectivesModule,
         CustomImageRendererModule,
         AgGridModule.withComponents([CustomImageRendererComponent]),
-        NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyC_u-ujFg1xhXlOnOV0GyptTlory-KvlFY'}),
+        NguiMapModule.forRoot({apiUrl: Constants.GOOGLE_MAP_API}),
         RouterModule.forChild(routes)
     ],
     declarations: [WeatherHistoryComponent]
