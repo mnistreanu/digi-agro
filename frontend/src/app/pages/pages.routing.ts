@@ -95,6 +95,12 @@ export const routes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
+                path: 'machinery',
+                loadChildren: 'app/pages/manage-expenses/manage-expenses.module#ManageExpensesModule',
+                data: {breadcrumb: 'Machinery'},
+                canActivate: [AuthGuard]
+            },
+            {
                 path: 'forecasting',
                 loadChildren: 'app/pages/forecast/forecast.module#ForecastModule',
                 data: {breadcrumb: 'Forecasting'},

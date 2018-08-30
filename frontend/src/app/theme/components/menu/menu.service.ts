@@ -160,30 +160,30 @@ export class MenuService {
         if (isAdmin || isUser) {
             menuItems.push({
                 title: 'nav.expenses-management',
-                routerLink: 'weather',
+                routerLink: 'expenses',
                 icon: 'fa fa-money',
                 selected: false,
                 expanded: false,
                 subMenu: [
                     {
                         title: 'nav.agricultural-machinery',
-                        routerLink: 'weather/forecast',
+                        routerLink: 'expenses/machinery',
                     },
                     {
                         title: 'nav.fuel',
-                        routerLink: 'weather/forecast',
+                        routerLink: 'expenses/fuel',
                     },
                     {
                         title: 'nav.sowing',
-                        routerLink: 'weather/forecast',
+                        routerLink: 'expenses/sowing',
                     },
                     {
                         title: 'nav.agricultural-works',
-                        routerLink: 'weather/forecast',
+                        routerLink: 'expenses/works',
                     },
                     {
                         title: 'nav.fertilizers-pesticides',
-                        routerLink: 'weather/history',
+                        routerLink: 'expenses/chemicals',
                     },
                 ]
             });
