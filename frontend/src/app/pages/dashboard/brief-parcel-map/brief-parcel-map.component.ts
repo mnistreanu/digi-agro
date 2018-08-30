@@ -64,6 +64,8 @@ export class BriefParcelMapComponent implements OnInit {
         this.model = model;
         const title = this.labels['parcelName'] + ' "' + this.model.name + '"';
         this.toastr.show(this.getParcelInfoMessage(), title, {
+            progressBar: true,
+            positionClass: 'toast-top-right',
             enableHtml: true,
             toastClass: 'toast toast-custom'
         });

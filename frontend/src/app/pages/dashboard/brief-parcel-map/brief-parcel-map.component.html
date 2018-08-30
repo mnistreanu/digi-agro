@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="card-body widget-body">
-        <ngui-map zoom="15" [center]="center" mapTypeId="terrain" scrollwheel="true">
+        <ngui-map zoom="14" [center]="center" mapTypeId="satellite" scrollwheel="true">
             <polygon *ngFor="let p of models"
                      (click)="onParcelClick(p)"
                      (mouseover)="onParcelUp($event)"
