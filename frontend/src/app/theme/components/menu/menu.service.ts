@@ -174,11 +174,15 @@ export class MenuService {
                         routerLink: 'weather/forecast',
                     },
                     {
+                        title: 'nav.sowing',
+                        routerLink: 'weather/forecast',
+                    },
+                    {
                         title: 'nav.agricultural-works',
                         routerLink: 'weather/forecast',
                     },
                     {
-                        title: 'nav.various-chemicals',
+                        title: 'nav.fertilizers-pesticides',
                         routerLink: 'weather/history',
                     },
                 ]
