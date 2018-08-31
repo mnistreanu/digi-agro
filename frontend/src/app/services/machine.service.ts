@@ -16,8 +16,11 @@ export class MachineService {
     }
 
     validateIdentifier(id: number, value: string): Observable<boolean> {
-        const queryParams = `?id=${id}&value=${value}`;
-        return this.http.get<boolean>(this.api + '/validate-identifier' + queryParams);
+        let queryParams = `?field=identifier&value=${value}`;
+        if (id) {
+            queryParams += `&id=${id}`;
+        }
+        return this.http.get<boolean>(this.api + '/unique' + queryParams);
     }
 
     findOne(id: number): Observable<MachineModel> {

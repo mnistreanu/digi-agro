@@ -1,6 +1,5 @@
 package com.arobs.entity;
 
-
 import com.arobs.enums.MachineType;
 import com.arobs.enums.MotorType;
 
@@ -23,8 +22,8 @@ public class Machine {
     private MachineType type;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private Owner owner;
+    @JoinColumn(name = "tenant_id")
+    private Tenant tenant;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
@@ -77,14 +76,6 @@ public class Machine {
 
     public void setType(MachineType type) {
         this.type = type;
-    }
-
-    public Owner getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Owner owner) {
-        this.owner = owner;
     }
 
     public Brand getBrand() {
@@ -173,5 +164,13 @@ public class Machine {
 
     public void setFabricationCountry(String fabricationCountry) {
         this.fabricationCountry = fabricationCountry;
+    }
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
     }
 }

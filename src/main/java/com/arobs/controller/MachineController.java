@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,9 +20,9 @@ public class MachineController {
     private MachineService machineService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<List<MachineModel>> getModels() {
-
-        List<Machine> items = machineService.findAll();
+    public ResponseEntity<List<MachineModel>> getModels(HttpSession session) {
+        Long tenant = (Long) session.getAttribute("tenant");
+        List<Machine> items = machineService.find(tenant);
         List<MachineModel> models = items.stream().map(MachineModel::new).collect(Collectors.toList());
 
         return ResponseEntity.ok(models);
@@ -34,18 +35,21 @@ public class MachineController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<MachineModel> getModel(@PathVariable Long id) {
-        return ResponseEntity.ok(machineService.findModelById(id));
+        Machine machine = machineService.findOne(id);
+        return ResponseEntity.ok(new MachineModel(machine));
     }
 
-    @RequestMapping(value = "/validate-identifier", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> validateIdentifier(@RequestParam("id") Long id, @RequestParam("value") String value) {
-        return ResponseEntity.ok(machineService.validateIdentifier(id, value));
+    @RequestMapping(value = "/unique", method = RequestMethod.GET)
+    public ResponseEntity<Boolean> isUnique(@RequestParam(value = "id", required = false) Long id,
+                                            @RequestParam("field") String field, @RequestParam("value") String value) {
+        return ResponseEntity.ok(machineService.isUnique(id, field, value));
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity<MachineModel> save(@RequestBody MachineModel model) {
-        return ResponseEntity.ok(new MachineModel(machineService.save(model)));
+    public ResponseEntity<MachineModel> save(@RequestBody MachineModel model, HttpSession session) {
+        Long tenant = (Long) session.getAttribute("tenant");
+        return ResponseEntity.ok(new MachineModel(machineService.save(model, tenant)));
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")

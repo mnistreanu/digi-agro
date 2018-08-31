@@ -18,7 +18,6 @@ public class MachineModel {
 
     private MachineType type;
 
-    private String owner;
     private String brand;
 
     private Date fabricationDate;
@@ -31,7 +30,7 @@ public class MachineModel {
     private Double speedOnRoad;
     private Double speedInWork;
 
-    private List<String> workTypes;
+    private List<AgroWorkTypeModel> workTypes;
 
     public MachineModel() {
     }
@@ -43,7 +42,6 @@ public class MachineModel {
 
         type = entity.getType();
 
-        owner = entity.getOwner().getName();
         brand = entity.getBrand().getName();
 
         fabricationDate = entity.getFabricationDate();
@@ -57,7 +55,7 @@ public class MachineModel {
         speedInWork = entity.getSpeedInWork();
 
         if (entity.getWorkTypes() != null) {
-            workTypes = entity.getWorkTypes().stream().map(AgroWorkType::getNameRo).collect(Collectors.toList());
+            workTypes = entity.getWorkTypes().stream().map(AgroWorkTypeModel::new).collect(Collectors.toList());
         }
     }
 
@@ -91,14 +89,6 @@ public class MachineModel {
 
     public void setType(MachineType type) {
         this.type = type;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
     }
 
     public String getBrand() {
@@ -165,11 +155,11 @@ public class MachineModel {
         this.speedInWork = speedInWork;
     }
 
-    public List<String> getWorkTypes() {
+    public List<AgroWorkTypeModel> getWorkTypes() {
         return workTypes;
     }
 
-    public void setWorkTypes(List<String> workTypes) {
+    public void setWorkTypes(List<AgroWorkTypeModel> workTypes) {
         this.workTypes = workTypes;
     }
 }

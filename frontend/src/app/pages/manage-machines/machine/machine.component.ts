@@ -7,6 +7,10 @@ import {MachineModel} from './machine.model';
 import {ToastrService} from 'ngx-toastr';
 import {Messages} from '../../../common/messages';
 import {LangService} from '../../../services/lang.service';
+import {WorkTypeService} from '../../../services/work-type.service';
+import {AgroWorkTypeModel} from '../../reminder/agro-work-type.model';
+import {FieldMapper} from '../../../common/field.mapper';
+import {IMultiSelectSettings} from 'angular-2-dropdown-multiselect';
 
 
 @Component({
@@ -27,7 +31,12 @@ export class MachineComponent implements OnInit {
 
     hasMotor: boolean;
 
-    availableWorkTypes: string[] = ['SOWING', 'PLOWING', 'GATHERING', 'WATERING', 'SPRAY'];
+    availableWorkTypes: AgroWorkTypeModel[];
+    multiSelectSettings: IMultiSelectSettings = {
+        checkedStyle: 'fontawesome',
+        dynamicTitleMaxItems: 10,
+        maxHeight: '100px'
+    };
 
     private labels: any;
 
@@ -35,6 +44,7 @@ export class MachineComponent implements OnInit {
                 private router: Router,
                 private route: ActivatedRoute,
                 private langService: LangService,
+                private workTypeService: WorkTypeService,
                 private brandService: BrandService,
                 private machineService: MachineService,
                 private toastr: ToastrService) {
@@ -43,6 +53,7 @@ export class MachineComponent implements OnInit {
     ngOnInit() {
         this.setupLabels();
         this.setupBrands();
+        this.setupWorkTypes();
         this.route.params.subscribe(params => {
             const id = params['id'];
 
@@ -65,6 +76,16 @@ export class MachineComponent implements OnInit {
     private setupBrands() {
         this.brandService.findAll().subscribe(models => {
             this.brands = models.map(model => model.name);
+        });
+    }
+
+    private setupWorkTypes() {
+        this.workTypeService.find().subscribe(models => {
+            this.availableWorkTypes = models;
+            const fieldMapper = new FieldMapper(this.langService.getLanguage());
+            const nameField = fieldMapper.get('name');
+            models.forEach(model => model.name = model[nameField]);
+            console.log('wt', models);
         });
     }
 
@@ -101,21 +122,14 @@ export class MachineComponent implements OnInit {
             power: [{value: this.model.power, disabled: !this.hasMotor}],
             speedOnRoad: [this.model.speedOnRoad],
             speedInWork: [this.model.speedInWork],
-            workTypesIndices: this.buildWorkTypeControls()
+            workTypes: [this.model.workTypes]
         });
-    }
-
-    private buildWorkTypeControls() {
-        const arr = this.availableWorkTypes.map(work => {
-            const checked = this.model.workTypes.indexOf(work) != -1;
-            return this.fb.control(checked);
-        });
-        return this.fb.array(arr);
+        console.log(this.model.workTypes);
     }
 
     public onIdentifierChange() {
         const control = this.form.controls.identifier;
-        this.machineService.validateIdentifier(this.model.id || -1, control.value).subscribe((isUnique) => {
+        this.machineService.validateIdentifier(this.model.id, control.value).subscribe((isUnique) => {
             if (!isUnique) {
                 const errors = control.errors || {};
                 errors.unique = !isUnique;
@@ -132,8 +146,7 @@ export class MachineComponent implements OnInit {
             this.toastr.warning(this.labels[Messages.VALIDATION_FAIL]);
             return;
         }
-
-        this.prepareWorkTypesForSubmit(form);
+        console.log(form.value);
 
         Object.assign(this.model, form.value);
         this.isNew = false;
@@ -143,19 +156,6 @@ export class MachineComponent implements OnInit {
             this.model = model;
             this.toastr.success(this.labels[Messages.SAVED]);
         });
-    }
-
-    private prepareWorkTypesForSubmit(form: FormGroup) {
-        const workTypes: string[] = [];
-
-        // array of boolean items. true is selected
-        form.value.workTypesIndices.forEach((item, index) => {
-            if (item) {
-                workTypes.push(this.availableWorkTypes[index]);
-            }
-        });
-
-        this.model.workTypes = workTypes;
     }
 
     public remove() {

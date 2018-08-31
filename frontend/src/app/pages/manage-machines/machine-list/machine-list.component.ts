@@ -64,12 +64,6 @@ export class MachineListComponent implements OnInit {
                 minWidth: 200
             },
             {
-                headerName: 'Owner',
-                field: 'owner',
-                width: 200,
-                minWidth: 200
-            },
-            {
                 headerName: 'Type',
                 field: 'type',
                 width: 200,
