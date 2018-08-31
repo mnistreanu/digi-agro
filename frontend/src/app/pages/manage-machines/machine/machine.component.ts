@@ -165,6 +165,7 @@ export class MachineComponent implements OnInit {
         this.machineService.save(this.model).subscribe((model) => {
             this.model = model;
             this.toastr.success(this.labels[Messages.SAVED]);
+            this.router.navigate(['/pages/manage-machines']);
         });
     }
 
