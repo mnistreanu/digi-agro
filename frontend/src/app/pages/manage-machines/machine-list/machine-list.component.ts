@@ -61,9 +61,11 @@ export class MachineListComponent implements OnInit {
             },
             {
                 headerName: 'info.name',
-                field: 'name',
                 width: 200,
-                minWidth: 200
+                minWidth: 200,
+                valueGetter: (params) => {
+                    return params.data.brand + '-' + params.data.name;
+                }
             },
             {
                 headerName: 'machine.type',
