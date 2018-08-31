@@ -10,6 +10,10 @@ import {LangService} from '../../../services/lang.service';
 import {WorkTypeService} from '../../../services/work-type.service';
 import {AgroWorkTypeModel} from '../../reminder/agro-work-type.model';
 import {FieldMapper} from '../../../common/field.mapper';
+import {EmployeeService} from '../../../services/employee.service';
+import {EmployeeModel} from '../../employee/employee/employee.model';
+import {IMultiSelectSettings} from 'angular-2-dropdown-multiselect';
+import {ListItem} from '../../../interfaces/list-item.interface';
 
 
 @Component({
@@ -30,7 +34,14 @@ export class MachineComponent implements OnInit {
 
     hasMotor: boolean;
 
+    employees: ListItem[];
     workTypes: AgroWorkTypeModel[];
+
+    multiSelectSettings: IMultiSelectSettings = {
+        checkedStyle: 'fontawesome',
+        buttonClasses: 'btn btn-secondary btn-block',
+        dynamicTitleMaxItems: 3
+    };
 
     private labels: any;
 
@@ -41,14 +52,16 @@ export class MachineComponent implements OnInit {
                 private workTypeService: WorkTypeService,
                 private brandService: BrandService,
                 private machineService: MachineService,
+                private employeeService: EmployeeService,
                 private toastr: ToastrService) {
     }
 
     ngOnInit() {
         this.setupLabels();
         this.setupBrands()
-        .then(() => this.setupWorkTypes())
-        .then(() => this.restoreModel());
+            .then(() => this.setupEmployees())
+            .then(() => this.setupWorkTypes())
+            .then(() => this.restoreModel());
     }
 
     private setupLabels() {
@@ -62,6 +75,20 @@ export class MachineComponent implements OnInit {
         return new Promise((resolve) => {
             this.brandService.findAll().subscribe(models => {
                 this.brands = models.map(model => model.name);
+                resolve();
+            });
+        });
+    }
+
+    private setupEmployees(): Promise<void> {
+        return new Promise((resolve) => {
+            this.employeeService.findAll().subscribe(models => {
+                this.employees = models.map(model => {
+                    return {
+                        id: model.id,
+                        name: model.firstName + ' ' + model.lastName
+                    };
+                });
                 resolve();
             });
         });
@@ -124,6 +151,7 @@ export class MachineComponent implements OnInit {
             power: [{value: this.model.power, disabled: !this.hasMotor}],
             speedOnRoad: [this.model.speedOnRoad],
             speedInWork: [this.model.speedInWork],
+            employees: [this.model.employees],
             workTypeControls: this.buildWorkTypeControls()
         });
     }

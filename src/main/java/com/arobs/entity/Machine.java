@@ -49,6 +49,12 @@ public class Machine {
             inverseJoinColumns = { @JoinColumn(name = "work_type_id") })
     private List<AgroWorkType> workTypes = new ArrayList<>();
 
+    @ManyToMany
+    @JoinTable(name = "machine_employee",
+            joinColumns = { @JoinColumn(name = "machine_id") },
+            inverseJoinColumns = { @JoinColumn(name = "employee_id") })
+    private List<Employee> employees = new ArrayList<>();
+
     @Column(columnDefinition = "boolean default true")
     private boolean active = true;
 
@@ -172,5 +178,13 @@ public class Machine {
 
     public void setTenant(Tenant tenant) {
         this.tenant = tenant;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }

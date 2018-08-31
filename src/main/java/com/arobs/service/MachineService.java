@@ -25,6 +25,8 @@ public class MachineService implements HasRepository<MachineRepository> {
     private CommonCustomRepository commonCustomRepository;
     @Autowired
     private TenantService tenantService;
+    @Autowired
+    private EmployeeService employeeService;
 
     @Override
     public MachineRepository getRepository() {
@@ -84,6 +86,11 @@ public class MachineService implements HasRepository<MachineRepository> {
         entity.getWorkTypes().clear();
         if (!StaticUtil.isEmpty(model.getWorkTypes())) {
             entity.getWorkTypes().addAll(workTypeService.findAll(model.getWorkTypes()));
+        }
+
+        entity.getEmployees().clear();
+        if (!StaticUtil.isEmpty(model.getEmployees())) {
+            entity.getEmployees().addAll(employeeService.findAll(model.getEmployees()));
         }
     }
 }

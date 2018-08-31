@@ -18,5 +18,6 @@ export class MachineModel {
     speedOnRoad: number;
     speedInWork: number;
 
+    employees: number[];
     workTypes: number[];
 }

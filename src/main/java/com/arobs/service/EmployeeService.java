@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -29,6 +30,10 @@ public class EmployeeService implements HasRepository<EmployeeRepository> {
 
     public List<Employee> find(Long tenantId) {
         return getRepository().find(tenantId);
+    }
+
+    public List<Employee> findAll(List<Long> ids) {
+        return getRepository().findAll(ids);
     }
 
     @Transactional
