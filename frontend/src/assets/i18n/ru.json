@@ -15,6 +15,9 @@
 		"branch": "Филиал",
 		"branches": "Филиалы"
 	},
+	"brand": {
+		"brand": "Марка"
+	},
 	"contact": {
 		"phone": "Телефон"
 	},
@@ -67,7 +70,6 @@
 		"language": "Язык"
 	},
 	"machine": {
-		"brand": "Марка",
 		"consumption": "Расход",
 		"fabrication-country": "Страна изготовления",
 		"fabrication-date": "Дата изготовления",

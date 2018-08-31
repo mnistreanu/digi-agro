@@ -4,6 +4,7 @@ import com.arobs.entity.Brand;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.BrandModel;
 import com.arobs.repository.BrandRepository;
+import com.arobs.repository.custom.CommonCustomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,20 +16,15 @@ public class BrandService implements HasRepository<BrandRepository> {
 
     @Autowired
     private BrandRepository brandRepository;
+    @Autowired
+    private CommonCustomRepository commonCustomRepository;
 
-    public boolean validateName(Long id, String name) {
-        if (id == -1) {
-            return getRepository().countByName(name) == 0;
-        }
-        return getRepository().countByNameEscapeId(id, name) == 0;
+    public boolean isUnique(Long currentId, String field, String value) {
+        return commonCustomRepository.isUnique("Brand", currentId, field, value);
     }
 
     public Brand findOne(Long id) {
         return getRepository().findOne(id);
-    }
-
-    public BrandModel findModelById(Long id) {
-        return new BrandModel(getRepository().findOne(id));
     }
 
     public List<Brand> findAll() {
@@ -68,7 +64,7 @@ public class BrandService implements HasRepository<BrandRepository> {
     @Transactional
     public Brand register(String brandName) {
 
-        Brand brand = findByName(brandName);
+        Brand brand = find(brandName);
 
         if (brand == null) {
             brand = new Brand();
@@ -79,8 +75,8 @@ public class BrandService implements HasRepository<BrandRepository> {
         return brand;
     }
 
-    private Brand findByName(String name) {
-        return getRepository().findByName(name);
+    private Brand find(String name) {
+        return getRepository().find(name);
     }
 
     @Override

@@ -15,6 +15,9 @@
 		"branch": "Filial",
 		"branches": "Filiale"
 	},
+	"brand": {
+		"brand": "Brand"
+	},
 	"contact": {
 		"phone": "Telefon"
 	},
@@ -67,7 +70,6 @@
 		"language": "Limba"
 	},
 	"machine": {
-		"brand": "Brand",
 		"consumption": "Consum",
 		"fabrication-country": "Țara de origine",
 		"fabrication-date": "Data de fabricație",

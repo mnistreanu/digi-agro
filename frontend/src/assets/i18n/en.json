@@ -15,6 +15,9 @@
 		"branch": "Branch",
 		"branches": "Branches"
 	},
+	"brand": {
+		"brand": "Brand"
+	},
 	"contact": {
 		"phone": "Phone"
 	},
@@ -67,7 +70,6 @@
 		"language": "Language"
 	},
 	"machine": {
-		"brand": "Brand",
 		"consumption": "Consumption",
 		"fabrication-country": "Fabrication Country",
 		"fabrication-date": "Fabrication Date",
