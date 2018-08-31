@@ -3,6 +3,7 @@ import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-
 import {ColDef, GridOptions} from 'ag-grid';
 import {MachineService} from '../../../services/machine.service';
 import {Router} from '@angular/router';
+import {LangService} from '../../../services/lang.service';
 
 @Component({
     selector: 'app-machine-list',
@@ -15,6 +16,7 @@ export class MachineListComponent implements OnInit {
     context;
 
     constructor(private router: Router,
+                private langService: LangService,
                 private machineService: MachineService) {
     }
 
@@ -51,25 +53,31 @@ export class MachineListComponent implements OnInit {
                 }
             },
             {
-                headerName: 'Identifier',
+                headerName: 'machine.identifier',
                 field: 'identifier',
                 width: 200,
                 minWidth: 200,
                 maxWidth: 200
             },
             {
-                headerName: 'Name',
+                headerName: 'info.name',
                 field: 'name',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'Type',
+                headerName: 'machine.type',
                 field: 'type',
                 width: 200,
                 minWidth: 200
             }
         ];
+
+        headers.forEach(header => {
+            if (header.headerName) {
+                this.langService.get(header.headerName).subscribe(m => header.headerName = m);
+            }
+        });
 
         return headers;
     }
