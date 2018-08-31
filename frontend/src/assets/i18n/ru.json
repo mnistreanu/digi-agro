@@ -23,6 +23,10 @@
 		"name": "Сельскохозяйственная культура",
 		"variety": "Сорт"
 	},
+	"event": {
+		"events": "События",
+		"message": "Сообщение"
+	},
 	"forecast": {
 		"additional_info": "Дополнительная информация",
 		"currency": "Валюта",
@@ -45,8 +49,11 @@
 	},
 	"geo": {
 		"address": "Адрес",
+		"coords": "Координаты",
 		"country": "Страна",
 		"county": "Округ",
+		"latitude": "Широта",
+		"longitude": "Долгота",
 		"map": "Карта",
 		"village-city": "Деревня/Город"
 	},

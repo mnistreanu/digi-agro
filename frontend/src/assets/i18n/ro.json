@@ -23,6 +23,10 @@
 		"name": "Cultura agricolă",
 		"variety": "Soi"
 	},
+	"event": {
+		"events": "Evenimente",
+		"message": "Mesaj"
+	},
 	"forecast": {
 		"additional_info": "Informații suplimnetare",
 		"currency": "Monedă",
@@ -45,8 +49,11 @@
 	},
 	"geo": {
 		"address": "Adresa",
+		"coords": "Coordonate",
 		"country": "Țară",
 		"county": "Județ",
+		"latitude": "Latitudine",
+		"longitude": "Longitudine",
 		"map": "Hartă",
 		"village-city": "Sat/Oraș"
 	},

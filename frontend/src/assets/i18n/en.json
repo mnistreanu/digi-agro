@@ -23,6 +23,10 @@
 		"name": "Agricultural crop",
 		"variety": "Variety"
 	},
+	"event": {
+		"events": "Events",
+		"message": "Message"
+	},
 	"forecast": {
 		"additional_info": "Additional information",
 		"currency": "Currency",
@@ -45,8 +49,11 @@
 	},
 	"geo": {
 		"address": "Address",
+		"coords": "Coordinates",
 		"country": "Country",
 		"county": "County",
+		"latitude": "Latitude",
+		"longitude": "Longitude",
 		"map": "Map",
 		"village-city": "Village/City"
 	},

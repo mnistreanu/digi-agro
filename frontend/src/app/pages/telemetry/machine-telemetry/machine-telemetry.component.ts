@@ -85,7 +85,7 @@ export class MachineTelemetryComponent implements OnInit {
 
         const headers: ColDef[] = [
             {
-                headerName: 'Latitude',
+                headerName: 'geo.latitude',
                 field: 'latitude',
                 width: 100,
                 minWidth: 100,
@@ -94,7 +94,7 @@ export class MachineTelemetryComponent implements OnInit {
                 onCellValueChanged: (params) => this.onCoordinateChange(params)
             },
             {
-                headerName: 'Longitude',
+                headerName: 'geo.longitude',
                 field: 'longitude',
                 width: 100,
                 minWidth: 100,
@@ -103,7 +103,7 @@ export class MachineTelemetryComponent implements OnInit {
                 onCellValueChanged: (params) => this.onCoordinateChange(params)
             },
             {
-                headerName: 'Created At',
+                headerName: 'info.creation-time',
                 field: 'createdAt',
                 width: 120,
                 minWidth: 170,
@@ -126,7 +126,11 @@ export class MachineTelemetryComponent implements OnInit {
             }
         ];
 
-        // todo: add translations
+        headers.forEach(header => {
+            if (header.headerName) {
+                this.langService.get(header.headerName).subscribe(m => header.headerName = m);
+            }
+        });
 
         return headers;
     }

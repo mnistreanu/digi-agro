@@ -61,7 +61,7 @@ export class MapEventsComponent implements OnInit {
 
         const headers: ColDef[] = [
             {
-                headerName: 'Message',
+                headerName: 'event.message',
                 field: 'message',
                 width: 200,
                 minWidth: 200,
@@ -69,7 +69,7 @@ export class MapEventsComponent implements OnInit {
                 onCellValueChanged: (params) => this.onDataChange(params)
             },
             {
-                headerName: 'Latitude',
+                headerName: 'geo.latitude',
                 field: 'latitude',
                 width: 100,
                 minWidth: 100,
@@ -78,7 +78,7 @@ export class MapEventsComponent implements OnInit {
                 onCellValueChanged: (params) => this.onDataChange(params)
             },
             {
-                headerName: 'Longitude',
+                headerName: 'geo.longitude',
                 field: 'longitude',
                 width: 100,
                 minWidth: 100,
@@ -87,7 +87,7 @@ export class MapEventsComponent implements OnInit {
                 onCellValueChanged: (params) => this.onDataChange(params)
             },
             {
-                headerName: 'Created At',
+                headerName: 'info.creation-time',
                 field: 'createdAt',
                 width: 120,
                 minWidth: 170,
@@ -109,6 +109,12 @@ export class MapEventsComponent implements OnInit {
                 }
             }
         ];
+
+        headers.forEach(header => {
+            if (header.headerName) {
+                this.langService.get(header.headerName).subscribe(m => header.headerName = m);
+            }
+        });
 
         return headers;
     }
