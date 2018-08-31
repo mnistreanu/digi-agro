@@ -16,7 +16,7 @@ import {SowingExpensesComponent} from "./sowing-expenses/sowing-expenses.compone
 import {WorksExpensesComponent} from "./works-expenses/works-expenses.component";
 
 export const routes = [
-    // {path: '', component: ForecastListComponent, pathMatch: 'full'},
+    {path: '', redirectTo: 'expenses', pathMatch: 'full'},
     {path: 'machinery', component: MachineryExpensesComponent, data: {breadcrumb: 'machinery'}},
     {path: 'fuel', component: FuelExpensesComponent, data: {breadcrumb: 'fuel'}},
     {path: 'sowing', component: SowingExpensesComponent, data: {breadcrumb: 'sowing'}},

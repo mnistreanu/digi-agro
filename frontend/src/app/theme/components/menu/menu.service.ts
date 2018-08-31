@@ -85,7 +85,7 @@ export class MenuService {
             menuItems.push({
                 title: 'nav.parcels',
                 routerLink: '/pages/parcel',
-                icon: 'fas fa-globe',
+                icon: 'fa fa-th',
                 selected: false,
                 expanded: false
             });
