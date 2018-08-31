@@ -79,7 +79,7 @@
 	"machine": {
 		"consumption": "Consum",
 		"fabrication-country": "Țara de origine",
-		"fabrication-date": "Data de fabricație",
+		"fabrication-year": "Anul de fabricație",
 		"identifier": "Identificator",
 		"machine": "Mașină",
 		"motor": "Motor",

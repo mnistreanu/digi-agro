@@ -79,7 +79,7 @@
 	"machine": {
 		"consumption": "Расход",
 		"fabrication-country": "Страна изготовления",
-		"fabrication-date": "Дата изготовления",
+		"fabrication-year": "Год изготовления",
 		"identifier": "Идентификатор",
 		"machine": "Машина",
 		"motor": "Мотор",

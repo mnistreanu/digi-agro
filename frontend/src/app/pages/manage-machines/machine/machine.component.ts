@@ -111,14 +111,13 @@ export class MachineComponent implements OnInit {
     }
 
     private buildForm() {
-        const fabricationDate = this.model.fabricationDate ? new Date(this.model.fabricationDate).toISOString().substring(0, 10) : null;
 
         this.form = this.fb.group({
             type: [this.model.type, Validators.required],
             brand: [this.model.brand, Validators.required],
             name: [this.model.name, Validators.required],
             identifier: [this.model.identifier, Validators.required],
-            fabricationDate: [fabricationDate],
+            fabricationYear: [this.model.fabricationYear],
             fabricationCountry: [this.model.fabricationCountry],
             motorType: [this.model.motorType, Validators.required],
             consumption: [{value: this.model.consumption, disabled: !this.hasMotor}],

@@ -20,7 +20,7 @@ public class MachineModel {
 
     private String brand;
 
-    private Date fabricationDate;
+    private Integer fabricationYear;
     private String fabricationCountry;
 
     private MotorType motorType;
@@ -44,7 +44,7 @@ public class MachineModel {
 
         brand = entity.getBrand().getName();
 
-        fabricationDate = entity.getFabricationDate();
+        fabricationYear = entity.getFabricationYear();
         fabricationCountry = entity.getFabricationCountry();
 
         motorType = entity.getMotorType();
@@ -99,12 +99,12 @@ public class MachineModel {
         this.brand = brand;
     }
 
-    public Date getFabricationDate() {
-        return fabricationDate;
+    public Integer getFabricationYear() {
+        return fabricationYear;
     }
 
-    public void setFabricationDate(Date fabricationDate) {
-        this.fabricationDate = fabricationDate;
+    public void setFabricationYear(Integer fabricationYear) {
+        this.fabricationYear = fabricationYear;
     }
 
     public String getFabricationCountry() {

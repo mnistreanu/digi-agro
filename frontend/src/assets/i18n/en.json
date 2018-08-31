@@ -79,7 +79,7 @@
 	"machine": {
 		"consumption": "Consumption",
 		"fabrication-country": "Fabrication Country",
-		"fabrication-date": "Fabrication Date",
+		"fabrication-year": "Fabrication Year",
 		"identifier": "Identifier",
 		"machine": "Machine",
 		"motor": "Motor",

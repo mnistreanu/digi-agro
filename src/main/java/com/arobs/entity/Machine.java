@@ -31,7 +31,7 @@ public class Machine {
 
     private String name;
 
-    private Date fabricationDate;
+    private Integer fabricationYear;
     private String fabricationCountry;
 
     @Enumerated(EnumType.STRING)
@@ -94,12 +94,12 @@ public class Machine {
         this.name = name;
     }
 
-    public Date getFabricationDate() {
-        return fabricationDate;
+    public Integer getFabricationYear() {
+        return fabricationYear;
     }
 
-    public void setFabricationDate(Date fabricationDate) {
-        this.fabricationDate = fabricationDate;
+    public void setFabricationYear(Integer fabricationYear) {
+        this.fabricationYear = fabricationYear;
     }
 
     public MotorType getMotorType() {

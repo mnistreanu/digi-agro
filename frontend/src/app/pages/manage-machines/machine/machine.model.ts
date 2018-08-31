@@ -8,7 +8,7 @@ export class MachineModel {
 
     brand: string;
 
-    fabricationDate: Date;
+    fabricationYear: number;
     fabricationCountry: string;
 
     motorType: string;

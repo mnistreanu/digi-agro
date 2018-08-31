@@ -701,4 +701,13 @@
         </sql>
     </changeSet>
 
+    <changeSet id="machine_fabrication_year" author="maxim.nistreanu" failOnError="false" runOnChange="true">
+        <sql>
+            UPDATE machine SET fabrication_year = date_part('year', fabrication_date)
+                WHERE fabrication_date IS NOT null;
+
+            ALTER TABLE machine DROP COLUMN fabrication_date;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

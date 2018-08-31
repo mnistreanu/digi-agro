@@ -72,7 +72,7 @@ public class MachineService implements HasRepository<MachineRepository> {
         entity.setName(model.getName());
         entity.setType(model.getType());
 
-        entity.setFabricationDate(model.getFabricationDate());
+        entity.setFabricationYear(model.getFabricationYear());
         entity.setFabricationCountry(model.getFabricationCountry());
 
         entity.setMotorType(model.getMotorType());
