@@ -12,7 +12,7 @@ import {AgroWorkTypeModel} from '../../reminder/agro-work-type.model';
 import {FieldMapper} from '../../../common/field.mapper';
 import {EmployeeService} from '../../../services/employee.service';
 import {EmployeeModel} from '../../employee/employee/employee.model';
-import {IMultiSelectSettings} from 'angular-2-dropdown-multiselect';
+import {IMultiSelectSettings, IMultiSelectTexts} from 'angular-2-dropdown-multiselect';
 import {ListItem} from '../../../interfaces/list-item.interface';
 
 
@@ -40,8 +40,18 @@ export class MachineComponent implements OnInit {
     multiSelectSettings: IMultiSelectSettings = {
         checkedStyle: 'fontawesome',
         buttonClasses: 'btn btn-secondary btn-block',
-        dynamicTitleMaxItems: 3
+        dynamicTitleMaxItems: 3,
+        displayAllSelectedText: true
     };
+    multiSelectTexts: IMultiSelectTexts = {
+        checkAll: this.langService.instant(Messages.SELECT_ALL),
+        uncheckAll: this.langService.instant(Messages.UNSELECT_ALL),
+        checked: this.langService.instant(Messages.ITEM_SELECTED),
+        checkedPlural: this.langService.instant(Messages.ITEMS_SELECTED),
+        defaultTitle: this.langService.instant(Messages.PLEASE_SELECT),
+        allSelected: this.langService.instant(Messages.ALL_SELECTED),
+    };
+
 
     private labels: any;
 
