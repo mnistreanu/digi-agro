@@ -23,6 +23,13 @@
 		"name": "Agricultural crop",
 		"variety": "Variety"
 	},
+	"expenses": {
+		"agricultural-machinery": "Expenses for repairing agricultural machinery",
+		"agricultural-works": "Expenses for agricultural works",
+		"various-chemicals": "Expenses for fertilizers and pesticides",
+		"fuel": "Expenses for fuel",
+		"sowing": "Expenses for sowing"
+	},
 	"forecast": {
 		"additional_info": "Additional information",
 		"currency": "Currency",

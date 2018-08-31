@@ -23,6 +23,13 @@
 		"name": "Cultura agricolă",
 		"variety": "Soi"
 	},
+	"expenses": {
+		"agricultural-machinery": "Cheltuieli pentru repararea mașinilor agricole",
+		"agricultural-works": "Cheltuieli pentru lucrări agricole",
+		"various-chemicals": "Cheltuieli pentru îngrășăminte și pesticide",
+		"fuel": "Cheltuieli pentru combustibil",
+		"sowing": "Cheltuieli pentru însămânțare"
+	},
 	"forecast": {
 		"additional_info": "Informații suplimnetare",
 		"currency": "Monedă",
