@@ -28,11 +28,6 @@ public class MachineController {
         return ResponseEntity.ok(models);
     }
 
-    @RequestMapping(value = "/identifiers", method = RequestMethod.GET)
-    public ResponseEntity<List<String>> fetchIdentifiers() {
-        return ResponseEntity.ok(machineService.fetchIdentifiers());
-    }
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<MachineModel> getModel(@PathVariable Long id) {
         Machine machine = machineService.findOne(id);

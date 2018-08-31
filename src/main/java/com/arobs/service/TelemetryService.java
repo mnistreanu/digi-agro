@@ -26,18 +26,12 @@ public class TelemetryService implements HasRepository<MachineTelemetryRepositor
     @Autowired
     private MachineService machineService;
 
-
     public MachineTelemetry findOne(Long id) {
         return getRepository().findOne(id);
     }
 
-    public List<MachineTelemetry> findAll() {
-        return getRepository().findAll();
-    }
-
-
-    public List<MachineTelemetry> find(String machineIdentifier, Long userId) {
-        return getRepository().find(machineIdentifier, userId);
+    public List<MachineTelemetry> find(Long machineId, Long userId) {
+        return getRepository().find(machineId, userId);
     }
 
     @Transactional
@@ -52,6 +46,8 @@ public class TelemetryService implements HasRepository<MachineTelemetryRepositor
         if (model.getId() == null) {
             entity = new MachineTelemetry();
             entity.setUserAccount(userAccountService.findOne(userId));
+            entity.setMachine(machineService.findOne(model.getMachineId()));
+            entity.setCreatedAt(new Date());
         }
         else {
             entity = findOne(model.getId());
@@ -64,12 +60,6 @@ public class TelemetryService implements HasRepository<MachineTelemetryRepositor
     private void copyValues(MachineTelemetry entity, MachineTelemetryModel model) {
         entity.setLongitude(model.getLongitude());
         entity.setLatitude(model.getLatitude());
-
-        if (entity.getCreatedAt() == null) {
-            entity.setCreatedAt(new Date());
-        }
-
-        entity.setMachine(machineService.findByIdentifier(model.getMachineIdentifier()));
     }
 
     @Transactional

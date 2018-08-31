@@ -17,7 +17,7 @@ import {LangService} from '../../../services/lang.service';
 export class MapEventsComponent implements OnInit {
 
 
-    @Output() mapEventChanged: EventEmitter<MapEventModel[]> = new EventEmitter<MapEventModel[]>();
+    @Output() dataChanged: EventEmitter<MapEventModel[]> = new EventEmitter<MapEventModel[]>();
 
     options: GridOptions;
     context;
@@ -137,7 +137,7 @@ export class MapEventsComponent implements OnInit {
 
         this.mapEventService.update(model.id, field, value).subscribe(() => {
             this.toastr.success(this.labelSaved);
-            this.mapEventChanged.emit(this.models);
+            this.dataChanged.emit(this.models);
         });
     }
 
@@ -146,7 +146,7 @@ export class MapEventsComponent implements OnInit {
             this.options.api.setRowData(models);
             this.models = models;
             this.adjustGridSize();
-            this.mapEventChanged.emit(this.models);
+            this.dataChanged.emit(this.models);
         });
     }
 
@@ -177,7 +177,7 @@ export class MapEventsComponent implements OnInit {
             item.id = savedModel.id;
 
             this.models.push(item);
-            this.mapEventChanged.emit(this.models);
+            this.dataChanged.emit(this.models);
 
             this.toastr.success(this.labelAdded);
         });
@@ -189,7 +189,7 @@ export class MapEventsComponent implements OnInit {
 
         this.mapEventService.remove(model).subscribe(() => {
             this.models.splice(this.models.indexOf(model), 1);
-            this.mapEventChanged.emit(this.models);
+            this.dataChanged.emit(this.models);
             this.toastr.success(this.labelRemoved);
         });
     }

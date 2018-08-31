@@ -9,6 +9,7 @@ import {DateUtil} from '../../../common/dateUtil';
 import {MachineService} from '../../../services/machine.service';
 import {LangService} from '../../../services/lang.service';
 import {MachineTelemetryService} from '../../../services/machine-telemetry.service';
+import {MachineModel} from '../../manage-machines/machine/machine.model';
 
 @Component({
     selector: 'app-machine-telemetry',
@@ -17,13 +18,13 @@ import {MachineTelemetryService} from '../../../services/machine-telemetry.servi
 })
 export class MachineTelemetryComponent implements OnInit {
 
-    @Output() coordinateChanged: EventEmitter<MachineTelemetryModel[]> = new EventEmitter<MachineTelemetryModel[]>();
+    @Output() dataChanged: EventEmitter<MachineTelemetryModel[]> = new EventEmitter<MachineTelemetryModel[]>();
 
     options: GridOptions;
     context;
 
-    machineIdentifier: string;
-    availableMachineIdentifiers: string[];
+    selectedMachine: MachineModel;
+    machines: MachineModel[];
 
     models: MachineTelemetryModel[] = [];
 
@@ -40,8 +41,8 @@ export class MachineTelemetryComponent implements OnInit {
 
     ngOnInit(): void {
         this.setupLabels();
-        this.setupMachineIdentifiers();
-        this.setupGrid();
+        this.setupMachines()
+            .then(() => this.setupGrid());
     }
 
     private setupLabels() {
@@ -50,16 +51,22 @@ export class MachineTelemetryComponent implements OnInit {
         this.langService.get(Messages.REMOVED).subscribe(msg => this.labelRemoved = msg);
     }
 
-    private setupMachineIdentifiers() {
-        this.machineService.fetchIdentifiers().subscribe(data => {
-            this.availableMachineIdentifiers = data;
+    private setupMachines(): Promise<void> {
+        return new Promise((resolve) => {
+            this.machineService.findAll().subscribe(data => {
+                this.machines = data;
 
-            if (data && data.length > 0) {
-                return;
-            }
+                if (data && data.length > 0) {
+                    this.selectedMachine = this.machines[0];
+                }
 
-            this.machineIdentifier = this.availableMachineIdentifiers[0];
+                resolve();
+            });
         });
+    }
+
+    public onMachineChange() {
+        this.setupRows();
     }
 
     public setupGrid() {
@@ -77,12 +84,6 @@ export class MachineTelemetryComponent implements OnInit {
     private setupHeaders() {
 
         const headers: ColDef[] = [
-            {
-                headerName: 'Machine Identifier',
-                field: 'machineIdentifier',
-                width: 200,
-                minWidth: 200
-            },
             {
                 headerName: 'Latitude',
                 field: 'latitude',
@@ -125,6 +126,8 @@ export class MachineTelemetryComponent implements OnInit {
             }
         ];
 
+        // todo: add translations
+
         return headers;
     }
 
@@ -152,16 +155,16 @@ export class MachineTelemetryComponent implements OnInit {
 
         this.machineTelemetryService.updateCoordinate(model.id, field, value).subscribe(() => {
             this.toastr.success(this.labelSaved);
-            this.coordinateChanged.emit(this.models);
+            this.dataChanged.emit(this.models);
         });
     }
 
     public setupRows() {
-        this.machineTelemetryService.find(this.machineIdentifier).subscribe(models => {
+        this.machineTelemetryService.find(this.selectedMachine.id).subscribe(models => {
             this.options.api.setRowData(models);
             this.models = models;
             this.adjustGridSize();
-            this.coordinateChanged.emit(this.models);
+            this.dataChanged.emit(this.models);
         });
     }
 
@@ -180,7 +183,7 @@ export class MachineTelemetryComponent implements OnInit {
     public add() {
         const item = new MachineTelemetryModel();
 
-        item.machineIdentifier = this.machineIdentifier;
+        item.machineId = this.selectedMachine.id;
         item.createdAt = new Date();
         item.latitude = 0;
         item.longitude = 0;
@@ -191,7 +194,7 @@ export class MachineTelemetryComponent implements OnInit {
             item.id = savedModel.id;
 
             this.models.push(item);
-            this.coordinateChanged.emit(this.models);
+            this.dataChanged.emit(this.models);
             this.toastr.success(this.labelAdded);
         });
     }
@@ -202,7 +205,7 @@ export class MachineTelemetryComponent implements OnInit {
 
         this.machineTelemetryService.remove(model).subscribe(() => {
             this.models.splice(this.models.indexOf(model), 1);
-            this.coordinateChanged.emit(this.models);
+            this.dataChanged.emit(this.models);
             this.toastr.success(this.labelRemoved);
         });
     }

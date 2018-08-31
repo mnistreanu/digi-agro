@@ -12,15 +12,9 @@ import java.util.List;
 @Repository
 public interface MachineRepository extends JpaRepository<Machine, Long> {
 
-    @Query("SELECT m.identifier FROM Machine m WHERE m.active = true")
-    List<String> fetchIdentifiers();
-
     @Modifying
     @Query("UPDATE Machine m SET m.active = false WHERE m.id = :id")
     void remove(@Param("id") Long id);
-
-    @Query("SELECT m FROM Machine m WHERE m.identifier = :identifier AND m.active = true")
-    Machine findByIdentifier(@Param("identifier") String identifier);
 
     @Query("SELECT m FROM Machine m " +
             "WHERE m.active = true AND m.tenant.id = :tenantId")

@@ -31,10 +31,6 @@ export class MachineService {
         return this.http.get<MachineModel[]>(this.api + '/');
     }
 
-    fetchIdentifiers(): Observable<string[]> {
-        return this.http.get<string[]>(this.api + '/identifiers');
-    }
-
     save(model: MachineModel): Observable<MachineModel> {
         return this.http.post<MachineModel>(this.api + '/', model);
     }

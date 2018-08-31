@@ -10,7 +10,7 @@ public class MachineTelemetryModel {
 
     private Long id;
 
-    private String machineIdentifier;
+    private Long machineId;
 
     private BigDecimal latitude;
     private BigDecimal longitude;
@@ -23,7 +23,7 @@ public class MachineTelemetryModel {
     public MachineTelemetryModel(MachineTelemetry entity) {
         id = entity.getId();
 
-        machineIdentifier = entity.getMachine().getIdentifier();
+        machineId = entity.getMachine().getId();
 
         longitude = entity.getLongitude();
         latitude = entity.getLatitude();
@@ -37,14 +37,6 @@ public class MachineTelemetryModel {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getMachineIdentifier() {
-        return machineIdentifier;
-    }
-
-    public void setMachineIdentifier(String machineIdentifier) {
-        this.machineIdentifier = machineIdentifier;
     }
 
     public BigDecimal getLatitude() {
@@ -69,5 +61,13 @@ public class MachineTelemetryModel {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Long getMachineId() {
+        return machineId;
+    }
+
+    public void setMachineId(Long machineId) {
+        this.machineId = machineId;
     }
 }

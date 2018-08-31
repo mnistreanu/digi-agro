@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Constants} from '../common/constants';
 import {Observable} from 'rxjs/Rx';
 import {MachineTelemetryModel} from '../pages/telemetry/machine-telemetry/machine-telemetry.model';
-import { environment } from '../../environments/environment';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class MachineTelemetryService {
@@ -18,8 +17,8 @@ export class MachineTelemetryService {
     }
 
 
-    find(machineIdentifier): Observable<MachineTelemetryModel[]> {
-        const query = `?machineIdentifier=${machineIdentifier}`;
+    find(machineId): Observable<MachineTelemetryModel[]> {
+        const query = `?machineId=${machineId}`;
         return this.http.get<MachineTelemetryModel[]>(this.api + '/' + query);
     }
 

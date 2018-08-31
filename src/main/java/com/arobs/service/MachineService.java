@@ -35,20 +35,12 @@ public class MachineService implements HasRepository<MachineRepository> {
         return commonCustomRepository.isUnique("Machine", currentId, field, value);
     }
 
-    public Machine findByIdentifier(String identifier) {
-        return getRepository().findByIdentifier(identifier);
-    }
-
     public Machine findOne(Long id) {
         return getRepository().findOne(id);
     }
 
     public List<Machine> find(Long tenantId) {
         return getRepository().find(tenantId);
-    }
-
-    public List<String> fetchIdentifiers() {
-        return getRepository().fetchIdentifiers();
     }
 
     @Transactional
