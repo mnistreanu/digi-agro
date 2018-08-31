@@ -144,6 +144,7 @@ export class MachineComponent implements OnInit {
         this.isNew = true;
 
         this.model.workTypes = [];
+        this.model.employees = [];
         this.buildForm();
     }
 
@@ -161,7 +162,7 @@ export class MachineComponent implements OnInit {
             power: [{value: this.model.power, disabled: !this.hasMotor}],
             speedOnRoad: [this.model.speedOnRoad],
             speedInWork: [this.model.speedInWork],
-            employees: [this.model.employees],
+            employees: [this.model.employees.map(e => e.id)],
             workTypeControls: this.buildWorkTypeControls()
         });
     }
@@ -196,6 +197,7 @@ export class MachineComponent implements OnInit {
 
         Object.assign(this.model, form.value);
         this.model.workTypes = this.getWorkTypes(form);
+        this.model.employees = this.getEmployees(form);
 
         this.isNew = false;
         this.submitted = false;
@@ -217,6 +219,13 @@ export class MachineComponent implements OnInit {
         });
 
         return checkedItems;
+    }
+
+    private getEmployees(form: FormGroup): EmployeeModel[] {
+        const employeeMap = {};
+        this.employees.forEach(e => employeeMap[e.id] = e);
+
+        return form.value.employees.map((employeeId) => employeeMap[employeeId]);
     }
 
     public remove() {

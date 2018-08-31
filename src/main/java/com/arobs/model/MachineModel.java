@@ -31,7 +31,8 @@ public class MachineModel {
     private Double speedOnRoad;
     private Double speedInWork;
 
-    private List<Long> employees;
+    private List<EmployeeModel> employees;
+
     private List<Long> workTypes;
 
     public MachineModel() {
@@ -57,7 +58,7 @@ public class MachineModel {
         speedInWork = entity.getSpeedInWork();
 
         if (entity.getEmployees() != null) {
-            employees = entity.getEmployees().stream().map(Employee::getId).collect(Collectors.toList());
+            employees = entity.getEmployees().stream().map(EmployeeModel::new).collect(Collectors.toList());
         }
 
         if (entity.getWorkTypes() != null) {
@@ -161,11 +162,11 @@ public class MachineModel {
         this.speedInWork = speedInWork;
     }
 
-    public List<Long> getEmployees() {
+    public List<EmployeeModel> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(List<Long> employees) {
+    public void setEmployees(List<EmployeeModel> employees) {
         this.employees = employees;
     }
 

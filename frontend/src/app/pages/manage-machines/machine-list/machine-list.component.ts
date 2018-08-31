@@ -61,15 +61,19 @@ export class MachineListComponent implements OnInit {
             },
             {
                 headerName: 'machine.model',
+                field: 'brandAndModel',
                 width: 200,
-                minWidth: 200,
-                valueGetter: (params) => {
-                    return params.data.brand + '-' + params.data.model;
-                }
+                minWidth: 200
             },
             {
                 headerName: 'machine.type',
                 field: 'type',
+                width: 200,
+                minWidth: 200
+            },
+            {
+                headerName: 'machine.responsible-persons',
+                field: 'responsiblePersons',
                 width: 200,
                 minWidth: 200
             }
@@ -86,6 +90,10 @@ export class MachineListComponent implements OnInit {
 
     private setupRows() {
         this.machineService.findAll().subscribe(models => {
+            models.forEach((model) => {
+                model['brandAndModel'] = model.brand + '-' + model.model;
+                model['responsiblePersons'] = model.employees.map(m => m.firstName + ' ' + m.lastName).join(', ');
+            });
             this.options.api.setRowData(models);
         });
     }

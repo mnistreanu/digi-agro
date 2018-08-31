@@ -1,3 +1,5 @@
+import {EmployeeModel} from '../../employee/employee/employee.model';
+
 export class MachineModel {
 
     id: number;
@@ -18,6 +20,6 @@ export class MachineModel {
     speedOnRoad: number;
     speedInWork: number;
 
-    employees: number[];
+    employees: EmployeeModel[];
     workTypes: number[];
 }

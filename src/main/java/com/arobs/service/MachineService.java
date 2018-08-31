@@ -2,6 +2,7 @@ package com.arobs.service;
 
 import com.arobs.entity.Machine;
 import com.arobs.interfaces.HasRepository;
+import com.arobs.model.EmployeeModel;
 import com.arobs.model.MachineModel;
 import com.arobs.repository.MachineRepository;
 import com.arobs.repository.custom.CommonCustomRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MachineService implements HasRepository<MachineRepository> {
@@ -90,7 +92,8 @@ public class MachineService implements HasRepository<MachineRepository> {
 
         entity.getEmployees().clear();
         if (!StaticUtil.isEmpty(model.getEmployees())) {
-            entity.getEmployees().addAll(employeeService.findAll(model.getEmployees()));
+            List<Long> ids = model.getEmployees().stream().map(EmployeeModel::getId).collect(Collectors.toList());
+            entity.getEmployees().addAll(employeeService.findAll(ids));
         }
     }
 }

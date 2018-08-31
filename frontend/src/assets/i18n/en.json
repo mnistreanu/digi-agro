@@ -91,6 +91,7 @@
 		"model": "Model",
 		"motor": "Motor",
 		"power": "Power",
+		"responsible-persons": "Responsible Persons",
 		"speed-in-work": "Speed In Work",
 		"speed-on-road": "Speed On Road",
 		"type": "Type",

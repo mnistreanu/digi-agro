@@ -91,6 +91,7 @@
 		"model": "Model",
 		"motor": "Motor",
 		"power": "Putere",
+		"responsible-persons": "Pers. Resp.",
 		"speed-in-work": "Viteză în munca",
 		"speed-on-road": "Viteza pe drum",
 		"type": "Tip",
