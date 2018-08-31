@@ -17,7 +17,7 @@ import {LangService} from '../../../services/lang.service';
 export class MapEventsComponent implements OnInit {
 
 
-    @Output() mapEventChanged: EventEmitter<MapEventModel[]> = new EventEmitter<MapEventModel[]>();
+    @Output() dataChanged: EventEmitter<MapEventModel[]> = new EventEmitter<MapEventModel[]>();
 
     options: GridOptions;
     context;
@@ -61,7 +61,7 @@ export class MapEventsComponent implements OnInit {
 
         const headers: ColDef[] = [
             {
-                headerName: 'Message',
+                headerName: 'event.message',
                 field: 'message',
                 width: 200,
                 minWidth: 200,
@@ -69,7 +69,7 @@ export class MapEventsComponent implements OnInit {
                 onCellValueChanged: (params) => this.onDataChange(params)
             },
             {
-                headerName: 'Latitude',
+                headerName: 'geo.latitude',
                 field: 'latitude',
                 width: 100,
                 minWidth: 100,
@@ -78,7 +78,7 @@ export class MapEventsComponent implements OnInit {
                 onCellValueChanged: (params) => this.onDataChange(params)
             },
             {
-                headerName: 'Longitude',
+                headerName: 'geo.longitude',
                 field: 'longitude',
                 width: 100,
                 minWidth: 100,
@@ -87,7 +87,7 @@ export class MapEventsComponent implements OnInit {
                 onCellValueChanged: (params) => this.onDataChange(params)
             },
             {
-                headerName: 'Created At',
+                headerName: 'info.creation-time',
                 field: 'createdAt',
                 width: 120,
                 minWidth: 170,
@@ -109,6 +109,12 @@ export class MapEventsComponent implements OnInit {
                 }
             }
         ];
+
+        headers.forEach(header => {
+            if (header.headerName) {
+                this.langService.get(header.headerName).subscribe(m => header.headerName = m);
+            }
+        });
 
         return headers;
     }
@@ -137,7 +143,7 @@ export class MapEventsComponent implements OnInit {
 
         this.mapEventService.update(model.id, field, value).subscribe(() => {
             this.toastr.success(this.labelSaved);
-            this.mapEventChanged.emit(this.models);
+            this.dataChanged.emit(this.models);
         });
     }
 
@@ -146,7 +152,7 @@ export class MapEventsComponent implements OnInit {
             this.options.api.setRowData(models);
             this.models = models;
             this.adjustGridSize();
-            this.mapEventChanged.emit(this.models);
+            this.dataChanged.emit(this.models);
         });
     }
 
@@ -177,7 +183,7 @@ export class MapEventsComponent implements OnInit {
             item.id = savedModel.id;
 
             this.models.push(item);
-            this.mapEventChanged.emit(this.models);
+            this.dataChanged.emit(this.models);
 
             this.toastr.success(this.labelAdded);
         });
@@ -189,7 +195,7 @@ export class MapEventsComponent implements OnInit {
 
         this.mapEventService.remove(model).subscribe(() => {
             this.models.splice(this.models.indexOf(model), 1);
-            this.mapEventChanged.emit(this.models);
+            this.dataChanged.emit(this.models);
             this.toastr.success(this.labelRemoved);
         });
     }

@@ -1,8 +1,8 @@
 <div>
 
-    <app-machine-telemetry (coordinateChanged)="processCoordinates($event)"></app-machine-telemetry>
+    <app-machine-telemetry (dataChanged)="processCoordinates($event)"></app-machine-telemetry>
 
-    <app-map-events (mapEventChanged)="processEvents($event)"></app-map-events>
+    <app-map-events (dataChanged)="processEvents($event)"></app-map-events>
 
     <app-telemetry-map [polylinePath]="mapPolylinePath" [markers]="mapMarkers"></app-telemetry-map>
 

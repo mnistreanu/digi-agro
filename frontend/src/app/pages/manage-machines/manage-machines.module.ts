@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-block.module';
 import {MachineService} from '../../services/machine.service';
 import {BrandService} from '../../services/brand.service';
+import {MultiselectDropdownModule} from 'angular-2-dropdown-multiselect';
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import {BrandService} from '../../services/brand.service';
         DirectivesModule,
         FormErrorBlockModule,
         EditRendererModule,
+        MultiselectDropdownModule,
         AgGridModule.withComponents([EditRendererComponent])
     ],
     declarations: [MachineListComponent, MachineComponent],

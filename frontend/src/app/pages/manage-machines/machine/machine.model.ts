@@ -6,7 +6,6 @@ export class MachineModel {
 
     type: string;
 
-    owner: string;
     brand: string;
 
     fabricationDate: Date;
@@ -19,6 +18,5 @@ export class MachineModel {
     speedOnRoad: number;
     speedInWork: number;
 
-    workTypes: string[];
-
+    workTypes: number[];
 }

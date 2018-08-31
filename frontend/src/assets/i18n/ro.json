@@ -15,6 +15,9 @@
 		"branch": "Filial",
 		"branches": "Filiale"
 	},
+	"brand": {
+		"brand": "Brand"
+	},
 	"contact": {
 		"phone": "Telefon"
 	},
@@ -23,13 +26,17 @@
 		"name": "Cultura agricolă",
 		"variety": "Soi"
 	},
-	"expenses": {
-		"agricultural-machinery": "Cheltuieli pentru repararea mașinilor agricole",
-		"agricultural-works": "Cheltuieli pentru lucrări agricole",
-		"various-chemicals": "Cheltuieli pentru îngrășăminte și pesticide",
-		"fuel": "Cheltuieli pentru combustibil",
-		"sowing": "Cheltuieli pentru însămânțare"
+	"event": {
+		"events": "Evenimente",
+		"message": "Mesaj"
 	},
+    "expenses": {
+      "agricultural-machinery": "Cheltuieli pentru repararea mașinilor agricole",
+      "agricultural-works": "Cheltuieli pentru lucrări agricole",
+      "various-chemicals": "Cheltuieli pentru îngrășăminte și pesticide",
+      "fuel": "Cheltuieli pentru combustibil",
+      "sowing": "Cheltuieli pentru însămânțare"
+    },
 	"forecast": {
 		"additional_info": "Informații suplimnetare",
 		"currency": "Monedă",
@@ -52,8 +59,11 @@
 	},
 	"geo": {
 		"address": "Adresa",
+		"coords": "Coordonate",
 		"country": "Țară",
 		"county": "Județ",
+		"latitude": "Latitudine",
+		"longitude": "Longitudine",
 		"map": "Hartă",
 		"village-city": "Sat/Oraș"
 	},
@@ -67,16 +77,31 @@
 		"language": "Limba"
 	},
 	"machine": {
+		"consumption": "Consum",
+		"fabrication-country": "Țara de origine",
+		"fabrication-date": "Data de fabricație",
+		"identifier": "Identificator",
+		"machine": "Mașină",
 		"motor": "Motor",
 		"power": "Putere",
 		"speed-in-work": "Viteză în munca",
 		"speed-on-road": "Viteza pe drum",
 		"type": "Tip",
-		"work-types": "Tipuri de lucrul",
-		"сonsumption": "Consum"
+		"work-types": "Tipuri de lucrul"
+	},
+	"machine-motor": {
+		"benzine": "Benzină",
+		"diesel": "Motorină",
+		"electric": "Electrica",
+		"none": "Nu este"
+	},
+	"machine-type": {
+		"combine": "Combină",
+		"sowing": "Semănătoare",
+		"tractor": "Tractor"
 	},
 	"nav": {
-		"expenses-management": "Evidența cheltuielilor",
+		"agricultural-machinery": "Maşini agricole",
 		"agricultural-works": "Lucrări agricole",
 		"branches": "Filiale",
 		"brands": "Brands",
@@ -85,7 +110,8 @@
 		"crops": "Culturi agricole",
 		"crops-varieties": "Culturi agricole și soiuri",
 		"dashboard": "Dashboard",
-		"fertilizers-pesticides": "Îngrășăminte, pesticide",
+		"expenses-management": "Evidența cheltuielilor",
+      "fertilizers-pesticides": "Îngrășăminte, pesticide",
 		"forecast-list": "Lista",
 		"forecasting-charts": "Diagrame de prognoză",
 		"forecasts": "Prognoze",
@@ -107,8 +133,7 @@
 		"weather": "Date meteo",
 		"weather-forecast": "Prognoza meteo",
 		"weather-history": "Date meteo istorice",
-		"work-agenda": "Agenda lucrărilor",
-		"agricultural-machinery": "Maşini agricole"
+		"work-agenda": "Agenda lucrărilor"
 	},
 	"notification": {
 		"mark-all-as-read": "Marcheaza toate ca fiind citite",

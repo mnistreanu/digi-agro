@@ -1,6 +1,6 @@
 <div widget class="card bottom-30">
   <div class="card-header">
-    <span>Coordinates</span>
+    <span translate>geo.coords</span>
     <div class="widget-controls">
       <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
       <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
@@ -12,13 +12,13 @@
   <div class="card-body widget-body">
 
     <div>
-      <button class="btn btn-sm btn-primary" (click)="add()">Add</button>
+      <button class="btn btn-sm btn-primary" (click)="add()" translate>action.add</button>
 
       <form class="form-inline pull-right">
-        <label for="machineIdentifier" class="mr-1">Machine</label>
-        <select id="machineIdentifier" name="machineIdentifier" class="form-control" style="width: 150px;"
-                [(ngModel)]="machineIdentifier" (change)="onMachineChange()">
-          <option *ngFor="let i of availableMachineIdentifiers" [ngValue]="i">{{ i }}</option>
+        <label for="machine-selector" class="mr-1" translate>machine.machine</label>
+        <select id="machine-selector" name="machine" class="form-control" style="width: 150px;"
+                [(ngModel)]="selectedMachine" (change)="onMachineChange()">
+          <option *ngFor="let m of machines" [ngValue]="m">{{ m.identifier }}</option>
         </select>
       </form>
 

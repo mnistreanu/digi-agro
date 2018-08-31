@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
-import {Constants} from '../common/constants';
 import {HttpClient} from '@angular/common/http';
 import {UserList} from '../interfaces/user-list.interface';
 import {UserAccountModel} from '../pages/manage-users/user/user-account.model';
-import { environment } from '../../environments/environment';
+import {environment} from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'

@@ -28,9 +28,9 @@ public class MachineTelemetryController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<List<MachineTelemetryModel>> find(@RequestParam("machineIdentifier") String machineIdentifier) {
+    public ResponseEntity<List<MachineTelemetryModel>> find(@RequestParam("machineId") Long machineId) {
         Long userId = authService.getCurrentUser().getId();
-        List<MachineTelemetry> telemetries = telemetryService.find(machineIdentifier, userId);
+        List<MachineTelemetry> telemetries = telemetryService.find(machineId, userId);
         List<MachineTelemetryModel> models = telemetries.stream().map(MachineTelemetryModel::new).collect(Collectors.toList());
         return ResponseEntity.ok(models);
     }

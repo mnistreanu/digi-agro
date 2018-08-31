@@ -695,4 +695,10 @@
         </sql>
     </changeSet>
 
+    <changeSet id="drop_machine_work_types" author="maxim.nistreanu" failOnError="false" runOnChange="true">
+        <sql>
+            DROP TABLE machine_work_types;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

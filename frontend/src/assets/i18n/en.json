@@ -15,6 +15,9 @@
 		"branch": "Branch",
 		"branches": "Branches"
 	},
+	"brand": {
+		"brand": "Brand"
+	},
 	"contact": {
 		"phone": "Phone"
 	},
@@ -23,13 +26,17 @@
 		"name": "Agricultural crop",
 		"variety": "Variety"
 	},
-	"expenses": {
-		"agricultural-machinery": "Expenses for repairing agricultural machinery",
-		"agricultural-works": "Expenses for agricultural works",
-		"various-chemicals": "Expenses for fertilizers and pesticides",
-		"fuel": "Expenses for fuel",
-		"sowing": "Expenses for sowing"
+	"event": {
+		"events": "Events",
+		"message": "Message"
 	},
+    "expenses": {
+      "agricultural-machinery": "Expenses for repairing agricultural machinery",
+      "agricultural-works": "Expenses for agricultural works",
+      "various-chemicals": "Expenses for fertilizers and pesticides",
+      "fuel": "Expenses for fuel",
+      "sowing": "Expenses for sowing"
+    },
 	"forecast": {
 		"additional_info": "Additional information",
 		"currency": "Currency",
@@ -52,8 +59,11 @@
 	},
 	"geo": {
 		"address": "Address",
+		"coords": "Coordinates",
 		"country": "Country",
 		"county": "County",
+		"latitude": "Latitude",
+		"longitude": "Longitude",
 		"map": "Map",
 		"village-city": "Village/City"
 	},
@@ -67,16 +77,31 @@
 		"language": "Language"
 	},
 	"machine": {
+		"consumption": "Consumption",
+		"fabrication-country": "Fabrication Country",
+		"fabrication-date": "Fabrication Date",
+		"identifier": "Identifier",
+		"machine": "Machine",
 		"motor": "Motor",
 		"power": "Power",
 		"speed-in-work": "Speed In Work",
 		"speed-on-road": "Speed On Road",
 		"type": "Type",
-		"work-types": "Work Types",
-		"сonsumption": "Consumption"
+		"work-types": "Work Types"
+	},
+	"machine-motor": {
+		"benzine": "Benzine",
+		"diesel": "Diesel",
+		"electric": "Electric",
+		"none": "None"
+	},
+	"machine-type": {
+		"combine": "Combine",
+		"sowing": "Sowing",
+		"tractor": "Tractor"
 	},
 	"nav": {
-		"expenses-management": "Expenses management",
+		"agricultural-machinery": "Agricultural machinery",
 		"agricultural-works": "Agricultural works",
 		"branches": "Branches",
 		"brands": "Brands",
@@ -85,7 +110,8 @@
 		"crops": "Crops",
 		"crops-varieties": "Crops & Varieties",
 		"dashboard": "Dashboard",
-		"fertilizers-pesticides": "Fertilizers & pesticides",
+		"expenses-management": "Expenses management",
+        "fertilizers-pesticides": "Fertilizers & pesticides",
 		"forecast-list": "List",
 		"forecasting-charts": "Forecasting charts",
 		"forecasts": "Forecasts",
@@ -107,8 +133,7 @@
 		"weather": "Weather",
 		"weather-forecast": "Weather forecast",
 		"weather-history": "Weather history",
-		"work-agenda": "Work agenda",
-		"agricultural-machinery": "Agricultural machinery"
+		"work-agenda": "Work agenda"
 	},
 	"notification": {
 		"mark-all-as-read": "Mark All as Read",

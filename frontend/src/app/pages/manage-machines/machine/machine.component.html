@@ -1,159 +1,157 @@
 <form [formGroup]="form" *ngIf="model" (keydown.enter)="$event.preventDefault()">
 
-  <div widget class="card bottom-30">
-    <div class="card-header">
-      <span>Machine</span>
-      <div class="widget-controls">
-        <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
-        <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
-        <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
-        <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>
-        <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
-      </div>
-    </div>
-    <div class="card-body widget-body">
-
-
-      <div class="form-group row">
-        <div class="col-sm-6">
-          <label for="type">Type</label>
-          <div>
-            <select id="type" class="form-control" formControlName="type">
-              <option *ngFor="let t of machineTypes" [ngValue]="t">{{ t }}</option>
-            </select>
-          </div>
-          <app-form-error-block [control]="form.get('type')" [formSubmitted]="submitted"
-                                [title]="'Type'"></app-form-error-block>
+    <div widget class="card bottom-30">
+        <div class="card-header">
+            <span translate>machine.machine</span>
+            <div class="widget-controls">
+                <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
+                <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
+                <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
+                <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>
+                <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+            </div>
         </div>
+        <div class="card-body widget-body">
 
-        <div class="col-sm-6">
-          <label for="owner">Owner</label>
-          <div>
-            <input id="owner" class="form-control checking-field"
-                   formControlName="owner" auto-complete [source]="owners">
-          </div>
-          <app-form-error-block [control]="form.get('owner')" [formSubmitted]="submitted"
-                                [title]="'Owner'"></app-form-error-block>
-        </div>
-      </div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="type" translate>machine.type</label>
+                    <div>
+                        <select id="type" class="form-control" formControlName="type">
+                            <option value="TRACTOR" translate>machine-type.tractor</option>
+                            <option value="COMBINE" translate>machine-type.combine</option>
+                            <option value="SOWING" translate>machine-type.sowing</option>
+                        </select>
+                    </div>
+                    <app-form-error-block [control]="form.get('type')"
+                                          [formSubmitted]="submitted">
+                    </app-form-error-block>
+                </div>
 
-      <div class="form-group row">
-        <div class="col-sm-6">
-          <label for="brand">Brand</label>
-          <div>
-            <input id="brand" class="form-control checking-field"
-                   formControlName="brand" auto-complete [source]="brands">
-          </div>
-          <app-form-error-block [control]="form.get('brand')" [formSubmitted]="submitted"
-                                [title]="'Brand'"></app-form-error-block>
-        </div>
-
-        <div class="col-sm-6">
-          <label for="name">Name</label>
-          <div>
-            <input id="name" class="form-control checking-field" formControlName="name">
-          </div>
-          <app-form-error-block [control]="form.get('name')" [formSubmitted]="submitted"
-                                [title]="'Name'"></app-form-error-block>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <div class="col-sm-6">
-          <label for="identifier">Identifier</label>
-          <div>
-            <input id="identifier" class="form-control checking-field" formControlName="identifier" (change)="onIdentifierChange()">
-          </div>
-          <app-form-error-block [control]="form.get('identifier')" [formSubmitted]="submitted"
-                                [title]="'Identifier'"></app-form-error-block>
-        </div>
-      </div>
-
-      <div class="form-group row">
-
-        <div class="col-sm-6">
-          <label for="fabricationCountry">Fabrication Country</label>
-          <div>
-            <input id="fabricationCountry" class="form-control" formControlName="fabricationCountry">
-          </div>
-        </div>
-
-        <div class="col-sm-6">
-          <label for="fabricationDate">Fabrication Date</label>
-          <div>
-            <input id="fabricationDate" type="date" class="form-control" formControlName="fabricationDate">
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <div class="col-sm-6">
-          <label for="motor" translate>machine.motor</label>
-          <div>
-            <select id="motor" class="form-control checking-field" formControlName="motorType"
-                    (change)="onMotorTypeChange($event)">
-              <option *ngFor="let t of motorTypes" [ngValue]="t">{{ t }}</option>
-            </select>
-          </div>
-          <app-form-error-block [control]="form.get('motorType')" [formSubmitted]="submitted"
-                                [title]="'Motor'"></app-form-error-block>
-        </div>
-
-        <div class="col-sm-6">
-
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label for="consumption">Consumption</label>
-              <div>
-                <input id="consumption" type="number" class="form-control" formControlName="consumption">
-              </div>
+                <div class="col-sm-6">
+                    <label for="identifier" translate>machine.identifier</label>
+                    <div>
+                        <input id="identifier" class="form-control checking-field" formControlName="identifier"
+                               (change)="onIdentifierChange()">
+                    </div>
+                    <app-form-error-block [control]="form.get('identifier')"
+                                          [formSubmitted]="submitted"></app-form-error-block>
+                </div>
             </div>
 
-            <div class="col-sm-6">
-              <label for="power">Power</label>
-              <div>
-                <input id="power" type="number" class="form-control" formControlName="power">
-              </div>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="brand" translate>brand.brand</label>
+                    <div>
+                        <input id="brand" class="form-control checking-field"
+                               formControlName="brand" auto-complete [source]="brands">
+                    </div>
+                    <app-form-error-block [control]="form.get('brand')"
+                                          [formSubmitted]="submitted">
+                    </app-form-error-block>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="name" translate>info.name</label>
+                    <div>
+                        <input id="name" class="form-control checking-field" formControlName="name">
+                    </div>
+                    <app-form-error-block [control]="form.get('name')"
+                                          [formSubmitted]="submitted">
+                    </app-form-error-block>
+                </div>
             </div>
-          </div>
+
+            <div class="form-group row">
+
+                <div class="col-sm-6">
+                    <label for="fabricationCountry" translate>machine.fabrication-country</label>
+                    <div>
+                        <input id="fabricationCountry" class="form-control" formControlName="fabricationCountry">
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="fabricationDate" translate>machine.fabrication-date</label>
+                    <div>
+                        <input id="fabricationDate" type="date" class="form-control" formControlName="fabricationDate">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="motor" translate>machine.motor</label>
+                    <div>
+                        <select id="motor" class="form-control checking-field"
+                                formControlName="motorType" (change)="onMotorTypeChange()">
+                            <option value="NONE" translate>machine-motor.none</option>
+                            <option value="ELECTRIC" translate>machine-motor.electric</option>
+                            <option value="DIESEL" translate>machine-motor.diesel</option>
+                            <option value="BENZINE" translate>machine-motor.benzine</option>
+                        </select>
+                    </div>
+                    <app-form-error-block [control]="form.get('motorType')"
+                                          [formSubmitted]="submitted">
+                    </app-form-error-block>
+                </div>
+
+                <div class="col-sm-6">
+
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="consumption" translate>machine.consumption</label>
+                            <div>
+                                <input id="consumption" type="number" class="form-control"
+                                       formControlName="consumption">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="power" translate>machine.power</label>
+                            <div>
+                                <input id="power" type="number" class="form-control" formControlName="power">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="speedOnRoad" translate>machine.speed-on-road</label>
+                    <div>
+                        <input id="speedOnRoad" type="number" class="form-control" formControlName="speedOnRoad">
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="speedInWork" translate>machine.speed-in-work</label>
+                    <div>
+                        <input id="speedInWork" type="number" class="form-control" formControlName="speedInWork">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-2">
+                    <span translate>machine.work-types</span>
+                </div>
+                <div class="col-sm-10">
+                    <div *ngFor="let w of form.controls['workTypeControls'].controls; let i = index"
+                         class="abc-checkbox abc-checkbox-primary">
+                        <input id="wt-cb-{{i}}" type="checkbox" [formControl]="w">
+                        <label for="wt-cb-{{i}}">{{ workTypes[i].name }}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-danger" *ngIf="!isNew" (click)="remove()" translate>action.remove</button>
+                <button class="btn btn-success pull-right" (click)="save(form)" translate>action.save</button>
+            </div>
+
         </div>
-      </div>
-
-      <div class="form-group row">
-        <div class="col-sm-6">
-          <label for="speedOnRoad">Speed On Road</label>
-          <div>
-            <input id="speedOnRoad" type="number" class="form-control" formControlName="speedOnRoad">
-          </div>
-        </div>
-
-        <div class="col-sm-6">
-          <label for="speedInWork">Speed In Work</label>
-          <div>
-            <input id="speedInWork" type="number" class="form-control" formControlName="speedInWork">
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <div class="col-sm-2">
-          <span>Work Types</span>
-        </div>
-
-        <div class="col-sm-10">
-          <div *ngFor="let w of form.controls['workTypesIndices'].controls; let i = index" class="abc-checkbox abc-checkbox-primary">
-            <input id="work-type-cb-{{i}}" type="checkbox" [formControl]="w">
-            <label for="work-type-cb-{{i}}"> {{availableWorkTypes[i]}}</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <button class="btn btn-danger" *ngIf="!isNew" (click)="remove()">Remove</button>
-        <button class="btn btn-success pull-right" (click)="save(form)">Save</button>
-      </div>
-
     </div>
-  </div>
 
 </form>

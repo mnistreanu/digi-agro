@@ -4,6 +4,8 @@ import com.arobs.entity.Machine;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.MachineModel;
 import com.arobs.repository.MachineRepository;
+import com.arobs.repository.custom.CommonCustomRepository;
+import com.arobs.utils.StaticUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,36 +20,27 @@ public class MachineService implements HasRepository<MachineRepository> {
     @Autowired
     private BrandService brandService;
     @Autowired
-    private OwnerService ownerService;
-    @Autowired
     private AgroWorkTypeService workTypeService;
+    @Autowired
+    private CommonCustomRepository commonCustomRepository;
+    @Autowired
+    private TenantService tenantService;
 
-
-    public boolean validateIdentifier(Long id, String value) {
-        if (id == -1) {
-            return getRepository().countByIdentifier(value) == 0;
-        }
-        return getRepository().countByIdentifierEscapeId(id, value) == 0;
+    @Override
+    public MachineRepository getRepository() {
+        return machineRepository;
     }
 
-    public Machine findByIdentifier(String identifier) {
-        return getRepository().findByIdentifier(identifier);
+    public boolean isUnique(Long currentId, String field, String value) {
+        return commonCustomRepository.isUnique("Machine", currentId, field, value);
     }
 
     public Machine findOne(Long id) {
         return getRepository().findOne(id);
     }
 
-    public MachineModel findModelById(Long id) {
-        return new MachineModel(getRepository().findOne(id));
-    }
-
-    public List<Machine> findAll() {
-        return getRepository().findAll();
-    }
-
-    public List<String> fetchIdentifiers() {
-        return getRepository().fetchIdentifiers();
+    public List<Machine> find(Long tenantId) {
+        return getRepository().find(tenantId);
     }
 
     @Transactional
@@ -56,11 +49,12 @@ public class MachineService implements HasRepository<MachineRepository> {
     }
 
     @Transactional(rollbackOn = Exception.class)
-    public Machine save(MachineModel model) {
+    public Machine save(MachineModel model, Long tenant) {
         Machine entity;
 
         if (model.getId() == null) {
             entity = new Machine();
+            entity.setTenant(tenantService.findOne(tenant));
         }
         else {
             entity = findOne(model.getId());
@@ -70,8 +64,10 @@ public class MachineService implements HasRepository<MachineRepository> {
         return getRepository().save(entity);
     }
 
-    @Transactional
     private void copyValues(Machine entity, MachineModel model) {
+
+        entity.setBrand(brandService.register(model.getBrand()));
+
         entity.setIdentifier(model.getIdentifier());
         entity.setName(model.getName());
         entity.setType(model.getType());
@@ -85,15 +81,9 @@ public class MachineService implements HasRepository<MachineRepository> {
         entity.setSpeedOnRoad(model.getSpeedOnRoad());
         entity.setSpeedInWork(model.getSpeedInWork());
 
-        entity.setOwner(ownerService.register(model.getOwner()));
-        entity.setBrand(brandService.register(model.getBrand()));
-
         entity.getWorkTypes().clear();
-        entity.getWorkTypes().addAll(workTypeService.find());
-    }
-
-    @Override
-    public MachineRepository getRepository() {
-        return machineRepository;
+        if (!StaticUtil.isEmpty(model.getWorkTypes())) {
+            entity.getWorkTypes().addAll(workTypeService.findAll(model.getWorkTypes()));
+        }
     }
 }

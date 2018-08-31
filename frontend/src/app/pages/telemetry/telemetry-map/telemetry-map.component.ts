@@ -64,7 +64,9 @@ export class TelemetryMapComponent implements OnInit, OnChanges {
         this.infoParcel = parcel;
 
         if (this.infoWindow == null) {
-            this.infoWindow = new google.maps.InfoWindow();
+            this.infoWindow = new google.maps.InfoWindow({
+                disableAutoPan: true
+            });
         }
 
         this.infoWindow.setContent(this.infoBody.nativeElement);
