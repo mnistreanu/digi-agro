@@ -30,13 +30,13 @@
 		"events": "Events",
 		"message": "Message"
 	},
-    "expenses": {
-      "agricultural-machinery": "Expenses for repairing agricultural machinery",
-      "agricultural-works": "Expenses for agricultural works",
-      "various-chemicals": "Expenses for fertilizers and pesticides",
-      "fuel": "Expenses for fuel",
-      "sowing": "Expenses for sowing"
-    },
+	"expenses": {
+		"agricultural-machinery": "Expenses for repairing agricultural machinery",
+		"agricultural-works": "Expenses for agricultural works",
+		"fuel": "Expenses for fuel",
+		"sowing": "Expenses for sowing",
+		"various-chemicals": "Expenses for fertilizers and pesticides"
+	},
 	"forecast": {
 		"additional_info": "Additional information",
 		"currency": "Currency",
@@ -111,7 +111,7 @@
 		"crops-varieties": "Crops & Varieties",
 		"dashboard": "Dashboard",
 		"expenses-management": "Expenses management",
-        "fertilizers-pesticides": "Fertilizers & pesticides",
+		"fertilizers-pesticides": "Fertilizers & pesticides",
 		"forecast-list": "List",
 		"forecasting-charts": "Forecasting charts",
 		"forecasts": "Forecasts",

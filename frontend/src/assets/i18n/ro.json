@@ -30,13 +30,13 @@
 		"events": "Evenimente",
 		"message": "Mesaj"
 	},
-    "expenses": {
-      "agricultural-machinery": "Cheltuieli pentru repararea mașinilor agricole",
-      "agricultural-works": "Cheltuieli pentru lucrări agricole",
-      "various-chemicals": "Cheltuieli pentru îngrășăminte și pesticide",
-      "fuel": "Cheltuieli pentru combustibil",
-      "sowing": "Cheltuieli pentru însămânțare"
-    },
+	"expenses": {
+		"agricultural-machinery": "Cheltuieli pentru repararea mașinilor agricole",
+		"agricultural-works": "Cheltuieli pentru lucrări agricole",
+		"fuel": "Cheltuieli pentru combustibil",
+		"sowing": "Cheltuieli pentru însămânțare",
+		"various-chemicals": "Cheltuieli pentru îngrășăminte și pesticide"
+	},
 	"forecast": {
 		"additional_info": "Informații suplimnetare",
 		"currency": "Monedă",
@@ -111,7 +111,7 @@
 		"crops-varieties": "Culturi agricole și soiuri",
 		"dashboard": "Dashboard",
 		"expenses-management": "Evidența cheltuielilor",
-      "fertilizers-pesticides": "Îngrășăminte, pesticide",
+		"fertilizers-pesticides": "Îngrășăminte, pesticide",
 		"forecast-list": "Lista",
 		"forecasting-charts": "Diagrame de prognoză",
 		"forecasts": "Prognoze",
