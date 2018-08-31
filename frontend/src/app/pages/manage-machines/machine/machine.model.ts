@@ -1,4 +1,3 @@
-import {AgroWorkTypeModel} from '../../reminder/agro-work-type.model';
 export class MachineModel {
 
     id: number;
@@ -19,5 +18,5 @@ export class MachineModel {
     speedOnRoad: number;
     speedInWork: number;
 
-    workTypes: AgroWorkTypeModel[];
+    workTypes: number[];
 }

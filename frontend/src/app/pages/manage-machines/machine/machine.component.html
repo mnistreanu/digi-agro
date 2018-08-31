@@ -1,6 +1,6 @@
 <form [formGroup]="form" *ngIf="model" (keydown.enter)="$event.preventDefault()">
 
-    <div widget class="card bottom-30" style="overflow: visible;">
+    <div widget class="card bottom-30">
         <div class="card-header">
             <span translate>machine.machine</span>
             <div class="widget-controls">
@@ -84,7 +84,7 @@
                     <label for="motor" translate>machine.motor</label>
                     <div>
                         <select id="motor" class="form-control checking-field"
-                                formControlName="motorType" (change)="onMotorTypeChange($event)">
+                                formControlName="motorType" (change)="onMotorTypeChange()">
                             <option value="NONE" translate>machine-motor.none</option>
                             <option value="ELECTRIC" translate>machine-motor.electric</option>
                             <option value="DIESEL" translate>machine-motor.diesel</option>
@@ -137,12 +137,12 @@
                 <div class="col-sm-2">
                     <span translate>machine.work-types</span>
                 </div>
-
                 <div class="col-sm-10">
-                    <ss-multiselect-dropdown *ngIf="form && model && availableWorkTypes" [options]="availableWorkTypes"
-                                             [settings]="multiSelectSettings"
-                                             formControlName="workTypes">
-                    </ss-multiselect-dropdown>
+                    <div *ngFor="let w of form.controls['workTypeControls'].controls; let i = index"
+                         class="abc-checkbox abc-checkbox-primary">
+                        <input id="wt-cb-{{i}}" type="checkbox" [formControl]="w">
+                        <label for="wt-cb-{{i}}">{{ workTypes[i].name }}</label>
+                    </div>
                 </div>
             </div>
 

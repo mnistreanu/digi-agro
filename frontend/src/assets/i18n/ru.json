@@ -214,9 +214,9 @@
 	},
 	"response": {
 		"added": "Добавлен",
-		"all-selected": "Выбраны все",
+		"all-selected": "Все элементы выбраны",
 		"item-selected": "элемент выбран",
-		"items-selected": "элементы выбраны",
+		"items-selected": "элементов выбрано",
 		"please-select": "Выберите",
 		"removed": "Удалено",
 		"saved": "Сохранено",

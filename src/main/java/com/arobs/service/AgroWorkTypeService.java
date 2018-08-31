@@ -18,6 +18,10 @@ public class AgroWorkTypeService implements HasRepository<AgroWorkTypeRepository
         return getRepository().findOne(id);
     }
 
+    public List<AgroWorkType> findAll(List<Long> ids) {
+        return getRepository().findAll(ids);
+    }
+
     public List<AgroWorkType> find() {
         return getRepository().find();
     }

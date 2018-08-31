@@ -5,6 +5,7 @@ import com.arobs.interfaces.HasRepository;
 import com.arobs.model.MachineModel;
 import com.arobs.repository.MachineRepository;
 import com.arobs.repository.custom.CommonCustomRepository;
+import com.arobs.utils.StaticUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -89,6 +90,8 @@ public class MachineService implements HasRepository<MachineRepository> {
         entity.setSpeedInWork(model.getSpeedInWork());
 
         entity.getWorkTypes().clear();
-        entity.getWorkTypes().addAll(workTypeService.find());
+        if (!StaticUtil.isEmpty(model.getWorkTypes())) {
+            entity.getWorkTypes().addAll(workTypeService.findAll(model.getWorkTypes()));
+        }
     }
 }

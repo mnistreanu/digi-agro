@@ -44,7 +44,7 @@ public class Machine {
     private Double speedInWork;
 
     @ManyToMany
-    @JoinTable(name = "machine_work_types",
+    @JoinTable(name = "machine_work_type",
             joinColumns = { @JoinColumn(name = "machine_id") },
             inverseJoinColumns = { @JoinColumn(name = "work_type_id") })
     private List<AgroWorkType> workTypes = new ArrayList<>();

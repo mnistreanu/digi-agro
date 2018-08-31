@@ -10,7 +10,6 @@ import {LangService} from '../../../services/lang.service';
 import {WorkTypeService} from '../../../services/work-type.service';
 import {AgroWorkTypeModel} from '../../reminder/agro-work-type.model';
 import {FieldMapper} from '../../../common/field.mapper';
-import {IMultiSelectSettings} from 'angular-2-dropdown-multiselect';
 
 
 @Component({
@@ -31,12 +30,7 @@ export class MachineComponent implements OnInit {
 
     hasMotor: boolean;
 
-    availableWorkTypes: AgroWorkTypeModel[];
-    multiSelectSettings: IMultiSelectSettings = {
-        checkedStyle: 'fontawesome',
-        dynamicTitleMaxItems: 10,
-        maxHeight: '100px'
-    };
+    workTypes: AgroWorkTypeModel[];
 
     private labels: any;
 
@@ -52,18 +46,9 @@ export class MachineComponent implements OnInit {
 
     ngOnInit() {
         this.setupLabels();
-        this.setupBrands();
-        this.setupWorkTypes();
-        this.route.params.subscribe(params => {
-            const id = params['id'];
-
-            if (id == -1) {
-                this.prepareNewModel();
-            }
-            else {
-                this.setupModel(id);
-            }
-        });
+        this.setupBrands()
+        .then(() => this.setupWorkTypes())
+        .then(() => this.restoreModel());
     }
 
     private setupLabels() {
@@ -73,19 +58,37 @@ export class MachineComponent implements OnInit {
         this.langService.get(Messages.VALIDATION_FAIL).subscribe(m => this.labels[Messages.VALIDATION_FAIL] = m);
     }
 
-    private setupBrands() {
-        this.brandService.findAll().subscribe(models => {
-            this.brands = models.map(model => model.name);
+    private setupBrands(): Promise<void> {
+        return new Promise((resolve) => {
+            this.brandService.findAll().subscribe(models => {
+                this.brands = models.map(model => model.name);
+                resolve();
+            });
         });
     }
 
-    private setupWorkTypes() {
-        this.workTypeService.find().subscribe(models => {
-            this.availableWorkTypes = models;
-            const fieldMapper = new FieldMapper(this.langService.getLanguage());
-            const nameField = fieldMapper.get('name');
-            models.forEach(model => model.name = model[nameField]);
-            console.log('wt', models);
+    private setupWorkTypes(): Promise<void> {
+        return new Promise((resolve) => {
+            this.workTypeService.find().subscribe(models => {
+                this.workTypes = models;
+                const fieldMapper = new FieldMapper(this.langService.getLanguage());
+                const nameField = fieldMapper.get('name');
+                models.forEach(model => model.name = model[nameField]);
+                resolve();
+            });
+        });
+    }
+
+    private restoreModel() {
+        this.route.params.subscribe(params => {
+            const id = params['id'];
+
+            if (id == -1) {
+                this.prepareNewModel();
+            }
+            else {
+                this.setupModel(id);
+            }
         });
     }
 
@@ -122,9 +125,16 @@ export class MachineComponent implements OnInit {
             power: [{value: this.model.power, disabled: !this.hasMotor}],
             speedOnRoad: [this.model.speedOnRoad],
             speedInWork: [this.model.speedInWork],
-            workTypes: [this.model.workTypes]
+            workTypeControls: this.buildWorkTypeControls()
         });
-        console.log(this.model.workTypes);
+    }
+
+    private buildWorkTypeControls() {
+        const arr = this.workTypes.map(workTypeModel => {
+            const checked = this.model.workTypes.some((wtId) => wtId == workTypeModel.id);
+            return this.fb.control(checked);
+        });
+        return this.fb.array(arr);
     }
 
     public onIdentifierChange() {
@@ -146,9 +156,10 @@ export class MachineComponent implements OnInit {
             this.toastr.warning(this.labels[Messages.VALIDATION_FAIL]);
             return;
         }
-        console.log(form.value);
 
         Object.assign(this.model, form.value);
+        this.model.workTypes = this.getWorkTypes(form);
+
         this.isNew = false;
         this.submitted = false;
 
@@ -158,6 +169,18 @@ export class MachineComponent implements OnInit {
         });
     }
 
+    private getWorkTypes(form: FormGroup): number[] {
+        const checkedItems: number[] = [];
+
+        form.value.workTypeControls.forEach((checked, index) => {
+            if (checked) {
+                checkedItems.push(this.workTypes[index].id);
+            }
+        });
+
+        return checkedItems;
+    }
+
     public remove() {
         this.machineService.remove(this.model).subscribe(() => {
             this.toastr.success(this.labels[Messages.REMOVED]);
@@ -165,7 +188,7 @@ export class MachineComponent implements OnInit {
         });
     }
 
-    public onMotorTypeChange(event) {
+    public onMotorTypeChange() {
         const motorType = this.form.controls['motorType'].value;
         this.hasMotor = motorType != 'NONE';
 

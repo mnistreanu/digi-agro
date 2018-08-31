@@ -30,7 +30,7 @@ public class MachineModel {
     private Double speedOnRoad;
     private Double speedInWork;
 
-    private List<AgroWorkTypeModel> workTypes;
+    private List<Long> workTypes;
 
     public MachineModel() {
     }
@@ -55,7 +55,7 @@ public class MachineModel {
         speedInWork = entity.getSpeedInWork();
 
         if (entity.getWorkTypes() != null) {
-            workTypes = entity.getWorkTypes().stream().map(AgroWorkTypeModel::new).collect(Collectors.toList());
+            workTypes = entity.getWorkTypes().stream().map(AgroWorkType::getId).collect(Collectors.toList());
         }
     }
 
@@ -155,11 +155,11 @@ public class MachineModel {
         this.speedInWork = speedInWork;
     }
 
-    public List<AgroWorkTypeModel> getWorkTypes() {
+    public List<Long> getWorkTypes() {
         return workTypes;
     }
 
-    public void setWorkTypes(List<AgroWorkTypeModel> workTypes) {
+    public void setWorkTypes(List<Long> workTypes) {
         this.workTypes = workTypes;
     }
 }
