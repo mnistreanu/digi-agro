@@ -9,11 +9,11 @@ import {TranslateModule} from '@ngx-translate/core';
 import {MultiselectDropdownModule} from 'angular-2-dropdown-multiselect';
 import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-block.module';
 import {AgGridModule} from 'ag-grid-angular';
-import {ChemicalsExpensesComponent} from "./chemicals-expenses/chemicals-expenses.component";
-import {MachineryExpensesComponent} from "./machinery-expenses/machinery-expenses.component";
-import {FuelExpensesComponent} from "./fuel-expenses/fuel-expenses.component";
-import {SowingExpensesComponent} from "./sowing-expenses/sowing-expenses.component";
-import {WorksExpensesComponent} from "./works-expenses/works-expenses.component";
+import {ChemicalsExpensesComponent} from './chemicals-expenses/chemicals-expenses.component';
+import {MachineryExpensesComponent} from './machinery-expenses/machinery-expenses.component';
+import {FuelExpensesComponent} from './fuel-expenses/fuel-expenses.component';
+import {SowingExpensesComponent} from './sowing-expenses/sowing-expenses.component';
+import {WorksExpensesComponent} from './works-expenses/works-expenses.component';
 
 export const routes = [
     {path: '', redirectTo: 'expenses', pathMatch: 'full'},

@@ -95,33 +95,9 @@ export const routes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
-                path: 'machinery',
+                path: 'expenses',
                 loadChildren: 'app/pages/manage-expenses/manage-expenses.module#ManageExpensesModule',
-                data: {breadcrumb: 'Machinery'},
-                canActivate: [AuthGuard]
-            },
-            {
-                path: 'fuel',
-                loadChildren: 'app/pages/manage-expenses/manage-expenses.module#ManageExpensesModule',
-                data: {breadcrumb: 'Fuel'},
-                canActivate: [AuthGuard]
-            },
-            {
-                path: 'sowing',
-                loadChildren: 'app/pages/manage-expenses/manage-expenses.module#ManageExpensesModule',
-                data: {breadcrumb: 'Sowing'},
-                canActivate: [AuthGuard]
-            },
-            {
-                path: 'works',
-                loadChildren: 'app/pages/manage-expenses/manage-expenses.module#ManageExpensesModule',
-                data: {breadcrumb: 'Works'},
-                canActivate: [AuthGuard]
-            },
-            {
-                path: 'chemicals',
-                loadChildren: 'app/pages/manage-expenses/manage-expenses.module#ManageExpensesModule',
-                data: {breadcrumb: 'Chemicals'},
+                data: {breadcrumb: 'Expenses'},
                 canActivate: [AuthGuard]
             },
             {
