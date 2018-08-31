@@ -40,6 +40,12 @@ export const routes: Routes = [
                 canActivate: [SuperAdminOrAdminGuard]
             },
             {
+                path: 'employee',
+                loadChildren: 'app/pages/employee/employee.module#EmployeeModule',
+                data: {breadcrumb: 'Employee'},
+                canActivate: [AdminGuard]
+            },
+            {
                 path: 'manage-brands',
                 loadChildren: 'app/pages/manage-brands/manage-brands.module#ManageBrandsModule',
                 data: {breadcrumb: 'Manage Brands'},

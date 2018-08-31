@@ -52,9 +52,15 @@ export class MenuService {
                 selected: false,
                 expanded: false
             });
-        }
 
-        if (isAdmin) {
+            menuItems.push({
+                title: 'nav.employees',
+                routerLink: '/pages/employee',
+                icon: 'fa-users',
+                selected: false,
+                expanded: false
+            });
+
             menuItems.push({
                 title: 'nav.brands',
                 routerLink: '/pages/manage-brands',
