@@ -1,4 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {LangService} from "../../../services/lang.service";
 
 @Component({
     selector: 'app-machinery-expenses',
@@ -8,7 +9,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 })
 export class MachineryExpensesComponent implements OnInit {
 
-    constructor() {
+    constructor(private langService: LangService) {
     }
 
     ngOnInit() {
