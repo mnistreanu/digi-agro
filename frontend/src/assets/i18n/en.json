@@ -104,9 +104,9 @@
 		"none": "None"
 	},
 	"machine-type": {
-		"combine": "Combine",
-		"sowing": "Sowing",
-		"tractor": "Tractor"
+		"COMBINE": "Combine",
+		"SOWING": "Sowing",
+		"TRACTOR": "Tractor"
 	},
 	"nav": {
 		"agricultural-machinery": "Agricultural machinery",

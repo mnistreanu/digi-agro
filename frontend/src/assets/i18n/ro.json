@@ -104,9 +104,9 @@
 		"none": "Nu este"
 	},
 	"machine-type": {
-		"combine": "Combină",
-		"sowing": "Semănătoare",
-		"tractor": "Tractor"
+		"COMBINE": "Combină",
+		"SOWING": "Semănătoare",
+		"TRACTOR": "Tractor"
 	},
 	"nav": {
 		"agricultural-machinery": "Maşini agricole",

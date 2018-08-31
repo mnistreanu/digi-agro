@@ -104,9 +104,9 @@
 		"none": "Нет"
 	},
 	"machine-type": {
-		"combine": "Комбайн",
-		"sowing": "Сеялка",
-		"tractor": "Трактор"
+		"COMBINE": "Комбайн",
+		"SOWING": "Сеялка",
+		"TRACTOR": "Трактор"
 	},
 	"nav": {
 		"agricultural-machinery": "Сельх. техника",

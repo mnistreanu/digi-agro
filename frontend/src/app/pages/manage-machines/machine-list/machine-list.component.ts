@@ -91,6 +91,7 @@ export class MachineListComponent implements OnInit {
     private setupRows() {
         this.machineService.findAll().subscribe(models => {
             models.forEach((model) => {
+                model.type = this.langService.instant('machine-type.' + model.type);
                 model['brandAndModel'] = model.brand + '-' + model.model;
                 model['responsiblePersons'] = model.employees.map(m => m.firstName + ' ' + m.lastName).join(', ');
             });
