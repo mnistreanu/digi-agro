@@ -26,6 +26,12 @@
 		"name": "Cultura agricolă",
 		"variety": "Soi"
 	},
+	"employee": {
+		"employee": "Angajat",
+		"first-name": "Nume",
+		"last-name": "Prenume",
+		"title": "Titlu"
+	},
 	"event": {
 		"events": "Evenimente",
 		"message": "Mesaj"
@@ -110,6 +116,7 @@
 		"crops": "Culturi agricole",
 		"crops-varieties": "Culturi agricole și soiuri",
 		"dashboard": "Dashboard",
+		"employees": "Angajați",
 		"expenses-management": "Evidența cheltuielilor",
 		"fertilizers-pesticides": "Îngrășăminte, pesticide",
 		"forecast-list": "Lista",

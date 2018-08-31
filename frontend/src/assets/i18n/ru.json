@@ -26,6 +26,12 @@
 		"name": "Сельскохозяйственная культура",
 		"variety": "Сорт"
 	},
+	"employee": {
+		"employee": "Работник",
+		"first-name": "Имя",
+		"last-name": "Фамилия",
+		"title": "Титул"
+	},
 	"event": {
 		"events": "События",
 		"message": "Сообщение"
@@ -110,6 +116,7 @@
 		"crops": "Сельхоз. культуры",
 		"crops-varieties": "Сельскохозяйственные культуры и сорта",
 		"dashboard": "Главная",
+		"employees": "Работники",
 		"expenses-management": "Учет затрат",
 		"fertilizers-pesticides": "Удобрения и пестициды",
 		"forecast-list": "Список",

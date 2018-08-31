@@ -26,6 +26,12 @@
 		"name": "Agricultural crop",
 		"variety": "Variety"
 	},
+	"employee": {
+		"employee": "Employee",
+		"first-name": "Fist Name",
+		"last-name": "Last Name",
+		"title": "Title"
+	},
 	"event": {
 		"events": "Events",
 		"message": "Message"
@@ -110,6 +116,7 @@
 		"crops": "Crops",
 		"crops-varieties": "Crops & Varieties",
 		"dashboard": "Dashboard",
+		"employees": "Employees",
 		"expenses-management": "Expenses management",
 		"fertilizers-pesticides": "Fertilizers & pesticides",
 		"forecast-list": "List",
