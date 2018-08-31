@@ -88,6 +88,7 @@
 		"fabrication-year": "Fabrication Year",
 		"identifier": "Identifier",
 		"machine": "Machine",
+		"model": "Model",
 		"motor": "Motor",
 		"power": "Power",
 		"speed-in-work": "Speed In Work",

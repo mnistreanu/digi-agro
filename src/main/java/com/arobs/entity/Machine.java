@@ -29,7 +29,7 @@ public class Machine {
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
-    private String name;
+    private String model;
 
     private Integer fabricationYear;
     private String fabricationCountry;
@@ -92,12 +92,12 @@ public class Machine {
         this.brand = brand;
     }
 
-    public String getName() {
-        return name;
+    public String getModel() {
+        return model;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public Integer getFabricationYear() {

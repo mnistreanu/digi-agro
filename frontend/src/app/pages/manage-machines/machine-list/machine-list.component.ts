@@ -60,11 +60,11 @@ export class MachineListComponent implements OnInit {
                 maxWidth: 200
             },
             {
-                headerName: 'info.name',
+                headerName: 'machine.model',
                 width: 200,
                 minWidth: 200,
                 valueGetter: (params) => {
-                    return params.data.brand + '-' + params.data.name;
+                    return params.data.brand + '-' + params.data.model;
                 }
             },
             {

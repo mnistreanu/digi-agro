@@ -152,7 +152,7 @@ export class MachineComponent implements OnInit {
         this.form = this.fb.group({
             type: [this.model.type, Validators.required],
             brand: [this.model.brand, Validators.required],
-            name: [this.model.name, Validators.required],
+            model: [this.model.model, Validators.required],
             identifier: [this.model.identifier, Validators.required],
             fabricationYear: [this.model.fabricationYear],
             fabricationCountry: [this.model.fabricationCountry],

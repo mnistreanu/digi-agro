@@ -15,7 +15,7 @@ public class MachineModel {
 
     private Long id;
     private String identifier;
-    private String name;
+    private String model;
 
     private MachineType type;
 
@@ -40,7 +40,7 @@ public class MachineModel {
     public MachineModel(Machine entity) {
         id = entity.getId();
         identifier = entity.getIdentifier();
-        name = entity.getName();
+        model = entity.getModel();
 
         type = entity.getType();
 
@@ -81,12 +81,12 @@ public class MachineModel {
         this.identifier = identifier;
     }
 
-    public String getName() {
-        return name;
+    public String getModel() {
+        return model;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public MachineType getType() {

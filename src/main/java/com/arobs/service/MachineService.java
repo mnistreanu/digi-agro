@@ -71,7 +71,7 @@ public class MachineService implements HasRepository<MachineRepository> {
         entity.setBrand(brandService.register(model.getBrand()));
 
         entity.setIdentifier(model.getIdentifier());
-        entity.setName(model.getName());
+        entity.setModel(model.getModel());
         entity.setType(model.getType());
 
         entity.setFabricationYear(model.getFabricationYear());

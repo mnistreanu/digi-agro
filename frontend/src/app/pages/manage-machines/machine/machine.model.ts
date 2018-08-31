@@ -2,7 +2,7 @@ export class MachineModel {
 
     id: number;
     identifier: string;
-    name: string;
+    model: string;
 
     type: string;
 
