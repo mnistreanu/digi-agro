@@ -25,7 +25,9 @@
 		"category": "Categoria",
 		"name": "Cultura agricolă",
 		"planting-date": "Data plantării",
-		"unit-of-measure": "Un.măs.",
+		"seeds": "Semințe",
+		"unit-of-measure-short": "U.m.",
+		"unit-of-measure-long": "Unitatea de măsură",
 		"variety": "Soi"
 	},
 	"employee": {
@@ -218,7 +220,7 @@
 		"804": "overcast clouds"
 	},
 	"parcel": {
-		"area": "Arie",
+		"area": "Aria",
 		"cadaster-number": "Nr. cadastral",
 		"description": "Descriere",
 		"ha": "ha",

@@ -18,7 +18,9 @@ export class SowingExpensesComponent implements OnInit {
     labelDate: string;
     labelCrop: string;
     labelCropVariety: string;
-    labelUnitOfMeasure: string;
+    labelSeeds: string;
+    labelUnitOfMeasureShort: string;
+    labelUnitOfMeasureLong: string;
     labelArea: string;
     labelParcels: string;
     labelExpenses: string;
@@ -40,7 +42,9 @@ export class SowingExpensesComponent implements OnInit {
         this.langService.get('crop.planting-date').subscribe(msg => this.labelDate = msg);
         this.langService.get('crop.name').subscribe(msg => this.labelCrop = msg);
         this.langService.get('crop.variety').subscribe(msg => this.labelCropVariety = msg);
-        this.langService.get('crop.unit-of-measure').subscribe(msg => this.labelUnitOfMeasure = msg);
+        this.langService.get('crop.seeds').subscribe(msg => this.labelSeeds = msg);
+        this.langService.get('crop.unit-of-measure-short').subscribe(msg => this.labelUnitOfMeasureShort = msg);
+        this.langService.get('crop.unit-of-measure-long').subscribe(msg => this.labelUnitOfMeasureLong = msg);
         this.langService.get('parcel.area').subscribe(msg => this.labelArea = msg);
         this.langService.get('parcel.parcels').subscribe(msg => this.labelParcels = msg);
         this.langService.get('expenses.sowing').subscribe(msg => this.labelExpenses = msg);
@@ -82,30 +86,38 @@ export class SowingExpensesComponent implements OnInit {
                 suppressFilter: true,
             },
             {
-                headerName: this.labelCrop,
-                field: 'crop',
+                headerName: this.labelSeeds,
+                field: 'cropAndVariety',
                 width: 180,
                 minWidth: 180
             },
+            // {
+            //     headerName: this.labelCropVariety,
+            //     field: 'variety',
+            //     width: 100,
+            //     minWidth: 100,
+            //     suppressFilter: true,
+            // },
             {
-                headerName: this.labelCropVariety,
-                field: 'variety',
-                width: 100,
-                minWidth: 100,
-                suppressFilter: true,
-            },
-            {
-                headerName: this.labelUnitOfMeasure,
+                headerName: this.labelUnitOfMeasureShort,
                 field: 'unitOfMeasure',
-                width: 80,
-                minWidth: 80,
+                width: 60,
+                minWidth: 60,
                 suppressFilter: true,
+                headerTooltip:this.labelUnitOfMeasureLong,
             },
             {
                 headerName: this.labelArea,
                 field: 'sownArea',
-                width: 100,
-                minWidth: 100,
+                width: 50,
+                minWidth: 50,
+                suppressFilter: true,
+            },
+            {
+                headerName: this.labelParcels,
+                field: 'parcels',
+                width: 200,
+                minWidth: 200,
                 suppressFilter: true,
             },
             {
@@ -176,8 +188,10 @@ export class SowingExpensesComponent implements OnInit {
                 model.icon = '/assets/img/crops/wheat.png';
                 model.crop = 'Porumb';
                 model.variety = 'Mama';
+                model.cropAndVariety = 'Porumb "Mama"',
                 model.unitOfMeasure = 'tone';
                 model.sownArea = 121;
+                model.parcels = 'Jora de Sus, Campul din deal, Delta Dunarii',
                 model.sown1Ha = 51;
                 model.totalSown = model.sownArea * model.sown1Ha;
                 model.unitPrice = 15.20;

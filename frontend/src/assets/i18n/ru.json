@@ -25,7 +25,9 @@
 		"category": "Категория",
 		"name": "Сельскохозяйственная культура",
 		"planting-date": "Дата посадки",
-		"unit-of-measure": "Ед. изм.",
+		"seeds": "Семена",
+		"unit-of-measure-short": "Ед.И.",
+		"unit-of-measure-long": "Единица измерения",
 		"variety": "Сорт"
 	},
 	"employee": {

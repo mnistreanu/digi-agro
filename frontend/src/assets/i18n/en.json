@@ -25,7 +25,9 @@
 		"category": "Category",
 		"name": "Agricultural crop",
 		"planting-date": "Planting date",
-		"unit-of-measure": "Measure Unit",
+		"seeds": "Seeds",
+		"unit-of-measure-short": "Unit",
+		"unit-of-measure-long": "Unit of measure",
 		"variety": "Variety"
 	},
 	"employee": {
