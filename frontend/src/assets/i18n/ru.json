@@ -87,6 +87,7 @@
 		"language": "Язык"
 	},
 	"machine": {
+		"agricultural-machinery": "Сельскохозяйственная техника",
 		"consumption": "Расход",
 		"fabrication-country": "Страна изготовления",
 		"fabrication-year": "Год изготовления",
@@ -96,7 +97,10 @@
 		"model": "Модель",
 		"motor": "Мотор",
 		"power": "Мощность",
+		"repairing-date": "Дата",
 		"responsible-persons": "Ответственные лица",
+		"spare-part": "Запасная часть",
+		"spare-part-price": "Цена",
 		"speed-in-work": "Рабочая скорость",
 		"speed-on-road": "Скорость на дороге",
 		"type": "Тип",

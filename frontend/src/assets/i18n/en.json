@@ -87,6 +87,7 @@
 		"language": "Language"
 	},
 	"machine": {
+		"agricultural-machinery": "Agricultural machinery",
 		"consumption": "Consumption",
 		"fabrication-country": "Fabrication Country",
 		"fabrication-year": "Fabrication Year",
@@ -96,7 +97,10 @@
 		"model": "Model",
 		"motor": "Motor",
 		"power": "Power",
+		"repairing-date": "Date",
 		"responsible-persons": "Responsible persons",
+		"spare-part": "Spare part",
+		"spare-part-price": "Price",
 		"speed-in-work": "Speed In Work",
 		"speed-on-road": "Speed On Road",
 		"type": "Type",

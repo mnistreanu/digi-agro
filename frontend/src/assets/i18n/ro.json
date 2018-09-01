@@ -32,8 +32,8 @@
 	},
 	"employee": {
 		"employee": "Angajat",
-		"first-name": "Nume",
-		"last-name": "Prenume",
+		"first-name": "Prenume",
+		"last-name": "Nume",
 		"title": "Titlu"
 	},
 	"event": {
@@ -87,6 +87,7 @@
 		"language": "Limba"
 	},
 	"machine": {
+		"agricultural-machinery": "Mașini agricole",
 		"consumption": "Consum",
 		"fabrication-country": "Țara de origine",
 		"fabrication-year": "Anul de fabricație",
@@ -96,7 +97,10 @@
 		"model": "Model",
 		"motor": "Motor",
 		"power": "Putere",
+		"repairing-date": "Data",
 		"responsible-persons": "Persoane responsabile",
+		"spare-part": "Piesa de schimb",
+		"spare-part-price": "Preț",
 		"speed-in-work": "Viteză în munca",
 		"speed-on-road": "Viteza pe drum",
 		"type": "Tip",
