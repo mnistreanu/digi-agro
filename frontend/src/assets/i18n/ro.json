@@ -24,6 +24,8 @@
 	"crop": {
 		"category": "Categoria",
 		"name": "Cultura agricolă",
+		"planting-date": "Data plantării",
+		"unit-of-measure": "Un.măs.",
 		"variety": "Soi"
 	},
 	"employee": {

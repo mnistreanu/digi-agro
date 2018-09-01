@@ -24,6 +24,8 @@
 	"crop": {
 		"category": "Category",
 		"name": "Agricultural crop",
+		"planting-date": "Planting date",
+		"unit-of-measure": "Measure Unit",
 		"variety": "Variety"
 	},
 	"employee": {

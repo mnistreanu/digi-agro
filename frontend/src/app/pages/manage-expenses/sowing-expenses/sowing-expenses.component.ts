@@ -3,7 +3,7 @@ import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from "../../../services/lang.service";
 import {WeatherService} from "../../../services/weather.service";
 import {CustomImageRendererComponent} from "../../../modules/aggrid/custom-image-renderer/custom-image-renderer.component";
-import {WeatherHistoryModel} from "../../weather/history/weather-history.model";
+import {SowingExpensesModel} from "./sowing-expenses.model";
 
 @Component({
     selector: 'app-sowing-expenses',
@@ -16,12 +16,12 @@ export class SowingExpensesComponent implements OnInit {
     context;
 
     labelDate: string;
-    labelCropIcon: string;
     labelCrop: string;
     labelCropVariety: string;
     labelUnitOfMeasure: string;
     labelArea: string;
     labelParcels: string;
+    labelExpenses: string;
     labelConsumed1Ha: string;
     labelConsumedTotal: string;
     labelPriceUnit: string;
@@ -37,12 +37,14 @@ export class SowingExpensesComponent implements OnInit {
     }
 
     private setupLabels() {
-        this.langService.get('weather.date').subscribe(msg => this.labelDate = msg);
-        this.langService.get('crop.name').subscribe(msg => this.labelCropIcon = msg);
+        this.langService.get('crop.planting-date').subscribe(msg => this.labelDate = msg);
         this.langService.get('crop.name').subscribe(msg => this.labelCrop = msg);
-        this.langService.get('weather.temperature').subscribe(msg => this.labelCropVariety = msg);
-        this.langService.get('weather.humidity').subscribe(msg => this.labelUnitOfMeasure = msg);
-        this.langService.get('weather.wind').subscribe(msg => this.labelArea = msg);
+        this.langService.get('crop.variety').subscribe(msg => this.labelCropVariety = msg);
+        this.langService.get('crop.unit-of-measure').subscribe(msg => this.labelUnitOfMeasure = msg);
+        this.langService.get('parcel.area').subscribe(msg => this.labelArea = msg);
+        this.langService.get('parcel.parcels').subscribe(msg => this.labelParcels = msg);
+        this.langService.get('expenses.sowing').subscribe(msg => this.labelExpenses = msg);
+        this.langService.get('crop.labelConsumed1Ha').subscribe(msg => this.labelConsumed1Ha = msg);
     }
 
 
@@ -63,57 +65,102 @@ export class SowingExpensesComponent implements OnInit {
 
         const headers: ColDef[] = [
             {
+                headerName: '',
+                field: 'icon',
+                cellRendererFramework: CustomImageRendererComponent,
+                cellRendererParams: {
+                    iconField: 'icon'
+                },
+                width: 40,
+                minWidth: 40,
+            },
+            {
                 headerName: this.labelDate,
                 field: 'date',
-                width: 100,
-                minWidth: 100,
+                width: 90,
+                minWidth: 90,
+                suppressFilter: true,
             },
             {
                 headerName: this.labelCrop,
-                field: 'condition',
-                cellRendererFramework: CustomImageRendererComponent,
-                cellRendererParams: {
-                    textField: 'condition',
-                    iconField: 'icon'
-                },
-                width: 200,
-                minWidth: 200
+                field: 'crop',
+                width: 180,
+                minWidth: 180
             },
             {
                 headerName: this.labelCropVariety,
-                field: 'temperature',
+                field: 'variety',
                 width: 100,
                 minWidth: 100,
                 suppressFilter: true,
-                suppressSorting : true,
             },
             {
                 headerName: this.labelUnitOfMeasure,
-                field: 'humidity',
-                width: 100,
-                minWidth: 100,
+                field: 'unitOfMeasure',
+                width: 80,
+                minWidth: 80,
                 suppressFilter: true,
-                suppressSorting : true,
-            },
-            {
-                headerName: this.labelCropIcon,
-                field: 'condition',
-                cellRendererFramework: CustomImageRendererComponent,
-                cellRendererParams: {
-                    textField: 'condition',
-                    iconField: 'icon'
-                },
-                width: 200,
-                minWidth: 200,
             },
             {
                 headerName: this.labelArea,
-                field: 'wind',
+                field: 'sownArea',
                 width: 100,
                 minWidth: 100,
                 suppressFilter: true,
-                suppressSorting : true,
-            }
+            },
+            {
+                headerName: 'Norma de insamintare',
+                children: [
+                    {
+                        headerName: '1 Ha',
+                        field: 'sown1Ha',
+                        width: 60,
+                        minWidth: 60,
+                        suppressFilter: true,
+                    },
+                    {
+                        headerName: 'Suma Ha',
+                        field: 'totalSown',
+                        width: 100,
+                        minWidth: 100,
+                        suppressFilter: true,
+                    },
+
+                ]
+            },
+            {
+                headerName: this.labelExpenses,
+                children: [
+                    {
+                        headerName: '1 Ha',
+                        field: 'sown1Ha',
+                        width: 60,
+                        minWidth: 60,
+                        suppressFilter: true,
+                    },
+                    {
+                        headerName: 'Suma Ha',
+                        field: 'totalSown',
+                        width: 100,
+                        minWidth: 100,
+                        suppressFilter: true,
+                    },
+                    {
+                        headerName: 'Pret',
+                        field: 'unitPrice',
+                        width: 60,
+                        minWidth: 60,
+                        suppressFilter: true,
+                    },
+                    {
+                        headerName: 'Suma',
+                        field: 'totalAmount',
+                        width: 100,
+                        minWidth: 100,
+                        suppressFilter: true,
+                    }
+                ]
+            },
 
         ];
 
@@ -124,14 +171,17 @@ export class SowingExpensesComponent implements OnInit {
     public setupRows() {
         this.weatherService.findWeatherHistory().subscribe(payloadModel => {
             const rows = payloadModel.payload.map(data => {
-                const model = new WeatherHistoryModel();
+                const model = new SowingExpensesModel();
                 model.date = new Date(data.dt).toLocaleDateString();
-                model.icon = '/assets/img/notifications/weather-rain-alert.png';
-                model.temperature = data.tempMax + '\u00B0C / ' + data.tempMin + '\u00B0C';
-                model.condition = data.main; //TODO de tradus din resurse, de exemplu: clouds, rain
-                model.location = 'Nisporeni';
-                model.humidity = data.humidity + ' %';
-                model.wind = data.windSpeed + ' km/h NW';
+                model.icon = '/assets/img/crops/wheat.png';
+                model.crop = 'Porumb';
+                model.variety = 'Mama';
+                model.unitOfMeasure = 'tone';
+                model.sownArea = 121;
+                model.sown1Ha = 51;
+                model.totalSown = model.sownArea * model.sown1Ha;
+                model.unitPrice = 15.20;
+                model.totalAmount = model.unitPrice * model.unitPrice;
                 return model;
             });
             this.options.api.setRowData(rows);

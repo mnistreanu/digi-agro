@@ -24,6 +24,8 @@
 	"crop": {
 		"category": "Категория",
 		"name": "Сельскохозяйственная культура",
+		"planting-date": "Дата посадки",
+		"unit-of-measure": "Ед. изм.",
 		"variety": "Сорт"
 	},
 	"employee": {
