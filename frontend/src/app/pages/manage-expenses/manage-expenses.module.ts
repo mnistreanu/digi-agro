@@ -14,6 +14,8 @@ import {MachineryExpensesComponent} from './machinery-expenses/machinery-expense
 import {FuelExpensesComponent} from './fuel-expenses/fuel-expenses.component';
 import {SowingExpensesComponent} from './sowing-expenses/sowing-expenses.component';
 import {WorksExpensesComponent} from './works-expenses/works-expenses.component';
+import {CustomImageRendererComponent} from "../../modules/aggrid/custom-image-renderer/custom-image-renderer.component";
+import {CustomImageRendererModule} from "../../modules/aggrid/custom-image-renderer/custom-image-renderer.module";
 
 export const routes = [
     {path: '', redirectTo: 'expenses', pathMatch: 'full'},
@@ -34,7 +36,8 @@ export const routes = [
         ChartsModule,
         DirectivesModule,
         FormErrorBlockModule,
-        AgGridModule.withComponents([]),
+        CustomImageRendererModule,
+        AgGridModule.withComponents([CustomImageRendererComponent]),
         RouterModule.forChild(routes)
     ],
     declarations: [
