@@ -53,29 +53,29 @@ export class MachineListComponent implements OnInit {
                 }
             },
             {
-                headerName: 'machine.identifier',
-                field: 'identifier',
-                width: 200,
-                minWidth: 200,
-                maxWidth: 200
+                headerName: 'machine.type',
+                field: 'type',
+                width: 175,
+                minWidth: 175
             },
             {
                 headerName: 'machine.model',
                 field: 'brandAndModel',
-                width: 200,
-                minWidth: 200
+                width: 175,
+                minWidth: 175
             },
             {
-                headerName: 'machine.type',
-                field: 'type',
-                width: 200,
-                minWidth: 200
+                headerName: 'machine.identifier',
+                field: 'identifier',
+                width: 100,
+                minWidth: 100,
+                maxWidth: 100
             },
             {
                 headerName: 'machine.responsible-persons',
                 field: 'responsiblePersons',
-                width: 200,
-                minWidth: 200
+                width: 300,
+                minWidth: 300
             }
         ];
 
@@ -92,7 +92,7 @@ export class MachineListComponent implements OnInit {
         this.machineService.findAll().subscribe(models => {
             models.forEach((model) => {
                 model.type = this.langService.instant('machine-type.' + model.type);
-                model['brandAndModel'] = model.brand + '-' + model.model;
+                model['brandAndModel'] = model.brand + ' ' + model.model;
                 model['responsiblePersons'] = model.employees.map(m => m.firstName + ' ' + m.lastName).join(', ');
             });
             this.options.api.setRowData(models);

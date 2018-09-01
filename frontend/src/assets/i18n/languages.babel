@@ -532,6 +532,27 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>various-chemicals</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ro-RO</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ru-RU</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>fuel</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
@@ -554,27 +575,6 @@
                     </concept_node>
                     <concept_node>
                         <name>sowing</name>
-                        <definition_loaded>false</definition_loaded>
-                        <description></description>
-                        <comment></comment>
-                        <default_text></default_text>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>false</approved>
-                            </translation>
-                            <translation>
-                                <language>ro-RO</language>
-                                <approved>false</approved>
-                            </translation>
-                            <translation>
-                                <language>ru-RU</language>
-                                <approved>false</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>various-chemicals</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -1297,6 +1297,27 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>hp</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ro-RO</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ru-RU</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>identifier</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
@@ -1339,6 +1360,27 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>model</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ro-RO</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ru-RU</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>motor</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
@@ -1361,6 +1403,27 @@
                     </concept_node>
                     <concept_node>
                         <name>power</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ro-RO</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ru-RU</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>responsible-persons</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -1559,7 +1622,7 @@
                 <name>machine-type</name>
                 <children>
                     <concept_node>
-                        <name>combine</name>
+                        <name>COMBINE</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -1580,7 +1643,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>sowing</name>
+                        <name>SOWING</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -1601,7 +1664,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>tractor</name>
+                        <name>TRACTOR</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -1627,7 +1690,7 @@
                 <name>nav</name>
                 <children>
                     <concept_node>
-                        <name>agricultural-machinery</name>
+                        <name>expenses-management</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -1817,27 +1880,6 @@
                     </concept_node>
                     <concept_node>
                         <name>employees</name>
-                        <definition_loaded>false</definition_loaded>
-                        <description></description>
-                        <comment></comment>
-                        <default_text></default_text>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>false</approved>
-                            </translation>
-                            <translation>
-                                <language>ro-RO</language>
-                                <approved>false</approved>
-                            </translation>
-                            <translation>
-                                <language>ru-RU</language>
-                                <approved>false</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>expenses-management</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -2321,6 +2363,27 @@
                     </concept_node>
                     <concept_node>
                         <name>work-agenda</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ro-RO</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ru-RU</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>agricultural-machinery</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>

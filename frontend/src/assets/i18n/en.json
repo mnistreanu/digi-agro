@@ -39,9 +39,9 @@
 	"expenses": {
 		"agricultural-machinery": "Expenses for repairing agricultural machinery",
 		"agricultural-works": "Expenses for agricultural works",
+		"various-chemicals": "Expenses for fertilizers and pesticides",
 		"fuel": "Expenses for fuel",
-		"sowing": "Expenses for sowing",
-		"various-chemicals": "Expenses for fertilizers and pesticides"
+		"sowing": "Expenses for sowing"
 	},
 	"forecast": {
 		"additional_info": "Additional information",
@@ -86,12 +86,13 @@
 		"consumption": "Consumption",
 		"fabrication-country": "Fabrication Country",
 		"fabrication-year": "Fabrication Year",
-		"identifier": "Identifier",
+		"hp": "H.p.",
+		"identifier": "ID",
 		"machine": "Machine",
 		"model": "Model",
 		"motor": "Motor",
 		"power": "Power",
-		"responsible-persons": "Responsible Persons",
+		"responsible-persons": "Responsible persons",
 		"speed-in-work": "Speed In Work",
 		"speed-on-road": "Speed On Road",
 		"type": "Type",
@@ -109,7 +110,7 @@
 		"TRACTOR": "Tractor"
 	},
 	"nav": {
-		"agricultural-machinery": "Agricultural machinery",
+		"expenses-management": "Expenses management",
 		"agricultural-works": "Agricultural works",
 		"branches": "Branches",
 		"brands": "Brands",
@@ -119,7 +120,6 @@
 		"crops-varieties": "Crops & Varieties",
 		"dashboard": "Dashboard",
 		"employees": "Employees",
-		"expenses-management": "Expenses management",
 		"fertilizers-pesticides": "Fertilizers & pesticides",
 		"forecast-list": "List",
 		"forecasting-charts": "Forecasting charts",
@@ -142,7 +142,8 @@
 		"weather": "Weather",
 		"weather-forecast": "Weather forecast",
 		"weather-history": "Weather history",
-		"work-agenda": "Work agenda"
+		"work-agenda": "Work agenda",
+		"agricultural-machinery": "Agricultural machinery"
 	},
 	"notification": {
 		"mark-all-as-read": "Mark All as Read",

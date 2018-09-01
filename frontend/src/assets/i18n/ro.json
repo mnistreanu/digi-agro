@@ -39,9 +39,9 @@
 	"expenses": {
 		"agricultural-machinery": "Cheltuieli pentru repararea mașinilor agricole",
 		"agricultural-works": "Cheltuieli pentru lucrări agricole",
+		"various-chemicals": "Cheltuieli pentru îngrășăminte și pesticide",
 		"fuel": "Cheltuieli pentru combustibil",
-		"sowing": "Cheltuieli pentru însămânțare",
-		"various-chemicals": "Cheltuieli pentru îngrășăminte și pesticide"
+		"sowing": "Cheltuieli pentru însămânțare"
 	},
 	"forecast": {
 		"additional_info": "Informații suplimnetare",
@@ -86,12 +86,13 @@
 		"consumption": "Consum",
 		"fabrication-country": "Țara de origine",
 		"fabrication-year": "Anul de fabricație",
-		"identifier": "Identificator",
+		"hp": "C.p.",
+		"identifier": "Nr. ID",
 		"machine": "Mașină",
 		"model": "Model",
 		"motor": "Motor",
 		"power": "Putere",
-		"responsible-persons": "Pers. Resp.",
+		"responsible-persons": "Persoane responsabile",
 		"speed-in-work": "Viteză în munca",
 		"speed-on-road": "Viteza pe drum",
 		"type": "Tip",
@@ -109,7 +110,7 @@
 		"TRACTOR": "Tractor"
 	},
 	"nav": {
-		"agricultural-machinery": "Maşini agricole",
+		"expenses-management": "Evidența cheltuielilor",
 		"agricultural-works": "Lucrări agricole",
 		"branches": "Filiale",
 		"brands": "Brands",
@@ -119,7 +120,6 @@
 		"crops-varieties": "Culturi agricole și soiuri",
 		"dashboard": "Dashboard",
 		"employees": "Angajați",
-		"expenses-management": "Evidența cheltuielilor",
 		"fertilizers-pesticides": "Îngrășăminte, pesticide",
 		"forecast-list": "Lista",
 		"forecasting-charts": "Diagrame de prognoză",
@@ -142,7 +142,8 @@
 		"weather": "Date meteo",
 		"weather-forecast": "Prognoza meteo",
 		"weather-history": "Date meteo istorice",
-		"work-agenda": "Agenda lucrărilor"
+		"work-agenda": "Agenda lucrărilor",
+		"agricultural-machinery": "Maşini agricole"
 	},
 	"notification": {
 		"mark-all-as-read": "Marcheaza toate ca fiind citite",
