@@ -66,7 +66,13 @@ export class SowingExpensesComponent implements OnInit {
                 headerName: this.labelDate,
                 field: 'date',
                 width: 100,
-                minWidth: 100
+                minWidth: 100,
+                cellStyle: () => {
+                    return {
+                        paddingLeft: '5px',
+                        paddingRight: '5px'
+                    };
+                }
             },
             {
                 headerName: this.labelCrop,
