@@ -56,15 +56,6 @@ export class SowingExpensesComponent implements OnInit {
         this.options.columnDefs = this.setupHeaders();
         this.context = {componentParent: this};
 
-        this.options.defaultColDef = {
-            cellStyle: () => {
-                return {
-                    paddingLeft: '5px',
-                    paddingRight: '5px'
-                };
-            }
-        };
-
         this.setupRows();
     }
 
