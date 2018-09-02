@@ -6,17 +6,18 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-<!--     <changeSet id="insert-2-tenants" author="mihai.gorgos" failOnError="true"> -->
-<!--         <sql> -->
-<!--             INSERT INTO tenant (id, name, country_id, fiscal_code, description, county_id, city_id, address, phones) -->
-<!--             VALUES (1, 'Gospodăria Ţărănească Orhei', 'md', '9842367810452', 'Gospodăria Ţărănească Orhei este super-puper', 'OR', null, 'str.Solidaritatii 14', '0-232-12345 0-232-12346'); -->
-<!--             select nextval('tenant_id_seq'); -->
+     <changeSet id="insert-2-tenants" author="mihai.gorgos" failOnError="true" onValidationFail="MARK_RAN">
+         <validCheckSum>ANY</validCheckSum>
+         <sql>
+             INSERT INTO tenant (id, name, country_id, fiscal_code, description, county_id, city_id, address, phones)
+             VALUES (1, 'Gospodăria Ţărănească Orhei', 'md', '9842367810452', 'Gospodăria Ţărănească Orhei este super-puper', 'OR', null, 'str.Solidaritatii 14', '0-232-12345 0-232-12346');
+             select nextval('tenant_id_seq');
 
-<!--             INSERT INTO tenant (id, name, country_id, fiscal_code, description, county_id, city_id, address, phones) -->
-<!--             VALUES (2, 'InterAgro Nisporeni', 'md', '8239045184523', 'InterAgro Nisporeni este super-puper', 'NS', null, 'str.Vladimir Ilici Lenin 1', '0-111-12345 0-111-12346'); -->
-<!--             select nextval('tenant_id_seq'); -->
-<!--         </sql> -->
-<!--     </changeSet> -->
+             INSERT INTO tenant (id, name, country_id, fiscal_code, description, county_id, city_id, address, phones)
+             VALUES (2, 'InterAgro Nisporeni', 'md', '8239045184523', 'InterAgro Nisporeni este super-puper', 'NS', null, 'str.Vladimir Ilici Lenin 1', '0-111-12345 0-111-12346');
+             select nextval('tenant_id_seq');
+         </sql>
+     </changeSet>
 
     <changeSet id="insert-super-admin" author="maxim.nistreanu" failOnError="true" runOnChange="true">
         <sql>
@@ -243,62 +244,64 @@
     <!--
         Adaugat 3 parcele cu coordonate la tenant_id=1
     -->
-<!--     <changeSet id="insert-3-parcels-tenant-1" author="mgorgos" failOnError="false"> -->
-<!--         <sql> -->
-<!--             INSERT INTO parcel(id, cadaster_number, city_id, country_id, county_id, created_at, description, land_worthiness_points, name, parent_id, tenant_id) -->
-<!--             VALUES (1, 'AB-34567-ZB-12356', null, 'md', 'HN', '2018-07-26 12:45:00', 'sus in deal', 89, 'Floarea soarelui', null, 1); -->
-<!--             select nextval('parcel_id_seq'); -->
+     <changeSet id="insert-3-parcels-tenant-1" author="mgorgos" failOnError="false" onValidationFail="MARK_RAN">
+         <validCheckSum>ANY</validCheckSum>
+         <sql>
+             INSERT INTO parcel(id, cadaster_number, city_id, country_id, county_id, created_at, description, land_worthiness_points, name, parent_id, tenant_id)
+             VALUES (1, 'AB-34567-ZB-12356', null, 'md', 'HN', '2018-07-26 12:45:00', 'sus in deal', 89, 'Floarea soarelui', null, 1);
+             select nextval('parcel_id_seq');
 
-<!--             INSERT INTO parcel_geometry(	parcel_id, coordinates) -->
-<!--             VALUES (1, '{ "coordinates": [ [46.811898, 28.638581], [46.810215, 28.634720], [46.798834, 28.643039], [46.799954, 28.644066], [46.802772, 28.644606] ]}'); -->
+             INSERT INTO parcel_geometry(	parcel_id, coordinates)
+             VALUES (1, '{ "coordinates": [ [46.811898, 28.638581], [46.810215, 28.634720], [46.798834, 28.643039], [46.799954, 28.644066], [46.802772, 28.644606] ]}');
 
-<!--             INSERT INTO parcel(id, cadaster_number, city_id, country_id, county_id, created_at, description, land_worthiness_points, name, parent_id, tenant_id) -->
-<!--             VALUES (2, 'AB-34567-ZB-17554', null, 'md', 'HN', '2018-07-26 12:45:00', 'sus in stinga', 84, 'Porumb furajer', null, 1); -->
-<!--             select nextval('parcel_id_seq'); -->
+             INSERT INTO parcel(id, cadaster_number, city_id, country_id, county_id, created_at, description, land_worthiness_points, name, parent_id, tenant_id)
+             VALUES (2, 'AB-34567-ZB-17554', null, 'md', 'HN', '2018-07-26 12:45:00', 'sus in stinga', 84, 'Porumb furajer', null, 1);
+             select nextval('parcel_id_seq');
 
-<!--             INSERT INTO parcel_geometry(	parcel_id, coordinates) -->
-<!--             VALUES (2, '{ "coordinates": [ [46.811898, 28.638581], [46.814937, 28.645115], [46.811814, 28.644840], [46.809678, 28.640038] ]}'); -->
+             INSERT INTO parcel_geometry(	parcel_id, coordinates)
+             VALUES (2, '{ "coordinates": [ [46.811898, 28.638581], [46.814937, 28.645115], [46.811814, 28.644840], [46.809678, 28.640038] ]}');
 
-<!--             INSERT INTO parcel(id, cadaster_number, city_id, country_id, county_id, created_at, description, land_worthiness_points, name, parent_id, tenant_id) -->
-<!--             VALUES (3, 'AB-34567-ZB-1898', null, 'md', 'HN', '2018-07-26 12:45:00', 'jos la vale', 82, 'Negru de purcari', null, 1); -->
-<!--             select nextval('parcel_id_seq'); -->
+             INSERT INTO parcel(id, cadaster_number, city_id, country_id, county_id, created_at, description, land_worthiness_points, name, parent_id, tenant_id)
+             VALUES (3, 'AB-34567-ZB-1898', null, 'md', 'HN', '2018-07-26 12:45:00', 'jos la vale', 82, 'Negru de purcari', null, 1);
+             select nextval('parcel_id_seq');
 
-<!--             INSERT INTO parcel_geometry(	parcel_id, coordinates) -->
-<!--             VALUES (3, '{ "coordinates": [ [46.811814, 28.644840], [46.809678, 28.640038], [46.804438, 28.643071], [46.801469, 28.645740], [46.802652, 28.645927], [46.803798, 28.645621], [46.807954, 28.648691] ]}'); -->
-<!--         </sql> -->
-<!--     </changeSet> -->
+             INSERT INTO parcel_geometry(	parcel_id, coordinates)
+             VALUES (3, '{ "coordinates": [ [46.811814, 28.644840], [46.809678, 28.640038], [46.804438, 28.643071], [46.801469, 28.645740], [46.802652, 28.645927], [46.803798, 28.645621], [46.807954, 28.648691] ]}');
+         </sql>
+     </changeSet>
 
-<!--     <changeSet id="insert-4-parcels-tenant-2" author="mgorgos" failOnError="false"> -->
-<!--         <sql> -->
-<!--             INSERT INTO parcel(id, cadaster_number, city_id, country_id, county_id, created_at, description, land_worthiness_points, name, parent_id, tenant_id) -->
-<!--             VALUES (4, 'AB-34567-NS-12356', null, 'md', 'NS', '2018-07-26 12:45:00', 'sus in deal', 89, 'Floarea soarelui', null, 2); -->
-<!--             select nextval('parcel_id_seq'); -->
+     <changeSet id="insert-4-parcels-tenant-2" author="mgorgos" failOnError="false" onValidationFail="MARK_RAN">
+         <validCheckSum>ANY</validCheckSum>
+         <sql>
+             INSERT INTO parcel(id, cadaster_number, city_id, country_id, county_id, created_at, description, land_worthiness_points, name, parent_id, tenant_id)
+             VALUES (4, 'AB-34567-NS-12356', null, 'md', 'NS', '2018-07-26 12:45:00', 'sus in deal', 89, 'Floarea soarelui', null, 2);
+             select nextval('parcel_id_seq');
 
-<!--             INSERT INTO parcel_geometry(	parcel_id, coordinates) -->
-<!--             VALUES (4, '{ "coordinates": [ [47.070854, 28.145911], [47.069766, 28.144750], [47.068454, 28.146618], [47.069552, 28.147994] ]}'); -->
+             INSERT INTO parcel_geometry(	parcel_id, coordinates)
+             VALUES (4, '{ "coordinates": [ [47.070854, 28.145911], [47.069766, 28.144750], [47.068454, 28.146618], [47.069552, 28.147994] ]}');
 
-<!--             INSERT INTO parcel(id, cadaster_number, city_id, country_id, county_id, created_at, description, land_worthiness_points, name, parent_id, tenant_id) -->
-<!--             VALUES (5, 'AB-34567-NS-17554', null, 'md', 'NS', '2018-07-26 12:45:00', 'sus in stinga', 84, 'Porumb furajer', null, 2); -->
-<!--             select nextval('parcel_id_seq'); -->
+             INSERT INTO parcel(id, cadaster_number, city_id, country_id, county_id, created_at, description, land_worthiness_points, name, parent_id, tenant_id)
+             VALUES (5, 'AB-34567-NS-17554', null, 'md', 'NS', '2018-07-26 12:45:00', 'sus in stinga', 84, 'Porumb furajer', null, 2);
+             select nextval('parcel_id_seq');
 
-<!--             INSERT INTO parcel_geometry(	parcel_id, coordinates) -->
-<!--             VALUES (5, '{ "coordinates": [ [47.068454, 28.146618], [47.069552, 28.147994], [47.068984, 28.148861], [47.067851, 28.147590] ]}'); -->
+             INSERT INTO parcel_geometry(	parcel_id, coordinates)
+             VALUES (5, '{ "coordinates": [ [47.068454, 28.146618], [47.069552, 28.147994], [47.068984, 28.148861], [47.067851, 28.147590] ]}');
 
-<!--             INSERT INTO parcel(id, cadaster_number, city_id, country_id, county_id, created_at, description, land_worthiness_points, name, parent_id, tenant_id) -->
-<!--             VALUES (6, 'AB-34567-NS-18698', null, 'md', 'NS', '2018-07-26 12:45:00', 'jos la vale', 82, 'Negru de purcari', null, 2); -->
-<!--             select nextval('parcel_id_seq'); -->
+             INSERT INTO parcel(id, cadaster_number, city_id, country_id, county_id, created_at, description, land_worthiness_points, name, parent_id, tenant_id)
+             VALUES (6, 'AB-34567-NS-18698', null, 'md', 'NS', '2018-07-26 12:45:00', 'jos la vale', 82, 'Negru de purcari', null, 2);
+             select nextval('parcel_id_seq');
 
-<!--             INSERT INTO parcel_geometry(	parcel_id, coordinates) -->
-<!--             VALUES (6, '{ "coordinates": [ [47.068984, 28.148861], [47.067851, 28.147590], [47.066603, 28.149660], [47.067649, 28.150897] ]}'); -->
+             INSERT INTO parcel_geometry(	parcel_id, coordinates)
+             VALUES (6, '{ "coordinates": [ [47.068984, 28.148861], [47.067851, 28.147590], [47.066603, 28.149660], [47.067649, 28.150897] ]}');
 
-<!--             INSERT INTO parcel(id, cadaster_number, city_id, country_id, county_id, created_at, description, land_worthiness_points, name, parent_id, tenant_id) -->
-<!--             VALUES (7, 'AB-34567-NS-18398', null, 'md', 'NS', '2018-07-26 12:45:00', 'jos iin stinga', 82, 'Tutun Kentuki', null, 2); -->
-<!--             select nextval('parcel_id_seq'); -->
+             INSERT INTO parcel(id, cadaster_number, city_id, country_id, county_id, created_at, description, land_worthiness_points, name, parent_id, tenant_id)
+             VALUES (7, 'AB-34567-NS-18398', null, 'md', 'NS', '2018-07-26 12:45:00', 'jos iin stinga', 82, 'Tutun Kentuki', null, 2);
+             select nextval('parcel_id_seq');
 
-<!--             INSERT INTO parcel_geometry(	parcel_id, coordinates) -->
-<!--             VALUES (7, '{ "coordinates": [ [47.066603, 28.149660], [47.067649, 28.150897], [47.066009, 28.153511], [47.066329, 28.150125] ]}'); -->
-<!--         </sql> -->
-<!--     </changeSet> -->
+             INSERT INTO parcel_geometry(	parcel_id, coordinates)
+             VALUES (7, '{ "coordinates": [ [47.066603, 28.149660], [47.067649, 28.150897], [47.066009, 28.153511], [47.066329, 28.150125] ]}');
+         </sql>
+     </changeSet>
 
 
     <changeSet id="update_parcels_area" author="mgorgos" failOnError="true" runOnChange="true">
@@ -430,7 +433,8 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert-harvesting-forecast-wheat-2018" author="mihai.gorgos" failOnError="true" runOnChange="false">
+    <changeSet id="insert-harvesting-forecast-wheat-2018" author="mihai.gorgos" failOnError="true" runOnChange="false" onValidationFail="MARK_RAN">
+        <validCheckSum>ANY</validCheckSum>
         <sql>
             INSERT INTO forecast(id, crop_id, tenant_id, harvesting_year, name, description)
             VALUES (1, 1, 1, 2018, 'Prognoza de grîu in 2018', 'Prognoza de grîu in 2018 pe terenurile din Calarasi si Strășeni');
