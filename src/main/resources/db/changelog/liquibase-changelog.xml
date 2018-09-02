@@ -695,7 +695,59 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert-employee_v_003" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+    <changeSet id="clear-data-brand_machine_employee_v_004" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <sql>
+            DELETE FROM machine_employee;
+
+            DELETE FROM machine_telemetry;
+            SELECT setval('machine_telemetry_id_seq', 1);
+
+            DELETE FROM machine_work_type;
+
+            DELETE FROM machine;
+            SELECT setval('machine_id_seq', 1);
+
+            DELETE FROM brand;
+            SELECT setval('brand_id_seq', 1);
+
+            DELETE FROM employee;
+            SELECT setval('employee_id_seq', 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert-brands_v_004" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <sql>
+            INSERT INTO brand(id, name) VALUES
+            (1, 'John Deere'),
+            (2, 'Belarus');
+
+            SELECT nextval('brand_id_seq');
+            SELECT nextval('brand_id_seq');
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert-machines_v_004" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <sql>
+            INSERT INTO machine(id, tenant_id, brand_id, type, identifier, model, fabrication_country, motor_type) VALUES
+            (1, 1, 1, 'TRACTOR', 'ANT 863', '5060E', 'USA', 'DIESEL'),
+            (2, 1, 1, 'TRACTOR', 'CLT 751', '5E', 'USA', 'DIESEL'),
+            (3, 2, 2, 'TRACTOR', 'UNT 784', 'MTZ-82', 'Belarus', 'DIESEL'),
+            (4, 2, 2, 'TRACTOR', 'BLT 367', 'MTZ-96', 'Belarus', 'DIESEL');
+
+            INSERT INTO machine_work_type(machine_id, work_type_id) VALUES
+            (1, 1), (1, 2),
+            (2, 1), (2, 2),
+            (3, 1), (3, 2),
+            (4, 1), (4, 2);
+
+            SELECT nextval('machine_id_seq');
+            SELECT nextval('machine_id_seq');
+            SELECT nextval('machine_id_seq');
+            SELECT nextval('machine_id_seq');
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert-employee_v_004" author="maxim.nistreanu" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO employee(id, tenant_id, title, first_name, last_name) VALUES
             (1, 1, 'Șofer', 'Alexandr', 'Ceban'),
@@ -718,7 +770,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="machine-employee_v_003" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+    <changeSet id="machine-employee_v_004" author="maxim.nistreanu" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO machine_employee(machine_id, employee_id) VALUES
             (1, 1), (1, 2),
