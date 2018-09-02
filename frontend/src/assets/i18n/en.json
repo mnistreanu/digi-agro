@@ -63,6 +63,12 @@
 		"summary-price": "Price",
 		"unit_of_measure": "Unit of measure"
 	},
+	"fuel": {
+		"diesel": "Diesel",
+		"negrol": "Negrol",
+		"oil": "Oil",
+		"solidol": "Solidol"
+	},
 	"general": {
 		"form": "Form",
 		"settings": "Settings"
@@ -279,7 +285,9 @@
 		"mdl": "Lei",
 		"q": "Quintal",
 		"ron": "Lei",
-		"t": "Ton"
+		"t": "Ton",
+		"unit-long": "Unit of measure",
+		"unit-short": "Unit"
 	},
 	"user": {
 		"account-information": "Account Information",

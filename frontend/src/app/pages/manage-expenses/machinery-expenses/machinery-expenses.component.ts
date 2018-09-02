@@ -101,6 +101,18 @@ export class MachineryExpensesComponent implements OnInit {
                 minWidth: 100,
                 suppressFilter: true,
             },
+            {
+                headerName: 'Registered By',
+                field: '',
+                width: 100,
+                minWidth: 100,
+            },
+            {
+                headerName: 'At',
+                field: '',
+                width: 60,
+                minWidth: 60,
+            },
         ];
 
         return headers;

@@ -63,6 +63,12 @@
 		"summary-price": "Preț",
 		"unit_of_measure": "Unitatea de măsură"
 	},
+	"fuel": {
+		"diesel": "Motorină",
+		"negrol": "Negrol",
+		"oil": "Ulei",
+		"solidol": "Solidol"
+	},
 	"general": {
 		"form": "Forma",
 		"settings": "Setări"
@@ -279,7 +285,9 @@
 		"mdl": "Lei",
 		"q": "Chintal",
 		"ron": "Lei",
-		"t": "Tonă"
+		"t": "Tonă",
+		"unit-long": "Unitatea de măsură",
+		"unit-short": "U.m."
 	},
 	"user": {
 		"account-information": "Informații despre cont",

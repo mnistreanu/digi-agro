@@ -173,7 +173,23 @@ export class SowingExpensesComponent implements OnInit {
                     }
                 ]
             },
-
+            {
+                headerName: 'Registered',
+                children: [
+                    {
+                        headerName: 'By',
+                        field: '',
+                        width: 100,
+                        minWidth: 100,
+                    },
+                    {
+                        headerName: 'At',
+                        field: '',
+                        width: 60,
+                        minWidth: 60,
+                    },
+                ]
+            },
         ];
 
         return headers;
