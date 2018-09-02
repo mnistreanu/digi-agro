@@ -50,7 +50,7 @@ public class WeatherHistoryTest {
 	@Rollback(false)
 	public void testInsertFromSelect() {
 		@SuppressWarnings("deprecation")
-		Date referenceDate = new Date(2018 - 1900, 8 - 1, 21);
+		Date referenceDate = new Date(2018 - 1900, 8 - 1, 30);
 		int o = weatherHistoryRepository.insertFromSnapshot(referenceDate);
 		logger.debug("Articole inserate: {}", o);
 	}
