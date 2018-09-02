@@ -1,136 +1,55 @@
 package com.arobs.weather.entity;
 
-import javax.persistence.*;
-
-import org.jdto.annotation.DTOCascade;
-import org.jdto.annotation.DTOTransient;
-import org.jdto.annotation.Source;
-
 import com.arobs.weather.snapshot.Weather;
 
 import java.util.Date;
 import java.util.List;
 
 /**
- * Created by mihail.gorgos on 31.07.2018.
+ * Date istorice. Se transfera zilnic din tabelul "weather_snapshot"
  */
-@Entity
-@Table(name = "weather_snaphot")
-public class WeatherSnapshot {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    @DTOTransient
+public class WeatherHistoryModel {
     private Long id;
-    @Column(name="day_timestamp")
-    @DTOTransient
-    private Long dayTimestamp;
-    @Column(name="openweather_id")
-	@Source("id")
     private Integer openweatherId;
-    @Column(name="parcel_id")
-    @DTOTransient
     private Long parcelId;
-    @Column(name="name")
     private String name;
-    @Column(name="cod")
     private Integer cod;
-    @Column(name="dt")
     private Date dt;
-    @Column(name="base")
     private String base;
-    @Column(name="rain_3h")
-	@Source("rain.3h")
     private Double rain3h;
-    @Column(name="source_id")
-    @DTOTransient
     private Integer sourceId;
-    @Column(name="county_id")
-	@DTOTransient
     private String countyId;
     
-    @Column(name="lat")
-	@Source("coord.lat")
     private Double lat;
-    @Column(name="lon")
-	@Source("coord.lon")
     private Double lon;
 
-    @Transient
-    @DTOCascade
-	@Source("weather")
     private List<Weather> weather;
 
-    @Column(name="weather_id")
-	@DTOTransient
     private Integer weatherId;
-    @Column(name="main")
-	@DTOTransient
     private String main;
-    @Column(name="description")
-	@DTOTransient
     private String description;
-    @Column(name="icon")
-	@DTOTransient
     private String icon;
 
-    @Column(name="temp")
-	@Source( "main.temp")
     private Double temp;
-    @Column(name="pressure")
-	@Source( "main.pressure")
     private Double pressure;
-    @Column(name="humidity")
-	@Source( "main.humidity")
     private Integer humidity;
-    @Column(name="humidity_air")
-	@DTOTransient
     private Integer humidityAir;
-    @Column(name="humidity_soil")
-	@DTOTransient
     private Integer humiditySoil;
-    @Column(name="temp_min")
-	@Source("main.tempMin")
 	private Double tempMin;
-    @Column(name="temp_max")
-	@Source("main.tempMax")
 	private Double tempMax;
-    @Column(name="sea_level")
-	@Source("main.seaLevel")
 	private Double seaLevel;
-    @Column(name="grnd_level")
-	@Source("main.grndLevel")
 	private Double grndLevel;
 
-    @Column(name="speed")
-    @Source("wind.speed")
     private Double speed;
-    @Column(name="deg")
-    @Source("wind.deg")
     private Double deg;
 
-    @Column(name="clouds")
-	@Source( "clouds.all")
     private Integer clouds;
 
-    @Column(name="sys_id")
-	@Source( "sys.id")
 	private Integer sysId;
-    @Column(name="sys_type")
-	@Source( "sys.type")
 	private Integer sysType;
-    @Column(name="message")
-	@Source( "sys.message")
 	private Double message;
-    @Column(name="country_code")
-	@Source("sys.country")
 	private String countryCode;
-    @Column(name="sunrise")
-	@Source( "sys.sunrise")
 	private Date sunrise;
-    @Column(name="sunset")
-	@Source( "sys.sunset")
 	private Date sunset;
     
     public Long getId() {
@@ -141,15 +60,7 @@ public class WeatherSnapshot {
         this.id = id;
     }
 
-    public Long getDayTimestamp() {
-		return dayTimestamp;
-	}
-
-	public void setDayTimestamp(Long dayTimestamp) {
-		this.dayTimestamp = dayTimestamp;
-	}
-
-	public Integer getOpenweatherId() {
+    public Integer getOpenweatherId() {
 		return openweatherId;
 	}
 

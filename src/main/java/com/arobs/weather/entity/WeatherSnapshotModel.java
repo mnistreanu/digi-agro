@@ -1,139 +1,84 @@
 package com.arobs.weather.entity;
 
-import javax.persistence.*;
-
-import org.jdto.annotation.DTOCascade;
-import org.jdto.annotation.DTOTransient;
-import org.jdto.annotation.Source;
-
-import com.arobs.weather.snapshot.Weather;
-
 import java.util.Date;
-import java.util.List;
 
-/**
- * Created by mihail.gorgos on 31.07.2018.
- */
-@Entity
-@Table(name = "weather_snaphot")
-public class WeatherSnapshot {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    @DTOTransient
+public class WeatherSnapshotModel {
     private Long id;
-    @Column(name="day_timestamp")
-    @DTOTransient
-    private Long dayTimestamp;
-    @Column(name="openweather_id")
-	@Source("id")
     private Integer openweatherId;
-    @Column(name="parcel_id")
-    @DTOTransient
     private Long parcelId;
-    @Column(name="name")
     private String name;
-    @Column(name="cod")
     private Integer cod;
-    @Column(name="dt")
     private Date dt;
-    @Column(name="base")
     private String base;
-    @Column(name="rain_3h")
-	@Source("rain.3h")
     private Double rain3h;
-    @Column(name="source_id")
-    @DTOTransient
     private Integer sourceId;
-    @Column(name="county_id")
-	@DTOTransient
     private String countyId;
-    
-    @Column(name="lat")
-	@Source("coord.lat")
     private Double lat;
-    @Column(name="lon")
-	@Source("coord.lon")
     private Double lon;
-
-    @Transient
-    @DTOCascade
-	@Source("weather")
-    private List<Weather> weather;
-
-    @Column(name="weather_id")
-	@DTOTransient
     private Integer weatherId;
-    @Column(name="main")
-	@DTOTransient
     private String main;
-    @Column(name="description")
-	@DTOTransient
     private String description;
-    @Column(name="icon")
-	@DTOTransient
     private String icon;
-
-    @Column(name="temp")
-	@Source( "main.temp")
     private Double temp;
-    @Column(name="pressure")
-	@Source( "main.pressure")
     private Double pressure;
-    @Column(name="humidity")
-	@Source( "main.humidity")
     private Integer humidity;
-    @Column(name="humidity_air")
-	@DTOTransient
     private Integer humidityAir;
-    @Column(name="humidity_soil")
-	@DTOTransient
     private Integer humiditySoil;
-    @Column(name="temp_min")
-	@Source("main.tempMin")
 	private Double tempMin;
-    @Column(name="temp_max")
-	@Source("main.tempMax")
 	private Double tempMax;
-    @Column(name="sea_level")
-	@Source("main.seaLevel")
 	private Double seaLevel;
-    @Column(name="grnd_level")
-	@Source("main.grndLevel")
 	private Double grndLevel;
-
-    @Column(name="speed")
-    @Source("wind.speed")
     private Double speed;
-    @Column(name="deg")
-    @Source("wind.deg")
     private Double deg;
-
-    @Column(name="clouds")
-	@Source( "clouds.all")
     private Integer clouds;
-
-    @Column(name="sys_id")
-	@Source( "sys.id")
 	private Integer sysId;
-    @Column(name="sys_type")
-	@Source( "sys.type")
 	private Integer sysType;
-    @Column(name="message")
-	@Source( "sys.message")
 	private Double message;
-    @Column(name="country_code")
-	@Source("sys.country")
 	private String countryCode;
-    @Column(name="sunrise")
-	@Source( "sys.sunrise")
 	private Date sunrise;
-    @Column(name="sunset")
-	@Source( "sys.sunset")
 	private Date sunset;
+	
+	
     
-    public Long getId() {
+    public WeatherSnapshotModel(WeatherSnapshot weatherSnapshot) {
+		super();
+		this.id = weatherSnapshot.getId();
+		this.openweatherId = weatherSnapshot.getOpenweatherId();
+		this.parcelId = weatherSnapshot.getParcelId();
+		this.name = weatherSnapshot.getName();
+		this.cod = weatherSnapshot.getCod();
+		this.dt = weatherSnapshot.getDt();
+		this.base = weatherSnapshot.getBase();
+		this.rain3h = weatherSnapshot.getRain3h();
+		this.sourceId = weatherSnapshot.getSourceId();
+		this.countyId = weatherSnapshot.getCountyId();
+		this.lat = weatherSnapshot.getLat();
+		this.lon = weatherSnapshot.getLon();
+		this.weatherId = weatherSnapshot.getWeatherId();
+		this.main = weatherSnapshot.getMain();
+		this.description = weatherSnapshot.getDescription();
+		this.icon = weatherSnapshot.getIcon();
+		this.temp = weatherSnapshot.getTemp();
+		this.pressure = weatherSnapshot.getPressure();
+		this.humidity = weatherSnapshot.getHumidity();
+		this.humidityAir = weatherSnapshot.getHumidityAir();
+		this.humiditySoil = weatherSnapshot.getHumiditySoil();
+		this.tempMin = weatherSnapshot.getTempMin();
+		this.tempMax = weatherSnapshot.getTempMax();
+		this.seaLevel = weatherSnapshot.getSeaLevel();
+		this.grndLevel = weatherSnapshot.getGrndLevel();
+		this.speed = weatherSnapshot.getSpeed();
+		this.deg = weatherSnapshot.getDeg();
+		this.clouds = weatherSnapshot.getClouds();
+		this.sysId = weatherSnapshot.getSysId();
+		this.sysType = weatherSnapshot.getSysType();
+		this.message = weatherSnapshot.getMessage();
+		this.countryCode = weatherSnapshot.getCountryCode();
+		this.sunrise = weatherSnapshot.getSunrise();
+		this.sunset = weatherSnapshot.getSunset();
+	}
+
+	public Long getId() {
         return id;
     }
 
@@ -141,15 +86,7 @@ public class WeatherSnapshot {
         this.id = id;
     }
 
-    public Long getDayTimestamp() {
-		return dayTimestamp;
-	}
-
-	public void setDayTimestamp(Long dayTimestamp) {
-		this.dayTimestamp = dayTimestamp;
-	}
-
-	public Integer getOpenweatherId() {
+    public Integer getOpenweatherId() {
 		return openweatherId;
 	}
 
@@ -236,19 +173,6 @@ public class WeatherSnapshot {
     public void setLon(Double lon) {
         this.lon = lon;
     }
-
-    public List<Weather> getWeather() {
-		return weather;
-	}
-
-	public void setWeather(List<Weather> weather) {
-		this.weather = weather;
-		Weather weatherItem = weather.get(0);
-		this.weatherId = weatherItem.getId();
-		this.main = weatherItem.getMain();
-		this.description = weatherItem.getDescription();
-		this.icon = weatherItem.getIcon();
-	}
 
 	public Integer getWeatherId() {
 		return weatherId;

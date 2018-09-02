@@ -49,8 +49,8 @@ import java.util.stream.Collectors;
 @Service
 public class WeatherLocationProvider implements HasRepository<WeatherLocationRepository> {
 	private static final Logger logger = LoggerFactory.getLogger(WeatherLocationProvider.class);
-	private static final String FILE_URL = "http://bulk.openweathermap.org/sample/city.list.json.gz";
-	private static final String LOCAL_FILE = "r:/digi-agro/city.list.json.gz";
+	public static final String FILE_URL = "http://bulk.openweathermap.org/sample/city.list.json.gz";
+	public static final String LOCAL_FILE = "r:/digi-agro/city.list.json.gz";
 
 	
 	@Value("${weather.location.url}")
@@ -69,7 +69,19 @@ public class WeatherLocationProvider implements HasRepository<WeatherLocationRep
 
 	private ObjectMapper objectMapper = new ObjectMapper();
 	
-    public int synchronizeLocations() throws IOException {
+    /**
+     * <ol>
+     * <li>Descarca fisierul ZIP cu localitatile de pe Open weather</li>
+     * <li>Dezariveaza fisierul ZIP intr-un fisier JSON</li>
+     * <li>Proceseaza fisierul JSON si formeaza o clectie de obiecte Java de tip JSON corespunzatoare localitatilor</li>
+     * <li>Transforma obiectele de tip JSON in entitati Hibernate</li>
+     * <li>Elimina toata informatia din tabelul "location" </li>
+     * <li>Salveaza obiectele Hibernate in tabelul "location" din BD</li>
+     * </ol>
+     * @return Numarul de articole inserate. 
+     * @throws IOException daca nu poate gasi fisierul JSON.
+     */
+	public int synchronizeLocations() throws IOException {
     	String downloadFile = downloadFile(weatherLocationUrl, locationZipFile);
     	logger.debug("Fisierul {} a fost descarcat", downloadFile);
     	String unzipedFile = zipFileExtractor.unzip(locationZipFile, locationJsonFile);
@@ -82,10 +94,8 @@ public class WeatherLocationProvider implements HasRepository<WeatherLocationRep
 		List<WeatherLocationJson> jsonLocations = objectMapper.readValue(file,  listType);
 		List<WeatherLocation> locationsEntities = binder.bindFromBusinessObjectList(WeatherLocation.class, jsonLocations
 				.stream()
-				.filter(v -> 
-						(
-							(v.getCountry().equals("RO") || v.getCountry().equals("MD")) && 
-							(v.getName().toLowerCase().startsWith("raio")  || v.getName().toLowerCase().startsWith("jude"))
+				.filter(v -> ((v.getCountry().equals("RO") || v.getCountry().equals("MD")) && 
+									(v.getName().toLowerCase().startsWith("raio")  || v.getName().toLowerCase().startsWith("jude"))
 						)
 					)
 				.collect(Collectors.toList()));
@@ -102,7 +112,7 @@ public class WeatherLocationProvider implements HasRepository<WeatherLocationRep
 	 * @return - returneaza numele fisierului salvat
 	 * @throws IOException
 	 */
-	public String downloadFile(String fileUrl, String localFilePath) throws IOException {
+	String downloadFile(String fileUrl, String localFilePath) throws IOException {
 		if (StringUtils.isEmpty(fileUrl)) {
 			fileUrl = FILE_URL;
 		}
@@ -134,10 +144,6 @@ public class WeatherLocationProvider implements HasRepository<WeatherLocationRep
     }
 
     public List<WeatherLocation> findAllMdRo() {
-        return getRepository().findAllMdRo();
-    }
-
-    public List<WeatherLocation> Sace(List<WeatherLocation> weatherLocations) {
         return getRepository().findAllMdRo();
     }
 

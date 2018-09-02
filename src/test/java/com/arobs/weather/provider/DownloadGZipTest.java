@@ -1,4 +1,6 @@
-package com.arobs.weather;
+package com.arobs.weather.provider;
+
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.arobs.weather.GZipFile;
 import com.arobs.weather.provider.WeatherLocationProvider;
 
 @RunWith(SpringRunner.class)
@@ -21,7 +24,8 @@ public class DownloadGZipTest {
 	
 	@Test
 	public void downloadFile() throws IOException {
-		weatherLocationProvider.downloadFile(null, null);
+		String savedFile = weatherLocationProvider.downloadFile(null, null);
+		assertEquals(WeatherLocationProvider.LOCAL_FILE, savedFile);
 	}
 	
 	@Test
