@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ColDef, GridOptions} from 'ag-grid';
-import {LangService} from "../../../services/lang.service";
-import {WeatherService} from "../../../services/weather.service";
-import {CustomImageRendererComponent} from "../../../modules/aggrid/custom-image-renderer/custom-image-renderer.component";
-import {SowingExpensesModel} from "./sowing-expenses.model";
+import {ColDef, ColGroupDef, GridOptions} from 'ag-grid';
+import {LangService} from '../../../services/lang.service';
+import {WeatherService} from '../../../services/weather.service';
+import {CustomImageRendererComponent} from '../../../modules/aggrid/custom-image-renderer/custom-image-renderer.component';
+import {SowingExpensesModel} from './sowing-expenses.model';
 
 @Component({
     selector: 'app-sowing-expenses',
@@ -67,7 +67,7 @@ export class SowingExpensesComponent implements OnInit {
 
     private setupHeaders() {
 
-        const headers: ColDef[] = [
+        const headers: (ColDef | ColGroupDef)[] = [
             {
                 headerName: '',
                 field: 'icon',
@@ -91,20 +91,13 @@ export class SowingExpensesComponent implements OnInit {
                 width: 180,
                 minWidth: 180
             },
-            // {
-            //     headerName: this.labelCropVariety,
-            //     field: 'variety',
-            //     width: 100,
-            //     minWidth: 100,
-            //     suppressFilter: true,
-            // },
             {
                 headerName: this.labelUnitOfMeasureShort,
                 field: 'unitOfMeasure',
                 width: 60,
                 minWidth: 60,
                 suppressFilter: true,
-                headerTooltip:this.labelUnitOfMeasureLong,
+                headerTooltip: this.labelUnitOfMeasureLong,
             },
             {
                 headerName: this.labelArea,

@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
-import {LangService} from "../../../services/lang.service";
-import {MachineService} from "../../../services/machine.service";
-import {FuelExpensesModel} from "./fuel-expenses.model";
+import {LangService} from '../../../services/lang.service';
+import {MachineService} from '../../../services/machine.service';
+import {FuelExpensesModel} from './fuel-expenses.model';
 
 @Component({
     selector: 'app-fuel-expenses',
@@ -89,7 +89,7 @@ export class FuelExpensesComponent implements OnInit {
                 suppressFilter: true,
             },
             {
-                headerName: this.labelLastName  +' ' +this.labelFirstName,
+                headerName: this.labelLastName  + ' ' + this.labelFirstName,
                 field: 'employee',
                 width: 100,
                 minWidth: 100,
@@ -150,7 +150,7 @@ export class FuelExpensesComponent implements OnInit {
 
 
     public setupRows() {
-        let i:number = 0;
+        let i = 0;
         this.machineService.findAll().subscribe(modelsArray => {
             const rows = modelsArray.map(data => {
                 const model = new FuelExpensesModel();

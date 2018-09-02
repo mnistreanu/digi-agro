@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
-import {LangService} from "../../../services/lang.service";
-import {MachineService} from "../../../services/machine.service";
-import {MachineryExpensesModel} from "./machinery-expenses.model";
+import {LangService} from '../../../services/lang.service';
+import {MachineService} from '../../../services/machine.service';
+import {MachineryExpensesModel} from './machinery-expenses.model';
 
 @Component({
     selector: 'app-machinery-expenses',
@@ -81,7 +81,7 @@ export class MachineryExpensesComponent implements OnInit {
                 suppressFilter: true,
             },
             {
-                headerName: this.labelLastName  +' ' +this.labelFirstName,
+                headerName: this.labelLastName  + ' ' + this.labelFirstName,
                 field: 'employee',
                 width: 100,
                 minWidth: 100,
@@ -120,7 +120,7 @@ export class MachineryExpensesComponent implements OnInit {
 
 
     public setupRows() {
-        let i:number = 0;
+        let i = 0;
         this.machineService.findAll().subscribe(modelsArray => {
             const rows = modelsArray.map(data => {
                 const model = new MachineryExpensesModel();
