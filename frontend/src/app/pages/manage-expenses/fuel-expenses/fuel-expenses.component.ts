@@ -3,7 +3,7 @@ import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {MachineService} from '../../../services/machine.service';
 import {FuelExpensesModel} from './fuel-expenses.model';
-import { CustomPinnedRowRenderer } from "../../../modules/aggrid/custom-pinned-row-renderer/custom-pinned-row-renderer.component";
+import { CustomPinnedRowRenderer } from '../../../modules/aggrid/custom-pinned-row-renderer/custom-pinned-row-renderer.component';
 
 @Component({
     selector: 'app-fuel-expenses',
@@ -116,8 +116,8 @@ export class FuelExpensesComponent implements OnInit {
                 enableValue: true,
                 // restrict aggregations to sum
                 allowedAggFuncs: ['sum'],
-                pinnedRowCellRenderer: "customPinnedRowRenderer",
-                pinnedRowCellRendererParams: { style: { color: "blue" } }
+                pinnedRowCellRenderer: 'customPinnedRowRenderer',
+                pinnedRowCellRendererParams: { style: { color: 'blue' } }
             },
             {
                 headerName: this.labelOil,
@@ -179,7 +179,18 @@ export class FuelExpensesComponent implements OnInit {
                 return model;
             });
             this.options.api.setRowData(rows);
+            this.setupSummaryRow(rows);
         });
+    }
+
+    private setupSummaryRow(rows) {
+        const summaryRow = {
+            diesel: 0
+        };
+        rows.forEach(source => {
+            summaryRow.diesel += source.diesel || 0;
+        });
+        this.options.api.setPinnedBottomRowData([summaryRow]);
     }
 
     public onGridReady() {

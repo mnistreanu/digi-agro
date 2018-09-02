@@ -33,7 +33,6 @@ export const routes = [
         FormsModule,
         ReactiveFormsModule,
         MultiselectDropdownModule,
-        BrowserModule,,
         DirectivesModule,
         FormErrorBlockModule,
         CustomImageRendererModule,

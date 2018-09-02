@@ -14,7 +14,7 @@ export class CustomPinnedRowRenderer implements ICellRendererAngularComp {
         this.style = this.params.style;
     }
 
-    refresh():boolean{
+    refresh(): boolean {
         return false;
     }
 }
