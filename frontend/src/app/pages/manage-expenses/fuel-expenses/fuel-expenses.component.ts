@@ -3,6 +3,7 @@ import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {MachineService} from '../../../services/machine.service';
 import {FuelExpensesModel} from './fuel-expenses.model';
+import { CustomPinnedRowRenderer } from "../../../modules/aggrid/custom-pinned-row-renderer/custom-pinned-row-renderer.component";
 
 @Component({
     selector: 'app-fuel-expenses',
@@ -27,8 +28,8 @@ export class FuelExpensesComponent implements OnInit {
     labelSolidol: string;
     labelNegrol: string;
 
-    constructor(private machineService: MachineService,
-                private langService: LangService) {
+    constructor(private machineService: MachineService, private langService: LangService) {
+
     }
 
     ngOnInit() {
@@ -60,6 +61,8 @@ export class FuelExpensesComponent implements OnInit {
         this.options.enableFilter = true;
         this.options.rowSelection = 'single';
         this.options.columnDefs = this.setupHeaders();
+        this.options.frameworkComponents = { customPinnedRowRenderer: CustomPinnedRowRenderer };
+
         this.context = {componentParent: this};
 
         this.setupRows();
@@ -109,6 +112,12 @@ export class FuelExpensesComponent implements OnInit {
                 width: 100,
                 minWidth: 100,
                 suppressFilter: true,
+                // allow gui to set aggregations for this column
+                enableValue: true,
+                // restrict aggregations to sum
+                allowedAggFuncs: ['sum'],
+                pinnedRowCellRenderer: "customPinnedRowRenderer",
+                pinnedRowCellRendererParams: { style: { color: "blue" } }
             },
             {
                 headerName: this.labelOil,
@@ -143,7 +152,9 @@ export class FuelExpensesComponent implements OnInit {
                 width: 60,
                 minWidth: 60,
             },
+
         ];
+
 
         return headers;
     }
