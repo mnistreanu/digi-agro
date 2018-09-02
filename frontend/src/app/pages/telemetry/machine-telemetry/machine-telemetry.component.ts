@@ -164,6 +164,9 @@ export class MachineTelemetryComponent implements OnInit {
     }
 
     public setupRows() {
+        if (!this.selectedMachine) {
+            return;
+        }
         this.machineTelemetryService.find(this.selectedMachine.id).subscribe(models => {
             this.options.api.setRowData(models);
             this.models = models;
