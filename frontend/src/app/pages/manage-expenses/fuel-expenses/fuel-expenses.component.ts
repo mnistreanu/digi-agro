@@ -77,6 +77,8 @@ export class FuelExpensesComponent implements OnInit {
                 width: 90,
                 minWidth: 90,
                 suppressFilter: true,
+                pinnedRowCellRenderer: 'customPinnedRowRenderer',
+                pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } }
             },
             {
                 headerName: this.labelAgriculturalMachinery,
@@ -113,11 +115,11 @@ export class FuelExpensesComponent implements OnInit {
                 minWidth: 100,
                 suppressFilter: true,
                 // allow gui to set aggregations for this column
-                enableValue: true,
+//                enableValue: true,
                 // restrict aggregations to sum
-                allowedAggFuncs: ['sum'],
+//                allowedAggFuncs: ['sum'],
                 pinnedRowCellRenderer: 'customPinnedRowRenderer',
-                pinnedRowCellRendererParams: { style: { color: 'blue' } }
+                pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } }
             },
             {
                 headerName: this.labelOil,
@@ -185,6 +187,7 @@ export class FuelExpensesComponent implements OnInit {
 
     private setupSummaryRow(rows) {
         const summaryRow = {
+            date: 'TOTAL',
             diesel: 0
         };
         rows.forEach(source => {
