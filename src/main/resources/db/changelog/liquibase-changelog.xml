@@ -695,4 +695,37 @@
         </sql>
     </changeSet>
 
+    <changeSet id="insert-employee_v_003" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <sql>
+            INSERT INTO employee(id, tenant_id, title, first_name, last_name) VALUES
+            (1, 1, 'Șofer', 'Alexandr', 'Ceban'),
+            (2, 1, 'Șofer', 'Vladimir', 'Ursu'),
+            (3, 1, 'Șofer', 'Petru', 'Birca'),
+            (4, 1, 'Șofer', 'Iurii', 'Popov'),
+            (5, 2, 'Șofer', 'Pavel', 'Croitor'),
+            (6, 2, 'Șofer', 'Ivan', 'Lupu'),
+            (7, 2, 'Șofer', 'David', 'Russu'),
+            (8, 2, 'Șofer', 'Boris', 'Sirbu');
+
+            SELECT nextval('employee_id_seq');
+            SELECT nextval('employee_id_seq');
+            SELECT nextval('employee_id_seq');
+            SELECT nextval('employee_id_seq');
+            SELECT nextval('employee_id_seq');
+            SELECT nextval('employee_id_seq');
+            SELECT nextval('employee_id_seq');
+            SELECT nextval('employee_id_seq');
+        </sql>
+    </changeSet>
+
+    <changeSet id="machine-employee_v_003" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <sql>
+            INSERT INTO machine_employee(machine_id, employee_id) VALUES
+            (1, 1), (1, 2),
+            (2, 3), (2, 4),
+            (3, 5), (3, 6),
+            (4, 7), (4, 8);
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
