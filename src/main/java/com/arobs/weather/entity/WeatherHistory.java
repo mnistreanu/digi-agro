@@ -3,69 +3,70 @@ package com.arobs.weather.entity;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Date istorice. Se transfera zilnic din tabelul "weather_snapshot"
  */
 @Entity
-@Table(name = "weather_history",  uniqueConstraints = {@UniqueConstraint(name="UQ_weather_history_openweather_id", columnNames = {"day_timestamp", "openweather_id"})})
+@Table(name = "weather_history", uniqueConstraints = {
+		@UniqueConstraint(name = "UQ_weather_history_openweather_id", columnNames = {"openweather_id", "day_timestamp"})
+	}
+)
 public class WeatherHistory implements Serializable {
-	private static final long serialVersionUID = -649436542429821841L;
+	private static final long serialVersionUID = -8449688319806335527L;
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private Long id;
-    @Column(name="day_timestamp")
-    private Long dayTimestamp;
-    @Column(name="openweather_id")
-    private Integer openweatherId;
-    @Column(name="parcel_id")
-    private Long parcelId;
-    @Column(name="name")
-    private String name;
-    @Column(name="cod")
-    private Integer cod;
-    @Column(name="source_id")
-    private Integer sourceId;
-    @Column(name="county_id")
-    private String countyId;
-    
-    @Column(name="lat")
-    private Double lat;
-    @Column(name="lon")
-    private Double lon;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
+	@Column(name = "openweather_id")
+	private Integer openweatherId;
+	@Column(name = "parcel_id")
+	private Long parcelId;
+	@Column(name = "day_timestamp")
+	private Long dayTimestamp;
+	@Column(name = "day")
+	private Double day;
+	@Column(name = "temp_min")
+	private Double tempMin;
+	@Column(name = "temp_max")
+	private Double tempMax;
+	@Column(name = "night")
+	private Double night;
+	@Column(name = "evn")
+	private Double evn;
+	@Column(name = "morn")
+	private Double morn;
+	@Column(name = "pressure")
+	private Double pressure;
+	@Column(name = "humidity")
+	private Integer humidity;
+	@Column(name = "humidity_air")
+	private Integer humidityAir;
+	@Column(name = "humidity_soil")
+	private Integer humiditySoil;
+	@Column(name = "weather_id")
+	private Integer weatherId;
+	@Column(name = "main")
+	private String main;
+	@Column(name = "description")
+	private String description;
+	@Column(name = "icon")
+	private String icon;
+	@Column(name = "speed")
+	private Double speed;
+	@Column(name = "deg")
+	private Double deg;
+	@Column(name = "clouds")
+	private Integer clouds;
+	@Column(name = "rain_3h")
+	private Double rain3h;
 
-    @Column(name="sys_id")
-	private Integer sysId;
-    @Column(name="sys_type")
-	private Integer sysType;
-    @Column(name="message")
-	private Double message;
-    @Column(name="country_code")
-	private String countryCode;
-    @Column(name="sunrise")
-	private Date sunrise;
-    @Column(name="sunset")
-	private Date sunset;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "weatherHistory")
-    private List<WeatherHistoryItem> historyItems;
-    
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-	public Long getDayTimestamp() {
-		return dayTimestamp;
+	public Long getId() {
+		return id;
 	}
 
-	public void setDayTimestamp(Long dayTimestamp) {
-		this.dayTimestamp = dayTimestamp;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Integer getOpenweatherId() {
@@ -84,109 +85,159 @@ public class WeatherHistory implements Serializable {
         this.parcelId = parcelId;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public Integer getCod() {
-		return cod;
+	public Long getDayTimestamp() {
+		return dayTimestamp;
 	}
 
-	public void setCod(Integer cod) {
-		this.cod = cod;
+	public void setDayTimestamp(Long dayTimestamp) {
+		this.dayTimestamp = dayTimestamp;
 	}
 
-
-	public Integer getSourceId() {
-        return sourceId;
-    }
-
-    public void setSourceId(Integer sourceId) {
-        this.sourceId = sourceId;
-    }
-
-    public String getCountyId() {
-        return countyId;
-    }
-
-    public void setCountyId(String countyId) {
-        this.countyId = countyId;
-    }
-
-	public Double getLat() {
-        return lat;
-    }
-
-    public void setLat(Double lat) {
-        this.lat = lat;
-    }
-
-    public Double getLon() {
-        return lon;
-    }
-
-    public void setLon(Double lon) {
-        this.lon = lon;
-    }
-
-    public Integer getSysId() {
-		return sysId;
+	public Double getDay() {
+		return day;
 	}
 
-	public void setSysId(Integer sysId) {
-		this.sysId = sysId;
+	public void setDay(Double day) {
+		this.day = day;
 	}
 
-	public Integer getSysType() {
-		return sysType;
+	public Double getTempMin() {
+		return tempMin;
 	}
 
-	public void setSysType(Integer sysType) {
-		this.sysType = sysType;
+	public void setTempMin(Double tempMin) {
+		this.tempMin = tempMin;
 	}
 
-	public Double getMessage() {
-		return message;
+	public Double getTempMax() {
+		return tempMax;
 	}
 
-	public void setMessage(Double message) {
-		this.message = message;
+	public void setTempMax(Double tempMax) {
+		this.tempMax = tempMax;
 	}
 
-	public String getCountryCode() {
-		return countryCode;
+	public Double getNight() {
+		return night;
 	}
 
-	public void setCountryCode(String countryCode) {
-		this.countryCode = countryCode;
+	public void setNight(Double night) {
+		this.night = night;
 	}
 
-	public Date getSunrise() {
-		return sunrise;
+	public Double getEvn() {
+		return evn;
 	}
 
-	public void setSunrise(Date sunrise) {
-		this.sunrise = sunrise;
+	public void setEvn(Double evn) {
+		this.evn = evn;
 	}
 
-	public Date getSunset() {
-		return sunset;
+	public Double getMorn() {
+		return morn;
 	}
 
-	public void setSunset(Date sunset) {
-		this.sunset = sunset;
+	public void setMorn(Double morn) {
+		this.morn = morn;
 	}
 
-	public List<WeatherHistoryItem> getHistoryItems() {
-		return historyItems;
+	public Double getPressure() {
+		return pressure;
 	}
 
-	public void setHistoryItems(List<WeatherHistoryItem> historyItems) {
-		this.historyItems = historyItems;
+	public void setPressure(Double pressure) {
+		this.pressure = pressure;
+	}
+
+	public Integer getHumidity() {
+		return humidity;
+	}
+
+	public void setHumidity(Integer humidity) {
+		this.humidity = humidity;
+	}
+
+	public Integer getHumidityAir() {
+		return humidityAir;
+	}
+
+	public void setHumidityAir(Integer humidityAir) {
+		this.humidityAir = humidityAir;
+	}
+
+	public Integer getHumiditySoil() {
+		return humiditySoil;
+	}
+
+	public void setHumiditySoil(Integer humiditySoil) {
+		this.humiditySoil = humiditySoil;
+	}
+
+	public Integer getWeatherId() {
+		return weatherId;
+	}
+
+	public void setWeatherId(Integer weatherId) {
+		this.weatherId = weatherId;
+	}
+
+	public String getMain() {
+		return main;
+	}
+
+	public void setMain(String main) {
+		this.main = main;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public Double getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(Double speed) {
+		this.speed = speed;
+	}
+
+	public Double getDeg() {
+		return deg;
+	}
+
+	public void setDeg(Double deg) {
+		this.deg = deg;
+	}
+
+	public Integer getClouds() {
+		return clouds;
+	}
+
+	public void setClouds(Integer clouds) {
+		this.clouds = clouds;
+	}
+
+	public Double getRain3h() {
+		return rain3h;
+	}
+
+	public void setRain3h(Double rain3h) {
+		this.rain3h = rain3h;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 }
-

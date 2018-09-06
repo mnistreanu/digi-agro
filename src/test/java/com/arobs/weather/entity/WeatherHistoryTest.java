@@ -2,7 +2,6 @@ package com.arobs.weather.entity;
 
 import static org.junit.Assert.assertNotNull;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -49,9 +48,7 @@ public class WeatherHistoryTest {
 	@Test
 	@Rollback(false)
 	public void testInsertFromSelect() {
-		@SuppressWarnings("deprecation")
-		Date referenceDate = new Date(2018 - 1900, 8 - 1, 30);
-		int o = weatherHistoryRepository.insertFromSnapshot(referenceDate);
+		int o = weatherHistoryRepository.synchronizeWeatherHistory();
 		logger.debug("Articole inserate: {}", o);
 	}
 }

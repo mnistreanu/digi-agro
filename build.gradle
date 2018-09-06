@@ -13,6 +13,7 @@ buildscript {
 
 plugins {
   id "net.saliman.cobertura" version "2.5.4"
+  id 'war'
 }
 
 apply plugin: 'java'
@@ -28,7 +29,6 @@ war {
     version =  '0.1'
 }
 
-
 def jobpath = new File(buildDir.toString() + "/reports/cobertura")
 mkdir jobpath
 
@@ -43,8 +43,13 @@ logger.info('DONE Configuring Cobertura Plugin')
 
 group = 'com.arobs'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+bootRun {
+    main = 'com.arobs.Application'
+}
 repositories {
 	mavenCentral()
 	maven {
@@ -62,7 +67,8 @@ configurations {
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
-    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+//    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'    
 
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.liquibase:liquibase-core')

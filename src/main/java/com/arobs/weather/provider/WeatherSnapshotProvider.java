@@ -52,7 +52,7 @@ public class WeatherSnapshotProvider implements HasRepository<WeatherSnapshotRep
 	 * @return Numarul de articole inserate in baza de date.
 	 */
     public int synchronizeWeatherSnapshotsByCity() {
-    	long dayTimestamp = WeatherUtils.testUnixTime();
+    	long dayTimestamp = WeatherUtils.getUnixTime();
 		List<WeatherLocation> locations = weatherLocationRepository.findAll();
 		List<WeatherSnapshot> weatherSnapshots = new ArrayList<>();
 		for (WeatherLocation location : locations) {
@@ -95,14 +95,18 @@ public class WeatherSnapshotProvider implements HasRepository<WeatherSnapshotRep
         return weatherSnapshotRepository;
     }
 
-    public List<WeatherSnapshot> find(Long parcelId, Date dateFrom, Date dateTo) {
-        return getRepository().find(parcelId, dateFrom, dateTo);
+    public List<WeatherSnapshot> find(Integer locationlId, Date dateFrom, Date dateTo) {
+        return getRepository().find(locationlId, dateFrom, dateTo);
     }
 
     public List<WeatherSnapshot> find(String countryId, String countyId, Date dateFrom, Date dateTo) {
         return getRepository().find(countryId, countyId, dateFrom, dateTo);
     }
 
+
+	public List<WeatherSnapshot> find(Integer locationId) {
+        return getRepository().find(locationId);
+	}
     public WeatherSnapshot findOne(Long id) {
         return getRepository().findOne(id);
     }

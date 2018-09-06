@@ -1,19 +1,12 @@
 package com.arobs.weather.history;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.EntityManager;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.Transient;
 import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
@@ -27,146 +20,96 @@ public class WeatherHistoryRepositoryImpl implements WeatherHistoryRepositoryCus
 	@PersistenceContext
     EntityManager entityManager;
 
+	/**
+	 * Selecteaza din snapshot toate inregistrarile meteo de pina la ziua de ieri, le agregheaza si inscrie rezultatul agregarii in tabelul histiry.
+	 * Elimina din tabelul snapshot toate  inregistrarile moteo agregate si trasferate in history.
+	 */
 	@Override
     @Transactional
-	public int insertFromSnapshot(Date referenceDate) {
+	public int synchronizeWeatherHistory() {
 		Calendar referenceCalendar = Calendar.getInstance();
-		referenceCalendar.setTime(referenceDate);
+		referenceCalendar.roll(Calendar.DATE, false);
 		Calendar calendar = Calendar.getInstance();
 		calendar.clear();
 		calendar.set(referenceCalendar.get(Calendar.YEAR), referenceCalendar.get(Calendar.MONTH), referenceCalendar.get(Calendar.DATE));
-		
-		String newOpenweatherIdsSQL = "SELECT snapshot.openweatherId " + 
-				"FROM WeatherSnapshot snapshot " + 
-				"WHERE (snapshot.dayTimestamp, snapshot.openweatherId) NOT IN " + 
-					"(SELECT history.dayTimestamp, history.openweatherId FROM WeatherHistory history)"; 
-		Query query = entityManager.createQuery(newOpenweatherIdsSQL, Integer.class);
-		@SuppressWarnings("unchecked")
-		List<Integer> newIds = query.getResultList();
-		int insertedHistory = 0;
-		if (! newIds.isEmpty()) {
-			String insertHistorySql = "INSERT INTO WeatherHistory (" + 
-					"    dayTimestamp," + 
-					"    openweatherId," + 
-					"    parcelId," + 
-					"    name," + 
-					"    cod," +
-					"    sourceId," + 
-					"    countryCode," + 
-					"    countyId," + 
-					"    lat," + 
-					"    lon," +
-					"    sysId," + 
-					"    sysType," + 
-					"    message," + 
-					"    sunrise," + 
-					"    sunset" + 
-					")" + 
-					"SELECT DISTINCT " + 
-					"    dayTimestamp," + 
-					"    openweatherId," + 
-					"    parcelId," + 
-					"    name," + 
-					"    cod," +
-					"    sourceId," + 
-					"    countryCode," + 
-					"    countyId," + 
-					"    lat," + 
-					"    lon," +
-					"    sysId," + 
-					"    sysType," + 
-					"    message," + 
-					"    sunrise," + 
-					"    sunset " + 
-					"FROM WeatherSnapshot " + 
-					"WHERE openweatherId IN :openweatherIds";
-			query = entityManager.createQuery(insertHistorySql);
-			query.setParameter("openweatherIds", newIds);
-			insertedHistory = query.executeUpdate();
-		}
+		Instant instant = Instant.ofEpochMilli(calendar.getTimeInMillis());
+		long unixTimestanp = instant.getEpochSecond();
 
-		String selectSnapshotSql = "SELECT COUNT(id) " + 
-				"FROM WeatherSnapshot " + 
-				"WHERE YEAR(dt) = :year AND MONTH(dt) = :month AND DAY(dt) = :day";
-		query = entityManager.createQuery(selectSnapshotSql);
-		setParameters(query, calendar);
+		String selectSnapshotSql = "SELECT COUNT(snapshot) " + 
+				"FROM WeatherSnapshot snapshot " + 
+				"WHERE snapshot.dayTimestamp <= :referenceDate";
+		Query query = entityManager.createQuery(selectSnapshotSql);
+		query.setParameter("referenceDate", unixTimestanp);
 		Long toMove = (Long) query.getSingleResult();
-		if (toMove == 0L) {
-			logger.debug("Pentru data {} nu exista observatii meteo de transferat in istori", new SimpleDateFormat("dd.MM.YYYY").format(calendar.getTime().getTime()));
+		
+		if (toMove ==  0L) {
+			logger.debug("Pentru data {} nu exista inregistrari meteo de transferat in istori", new SimpleDateFormat("dd.MM.YYYY").format(calendar.getTime().getTime()));
 			return 0;
 		}
-		
-		String deleteHistorySql = "DELETE FROM WeatherHistory " /*+ 
-				"WHERE YEAR(dt) = :year AND MONTH(dt) = :month AND DAY(dt) = :day"*/;
-		query = entityManager.createQuery(deleteHistorySql);
-//		setParameters(query, calendar);
-		query.executeUpdate();
-		
-		
-		String insertHistoryItemsSql = "INSERT INTO WeatherHistoryItem (" + 
-			    "    openweatherId, " +
-			    "    dt, " +
-			    "    base, " +
-			    "    rain3h, " +
-				"    weatherId, " +
-				"    main, " +
-				"    description, " +
-				"    icon, " +
-				"    temp, " +
-				"    pressure, " +
-				"    humidity, " +
-				"    humidityAir, " +
-				"    humiditySoil, " +
-				"    tempMin, " +
-				"    tempMax, " +
-				"    seaLevel, " +
-				"    grndLevel, " +
-				"    speed, " +
-				"    deg, " +
-				"    clouds" +
+		int insertedHistory = 0;
+		String insertHistorySql = "INSERT INTO WeatherHistory (" + 
+				"    openweatherId," + 
+				"    dayTimestamp," + 
+				"    parcelId," + 
+				"    tempMin," + 
+				"    tempMax," +
+				"    morn," + 
+				"    day," + 
+				"    evn," + 
+				"    night," + 
+				"    pressure," + 
+				"    humidity," + 
+				"    humidityAir," + 
+				"    humiditySoil," + 
+				"    weatherId," + 
+				"    main," + 
+				"    description," + 
+				"    speed," + 
+				"    deg," + 
+				"    clouds," + 
+				"    rain3h" + 
 				")" + 
-				"SELECT" + 
-			    "    openweatherId, " +
-			    "    dt, " +
-			    "    base, " +
-			    "    rain3h, " +
-				"    weatherId, " +
-				"    main, " +
-				"    description, " +
-				"    icon, " +
-				"    temp, " +
-				"    pressure, " +
-				"    humidity, " +
-				"    humidityAir, " +
-				"    humiditySoil, " +
-				"    tempMin, " +
-				"    tempMax, " +
-				"    seaLevel, " +
-				"    grndLevel, " +
-				"    speed, " +
-				"    deg, " +
-				"    clouds " +
-				"FROM WeatherSnapshot " + 
-				"WHERE YEAR(dt) = :year AND MONTH(dt) = :month AND DAY(dt) = :day";
-		query = entityManager.createQuery(insertHistoryItemsSql);
-		setParameters(query, calendar);
-		int insertedHistoryItems = query.executeUpdate();
-		
-		
-		
-//		String deleteSnapshotSql = "DELETE FROM WeatherSnapshot " + 
-//				"WHERE YEAR(dt) = :year AND MONTH(dt) = :month AND DAY(dt) = :day";
-//		query = entityManager.createQuery(deleteSnapshotSql);
-//		setParameters(query, calendar);
-//		int deletedSnapshots = query.executeUpdate();
-		
-		logger.debug("Articole inserate in History: {}, eliminate din Snapshot: {}", insertedHistory, 0/*deletedSnapshots*/);
-		return 0; //insertedHistory;
-	}
+				"SELECT snapshot.openweatherId AS openweatherId, " + 
+				"    snapshot.dayTimestamp AS dayTimestamp, " + 
+				"    snapshot.parcelId AS parcelId, " + 
+				"    MIN(snapshot.tempMin) AS tempMin, " + 
+				"    MAX(snapshot.tempMax) AS tempMax, " + 
+				"    MIN(CASE " + 
+				"        WHEN HOUR(dt) BETWEEN 6 AND 9 THEN snapshot.temp ELSE 0 " + 
+				"    END) AS morn," + 
+				"    MAX(CASE " + 
+				"        WHEN HOUR(dt) BETWEEN 9 AND 18 THEN snapshot.temp ELSE 0 " + 
+				"    END) AS day," + 
+				"    MIN(CASE " + 
+				"        WHEN HOUR(dt) BETWEEN 18 AND 21 THEN snapshot.temp ELSE 0 " + 
+				"    END) AS evn," + 
+				"    MIN(CASE " + 
+				"        WHEN HOUR(dt) > 9 OR HOUR(dt) < 6 THEN snapshot.temp ELSE 0 " + 
+				"    END) AS night," + 
+				"    MAX(snapshot.pressure) AS pressure," + 
+				"    MAX(snapshot.humidity) AS humidity," + 
+				"    MAX(snapshot.humidityAir) AS humidityAir," + 
+				"    MAX(snapshot.humiditySoil) AS humiditySoil," + 
+				"    MAX(snapshot.weatherId) AS weatherId," + 
+				"    MAX(snapshot.main) AS main," + 
+				"    MAX(snapshot.description) AS description," + 
+				"    MAX(snapshot.speed) AS speed," + 
+				"    MAX(snapshot.deg) AS deg," + 
+				"    MAX(snapshot.clouds) AS clouds," + 
+				"    MAX(snapshot.rain3h) AS rain3h " + 
+				"FROM WeatherSnapshot snapshot " + 
+				"WHERE snapshot.dayTimestamp <= :referenceDate " + 
+				"GROUP BY snapshot.openweatherId, snapshot.parcelId, snapshot.dayTimestamp";
+		query = entityManager.createQuery(insertHistorySql);
+		query.setParameter("referenceDate", unixTimestanp);
+		insertedHistory = query.executeUpdate();
 
-	private void setParameters(Query query, Calendar calendar) {
-		query.setParameter("year", calendar.get(Calendar.YEAR));
-		query.setParameter("month", calendar.get(Calendar.MONTH) + 1);
-		query.setParameter("day", calendar.get(Calendar.DATE));
+		String deleteHistorySql = "DELETE FROM WeatherSnapshot snapshot WHERE snapshot.dayTimestamp <= :referenceDate";
+		query = entityManager.createQuery(deleteHistorySql);
+		query.setParameter("referenceDate", unixTimestanp);
+		int deletedSnapshots = query.executeUpdate();
+		
+		logger.debug("Articole inserate in History: {}, eliminate din Snapshot: {}", insertedHistory, deletedSnapshots);
+		return insertedHistory;
 	}
 }

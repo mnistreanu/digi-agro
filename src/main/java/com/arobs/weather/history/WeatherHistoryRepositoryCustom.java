@@ -1,7 +1,5 @@
 package com.arobs.weather.history;
 
-import java.util.Date;
-
 public interface WeatherHistoryRepositoryCustom {
 
 	/**
@@ -9,5 +7,5 @@ public interface WeatherHistoryRepositoryCustom {
 	 * @param referenceDate - data specificata
 	 * @return numarul de articole transferate.
 	 */
-	int insertFromSnapshot(Date referenceDate);
+	int synchronizeWeatherHistory();
 }

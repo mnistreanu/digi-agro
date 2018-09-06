@@ -15,7 +15,7 @@ import java.util.List;
  * Created by mihail.gorgos on 31.07.2018.
  */
 @Entity
-@Table(name = "weather_snaphot")
+@Table(name = "weather_snapshot")
 public class WeatherSnapshot {
 
     @Id
@@ -23,15 +23,15 @@ public class WeatherSnapshot {
     @Column(name="id")
     @DTOTransient
     private Long id;
-    @Column(name="day_timestamp")
-    @DTOTransient
-    private Long dayTimestamp;
     @Column(name="openweather_id")
 	@Source("id")
     private Integer openweatherId;
     @Column(name="parcel_id")
     @DTOTransient
     private Long parcelId;
+    @Column(name="day_timestamp")
+    @DTOTransient
+    private Long dayTimestamp;
     @Column(name="name")
     private String name;
     @Column(name="cod")
@@ -141,14 +141,6 @@ public class WeatherSnapshot {
         this.id = id;
     }
 
-    public Long getDayTimestamp() {
-		return dayTimestamp;
-	}
-
-	public void setDayTimestamp(Long dayTimestamp) {
-		this.dayTimestamp = dayTimestamp;
-	}
-
 	public Integer getOpenweatherId() {
 		return openweatherId;
 	}
@@ -164,6 +156,14 @@ public class WeatherSnapshot {
     public void setParcelId(Long parcelId) {
         this.parcelId = parcelId;
     }
+
+    public Long getDayTimestamp() {
+		return dayTimestamp;
+	}
+
+	public void setDayTimestamp(Long dayTimestamp) {
+		this.dayTimestamp = dayTimestamp;
+	}
 
     public String getName() {
         return name;

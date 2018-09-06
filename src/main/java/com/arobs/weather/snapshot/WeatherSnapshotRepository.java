@@ -13,20 +13,22 @@ import java.util.List;
 @Repository
 public interface WeatherSnapshotRepository extends JpaRepository<WeatherSnapshot, Long> {
 
-    @Query("SELECT w FROM WeatherSnapshot w " +
-            "WHERE w.parcelId = :parcelId " +
-            "AND w.dt >= :dateFrom " +
-            "ORDER BY w.dt ")
-    List<WeatherSnapshot> find(@Param("parcelId") Long parcelId,
-                       @Param("dateFrom") Date dateFrom);
+    @Query("SELECT weatherSnapshot FROM WeatherSnapshot weatherSnapshot " +
+            "WHERE weatherSnapshot.openweatherId = :locationId " +
+            "ORDER BY weatherSnapshot.dt ")
+    List<WeatherSnapshot> find(@Param("locationId") Integer locationId);
 
-    @Query("SELECT w FROM WeatherSnapshot w " +
-            "WHERE w.parcelId = :parcelId " +
-            "AND w.dt >= :dateFrom AND w.dt <= :dateTo " +
-            "ORDER BY w.dt ")
-    List<WeatherSnapshot> find(@Param("parcelId") Long parcelId,
-                       @Param("dateFrom") Date dateFrom,
-                       @Param("dateTo") Date dateTo);
+    @Query("SELECT weatherSnapshot FROM WeatherSnapshot weatherSnapshot " +
+            "WHERE weatherSnapshot.openweatherId = :locationId " +
+            "AND weatherSnapshot.dt >= :dateFrom " +
+            "ORDER BY weatherSnapshot.dt ")
+    List<WeatherSnapshot> find(@Param("locationId") Long parcelId, @Param("dateFrom") Date dateFrom);
+
+    @Query("SELECT weatherSnapshot FROM WeatherSnapshot weatherSnapshot " +
+            "WHERE weatherSnapshot.openweatherId = :locationId " +
+            "AND weatherSnapshot.dt BETWEEN :dateFrom AND :dateTo " +
+            "ORDER BY weatherSnapshot.dt ")
+    List<WeatherSnapshot> find(@Param("locationId") Integer locationId, @Param("dateFrom") Date dateFrom, @Param("dateTo") Date dateTo);
 
     @Query("SELECT w FROM WeatherSnapshot w " +
             "WHERE w.countryCode = :countryCode " +
