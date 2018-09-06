@@ -1,7 +1,7 @@
 export class MachineTelemetryModel {
 
     id: number;
-    machineIdentifier: string;
+    machineId: number;
 
     latitude: number;
     longitude: number;

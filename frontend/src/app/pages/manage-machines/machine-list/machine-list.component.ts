@@ -3,6 +3,7 @@ import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-
 import {ColDef, GridOptions} from 'ag-grid';
 import {MachineService} from '../../../services/machine.service';
 import {Router} from '@angular/router';
+import {LangService} from '../../../services/lang.service';
 
 @Component({
     selector: 'app-machine-list',
@@ -15,6 +16,7 @@ export class MachineListComponent implements OnInit {
     context;
 
     constructor(private router: Router,
+                private langService: LangService,
                 private machineService: MachineService) {
     }
 
@@ -51,37 +53,48 @@ export class MachineListComponent implements OnInit {
                 }
             },
             {
-                headerName: 'Identifier',
-                field: 'identifier',
-                width: 200,
-                minWidth: 200,
-                maxWidth: 200
-            },
-            {
-                headerName: 'Name',
-                field: 'name',
-                width: 200,
-                minWidth: 200
-            },
-            {
-                headerName: 'Owner',
-                field: 'owner',
-                width: 200,
-                minWidth: 200
-            },
-            {
-                headerName: 'Type',
+                headerName: 'machine.type',
                 field: 'type',
-                width: 200,
-                minWidth: 200
+                width: 175,
+                minWidth: 175
+            },
+            {
+                headerName: 'machine.model',
+                field: 'brandAndModel',
+                width: 175,
+                minWidth: 175
+            },
+            {
+                headerName: 'machine.identifier',
+                field: 'identifier',
+                width: 100,
+                minWidth: 100,
+                maxWidth: 100
+            },
+            {
+                headerName: 'machine.responsible-persons',
+                field: 'responsiblePersons',
+                width: 300,
+                minWidth: 300
             }
         ];
+
+        headers.forEach(header => {
+            if (header.headerName) {
+                this.langService.get(header.headerName).subscribe(m => header.headerName = m);
+            }
+        });
 
         return headers;
     }
 
     private setupRows() {
         this.machineService.findAll().subscribe(models => {
+            models.forEach((model) => {
+                model.type = this.langService.instant('machine-type.' + model.type);
+                model['brandAndModel'] = model.brand + ' ' + model.model;
+                model['responsiblePersons'] = model.employees.map(m => m.firstName + ' ' + m.lastName).join(', ');
+            });
             this.options.api.setRowData(models);
         });
     }

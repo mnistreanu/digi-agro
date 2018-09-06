@@ -15,13 +15,37 @@
 		"branch": "Branch",
 		"branches": "Branches"
 	},
+	"brand": {
+		"brand": "Brand"
+	},
 	"contact": {
 		"phone": "Phone"
 	},
 	"crop": {
 		"category": "Category",
 		"name": "Agricultural crop",
+		"planting-date": "Planting date",
+		"seeds": "Seeds",
+		"unit-of-measure-short": "Unit",
+		"unit-of-measure-long": "Unit of measure",
 		"variety": "Variety"
+	},
+	"employee": {
+		"employee": "Employee",
+		"first-name": "Fist Name",
+		"last-name": "Last Name",
+		"title": "Title"
+	},
+	"event": {
+		"events": "Events",
+		"message": "Message"
+	},
+	"expenses": {
+		"agricultural-machinery": "Expenses for repairing agricultural machinery",
+		"agricultural-works": "Expenses for agricultural works",
+		"various-chemicals": "Expenses for fertilizers and pesticides",
+		"fuel": "Expenses for fuel",
+		"sowing": "Expenses for sowing"
 	},
 	"forecast": {
 		"additional_info": "Additional information",
@@ -39,14 +63,23 @@
 		"summary-price": "Price",
 		"unit_of_measure": "Unit of measure"
 	},
+	"fuel": {
+		"diesel": "Diesel",
+		"negrol": "Negrol",
+		"oil": "Oil",
+		"solidol": "Solidol"
+	},
 	"general": {
 		"form": "Form",
 		"settings": "Settings"
 	},
 	"geo": {
 		"address": "Address",
+		"coords": "Coordinates",
 		"country": "Country",
 		"county": "County",
+		"latitude": "Latitude",
+		"longitude": "Longitude",
 		"map": "Map",
 		"village-city": "Village/City"
 	},
@@ -60,15 +93,39 @@
 		"language": "Language"
 	},
 	"machine": {
+		"agricultural-machinery": "Agricultural machinery",
+		"consumption": "Consumption",
+		"fabrication-country": "Fabrication Country",
+		"fabrication-year": "Fabrication Year",
+		"hp": "H.p.",
+		"identifier": "ID",
+		"machine": "Machine",
+		"model": "Model",
 		"motor": "Motor",
 		"power": "Power",
+		"repairing-date": "Date",
+		"responsible-persons": "Responsible persons",
+		"spare-part": "Spare part",
+		"spare-part-price": "Price",
 		"speed-in-work": "Speed In Work",
 		"speed-on-road": "Speed On Road",
 		"type": "Type",
-		"work-types": "Work Types",
-		"сonsumption": "Consumption"
+		"work-types": "Work Types"
+	},
+	"machine-motor": {
+		"benzine": "Benzine",
+		"diesel": "Diesel",
+		"electric": "Electric",
+		"none": "None"
+	},
+	"machine-type": {
+		"COMBINE": "Combine",
+		"SOWING": "Sowing",
+		"TRACTOR": "Tractor"
 	},
 	"nav": {
+		"expenses-management": "Expenses management",
+		"agricultural-works": "Agricultural works",
 		"branches": "Branches",
 		"brands": "Brands",
 		"costs-forecasting": "Costs forecasting",
@@ -76,9 +133,12 @@
 		"crops": "Crops",
 		"crops-varieties": "Crops & Varieties",
 		"dashboard": "Dashboard",
+		"employees": "Employees",
+		"fertilizers-pesticides": "Fertilizers & pesticides",
 		"forecast-list": "List",
 		"forecasting-charts": "Forecasting charts",
 		"forecasts": "Forecasts",
+		"fuel": "Fuel",
 		"harvesting-forecasting": "Harvesting forecasting",
 		"harvesting-forecasting-factor": "Harvesting forecasting FACTOR",
 		"harvesting-forecasting-form": "Harvesting forecasting FORM",
@@ -87,14 +147,17 @@
 		"notifications-and-alerts": "Notifications and alerts",
 		"owners": "Owners",
 		"parcels": "Parcels",
+		"sowing": "Sowing",
 		"tasks": "Tasks",
 		"telemetry": "Telemetry",
 		"tenants": "Tenants",
 		"users": "Users",
+		"various-chemicals": "Various chemicals",
 		"weather": "Weather",
 		"weather-forecast": "Weather forecast",
 		"weather-history": "Weather history",
-		"work-agenda": "Work agenda"
+		"work-agenda": "Work agenda",
+		"agricultural-machinery": "Agricultural machinery"
 	},
 	"notification": {
 		"mark-all-as-read": "Mark All as Read",
@@ -222,7 +285,9 @@
 		"mdl": "Lei",
 		"q": "Quintal",
 		"ron": "Lei",
-		"t": "Ton"
+		"t": "Ton",
+		"unit-long": "Unit of measure",
+		"unit-short": "Unit"
 	},
 	"user": {
 		"account-information": "Account Information",

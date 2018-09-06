@@ -52,9 +52,15 @@ export class MenuService {
                 selected: false,
                 expanded: false
             });
-        }
 
-        if (isAdmin) {
+            menuItems.push({
+                title: 'nav.employees',
+                routerLink: '/pages/employee',
+                icon: 'fa-users',
+                selected: false,
+                expanded: false
+            });
+
             menuItems.push({
                 title: 'nav.brands',
                 routerLink: '/pages/manage-brands',
@@ -85,7 +91,7 @@ export class MenuService {
             menuItems.push({
                 title: 'nav.parcels',
                 routerLink: '/pages/parcel',
-                icon: 'fas fa-globe',
+                icon: 'fa fa-th',
                 selected: false,
                 expanded: false
             });
@@ -153,6 +159,38 @@ export class MenuService {
                         title: 'nav.crops-varieties',
                         routerLink: 'manage-crops/crop-varieties'
                     }
+                ]
+            });
+        }
+
+        if (isAdmin || isUser) {
+            menuItems.push({
+                title: 'nav.expenses-management',
+                routerLink: 'expenses',
+                icon: 'fa fa-money',
+                selected: false,
+                expanded: false,
+                subMenu: [
+                    {
+                        title: 'nav.agricultural-machinery',
+                        routerLink: 'expenses/machinery',
+                    },
+                    {
+                        title: 'nav.fuel',
+                        routerLink: 'expenses/fuel',
+                    },
+                    {
+                        title: 'nav.sowing',
+                        routerLink: 'expenses/sowing',
+                    },
+                    {
+                        title: 'nav.agricultural-works',
+                        routerLink: 'expenses/works',
+                    },
+                    {
+                        title: 'nav.fertilizers-pesticides',
+                        routerLink: 'expenses/chemicals',
+                    },
                 ]
             });
         }

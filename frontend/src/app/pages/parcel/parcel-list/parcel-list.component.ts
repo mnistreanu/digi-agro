@@ -3,7 +3,6 @@ import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {ParcelModel} from '../../telemetry/parcel.model';
 import {ParcelService} from '../../../services/parcel.service';
-import {FieldMapper} from "../../../common/field.mapper";
 
 @Component({
     selector: 'app-parcel-list',
@@ -90,44 +89,9 @@ export class ParcelListComponent implements OnInit {
             this.options.api.setRowData(models);
             this.models = models;
             this.adjustGridSize();
-
-            const fieldMapper = new FieldMapper(this.langService.getLanguage());
-            const lastWorkTypeField = fieldMapper.get('lastWorkType');
-            const cropNameField = fieldMapper.get('cropName');
-
-            this.models.forEach((parcel) => {
-                parcel.fillColor = this.randomColor();
-                parcel.icon = '/assets/img/crops/' + parcel.icon;
-                parcel.paths = parcel.coordinates.map((c) => {
-                    return {
-                        lat: c[0],
-                        lng: c[1]
-                    };
-                });
-                parcel.center = this.getCenterOfPolygon(parcel.paths);
-                parcel.lastWorkType = parcel[lastWorkTypeField];
-                parcel.cropName = parcel[cropNameField];
-            });
-
+            this.parcelService.adjust(this.models);
             this.dataChanged.emit(this.models);
         });
-    }
-
-    private getCenterOfPolygon(paths) {
-
-        const pointCount = paths.length;
-        let lat = 0;
-        let lng = 0;
-
-        paths.forEach(point => {
-            lat += point.lat;
-            lng += point.lng;
-        });
-
-        return {
-            lat: lat / pointCount,
-            lng: lng / pointCount
-        };
     }
 
     public onGridReady() {
@@ -140,10 +104,6 @@ export class ParcelListComponent implements OnInit {
                 this.options.api.sizeColumnsToFit();
             }
         }, 500);
-    }
-
-    private randomColor(): string {
-        return '#' + Math.random().toString(16).slice(-3);
     }
 
     onSelectionChanged() {

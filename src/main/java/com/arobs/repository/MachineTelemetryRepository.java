@@ -12,17 +12,13 @@ import java.util.List;
 @Repository
 public interface MachineTelemetryRepository extends JpaRepository<MachineTelemetry, Long> {
 
-
-    @Query("SELECT t FROM MachineTelemetry t WHERE t.active = true ORDER BY t.id")
-    List<MachineTelemetry> findAll();
-
     @Modifying
     @Query("UPDATE MachineTelemetry t SET t.active = false WHERE t.id = :id")
     void remove(@Param("id") Long id);
 
     @Query("SELECT t FROM MachineTelemetry t " +
-            " WHERE t.active = true AND t.userAccount.id = :userId AND t.machine.identifier = :machineIdentifier " +
+            " WHERE t.active = true AND t.userAccount.id = :userId AND t.machine.id = :machineId " +
             " ORDER BY t.id")
-    List<MachineTelemetry> find(@Param("machineIdentifier") String machineIdentifier,
+    List<MachineTelemetry> find(@Param("machineId") Long machineId,
                                 @Param("userId") Long userId);
 }

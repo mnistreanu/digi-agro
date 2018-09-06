@@ -1,15 +1,16 @@
+import {EmployeeModel} from '../../employee/employee/employee.model';
+
 export class MachineModel {
 
     id: number;
     identifier: string;
-    name: string;
+    model: string;
 
     type: string;
 
-    owner: string;
     brand: string;
 
-    fabricationDate: Date;
+    fabricationYear: number;
     fabricationCountry: string;
 
     motorType: string;
@@ -19,6 +20,6 @@ export class MachineModel {
     speedOnRoad: number;
     speedInWork: number;
 
-    workTypes: string[];
-
+    employees: EmployeeModel[];
+    workTypes: number[];
 }

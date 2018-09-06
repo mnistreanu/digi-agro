@@ -29,12 +29,14 @@ public class BrandController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<BrandModel> getModel(@PathVariable Long id) {
-        return ResponseEntity.ok(brandService.findModelById(id));
+        Brand brand = brandService.findOne(id);
+        return ResponseEntity.ok(new BrandModel(brand));
     }
 
-    @RequestMapping(value = "/validate-name", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> validateName(@RequestParam("id") Long id, @RequestParam("name") String name) {
-        return ResponseEntity.ok(brandService.validateName(id, name));
+    @RequestMapping(value = "/unique", method = RequestMethod.GET)
+    public ResponseEntity<Boolean> isUnique(@RequestParam(value = "id", required = false) Long id,
+                                            @RequestParam("field") String field, @RequestParam("value") String value) {
+        return ResponseEntity.ok(brandService.isUnique(id, field, value));
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")

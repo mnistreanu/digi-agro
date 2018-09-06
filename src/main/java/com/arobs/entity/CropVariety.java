@@ -28,6 +28,12 @@ public class CropVariety {
     @Column(name = "description_ru", length = 4000)
     private String descriptionRu;
 
+    @Column(name = "seed_consumption_ha")
+    private Double seedConsumptionHa;
+
+    @Column(name = "unit_of_measure")
+    private String unitOfMeasure;
+
 
     public CropVariety() {
     }
@@ -78,5 +84,21 @@ public class CropVariety {
 
     public void setDescriptionRo(String descriptionRo) {
         this.descriptionRo = descriptionRo;
+    }
+
+    public Double getSeedConsumptionHa() {
+        return seedConsumptionHa;
+    }
+
+    public void setSeedConsumptionHa(Double seedConsumptionHa) {
+        this.seedConsumptionHa = seedConsumptionHa;
+    }
+
+    public String getUnitOfMeasure() {
+        return unitOfMeasure;
+    }
+
+    public void setUnitOfMeasure(String unitOfMeasure) {
+        this.unitOfMeasure = unitOfMeasure;
     }
 }

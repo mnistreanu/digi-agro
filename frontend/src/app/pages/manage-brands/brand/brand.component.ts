@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BrandModel} from './brand.model';
 import {ToastrService} from 'ngx-toastr';
 import {Messages} from '../../../common/messages';
+import {LangService} from '../../../services/lang.service';
 
 @Component({
     selector: 'app-brand',
@@ -19,7 +20,10 @@ export class BrandComponent implements OnInit {
     model: BrandModel;
     isNew: boolean;
 
+    labels: any;
+
     constructor(private fb: FormBuilder,
+                private langService: LangService,
                 private router: Router,
                 private route: ActivatedRoute,
                 private brandService: BrandService,
@@ -27,6 +31,7 @@ export class BrandComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.setupLabels();
         this.route.params.subscribe(params => {
             const id = params['id'];
 
@@ -37,6 +42,13 @@ export class BrandComponent implements OnInit {
                 this.setupModel(id);
             }
         });
+    }
+
+    private setupLabels() {
+        this.labels = {};
+        this.langService.get(Messages.SAVED).subscribe(m => this.labels[Messages.SAVED] = m);
+        this.langService.get(Messages.REMOVED).subscribe(m => this.labels[Messages.REMOVED] = m);
+        this.langService.get(Messages.VALIDATION_FAIL).subscribe(m => this.labels[Messages.VALIDATION_FAIL] = m);
     }
 
     private setupModel(id) {
@@ -61,14 +73,13 @@ export class BrandComponent implements OnInit {
 
     public onNameChange() {
         const control = this.form.controls.name;
-        this.brandService.validateName(this.model.id || -1, control.value).subscribe((isUnique) => {
+        this.brandService.validateName(this.model.id, control.value).subscribe((isUnique) => {
             if (!isUnique) {
                 const errors = control.errors || {};
                 errors.unique = !isUnique;
                 control.setErrors(errors);
             }
         });
-
     }
 
     public save(form: FormGroup) {
@@ -76,7 +87,7 @@ export class BrandComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.toastr.warning(Messages.VALIDATION_FAIL);
+            this.toastr.warning(this.labels[Messages.VALIDATION_FAIL]);
             return;
         }
 
@@ -86,14 +97,14 @@ export class BrandComponent implements OnInit {
 
         this.brandService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.toastr.success(Messages.SAVED);
+            this.toastr.success(this.labels[Messages.SAVED]);
         });
 
     }
 
     public remove() {
         this.brandService.remove(this.model).subscribe(() => {
-            this.toastr.success(Messages.REMOVED);
+            this.toastr.success(this.labels[Messages.REMOVED]);
             this.router.navigate(['/pages/manage-brands']);
         });
     }

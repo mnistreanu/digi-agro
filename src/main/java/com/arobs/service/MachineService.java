@@ -2,13 +2,17 @@ package com.arobs.service;
 
 import com.arobs.entity.Machine;
 import com.arobs.interfaces.HasRepository;
+import com.arobs.model.EmployeeModel;
 import com.arobs.model.MachineModel;
 import com.arobs.repository.MachineRepository;
+import com.arobs.repository.custom.CommonCustomRepository;
+import com.arobs.utils.StaticUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MachineService implements HasRepository<MachineRepository> {
@@ -18,36 +22,29 @@ public class MachineService implements HasRepository<MachineRepository> {
     @Autowired
     private BrandService brandService;
     @Autowired
-    private OwnerService ownerService;
-    @Autowired
     private AgroWorkTypeService workTypeService;
+    @Autowired
+    private CommonCustomRepository commonCustomRepository;
+    @Autowired
+    private TenantService tenantService;
+    @Autowired
+    private EmployeeService employeeService;
 
-
-    public boolean validateIdentifier(Long id, String value) {
-        if (id == -1) {
-            return getRepository().countByIdentifier(value) == 0;
-        }
-        return getRepository().countByIdentifierEscapeId(id, value) == 0;
+    @Override
+    public MachineRepository getRepository() {
+        return machineRepository;
     }
 
-    public Machine findByIdentifier(String identifier) {
-        return getRepository().findByIdentifier(identifier);
+    public boolean isUnique(Long currentId, String field, String value) {
+        return commonCustomRepository.isUnique("Machine", currentId, field, value);
     }
 
     public Machine findOne(Long id) {
         return getRepository().findOne(id);
     }
 
-    public MachineModel findModelById(Long id) {
-        return new MachineModel(getRepository().findOne(id));
-    }
-
-    public List<Machine> findAll() {
-        return getRepository().findAll();
-    }
-
-    public List<String> fetchIdentifiers() {
-        return getRepository().fetchIdentifiers();
+    public List<Machine> find(Long tenantId) {
+        return getRepository().find(tenantId);
     }
 
     @Transactional
@@ -56,11 +53,12 @@ public class MachineService implements HasRepository<MachineRepository> {
     }
 
     @Transactional(rollbackOn = Exception.class)
-    public Machine save(MachineModel model) {
+    public Machine save(MachineModel model, Long tenant) {
         Machine entity;
 
         if (model.getId() == null) {
             entity = new Machine();
+            entity.setTenant(tenantService.findOne(tenant));
         }
         else {
             entity = findOne(model.getId());
@@ -70,13 +68,15 @@ public class MachineService implements HasRepository<MachineRepository> {
         return getRepository().save(entity);
     }
 
-    @Transactional
     private void copyValues(Machine entity, MachineModel model) {
+
+        entity.setBrand(brandService.register(model.getBrand()));
+
         entity.setIdentifier(model.getIdentifier());
-        entity.setName(model.getName());
+        entity.setModel(model.getModel());
         entity.setType(model.getType());
 
-        entity.setFabricationDate(model.getFabricationDate());
+        entity.setFabricationYear(model.getFabricationYear());
         entity.setFabricationCountry(model.getFabricationCountry());
 
         entity.setMotorType(model.getMotorType());
@@ -85,15 +85,15 @@ public class MachineService implements HasRepository<MachineRepository> {
         entity.setSpeedOnRoad(model.getSpeedOnRoad());
         entity.setSpeedInWork(model.getSpeedInWork());
 
-        entity.setOwner(ownerService.register(model.getOwner()));
-        entity.setBrand(brandService.register(model.getBrand()));
-
         entity.getWorkTypes().clear();
-        entity.getWorkTypes().addAll(workTypeService.find());
-    }
+        if (!StaticUtil.isEmpty(model.getWorkTypes())) {
+            entity.getWorkTypes().addAll(workTypeService.findAll(model.getWorkTypes()));
+        }
 
-    @Override
-    public MachineRepository getRepository() {
-        return machineRepository;
+        entity.getEmployees().clear();
+        if (!StaticUtil.isEmpty(model.getEmployees())) {
+            List<Long> ids = model.getEmployees().stream().map(EmployeeModel::getId).collect(Collectors.toList());
+            entity.getEmployees().addAll(employeeService.findAll(ids));
+        }
     }
 }

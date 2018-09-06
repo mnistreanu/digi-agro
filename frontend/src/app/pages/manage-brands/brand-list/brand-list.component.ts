@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {ColDef, GridOptions} from 'ag-grid';
 import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {BrandService} from '../../../services/brand.service';
+import {LangService} from '../../../services/lang.service';
 
 @Component({
     selector: 'app-brand-list',
@@ -15,6 +16,7 @@ export class BrandListComponent implements OnInit {
     context;
 
     constructor(private router: Router,
+                private langService: LangService,
                 private brandService: BrandService) {
     }
 
@@ -52,19 +54,18 @@ export class BrandListComponent implements OnInit {
                 }
             },
             {
-                headerName: 'ID',
-                field: 'id',
-                width: 100,
-                minWidth: 100,
-                maxWidth: 150
-            },
-            {
-                headerName: 'Name',
+                headerName: 'info.name',
                 field: 'name',
                 width: 200,
                 minWidth: 200
             }
         ];
+
+        headers.forEach(header => {
+            if (header.headerName) {
+                this.langService.get(header.headerName).subscribe(m => header.headerName = m);
+            }
+        });
 
         return headers;
     }

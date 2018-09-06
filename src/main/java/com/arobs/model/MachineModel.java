@@ -2,6 +2,7 @@ package com.arobs.model;
 
 
 import com.arobs.entity.AgroWorkType;
+import com.arobs.entity.Employee;
 import com.arobs.entity.Machine;
 import com.arobs.enums.MachineType;
 import com.arobs.enums.MotorType;
@@ -14,14 +15,13 @@ public class MachineModel {
 
     private Long id;
     private String identifier;
-    private String name;
+    private String model;
 
     private MachineType type;
 
-    private String owner;
     private String brand;
 
-    private Date fabricationDate;
+    private Integer fabricationYear;
     private String fabricationCountry;
 
     private MotorType motorType;
@@ -31,7 +31,9 @@ public class MachineModel {
     private Double speedOnRoad;
     private Double speedInWork;
 
-    private List<String> workTypes;
+    private List<EmployeeModel> employees;
+
+    private List<Long> workTypes;
 
     public MachineModel() {
     }
@@ -39,14 +41,13 @@ public class MachineModel {
     public MachineModel(Machine entity) {
         id = entity.getId();
         identifier = entity.getIdentifier();
-        name = entity.getName();
+        model = entity.getModel();
 
         type = entity.getType();
 
-        owner = entity.getOwner().getName();
         brand = entity.getBrand().getName();
 
-        fabricationDate = entity.getFabricationDate();
+        fabricationYear = entity.getFabricationYear();
         fabricationCountry = entity.getFabricationCountry();
 
         motorType = entity.getMotorType();
@@ -56,8 +57,12 @@ public class MachineModel {
         speedOnRoad = entity.getSpeedOnRoad();
         speedInWork = entity.getSpeedInWork();
 
+        if (entity.getEmployees() != null) {
+            employees = entity.getEmployees().stream().map(EmployeeModel::new).collect(Collectors.toList());
+        }
+
         if (entity.getWorkTypes() != null) {
-            workTypes = entity.getWorkTypes().stream().map(AgroWorkType::getNameRo).collect(Collectors.toList());
+            workTypes = entity.getWorkTypes().stream().map(AgroWorkType::getId).collect(Collectors.toList());
         }
     }
 
@@ -77,12 +82,12 @@ public class MachineModel {
         this.identifier = identifier;
     }
 
-    public String getName() {
-        return name;
+    public String getModel() {
+        return model;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public MachineType getType() {
@@ -93,14 +98,6 @@ public class MachineModel {
         this.type = type;
     }
 
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
     public String getBrand() {
         return brand;
     }
@@ -109,12 +106,12 @@ public class MachineModel {
         this.brand = brand;
     }
 
-    public Date getFabricationDate() {
-        return fabricationDate;
+    public Integer getFabricationYear() {
+        return fabricationYear;
     }
 
-    public void setFabricationDate(Date fabricationDate) {
-        this.fabricationDate = fabricationDate;
+    public void setFabricationYear(Integer fabricationYear) {
+        this.fabricationYear = fabricationYear;
     }
 
     public String getFabricationCountry() {
@@ -165,11 +162,19 @@ public class MachineModel {
         this.speedInWork = speedInWork;
     }
 
-    public List<String> getWorkTypes() {
+    public List<EmployeeModel> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<EmployeeModel> employees) {
+        this.employees = employees;
+    }
+
+    public List<Long> getWorkTypes() {
         return workTypes;
     }
 
-    public void setWorkTypes(List<String> workTypes) {
+    public void setWorkTypes(List<Long> workTypes) {
         this.workTypes = workTypes;
     }
 }

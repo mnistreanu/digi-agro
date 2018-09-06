@@ -15,13 +15,37 @@
 		"branch": "Филиал",
 		"branches": "Филиалы"
 	},
+	"brand": {
+		"brand": "Марка"
+	},
 	"contact": {
 		"phone": "Телефон"
 	},
 	"crop": {
 		"category": "Категория",
 		"name": "Сельскохозяйственная культура",
+		"planting-date": "Дата посадки",
+		"seeds": "Семена",
+		"unit-of-measure-short": "Ед.И.",
+		"unit-of-measure-long": "Единица измерения",
 		"variety": "Сорт"
+	},
+	"employee": {
+		"employee": "Работник",
+		"first-name": "Имя",
+		"last-name": "Фамилия",
+		"title": "Титул"
+	},
+	"event": {
+		"events": "События",
+		"message": "Сообщение"
+	},
+	"expenses": {
+		"agricultural-machinery": "Расходы на ремонт сельскохозяйственной техники",
+		"agricultural-works": "Расходы на сельскохозяйственные работы",
+		"various-chemicals": "Расходы на удобрения и пестициды",
+		"fuel": "Расходы на топливо",
+		"sowing": "Расходы на посев"
 	},
 	"forecast": {
 		"additional_info": "Дополнительная информация",
@@ -39,14 +63,23 @@
 		"summary-price": "Цена",
 		"unit_of_measure": "Единица измерения"
 	},
+	"fuel": {
+		"diesel": "Диз. топливо",
+		"negrol": "Негрол",
+		"oil": "Масло",
+		"solidol": "Солидол"
+	},
 	"general": {
 		"form": "Форма",
 		"settings": "Настройки"
 	},
 	"geo": {
 		"address": "Адрес",
+		"coords": "Координаты",
 		"country": "Страна",
 		"county": "Округ",
+		"latitude": "Широта",
+		"longitude": "Долгота",
 		"map": "Карта",
 		"village-city": "Деревня/Город"
 	},
@@ -60,15 +93,39 @@
 		"language": "Язык"
 	},
 	"machine": {
+		"agricultural-machinery": "Сельскохозяйственная техника",
+		"consumption": "Расход",
+		"fabrication-country": "Страна изготовления",
+		"fabrication-year": "Год изготовления",
+		"hp": "Л.с.",
+		"identifier": "Ид. номер",
+		"machine": "Машина",
+		"model": "Модель",
 		"motor": "Мотор",
-		"power": "Сила",
-		"speed-in-work": "Скорость в работе",
+		"power": "Мощность",
+		"repairing-date": "Дата",
+		"responsible-persons": "Ответственные лица",
+		"spare-part": "Запасная часть",
+		"spare-part-price": "Цена",
+		"speed-in-work": "Рабочая скорость",
 		"speed-on-road": "Скорость на дороге",
 		"type": "Тип",
-		"work-types": "Виды работы",
-		"сonsumption": "Расход"
+		"work-types": "Виды работ"
+	},
+	"machine-motor": {
+		"benzine": "Бензин",
+		"diesel": "Дизель",
+		"electric": "Электрический",
+		"none": "Нет"
+	},
+	"machine-type": {
+		"COMBINE": "Комбайн",
+		"SOWING": "Сеялка",
+		"TRACTOR": "Трактор"
 	},
 	"nav": {
+		"expenses-management": "Учет затрат",
+		"agricultural-works": "Сельхоз. работы",
 		"branches": "Филиалы",
 		"brands": "Бренды",
 		"costs-forecasting": "Прогнозирование затрат",
@@ -76,9 +133,12 @@
 		"crops": "Сельхоз. культуры",
 		"crops-varieties": "Сельскохозяйственные культуры и сорта",
 		"dashboard": "Главная",
+		"employees": "Работники",
+		"fertilizers-pesticides": "Удобрения и пестициды",
 		"forecast-list": "Список",
 		"forecasting-charts": "Прогнозные графики",
 		"forecasts": "Прогнозирование",
+		"fuel": "Топливо",
 		"harvesting-forecasting": "Прогнозирование урожая",
 		"harvesting-forecasting-factor": "Прогнозирование урожая FACTOR",
 		"harvesting-forecasting-form": "Прогнозирование урожая FORM",
@@ -87,14 +147,17 @@
 		"notifications-and-alerts": "Уведомления и оповещения",
 		"owners": "Владелецы",
 		"parcels": "Участки",
+		"sowing": "Посев",
 		"tasks": "Задания",
 		"telemetry": "Телеметрия",
 		"tenants": "Клиенты",
 		"users": "Пользователями",
+		"various-chemicals": "Различные химикаты",
 		"weather": "Погода",
 		"weather-forecast": "Прогноз погоды",
 		"weather-history": "Исторические данные",
-		"work-agenda": "Повестка работ"
+		"work-agenda": "Повестка работ",
+		"agricultural-machinery": "Сельх. техника"
 	},
 	"notification": {
 		"mark-all-as-read": "Отметить все как прочитанные",
@@ -193,9 +256,9 @@
 	},
 	"response": {
 		"added": "Добавлен",
-		"all-selected": "Выбраны все",
+		"all-selected": "Все элементы выбраны",
 		"item-selected": "элемент выбран",
-		"items-selected": "элементы выбраны",
+		"items-selected": "элементов выбрано",
 		"please-select": "Выберите",
 		"removed": "Удалено",
 		"saved": "Сохранено",
@@ -222,7 +285,9 @@
 		"mdl": "Лей",
 		"q": "Центнер",
 		"ron": "Лей",
-		"t": "Тонна"
+		"t": "Тонна",
+		"unit-long": "Единица измерения",
+		"unit-short": "Ед.И."
 	},
 	"user": {
 		"account-information": "Информация об аккаунте",

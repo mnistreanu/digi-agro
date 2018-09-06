@@ -9,6 +9,7 @@ import {DirectivesModule} from '../../theme/directives/directives.module';
 import {ParcelListComponent} from './parcel-list/parcel-list.component';
 import {ParcelMapComponent} from './parcel-map/parcel-map.component';
 import {ParcelComponent} from './parcel/parcel.component';
+import {Constants} from '../../common/constants';
 
 export const routes = [
     {path: '', component: ParcelComponent, pathMatch: 'full'}
@@ -22,7 +23,7 @@ export const routes = [
         ReactiveFormsModule,
         DirectivesModule,
         AgGridModule.withComponents([]),
-        NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyC_u-ujFg1xhXlOnOV0GyptTlory-KvlFY'}),
+        NguiMapModule.forRoot({apiUrl: Constants.GOOGLE_MAP_API}),
         RouterModule.forChild(routes),
     ],
     declarations: [ParcelListComponent, ParcelMapComponent, ParcelComponent]

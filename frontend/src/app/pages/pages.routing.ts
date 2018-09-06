@@ -40,6 +40,12 @@ export const routes: Routes = [
                 canActivate: [SuperAdminOrAdminGuard]
             },
             {
+                path: 'employee',
+                loadChildren: 'app/pages/employee/employee.module#EmployeeModule',
+                data: {breadcrumb: 'Employee'},
+                canActivate: [AdminGuard]
+            },
+            {
                 path: 'manage-brands',
                 loadChildren: 'app/pages/manage-brands/manage-brands.module#ManageBrandsModule',
                 data: {breadcrumb: 'Manage Brands'},
@@ -92,6 +98,12 @@ export const routes: Routes = [
                 path: 'notification-list',
                 loadChildren: 'app/pages/notifications/list/notification-list.module#NotificationListModule',
                 data: {breadcrumb: 'Notifications'},
+                canActivate: [AuthGuard]
+            },
+            {
+                path: 'expenses',
+                loadChildren: 'app/pages/manage-expenses/manage-expenses.module#ManageExpensesModule',
+                data: {breadcrumb: 'Expenses'},
                 canActivate: [AuthGuard]
             },
             {

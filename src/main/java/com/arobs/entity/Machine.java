@@ -1,6 +1,5 @@
 package com.arobs.entity;
 
-
 import com.arobs.enums.MachineType;
 import com.arobs.enums.MotorType;
 
@@ -23,16 +22,16 @@ public class Machine {
     private MachineType type;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private Owner owner;
+    @JoinColumn(name = "tenant_id")
+    private Tenant tenant;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
-    private String name;
+    private String model;
 
-    private Date fabricationDate;
+    private Integer fabricationYear;
     private String fabricationCountry;
 
     @Enumerated(EnumType.STRING)
@@ -45,10 +44,16 @@ public class Machine {
     private Double speedInWork;
 
     @ManyToMany
-    @JoinTable(name = "machine_work_types",
+    @JoinTable(name = "machine_work_type",
             joinColumns = { @JoinColumn(name = "machine_id") },
             inverseJoinColumns = { @JoinColumn(name = "work_type_id") })
     private List<AgroWorkType> workTypes = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name = "machine_employee",
+            joinColumns = { @JoinColumn(name = "machine_id") },
+            inverseJoinColumns = { @JoinColumn(name = "employee_id") })
+    private List<Employee> employees = new ArrayList<>();
 
     @Column(columnDefinition = "boolean default true")
     private boolean active = true;
@@ -79,14 +84,6 @@ public class Machine {
         this.type = type;
     }
 
-    public Owner getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Owner owner) {
-        this.owner = owner;
-    }
-
     public Brand getBrand() {
         return brand;
     }
@@ -95,20 +92,20 @@ public class Machine {
         this.brand = brand;
     }
 
-    public String getName() {
-        return name;
+    public String getModel() {
+        return model;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setModel(String model) {
+        this.model = model;
     }
 
-    public Date getFabricationDate() {
-        return fabricationDate;
+    public Integer getFabricationYear() {
+        return fabricationYear;
     }
 
-    public void setFabricationDate(Date fabricationDate) {
-        this.fabricationDate = fabricationDate;
+    public void setFabricationYear(Integer fabricationYear) {
+        this.fabricationYear = fabricationYear;
     }
 
     public MotorType getMotorType() {
@@ -173,5 +170,21 @@ public class Machine {
 
     public void setFabricationCountry(String fabricationCountry) {
         this.fabricationCountry = fabricationCountry;
+    }
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }
