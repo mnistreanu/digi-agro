@@ -1,6 +1,6 @@
 package com.arobs.enums;
 
-public enum ExpenseType {
+public enum ExpenseCategory {
     HR  (1),
     MACHINERY_OWN(2),
     MACHINERY_RENT(3),
@@ -12,18 +12,18 @@ public enum ExpenseType {
     OTHERS (10);
 
 
-    private final int type;
+    private final int category;
 
-    private ExpenseType(int type) {
-        this.type = type;
+    private ExpenseCategory(int category) {
+        this.category = category;
     }
 
-    public int getType() {
-        return this.type;
+    public int getCategory() {
+        return this.category;
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return "" + category;
     }
 }

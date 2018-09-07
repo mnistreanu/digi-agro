@@ -1,6 +1,6 @@
 package com.arobs.entity;
 
-import com.arobs.enums.ExpenseType;
+import com.arobs.enums.ExpenseCategory;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -18,8 +18,8 @@ public class ExpenseItem {
     @Column(name = "expense_id")
     private Long expseneId;
 
-    @Column(name = "type_id")
-    private ExpenseType typeId;
+    @Column(name = "category_id")
+    private ExpenseCategory categoryId;
 
     @Column(name = "title")
     private String title;
@@ -64,12 +64,12 @@ public class ExpenseItem {
         this.expseneId = expseneId;
     }
 
-    public ExpenseType getTypeId() {
-        return typeId;
+    public ExpenseCategory getCategoryId() {
+        return categoryId;
     }
 
-    public void setTypeId(ExpenseType typeId) {
-        this.typeId = typeId;
+    public void setCategoryId(ExpenseCategory categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getTitle() {
