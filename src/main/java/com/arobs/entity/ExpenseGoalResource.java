@@ -1,21 +1,22 @@
 package com.arobs.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
+import javax.persistence.*;
 
 @Entity
+@Table(name = "expense_goal_resource")
 public class ExpenseGoalResource {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column (name = "expense_goal_id")
     private Long expenseGoalId;
+
+    @Column (name = "resource_id")
     private Long resourceId;
 
+    @Column (name = "table_name")
     private String tableName;
 
     public ExpenseGoalResource() {

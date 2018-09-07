@@ -5,18 +5,23 @@ import java.util.Date;
 
 
 @Entity
+@Table (name = "expense_goal")
 public class ExpenseGoal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column (name = "expense_item_id")
     private Long expenseItemId;
 
+    @Column (name = "unit_of_measure")
     private String unitOfMeasure;
 
+    @Column (name = "amount")
     private Double amount;
 
+    @Column (name = "description")
     private String description;
 
     public ExpenseGoal() {
