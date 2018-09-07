@@ -43,9 +43,10 @@
 	"expenses": {
 		"agricultural-machinery": "Cheltuieli pentru repararea mașinilor agricole",
 		"agricultural-works": "Cheltuieli pentru lucrări agricole",
-		"various-chemicals": "Cheltuieli pentru îngrășăminte și pesticide",
+		"fertilizers": "Cheltuieli pentru îngrășăminte",
 		"fuel": "Cheltuieli pentru combustibil",
-		"sowing": "Cheltuieli pentru însămânțare"
+		"sowing": "Cheltuieli pentru însămânțare",
+		"pesticides": "Cheltuieli pentru pesticide"
 	},
 	"forecast": {
 		"additional_info": "Informații suplimnetare",
@@ -134,7 +135,8 @@
 		"crops-varieties": "Culturi agricole și soiuri",
 		"dashboard": "Dashboard",
 		"employees": "Angajați",
-		"fertilizers-pesticides": "Îngrășăminte, pesticide",
+		"fertilizers": "Îngrășăminte",
+		"pesticides": "Pesticide",
 		"forecast-list": "Lista",
 		"forecasting-charts": "Diagrame de prognoză",
 		"forecasts": "Prognoze",

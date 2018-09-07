@@ -43,9 +43,10 @@
 	"expenses": {
 		"agricultural-machinery": "Expenses for repairing agricultural machinery",
 		"agricultural-works": "Expenses for agricultural works",
-		"various-chemicals": "Expenses for fertilizers and pesticides",
+		"fertilizers": "Expenses for fertilizers",
 		"fuel": "Expenses for fuel",
-		"sowing": "Expenses for sowing"
+		"sowing": "Expenses for sowing",
+		"pesticides": "Expenses for pesticides"
 	},
 	"forecast": {
 		"additional_info": "Additional information",
@@ -134,7 +135,8 @@
 		"crops-varieties": "Crops & Varieties",
 		"dashboard": "Dashboard",
 		"employees": "Employees",
-		"fertilizers-pesticides": "Fertilizers & pesticides",
+		"fertilizers": "Fertilizers",
+		"pesticides": "Pesticides",
 		"forecast-list": "List",
 		"forecasting-charts": "Forecasting charts",
 		"forecasts": "Forecasts",

@@ -188,8 +188,12 @@ export class MenuService {
                         routerLink: 'expenses/works',
                     },
                     {
-                        title: 'nav.fertilizers-pesticides',
-                        routerLink: 'expenses/chemicals',
+                        title: 'nav.pesticides',
+                        routerLink: 'expenses/pesticides',
+                    },
+                    {
+                        title: 'nav.fertilizers',
+                        routerLink: 'expenses/fertilizers',
                     },
                 ]
             });

@@ -1,4 +1,4 @@
-export class ChemicalsExpensesModel {
+export class FertilizersExpensesModel {
   date: string;
   type: string;
   brandModel: string;
