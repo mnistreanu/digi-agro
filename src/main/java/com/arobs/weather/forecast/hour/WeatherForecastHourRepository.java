@@ -17,10 +17,11 @@ public interface WeatherForecastHourRepository extends JpaRepository<WeatherFore
             "ORDER BY weatherForecastHour.name ")
     List<WeatherForecastHour> find(@Param("name") String name);
 
-//    @Modifying
-//    @Query("delete from User u where u.active = false")
-//    @Query("update User u set u.firstname = ?1, u.lastname = ?2 where u.id = ?3")
-//    Integer saveAll(List<WeatherForecast> weatherForecast);
+	List<WeatherForecastHour> find(Integer locationId);
+
+	List<WeatherForecastHour> find(Integer locationId, long unixTime, long unixTime2);
+
+	List<WeatherForecastHour> find(long unixTime);
 
 }
 
