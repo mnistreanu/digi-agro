@@ -83,8 +83,8 @@ export class FuelExpensesComponent implements OnInit {
             {
                 headerName: this.labelAgriculturalMachinery,
                 field: 'brandModel',
-                width: 180,
-                minWidth: 180
+                width: 200,
+                minWidth: 200
             },
             {
                 headerName: this.labelIdentifier,
@@ -96,8 +96,8 @@ export class FuelExpensesComponent implements OnInit {
             {
                 headerName: this.labelLastName  + ' ' + this.labelFirstName,
                 field: 'employee',
-                width: 100,
-                minWidth: 100,
+                width: 140,
+                minWidth: 140,
                 suppressFilter: true,
             },
             {
@@ -124,22 +124,22 @@ export class FuelExpensesComponent implements OnInit {
             {
                 headerName: this.labelOil,
                 field: 'oil',
-                width: 100,
-                minWidth: 100,
+                width: 80,
+                minWidth: 80,
                 suppressFilter: true,
             },
             {
                 headerName: this.labelSolidol,
                 field: 'solidol',
-                width: 100,
-                minWidth: 100,
+                width: 80,
+                minWidth: 80,
                 suppressFilter: true,
             },
             {
                 headerName: this.labelNegrol,
                 field: 'negrol',
-                width: 100,
-                minWidth: 100,
+                width: 80,
+                minWidth: 80,
                 suppressFilter: true,
             },
             {
