@@ -15,18 +15,12 @@ export class PesticidesExpensesComponent implements OnInit {
     options: GridOptions;
     context;
 
-    labelMachineType: string;
-    labelAgriculturalMachinery: string;
-    labelIdentifier: string;
     labelDate: string;
-    labelFirstName: string;
-    labelLastName: string;
-    labelUnitOfMeasureShort: string;
-    labelUnitOfMeasureLong: string;
-    labelDiesel: string;
-    labelOil: string;
-    labelSolidol: string;
-    labelNegrol: string;
+    labelName: string;
+    labelType: string;
+    labelPhase: string;
+    labelResult: string;
+    labelComments: string;
 
     constructor(private machineService: MachineService, private langService: LangService) {
 
@@ -38,18 +32,12 @@ export class PesticidesExpensesComponent implements OnInit {
     }
 
     private setupLabels() {
-        this.langService.get('machine.type').subscribe(msg => this.labelMachineType = msg);
-        this.langService.get('machine.agricultural-machinery').subscribe(msg => this.labelAgriculturalMachinery = msg);
-        this.langService.get('machine.identifier').subscribe(msg => this.labelIdentifier = msg);
-        this.langService.get('machine.repairing-date').subscribe(msg => this.labelDate = msg);
-        this.langService.get('employee.first-name').subscribe(msg => this.labelFirstName = msg);
-        this.langService.get('employee.last-name').subscribe(msg => this.labelLastName = msg);
-        this.langService.get('unit-of-measure.unit-short').subscribe(msg => this.labelUnitOfMeasureShort = msg);
-        this.langService.get('unit-of-measure.unit-long').subscribe(msg => this.labelUnitOfMeasureLong = msg);
-        this.langService.get('fuel.diesel').subscribe(msg => this.labelDiesel = msg);
-        this.langService.get('fuel.oil').subscribe(msg => this.labelOil = msg);
-        this.langService.get('fuel.solidol').subscribe(msg => this.labelSolidol = msg);
-        this.langService.get('fuel.negrol').subscribe(msg => this.labelNegrol = msg);
+        this.langService.get('pesticides.spray-date').subscribe(msg => this.labelDate = msg);
+        this.langService.get('pesticides.name').subscribe(msg => this.labelName = msg);
+        this.langService.get('pesticides.type').subscribe(msg => this.labelType = msg);
+        this.langService.get('pesticides.phase').subscribe(msg => this.labelPhase = msg);
+        this.langService.get('pesticides.result').subscribe(msg => this.labelResult = msg);
+        this.langService.get('pesticides.comments').subscribe(msg => this.labelComments = msg);
     }
 
 
@@ -81,65 +69,39 @@ export class PesticidesExpensesComponent implements OnInit {
                 pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } }
             },
             {
-                headerName: this.labelAgriculturalMachinery,
-                field: 'brandModel',
+                headerName: this.labelName,
+                field: 'name',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: this.labelIdentifier,
-                field: 'identifier',
+                headerName: this.labelType,
+                field: 'type',
                 width: 60,
                 minWidth: 60,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelLastName  + ' ' + this.labelFirstName,
-                field: 'employee',
+                headerName: this.labelPhase,
+                field: 'phase',
                 width: 140,
                 minWidth: 140,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelUnitOfMeasureShort,
-                headerTooltip: this.labelUnitOfMeasureLong,
-                field: 'unitOfMeasure',
+                headerName: this.labelResult,
+//                headerTooltip: this.labelUnitOfMeasureLong,
+                field: 'result',
                 width: 60,
                 minWidth: 60,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelDiesel,
-                field: 'diesel',
-                width: 100,
-                minWidth: 100,
-                suppressFilter: true,
-                // allow gui to set aggregations for this column
-//                enableValue: true,
-                // restrict aggregations to sum
-//                allowedAggFuncs: ['sum'],
-                pinnedRowCellRenderer: 'customPinnedRowRenderer',
-                pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } }
-            },
-            {
-                headerName: this.labelOil,
-                field: 'oil',
-                width: 80,
-                minWidth: 80,
-                suppressFilter: true,
-            },
-            {
-                headerName: this.labelSolidol,
-                field: 'solidol',
-                width: 80,
-                minWidth: 80,
-                suppressFilter: true,
-            },
-            {
-                headerName: this.labelNegrol,
-                field: 'negrol',
-                width: 80,
-                minWidth: 80,
+                headerName: this.labelComments,
+//                headerTooltip: this.labelUnitOfMeasureLong,
+                field: 'comments',
+                width: 60,
+                minWidth: 60,
                 suppressFilter: true,
             },
             {
@@ -169,14 +131,10 @@ export class PesticidesExpensesComponent implements OnInit {
                 const model = new PesticidesExpensesModel();
                 model.date = new Date().toLocaleDateString();
                 model.type = modelsArray[i].type;
-                model.brandModel = modelsArray[i].type + ' ' + modelsArray[i].brand + ' ' + modelsArray[i].model;
-                model.identifier = modelsArray[i].identifier;
-                model.employee = 'Roată Ion';
-                model.unitOfMeasure = 'L';
-                model.diesel = 120;
-                model.oil = 9;
-                model.solidol = 1;
-                model.negrol = 1;
+                model.name = modelsArray[i].model;
+                model.phase = modelsArray[i].identifier;
+                model.result = 'Pozitiv';
+                model.comments = 'Managerul ( brigadiri, agronomul) efectueaza evidenta in jurnalul personal zilnic + complecteaza un blanc pentru raport; (de obicei complecteaza contabilitatea)';
                 i++;
                 return model;
             });

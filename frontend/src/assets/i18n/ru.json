@@ -248,6 +248,14 @@
 		"space-between-rows": "Пространство между рядами",
 		"the-parcels": "участки"
 	},
+	"pesticides": {
+		"comments": "Комментарии",
+		"name": "Название",
+		"phase": "Фаза",
+		"result": "Результат",
+		"spray-date": "Дата распыления",
+		"type": "Тип"
+	},
 	"reminder": {
 		"enter-new-event": "Просто введите название события",
 		"event": "Задача",

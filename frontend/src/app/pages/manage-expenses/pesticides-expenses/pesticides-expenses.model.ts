@@ -1,12 +1,8 @@
 export class PesticidesExpensesModel {
   date: string;
+  name: string;
   type: string;
-  brandModel: string;
-  identifier: string;
-  employee: string;
-  unitOfMeasure: string;
-  diesel: number;
-  oil: number;
-  solidol: number;
-  negrol: number;
+  phase: string;
+  result: string;
+  comments: string;
 }

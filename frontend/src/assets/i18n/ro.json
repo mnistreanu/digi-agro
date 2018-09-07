@@ -248,6 +248,14 @@
 		"space-between-rows": "Spațiu între rânduri",
 		"the-parcels": "parcelele"
 	},
+	"pesticides": {
+		"comments": "Comentarii",
+		"name": "Denumire",
+		"phase": "Faza",
+		"result": "Rezultat",
+		"spray-date": "Data pulverizării",
+		"type": "Tip"
+	},
 	"reminder": {
 		"enter-new-event": "Doar introduceți numele evenimentului",
 		"event": "Activitate",

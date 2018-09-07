@@ -248,6 +248,14 @@
 		"space-between-rows": "Space Between Rows",
 		"the-parcels": "the parcels"
 	},
+	"pesticides": {
+		"comments": "Comments",
+		"name": "Name",
+		"phase": "Phase",
+		"result": "Result",
+		"spray-date": "Spray date",
+		"type": "Type"
+	},
 	"reminder": {
 		"enter-new-event": "Just enter event name to create a new one",
 		"event": "Event",
