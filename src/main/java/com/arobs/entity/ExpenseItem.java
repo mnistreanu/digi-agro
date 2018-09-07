@@ -36,7 +36,7 @@ public class ExpenseItem {
     @Column(name = "norm_per_unit")
     private Double normPerUnit;
 
-    @Column(name = "actual_qty")
+    @Column(name = "actual_per_unit")
     private Double actualPerUnit;
 
     @Column(name = "unit_cost")
