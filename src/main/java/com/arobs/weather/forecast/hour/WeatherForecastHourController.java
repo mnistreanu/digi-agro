@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +30,7 @@ public class WeatherForecastHourController {
      * Returneaza toate articolele din istoria inregistrarilor meteo.
      * @return lista de istorii
      */
-    @RequestMapping(value = "/histories", method = RequestMethod.GET)
+    @RequestMapping(value = "/forecasts/hour", method = RequestMethod.GET)
     public ResponseEntity<PayloadModel<WeatherForecastHourModel>> getWeatherHistories() {
         PayloadModel<WeatherForecastHourModel> payloadModel = new PayloadModel<>();
 
@@ -56,7 +57,7 @@ public class WeatherForecastHourController {
      * @param locationId - CITY_ID din Open weather
      * @return lista de istorii
      */
-    @RequestMapping(value = "/history_location/{locationId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/forecasts/hour/{locationId}", method = RequestMethod.GET)
     public ResponseEntity<PayloadModel<WeatherForecastHourModel>> getWeatherForecastHourByLocation(@PathVariable("locationId") Integer locationId) {
         PayloadModel<WeatherForecastHourModel> payloadModel = new PayloadModel<>();
 
@@ -89,7 +90,7 @@ public class WeatherForecastHourController {
      * @param dateTo - sfirsit de interval in format "yyyyMMdd"
      * @return lista de istorii.
      */
-    @RequestMapping(value = "/history_interval", method = RequestMethod.GET)
+    @RequestMapping(value = "/forecasts/hour/interval", method = RequestMethod.GET)
     public ResponseEntity<PayloadModel<WeatherForecastHourModel>> getWeatherForecastHourInterval(@RequestParam("locationId") Integer locationId,
                                                     @RequestParam("dateFrom") @DateTimeFormat(pattern="yyyyMMdd") Date dateFrom,
                                                     @RequestParam("dateTo") @DateTimeFormat(pattern="yyyyMMdd") Date dateTo) {
@@ -122,9 +123,10 @@ public class WeatherForecastHourController {
     @RequestMapping(value = "/history_date/{date}", method = RequestMethod.GET)
     public ResponseEntity<PayloadModel<WeatherForecastHourModel>> getWeatherForecastHourByDate(@PathVariable(value="date") @DateTimeFormat(pattern="yyyyMMdd") Date referenceDate) {
         PayloadModel<WeatherForecastHourModel> payloadModel = new PayloadModel<>();
-
+        Calendar referenceCalendar = Calendar.getInstance();
+        referenceCalendar.setTime(referenceDate);
         try {
-            List<WeatherForecastHour> weatherForecastHour = weatherForecastHourRepository.find(WeatherUtils.getUnixTime(referenceDate));
+            List<WeatherForecastHour> weatherForecastHour = weatherForecastHourRepository.find(referenceCalendar.get(Calendar.YEAR), referenceCalendar.get(Calendar.MONTH) + 1, referenceCalendar.get(Calendar.DATE), referenceCalendar.get(Calendar.HOUR));
             if (! weatherForecastHour.isEmpty()) {
                 if (!weatherForecastHour.isEmpty()) {
                     List<WeatherForecastHourModel> models = weatherForecastHour.stream().map(WeatherForecastHourModel::new).collect(Collectors.toList());

@@ -17,11 +17,22 @@ public interface WeatherForecastHourRepository extends JpaRepository<WeatherFore
             "ORDER BY weatherForecastHour.name ")
     List<WeatherForecastHour> find(@Param("name") String name);
 
-	List<WeatherForecastHour> find(Integer locationId);
+	@Query("SELECT DISTINCT weatherForecastHour " + 
+			"FROM WeatherForecastHour weatherForecastHour " + 
+			"LEFT JOIN FETCH weatherForecastHour.forecastItems " + 
+			"WHERE weatherForecastHour.cityId = :locationId")
+    List<WeatherForecastHour> find(Integer locationId);
+
+	@Query("SELECT DISTINCT weatherForecastHour " + 
+			"FROM WeatherForecastHour weatherForecastHour " + 
+			"LEFT JOIN FETCH weatherForecastHour.forecastItems forecastItem " + 
+			"WHERE AND YEAR(forecastItem.dt) = :year " +
+				"AND MONTH(forecastItem.dt )= :month " + 
+				"AND DAY(forecastItem.dt) = :day " + 
+				"HOUR(forecastItem.dt) = :hour ")
+	List<WeatherForecastHour> find(@Param("year") Integer year, @Param("month") Integer month, @Param("day") Integer day, @Param("hour") Integer hour);
 
 	List<WeatherForecastHour> find(Integer locationId, long unixTime, long unixTime2);
-
-	List<WeatherForecastHour> find(long unixTime);
 
 }
 

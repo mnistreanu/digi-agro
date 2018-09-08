@@ -3,6 +3,8 @@ package com.arobs.weather;
 import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WeatherUtils {
 	/**
@@ -25,6 +27,24 @@ public class WeatherUtils {
 		return convert(now);
 	}
 
+	/**
+	 * 
+	 * @param referenceDate
+	 * @return
+	 */
+	public static Map<Integer, Integer> splitDate(Date referenceDate) {
+		Calendar referenceCalendar = Calendar.getInstance();
+		referenceCalendar.setTime(referenceDate);
+		Map<Integer, Integer> retValue =  new HashMap<>();
+		retValue.put(Calendar.YEAR, referenceCalendar.get(Calendar.YEAR));
+		retValue.put(Calendar.MONTH, referenceCalendar.get(Calendar.MONTH));
+		retValue.put(Calendar.DATE, referenceCalendar.get(Calendar.DATE));
+		retValue.put(Calendar.HOUR, referenceCalendar.get(Calendar.HOUR));
+		retValue.put(Calendar.MINUTE, referenceCalendar.get(Calendar.MINUTE));
+		retValue.put(Calendar.SECOND, referenceCalendar.get(Calendar.SECOND)); 
+		return retValue;
+	}
+	
 	private static long convert(Calendar referenceCalendar) {
 		int year = referenceCalendar.get(Calendar.YEAR);
 		int month = referenceCalendar.get(Calendar.MONTH);
