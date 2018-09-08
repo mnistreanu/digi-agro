@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -97,7 +98,7 @@ public class WeatherForecastHourController {
         PayloadModel<WeatherForecastHourModel> payloadModel = new PayloadModel<>();
 
         try {
-            List<WeatherForecastHour> weatherForecastHour = weatherForecastHourRepository.find(locationId, WeatherUtils.getUnixTime(dateFrom), WeatherUtils.getUnixTime(dateTo));
+            List<WeatherForecastHour> weatherForecastHour = new ArrayList<WeatherForecastHour>(); //weatherForecastHourRepository.find(locationId, WeatherUtils.getUnixTime(dateFrom), WeatherUtils.getUnixTime(dateTo));
             if (!weatherForecastHour.isEmpty()) {
                 List<WeatherForecastHourModel> models = weatherForecastHour.stream().map(WeatherForecastHourModel::new).collect(Collectors.toList());
                 WeatherForecastHourModel[] payload = models.toArray(new WeatherForecastHourModel[models.size()]);
@@ -120,7 +121,7 @@ public class WeatherForecastHourController {
      * @param referenceDate - data specificata in formt "yyyyMMdd"
      * @return lista de observatii meteo
      */
-    @RequestMapping(value = "/history_date/{date}", method = RequestMethod.GET)
+    @RequestMapping(value = "/forecast/{date}", method = RequestMethod.GET)
     public ResponseEntity<PayloadModel<WeatherForecastHourModel>> getWeatherForecastHourByDate(@PathVariable(value="date") @DateTimeFormat(pattern="yyyyMMdd") Date referenceDate) {
         PayloadModel<WeatherForecastHourModel> payloadModel = new PayloadModel<>();
         Calendar referenceCalendar = Calendar.getInstance();
