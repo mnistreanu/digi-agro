@@ -67,8 +67,7 @@ configurations {
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
-//    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
-    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'    
+//    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.liquibase:liquibase-core')
