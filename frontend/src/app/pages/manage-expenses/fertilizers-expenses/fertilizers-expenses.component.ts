@@ -1,16 +1,17 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ColDef, GridOptions} from 'ag-grid';
-import {LangService} from '../../../services/lang.service';
-import {MachineService} from '../../../services/machine.service';
-import {WorksExpensesModel} from './works-expenses.model';
+import {ColDef, GridOptions} from "ag-grid";
+import {LangService} from "../../../services/lang.service";
+import {MachineService} from "../../../services/machine.service";
+import {CustomPinnedRowRenderer} from "../../../modules/aggrid/custom-pinned-row-renderer/custom-pinned-row-renderer.component";
+import {FertilizersExpensesModel} from "./fertilizers-expenses.model";
 
 @Component({
-    selector: 'app-works-expenses',
+    selector: 'app-fertilizers-expenses',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: './works-expenses.component.html',
-    styleUrls: ['./works-expenses.component.scss']
+    templateUrl: './fertilizers-expenses.component.html',
+    styleUrls: ['./fertilizers-expenses.component.scss']
 })
-export class WorksExpensesComponent implements OnInit {
+export class FertilizersExpensesComponent implements OnInit {
     options: GridOptions;
     context;
 
@@ -20,11 +21,15 @@ export class WorksExpensesComponent implements OnInit {
     labelDate: string;
     labelFirstName: string;
     labelLastName: string;
-    labelSparePart: string;
-    labelSparePartPrice: string;
+    labelUnitOfMeasureShort: string;
+    labelUnitOfMeasureLong: string;
+    labelDiesel: string;
+    labelOil: string;
+    labelSolidol: string;
+    labelNegrol: string;
 
-    constructor(private machineService: MachineService,
-                private langService: LangService) {
+    constructor(private machineService: MachineService, private langService: LangService) {
+
     }
 
     ngOnInit() {
@@ -39,8 +44,12 @@ export class WorksExpensesComponent implements OnInit {
         this.langService.get('machine.repairing-date').subscribe(msg => this.labelDate = msg);
         this.langService.get('employee.first-name').subscribe(msg => this.labelFirstName = msg);
         this.langService.get('employee.last-name').subscribe(msg => this.labelLastName = msg);
-        this.langService.get('machine.spare-part').subscribe(msg => this.labelSparePart = msg);
-        this.langService.get('machine.spare-part-price').subscribe(msg => this.labelSparePartPrice = msg);
+        this.langService.get('unit-of-measure.unit-short').subscribe(msg => this.labelUnitOfMeasureShort = msg);
+        this.langService.get('unit-of-measure.unit-long').subscribe(msg => this.labelUnitOfMeasureLong = msg);
+        this.langService.get('fuel.diesel').subscribe(msg => this.labelDiesel = msg);
+        this.langService.get('fuel.oil').subscribe(msg => this.labelOil = msg);
+        this.langService.get('fuel.solidol').subscribe(msg => this.labelSolidol = msg);
+        this.langService.get('fuel.negrol').subscribe(msg => this.labelNegrol = msg);
     }
 
 
@@ -52,6 +61,8 @@ export class WorksExpensesComponent implements OnInit {
         this.options.enableFilter = true;
         this.options.rowSelection = 'single';
         this.options.columnDefs = this.setupHeaders();
+        this.options.frameworkComponents = { customPinnedRowRenderer: CustomPinnedRowRenderer };
+
         this.context = {componentParent: this};
 
         this.setupRows();
@@ -66,12 +77,14 @@ export class WorksExpensesComponent implements OnInit {
                 width: 90,
                 minWidth: 90,
                 suppressFilter: true,
+                pinnedRowCellRenderer: 'customPinnedRowRenderer',
+                pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } }
             },
             {
                 headerName: this.labelAgriculturalMachinery,
                 field: 'brandModel',
-                width: 180,
-                minWidth: 180
+                width: 200,
+                minWidth: 200
             },
             {
                 headerName: this.labelIdentifier,
@@ -83,22 +96,50 @@ export class WorksExpensesComponent implements OnInit {
             {
                 headerName: this.labelLastName  + ' ' + this.labelFirstName,
                 field: 'employee',
-                width: 100,
-                minWidth: 100,
+                width: 140,
+                minWidth: 140,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelSparePart,
-                field: 'sparePart',
-                width: 200,
-                minWidth: 200,
+                headerName: this.labelUnitOfMeasureShort,
+                headerTooltip: this.labelUnitOfMeasureLong,
+                field: 'unitOfMeasure',
+                width: 60,
+                minWidth: 60,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelSparePartPrice,
-                field: 'sparePartPrice',
+                headerName: this.labelDiesel,
+                field: 'diesel',
                 width: 100,
                 minWidth: 100,
+                suppressFilter: true,
+                // allow gui to set aggregations for this column
+//                enableValue: true,
+                // restrict aggregations to sum
+//                allowedAggFuncs: ['sum'],
+                pinnedRowCellRenderer: 'customPinnedRowRenderer',
+                pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } }
+            },
+            {
+                headerName: this.labelOil,
+                field: 'oil',
+                width: 80,
+                minWidth: 80,
+                suppressFilter: true,
+            },
+            {
+                headerName: this.labelSolidol,
+                field: 'solidol',
+                width: 80,
+                minWidth: 80,
+                suppressFilter: true,
+            },
+            {
+                headerName: this.labelNegrol,
+                field: 'negrol',
+                width: 80,
+                minWidth: 80,
                 suppressFilter: true,
             },
             {
@@ -113,7 +154,9 @@ export class WorksExpensesComponent implements OnInit {
                 width: 60,
                 minWidth: 60,
             },
+
         ];
+
 
         return headers;
     }
@@ -123,19 +166,34 @@ export class WorksExpensesComponent implements OnInit {
         let i = 0;
         this.machineService.findAll().subscribe(modelsArray => {
             const rows = modelsArray.map(data => {
-                const model = new WorksExpensesModel();
+                const model = new FertilizersExpensesModel();
                 model.date = new Date().toLocaleDateString();
                 model.type = modelsArray[i].type;
                 model.brandModel = modelsArray[i].type + ' ' + modelsArray[i].brand + ' ' + modelsArray[i].model;
                 model.identifier = modelsArray[i].identifier;
                 model.employee = 'Roată Ion';
-                model.sparePart = 'Ambreaj la cutia de viteze';
-                model.sparePartPrice = 3400;
+                model.unitOfMeasure = 'L';
+                model.diesel = 120;
+                model.oil = 9;
+                model.solidol = 1;
+                model.negrol = 1;
                 i++;
                 return model;
             });
             this.options.api.setRowData(rows);
+            this.setupSummaryRow(rows);
         });
+    }
+
+    private setupSummaryRow(rows) {
+        const summaryRow = {
+            date: 'TOTAL',
+            diesel: 0
+        };
+        rows.forEach(source => {
+            summaryRow.diesel += source.diesel || 0;
+        });
+        this.options.api.setPinnedBottomRowData([summaryRow]);
     }
 
     public onGridReady() {

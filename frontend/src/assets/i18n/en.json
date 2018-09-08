@@ -43,9 +43,10 @@
 	"expenses": {
 		"agricultural-machinery": "Expenses for repairing agricultural machinery",
 		"agricultural-works": "Expenses for agricultural works",
-		"various-chemicals": "Expenses for fertilizers and pesticides",
+		"fertilizers": "Expenses for fertilizers",
 		"fuel": "Expenses for fuel",
-		"sowing": "Expenses for sowing"
+		"sowing": "Expenses for sowing",
+		"pesticides": "Expenses for pesticides"
 	},
 	"forecast": {
 		"additional_info": "Additional information",
@@ -134,7 +135,8 @@
 		"crops-varieties": "Crops & Varieties",
 		"dashboard": "Dashboard",
 		"employees": "Employees",
-		"fertilizers-pesticides": "Fertilizers & pesticides",
+		"fertilizers": "Fertilizers",
+		"pesticides": "Pesticides",
 		"forecast-list": "List",
 		"forecasting-charts": "Forecasting charts",
 		"forecasts": "Forecasts",
@@ -245,6 +247,14 @@
 		"space-between-plants": "Space Between Plants",
 		"space-between-rows": "Space Between Rows",
 		"the-parcels": "the parcels"
+	},
+	"pesticides": {
+		"comments": "Comments",
+		"name": "Name",
+		"phase": "Phase",
+		"result": "Result",
+		"spray-date": "Spray date",
+		"type": "Type"
 	},
 	"reminder": {
 		"enter-new-event": "Just enter event name to create a new one",

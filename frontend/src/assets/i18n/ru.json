@@ -43,9 +43,10 @@
 	"expenses": {
 		"agricultural-machinery": "Расходы на ремонт сельскохозяйственной техники",
 		"agricultural-works": "Расходы на сельскохозяйственные работы",
-		"various-chemicals": "Расходы на удобрения и пестициды",
+		"fertilizers": "Расходы на удобрения",
 		"fuel": "Расходы на топливо",
-		"sowing": "Расходы на посев"
+		"sowing": "Расходы на посев",
+		"pesticides": "Расходы на пестициды"
 	},
 	"forecast": {
 		"additional_info": "Дополнительная информация",
@@ -134,7 +135,8 @@
 		"crops-varieties": "Сельскохозяйственные культуры и сорта",
 		"dashboard": "Главная",
 		"employees": "Работники",
-		"fertilizers-pesticides": "Удобрения и пестициды",
+		"fertilizers": "Удобрения",
+		"pesticides": "Пестициды",
 		"forecast-list": "Список",
 		"forecasting-charts": "Прогнозные графики",
 		"forecasts": "Прогнозирование",
@@ -245,6 +247,14 @@
 		"space-between-plants": "Пространство между растениями",
 		"space-between-rows": "Пространство между рядами",
 		"the-parcels": "участки"
+	},
+	"pesticides": {
+		"comments": "Комментарии",
+		"name": "Название",
+		"phase": "Фаза",
+		"result": "Результат",
+		"spray-date": "Дата распыления",
+		"type": "Тип"
 	},
 	"reminder": {
 		"enter-new-event": "Просто введите название события",

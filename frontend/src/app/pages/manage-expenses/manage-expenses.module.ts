@@ -8,11 +8,12 @@ import {TranslateModule} from '@ngx-translate/core';
 import {MultiselectDropdownModule} from 'angular-2-dropdown-multiselect';
 import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-block.module';
 import {AgGridModule} from 'ag-grid-angular';
-import {ChemicalsExpensesComponent} from './chemicals-expenses/chemicals-expenses.component';
 import {MachineryExpensesComponent} from './machinery-expenses/machinery-expenses.component';
 import {FuelExpensesComponent} from './fuel-expenses/fuel-expenses.component';
 import {SowingExpensesComponent} from './sowing-expenses/sowing-expenses.component';
 import {WorksExpensesComponent} from './works-expenses/works-expenses.component';
+import {FertilizersExpensesComponent} from "./fertilizers-expenses/fertilizers-expenses.component";
+import {PesticidesExpensesComponent} from "./pesticides-expenses/pesticides-expenses.component";
 import {CustomImageRendererComponent} from "../../modules/aggrid/custom-image-renderer/custom-image-renderer.component";
 import {CustomImageRendererModule} from "../../modules/aggrid/custom-image-renderer/custom-image-renderer.module";
 import { CustomPinnedRowRenderer } from "../../modules/aggrid/custom-pinned-row-renderer/custom-pinned-row-renderer.component";
@@ -23,7 +24,9 @@ export const routes = [
     {path: 'fuel', component: FuelExpensesComponent, data: {breadcrumb: 'fuel'}},
     {path: 'sowing', component: SowingExpensesComponent, data: {breadcrumb: 'sowing'}},
     {path: 'works', component: WorksExpensesComponent, data: {breadcrumb: 'works'}},
-    {path: 'chemicals', component: ChemicalsExpensesComponent, data: {breadcrumb: 'chemicals'}}
+//    {path: 'chemicals', component: ChemicalsExpensesComponent, data: {breadcrumb: 'chemicals'}},
+    {path: 'fertilizers', component: FertilizersExpensesComponent, data: {breadcrumb: 'fertilizers'}},
+    {path: 'pesticides', component: PesticidesExpensesComponent, data: {breadcrumb: 'pesticides'}}
 ];
 
 @NgModule({
@@ -44,7 +47,8 @@ export const routes = [
         FuelExpensesComponent,
         SowingExpensesComponent,
         WorksExpensesComponent,
-        ChemicalsExpensesComponent,
+        PesticidesExpensesComponent,
+        FertilizersExpensesComponent,
         CustomPinnedRowRenderer
     ]
 })
