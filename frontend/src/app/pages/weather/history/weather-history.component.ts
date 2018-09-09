@@ -116,12 +116,12 @@ export class WeatherHistoryComponent implements OnInit {
     public setupRows() {
         let locationId = 617077;
         let dateTo = new Date();
-        let dateFrom = dateTo.setHours(dateTo.getHours() - 72);
+        let dateFrom = new Date();
+        dateFrom.setHours(dateTo.getHours() - 72);
         this.weatherService.findWeatherHistory(locationId, dateFrom, dateFrom).subscribe(payloadModel => {
 
             if (payloadModel.status == 'success') {
                 const rows = payloadModel.payload.map(data => {
-                    debugger;
                     const model = new WeatherHistoryModel();
                     model.date = new Date(data.dt).toLocaleDateString();
                     model.icon = '/assets/img/notifications/weather-rain-alert.png';
@@ -132,8 +132,10 @@ export class WeatherHistoryComponent implements OnInit {
                     model.wind = data.windSpeed + ' km/h NW';
                     return model;
                 });
+                this.options.api.setRowData(rows);
+            } else if (payloadModel.status == 'warning') {
+                this.options.api.setRowData(new Array());
             }
-            this.options.api.setRowData(rows);
         });
     }
 

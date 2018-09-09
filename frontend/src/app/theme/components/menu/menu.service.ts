@@ -201,6 +201,30 @@ export class MenuService {
 
         if (isAdmin || isUser) {
             menuItems.push({
+                title: 'nav.agricultural-works',
+                routerLink: 'agro-works',
+                icon: 'fa fa-pied-piper',
+                selected: false,
+                expanded: false,
+                subMenu: [
+                    {
+                        title: 'nav.sowing',
+                        routerLink: 'agro-works/sowing',
+                    },
+                    {
+                        title: 'nav.other-agricultural-works',
+                        routerLink: 'agro-works/works',
+                    },
+                    {
+                        title: 'nav.harvesting',
+                        routerLink: 'agro-works/harvesting',
+                    },
+                ]
+            });
+        }
+
+        if (isAdmin || isUser) {
+            menuItems.push({
                 title: 'nav.weather',
                 routerLink: 'weather',
                 icon: 'fa fa-cloud',

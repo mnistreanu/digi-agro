@@ -127,6 +127,7 @@
 	"nav": {
 		"expenses-management": "Evidența cheltuielilor",
 		"agricultural-works": "Lucrări agricole",
+		"other-agricultural-works": "Lucrări agricole",
 		"branches": "Filiale",
 		"brands": "Brands",
 		"costs-forecasting": "Prognoză costuri",
@@ -150,6 +151,7 @@
 		"owners": "Proprietari",
 		"parcels": "Parcele",
 		"sowing": "Semănatul",
+		"harvesting": "Recoltarea",
 		"tasks": "Sarcini",
 		"telemetry": "Telemetrie",
 		"tenants": "Clienți",
