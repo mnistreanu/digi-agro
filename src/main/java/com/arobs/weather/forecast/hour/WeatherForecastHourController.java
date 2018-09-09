@@ -1,6 +1,5 @@
 package com.arobs.weather.forecast.hour;
 
-import com.arobs.weather.WeatherUtils;
 import com.arobs.weather.entity.PayloadModel;
 import com.arobs.weather.entity.WeatherForecastHour;
 import com.arobs.weather.entity.WeatherForecastHourModel;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -28,11 +26,11 @@ public class WeatherForecastHourController {
     private WeatherForecastHourRepository weatherForecastHourRepository;
 
     /**
-     * Returneaza toate articolele din istoria inregistrarilor meteo.
-     * @return lista de istorii
+     * Returneaza toate prognozele meteo 5/3 inregistrate in baza de date.
+     * @return lista de prognoze
      */
     @RequestMapping(value = "/forecasts/hour", method = RequestMethod.GET)
-    public ResponseEntity<PayloadModel<WeatherForecastHourModel>> getWeatherHistories() {
+    public ResponseEntity<PayloadModel<WeatherForecastHourModel>> getWeatherForecastsHour() {
         PayloadModel<WeatherForecastHourModel> payloadModel = new PayloadModel<>();
 
         try {
@@ -53,10 +51,10 @@ public class WeatherForecastHourController {
     }
 
     /**
-     * Returneaza lista tuturor istoriilor meteo pentru localitatea specificata<br/>
-     * Exemplu URL: host:port/weather/history_location/617255
+     * Returneaza lista tuturor prognozelor meteo 5/3 pentru localitatea specificata<br/>
+     * Exemplu URL: host:port/weather/forecasts/hour/617255
      * @param locationId - CITY_ID din Open weather
-     * @return lista de istorii
+     * @return lista de prognoze
      */
     @RequestMapping(value = "/forecasts/hour/{locationId}", method = RequestMethod.GET)
     public ResponseEntity<PayloadModel<WeatherForecastHourModel>> getWeatherForecastHourByLocation(@PathVariable("locationId") Integer locationId) {
@@ -84,12 +82,12 @@ public class WeatherForecastHourController {
     }
 
     /**
-     * Returneaza lista de istorii meteo pentru localitatea specificata din intervalul de timp specificat  
+     * Returneaza lista de prognoze meteo 5/3 pentru localitatea specificata din intervalul de timp specificat  
      * @param locationId - ID localitate in conformitate cu CITY_ID din Open weather.<br/>
-     * Exemplu URL: host:port/weather/history_interval?locationId=684038&dateFrom=20180901&dateTo=20180902 
+     * Exemplu URL: host:port/weather/forecasts/hour/interval?locationId=665849&dateFrom=20180801&dateTo=20180824 
      * @param dateFrom - inceput de interval in format "yyyyMMdd"
      * @param dateTo - sfirsit de interval in format "yyyyMMdd"
-     * @return lista de istorii.
+     * @return lista de prognoze.
      */
     @RequestMapping(value = "/forecasts/hour/interval", method = RequestMethod.GET)
     public ResponseEntity<PayloadModel<WeatherForecastHourModel>> getWeatherForecastHourInterval(@RequestParam("locationId") Integer locationId,
@@ -98,7 +96,7 @@ public class WeatherForecastHourController {
         PayloadModel<WeatherForecastHourModel> payloadModel = new PayloadModel<>();
 
         try {
-            List<WeatherForecastHour> weatherForecastHour = new ArrayList<WeatherForecastHour>(); //weatherForecastHourRepository.find(locationId, WeatherUtils.getUnixTime(dateFrom), WeatherUtils.getUnixTime(dateTo));
+            List<WeatherForecastHour> weatherForecastHour = weatherForecastHourRepository.find(locationId, dateFrom, dateTo);
             if (!weatherForecastHour.isEmpty()) {
                 List<WeatherForecastHourModel> models = weatherForecastHour.stream().map(WeatherForecastHourModel::new).collect(Collectors.toList());
                 WeatherForecastHourModel[] payload = models.toArray(new WeatherForecastHourModel[models.size()]);
@@ -116,12 +114,12 @@ public class WeatherForecastHourController {
     }
 
     /**
-     * Returneaza lista tuturor istoriilor meteo pentru data specificata<br/>
-     * Exemplu URL: host:port/weather/history_date/20180902 
+     * Returneaza lista tuturor prognozelor  meteo 5/3 pentru data specificata<br/>
+     * Exemplu URL: host:port/weather/forecast/hour/20180824 
      * @param referenceDate - data specificata in formt "yyyyMMdd"
-     * @return lista de observatii meteo
+     * @return lista de prognoze meteo
      */
-    @RequestMapping(value = "/forecast/{date}", method = RequestMethod.GET)
+    @RequestMapping(value = "/forecast/hour/{date}", method = RequestMethod.GET)
     public ResponseEntity<PayloadModel<WeatherForecastHourModel>> getWeatherForecastHourByDate(@PathVariable(value="date") @DateTimeFormat(pattern="yyyyMMdd") Date referenceDate) {
         PayloadModel<WeatherForecastHourModel> payloadModel = new PayloadModel<>();
         Calendar referenceCalendar = Calendar.getInstance();
