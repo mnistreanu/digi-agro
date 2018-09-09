@@ -157,11 +157,16 @@ export class MenuService {
                     },
                     {
                         title: 'nav.crops-varieties',
+                        routerLink: 'manage-crops/crop-variety-tree'
+                    },
+                    {
+                        title: 'nav.crop-varieties',
                         routerLink: 'manage-crops/crop-varieties'
                     }
                 ]
             });
         }
+        
 
         if (isAdmin || isUser) {
             menuItems.push({

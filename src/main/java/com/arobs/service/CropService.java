@@ -3,6 +3,7 @@ package com.arobs.service;
 import com.arobs.entity.Crop;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.CropModel;
+import com.arobs.model.ListItemModel;
 import com.arobs.repository.CropRepository;
 import com.arobs.repository.custom.CropCustomRepository;
 import com.google.gson.Gson;
@@ -35,6 +36,10 @@ public class CropService implements HasRepository<CropRepository> {
         } else {
             return getRepository().find();
         }
+    }
+
+    public List<ListItemModel> fetchItems() {
+        return getRepository().fetchItems();
     }
 
     @Override

@@ -30,6 +30,17 @@
 		"unit-of-measure-long": "Unit of measure",
 		"variety": "Variety"
 	},
+	"crop-variety": {
+		"crop-varieties": "Crop Varieties",
+		"crop": "Crop",
+		"name-ro": "Name Ro",
+		"name-ru": "Name Ru",
+		"description-ro": "Description Ro",
+		"description-ru": "Description Ru",
+		"seed-consumption-ha": "Seed Consumption Ha",
+		"unit-of-measure": "Unit of Measure"
+
+	},
 	"employee": {
 		"employee": "Employee",
 		"first-name": "Fist Name",
@@ -133,6 +144,7 @@
 		"costs-forecasting-form": "Costs forecasting FORM",
 		"crops": "Crops",
 		"crops-varieties": "Crops & Varieties",
+		"crop-varieties": "Crop Varieties",
 		"dashboard": "Dashboard",
 		"employees": "Employees",
 		"fertilizers": "Fertilizers",

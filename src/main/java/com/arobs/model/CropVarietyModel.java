@@ -3,6 +3,7 @@ package com.arobs.model;
 import com.arobs.entity.Crop;
 import com.arobs.entity.CropCategory;
 import com.arobs.entity.CropVariety;
+import com.arobs.enums.UnitOfMeasure;
 
 import java.io.Serializable;
 
@@ -15,6 +16,8 @@ public class CropVarietyModel implements Serializable {
     private String nameRu;
     private String descriptionRo;
     private String descriptionRu;
+    private Double seedConsumptionHa;
+    private String unitOfMeasure;
 
     public CropVarietyModel() {
     }
@@ -43,6 +46,8 @@ public class CropVarietyModel implements Serializable {
         this.nameRu = cropVariety.getNameRu();
         this.descriptionRo = cropVariety.getDescriptionRo();
         this.descriptionRu = cropVariety.getDescriptionRu();
+        this.seedConsumptionHa = cropVariety.getSeedConsumptionHa();
+        this.unitOfMeasure = cropVariety.getUnitOfMeasure();
     }
 
     public Long getCropCategoryId() {
@@ -99,5 +104,21 @@ public class CropVarietyModel implements Serializable {
 
     public void setDescriptionRu(String descriptionRu) {
         this.descriptionRu = descriptionRu;
+    }
+
+    public Double getSeedConsumptionHa() {
+        return seedConsumptionHa;
+    }
+
+    public void setSeedConsumptionHa(Double seedConsumptionHa) {
+        this.seedConsumptionHa = seedConsumptionHa;
+    }
+
+    public String getUnitOfMeasure() {
+        return unitOfMeasure;
+    }
+
+    public void setUnitOfMeasure(String unitOfMeasure) {
+        this.unitOfMeasure = unitOfMeasure;
     }
 }

@@ -1,132 +1,134 @@
-import {Component, OnInit} from '@angular/core';
-import {ColDef, GridOptions} from 'ag-grid';
-import {CropService} from '../../../services/crop.service';
-import {CropVarietyModel} from './crop-variety.model';
-import {LangService} from '../../../services/lang.service';
-import {CropFieldMapper} from './crop-field.mapper';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Messages } from '../../../common/messages';
+import { GeoService } from '../../../services/geo.service';
+import { LangService } from '../../../services/lang.service';
+import { SelectItem } from '../../../dto/select-item.dto';
+import { CropVarietyModel } from './crop-variety.model';
+import { CropVarietyService } from '../../../services/crop-variety.service';
+import { UnitOfMeasure } from '../../../enums/unit-of-measure.enum';
 
 @Component({
-    selector: 'app-crop-variety',
-    templateUrl: './crop-variety.component.html'
+    selector: 'app-crop',
+    templateUrl: './crop-variety.component.html',
+    styleUrls: ['./crop-variety.component.scss']
 })
 export class CropVarietyComponent implements OnInit {
 
-    private options: GridOptions;
-    private context;
+    form: FormGroup;
+    submitted = false;
 
-    private labelName: string;
-    private labelDescription: string;
+    model: CropVarietyModel;
+    isNew: boolean;
 
-    private fieldMapper: CropFieldMapper;
+    unitOfMeasureSelectItems: SelectItem[] = [];
+    cropSelectItems: SelectItem[] = [];
 
-    constructor(private langService: LangService,
-                private cropService: CropService) {
+    private labelSaved: string;
+    private labelRemoved: string;
+    private labelValidationError: string;
+
+    constructor(private router: Router,
+                private route: ActivatedRoute,
+                private geoService: GeoService,
+                private langService: LangService,   
+                private cropVarietyService: CropVarietyService,
+                private toastr: ToastrService) {
     }
 
     ngOnInit() {
-        this.fieldMapper = new CropFieldMapper(this.langService.getLanguage());
         this.setupLabels();
-        this.setupGrid();
-        this.setupCropsTree();
+
+        this.cropVarietyService.findCategoryItems().subscribe(data => {
+            this.cropSelectItems = data;
+        });
+
+        const names = Object.keys(UnitOfMeasure);
+
+        for (let mu of names) {
+            this.unitOfMeasureSelectItems.push(new SelectItem(UnitOfMeasure[mu], mu));
+        }
+
+        this.route.params.subscribe(params => {
+            const id = params['id'];
+
+            if (id == -1) {
+                this.prepareNewModel();
+            }
+            else {
+                this.setupModel(id);
+            }
+        });
     }
 
     private setupLabels() {
-        this.langService.get('info.name').subscribe(msg => this.labelName = msg);
-        this.langService.get('info.description').subscribe(msg => this.labelDescription = msg);
+        this.langService.get(Messages.SAVED).subscribe(m => this.labelSaved = m);
+        this.langService.get(Messages.REMOVED).subscribe(m => this.labelRemoved = m);
+        this.langService.get(Messages.VALIDATION_FAIL).subscribe(m => this.labelValidationError = m);
     }
 
-    private setupCropsTree() {
-        this.cropService.findVarietiesTree().subscribe(payloadModel => {
-            this.adjustTree(payloadModel.payload);
+
+    private setupModel(id) {
+        this.cropVarietyService.findOne(id).subscribe(model => {
+            this.model = model;
+            this.buildForm();
         });
     }
 
-    private adjustTree(models: CropVarietyModel[]) {
+    private prepareNewModel() {
+        this.model = new CropVarietyModel();
+        this.isNew = true;
+        this.buildForm();
+    }
 
-        const rows = [];
-        const categories = {};
-        const crops = {};
-
-        let parent;
-        models.forEach(model => {
-            if (model.cropCategoryId == null && model.cropId == null) {
-                // category
-                categories[model.id] = model;
-                rows.push(model);
-            } else if (model.cropCategoryId != null) {
-                // crop
-                parent = categories[model.cropCategoryId];
-                parent.children = parent.children || [];
-                parent.children.push(model);
-                crops[model.id] = model;
-            } else {
-                // variety
-                parent = crops[model.cropId];
-                parent.children = parent.children || [];
-                parent.children.push(model);
-            }
+    private buildForm() {
+        this.form = new FormGroup({
+            cropId: new FormControl(this.model.cropId, [Validators.required]),
+            nameRo: new FormControl(this.model.nameRo, [Validators.required, Validators.maxLength(128)]),
+            nameRu: new FormControl(this.model.nameRu, [Validators.required, Validators.maxLength(128)]),
+            descriptionRo: new FormControl(this.model.descriptionRo, [Validators.required]),
+            descriptionRu: new FormControl(this.model.descriptionRu, [Validators.required]),
+            seedConsumptionHa: new FormControl(this.model.seedConsumptionHa, [Validators.required]),
+            unitOfMeasure: new FormControl(this.model.unitOfMeasure, [Validators.required])
         });
-        
-
-        this.options.api.setRowData(rows);
     }
 
 
-    private setupGrid() {
-        this.options = <GridOptions>{};
+    public save(form: FormGroup) {
 
-        this.options.enableColResize = true;
-        this.options.enableSorting = true;
-        this.options.enableFilter = true;
-        this.options.columnDefs = this.setupHeaders();
-        this.context = {componentParent: this};
-    }
+        this.submitted = true;
 
-    private setupHeaders() {
-
-        const headers: ColDef[] = [
-            {
-                headerName: this.labelName,
-                field: this.fieldMapper.getName(),
-                cellRenderer: 'agGroupCellRenderer',
-                width: 200,
-                minWidth: 200
-            },
-            {
-                headerName: this.labelDescription,
-                field: this.fieldMapper.getDescription(),
-                width: 600,
-                minWidth: 200
-            }
-        ];
-
-        return headers;
-    }
-
-    private getNodeChildDetails(rowItem) {
-        if (rowItem.children) {
-            return {
-                group: true,
-                expanded: false,
-                children: rowItem.children,
-                key: rowItem.group
-            };
-        } else {
-            return null;
+        if (!form.valid) {
+            this.toastr.warning(this.labelValidationError);
+            return;
         }
+
+        console.log(form.value)
+
+        this.isNew = false;
+        this.submitted = false;
+
+        if (this.model.id) {
+            this.cropVarietyService.update(this.model.id, form.value).subscribe((model) => {
+                this.model = model;
+                this.toastr.success(this.labelSaved);
+            });
+        } else {
+            this.cropVarietyService.create(form.value).subscribe((model) => {
+                this.model = model;
+                this.toastr.success(this.labelSaved);
+            });
+        }
+
     }
 
-    public onGridReady() {
-        this.options.api.sizeColumnsToFit();
+    public remove() {
+        this.cropVarietyService.remove(this.model.id).subscribe(() => {
+            this.toastr.success(this.labelRemoved);
+            this.router.navigate(['/pages/manage-crops/crop-varieties']);
+        });
     }
-
-    public adjustGridSize() {
-        setTimeout(() => {
-            if (this.options && this.options.api) {
-                this.options.api.sizeColumnsToFit();
-            }
-        }, 500);
-    }
-
 
 }

@@ -1,14 +1,10 @@
 export class CropVarietyModel {
-
-
-    cropCategoryId: number;
-    cropId: number;
-    id: number;
-
-    nameRo: string;
-    nameRu: string;
-    descriptionRo: string;
-    descriptionRu: string;
-
-    children: CropVarietyModel[];
+        public id: number;
+        public cropId: number;
+        public nameRo: String;
+        public nameRu: String;
+        public descriptionRo: String;
+        public descriptionRu: String;
+        public seedConsumptionHa: number;
+        public unitOfMeasure: String;
 }

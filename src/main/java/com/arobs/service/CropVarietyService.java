@@ -57,6 +57,8 @@ public class CropVarietyService implements HasRepository<CropVarietyRepository> 
         cropVariety.setDescriptionRo(model.getDescriptionRo());
         cropVariety.setDescriptionRu(model.getDescriptionRu());
         cropVariety.setCropId(model.getCropId());
+        cropVariety.setSeedConsumptionHa(model.getSeedConsumptionHa());
+        cropVariety.setUnitOfMeasure(model.getUnitOfMeasure());
 
         return getRepository().save(cropVariety);
     }
