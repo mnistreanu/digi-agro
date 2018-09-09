@@ -10,8 +10,8 @@ import {AgGridModule} from 'ag-grid-angular';
 import {SowingWorksComponent} from './sowing-works/sowing-works.component';
 import {OtherWorksComponent} from './other-works/other-works.component';
 import {HarvestingWorksComponent} from './harvesting-works/harvesting-works.component';
-import {CustomImageRendererComponent} from '../../modules/aggrid/custom-image-renderer/custom-image-renderer.component';
-import {CustomImageRendererModule} from '../../modules/aggrid/custom-image-renderer/custom-image-renderer.module';
+import {ImageRendererComponent} from '../../modules/aggrid/image-renderer/image-renderer.component';
+import {ImageRendererModule} from '../../modules/aggrid/image-renderer/image-renderer.module';
 import {PinnedRowRendererModule} from '../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.module';
 import {PinnedRowRendererComponent} from '../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
 
@@ -31,9 +31,9 @@ export const routes = [
         MultiselectDropdownModule,
         DirectivesModule,
         FormErrorBlockModule,
-        CustomImageRendererModule,
+        ImageRendererModule,
         PinnedRowRendererModule,
-        AgGridModule.withComponents([CustomImageRendererComponent, PinnedRowRendererComponent]),
+        AgGridModule.withComponents([ImageRendererComponent, PinnedRowRendererComponent]),
         RouterModule.forChild(routes)
     ],
     declarations: [

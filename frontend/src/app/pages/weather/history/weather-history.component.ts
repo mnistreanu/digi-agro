@@ -3,7 +3,7 @@ import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {WeatherService} from '../../../services/weather.service';
 import {WeatherHistoryModel} from './weather-history.model';
-import {CustomImageRendererComponent} from '../../../modules/aggrid/custom-image-renderer/custom-image-renderer.component';
+import {ImageRendererComponent} from '../../../modules/aggrid/image-renderer/image-renderer.component';
 
 @Component({
     selector: 'app-weather-history',
@@ -90,7 +90,7 @@ export class WeatherHistoryComponent implements OnInit {
             {
                 headerName: this.labelCondition,
                 field: 'condition',
-                cellRendererFramework: CustomImageRendererComponent,
+                cellRendererFramework: ImageRendererComponent,
                 cellRendererParams: {
                     textField: 'condition',
                     iconField: 'icon'

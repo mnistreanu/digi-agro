@@ -3,9 +3,9 @@ import {NotificationService} from '../../../services/notification/notification.s
 import {Router} from '@angular/router';
 import {ColDef, GridOptions} from 'ag-grid';
 import {NotificationModel} from '../notification.model';
-import {ImageRendererComponent} from '../../../modules/aggrid/image-renderer/image-renderer.component';
 import {LangService} from '../../../services/lang.service';
 import {DateUtil} from '../../../common/dateUtil';
+import {ImageRendererComponent} from '../../../modules/aggrid/image-renderer/image-renderer.component';
 
 @Component({
     selector: 'app-notification-list',
@@ -45,6 +45,9 @@ export class NotificationListComponent implements OnInit {
                 headerName: '',
                 field: 'image',
                 cellRendererFramework: ImageRendererComponent,
+                cellRendererParams: {
+                    iconField: 'image'
+                },
                 cellStyle: () => {
                     return {padding: 0};
                 },

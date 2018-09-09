@@ -13,8 +13,8 @@ import {SowingExpensesComponent} from './sowing-expenses/sowing-expenses.compone
 import {WorksExpensesComponent} from './works-expenses/works-expenses.component';
 import {FertilizersExpensesComponent} from './fertilizers-expenses/fertilizers-expenses.component';
 import {PesticidesExpensesComponent} from './pesticides-expenses/pesticides-expenses.component';
-import {CustomImageRendererComponent} from '../../modules/aggrid/custom-image-renderer/custom-image-renderer.component';
-import {CustomImageRendererModule} from '../../modules/aggrid/custom-image-renderer/custom-image-renderer.module';
+import {ImageRendererComponent} from '../../modules/aggrid/image-renderer/image-renderer.component';
+import {ImageRendererModule} from '../../modules/aggrid/image-renderer/image-renderer.module';
 import {PinnedRowRendererModule} from '../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.module';
 import {PinnedRowRendererComponent} from '../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
 
@@ -38,9 +38,9 @@ export const routes = [
         MultiselectDropdownModule,
         DirectivesModule,
         FormErrorBlockModule,
-        CustomImageRendererModule,
+        ImageRendererModule,
         PinnedRowRendererModule,
-        AgGridModule.withComponents([CustomImageRendererComponent, PinnedRowRendererComponent]),
+        AgGridModule.withComponents([ImageRendererComponent, PinnedRowRendererComponent]),
         RouterModule.forChild(routes)
     ],
     declarations: [

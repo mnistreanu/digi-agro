@@ -1,3 +1,4 @@
-<div class="cell-image">
-    <img [src]="imagePath"/>
+<div class="cell-block">
+    <img [src]="imagePath" [ngClass]="{'full-img': !text}"/>
+    <span>{{ text }}</span>
 </div>
