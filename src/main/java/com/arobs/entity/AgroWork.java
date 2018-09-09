@@ -20,8 +20,12 @@ public class AgroWork {
     @Column(name = "work_date")
     private Date workDate;
 
-    @Column(name = "work_type")
+    @ManyToOne
+    @JoinColumn(name = "work_type")
     private AgroWorkType workType;
+
+    @Column(name = "title")
+    private String title;
 
     @Column(name = "created_by")
     private Long createdBy;

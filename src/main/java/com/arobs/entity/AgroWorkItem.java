@@ -20,7 +20,7 @@ public class AgroWorkItem {
     @Column(name = "item_title")
     private String title;
 
-    @Column(name = "item_value")
+    @Column(name = "item_value", length = 2048)
     private String value;
 
     public Long getId() {
