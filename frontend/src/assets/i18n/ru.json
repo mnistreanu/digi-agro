@@ -127,6 +127,7 @@
 	"nav": {
 		"expenses-management": "Учет затрат",
 		"agricultural-works": "Сельхоз. работы",
+		"other-agricultural-works": "Сельхоз. работы",
 		"branches": "Филиалы",
 		"brands": "Бренды",
 		"costs-forecasting": "Прогнозирование затрат",
@@ -150,6 +151,7 @@
 		"owners": "Владелецы",
 		"parcels": "Участки",
 		"sowing": "Посев",
+		"harvesting": "Сбор урожая",
 		"tasks": "Задания",
 		"telemetry": "Телеметрия",
 		"tenants": "Клиенты",

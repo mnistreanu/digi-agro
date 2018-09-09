@@ -7,21 +7,22 @@ import java.util.Date;
  * Created by mihail.gorgos on 02.09.2018.
  */
 @Entity
-@Table(name = "expense")
-public class Expense {
+@Table(name = "agro_work")
+public class AgroWork {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "tenant_id")
-    private Long tenantId;
+    private Long tenant;
 
-    @Column(name = "agro_work_id")
-    private Long agroWorkId;
+    @Column(name = "work_date")
+    private Date workDate;
 
-    @Column(name = "expense_date")
-    private Date expenseDate;
+    @ManyToOne
+    @JoinColumn(name = "work_type")
+    private AgroWorkType workType;
 
     @Column(name = "title")
     private String title;
@@ -40,36 +41,28 @@ public class Expense {
         this.id = id;
     }
 
-    public Long getTenantId() {
-        return tenantId;
+    public Long getTenant() {
+        return tenant;
     }
 
-    public void setTenantId(Long tenantId) {
-        this.tenantId = tenantId;
+    public void setTenant(Long tenant) {
+        this.tenant = tenant;
     }
 
-    public Long getAgroWorkId() {
-        return agroWorkId;
+    public Date getWorkDate() {
+        return workDate;
     }
 
-    public void setAgroWorkId(Long agroWorkId) {
-        this.agroWorkId = agroWorkId;
+    public void setWorkDate(Date workDate) {
+        this.workDate = workDate;
     }
 
-    public Date getExpenseDate() {
-        return expenseDate;
+    public AgroWorkType getWorkType() {
+        return workType;
     }
 
-    public void setExpenseDate(Date expenseDate) {
-        this.expenseDate = expenseDate;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public void setWorkType(AgroWorkType workType) {
+        this.workType = workType;
     }
 
     public Long getCreatedBy() {

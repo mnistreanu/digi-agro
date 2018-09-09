@@ -138,6 +138,7 @@
 	"nav": {
 		"expenses-management": "Expenses management",
 		"agricultural-works": "Agricultural works",
+		"other-agricultural-works": "Agricultural works",
 		"branches": "Branches",
 		"brands": "Brands",
 		"costs-forecasting": "Costs forecasting",
@@ -162,6 +163,7 @@
 		"owners": "Owners",
 		"parcels": "Parcels",
 		"sowing": "Sowing",
+		"harvesting": "Harvesting",
 		"tasks": "Tasks",
 		"telemetry": "Telemetry",
 		"tenants": "Tenants",

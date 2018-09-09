@@ -13,6 +13,7 @@ public class WeatherLocation {
 	private Integer id;
 	private String name;
 	private String countryCode;
+	private String countyCode;
 	private Double lon;
 	private Double lat;
 
@@ -44,7 +45,16 @@ public class WeatherLocation {
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
-	
+
+	@Column(name = "county")
+	public String getCountyCode() {
+		return countyCode;
+	}
+
+	public void setCountyCode(String countyCode) {
+		this.countyCode = countyCode;
+	}
+
 	@Column(name = "lon")
 	@Source( "coord.lon")
 	public Double getLon() {

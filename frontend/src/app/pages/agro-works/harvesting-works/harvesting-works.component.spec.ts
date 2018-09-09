@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {CustomImageRendererComponent} from './custom-image-renderer.component';
+import {HarvestingWorksComponent} from "./harvesting-works.component";
 
-describe('CustomImageRendererComponent', () => {
-    let component: CustomImageRendererComponent;
-    let fixture: ComponentFixture<CustomImageRendererComponent>;
+describe('HarvestingWorksComponent', () => {
+    let component: HarvestingWorksComponent;
+    let fixture: ComponentFixture<HarvestingWorksComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [CustomImageRendererComponent]
+            declarations: [HarvestingWorksComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(CustomImageRendererComponent);
+        fixture = TestBed.createComponent(HarvestingWorksComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

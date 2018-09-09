@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.arobs.weather.entity.WeatherForecastHour;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -17,6 +18,11 @@ public interface WeatherForecastHourRepository extends JpaRepository<WeatherFore
 //            "ORDER BY weatherForecastHour.name ")
 //    List<WeatherForecastHour> find(@Param("name") String name);
 
+	@Query("SELECT DISTINCT weatherForecastHour " + 
+			"FROM WeatherForecastHour weatherForecastHour " + 
+			"LEFT JOIN FETCH weatherForecastHour.forecastItems")
+    List<WeatherForecastHour> findAll();
+	
 	@Query("SELECT DISTINCT weatherForecastHour " + 
 			"FROM WeatherForecastHour weatherForecastHour " + 
 			"LEFT JOIN FETCH weatherForecastHour.forecastItems " + 
@@ -32,7 +38,11 @@ public interface WeatherForecastHourRepository extends JpaRepository<WeatherFore
 				"AND HOUR(forecastItem.dt) = :hour ")
 	List<WeatherForecastHour> find(@Param("year") Integer year, @Param("month") Integer month, @Param("day") Integer day, @Param("hour") Integer hour);
 
-//	List<WeatherForecastHour> find(@Param("locationId") Integer locationId, @Param("unixTime") long unixTime, @Param("unixTime2") long unixTime2);
+	@Query("SELECT DISTINCT weatherForecastHour " + 
+			"FROM WeatherForecastHour weatherForecastHour " + 
+			"LEFT JOIN FETCH weatherForecastHour.forecastItems forecastItem " + 
+			"WHERE weatherForecastHour.cityId = :locationId AND forecastItem.dt BETWEEN :dateFrom AND :dateTo")
+	List<WeatherForecastHour> find(@Param("locationId") Integer locationId, @Param("dateFrom") Date dateFrom, @Param("dateTo") Date dateTo);
 
 }
 

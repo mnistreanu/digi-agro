@@ -11,6 +11,7 @@ export class ImageRendererComponent implements ICellRendererAngularComp {
 
     params: ICellRendererParams;
     imagePath: string;
+    text: string;
 
     constructor() {
     }
@@ -21,8 +22,8 @@ export class ImageRendererComponent implements ICellRendererAngularComp {
 
     agInit(params: ICellRendererParams): void {
         this.params = params;
-        const field = params.colDef.field;
-        this.imagePath = params.data[field];
+        this.imagePath = params.data[params['iconField']];
+        this.text = params.data[params['textField']];
     }
 
 }

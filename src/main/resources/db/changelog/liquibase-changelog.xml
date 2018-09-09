@@ -780,4 +780,39 @@
         </sql>
     </changeSet>
 
+    <changeSet id="Moldova_openweathermap_county_id" author="mihai.gorgos" failOnError="true" runOnChange="true">
+        <sql>
+            UPDATE weather_location SET county='ED' WHERE id=617077;
+            UPDATE weather_location SET county='UN' WHERE id=617181;
+            UPDATE weather_location SET county='TL' WHERE id=617255;
+            UPDATE weather_location SET county='TR' WHERE id=617264;
+            UPDATE weather_location SET county='SV' WHERE id=617283;
+            UPDATE weather_location SET county='ST' WHERE id=617301;
+            UPDATE weather_location SET county='SR' WHERE id=617366;
+            UPDATE weather_location SET county='RS' WHERE id=617483;
+            UPDATE weather_location SET county='RZ' WHERE id=617501;
+            UPDATE weather_location SET county='OR' WHERE id=617639;
+            UPDATE weather_location SET county='OK' WHERE id=617656;
+            UPDATE weather_location SET county='AN' WHERE id=617715;
+            UPDATE weather_location SET county='NS' WHERE id=617754;
+            UPDATE weather_location SET county='LV' WHERE id=617903;
+            UPDATE weather_location SET county='SG' WHERE id=617913;
+            UPDATE weather_location SET county='CR' WHERE id=617962;
+            UPDATE weather_location SET county='IL' WHERE id=617991;
+            UPDATE weather_location SET county='CS' WHERE id=618119;
+            UPDATE weather_location SET county='CT' WHERE id=618142;
+            UPDATE weather_location SET county='CL' WHERE id=618162;
+            UPDATE weather_location SET county='CH' WHERE id=618164;
+            UPDATE weather_location SET county='GL' WHERE id=618260;
+            UPDATE weather_location SET county='FR' WHERE id=618331;
+            UPDATE weather_location SET county='FL' WHERE id=618345;
+            UPDATE weather_location SET county='DR' WHERE id=618369;
+            UPDATE weather_location SET county='DN' WHERE id=618381;
+            UPDATE weather_location SET county='CM' WHERE id=618430;
+            UPDATE weather_location SET county='BR' WHERE id=618511;
+            UPDATE weather_location SET county='BS' WHERE id=618565;
+            UPDATE weather_location SET county='HN' WHERE id=858803;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

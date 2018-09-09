@@ -2,16 +2,15 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {MachineService} from '../../../services/machine.service';
-import {PinnedRowRendererComponent} from '../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
-import {FertilizersExpensesModel} from './fertilizers-expenses.model';
+import {HarvestingWorksModel} from './harvesting-works.model';
 
 @Component({
-    selector: 'app-fertilizers-expenses',
+    selector: 'app-harvesting-works',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: './fertilizers-expenses.component.html',
-    styleUrls: ['./fertilizers-expenses.component.scss']
+    templateUrl: './harvesting-works.component.html',
+    styleUrls: ['./harvesting-works.component.scss']
 })
-export class FertilizersExpensesComponent implements OnInit {
+export class HarvestingWorksComponent implements OnInit {
     options: GridOptions;
     context;
 
@@ -21,15 +20,11 @@ export class FertilizersExpensesComponent implements OnInit {
     labelDate: string;
     labelFirstName: string;
     labelLastName: string;
-    labelUnitOfMeasureShort: string;
-    labelUnitOfMeasureLong: string;
-    labelDiesel: string;
-    labelOil: string;
-    labelSolidol: string;
-    labelNegrol: string;
+    labelSparePart: string;
+    labelSparePartPrice: string;
 
-    constructor(private machineService: MachineService, private langService: LangService) {
-
+    constructor(private machineService: MachineService,
+                private langService: LangService) {
     }
 
     ngOnInit() {
@@ -44,12 +39,8 @@ export class FertilizersExpensesComponent implements OnInit {
         this.langService.get('machine.repairing-date').subscribe(msg => this.labelDate = msg);
         this.langService.get('employee.first-name').subscribe(msg => this.labelFirstName = msg);
         this.langService.get('employee.last-name').subscribe(msg => this.labelLastName = msg);
-        this.langService.get('unit-of-measure.unit-short').subscribe(msg => this.labelUnitOfMeasureShort = msg);
-        this.langService.get('unit-of-measure.unit-long').subscribe(msg => this.labelUnitOfMeasureLong = msg);
-        this.langService.get('fuel.diesel').subscribe(msg => this.labelDiesel = msg);
-        this.langService.get('fuel.oil').subscribe(msg => this.labelOil = msg);
-        this.langService.get('fuel.solidol').subscribe(msg => this.labelSolidol = msg);
-        this.langService.get('fuel.negrol').subscribe(msg => this.labelNegrol = msg);
+        this.langService.get('machine.spare-part').subscribe(msg => this.labelSparePart = msg);
+        this.langService.get('machine.spare-part-price').subscribe(msg => this.labelSparePartPrice = msg);
     }
 
 
@@ -61,8 +52,6 @@ export class FertilizersExpensesComponent implements OnInit {
         this.options.enableFilter = true;
         this.options.rowSelection = 'single';
         this.options.columnDefs = this.setupHeaders();
-        this.options.frameworkComponents = { customPinnedRowRenderer: PinnedRowRendererComponent };
-
         this.context = {componentParent: this};
 
         this.setupRows();
@@ -77,14 +66,12 @@ export class FertilizersExpensesComponent implements OnInit {
                 width: 90,
                 minWidth: 90,
                 suppressFilter: true,
-                pinnedRowCellRenderer: 'customPinnedRowRenderer',
-                pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } }
             },
             {
                 headerName: this.labelAgriculturalMachinery,
                 field: 'brandModel',
-                width: 200,
-                minWidth: 200
+                width: 180,
+                minWidth: 180
             },
             {
                 headerName: this.labelIdentifier,
@@ -96,50 +83,22 @@ export class FertilizersExpensesComponent implements OnInit {
             {
                 headerName: this.labelLastName  + ' ' + this.labelFirstName,
                 field: 'employee',
-                width: 140,
-                minWidth: 140,
-                suppressFilter: true,
-            },
-            {
-                headerName: this.labelUnitOfMeasureShort,
-                headerTooltip: this.labelUnitOfMeasureLong,
-                field: 'unitOfMeasure',
-                width: 60,
-                minWidth: 60,
-                suppressFilter: true,
-            },
-            {
-                headerName: this.labelDiesel,
-                field: 'diesel',
                 width: 100,
                 minWidth: 100,
                 suppressFilter: true,
-                // allow gui to set aggregations for this column
-//                enableValue: true,
-                // restrict aggregations to sum
-//                allowedAggFuncs: ['sum'],
-                pinnedRowCellRenderer: 'customPinnedRowRenderer',
-                pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } }
             },
             {
-                headerName: this.labelOil,
-                field: 'oil',
-                width: 80,
-                minWidth: 80,
+                headerName: this.labelSparePart,
+                field: 'sparePart',
+                width: 200,
+                minWidth: 200,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelSolidol,
-                field: 'solidol',
-                width: 80,
-                minWidth: 80,
-                suppressFilter: true,
-            },
-            {
-                headerName: this.labelNegrol,
-                field: 'negrol',
-                width: 80,
-                minWidth: 80,
+                headerName: this.labelSparePartPrice,
+                field: 'sparePartPrice',
+                width: 100,
+                minWidth: 100,
                 suppressFilter: true,
             },
             {
@@ -154,9 +113,7 @@ export class FertilizersExpensesComponent implements OnInit {
                 width: 60,
                 minWidth: 60,
             },
-
         ];
-
 
         return headers;
     }
@@ -166,34 +123,19 @@ export class FertilizersExpensesComponent implements OnInit {
         let i = 0;
         this.machineService.findAll().subscribe(modelsArray => {
             const rows = modelsArray.map(data => {
-                const model = new FertilizersExpensesModel();
+                const model = new HarvestingWorksModel();
                 model.date = new Date().toLocaleDateString();
                 model.type = modelsArray[i].type;
                 model.brandModel = modelsArray[i].type + ' ' + modelsArray[i].brand + ' ' + modelsArray[i].model;
                 model.identifier = modelsArray[i].identifier;
                 model.employee = 'Roată Ion';
-                model.unitOfMeasure = 'L';
-                model.diesel = 120;
-                model.oil = 9;
-                model.solidol = 1;
-                model.negrol = 1;
+                model.sparePart = 'Ambreaj la cutia de viteze';
+                model.sparePartPrice = 3400;
                 i++;
                 return model;
             });
             this.options.api.setRowData(rows);
-            this.setupSummaryRow(rows);
         });
-    }
-
-    private setupSummaryRow(rows) {
-        const summaryRow = {
-            date: 'TOTAL',
-            diesel: 0
-        };
-        rows.forEach(source => {
-            summaryRow.diesel += source.diesel || 0;
-        });
-        this.options.api.setPinnedBottomRowData([summaryRow]);
     }
 
     public onGridReady() {

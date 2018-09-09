@@ -2,7 +2,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ImageRendererComponent} from './image-renderer.component';
 
-describe('CustomImageRendererComponent', () => {
+describe('ImageRendererComponent', () => {
     let component: ImageRendererComponent;
     let fixture: ComponentFixture<ImageRendererComponent>;
 

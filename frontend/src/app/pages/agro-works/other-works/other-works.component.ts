@@ -3,15 +3,15 @@ import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {MachineService} from '../../../services/machine.service';
 import {PinnedRowRendererComponent} from '../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
-import {PesticidesExpensesModel} from './pesticides-expenses.model';
+import {OtherWorksModel} from './other-works.model';
 
 @Component({
-    selector: 'app-pesticides-expenses',
+    selector: 'app-other-works',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: './pesticides-expenses.component.html',
-    styleUrls: ['./pesticides-expenses.component.scss']
+    templateUrl: './other-works.component.html',
+    styleUrls: ['./other-works.component.scss']
 })
-export class PesticidesExpensesComponent implements OnInit {
+export class OtherWorksComponent implements OnInit {
     options: GridOptions;
     context;
 
@@ -128,7 +128,7 @@ export class PesticidesExpensesComponent implements OnInit {
         let i = 0;
         this.machineService.findAll().subscribe(modelsArray => {
             const rows = modelsArray.map(data => {
-                const model = new PesticidesExpensesModel();
+                const model = new OtherWorksModel();
                 model.date = new Date().toLocaleDateString();
                 model.type = modelsArray[i].type;
                 model.name = modelsArray[i].model;
