@@ -3,15 +3,15 @@ import {ColDef, ColGroupDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {WeatherService} from '../../../services/weather.service';
 import {CustomImageRendererComponent} from '../../../modules/aggrid/custom-image-renderer/custom-image-renderer.component';
-import {SowingExpensesModel} from './sowing-expenses.model';
+import {SowingWorksModel} from './sowing-works.model';
 
 @Component({
-    selector: 'app-sowing-expenses',
+    selector: 'app-sowing-works',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: './sowing-expenses.component.html',
-    styleUrls: ['./sowing-expenses.component.scss']
+    templateUrl: './sowing-works.component.html',
+    styleUrls: ['./sowing-works.component.scss']
 })
-export class SowingExpensesComponent implements OnInit {
+export class SowingWorksComponent implements OnInit {
     options: GridOptions;
     context;
 
@@ -23,7 +23,7 @@ export class SowingExpensesComponent implements OnInit {
     labelUnitOfMeasureLong: string;
     labelArea: string;
     labelParcels: string;
-    labelExpenses: string;
+    labelWorks: string;
     labelConsumed1Ha: string;
     labelConsumedTotal: string;
     labelPriceUnit: string;
@@ -47,7 +47,7 @@ export class SowingExpensesComponent implements OnInit {
         this.langService.get('crop.unit-of-measure-long').subscribe(msg => this.labelUnitOfMeasureLong = msg);
         this.langService.get('parcel.area').subscribe(msg => this.labelArea = msg);
         this.langService.get('parcel.parcels').subscribe(msg => this.labelParcels = msg);
-        this.langService.get('expenses.sowing').subscribe(msg => this.labelExpenses = msg);
+        this.langService.get('works.sowing').subscribe(msg => this.labelWorks = msg);
         this.langService.get('crop.labelConsumed1Ha').subscribe(msg => this.labelConsumed1Ha = msg);
     }
 
@@ -134,7 +134,7 @@ export class SowingExpensesComponent implements OnInit {
                 ]
             },
             {
-                headerName: this.labelExpenses,
+                headerName: this.labelWorks,
                 children: [
                     {
                         headerName: '1 Ha',
@@ -192,7 +192,7 @@ export class SowingExpensesComponent implements OnInit {
     public setupRows() {
         // this.weatherService.findWeatherHistory().subscribe(payloadModel => {
         //     const rows = payloadModel.payload.map(data => {
-        //         const model = new SowingExpensesModel();
+        //         const model = new SowingWorksModel();
         //         model.date = new Date(data.dt).toLocaleDateString();
         //         model.icon = '/assets/img/crops/wheat.png';
         //         model.crop = 'Porumb';

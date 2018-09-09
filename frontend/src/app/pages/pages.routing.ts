@@ -107,6 +107,12 @@ export const routes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
+                path: 'agro-works',
+                loadChildren: 'app/pages/agro-works/agro-works.module#AgroWorksModule',
+                data: {breadcrumb: 'AgroWorks'},
+                canActivate: [AuthGuard]
+            },
+            {
                 path: 'forecasting',
                 loadChildren: 'app/pages/forecast/forecast.module#ForecastModule',
                 data: {breadcrumb: 'Forecasting'},
