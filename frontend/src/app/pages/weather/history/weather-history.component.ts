@@ -114,18 +114,25 @@ export class WeatherHistoryComponent implements OnInit {
 
 
     public setupRows() {
-        this.weatherService.findWeatherHistory().subscribe(payloadModel => {
-            const rows = payloadModel.payload.map(data => {
-                const model = new WeatherHistoryModel();
-                model.date = new Date(data.dt).toLocaleDateString();
-                model.icon = '/assets/img/notifications/weather-rain-alert.png';
-                model.temperature = data.tempMax + '\u00B0C / ' + data.tempMin + '\u00B0C';
-                model.condition = data.main; //TODO de tradus din resurse, de exemplu: clouds, rain
-                model.location = 'Nisporeni';
-                model.humidity = data.humidity + ' %';
-                model.wind = data.windSpeed + ' km/h NW';
-                return model;
-            });
+        let locationId = 617077;
+        let dateTo = new Date();
+        let dateFrom = dateTo.setHours(dateTo.getHours() - 72);
+        this.weatherService.findWeatherHistory(locationId, dateFrom, dateFrom).subscribe(payloadModel => {
+
+            if (payloadModel.status == 'success') {
+                const rows = payloadModel.payload.map(data => {
+                    debugger;
+                    const model = new WeatherHistoryModel();
+                    model.date = new Date(data.dt).toLocaleDateString();
+                    model.icon = '/assets/img/notifications/weather-rain-alert.png';
+                    model.temperature = data.tempMax + '\u00B0C / ' + data.tempMin + '\u00B0C';
+                    model.condition = data.main; //TODO de tradus din resurse, de exemplu: clouds, rain
+                    model.location = 'Nisporeni';
+                    model.humidity = data.humidity + ' %';
+                    model.wind = data.windSpeed + ' km/h NW';
+                    return model;
+                });
+            }
             this.options.api.setRowData(rows);
         });
     }

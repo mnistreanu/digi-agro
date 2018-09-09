@@ -6,6 +6,7 @@ package com.arobs.weather.entity;
 public class WeatherHistoryModel {
 	private Long id;
 	private Integer openweatherId;
+	private Integer locationId;
 	private Long parcelId;
 	private Long dayTimestamp;
 	private Double day;

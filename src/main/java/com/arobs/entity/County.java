@@ -59,4 +59,5 @@ public class County {
     public void setNameRu(String nameRu) {
         this.nameRu = nameRu;
     }
+
 }
