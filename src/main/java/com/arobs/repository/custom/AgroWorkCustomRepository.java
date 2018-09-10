@@ -1,6 +1,6 @@
 package com.arobs.repository.custom;
 
-import com.arobs.entity.ParcelCropWork;
+import com.arobs.entity.AgroWork;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -8,22 +8,21 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 @Repository
-@Deprecated
-public class ParcelCropWorkCustomRepository {
+public class AgroWorkCustomRepository {
 
     @PersistenceContext
     private EntityManager em;
 
 
-    public ParcelCropWork findLast(Long parcelCropId) {
+    public AgroWork findLast(Long parcelCropId) {
 
-        String hql = "SELECT pcw FROM ParcelCropWork pcw " +
-                "WHERE pcw.parcelCropId = :parcelCropId " +
-                "ORDER BY pcw.createdAt DESC ";
+        String hql = "SELECT aw FROM AgroWork aw " +
+                "WHERE aw.parcelCropId = :parcelCropId " +
+                "ORDER BY aw.workDate DESC ";
 
-        ParcelCropWork entity = null;
+        AgroWork entity = null;
         try {
-            entity = (ParcelCropWork) em.createQuery(hql)
+            entity = (AgroWork) em.createQuery(hql)
                     .setParameter("parcelCropId", parcelCropId)
                     .setMaxResults(1)
                     .getSingleResult();

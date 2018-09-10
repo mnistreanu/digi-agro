@@ -4,6 +4,7 @@ import {LangService} from '../../../services/lang.service';
 import {MachineService} from '../../../services/machine.service';
 import {PinnedRowRendererComponent} from '../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
 import {OtherWorksModel} from './other-works.model';
+import {AgroWorksService} from "../../../services/agro-works.service";
 
 @Component({
     selector: 'app-other-works',
@@ -22,13 +23,14 @@ export class OtherWorksComponent implements OnInit {
     labelResult: string;
     labelComments: string;
 
-    constructor(private machineService: MachineService, private langService: LangService) {
+    constructor(private agroWorksService: AgroWorksService, private langService: LangService) {
 
     }
 
     ngOnInit() {
         this.setupLabels();
         this.setupGrid();
+        this.setupTreeData();
     }
 
     private setupLabels() {
@@ -53,14 +55,14 @@ export class OtherWorksComponent implements OnInit {
 
         this.context = {componentParent: this};
 
-        this.setupRows();
+//        this.setupRows();
     }
 
     private setupHeaders() {
 
         const headers: ColDef[] = [
             {
-                headerName: this.labelDate,
+                headerName: 'Denumirea lucrarilor', // this.labelDate,
                 field: 'date',
                 width: 90,
                 minWidth: 90,
@@ -69,78 +71,87 @@ export class OtherWorksComponent implements OnInit {
                 pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } }
             },
             {
-                headerName: this.labelName,
+                headerName: 'Un.mas.', //this.labelName,
                 field: 'name',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: this.labelType,
+                headerName: 'Cantitatea', //this.labelType,
                 field: 'type',
                 width: 60,
                 minWidth: 60,
                 suppressFilter: true,
             },
-            {
-                headerName: this.labelPhase,
-                field: 'phase',
-                width: 140,
-                minWidth: 140,
-                suppressFilter: true,
-            },
-            {
-                headerName: this.labelResult,
-//                headerTooltip: this.labelUnitOfMeasureLong,
-                field: 'result',
-                width: 60,
-                minWidth: 60,
-                suppressFilter: true,
-            },
-            {
-                headerName: this.labelComments,
-//                headerTooltip: this.labelUnitOfMeasureLong,
-                field: 'comments',
-                width: 60,
-                minWidth: 60,
-                suppressFilter: true,
-            },
-            {
-                headerName: 'Registered By',
-                field: '',
-                width: 100,
-                minWidth: 100,
-            },
-            {
-                headerName: 'At',
-                field: '',
-                width: 60,
-                minWidth: 60,
-            },
-
         ];
 
 
         return headers;
     }
 
+    //
+    // public setupRows() {
+    //     let i = 0;
+    //     this.machineService.findAll().subscribe(modelsArray => {
+    //         const rows = modelsArray.map(data => {
+    //             const model = new OtherWorksModel();
+    //             model.date = new Date().toLocaleDateString();
+    //             model.type = modelsArray[i].type;
+    //             model.name = modelsArray[i].model;
+    //             model.phase = modelsArray[i].identifier;
+    //             model.result = 'Pozitiv';
+    //             model.comments = 'Managerul ( brigadiri, agronomul) efectueaza evidenta in jurnalul personal zilnic + complecteaza un blanc pentru raport; (de obicei complecteaza contabilitatea)';
+    //             i++;
+    //             return model;
+    //         });
+    //         this.options.api.setRowData(rows);
+    //         this.setupSummaryRow(rows);
+    //     });
+    // }
 
-    public setupRows() {
-        let i = 0;
-        this.machineService.findAll().subscribe(modelsArray => {
-            const rows = modelsArray.map(data => {
-                const model = new OtherWorksModel();
-                model.date = new Date().toLocaleDateString();
-                model.type = modelsArray[i].type;
-                model.name = modelsArray[i].model;
-                model.phase = modelsArray[i].identifier;
-                model.result = 'Pozitiv';
-                model.comments = 'Managerul ( brigadiri, agronomul) efectueaza evidenta in jurnalul personal zilnic + complecteaza un blanc pentru raport; (de obicei complecteaza contabilitatea)';
-                i++;
-                return model;
-            });
-            this.options.api.setRowData(rows);
-            this.setupSummaryRow(rows);
+    private setupTreeData() {
+        this.agroWorksService.findCropsTree().subscribe(payloadModel => {
+            debugger;
+            this.adjustTree(payloadModel.payload);
         });
+    }
+
+    private adjustTree(models: OtherWorksModel[]) {
+
+        const rows = [];
+        const crops = {};
+
+
+        let parent;
+        models.forEach(model => {
+            if (model.cropId != null) {
+                // crop
+                crops[model.id] = model;
+                rows.push(model);
+            } else {
+                // work
+                parent = crops[model.workId];
+                parent.children = parent.children || [];
+                parent.children.push(model);
+            }
+        });
+
+
+        this.options.api.setRowData(rows);
+    }
+    
+
+    private getNodeChildDetails(rowItem) {
+        if (rowItem.children) {
+            return {
+                group: true,
+                expanded: false,
+                children: rowItem.children,
+                key: rowItem.group
+            };
+        } else {
+            return null;
+        }
     }
 
     private setupSummaryRow(rows) {

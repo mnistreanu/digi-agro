@@ -4,7 +4,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Created by mihail.gorgos on 02.09.2018.
+ * Created by mihail.gorgos on 16.08.2018.
+ * Aici se va defini relatie parcela cu cultura agricola si cu lucrarea efetuata.
+ *
+ * Se va folosi tabelul AGRO_WORK
  */
 @Entity
 @Table(name = "agro_work")
@@ -12,26 +15,30 @@ public class AgroWork {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "id")
     private Long id;
 
     @Column(name = "tenant_id")
     private Long tenant;
 
-    @Column(name = "work_date")
-    private Date workDate;
+    @Column(name = "parcel_crop_id")
+    private Long parcelCropId;
 
-    @ManyToOne
-    @JoinColumn(name = "work_type")
+    @ManyToOne (fetch = FetchType.EAGER)
+    @JoinColumn(name = "work_type_id")
     private AgroWorkType workType;
 
     @Column(name = "title")
     private String title;
 
-    @Column(name = "created_by")
-    private Long createdBy;
+    @Column(name = "work_date")
+    private Date workDate;
 
     @Column(name = "created_at")
     private Date createdAt;
+
+    @Column(name = "created_by")
+    private Long createdBy;
 
     public Long getId() {
         return id;
@@ -49,12 +56,12 @@ public class AgroWork {
         this.tenant = tenant;
     }
 
-    public Date getWorkDate() {
-        return workDate;
+    public Long getParcelCropId() {
+        return parcelCropId;
     }
 
-    public void setWorkDate(Date workDate) {
-        this.workDate = workDate;
+    public void setParcelCropId(Long parcelCropId) {
+        this.parcelCropId = parcelCropId;
     }
 
     public AgroWorkType getWorkType() {
@@ -65,12 +72,20 @@ public class AgroWork {
         this.workType = workType;
     }
 
-    public Long getCreatedBy() {
-        return createdBy;
+    public String getTitle() {
+        return title;
     }
 
-    public void setCreatedBy(Long createdBy) {
-        this.createdBy = createdBy;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Date getWorkDate() {
+        return workDate;
+    }
+
+    public void setWorkDate(Date workDate) {
+        this.workDate = workDate;
     }
 
     public Date getCreatedAt() {
@@ -79,5 +94,13 @@ public class AgroWork {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Long getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Long createdBy) {
+        this.createdBy = createdBy;
     }
 }

@@ -15,6 +15,7 @@
                          *ngIf="options"
                          [gridOptions]="options"
                          [context]="context"
+                         [getNodeChildDetails]="getNodeChildDetails"
                          (gridReady)="onGridReady($event)">
         </ag-grid-angular>
 

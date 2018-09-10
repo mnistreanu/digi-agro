@@ -1,4 +1,4 @@
-package com.arobs.service;
+package com.arobs.service.agrowork;
 
 import com.arobs.entity.AgroWorkType;
 import com.arobs.interfaces.HasRepository;
