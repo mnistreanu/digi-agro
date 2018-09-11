@@ -1,11 +1,7 @@
 package com.arobs.model.agrowork;
 
-
-import com.arobs.entity.AgroWorkType;
-import com.arobs.enums.UnitOfMeasure;
-import com.arobs.model.CropModel;
-
 import java.io.Serializable;
+import java.util.List;
 
 public class OtherWorksModel implements Serializable {
 
@@ -28,6 +24,7 @@ public class OtherWorksModel implements Serializable {
     private String workTypeNameRo;
     private String workTypeNameRu;
 
+    private List<OtherWorksModel> children;
 
     public OtherWorksModel() {
     }
@@ -110,5 +107,13 @@ public class OtherWorksModel implements Serializable {
 
     public void setQuantity(Double quantity) {
         this.quantity = quantity;
+    }
+
+    public List<OtherWorksModel> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<OtherWorksModel> children) {
+        this.children = children;
     }
 }

@@ -1,10 +1,20 @@
 export class OtherWorksModel {
-  parcelCropId: number;
-  cropId: number;
-  cropName:string;
-  workType: string;
-  unitOfMeasure: string;
-  quantity: number;
 
-  children: OtherWorksModel[];
+    id: number;
+
+    parcelCropId: number;
+    unitOfMeasure: string;
+    quantity: number;
+
+    cropId: number;
+    cropNameRo: string;
+    cropNameRu: string;
+    cropName: string;
+
+    workTypeId: number;
+    workTypeNameRo: string;
+    workTypeNameRu: string;
+    workTypeName: string;
+
+    children: OtherWorksModel[];
 }

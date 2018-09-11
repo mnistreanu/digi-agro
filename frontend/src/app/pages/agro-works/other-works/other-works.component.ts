@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
-import {MachineService} from '../../../services/machine.service';
 import {PinnedRowRendererComponent} from '../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
 import {OtherWorksModel} from './other-works.model';
-import {AgroWorksService} from "../../../services/agro-works.service";
+import {AgroWorksService} from '../../../services/agro-works.service';
+import {FieldMapper} from '../../../common/field.mapper';
 
 @Component({
     selector: 'app-other-works',
@@ -23,7 +23,8 @@ export class OtherWorksComponent implements OnInit {
     labelResult: string;
     labelComments: string;
 
-    constructor(private agroWorksService: AgroWorksService, private langService: LangService) {
+    constructor(private agroWorksService: AgroWorksService,
+                private langService: LangService) {
 
     }
 
@@ -42,7 +43,6 @@ export class OtherWorksComponent implements OnInit {
         this.langService.get('pesticides.comments').subscribe(msg => this.labelComments = msg);
     }
 
-
     private setupGrid() {
         this.options = <GridOptions>{};
 
@@ -54,104 +54,89 @@ export class OtherWorksComponent implements OnInit {
         this.options.frameworkComponents = { customPinnedRowRenderer: PinnedRowRendererComponent };
 
         this.context = {componentParent: this};
-
-//        this.setupRows();
     }
 
     private setupHeaders() {
 
         const headers: ColDef[] = [
             {
-                headerName: 'Denumirea lucrarilor', // this.labelDate,
-                field: 'date',
+                headerName: 'Denumirea lucrarilor',
+                field: 'workTypeName',
                 width: 90,
                 minWidth: 90,
-                suppressFilter: true,
-                pinnedRowCellRenderer: 'customPinnedRowRenderer',
-                pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } }
+                cellRenderer: 'agGroupCellRenderer',
+                suppressFilter: true
             },
             {
-                headerName: 'Un.mas.', //this.labelName,
-                field: 'name',
+                headerName: 'Un.mas.',
+                field: 'unitOfMeasure',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'Cantitatea', //this.labelType,
-                field: 'type',
+                headerName: 'Cantitatea',
+                field: 'quantity',
                 width: 60,
                 minWidth: 60,
-                suppressFilter: true,
+                suppressFilter: true
             },
         ];
-
 
         return headers;
     }
 
-    //
-    // public setupRows() {
-    //     let i = 0;
-    //     this.machineService.findAll().subscribe(modelsArray => {
-    //         const rows = modelsArray.map(data => {
-    //             const model = new OtherWorksModel();
-    //             model.date = new Date().toLocaleDateString();
-    //             model.type = modelsArray[i].type;
-    //             model.name = modelsArray[i].model;
-    //             model.phase = modelsArray[i].identifier;
-    //             model.result = 'Pozitiv';
-    //             model.comments = 'Managerul ( brigadiri, agronomul) efectueaza evidenta in jurnalul personal zilnic + complecteaza un blanc pentru raport; (de obicei complecteaza contabilitatea)';
-    //             i++;
-    //             return model;
-    //         });
-    //         this.options.api.setRowData(rows);
-    //         this.setupSummaryRow(rows);
-    //     });
-    // }
+
+    /*public setupRows() {
+        let i = 0;
+        this.machineService.findAll().subscribe(modelsArray => {
+            const rows = modelsArray.map(data => {
+                const model = new OtherWorksModel();
+                model.date = new Date().toLocaleDateString();
+                model.type = modelsArray[i].type;
+                model.name = modelsArray[i].model;
+                model.phase = modelsArray[i].identifier;
+                model.result = 'Pozitiv';
+                model.comments = 'Managerul ( brigadiri, agronomul) efectueaza evidenta in jurnalul personal zilnic
+    + complecteaza un blanc pentru raport; (de obicei complecteaza contabilitatea)';
+                i++;
+                return model;
+            });
+            this.options.api.setRowData(rows);
+            this.setupSummaryRow(rows);
+        });
+    }*/
 
     private setupTreeData() {
         this.agroWorksService.findCropsTree().subscribe(payloadModel => {
-            debugger;
-            this.adjustTree(payloadModel.payload);
+            const models = payloadModel.payload;
+            console.log(models);
+            this.adjustModels(models);
+            this.options.api.setRowData(models);
         });
     }
 
-    private adjustTree(models: OtherWorksModel[]) {
-
-        const rows = [];
-        const crops = {};
-
-
-        let parent;
+    private adjustModels(models: OtherWorksModel[]) {
+        const mapper = new FieldMapper(this.langService.getLanguage());
+        const cropName = mapper.get('cropName');
+        const workTypeName = mapper.get('workTypeName');
         models.forEach(model => {
-            if (model.cropId != null) {
-                // crop
-                crops[model.id] = model;
-                rows.push(model);
-            } else {
-                // work
-                parent = crops[model.workId];
-                parent.children = parent.children || [];
-                parent.children.push(model);
-            }
+            model.workTypeName = model[cropName];
+            model.children.forEach(child => {
+                child.workTypeName = child[workTypeName];
+            });
         });
-
-
-        this.options.api.setRowData(rows);
     }
-    
 
-    private getNodeChildDetails(rowItem) {
-        if (rowItem.children) {
-            return {
-                group: true,
-                expanded: false,
-                children: rowItem.children,
-                key: rowItem.group
-            };
-        } else {
+    private getNodeChildDetails(item) {
+        if (!item.children) {
             return null;
         }
+
+        return {
+            group: true,
+            expanded: false,
+            children: item.children
+        };
     }
 
     private setupSummaryRow(rows) {

@@ -1,27 +1,22 @@
 package com.arobs.controller;
 
-import com.arobs.entity.*;
+import com.arobs.entity.AgroWork;
+import com.arobs.entity.AgroWorkType;
+import com.arobs.entity.Crop;
 import com.arobs.enums.UnitOfMeasure;
-import com.arobs.model.CropModel;
-import com.arobs.model.CropVarietyModel;
-import com.arobs.model.ListItemModel;
 import com.arobs.model.PayloadModel;
-import com.arobs.model.agrowork.AgroWorkTypeModel;
 import com.arobs.model.agrowork.OtherWorksModel;
-import com.arobs.service.CropCategoryService;
 import com.arobs.service.CropService;
-import com.arobs.service.CropVarietyService;
 import com.arobs.service.agrowork.AgroWorkService;
 import com.arobs.service.agrowork.AgroWorkTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/agroworks")
@@ -176,11 +171,12 @@ public class AgroWorksController {
         PayloadModel<OtherWorksModel> payloadModel = new PayloadModel<>();
 
         List<Crop> crops = cropService.find(null);
-        for (Crop crop: crops){
+        for (Crop crop : crops) {
             OtherWorksModel parent = new OtherWorksModel();
             parent.setCropId(crop.getId());
             parent.setCropNameRo(crop.getNameRo());
             parent.setCropNameRu(crop.getNameRu());
+            parent.setChildren(new ArrayList<>());
             list.add(parent);
 
             List<AgroWork> agroWorks = agroWorkService.find(crop.getId());
@@ -193,7 +189,7 @@ public class AgroWorksController {
                     child.setWorkTypeNameRu(workType.getNameRu());
                     child.setQuantity(Math.random() * 100);
                     child.setUnitOfMeasure(UnitOfMeasure.Tone.getUnitOfMeasure());
-                    list.add(child);
+                    parent.getChildren().add(child);
                 }
             }
 
@@ -205,7 +201,7 @@ public class AgroWorksController {
                 child.setWorkTypeNameRu(workType.getNameRu());
                 child.setQuantity(Math.random() * 100);
                 child.setUnitOfMeasure(UnitOfMeasure.Tone.getUnitOfMeasure());
-                list.add(child);
+                parent.getChildren().add(child);
             }
         }
 
