@@ -58,32 +58,82 @@ export class OtherWorksComponent implements OnInit {
 
     private setupHeaders() {
 
+        this.options.defaultColDef = {
+            pinnedRowCellRenderer: 'pinnedRowRenderer',
+            pinnedRowCellRendererParams: { style: { fontWeight: 'bold' } } // color: 'blue'
+        };
+
         const headers: ColDef[] = [
             {
                 headerName: 'Denumirea lucrarilor',
                 field: 'workTypeName',
                 width: 90,
                 minWidth: 90,
+                pinned: 'left',
                 cellRenderer: 'agGroupCellRenderer',
-                suppressFilter: true,
-                pinnedRowCellRenderer: 'pinnedRowRenderer',
-                pinnedRowCellRendererParams: { style: { color: 'blue', fontWeight: 'bold' } }
+                suppressFilter: true
             },
             {
                 headerName: 'Un.mas.',
                 field: 'unitOfMeasure',
-                width: 200,
-                minWidth: 200
+                width: 100,
+                minWidth: 100
             },
             {
                 headerName: 'Cantitatea',
                 field: 'quantity',
                 width: 60,
                 minWidth: 60,
-                suppressFilter: true,
-                pinnedRowCellRenderer: 'pinnedRowRenderer',
-                pinnedRowCellRendererParams: { style: { color: 'blue', fontWeight: 'bold' } }
+                suppressFilter: true
             },
+            {
+                headerName: 'a/m',
+                field: 'am',
+                width: 60,
+                minWidth: 60
+            },
+            {
+                headerName: 'n/s',
+                field: 'ns',
+                width: 60,
+                minWidth: 60
+            },
+            {
+                headerName: 'z/m',
+                field: 'zm',
+                width: 60,
+                minWidth: 60
+            },
+            {
+                headerName: 'o/m',
+                field: 'am',
+                width: 60,
+                minWidth: 60
+            },
+            {
+                headerName: 'suma',
+                field: 'suma',
+                width: 60,
+                minWidth: 60
+            },
+            {
+                headerName: 'prod',
+                field: 'prod',
+                width: 60,
+                minWidth: 60
+            },
+            {
+                headerName: 'petrol',
+                field: 'petrol',
+                width: 60,
+                minWidth: 60
+            },
+            {
+                headerName: 'ulei',
+                field: 'ulei',
+                width: 60,
+                minWidth: 60
+            }
         ];
 
         return headers;
@@ -127,6 +177,16 @@ export class OtherWorksComponent implements OnInit {
         models.forEach((model: OtherWorksModel) => {
             model.workTypeName = model[cropName];
             model.children.forEach(child => {
+
+                child.am = Math.random() * 100;
+                child.ns = Math.random() * 100;
+                child.zm = Math.random() * 100;
+                child.om = Math.random() * 100;
+                child.suma = Math.random() * 100;
+                child.prod = Math.random() * 100;
+                child.petrol = Math.random() * 100;
+                child.ulei = Math.random() * 100;
+
                 this.aggregate(model, child);
                 child.workTypeName = child[workTypeName];
             });
@@ -136,6 +196,30 @@ export class OtherWorksComponent implements OnInit {
     private aggregate(source: OtherWorksModel, item: OtherWorksModel) {
         source.quantity = source.quantity || 0;
         source.quantity += item.quantity || 0;
+
+        source.am = source.am || 0;
+        source.am += item.am || 0;
+
+        source.ns = source.ns || 0;
+        source.ns += item.ns || 0;
+
+        source.zm = source.zm || 0;
+        source.zm += item.zm || 0;
+
+        source.om = source.om || 0;
+        source.om += item.om || 0;
+
+        source.suma = source.suma || 0;
+        source.suma += item.suma || 0;
+
+        source.prod = source.prod || 0;
+        source.prod += item.prod || 0;
+
+        source.petrol = source.petrol || 0;
+        source.petrol += item.petrol || 0;
+
+        source.ulei = source.ulei || 0;
+        source.ulei += item.ulei || 0;
     }
 
     private setupSummaryRow(rows) {

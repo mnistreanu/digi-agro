@@ -16,5 +16,15 @@ export class OtherWorksModel {
     workTypeNameRu: string;
     workTypeName: string;
 
+    am: number;
+    ns: number;
+    zm: number;
+    om: number;
+    suma: number;
+    prod: number;
+    petrol: number;
+    ulei: number;
+
+
     children: OtherWorksModel[];
 }
