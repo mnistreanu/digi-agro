@@ -189,7 +189,10 @@
     padding-left: 4px !important;
     padding-right: 0px !important;
   }
-
+}
+// agGroupCellRenderer, parent row - bold
+.ag-row-group-indent-0 .ag-group-value {
+  font-weight: bold;
 }
 //----------------------------------------------------------------------------
 

@@ -65,7 +65,9 @@ export class OtherWorksComponent implements OnInit {
                 width: 90,
                 minWidth: 90,
                 cellRenderer: 'agGroupCellRenderer',
-                suppressFilter: true
+                suppressFilter: true,
+                pinnedRowCellRenderer: 'pinnedRowRenderer',
+                pinnedRowCellRendererParams: { style: { color: 'blue', fontWeight: 'bold' } }
             },
             {
                 headerName: 'Un.mas.',
@@ -122,22 +124,26 @@ export class OtherWorksComponent implements OnInit {
         const mapper = new FieldMapper(this.langService.getLanguage());
         const cropName = mapper.get('cropName');
         const workTypeName = mapper.get('workTypeName');
-        models.forEach(model => {
+        models.forEach((model: OtherWorksModel) => {
             model.workTypeName = model[cropName];
             model.children.forEach(child => {
+                this.aggregate(model, child);
                 child.workTypeName = child[workTypeName];
             });
         });
     }
 
+    private aggregate(source: OtherWorksModel, item: OtherWorksModel) {
+        source.quantity = source.quantity || 0;
+        source.quantity += item.quantity || 0;
+    }
+
     private setupSummaryRow(rows) {
-        const summaryRow = {
-            workTypeName: 'TOTAL',
-            quantity: 0
-        };
+        const summaryRow = new OtherWorksModel();
+        summaryRow.workTypeName = 'TOTAL';
         rows.forEach(row => {
             row.children.forEach(child => {
-                summaryRow.quantity += child.quantity || 0;
+                this.aggregate(summaryRow, child);
             });
         });
         this.options.api.setPinnedBottomRowData([summaryRow]);
