@@ -51,7 +51,7 @@ export class OtherWorksComponent implements OnInit {
         this.options.enableFilter = true;
         this.options.rowSelection = 'single';
         this.options.columnDefs = this.setupHeaders();
-        this.options.frameworkComponents = { customPinnedRowRenderer: PinnedRowRendererComponent };
+        this.options.frameworkComponents = { pinnedRowRenderer: PinnedRowRendererComponent };
 
         this.context = {componentParent: this};
     }
@@ -78,7 +78,9 @@ export class OtherWorksComponent implements OnInit {
                 field: 'quantity',
                 width: 60,
                 minWidth: 60,
-                suppressFilter: true
+                suppressFilter: true,
+                pinnedRowCellRenderer: 'pinnedRowRenderer',
+                pinnedRowCellRendererParams: { style: { color: 'blue', fontWeight: 'bold' } }
             },
         ];
 
@@ -112,6 +114,7 @@ export class OtherWorksComponent implements OnInit {
             console.log(models);
             this.adjustModels(models);
             this.options.api.setRowData(models);
+            this.setupSummaryRow(models);
         });
     }
 
@@ -127,6 +130,19 @@ export class OtherWorksComponent implements OnInit {
         });
     }
 
+    private setupSummaryRow(rows) {
+        const summaryRow = {
+            workTypeName: 'TOTAL',
+            quantity: 0
+        };
+        rows.forEach(row => {
+            row.children.forEach(child => {
+                summaryRow.quantity += child.quantity || 0;
+            });
+        });
+        this.options.api.setPinnedBottomRowData([summaryRow]);
+    }
+
     private getNodeChildDetails(item) {
         if (!item.children) {
             return null;
@@ -137,17 +153,6 @@ export class OtherWorksComponent implements OnInit {
             expanded: false,
             children: item.children
         };
-    }
-
-    private setupSummaryRow(rows) {
-        const summaryRow = {
-            date: 'TOTAL',
-            diesel: 0
-        };
-        rows.forEach(source => {
-            summaryRow.diesel += source.diesel || 0;
-        });
-        this.options.api.setPinnedBottomRowData([summaryRow]);
     }
 
     public onGridReady() {
