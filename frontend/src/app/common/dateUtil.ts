@@ -2,6 +2,11 @@ import {DatePipe} from '@angular/common';
 
 export class DateUtil {
 
+    public static formatDateDB(date: Date): string {
+        const datePipe = new DatePipe('en-US');
+        return datePipe.transform(date, 'yyyyMMdd');
+    }
+
     public static formatDateWithTime(date: Date): string {
         const datePipe = new DatePipe('en-US');
         return datePipe.transform(date, 'dd/MM/yyyy hh:mm');

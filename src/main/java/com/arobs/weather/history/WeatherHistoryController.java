@@ -30,6 +30,7 @@ public class WeatherHistoryController {
      * @return lista de istorii
      */
     @RequestMapping(value = "/histories", method = RequestMethod.GET)
+    @Deprecated
     public ResponseEntity<PayloadModel<WeatherHistoryModel>> getWeatherHistories() {
         PayloadModel<WeatherHistoryModel> payloadModel = new PayloadModel<>();
 
@@ -57,6 +58,7 @@ public class WeatherHistoryController {
      * @return lista de istorii
      */
     @RequestMapping(value = "/history_location/{locationId}", method = RequestMethod.GET)
+    @Deprecated
     public ResponseEntity<PayloadModel<WeatherHistoryModel>> getWeatherHistoryByLocation(@PathVariable("locationId") Integer locationId) {
         PayloadModel<WeatherHistoryModel> payloadModel = new PayloadModel<>();
 

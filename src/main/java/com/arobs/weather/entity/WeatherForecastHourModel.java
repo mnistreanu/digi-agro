@@ -8,7 +8,7 @@ public class WeatherForecastHourModel {
     private String code;
     private Double message;
     private Integer cnt;
-    private List<ForecastHourItem> forecastItems = new ArrayList<>();
+    private List<ForecastHourItemModel> forecastItems = new ArrayList<>();
     private Integer cityId;
     private String name;
     private String countryCode;
@@ -16,6 +16,20 @@ public class WeatherForecastHourModel {
     private Double lat;
 
     public WeatherForecastHourModel(WeatherForecastHour weatherForecastHour) {
+        this.id = weatherForecastHour.getId();
+        this.code = weatherForecastHour.getCode();
+        this.message = weatherForecastHour.getMessage();
+        this.cnt = weatherForecastHour.getCnt();
+        List<ForecastHourItemModel> forecastItems = new ArrayList<>();
+        for (ForecastHourItem forecastHourItem : weatherForecastHour.getForecastItems()) {
+        	forecastItems .add(new ForecastHourItemModel(forecastHourItem));
+        }
+        this.forecastItems = forecastItems;
+        this.cityId = weatherForecastHour.getCityId();
+        this.name = weatherForecastHour.getName();
+        this.countryCode = weatherForecastHour.getCountryCode();
+        this.lon = weatherForecastHour.getLon();
+        this.lat = weatherForecastHour.getLat();
     	
     }
     
@@ -51,11 +65,11 @@ public class WeatherForecastHourModel {
 		this.cnt = cnt;
 	}
 
-	public List<ForecastHourItem> getForecastItems() {
+	public List<ForecastHourItemModel> getForecastItems() {
 		return forecastItems;
 	}
 
-	public void setForecastItems(List<ForecastHourItem> forecastItems) {
+	public void setForecastItems(List<ForecastHourItemModel> forecastItems) {
 		this.forecastItems = forecastItems;
 	}
 

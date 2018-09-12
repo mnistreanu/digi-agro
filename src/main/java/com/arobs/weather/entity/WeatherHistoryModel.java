@@ -6,6 +6,7 @@ package com.arobs.weather.entity;
 public class WeatherHistoryModel {
 	private Long id;
 	private Integer openweatherId;
+	private String countyId;
 	private Long parcelId;
 	private Long dayTimestamp;
 	private Double day;
@@ -31,6 +32,7 @@ public class WeatherHistoryModel {
 		super();
 		this.id = weatherHistory.getId();
 		this.openweatherId = weatherHistory.getOpenweatherId();
+		this.countyId = "NS"; // TODO
 		this.parcelId = weatherHistory.getParcelId();
 		this.dayTimestamp = weatherHistory.getDayTimestamp();
 		this.day = weatherHistory.getDay();

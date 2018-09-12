@@ -1,0 +1,50 @@
+// fullscreen button
+.gm-fullscreen-control {
+  margin: 0 !important;
+
+  width: 30px !important;
+  height: 30px !important;
+
+  img {
+    margin: 7px !important;
+  }
+}
+
+// for map type and zoom
+.gmnoprint {
+  margin: 0 !important;
+}
+
+// zoom buttons
+.gm-bundled-control.gm-bundled-control-on-bottom {
+  right: 30px !important;
+
+  .gmnoprint > div {
+    width: 30px !important;
+    height: 60px !important;
+  }
+
+  button {
+    width: 30px !important;
+    height: 30px !important;
+
+    img {
+      margin: 6px 7px !important;
+    }
+  }
+}
+
+.gm-style-mtc {
+  div:first-child  {
+    height: 25px !important;
+    padding: 0 5px !important;
+  }
+  div:last-child {
+    // object names, relief
+    display: none !important;
+  }
+}
+
+.gm-svpc {
+  display: none !important;
+}

@@ -1,6 +1,5 @@
 package com.arobs.weather.snapshot;
 
-import com.arobs.weather.WeatherUtils;
 import com.arobs.weather.entity.PayloadModel;
 import com.arobs.weather.entity.WeatherSnapshot;
 import com.arobs.weather.entity.WeatherSnapshotModel;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
