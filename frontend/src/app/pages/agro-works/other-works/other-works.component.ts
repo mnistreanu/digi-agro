@@ -177,15 +177,15 @@ export class OtherWorksComponent implements OnInit {
         models.forEach((model: OtherWorksModel) => {
             model.workTypeName = model[cropName];
             model.children.forEach(child => {
-
-                child.am = Math.random() * 100;
-                child.ns = Math.random() * 100;
-                child.zm = Math.random() * 100;
-                child.om = Math.random() * 100;
-                child.suma = Math.random() * 100;
-                child.prod = Math.random() * 100;
-                child.petrol = Math.random() * 100;
-                child.ulei = Math.random() * 100;
+                child.quantity = Math.round(child.quantity);
+                child.am = Math.round(Math.random() * 100);
+                child.ns = Math.round(Math.random() * 100);
+                child.zm = Math.round(Math.random() * 100);
+                child.om = Math.round(Math.random() * 100);
+                child.suma = Math.round(Math.random() * 100);
+                child.prod = Math.round(Math.random() * 100);
+                child.petrol = Math.round(Math.random() * 100);
+                child.ulei = Math.round(Math.random() * 100);
 
                 this.aggregate(model, child);
                 child.workTypeName = child[workTypeName];
