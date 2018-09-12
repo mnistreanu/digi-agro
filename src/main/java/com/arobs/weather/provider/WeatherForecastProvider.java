@@ -47,7 +47,7 @@ public class WeatherForecastProvider implements HasRepository<WeatherLocationRep
     @Autowired
     private WeatherForecastDailyRepository forecastDailyRepository;
     
-	public void synchronizeWeatherForecastsHour() {
+	public int synchronizeWeatherForecastsHour() {
 		List<WeatherLocation> locations = weatherLocationRepository.findAll();
 		List<WeatherForecastHour> weatherForecastsHour = new ArrayList<>();
 		for (WeatherLocation location : locations) {
@@ -58,13 +58,13 @@ public class WeatherForecastProvider implements HasRepository<WeatherLocationRep
 				item.setForecastHour(weatherForecastHour);
 			}
 			weatherForecastsHour.add(weatherForecastHour);
-			break; //TODO de eliminat
 		}
 		forecastHourRepository.save(weatherForecastsHour);
 		logger.debug("Au fost inscrise in BD {} articole", weatherForecastsHour.size());
+		return weatherForecastsHour.size();
 	}
 
-	public void synchronizeWeatherForecastsDaily() {
+	public int synchronizeWeatherForecastsDaily() {
 		List<WeatherLocation> locations = weatherLocationRepository.findAll();
 		List<WeatherForecastDaily> weatherForecastsDaily = new ArrayList<>();
 		for (WeatherLocation location : locations) {
@@ -82,6 +82,7 @@ public class WeatherForecastProvider implements HasRepository<WeatherLocationRep
 		}
 		forecastDailyRepository.save(weatherForecastsDaily);
 		logger.debug("Au fost inscrise in BD {} articole", weatherForecastsDaily.size());
+		return weatherForecastsDaily.size();
 	}
 
     public List<WeatherLocation> find(String countyCode, String name) {

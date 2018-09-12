@@ -22,7 +22,7 @@ public class WeatherForecastDailyRepositoryImpl implements WeatherForecastDailyR
 
 	@Override
     @Transactional
-	public int insertFromForecastHour(Date referenceDate) {
+	public int synchronizeForecastHourDaily(Date referenceDate) {
 		Calendar referenceCalendar = Calendar.getInstance();
 		referenceCalendar.setTime(referenceDate);
 		Calendar calendar = Calendar.getInstance();

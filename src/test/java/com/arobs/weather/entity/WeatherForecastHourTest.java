@@ -48,8 +48,8 @@ public class WeatherForecastHourTest {
 	public void testInsertFromForecastHour() {
 		@SuppressWarnings("deprecation")
 		Date referenceDate = new Date(2018 - 1900, 8 - 1, 21);
-		int list = weatherForecastDailyRepository.insertFromForecastHour(referenceDate);
-		logger.debug("Articole citite: {}", list);
+		int list = weatherForecastDailyRepository.synchronizeForecastHourDaily(referenceDate);
+		logger.debug("Articole iinserate: {}", list);
 	}
 	
 }

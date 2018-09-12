@@ -5,9 +5,8 @@ import java.util.Date;
 public interface WeatherForecastDailyRepositoryCustom {
 
 	/**
-	 * Transfera observatiile meteo de pe data specificata din Snapshot in History. 
-	 * @param referenceDate - data specificata
+	 * Agregheaza previziunile meteo si le transfera din Forecast 5/3 in Forecast 16/1. 
 	 * @return numarul de articole transferate.
 	 */
-	int insertFromForecastHour(Date referenceDate);
+	int synchronizeForecastHourDaily(Date referenceDate);
 }

@@ -45,7 +45,7 @@ public class WeatherSnapshotProvider implements HasRepository<WeatherSnapshotRep
 	/**
 	 * Pentru fiecare localitate din tabelul "location" executa operatiile:
 	 * <ol> 
-	 * <li>Citeste de pe Open Weather info curenta om format JSON.</li>
+	 * <li>Citeste de pe Open Weather info meteo curenta (Snapshot) dupa ID-ul localitatii in format JSON.</li>
 	 * <li>Transforma JSON in instanta Entity.</li>
 	 * <li>Inscrie toate instantele in BD.</li>
 	 * </ol>
