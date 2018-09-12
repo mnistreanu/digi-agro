@@ -46,7 +46,7 @@ public class WeatherSnapshot {
     @Column(name="source_id")
     @DTOTransient
     private Integer sourceId;
-    @Column(name="county_id")
+    @Column(name="county")
 	@DTOTransient
     private String countyId;
     

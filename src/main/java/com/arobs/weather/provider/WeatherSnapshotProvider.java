@@ -60,6 +60,7 @@ public class WeatherSnapshotProvider implements HasRepository<WeatherSnapshotRep
 			WeatherSnapshotJson weatherSnapshotJson = restConnector.getForObject(url, WeatherSnapshotJson.class);
 			WeatherSnapshot weatherSnapshot = binder.bindFromBusinessObject(WeatherSnapshot.class, weatherSnapshotJson);
 			weatherSnapshot.setDayTimestamp(dayTimestamp);
+			weatherSnapshot.setCountyId(location.getCountyCode());
 			weatherSnapshots.add(weatherSnapshot);
 		}
 		weatherSnapshotRepository.save(weatherSnapshots);
@@ -68,12 +69,15 @@ public class WeatherSnapshotProvider implements HasRepository<WeatherSnapshotRep
 	}
 
 	public int synchronizeWeatherSnapshotsByCoord() {
+    	long dayTimestamp = WeatherUtils.getUnixTime();
 		List<WeatherLocation> locations = weatherLocationRepository.findAll();
 		List<WeatherSnapshot> weatherSnapshots = new ArrayList<>();
 		for (WeatherLocation location : locations) {
 			String url = String.format(weatherSnapshotCoordUrl, location.getLat(), location.getLon(), weatherSnapshotAppid);
 			WeatherSnapshotJson weatherSnapshotJson = restConnector.getForObject(url, WeatherSnapshotJson.class);
 			WeatherSnapshot weatherSnapshot = binder.bindFromBusinessObject(WeatherSnapshot.class, weatherSnapshotJson);
+			weatherSnapshot.setDayTimestamp(dayTimestamp);
+			weatherSnapshot.setCountyId(location.getCountyCode());
 			weatherSnapshots.add(weatherSnapshot);
 		}
 		weatherSnapshotRepository.save(weatherSnapshots);

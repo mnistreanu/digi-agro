@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.arobs.weather.history.WeatherHistoryRepository;
 import com.arobs.weather.provider.WeatherForecastProvider;
 import com.arobs.weather.provider.WeatherLocationProvider;
 import com.arobs.weather.provider.WeatherSnapshotProvider;
@@ -26,6 +27,9 @@ public class ApplicationTests {
 
 	@Autowired
 	private WeatherForecastProvider weatherForecastProvider;
+	
+	@Autowired
+	private WeatherHistoryRepository weatherHistoryRepository;
 
 	@Test
 	public void testWeatherLocationService() {
@@ -54,5 +58,12 @@ public class ApplicationTests {
 	@Rollback(false)
 	public void testSynchronizWeatherForecastsDaily() throws IOException {
 		weatherForecastProvider.synchronizeWeatherForecastsDaily();
+	}
+
+	@Test
+	@Rollback(false)
+	public void testSynchronizeWeatherHistory() {
+		int insertedItems = weatherHistoryRepository.synchronizeWeatherHistory();
+		assertNotNull(insertedItems > 0);
 	}
 }
