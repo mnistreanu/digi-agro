@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Constants} from '../common/constants';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import {ForecastModel} from '../pages/forecast/forecast.model';
-import { environment } from '../../environments/environment';
-import {PayloadModel} from "../pages/payload.model";
+import {environment} from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'

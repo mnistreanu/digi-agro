@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 import {ErrorService} from '../../services/error.service';
 import {Constants} from '../../common/constants';
@@ -8,7 +8,7 @@ import {Constants} from '../../common/constants';
     encapsulation: ViewEncapsulation.None,
     templateUrl: './error.component.html'
 })
-export class ErrorComponent implements OnInit {
+export class ErrorComponent implements OnInit, AfterViewInit {
 
     error: Error = null;
 
@@ -24,4 +24,7 @@ export class ErrorComponent implements OnInit {
         this.errorService.clearError();
     }
 
+    ngAfterViewInit(): void {
+        document.getElementById('pre-loader').style['display'] = 'none';
+    }
 }

@@ -194,32 +194,13 @@ export class OtherWorksComponent implements OnInit {
     }
 
     private aggregate(source: OtherWorksModel, item: OtherWorksModel) {
-        source.quantity = source.quantity || 0;
-        source.quantity += item.quantity || 0;
 
-        source.am = source.am || 0;
-        source.am += item.am || 0;
+        const sumFields = ['quantity', 'am', 'ns', 'zm', 'om', 'suma', 'prod', 'petrol', 'ulei'];
 
-        source.ns = source.ns || 0;
-        source.ns += item.ns || 0;
-
-        source.zm = source.zm || 0;
-        source.zm += item.zm || 0;
-
-        source.om = source.om || 0;
-        source.om += item.om || 0;
-
-        source.suma = source.suma || 0;
-        source.suma += item.suma || 0;
-
-        source.prod = source.prod || 0;
-        source.prod += item.prod || 0;
-
-        source.petrol = source.petrol || 0;
-        source.petrol += item.petrol || 0;
-
-        source.ulei = source.ulei || 0;
-        source.ulei += item.ulei || 0;
+        sumFields.forEach(field => {
+            source[field] = source[field] || 0;
+            source[field] += item[field] || 0;
+        });
     }
 
     private setupSummaryRow(rows) {
