@@ -7,6 +7,15 @@
 		"remove": "Remove",
 		"save": "Save"
 	},
+	"agro-work": {
+		"date": "Date",
+		"defacto": "De facto",
+		"norm": "Norm",
+		"price-1-norm": "Price per 1 / norm",
+		"quantity": "Quantity",
+		"sum": "Sum",
+		"type": "Type of work"
+	},
 	"auth": {
 		"login": "Login",
 		"logout": "Logout"
@@ -26,20 +35,19 @@
 		"name": "Agricultural crop",
 		"planting-date": "Planting date",
 		"seeds": "Seeds",
-		"unit-of-measure-short": "Unit",
 		"unit-of-measure-long": "Unit of measure",
+		"unit-of-measure-short": "Unit",
 		"variety": "Variety"
 	},
 	"crop-variety": {
-		"crop-varieties": "Crop Varieties",
 		"crop": "Crop",
-		"name-ro": "Name Ro",
-		"name-ru": "Name Ru",
+		"crop-varieties": "Crop Varieties",
 		"description-ro": "Description Ro",
 		"description-ru": "Description Ru",
+		"name-ro": "Name Ro",
+		"name-ru": "Name Ru",
 		"seed-consumption-ha": "Seed Consumption Ha",
 		"unit-of-measure": "Unit of Measure"
-
 	},
 	"employee": {
 		"employee": "Employee",
@@ -56,8 +64,8 @@
 		"agricultural-works": "Expenses for agricultural works",
 		"fertilizers": "Expenses for fertilizers",
 		"fuel": "Expenses for fuel",
-		"sowing": "Expenses for sowing",
-		"pesticides": "Expenses for pesticides"
+		"pesticides": "Expenses for pesticides",
+		"sowing": "Expenses for sowing"
 	},
 	"forecast": {
 		"additional_info": "Additional information",
@@ -136,34 +144,35 @@
 		"TRACTOR": "Tractor"
 	},
 	"nav": {
-		"expenses-management": "Expenses management",
+		"agricultural-machinery": "Agricultural machinery",
 		"agricultural-works": "Agricultural works",
-		"other-agricultural-works": "Agricultural works",
 		"branches": "Branches",
 		"brands": "Brands",
 		"costs-forecasting": "Costs forecasting",
 		"costs-forecasting-form": "Costs forecasting FORM",
+		"crop-varieties": "Crop Varieties",
 		"crops": "Crops",
 		"crops-varieties": "Crops & Varieties",
-		"crop-varieties": "Crop Varieties",
 		"dashboard": "Dashboard",
 		"employees": "Employees",
+		"expenses-management": "Expenses management",
 		"fertilizers": "Fertilizers",
-		"pesticides": "Pesticides",
 		"forecast-list": "List",
 		"forecasting-charts": "Forecasting charts",
 		"forecasts": "Forecasts",
 		"fuel": "Fuel",
+		"harvesting": "Harvesting",
 		"harvesting-forecasting": "Harvesting forecasting",
 		"harvesting-forecasting-factor": "Harvesting forecasting FACTOR",
 		"harvesting-forecasting-form": "Harvesting forecasting FORM",
 		"machines": "Machines",
 		"notifications": "Notifications",
 		"notifications-and-alerts": "Notifications and alerts",
+		"other-agricultural-works": "Agricultural works",
 		"owners": "Owners",
 		"parcels": "Parcels",
+		"pesticides": "Pesticides",
 		"sowing": "Sowing",
-		"harvesting": "Harvesting",
 		"tasks": "Tasks",
 		"telemetry": "Telemetry",
 		"tenants": "Tenants",
@@ -172,8 +181,7 @@
 		"weather": "Weather",
 		"weather-forecast": "Weather forecast",
 		"weather-history": "Weather history",
-		"work-agenda": "Work agenda",
-		"agricultural-machinery": "Agricultural machinery"
+		"work-agenda": "Work agenda"
 	},
 	"notification": {
 		"mark-all-as-read": "Mark All as Read",

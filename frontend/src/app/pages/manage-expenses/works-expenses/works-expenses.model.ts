@@ -1,9 +1,14 @@
 export class WorksExpensesModel {
   date: string;
-  type: string;
+  workType: string;
+  crop: string;
+  unitOfMeasure: string;
+  quantity: number;
+  quantityNorm: number;
+  quantityDefacto: number;
+  price1Norm: string;
+  sum: number;
   brandModel: string;
   identifier: string;
   employee: string;
-  sparePart: string;
-  sparePartPrice: number;
 }
