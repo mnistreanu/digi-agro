@@ -6,7 +6,7 @@ import com.arobs.entity.Crop;
 import com.arobs.enums.UnitOfMeasure;
 import com.arobs.model.PayloadModel;
 import com.arobs.model.agrowork.OtherWorksModel;
-import com.arobs.service.CropService;
+import com.arobs.service.crop.CropService;
 import com.arobs.service.agrowork.AgroWorkService;
 import com.arobs.service.agrowork.AgroWorkTypeService;
 import org.springframework.beans.factory.annotation.Autowired;

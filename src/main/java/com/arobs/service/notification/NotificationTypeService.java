@@ -1,4 +1,4 @@
-package com.arobs.service;
+package com.arobs.service.notification;
 
 import com.arobs.entity.NotificationType;
 import com.arobs.interfaces.HasRepository;

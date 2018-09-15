@@ -3,10 +3,9 @@ package com.arobs.controller;
 import com.arobs.entity.Notification;
 import com.arobs.model.notification.NotificationModel;
 import com.arobs.service.AuthService;
-import com.arobs.service.NotificationService;
+import com.arobs.service.notification.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;

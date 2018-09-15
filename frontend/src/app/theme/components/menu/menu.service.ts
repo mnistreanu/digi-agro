@@ -147,7 +147,7 @@ export class MenuService {
             menuItems.push({
                 title: 'nav.crops',
                 routerLink: 'manage-crops',
-                icon: 'fas fa-leaf',
+                icon: 'fa fa-leaf',
                 selected: false,
                 expanded: false,
                 subMenu: [
@@ -166,7 +166,30 @@ export class MenuService {
                 ]
             });
         }
-        
+
+        if (isSuperAdmin || isAdmin) {
+            menuItems.push({
+                title: 'nav.chemicals-and-pests',
+                routerLink: 'chemicals-pests',
+                icon: 'fa fa-flask',
+                selected: false,
+                expanded: false,
+                subMenu: [
+                    {
+                        title: 'nav.pesticides',
+                        routerLink: 'chemicals-pests/pesticides'
+                    },
+                    {
+                        title: 'nav.fertilizers',
+                        routerLink: 'chemicals-pests/fertilizers'
+                    },
+                    {
+                        title: 'nav.harmful-organisms',
+                        routerLink: 'chemicals-pests/harmful-organisms'
+                    }
+                ]
+            });
+        }
 
         if (isAdmin || isUser) {
             menuItems.push({

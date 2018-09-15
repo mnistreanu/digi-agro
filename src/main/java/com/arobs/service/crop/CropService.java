@@ -1,4 +1,4 @@
-package com.arobs.service;
+package com.arobs.service.crop;
 
 import com.arobs.entity.Crop;
 import com.arobs.interfaces.HasRepository;

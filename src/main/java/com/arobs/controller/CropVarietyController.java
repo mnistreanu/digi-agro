@@ -1,13 +1,11 @@
 package com.arobs.controller;
 
 
-import com.arobs.entity.Crop;
 import com.arobs.entity.CropVariety;
-import com.arobs.model.CropModel;
 import com.arobs.model.CropVarietyModel;
 import com.arobs.model.ListItemModel;
-import com.arobs.service.CropService;
-import com.arobs.service.CropVarietyService;
+import com.arobs.service.crop.CropService;
+import com.arobs.service.crop.CropVarietyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

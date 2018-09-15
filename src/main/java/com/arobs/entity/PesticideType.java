@@ -6,8 +6,8 @@ import javax.persistence.*;
  * Created by mihail.gorgos on 14.07.2018.
  */
 @Entity
-@Table(name = "pesticide_category")
-public class PesticideCategory {
+@Table(name = "pesticide_type")
+public class PesticideType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class PesticideCategory {
     @Column (name = "name_ru")
     private String nameRu;
 
-    public PesticideCategory() {
+    public PesticideType() {
     }
 
     public Long getId() {

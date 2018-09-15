@@ -135,7 +135,13 @@ export const routes: Routes = [
                 loadChildren: 'app/pages/manage-crops/manage-crops.module#ManageCropsModule',
                 data: {breadcrumb: 'Crops'},
                 canActivate: [AuthGuard]
-            }
+            },
+            {
+                path: 'harmful-organism',
+                loadChildren: 'app/pages/chemicals-pests/manage-harmful-organisms/harmful-organism/harmful-organism.module#HarmfulOrganismModule',
+                data: {breadcrumb: 'Harmful Organism'},
+                canActivate: [AdminGuard]
+            },
         ]
     }
 ];

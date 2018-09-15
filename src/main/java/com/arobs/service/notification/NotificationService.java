@@ -1,8 +1,9 @@
-package com.arobs.service;
+package com.arobs.service.notification;
 
 import com.arobs.entity.Notification;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.repository.NotificationRepository;
+import com.arobs.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

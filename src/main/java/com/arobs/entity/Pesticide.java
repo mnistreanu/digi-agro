@@ -14,8 +14,8 @@ public class Pesticide {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (name = "pesticide_category_id")
-    private Long categoryId;
+    @Column (name = "pesticide_type_id")
+    private Long typeId;
 
     @Column (name = "name_ro")
     private String nameRo;
@@ -58,12 +58,12 @@ public class Pesticide {
         this.id = id;
     }
 
-    public Long getCategoryId() {
-        return categoryId;
+    public Long getTypeId() {
+        return typeId;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setTypeId(Long typeId) {
+        this.typeId = typeId;
     }
 
     public String getNameRo() {
