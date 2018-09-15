@@ -6,8 +6,8 @@ import javax.persistence.*;
  * Created by mihail.gorgos on 14.07.2018.
  */
 @Entity
-@Table(name = "harmful_organ")
-public class HarmfulOrgan {
+@Table(name = "harmful_organism")
+public class HarmfulOrganism {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class HarmfulOrgan {
     @Column (name = "name_ru")
     private String nameRu;
 
-    public HarmfulOrgan() {
+    public HarmfulOrganism() {
     }
 
     public Long getId() {

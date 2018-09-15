@@ -6,8 +6,8 @@ import javax.persistence.*;
  * Created by mihail.gorgos on 14.07.2018.
  */
 @Entity
-@Table(name = "pesticide_harmful_organ")
-public class PesticideHarmfulOrgan {
+@Table(name = "pesticide_harmful_organism")
+public class PesticideHarmfulOrganism {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,10 +16,10 @@ public class PesticideHarmfulOrgan {
     @Column (name = "pesticide_id")
     private Long pesticideId;
 
-    @Column (name = "harmful_organ_id")
-    private Long harmfulOrganId;
+    @Column (name = "harmful_organism_id")
+    private Long harmfulOrganismId;
 
-    public PesticideHarmfulOrgan() {
+    public PesticideHarmfulOrganism() {
     }
 
     public Long getId() {
@@ -38,11 +38,11 @@ public class PesticideHarmfulOrgan {
         this.pesticideId = pesticideId;
     }
 
-    public Long getHarmfulOrganId() {
-        return harmfulOrganId;
+    public Long getHarmfulOrganismId() {
+        return harmfulOrganismId;
     }
 
-    public void setHarmfulOrganId(Long harmfulOrganId) {
-        this.harmfulOrganId = harmfulOrganId;
+    public void setHarmfulOrganismId(Long harmfulOrganismId) {
+        this.harmfulOrganismId = harmfulOrganismId;
     }
 }

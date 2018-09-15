@@ -36,10 +36,10 @@ public class Pesticide {
     private String descriptionRu;
 
     @ManyToMany
-    @JoinTable(name="pesticide_harmful_organ",
+    @JoinTable(name="pesticide_harmful_organism",
             joinColumns= @JoinColumn(name="pesticide_id"),
-            inverseJoinColumns = @JoinColumn(name = "harmful_organ_id"))
-    private List<HarmfulOrgan> harmfulOrgans;
+            inverseJoinColumns = @JoinColumn(name = "harmful_organism_id"))
+    private List<HarmfulOrganism> harmfulOrgans;
 
     @Column (name = "active_substance")
     private String activeSubstance;
@@ -114,11 +114,11 @@ public class Pesticide {
         this.descriptionRu = descriptionRu;
     }
 
-    public List<HarmfulOrgan> getHarmfulOrgans() {
+    public List<HarmfulOrganism> getHarmfulOrgans() {
         return harmfulOrgans;
     }
 
-    public void setHarmfulOrgans(List<HarmfulOrgan> harmfulOrgans) {
+    public void setHarmfulOrgans(List<HarmfulOrganism> harmfulOrgans) {
         this.harmfulOrgans = harmfulOrgans;
     }
 
