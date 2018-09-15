@@ -8,12 +8,12 @@ import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-bl
 import {DirectivesModule} from '../../theme/directives/directives.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
-import {HarmfulOrganismListComponent} from './harmful-organism-list/harmful-organism-list.component';
-import {HarmfulOrganismComponent} from './harmful-organism/harmful-organism.component';
+import {HarmfulOrganismListComponent} from './manage-harmful-organisms/harmful-organism-list/harmful-organism-list.component';
+import { HarmfulOrganismComponent} from './manage-harmful-organisms/harmful-organism/harmful-organism.component';
 
 const routes: Routes = [
-    {path: '', component: HarmfulOrganismListComponent},
-    {path: ':id', component: HarmfulOrganismComponent, data: {breadcrumb: 'HarmfulOrganism Form'}}
+    {path: 'harmful-organism-list', component: HarmfulOrganismListComponent},
+    // {path: ':id', component: ChemicalsPestsComponent, data: {breadcrumb: 'ChemicalsPests Form'}}
 ];
 
 @NgModule({
@@ -30,5 +30,5 @@ const routes: Routes = [
     ],
     declarations: [HarmfulOrganismListComponent, HarmfulOrganismComponent]
 })
-export class HarmfulOrganismModule {
+export class ChemicalsPestsModule {
 }

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {Router} from '@angular/router';
-import {LangService} from '../../../services/lang.service';
-import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
-import {EmployeeService} from '../../../services/employee.service';
+import {HarmfulOrganismService} from '../../../../services/harmful-organism.service';
+import {LangService} from '../../../../services/lang.service';
+import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
 
 @Component({
     selector: 'app-harmful-organism-list',
@@ -17,7 +17,7 @@ export class HarmfulOrganismListComponent implements OnInit {
 
     constructor(private router: Router,
                 private langService: LangService,
-                private employeeService: EmployeeService) {
+                private harmfulOrganismService: HarmfulOrganismService) {
     }
 
     ngOnInit() {
@@ -55,14 +55,14 @@ export class HarmfulOrganismListComponent implements OnInit {
             },
             {
                 headerName: 'name RO',
-                field: 'nameRO',
-                width: 200,
+                field: 'nameRo',
+                width: 300,
                 minWidth: 200
             },
             {
                 headerName: 'name RU',
                 field: 'nameRu',
-                width: 200,
+                width: 300,
                 minWidth: 200
             }
         ];
@@ -77,7 +77,7 @@ export class HarmfulOrganismListComponent implements OnInit {
     }
 
     private setupRows() {
-        this.employeeService.findAll().subscribe(models => {
+        this.harmfulOrganismService.find().subscribe(models => {
             this.options.api.setRowData(models);
         });
     }

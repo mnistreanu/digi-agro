@@ -137,9 +137,9 @@ export const routes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
-                path: 'harmful-organism',
-                loadChildren: 'app/pages/chemicals-pests/manage-harmful-organisms/harmful-organism/harmful-organism.module#HarmfulOrganismModule',
-                data: {breadcrumb: 'Harmful Organism'},
+                path: 'chemicals-pests',
+                loadChildren: 'app/pages/chemicals-pests/chemicals-pests.module#ChemicalsPestsModule',
+                data: {breadcrumb: 'Chemicals & Pests'},
                 canActivate: [AdminGuard]
             },
         ]
