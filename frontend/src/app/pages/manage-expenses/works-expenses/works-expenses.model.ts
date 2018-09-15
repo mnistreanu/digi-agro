@@ -11,6 +11,4 @@ export class WorksExpensesModel {
     brandModel: string;
     identifier: string;
     employee: string;
-    sparePart: string;
-    sparePartPrice: number;
 }

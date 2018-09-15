@@ -196,8 +196,6 @@ export class WorksExpensesComponent implements OnInit {
                 model.brandModel = modelsArray[i].type + ' ' + modelsArray[i].brand + ' ' + modelsArray[i].model;
                 model.identifier = modelsArray[i].identifier;
                 model.employee = 'Roată Ion';
-                model.sparePart = 'Ambreaj la cutia de viteze';
-                model.sparePartPrice = 3400;
                 i++;
                 return model;
             });
