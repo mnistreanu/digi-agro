@@ -8,15 +8,15 @@ import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-bl
 import {DirectivesModule} from '../../theme/directives/directives.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
-import {HarmfulOrganismListComponent} from './manage-harmful-organisms/harmful-organism-list/harmful-organism-list.component';
-import { HarmfulOrganismComponent} from './manage-harmful-organisms/harmful-organism/harmful-organism.component';
+import {PestListComponent} from './manage-pests/pest-list/pest-list.component';
+import { PestComponent} from './manage-pests/pest/pest.component';
 import {PesticideListComponent} from './manage-pesticides/pesticide-list/pesticide-list.component';
 import {PesticideComponent} from './manage-pesticides/pesticide/pesticide.component';
 import {FertilizerListComponent} from './manage-fertilizers/fertilizer-list/fertilizer-list.component';
 import {FertilizerComponent} from './manage-fertilizers/fertilizer/fertilizer.component';
 
 const routes: Routes = [
-    {path: 'harmful-organism-list', component: HarmfulOrganismListComponent},
+    {path: 'pest-list', component: PestListComponent},
     {path: 'pesticide-list', component: PesticideListComponent},
     {path: 'fertilizer-list', component: FertilizerListComponent},
 ];
@@ -33,7 +33,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         AgGridModule.withComponents([EditRendererComponent])
     ],
-    declarations: [HarmfulOrganismListComponent, HarmfulOrganismComponent,
+    declarations: [PestListComponent, PestComponent,
         PesticideListComponent, PesticideComponent, FertilizerListComponent, FertilizerComponent]
 })
 export class ChemicalsPestsModule {

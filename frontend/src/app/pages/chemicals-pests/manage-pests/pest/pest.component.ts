@@ -4,20 +4,20 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {LangService} from '../../../../services/lang.service';
 import {Messages} from '../../../../common/messages';
-import {HarmfulOrganismModel} from '../harmful-organism.model';
-import {HarmfulOrganismService} from '../../../../services/chemicals-pests/harmful-organism.service';
+import {PestModel} from '../pest.model';
+import {PestService} from '../../../../services/chemicals-pests/pest.service';
 
 @Component({
     selector: 'app-harmful-organism',
-    templateUrl: './harmful-organism.component.html',
-    styleUrls: ['./harmful-organism.component.scss']
+    templateUrl: './pest.component.html',
+    styleUrls: ['./pest.component.scss']
 })
-export class HarmfulOrganismComponent implements OnInit {
+export class PestComponent implements OnInit {
 
     form: FormGroup;
     submitted = false;
 
-    model: HarmfulOrganismModel;
+    model: PestModel;
 
     labels: any;
 
@@ -25,7 +25,7 @@ export class HarmfulOrganismComponent implements OnInit {
                 private langService: LangService,
                 private router: Router,
                 private route: ActivatedRoute,
-                private harmfulOrganismService: HarmfulOrganismService,
+                private pestService: PestService,
                 private toastr: ToastrService) {
     }
 
@@ -51,14 +51,14 @@ export class HarmfulOrganismComponent implements OnInit {
     }
 
     private setupModel(id) {
-        this.harmfulOrganismService.findOne(id).subscribe(model => {
+        this.pestService.findOne(id).subscribe(model => {
             this.model = model;
             this.buildForm();
         });
     }
 
     private prepareNewModel() {
-        this.model = new HarmfulOrganismModel();
+        this.model = new PestModel();
         this.buildForm();
     }
 
@@ -82,7 +82,7 @@ export class HarmfulOrganismComponent implements OnInit {
         Object.assign(this.model, form.value);
         this.submitted = false;
 
-        this.harmfulOrganismService.save(this.model).subscribe((model) => {
+        this.pestService.save(this.model).subscribe((model) => {
             this.model = model;
             this.toastr.success(this.labels[Messages.SAVED]);
             this.router.navigate(['/pages/employee']);
@@ -91,7 +91,7 @@ export class HarmfulOrganismComponent implements OnInit {
     }
 
     public remove() {
-        this.harmfulOrganismService.remove(this.model).subscribe(() => {
+        this.pestService.remove(this.model).subscribe(() => {
             this.toastr.success(this.labels[Messages.REMOVED]);
             this.router.navigate(['/pages/employee']);
         });

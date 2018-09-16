@@ -815,26 +815,26 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert_harmful_organims" author="mihai.gorgos" failOnError="true" >
+    <changeSet id="insert_pests" author="mihai.gorgos" failOnError="true" >
         <validCheckSum>ANY</validCheckSum>
         <sql>
-            INSERT INTO harmful_organism (id, name_ro) VALUES (1, 'Rapăn');
-            INSERT INTO harmful_organism (id, name_ro) VALUES (2, 'Monilioze');
-            INSERT INTO harmful_organism (id, name_ro) VALUES (3, 'Bacterioze');
-            INSERT INTO harmful_organism (id, name_ro) VALUES (4, 'Gărgărițe');
-            INSERT INTO harmful_organism (id, name_ro) VALUES (5, 'Gărgărița florilor de măr');
-            INSERT INTO harmful_organism (id, name_ro) VALUES (6, 'Făinarea');
-            INSERT INTO harmful_organism (id, name_ro) VALUES (7, 'Păduchii');
-            INSERT INTO harmful_organism (id, name_ro) VALUES (8, 'Păduchele din San-Hose');
-            INSERT INTO harmful_organism (id, name_ro) VALUES (9, 'Gândacul păros');
-            INSERT INTO harmful_organism (id, name_ro) VALUES (10, 'Molii');
-            INSERT INTO harmful_organism (id, name_ro) VALUES (11, 'Viespe cu ferestrău');
-            INSERT INTO harmful_organism (id, name_ro) VALUES (12, 'Viermele mărului');
-            INSERT INTO harmful_organism (id, name_ro) VALUES (13, 'Acarieni');
-            INSERT INTO harmful_organism (id, name_ro) VALUES (14, 'Bolile dructelor în perioada de păstrare');
-            INSERT INTO harmful_organism (id, name_ro) VALUES (15, 'Molii minere');
+            INSERT INTO pest (id, name_ro) VALUES (1, 'Rapăn');
+            INSERT INTO pest (id, name_ro) VALUES (2, 'Monilioze');
+            INSERT INTO pest (id, name_ro) VALUES (3, 'Bacterioze');
+            INSERT INTO pest (id, name_ro) VALUES (4, 'Gărgărițe');
+            INSERT INTO pest (id, name_ro) VALUES (5, 'Gărgărița florilor de măr');
+            INSERT INTO pest (id, name_ro) VALUES (6, 'Făinarea');
+            INSERT INTO pest (id, name_ro) VALUES (7, 'Păduchii');
+            INSERT INTO pest (id, name_ro) VALUES (8, 'Păduchele din San-Hose');
+            INSERT INTO pest (id, name_ro) VALUES (9, 'Gândacul păros');
+            INSERT INTO pest (id, name_ro) VALUES (10, 'Molii');
+            INSERT INTO pest (id, name_ro) VALUES (11, 'Viespe cu ferestrău');
+            INSERT INTO pest (id, name_ro) VALUES (12, 'Viermele mărului');
+            INSERT INTO pest (id, name_ro) VALUES (13, 'Acarieni');
+            INSERT INTO pest (id, name_ro) VALUES (14, 'Bolile dructelor în perioada de păstrare');
+            INSERT INTO pest (id, name_ro) VALUES (15, 'Molii minere');
 
-            UPDATE harmful_organism SET name_ru=name_ro WHERE name_ru IS NULL;
+            UPDATE pest SET name_ru=name_ro WHERE name_ru IS NULL;
         </sql>
     </changeSet>
 

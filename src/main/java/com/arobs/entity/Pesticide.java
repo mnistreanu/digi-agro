@@ -39,7 +39,7 @@ public class Pesticide {
     @JoinTable(name="pesticide_harmful_organism",
             joinColumns= @JoinColumn(name="pesticide_id"),
             inverseJoinColumns = @JoinColumn(name = "harmful_organism_id"))
-    private List<HarmfulOrganism> harmfulOrganisms;
+    private List<Pest> pests;
 
     @Column (name = "harmful_organisms_ro", length = 4098)
     private String harmfulOrganismsRo;
@@ -120,12 +120,12 @@ public class Pesticide {
         this.descriptionRu = descriptionRu;
     }
 
-    public List<HarmfulOrganism> getHarmfulOrganisms() {
-        return harmfulOrganisms;
+    public List<Pest> getPests() {
+        return pests;
     }
 
-    public void setHarmfulOrganisms(List<HarmfulOrganism> harmfulOrganisms) {
-        this.harmfulOrganisms = harmfulOrganisms;
+    public void setPests(List<Pest> pests) {
+        this.pests = pests;
     }
 
     public String getHarmfulOrganismsRo() {

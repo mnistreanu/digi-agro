@@ -1,23 +1,23 @@
 package com.arobs.model.chemicals;
 
 
-import com.arobs.entity.HarmfulOrganism;
+import com.arobs.entity.Pest;
 
 import java.io.Serializable;
 
-public class HarmfulOrganismModel implements Serializable {
+public class PestModel implements Serializable {
 
     private Long id;
     private String nameRo;
     private String nameRu;
 
-    public HarmfulOrganismModel() {
+    public PestModel() {
     }
 
-    public HarmfulOrganismModel(HarmfulOrganism harmfulOrganism) {
-        this.id = harmfulOrganism.getId();
-        this.nameRo = harmfulOrganism.getNameRo();
-        this.nameRu = harmfulOrganism.getNameRu();
+    public PestModel(Pest pest) {
+        this.id = pest.getId();
+        this.nameRo = pest.getNameRo();
+        this.nameRu = pest.getNameRu();
     }
 
     public Long getId() {

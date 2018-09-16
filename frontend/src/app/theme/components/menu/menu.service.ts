@@ -185,7 +185,7 @@ export class MenuService {
                     },
                     {
                         title: 'nav.harmful-organisms',
-                        routerLink: 'chemicals-pests/harmful-organism-list'
+                        routerLink: 'chemicals-pests/pest-list'
                     }
                 ]
             });
