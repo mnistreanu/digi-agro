@@ -8,7 +8,6 @@ import {IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts} from 'angul
 import {MachineService} from '../../../../services/machine.service';
 import {EmployeeService} from '../../../../services/employee.service';
 import {Messages} from '../../../../common/messages';
-import {ExpenseItemModel} from '../expense-item-table/expense-item.model';
 import {MachineryExpenseService} from '../../../../services/machinery-expense.service';
 
 @Component({
@@ -115,6 +114,7 @@ export class MachineryExpensesFormComponent implements OnInit {
     private setupModel(id) {
         this.machineryExpenseService.findOne(id).subscribe(model => {
             this.model = model;
+            this.model.expenseDate = this.model.expenseDate ? new Date(this.model.expenseDate) : null;
             this.buildForm();
         });
     }
@@ -128,10 +128,10 @@ export class MachineryExpensesFormComponent implements OnInit {
     private buildForm() {
         const expenseDate = this.model.expenseDate ? this.model.expenseDate.toISOString().substring(0, 10) : null;
         this.form = this.fb.group({
-            expenseTitle: [this.model.expenseTitle, Validators.required],
+            title: [this.model.title, Validators.required],
             expenseDate: [expenseDate, Validators.required],
-            machines: [this.model.machines],
-            employees: [this.model.employees],
+            machines: [this.model.machines || []],
+            employees: [this.model.employees || []],
         });
     }
 

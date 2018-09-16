@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import {MachineryExpenseModel} from '../pages/manage-expenses/machinery-expenses/machinery-expenses-form/machinery-expense.model';
 import {ExpenseItemModel} from '../pages/manage-expenses/machinery-expenses/expense-item-table/expense-item.model';
+import {MachineryExpenseListModel} from '../pages/manage-expenses/machinery-expenses/machinery-expense-list.model';
 
 @Injectable({
     providedIn: 'root'
@@ -15,23 +16,11 @@ export class MachineryExpenseService {
     constructor(private http: HttpClient) {
     }
 
+    find(): Observable<MachineryExpenseListModel[]> {
+        return this.http.get<MachineryExpenseListModel[]>(this.api + '/');
+    }
+
     findOne(id: number): Observable<MachineryExpenseModel> {
-        // return this.http.get<MachineryExpenseModel>(this.api + '/' + id);
-
-        // todo: remove, this is only for testing...
-        return Observable.create(observer => {
-            setTimeout(() => {
-                const testModel = new MachineryExpenseModel();
-                testModel.expenseTitle = 'Reparatie machinelor';
-                testModel.expenseDate = new Date();
-                testModel.machines = [1];
-                testModel.employees = [1];
-                testModel.expenseItems = [<ExpenseItemModel> {title: 'Ambreaj la cutia de viteze', cost: 3400}];
-
-                observer.next(testModel);
-                observer.complete();
-            }, 500);
-        });
-
+        return this.http.get<MachineryExpenseModel>(this.api + '/' + id);
     }
 }

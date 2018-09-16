@@ -1,0 +1,17 @@
+package com.arobs.repository;
+
+import com.arobs.entity.ExpenseItem;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface ExpenseItemRepository extends JpaRepository<ExpenseItem, Long> {
+
+    @Query("SELECT ei FROM ExpenseItem ei WHERE ei.expseneId = :expenseId")
+    List<ExpenseItem> find(@Param("expenseId") Long expenseId);
+}
+

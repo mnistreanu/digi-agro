@@ -855,4 +855,30 @@
         </sql>
     </changeSet>
 
+    <changeSet id="insert-machinery-expense" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <sql>
+            INSERT INTO expense(id, tenant_id, title, expense_date) VALUES
+                (1, 1, 'Reparație tractorului', '2018-09-16');
+
+            SELECT nextval('expense_id_seq');
+
+            INSERT INTO expense_item(id, expense_id, title, total_cost) VALUES
+                (1, 1, 'Ambreiaj la cutia de viteze', 3400);
+
+            SELECT nextval('expense_item_id_seq');
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert-machinery-expense-resource" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <sql>
+            INSERT INTO expense_resource(id, expense_id, resource_id, table_name) VALUES
+                (1, 1, 1, 'machine'),
+                (2, 1, 1, 'employee');
+
+            SELECT nextval('expense_resource_id_seq');
+            SELECT nextval('expense_resource_id_seq');
+        </sql>
+    </changeSet>
+
+
 </databaseChangeLog>

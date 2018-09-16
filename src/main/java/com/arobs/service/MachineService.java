@@ -1,5 +1,6 @@
 package com.arobs.service;
 
+import com.arobs.entity.Employee;
 import com.arobs.entity.Machine;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.EmployeeModel;
@@ -46,6 +47,10 @@ public class MachineService implements HasRepository<MachineRepository> {
 
     public List<Machine> find(Long tenantId) {
         return getRepository().find(tenantId);
+    }
+
+    public List<Machine> findAll(List<Long> ids) {
+        return getRepository().findAll(ids);
     }
 
     @Transactional
