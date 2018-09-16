@@ -2,7 +2,8 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {MachineService} from '../../../services/machine.service';
-import {MachineryExpensesModel} from './machinery-expenses.model';
+import {MachineryExpenseListModel} from './machinery-expense-list.model';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
     selector: 'app-machinery-expenses',
@@ -24,6 +25,7 @@ export class MachineryExpensesComponent implements OnInit {
     labelSparePartPrice: string;
 
     constructor(private machineService: MachineService,
+                private router: Router,
                 private langService: LangService) {
     }
 
@@ -123,7 +125,8 @@ export class MachineryExpensesComponent implements OnInit {
         let i = 0;
         this.machineService.findAll().subscribe(modelsArray => {
             const rows = modelsArray.map(data => {
-                const model = new MachineryExpensesModel();
+                const model = new MachineryExpenseListModel();
+                model.expenseId = 1;
                 model.date = new Date().toLocaleDateString();
                 model.type = modelsArray[i].type;
                 model.brandModel = modelsArray[i].type + ' ' + modelsArray[i].brand + ' ' + modelsArray[i].model;
@@ -148,5 +151,14 @@ export class MachineryExpensesComponent implements OnInit {
                 this.options.api.sizeColumnsToFit();
             }
         }, 500);
+    }
+
+    public add() {
+        this.router.navigate(['/pages/expenses/machinery/-1']);
+    }
+
+    public onSelectionChanged() {
+        const model = this.options.api.getSelectedRows()[0];
+        this.router.navigate(['/pages/expenses/machinery/' + model.expenseId]);
     }
 }

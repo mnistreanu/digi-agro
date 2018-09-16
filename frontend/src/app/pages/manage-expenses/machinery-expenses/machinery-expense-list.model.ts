@@ -1,4 +1,5 @@
-export class MachineryExpensesModel {
+export class MachineryExpenseListModel {
+  expenseId: number;
   date: string;
   type: string;
   brandModel: string;
