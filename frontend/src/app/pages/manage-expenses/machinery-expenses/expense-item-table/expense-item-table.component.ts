@@ -71,7 +71,7 @@ export class ExpenseItemTableComponent implements OnInit {
             },
             {
                 headerName: 'Cost',
-                field: 'cost',
+                field: 'totalCost',
                 width: 175,
                 minWidth: 175,
                 editable: true,

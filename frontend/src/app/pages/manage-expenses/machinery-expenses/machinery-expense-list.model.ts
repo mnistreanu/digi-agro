@@ -1,9 +1,7 @@
 export class MachineryExpenseListModel {
   expenseId: number;
-  date: string;
-  type: string;
-  brandModel: string;
-  identifier: string;
+  expenseDate: string;
+  machine: string;
   employee: string;
   sparePart: string;
   sparePartPrice: number;
