@@ -17,10 +17,15 @@ import {ImageRendererComponent} from '../../modules/aggrid/image-renderer/image-
 import {ImageRendererModule} from '../../modules/aggrid/image-renderer/image-renderer.module';
 import {PinnedRowRendererModule} from '../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.module';
 import {PinnedRowRendererComponent} from '../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
+import { MachineryExpensesFormComponent } from './machinery-expenses/machinery-expenses-form/machinery-expenses-form.component';
+import { ExpenseItemTableComponent } from './machinery-expenses/expense-item-table/expense-item-table.component';
+import {DeleteRendererComponent} from '../../modules/aggrid/delete-renderer/delete-renderer.component';
+import {DeleteRendererModule} from '../../modules/aggrid/delete-renderer/delete-renderer.module';
 
 export const routes = [
     {path: '', redirectTo: 'expenses', pathMatch: 'full'},
     {path: 'machinery', component: MachineryExpensesComponent, data: {breadcrumb: 'machinery'}},
+    {path: 'machinery/:id', component: MachineryExpensesFormComponent, data: {breadcrumb: 'machinery form'}},
     {path: 'fuel', component: FuelExpensesComponent, data: {breadcrumb: 'fuel'}},
     {path: 'sowing', component: SowingExpensesComponent, data: {breadcrumb: 'sowing'}},
     {path: 'works', component: WorksExpensesComponent, data: {breadcrumb: 'works'}},
@@ -40,7 +45,8 @@ export const routes = [
         FormErrorBlockModule,
         ImageRendererModule,
         PinnedRowRendererModule,
-        AgGridModule.withComponents([ImageRendererComponent, PinnedRowRendererComponent]),
+        DeleteRendererModule,
+        AgGridModule.withComponents([ImageRendererComponent, PinnedRowRendererComponent, DeleteRendererComponent]),
         RouterModule.forChild(routes)
     ],
     declarations: [
@@ -49,7 +55,9 @@ export const routes = [
         SowingExpensesComponent,
         WorksExpensesComponent,
         PesticidesExpensesComponent,
-        FertilizersExpensesComponent
+        FertilizersExpensesComponent,
+        MachineryExpensesFormComponent,
+        ExpenseItemTableComponent
     ]
 })
 
