@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
-import { environment } from '../../environments/environment';
-import { CropVarietyDTO } from '../dto/crop/crop-variety.dto'
-import { SelectItem } from '../dto/select-item.dto';
-import { CropVarietyModel } from '../pages/manage-crops/crop-variety/crop-variety.model';
+import { environment } from '../../../environments/environment';
+import { CropVarietyDTO } from '../../dto/crop/crop-variety.dto'
+import { SelectItem } from '../../dto/select-item.dto';
+import { CropVarietyModel } from '../../pages/manage-crops/crop-variety/crop-variety.model';
 
 @Injectable({
     providedIn: 'root'

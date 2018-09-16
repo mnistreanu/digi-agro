@@ -177,11 +177,11 @@ export class MenuService {
                 subMenu: [
                     {
                         title: 'nav.pesticides',
-                        routerLink: 'chemicals-pests/pesticides'
+                        routerLink: 'chemicals-pests/pesticide-list'
                     },
                     {
                         title: 'nav.fertilizers',
-                        routerLink: 'chemicals-pests/fertilizers'
+                        routerLink: 'chemicals-pests/fertilizer-list'
                     },
                     {
                         title: 'nav.harmful-organisms',

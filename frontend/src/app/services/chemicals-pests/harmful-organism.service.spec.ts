@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { HarmfulOrganismService } from './employee.service';
+import { HarmfulOrganismService } from '../employee.service';
 
 describe('HarmfulOrganismService', () => {
   beforeEach(() => {

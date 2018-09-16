@@ -1,23 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {Router} from '@angular/router';
-import {HarmfulOrganismService} from '../../../../services/chemicals-pests/harmful-organism.service';
+import {PesticideService} from '../../../../services/chemicals-pests/pesticide.service';
 import {LangService} from '../../../../services/lang.service';
 import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
 
 @Component({
-    selector: 'app-harmful-organism-list',
-    templateUrl: './harmful-organism-list.component.html',
-    styleUrls: ['./harmful-organism-list.component.scss']
+    selector: 'app-pesticide-list',
+    templateUrl: './pesticide-list.component.html',
+    styleUrls: ['./pesticide-list.component.scss']
 })
-export class HarmfulOrganismListComponent implements OnInit {
+export class PesticideListComponent implements OnInit {
 
     options: GridOptions;
     context;
 
     constructor(private router: Router,
                 private langService: LangService,
-                private harmfulOrganismService: HarmfulOrganismService) {
+                private pesticideService: PesticideService) {
     }
 
     ngOnInit() {
@@ -77,7 +77,7 @@ export class HarmfulOrganismListComponent implements OnInit {
     }
 
     private setupRows() {
-        this.harmfulOrganismService.find().subscribe(models => {
+        this.pesticideService.find().subscribe(models => {
             this.options.api.setRowData(models);
         });
     }
@@ -95,12 +95,12 @@ export class HarmfulOrganismListComponent implements OnInit {
     }
 
     public add() {
-        this.router.navigate(['/pages/harmful-organism/-1']);
+        this.router.navigate(['/pages/pesticide/-1']);
     }
 
     public onEdit(node) {
         const model = node.data;
-        this.router.navigate(['/pages/harmful-organism/' + model.id]);
+        this.router.navigate(['/pages/pesticide/' + model.id]);
     }
 
 

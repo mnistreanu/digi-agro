@@ -7,7 +7,7 @@ import { GeoService } from '../../../services/geo.service';
 import { LangService } from '../../../services/lang.service';
 import { SelectItem } from '../../../dto/select-item.dto';
 import { CropVarietyModel } from './crop-variety.model';
-import { CropVarietyService } from '../../../services/crop-variety.service';
+import { CropVarietyService } from '../../../services/crop/crop-variety.service';
 import { UnitOfMeasure } from '../../../enums/unit-of-measure.enum';
 
 @Component({

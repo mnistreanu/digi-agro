@@ -10,10 +10,13 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {HarmfulOrganismListComponent} from './manage-harmful-organisms/harmful-organism-list/harmful-organism-list.component';
 import { HarmfulOrganismComponent} from './manage-harmful-organisms/harmful-organism/harmful-organism.component';
+import {PesticideListComponent} from './manage-pesticides/pesticide-list/pesticide-list.component';
+import {PesticideComponent} from './manage-pesticides/pesticide/pesticide.component';
 
 const routes: Routes = [
     {path: 'harmful-organism-list', component: HarmfulOrganismListComponent},
-    // {path: ':id', component: ChemicalsPestsComponent, data: {breadcrumb: 'ChemicalsPests Form'}}
+    {path: 'pesticide-list', component: PesticideListComponent},
+    {path: 'fertilizer-list', component: PesticideListComponent},
 ];
 
 @NgModule({
@@ -28,7 +31,8 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         AgGridModule.withComponents([EditRendererComponent])
     ],
-    declarations: [HarmfulOrganismListComponent, HarmfulOrganismComponent]
+    declarations: [HarmfulOrganismListComponent, HarmfulOrganismComponent,
+        PesticideListComponent, PesticideComponent]
 })
 export class ChemicalsPestsModule {
 }

@@ -1,59 +1,41 @@
-package com.arobs.entity;
+package com.arobs.model.chemicals;
 
-import javax.persistence.*;
-import java.util.List;
 
-/**
- * Created by mihail.gorgos on 14.07.2018.
- */
-@Entity
-@Table(name = "pesticide")
-public class Pesticide {
+import com.arobs.entity.Pesticide;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import java.io.Serializable;
+
+public class PesticideModel implements Serializable {
+
     private Long id;
-
-    @Column (name = "pesticide_type_id")
     private Long typeId;
-
-    @Column (name = "name_ro")
     private String nameRo;
-
-    @Column (name = "name_ru")
     private String nameRu;
-
-    @Column (name = "name2_ro")
     private String name2Ro;
-
-    @Column (name = "name2_ru")
     private String name2Ru;
-
-    @Column (name = "description_ro", length = 4096)
     private String descriptionRo;
-
-    @Column (name = "description_ru", length = 4096)
     private String descriptionRu;
-
-    @ManyToMany
-    @JoinTable(name="pesticide_harmful_organism",
-            joinColumns= @JoinColumn(name="pesticide_id"),
-            inverseJoinColumns = @JoinColumn(name = "harmful_organism_id"))
-    private List<HarmfulOrganism> harmfulOrganisms;
-
-    @Column (name = "harmful_organisms_ro", length = 4098)
     private String harmfulOrganismsRo;
-
-    @Column (name = "harmful_organisms_ru", length = 4098)
     private String harmfulOrganismsRu;
-
-    @Column (name = "active_substance")
     private String activeSubstance;
-
-    @Column (name = "consumption_norm")
     private Double consumptionNorm;
 
-    public Pesticide() {
+    public PesticideModel() {
+    }
+
+    public PesticideModel(Pesticide pesticide) {
+        this.id = pesticide.getId();
+        this.typeId = pesticide.getTypeId();
+        this.nameRo = pesticide.getNameRo();
+        this.nameRu = pesticide.getNameRu();
+        this.name2Ro = pesticide.getName2Ro();
+        this.name2Ru = pesticide.getName2Ru();
+        this.descriptionRo = pesticide.getDescriptionRo();
+        this.descriptionRu = pesticide.getDescriptionRu();
+        this.harmfulOrganismsRo = pesticide.getHarmfulOrganismsRo();
+        this.harmfulOrganismsRu = pesticide.getHarmfulOrganismsRu();
+        this.activeSubstance = pesticide.getActiveSubstance();
+        this.consumptionNorm = pesticide.getConsumptionNorm();
     }
 
     public Long getId() {
@@ -118,14 +100,6 @@ public class Pesticide {
 
     public void setDescriptionRu(String descriptionRu) {
         this.descriptionRu = descriptionRu;
-    }
-
-    public List<HarmfulOrganism> getHarmfulOrganisms() {
-        return harmfulOrganisms;
-    }
-
-    public void setHarmfulOrganisms(List<HarmfulOrganism> harmfulOrganisms) {
-        this.harmfulOrganisms = harmfulOrganisms;
     }
 
     public String getHarmfulOrganismsRo() {

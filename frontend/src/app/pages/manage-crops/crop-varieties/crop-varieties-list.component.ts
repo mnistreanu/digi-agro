@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {ColDef, GridOptions} from 'ag-grid';
 import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {LangService} from "../../../services/lang.service";
-import { CropVarietyService } from '../../../services/crop-variety.service';
+import { CropVarietyService } from '../../../services/crop/crop-variety.service';
 
 @Component({
     selector: 'app-crop-varieties-list',

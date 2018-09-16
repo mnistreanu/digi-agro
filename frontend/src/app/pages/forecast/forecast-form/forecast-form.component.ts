@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CropService} from '../../../services/crop.service';
+import {CropService} from '../../../services/crop/crop.service';
 import {CropCategoryModel} from '../../manage-crops/crop-category.model';
 import {CropModel} from '../../manage-crops/crop.model';
 import {CropVarietyModel} from '../../manage-crops/crop-variety.model';
