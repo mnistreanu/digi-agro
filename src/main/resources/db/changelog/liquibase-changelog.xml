@@ -838,4 +838,21 @@
         </sql>
     </changeSet>
 
+
+    <changeSet id="insert_fertilizers" author="mihai.gorgos" failOnError="true" >
+        <validCheckSum>ANY</validCheckSum>
+        <sql>
+            INSERT INTO fertilizer (id, fertilizer_type_id, name_ro, description_ro) VALUES (1, 1, 'AZOTAT (NITRAT) DE AMONIU granulat', 'Nitratul (azotatul) de amoniu este un îngrăşământ granulat, tratat cu agenţi de condiţionare pentru a preveni aglomerarea.');
+            INSERT INTO fertilizer (id, fertilizer_type_id, name_ro, description_ro) VALUES (2, 1, 'AZOTAT (NITRAT) DE AMONIU prill', 'Nitratul (azotatul) de amoniu este un îngrăşământ granulat, tratat cu agenţi de condiţionare pentru a preveni aglomerarea.');
+            INSERT INTO fertilizer (id, fertilizer_type_id, name_ro, description_ro) VALUES (3, 1, 'Ingrasamant complex NPK 16:16:16 MOP', 'Efectul fertilizant al complexului npk 16:16:16 mop se bazează pe conținutul celor 3 macroelemente esențiale, azot (N), Fosfor (P) și Potasiu (K), ce asigură un raport echilibrat de fertilizare.');
+            INSERT INTO fertilizer (id, fertilizer_type_id, name_ro, description_ro) VALUES (4, 1, 'Ingrasamant complex NPK 16:16:16 SOP', 'Efectul fertilizant al complexului npk 16:16:16  se bazează pe conținutul celor 3 macroelemente esențiale, azot (N), Fosfor (P) și Potasiu (K), ce asigură un raport echilibrat de fertilizare. Îngrășământul este îmbogățit cu sulf (s) ușor absorbabil. ');
+            INSERT INTO fertilizer (id, fertilizer_type_id, name_ro, description_ro) VALUES (5, 1, 'Ingrasamant complex NPK 20:20:0', 'Îngrăşământul complex npk 20:20:0 conţine două elemente esențiale, azot (N) si Fosfor (P), care asigură un raport echilibrat de fertilizare.');
+            INSERT INTO fertilizer (id, fertilizer_type_id, name_ro, description_ro) VALUES (6, 1, 'Ingrasamant complex NPK 27:13,5:0', 'Conținutul mai ridicat de azot (N) al complexului npk 27:13,5:0 asigură utilizarea ca îngrășământ suplimentar pe parcursul perioadelor de vegetație.');
+            INSERT INTO fertilizer (id, fertilizer_type_id, name_ro, description_ro) VALUES (7, 1, 'NITROCALCAR (CAN) granulat', 'Nitrocalcarul (can) granulat este un îngrășământ pe bază de nitrat de amoniu, completat cu dolomită sau carbonat de calciu ce asigură culturilor o aprovizionare suplimentară cu Calciu (Ca) și Magneziu (Mg). Este un îngrășământ de tip granulat, tratat cu agenți de condiționare pentru a preveni aglomerarea.');
+            INSERT INTO fertilizer (id, fertilizer_type_id, name_ro, description_ro) VALUES (8, 1, 'UREE granulata', 'Ureea granulată este un îngrășământ cu azot, acesta regăsindu-se sub formă amidica. Este un produs NOU, cu o granulaţie substanţial îmbunătăţită, granulele fiind mai compacte şi suprafaţa mai netedă. Se solubilizează mai încet, împiedicând pierderea în atmosferă a azotului.');
+
+            UPDATE fertilizer SET name_ru=name_ro, description_ru=description_ro WHERE name_ru IS NULL;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
