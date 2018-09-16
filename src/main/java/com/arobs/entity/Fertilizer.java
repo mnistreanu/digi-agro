@@ -29,12 +29,6 @@ public class Fertilizer {
     @Column (name = "description_ru", length = 4096)
     private String descriptionRu;
 
-//    @ManyToMany
-//    @JoinTable(name="fertilizer_crop_category",
-//            joinColumns= @JoinColumn(name="fertilizer_id"),
-//            inverseJoinColumns = @JoinColumn(name = "crop_category_id"))
-//    private List<Crop> crops;
-//
     public Fertilizer() {
     }
 

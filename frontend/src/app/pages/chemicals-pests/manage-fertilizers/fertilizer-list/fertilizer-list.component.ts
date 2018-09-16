@@ -112,7 +112,7 @@ export class FertilizerListComponent implements OnInit {
 
     public onEdit(node) {
         const model = node.data;
-        this.router.navigate(['/pages/fertilizer/' + model.id]);
+        this.router.navigate(['/pages/chemocal-pests/manage-fertilizers/fertilizer/' + model.id]);
     }
 
 

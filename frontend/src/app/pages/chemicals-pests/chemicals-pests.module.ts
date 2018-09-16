@@ -19,6 +19,7 @@ const routes: Routes = [
     {path: 'pest-list', component: PestListComponent},
     {path: 'pesticide-list', component: PesticideListComponent},
     {path: 'fertilizer-list', component: FertilizerListComponent},
+    {path: 'fertilizer/:id', component: FertilizerComponent, data: {breadcrumb: 'Fertilizer Form'}}
 ];
 
 @NgModule({
