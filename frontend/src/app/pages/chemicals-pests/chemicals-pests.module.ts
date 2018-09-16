@@ -12,11 +12,13 @@ import {HarmfulOrganismListComponent} from './manage-harmful-organisms/harmful-o
 import { HarmfulOrganismComponent} from './manage-harmful-organisms/harmful-organism/harmful-organism.component';
 import {PesticideListComponent} from './manage-pesticides/pesticide-list/pesticide-list.component';
 import {PesticideComponent} from './manage-pesticides/pesticide/pesticide.component';
+import {FertilizerListComponent} from './manage-fertilizers/fertilizer-list/fertilizer-list.component';
+import {FertilizerComponent} from './manage-fertilizers/fertilizer/fertilizer.component';
 
 const routes: Routes = [
     {path: 'harmful-organism-list', component: HarmfulOrganismListComponent},
     {path: 'pesticide-list', component: PesticideListComponent},
-    {path: 'fertilizer-list', component: PesticideListComponent},
+    {path: 'fertilizer-list', component: FertilizerListComponent},
 ];
 
 @NgModule({
@@ -32,7 +34,7 @@ const routes: Routes = [
         AgGridModule.withComponents([EditRendererComponent])
     ],
     declarations: [HarmfulOrganismListComponent, HarmfulOrganismComponent,
-        PesticideListComponent, PesticideComponent]
+        PesticideListComponent, PesticideComponent, FertilizerListComponent, FertilizerComponent]
 })
 export class ChemicalsPestsModule {
 }
