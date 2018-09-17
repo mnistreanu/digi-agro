@@ -4,4 +4,5 @@ export class ExpenseItemModel {
     cost: number;
 
     deleted: boolean;
+    readOnly: boolean;
 }

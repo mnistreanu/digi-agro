@@ -10,6 +10,8 @@ public class ExpenseItemModel {
     private String title;
     private BigDecimal totalCost;
 
+    private boolean deleted = false;
+
     public ExpenseItemModel() {
     }
 
@@ -41,5 +43,13 @@ public class ExpenseItemModel {
 
     public void setTotalCost(BigDecimal totalCost) {
         this.totalCost = totalCost;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

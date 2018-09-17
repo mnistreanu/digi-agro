@@ -8,6 +8,7 @@ import com.arobs.service.EmployeeService;
 import com.arobs.service.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,4 +81,14 @@ public class MachineryExpenseService {
         return expenseModel;
     }
 
+    @Transactional
+    public MachineryExpenseModel save(MachineryExpenseModel model, Long tenant) {
+
+        Expense expense = expenseService.save(model, tenant);
+        expenseItemService.save(model.getExpenseItems(), expense);
+        expenseResourceService.save(expense.getId(), model.getMachines(), "machine");
+        expenseResourceService.save(expense.getId(), model.getEmployees(), "employee");
+
+        return getModel(expense);
+    }
 }
