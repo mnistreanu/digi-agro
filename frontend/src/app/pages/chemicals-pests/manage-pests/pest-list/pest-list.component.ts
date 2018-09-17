@@ -95,12 +95,12 @@ export class PestListComponent implements OnInit {
     }
 
     public add() {
-        this.router.navigate(['/pages/pest/-1']);
+        this.router.navigate(['/pages/chemicals-pests/pest/-1']);
     }
 
     public onEdit(node) {
         const model = node.data;
-        this.router.navigate(['/pages/pest/' + model.id]);
+        this.router.navigate(['/pages/chemicals-pests/pest/' + model.id]);
     }
 
 

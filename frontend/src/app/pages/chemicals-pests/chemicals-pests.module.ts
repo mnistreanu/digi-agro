@@ -17,9 +17,13 @@ import {FertilizerComponent} from './manage-fertilizers/fertilizer/fertilizer.co
 
 const routes: Routes = [
     {path: 'pest-list', component: PestListComponent},
+    {path: 'pest/:id', component: PestComponent, data: {breadcrumb: 'Pest Form'}},
+
     {path: 'pesticide-list', component: PesticideListComponent},
+    {path: 'pesticide/:id', component: PesticideComponent, data: {breadcrumb: 'Pesticide Form'}},
+
     {path: 'fertilizer-list', component: FertilizerListComponent},
-    {path: 'fertilizer', component: FertilizerComponent, data: {breadcrumb: 'Fertilizer Form'}}
+    {path: 'fertilizer/:id', component: FertilizerComponent, data: {breadcrumb: 'Fertilizer Form'}}
 ];
 
 @NgModule({

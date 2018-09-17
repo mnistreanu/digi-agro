@@ -107,12 +107,12 @@ export class FertilizerListComponent implements OnInit {
     }
 
     public add() {
-        this.router.navigate(['/pages/fertilizer/-1']);
+        this.router.navigate(['/pages/chemicals-pests/fertilizer/-1']);
     }
 
     public onEdit(node) {
         const model = node.data;
-        this.router.navigate(['/pages/fertilizer/' + model.id]);
+        this.router.navigate(['/pages/chemicals-pests/fertilizer/' + model.id]);
     }
 
 

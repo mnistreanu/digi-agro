@@ -95,12 +95,12 @@ export class PesticideListComponent implements OnInit {
     }
 
     public add() {
-        this.router.navigate(['/pages/pesticide/-1']);
+        this.router.navigate(['/pages/chemicals-pests/pesticide/-1']);
     }
 
     public onEdit(node) {
         const model = node.data;
-        this.router.navigate(['/pages/pesticide/' + model.id]);
+        this.router.navigate(['/pages/chemicals-pests/pesticide/' + model.id]);
     }
 
 
