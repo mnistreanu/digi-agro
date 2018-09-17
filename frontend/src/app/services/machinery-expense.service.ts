@@ -23,4 +23,8 @@ export class MachineryExpenseService {
     findOne(id: number): Observable<MachineryExpenseModel> {
         return this.http.get<MachineryExpenseModel>(this.api + '/' + id);
     }
+
+    save(model: MachineryExpenseModel): Observable<MachineryExpenseModel> {
+        return this.http.post<MachineryExpenseModel>(this.api + '/', model);
+    }
 }

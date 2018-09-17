@@ -65,6 +65,7 @@ public class UserController {
         MultipartFile file = null;
         if (fileOptional.isPresent()) {
             file = fileOptional.get();
+
         }
 
         UserAccountModel model = StaticUtil.gson.fromJson(modelJson, UserAccountModel.class);

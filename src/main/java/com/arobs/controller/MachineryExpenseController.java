@@ -5,10 +5,7 @@ import com.arobs.model.expense.MachineryExpenseModel;
 import com.arobs.service.expense.MachineryExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -32,25 +29,18 @@ public class MachineryExpenseController {
         MachineryExpenseModel expenseModel = machineryExpenseService.findOne(id);
         return ResponseEntity.ok(expenseModel);
     }
-//
-//    @RequestMapping(value = "/unique", method = RequestMethod.GET)
-//    public ResponseEntity<Boolean> isUnique(@RequestParam(value = "id", required = false) Long id,
-//                                            @RequestParam("field") String field, @RequestParam("value") String value) {
-//        return ResponseEntity.ok(machineService.isUnique(id, field, value));
-//    }
-//
-//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-//    @RequestMapping(value = "/", method = RequestMethod.POST)
-//    public ResponseEntity<MachineModel> save(@RequestBody MachineModel model, HttpSession session) {
-//        Long tenant = (Long) session.getAttribute("tenant");
-//        return ResponseEntity.ok(new MachineModel(machineService.save(model, tenant)));
-//    }
-//
+
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public ResponseEntity<MachineryExpenseModel> save(@RequestBody MachineryExpenseModel model,
+                                                      HttpSession session) {
+        Long tenant = (Long) session.getAttribute("tenant");
+        return ResponseEntity.ok(machineryExpenseService.save(model, tenant));
+    }
+
 //    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
 //    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 //    public void remove(@PathVariable Long id) {
 //        machineService.remove(id);
 //    }
-//
 
 }

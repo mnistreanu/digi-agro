@@ -146,13 +146,14 @@ export class MachineryExpensesFormComponent implements OnInit {
         Object.assign(this.model, this.form.value);
         this.submitted = false;
 
-        console.log(this.model);
+        this.model.expenseItems.filter(item => {
+            return !item.deleted || (item.deleted && item.id != null);
+        });
 
-        // this.service.save(this.model).subscribe((model) => {
-        //     this.model = model;
-        //     this.toastr.success(this.labels[Messages.SAVED]);
-        //     this.router.navigate(['/pages/manage-machines']);
-        // });
+        this.machineryExpenseService.save(this.model).subscribe((model) => {
+            this.model = model;
+            this.toastr.success(this.labels[Messages.SAVED]);
+        });
     }
 
 }

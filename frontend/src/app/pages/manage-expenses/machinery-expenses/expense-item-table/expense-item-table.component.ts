@@ -67,14 +67,14 @@ export class ExpenseItemTableComponent implements OnInit {
                 field: 'title',
                 width: 175,
                 minWidth: 175,
-                editable: true
+                editable: params => !params.data.readOnly
             },
             {
                 headerName: 'Cost',
                 field: 'totalCost',
                 width: 175,
                 minWidth: 175,
-                editable: true,
+                editable: params => !params.data.readOnly,
                 valueSetter: (params) => this.costValueSetter(params),
                 onCellValueChanged: (params) => this.onCostChange(params)
             }
@@ -103,6 +103,7 @@ export class ExpenseItemTableComponent implements OnInit {
 
     private setupSummaryRow(models) {
         const summaryRow = new ExpenseItemModel();
+        summaryRow.readOnly = true;
         summaryRow.title = 'TOTAL';
         summaryRow.cost = 0;
         models.forEach(model => this.aggregate(summaryRow, model, true));
