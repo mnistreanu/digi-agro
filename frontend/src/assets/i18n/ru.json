@@ -67,6 +67,12 @@
 		"pesticides": "Расходы на пестициды",
 		"sowing": "Расходы на посев"
 	},
+	"fertilizer": {
+		"add-edit": "Добавить / редактировать удобрение",
+		"name": "Название",
+		"name-ro": "Название (Рум)",
+		"name-ru": "Название (Рус)"
+	},
 	"forecast": {
 		"additional_info": "Дополнительная информация",
 		"currency": "Валюта",
@@ -277,7 +283,18 @@
 		"phase": "Фаза",
 		"result": "Результат",
 		"spray-date": "Дата распыления",
-		"type": "Тип"
+		"type": "Тип",
+		"type-acaricide": "Акарициды",
+		"type-defoliant-desiccant": "Дефолианты и осушители",
+		"type-fungicide": "Фунгициды",
+		"type-growth-regulation": "Регуляторы роста",
+		"type-herbicide": "Гербициды",
+		"type-insecticide": "Инсектициды",
+		"type-insectofungicide": "Фунгициды",
+		"type-miscellaneous-auxiliary-product": "Разные и вспомогательные продукты",
+		"type-nematocide-soil-desinfectant": "Нематоциды, дезинфицирующие средства для почвы",
+		"type-pheromone": "Феромоны",
+		"type-rodenticide-molluscicide-repellant": "Родентициды, моллюскициды, репелленты"
 	},
 	"reminder": {
 		"enter-new-event": "Просто введите название события",

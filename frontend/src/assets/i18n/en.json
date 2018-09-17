@@ -67,6 +67,12 @@
 		"pesticides": "Expenses for pesticides",
 		"sowing": "Expenses for sowing"
 	},
+	"fertilizer": {
+		"add-edit": "Add / Edit fertilizer",
+		"name": "Name",
+		"name-ro": "Name",
+		"name-ru": "Name"
+	},
 	"forecast": {
 		"additional_info": "Additional information",
 		"currency": "Currency",
@@ -277,7 +283,18 @@
 		"phase": "Phase",
 		"result": "Result",
 		"spray-date": "Spray date",
-		"type": "Type"
+		"type": "Type",
+		"type-acaricide": "Acaricides",
+		"type-defoliant-desiccant": "Defoliants and desiccants",
+		"type-fungicide": "Fungicides",
+		"type-growth-regulation": "Growth regulators",
+		"type-herbicide": "Herbicides",
+		"type-insecticide": "Insecticides",
+		"type-insectofungicide": "Insectofungicides",
+		"type-miscellaneous-auxiliary-product": "Miscellaneous and auxiliary products",
+		"type-nematocide-soil-desinfectant": "Nematocides, soil disinfectants",
+		"type-pheromone": "Pheromones",
+		"type-rodenticide-molluscicide-repellant": "Rodenticides, molluscicides, repellents"
 	},
 	"reminder": {
 		"enter-new-event": "Just enter event name to create a new one",

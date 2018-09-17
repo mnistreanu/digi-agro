@@ -1,6 +1,7 @@
 package com.arobs.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,6 +29,9 @@ public class Fertilizer {
 
     @Column (name = "description_ru", length = 4096)
     private String descriptionRu;
+
+    @Column (name = "deleted_at")
+    private Date deletedAt;
 
     public Fertilizer() {
     }
@@ -81,4 +85,11 @@ public class Fertilizer {
         this.descriptionRu = descriptionRu;
     }
 
+    public Date getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(Date deletedAt) {
+        this.deletedAt = deletedAt;
+    }
 }

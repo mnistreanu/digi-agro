@@ -2,6 +2,7 @@ package com.arobs.repository;
 
 import com.arobs.entity.Fertilizer;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -19,5 +20,10 @@ public interface FertilizerRepository extends JpaRepository<Fertilizer, Long> {
             "WHERE f.typeId= :typeId " +
             "ORDER BY f.nameRo ")
     List<Fertilizer> find(@Param("typeId") Long typeId);
+
+    @Modifying
+    @Query("UPDATE Fertilizer f SET f.deletedAt = NOW() WHERE f.id = :id")
+    void remove(@Param("id") Long id);
+
 }
 

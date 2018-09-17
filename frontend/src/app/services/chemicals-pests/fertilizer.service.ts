@@ -22,9 +22,9 @@ export class FertilizerService {
         return this.http.get<FertilizerModel[]>(this.api + '/');
     }
 
-    // find(typeId: number): Observable<FertilizerModel[]> {
-    //     return this.http.get<FertilizerModel[]>(this.api + '/' + typeId);
-    // }
+    findByType(typeId: number): Observable<FertilizerModel[]> {
+        return this.http.get<FertilizerModel[]>(this.api + '/by-type/' + typeId);
+    }
 
     save(model: FertilizerModel): Observable<FertilizerModel> {
         return this.http.post<FertilizerModel>(this.api + '/', model);
