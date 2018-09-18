@@ -14,12 +14,12 @@ export class TelemetryMapComponent implements OnInit, OnChanges {
 
     @ViewChild('infoBody') infoBody: ElementRef;
 
-    private center: string;
+    center: string;
 
-    private parcels: ParcelModel[];
+    parcels: ParcelModel[];
 
-    private infoParcel: ParcelModel;
-    private infoWindow;
+    infoParcel: ParcelModel;
+    infoWindow;
 
     constructor(private parcelService: ParcelService) {
     }

@@ -145,8 +145,8 @@ export class CropVarietiesListComponent implements OnInit {
         this.router.navigate(['/pages/manage-crops/crop-varieties/' + model.id]);
     }
 
-    onPageSizeChanged(newPageSize) {
-        var value = Number(document.getElementById("page-size")['value']);
+    onPageSizeChanged() {
+        const value = Number(document.getElementById("page-size")['value']);
         this.options.paginationPageSize = value;
         this.pageSize = value;
         this.setupRows();

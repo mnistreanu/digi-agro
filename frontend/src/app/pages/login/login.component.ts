@@ -14,12 +14,12 @@ import {StorageService} from '../../services/storage.service';
 })
 export class LoginComponent implements OnInit {
 
-    private form: FormGroup;
+    form: FormGroup;
     private badCredentials = false;
     private returnUrl: String;
 
-    private authenticated: boolean;
-    private needShowTenantSelector: boolean;
+    authenticated: boolean;
+    needShowTenantSelector: boolean;
     private authData: AuthResponseModel;
 
     constructor(private router: Router,

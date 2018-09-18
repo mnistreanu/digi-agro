@@ -11,8 +11,8 @@ import {CropFieldMapper} from './crop-field.mapper';
 })
 export class CropVarietyTreeComponent implements OnInit {
 
-    private options: GridOptions;
-    private context;
+    options: GridOptions;
+    context;
 
     private labelName: string;
     private labelDescription: string;

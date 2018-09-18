@@ -28,7 +28,7 @@ export class UserFormComponent implements OnInit {
     public tenantForm: FormGroup;
     public details: any = {};
 
-    private model: UserAccountModel;
+    model: UserAccountModel;
 
     tenants: ListItem[];
     branches: ListItem[];
