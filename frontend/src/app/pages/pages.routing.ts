@@ -107,6 +107,12 @@ export const routes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
+                path: 'agro-works',
+                loadChildren: 'app/pages/agro-works/agro-works.module#AgroWorksModule',
+                data: {breadcrumb: 'AgroWorks'},
+                canActivate: [AuthGuard]
+            },
+            {
                 path: 'forecasting',
                 loadChildren: 'app/pages/forecast/forecast.module#ForecastModule',
                 data: {breadcrumb: 'Forecasting'},
@@ -129,7 +135,13 @@ export const routes: Routes = [
                 loadChildren: 'app/pages/manage-crops/manage-crops.module#ManageCropsModule',
                 data: {breadcrumb: 'Crops'},
                 canActivate: [AuthGuard]
-            }
+            },
+            {
+                path: 'chemicals-pests',
+                loadChildren: 'app/pages/chemicals-pests/chemicals-pests.module#ChemicalsPestsModule',
+                data: {breadcrumb: 'Chemicals & Pests'},
+                canActivate: [AdminGuard]
+            },
         ]
     }
 ];

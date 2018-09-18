@@ -1,23 +1,88 @@
-<div widget class="card">
-    <div class="card-header">
-        <span translate>nav.crops-varieties</span>
-        <div class="widget-controls">
-            <!--<a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>-->
-            <!--<a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>-->
-            <a data-widgster="fullscreen" href="#" class="transition" (click)="adjustGridSize()"><i class="fa fa-expand"></i></a>
-            <a data-widgster="restore" href="#" class="transition" (click)="adjustGridSize()"><i class="fa fa-compress"></i></a>
-            <!--<a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>-->
+<form [formGroup]="form" *ngIf="model" (keydown.enter)="$event.preventDefault()">
+
+    <div widget class="card bottom-30">
+        <div class="card-header">
+            <span translate>Crop</span>
+            <div class="widget-controls">
+                <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
+                <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
+                <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
+                <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>
+                <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+            </div>
+        </div>
+        <div class="card-body widget-body">
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <label for="cropId" >Crop</label>
+                    <select id="cropIf" class="form-control custom-select" formControlName="cropId">
+                        <option value="">Select Value</option>
+                        <option *ngFor="let item of cropSelectItems" value="{{item.id}}">{{ item.name }}</option>
+                    </select>
+                    <app-form-error-block [control]="form.get('cropId')" [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <label for="nameRo" >Name Ro</label>
+                    <input id="nameRo" class="form-control checking-field" formControlName="nameRo" />
+                    <app-form-error-block [control]="form.get('nameRo')" [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <label for="nameRu" >Name Ru</label>
+                    <input id="nameRu" class="form-control checking-field" formControlName="nameRu" />
+                    <app-form-error-block [control]="form.get('nameRu')" [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <label for="descriptionRo" >Description Ro</label>
+                    <input id="descriptionRo" class="form-control checking-field" formControlName="descriptionRo" />
+                    <app-form-error-block [control]="form.get('descriptionRo')" [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <label for="descriptionRu" >Description Ru</label>
+                    <input id="descriptionRu" class="form-control checking-field" formControlName="descriptionRu" />
+                    <app-form-error-block [control]="form.get('descriptionRu')" [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <label for="unitOfMeasure" >Unit of Measure</label>
+                    <select id="unitOfMeasure" class="form-control custom-select" formControlName="unitOfMeasure">
+                        <option value="">Select Value</option>
+                        <option *ngFor="let item of unitOfMeasureSelectItems" value="{{item.id}}">{{ item.name }}</option>
+                    </select>
+                    <app-form-error-block [control]="form.get('unitOfMeasure')" [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <label for="seedConsumptionHa" >Seed Consumption Ha</label>
+                    <input id="seedConsumptionHa" class="form-control checking-field" formControlName="seedConsumptionHa" type="number"/>
+                    <app-form-error-block [control]="form.get('seedConsumptionHa')" [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+            </div>
+
+            
+
+            <div class="form-group">
+                <button class="btn btn-danger" *ngIf="!isNew" (click)="remove()" translate>action.remove</button>
+                <button class="btn btn-success pull-right" (click)="save(form)" translate>action.save</button>
+            </div>
+
         </div>
     </div>
-    <div class="card-body widget-body">
 
-        <ag-grid-angular class="ag-theme-material" style="width: 100%; height: 350px; min-height: 100%;"
-                         *ngIf="options"
-                         [gridOptions]="options"
-                         [context]="context"
-                         [getNodeChildDetails]="getNodeChildDetails"
-                         (gridReady)="onGridReady($event)"></ag-grid-angular>
-
-    </div>
-</div>
-
+</form>

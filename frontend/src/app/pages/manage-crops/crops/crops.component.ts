@@ -6,7 +6,7 @@ import {Messages} from '../../../common/messages';
 
 import {ViewChild, ViewEncapsulation} from '@angular/core';
 import {DatatableComponent} from '@swimlane/ngx-datatable';
-import { CropService } from '../../../services/crop.service';
+import { CropService } from '../../../services/crop/crop.service';
 import { SelectItem } from '../../../dto/select-item.dto';
 
 @Component({

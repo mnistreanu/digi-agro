@@ -6,8 +6,8 @@ import {AgGridModule} from 'ag-grid-angular';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {DirectivesModule} from '../../theme/directives/directives.module';
-import {CustomImageRendererModule} from '../../modules/aggrid/custom-image-renderer/custom-image-renderer.module';
-import {CustomImageRendererComponent} from '../../modules/aggrid/custom-image-renderer/custom-image-renderer.component';
+import {ImageRendererModule} from '../../modules/aggrid/image-renderer/image-renderer.module';
+import {ImageRendererComponent} from '../../modules/aggrid/image-renderer/image-renderer.component';
 import {Constants} from '../../common/constants';
 import {WeatherForecastComponent} from "./forecast/weather-forecast.component";
 import {WeatherHistoryComponent} from './history/weather-history.component';
@@ -25,8 +25,8 @@ export const routes = [
         FormsModule,
         ReactiveFormsModule,
         DirectivesModule,
-        CustomImageRendererModule,
-        AgGridModule.withComponents([CustomImageRendererComponent]),
+        ImageRendererModule,
+        AgGridModule.withComponents([ImageRendererComponent]),
         NguiMapModule.forRoot({apiUrl: Constants.GOOGLE_MAP_API}),
         RouterModule.forChild(routes)
     ],

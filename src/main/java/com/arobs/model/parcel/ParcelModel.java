@@ -53,8 +53,8 @@ public class ParcelModel {
         cropNameRu = crop.getNameRu();
     }
 
-    public void setupLastCropWork(ParcelCropWork parcelCropWork, AgroWorkType workType) {
-        lastWorkDate = parcelCropWork.getCreatedAt();
+    public void setupLastCropWork(AgroWork lastAgroWork, AgroWorkType workType) {
+        lastWorkDate = lastAgroWork.getWorkDate();
         lastWorkTypeRo = workType.getNameRo();
         lastWorkTypeRu = workType.getNameRu();
     }

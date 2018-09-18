@@ -7,6 +7,15 @@
 		"remove": "Ștergere",
 		"save": "Salvare"
 	},
+	"agro-work": {
+		"date": "Data",
+		"defacto": "De facto",
+		"norm": "Norma",
+		"price-1-norm": "Prețul pe 1 / norma",
+		"quantity": "Cantitate",
+		"sum": "Suma",
+		"type": "Tipul lucrării"
+	},
 	"auth": {
 		"login": "Logare",
 		"logout": "Ieșire"
@@ -26,9 +35,19 @@
 		"name": "Cultura agricolă",
 		"planting-date": "Data plantării",
 		"seeds": "Semințe",
-		"unit-of-measure-short": "U.m.",
 		"unit-of-measure-long": "Unitatea de măsură",
+		"unit-of-measure-short": "U.m.",
 		"variety": "Soi"
+	},
+	"crop-variety": {
+		"crop": "",
+		"crop-varieties": "",
+		"description-ro": "",
+		"description-ru": "",
+		"name-ro": "",
+		"name-ru": "",
+		"seed-consumption-ha": "",
+		"unit-of-measure": ""
 	},
 	"employee": {
 		"employee": "Angajat",
@@ -45,8 +64,22 @@
 		"agricultural-works": "Cheltuieli pentru lucrări agricole",
 		"fertilizers": "Cheltuieli pentru îngrășăminte",
 		"fuel": "Cheltuieli pentru combustibil",
-		"sowing": "Cheltuieli pentru însămânțare",
-		"pesticides": "Cheltuieli pentru pesticide"
+		"pesticides": "Cheltuieli pentru pesticide",
+		"sowing": "Cheltuieli pentru însămânțare"
+	},
+	"fertilizer": {
+		"add-edit": "Adăugați / modificați îngrășământul",
+		"description-ro": "Descriere (Rom)",
+		"description-ru": "Descriere (Rus)",
+		"name": "Denumire",
+		"name-ro": "Denumire (Rom)",
+		"name-ru": "Denumire (Rus)",
+		"type": "Tip"
+	},
+	"fertilizer-type": {
+		"CHEMICAL": "Chimică",
+		"MINERAL": "Minerală",
+		"ORGANIC": "Organic"
 	},
 	"forecast": {
 		"additional_info": "Informații suplimnetare",
@@ -125,30 +158,36 @@
 		"TRACTOR": "Tractor"
 	},
 	"nav": {
-		"expenses-management": "Evidența cheltuielilor",
+		"agricultural-machinery": "Maşini agricole",
 		"agricultural-works": "Lucrări agricole",
 		"branches": "Filiale",
 		"brands": "Brands",
+		"chemicals-and-pests": "Chimicale si dăunatori",
 		"costs-forecasting": "Prognoză costuri",
 		"costs-forecasting-form": "Prognoză costuri FORM",
 		"crops": "Culturi agricole",
 		"crops-varieties": "Culturi agricole și soiuri",
 		"dashboard": "Dashboard",
 		"employees": "Angajați",
+		"enterprise": "Întreprindere",
+		"expenses-management": "Evidența cheltuielilor",
 		"fertilizers": "Îngrășăminte",
-		"pesticides": "Pesticide",
 		"forecast-list": "Lista",
 		"forecasting-charts": "Diagrame de prognoză",
 		"forecasts": "Prognoze",
 		"fuel": "Combustibil",
+		"harmful-organisms": "Organisme dăunătoare",
+		"harvesting": "Recoltarea",
 		"harvesting-forecasting": "Prognoză recoltă",
 		"harvesting-forecasting-factor": "Prognoză recoltă FACTOR",
 		"harvesting-forecasting-form": "Prognoză recoltă FORM",
 		"machines": "Maşini",
 		"notifications": "Notificări",
 		"notifications-and-alerts": "Notificări și alete",
+		"other-agricultural-works": "Lucrări agricole",
 		"owners": "Proprietari",
 		"parcels": "Parcele",
+		"pesticides": "Pesticide",
 		"sowing": "Semănatul",
 		"tasks": "Sarcini",
 		"telemetry": "Telemetrie",
@@ -158,8 +197,7 @@
 		"weather": "Date meteo",
 		"weather-forecast": "Prognoza meteo",
 		"weather-history": "Date meteo istorice",
-		"work-agenda": "Agenda lucrărilor",
-		"agricultural-machinery": "Maşini agricole"
+		"work-agenda": "Agenda lucrărilor"
 	},
 	"notification": {
 		"mark-all-as-read": "Marcheaza toate ca fiind citite",
@@ -254,7 +292,18 @@
 		"phase": "Faza",
 		"result": "Rezultat",
 		"spray-date": "Data pulverizării",
-		"type": "Tip"
+		"type": "Tip",
+		"type-acaricide": "Acaricide",
+		"type-defoliant-desiccant": "Defolianti si desicanti",
+		"type-fungicide": "Fungicide",
+		"type-growth-regulation": "Regulatori de crestere",
+		"type-herbicide": "Erbicide",
+		"type-insecticide": "Insecticide",
+		"type-insectofungicide": "Insectofungicide",
+		"type-miscellaneous-auxiliary-product": "Produse diverse si auxiliare",
+		"type-nematocide-soil-desinfectant": "Nematocide, dezinfectanti ai solului",
+		"type-pheromone": "Feromoni",
+		"type-rodenticide-molluscicide-repellant": "Rodenticide, moluscocide, repelenti"
 	},
 	"reminder": {
 		"enter-new-event": "Doar introduceți numele evenimentului",

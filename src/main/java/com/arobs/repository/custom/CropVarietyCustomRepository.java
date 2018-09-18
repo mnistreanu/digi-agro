@@ -91,7 +91,7 @@ public class CropVarietyCustomRepository {
 
     public long countFiltered(List<String> filters) {
 
-        String queryCount = "Select COUNT(c.id) From CropCategory c where 1 = 1 ";
+        String queryCount = "Select COUNT(c.id) From CropVariety c where 1 = 1 ";
 
         for (String filter: filters) {
             if (filter.contains("cropId")) {

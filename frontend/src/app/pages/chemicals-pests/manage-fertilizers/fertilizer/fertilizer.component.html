@@ -1,0 +1,88 @@
+<form [formGroup]="form" *ngIf="model" (keydown.enter)="$event.preventDefault()">
+
+    <div widget class="card bottom-30">
+        <div class="card-header">
+            <span translate>fertilizer.add-edit</span>
+            <div class="widget-controls">
+                <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
+                <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
+                <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
+                <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>
+                <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+            </div>
+        </div>
+        <div class="card-body widget-body">
+
+            <div class="form-group row">
+                <div class="col-sm-2">
+                    <label for="typeId" translate>fertilizer.type</label>
+                </div>
+                <div class="col-sm-10">
+                    <select id="typeId" class="form-control custom-select" formControlName="fertilizerType">
+                        <option value="MINERAL" translate>fertilizer-type.MINERAL</option>
+                        <option value="CHEMICAL" translate>fertilizer-type.CHEMICAL</option>
+                        <option value="ORGANIC" translate>fertilizer-type.ORGANIC</option>
+                    </select>
+                    <app-form-error-block [control]="form.get('fertilizerType')"
+                                          [formSubmitted]="submitted"></app-form-error-block>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-2">
+                    <label for="nameRo" translate>fertilizer.name-ro</label>
+                </div>
+                <div class="col-sm-10">
+                    <input id="nameRo" class="form-control checking-field" formControlName="nameRo">
+                    <app-form-error-block [control]="form.get('nameRo')"
+                                          [formSubmitted]="submitted"></app-form-error-block>
+
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-2">
+                    <label for="descriptionRo" translate>fertilizer.description-ro</label>
+                </div>
+                <div class="col-sm-10">
+                    <textarea id="descriptionRo" class="form-control checking-field" style="height: 300px; min-height: 100%;"
+                              formControlName="descriptionRo"></textarea>
+                    <app-form-error-block [control]="form.get('descriptionRo')"
+                                          [formSubmitted]="submitted"></app-form-error-block>
+
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-2">
+                    <label for="nameRu" translate>fertilizer.name-ru</label>
+                </div>
+                <div class="col-sm-10">
+                    <input id="nameRu" class="form-control checking-field" formControlName="nameRu">
+                    <app-form-error-block [control]="form.get('nameRu')"
+                                          [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-2">
+                    <label for="descriptionRu" translate>fertilizer.description-ru</label>
+                </div>
+                <div class="col-sm-10">
+                    <textarea id="descriptionRu" class="form-control checking-field" style="height: 300px; min-height: 100%;"
+                              formControlName="descriptionRu"></textarea>
+                    <app-form-error-block [control]="form.get('descriptionRu')"
+                                          [formSubmitted]="submitted"></app-form-error-block>
+                </div>            </div>
+
+            <div class="form-group">
+                <button class="btn btn-danger" *ngIf="model.id != null"
+                        (click)="remove()" translate>action.remove
+                </button>
+                <button class="btn btn-success pull-right" (click)="save(form)" translate>action.save</button>
+            </div>
+
+        </div>
+    </div>
+
+</form>

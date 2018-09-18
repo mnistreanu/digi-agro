@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ColDef, GridOptions} from "ag-grid";
-import {LangService} from "../../../services/lang.service";
-import {MachineService} from "../../../services/machine.service";
-import {CustomPinnedRowRenderer} from "../../../modules/aggrid/custom-pinned-row-renderer/custom-pinned-row-renderer.component";
-import {PesticidesExpensesModel} from "./pesticides-expenses.model";
+import {ColDef, GridOptions} from 'ag-grid';
+import {LangService} from '../../../services/lang.service';
+import {MachineService} from '../../../services/machine.service';
+import {PinnedRowRendererComponent} from '../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
+import {PesticidesExpensesModel} from './pesticides-expenses.model';
 
 @Component({
     selector: 'app-pesticides-expenses',
@@ -49,7 +49,7 @@ export class PesticidesExpensesComponent implements OnInit {
         this.options.enableFilter = true;
         this.options.rowSelection = 'single';
         this.options.columnDefs = this.setupHeaders();
-        this.options.frameworkComponents = { customPinnedRowRenderer: CustomPinnedRowRenderer };
+        this.options.frameworkComponents = { customPinnedRowRenderer: PinnedRowRendererComponent };
 
         this.context = {componentParent: this};
 

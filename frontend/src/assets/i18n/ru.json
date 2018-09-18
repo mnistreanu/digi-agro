@@ -7,6 +7,15 @@
 		"remove": "Удалить",
 		"save": "Сохранить"
 	},
+	"agro-work": {
+		"date": "Дата",
+		"defacto": "Фактически",
+		"norm": "Норма",
+		"price-1-norm": "Цена за 1 / норму",
+		"quantity": "Количество",
+		"sum": "Сумма",
+		"type": "Тип работы"
+	},
 	"auth": {
 		"login": "Вход",
 		"logout": "Выход"
@@ -26,9 +35,19 @@
 		"name": "Сельскохозяйственная культура",
 		"planting-date": "Дата посадки",
 		"seeds": "Семена",
-		"unit-of-measure-short": "Ед.И.",
 		"unit-of-measure-long": "Единица измерения",
+		"unit-of-measure-short": "Ед.И.",
 		"variety": "Сорт"
+	},
+	"crop-variety": {
+		"crop": "",
+		"crop-varieties": "",
+		"description-ro": "",
+		"description-ru": "",
+		"name-ro": "",
+		"name-ru": "",
+		"seed-consumption-ha": "",
+		"unit-of-measure": ""
 	},
 	"employee": {
 		"employee": "Работник",
@@ -45,8 +64,22 @@
 		"agricultural-works": "Расходы на сельскохозяйственные работы",
 		"fertilizers": "Расходы на удобрения",
 		"fuel": "Расходы на топливо",
-		"sowing": "Расходы на посев",
-		"pesticides": "Расходы на пестициды"
+		"pesticides": "Расходы на пестициды",
+		"sowing": "Расходы на посев"
+	},
+	"fertilizer": {
+		"add-edit": "Добавить / редактировать удобрение",
+		"description-ro": "Описание (Рум)",
+		"description-ru": "Описание (Рус)",
+		"name": "Название",
+		"name-ro": "Название (Рум)",
+		"name-ru": "Название (Рус)",
+		"type": "Тип"
+	},
+	"fertilizer-type": {
+		"CHEMICAL": "Химический",
+		"MINERAL": "Минеральная",
+		"ORGANIC": "Органическое"
 	},
 	"forecast": {
 		"additional_info": "Дополнительная информация",
@@ -125,30 +158,36 @@
 		"TRACTOR": "Трактор"
 	},
 	"nav": {
-		"expenses-management": "Учет затрат",
+		"agricultural-machinery": "Сельх. техника",
 		"agricultural-works": "Сельхоз. работы",
 		"branches": "Филиалы",
 		"brands": "Бренды",
+		"chemicals-and-pests": "Химикаты и вредители",
 		"costs-forecasting": "Прогнозирование затрат",
 		"costs-forecasting-form": "Прогнозирование затрат FORM",
 		"crops": "Сельхоз. культуры",
 		"crops-varieties": "Сельскохозяйственные культуры и сорта",
 		"dashboard": "Главная",
 		"employees": "Работники",
+		"enterprise": "Предприятие",
+		"expenses-management": "Учет затрат",
 		"fertilizers": "Удобрения",
-		"pesticides": "Пестициды",
 		"forecast-list": "Список",
 		"forecasting-charts": "Прогнозные графики",
 		"forecasts": "Прогнозирование",
 		"fuel": "Топливо",
+		"harmful-organisms": "Вредные организмы",
+		"harvesting": "Сбор урожая",
 		"harvesting-forecasting": "Прогнозирование урожая",
 		"harvesting-forecasting-factor": "Прогнозирование урожая FACTOR",
 		"harvesting-forecasting-form": "Прогнозирование урожая FORM",
 		"machines": "Машины",
 		"notifications": "Уведомления",
 		"notifications-and-alerts": "Уведомления и оповещения",
+		"other-agricultural-works": "Сельхоз. работы",
 		"owners": "Владелецы",
 		"parcels": "Участки",
+		"pesticides": "Пестициды",
 		"sowing": "Посев",
 		"tasks": "Задания",
 		"telemetry": "Телеметрия",
@@ -158,8 +197,7 @@
 		"weather": "Погода",
 		"weather-forecast": "Прогноз погоды",
 		"weather-history": "Исторические данные",
-		"work-agenda": "Повестка работ",
-		"agricultural-machinery": "Сельх. техника"
+		"work-agenda": "Повестка работ"
 	},
 	"notification": {
 		"mark-all-as-read": "Отметить все как прочитанные",
@@ -254,7 +292,18 @@
 		"phase": "Фаза",
 		"result": "Результат",
 		"spray-date": "Дата распыления",
-		"type": "Тип"
+		"type": "Тип",
+		"type-acaricide": "Акарициды",
+		"type-defoliant-desiccant": "Дефолианты и осушители",
+		"type-fungicide": "Фунгициды",
+		"type-growth-regulation": "Регуляторы роста",
+		"type-herbicide": "Гербициды",
+		"type-insecticide": "Инсектициды",
+		"type-insectofungicide": "Фунгициды",
+		"type-miscellaneous-auxiliary-product": "Разные и вспомогательные продукты",
+		"type-nematocide-soil-desinfectant": "Нематоциды, дезинфицирующие средства для почвы",
+		"type-pheromone": "Феромоны",
+		"type-rodenticide-molluscicide-repellant": "Родентициды, моллюскициды, репелленты"
 	},
 	"reminder": {
 		"enter-new-event": "Просто введите название события",

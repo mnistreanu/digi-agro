@@ -1,11 +1,11 @@
 package com.arobs.controller;
 
 
-import com.arobs.entity.Crop;
 import com.arobs.entity.CropVariety;
-import com.arobs.model.CropModel;
 import com.arobs.model.CropVarietyModel;
-import com.arobs.service.CropVarietyService;
+import com.arobs.model.ListItemModel;
+import com.arobs.service.crop.CropService;
+import com.arobs.service.crop.CropVarietyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +20,9 @@ public class CropVarietyController {
 
     @Autowired
     private CropVarietyService cropVarietyService;
+
+    @Autowired
+    private CropService cropService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable Long id) {
@@ -54,6 +57,7 @@ public class CropVarietyController {
             return ResponseEntity.notFound().build();
         }
 
+        resource.setId(id);
         return ResponseEntity.ok(new CropVarietyModel(cropVarietyService.save(resource)));
     }
 
@@ -78,5 +82,10 @@ public class CropVarietyController {
         }
 
         return ResponseEntity.ok(cropVarietyService.findAll().toString());
+    }
+
+    @RequestMapping(value = "/crops/select_items", method = RequestMethod.GET)
+    public ResponseEntity<List<ListItemModel>> getCropCategoryListItems() {
+        return ResponseEntity.ok(cropService.fetchItems());
     }
 }

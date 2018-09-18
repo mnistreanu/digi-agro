@@ -5,7 +5,7 @@ import {BranchComponent} from './branch/branch.component';
 
 const routes: Routes = [
     {path: '', component: BranchListComponent},
-    {path: 'branch/:id', component: BranchComponent, data: {breadcrumb: 'Branch Form'}}
+    {path: ':id', component: BranchComponent, data: {breadcrumb: 'Branch Form'}}
 ];
 
 @NgModule({

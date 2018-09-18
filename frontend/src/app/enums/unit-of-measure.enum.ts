@@ -1,6 +1,6 @@
-enum UnitOfmEasure {
+export enum UnitOfMeasure {
     Tone = 't',
     Quintal = 'q',
-    Kilogramm = 'kg',
+    Kilogram = 'kg',
     Litre = 'l'
 }

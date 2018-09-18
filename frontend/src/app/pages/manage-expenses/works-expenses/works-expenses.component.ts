@@ -14,14 +14,21 @@ export class WorksExpensesComponent implements OnInit {
     options: GridOptions;
     context;
 
+    labelDate: string;
+    labelAgroWorkType: string;
+    labelCrop: string;
+    labelUnitOfMeasureShort: string;
+    labelUnitOfMeasureLong: string;
+    labelQuantity: string;
+    labelNorm: string;
+    labelDefacto: string;
+    labelPrice1Norm: string;
+    labelSum: string;
     labelMachineType: string;
     labelAgriculturalMachinery: string;
     labelIdentifier: string;
-    labelDate: string;
     labelFirstName: string;
     labelLastName: string;
-    labelSparePart: string;
-    labelSparePartPrice: string;
 
     constructor(private machineService: MachineService,
                 private langService: LangService) {
@@ -33,14 +40,21 @@ export class WorksExpensesComponent implements OnInit {
     }
 
     private setupLabels() {
+        this.langService.get('agro-work.date').subscribe(msg => this.labelDate = msg);
+        this.langService.get('agro-work.type').subscribe(msg => this.labelAgroWorkType = msg);
+        this.langService.get('crop.name').subscribe(msg => this.labelCrop = msg);
+        this.langService.get('unit-of-measure.unit-short').subscribe(msg => this.labelUnitOfMeasureShort = msg);
+        this.langService.get('unit-of-measure.unit-long').subscribe(msg => this.labelUnitOfMeasureLong = msg);
+        this.langService.get('agro-work.quantity').subscribe(msg => this.labelQuantity = msg);
+        this.langService.get('agro-work.norm').subscribe(msg => this.labelNorm = msg);
+        this.langService.get('agro-work.defacto').subscribe(msg => this.labelDefacto = msg);
+        this.langService.get('agro-work.price-1-norm').subscribe(msg => this.labelPrice1Norm = msg);
+        this.langService.get('agro-work.sum').subscribe(msg => this.labelSum = msg);
         this.langService.get('machine.type').subscribe(msg => this.labelMachineType = msg);
         this.langService.get('machine.agricultural-machinery').subscribe(msg => this.labelAgriculturalMachinery = msg);
         this.langService.get('machine.identifier').subscribe(msg => this.labelIdentifier = msg);
-        this.langService.get('machine.repairing-date').subscribe(msg => this.labelDate = msg);
         this.langService.get('employee.first-name').subscribe(msg => this.labelFirstName = msg);
         this.langService.get('employee.last-name').subscribe(msg => this.labelLastName = msg);
-        this.langService.get('machine.spare-part').subscribe(msg => this.labelSparePart = msg);
-        this.langService.get('machine.spare-part-price').subscribe(msg => this.labelSparePartPrice = msg);
     }
 
 
@@ -68,6 +82,66 @@ export class WorksExpensesComponent implements OnInit {
                 suppressFilter: true,
             },
             {
+                headerName: this.labelAgroWorkType,
+                field: 'workType',
+                width: 100,
+                minWidth: 100,
+                suppressFilter: true,
+            },
+            {
+                headerName: this.labelCrop,
+                field: 'crop',
+                width: 180,
+                minWidth: 180
+            },
+            {
+                headerName: this.labelUnitOfMeasureShort,
+                headerTooltip: this.labelUnitOfMeasureLong,
+                field: 'unitOfMeasure',
+                width: 60,
+                minWidth: 60,
+                suppressFilter: true,
+            },
+            {
+                headerName: this.labelQuantity,
+                headerTooltip: this.labelQuantity,
+                field: 'quantity',
+                width: 60,
+                minWidth: 60,
+                suppressFilter: true,
+            },
+            {
+                headerName: this.labelNorm,
+                headerTooltip: this.labelNorm,
+                field: 'quantityNorm',
+                width: 60,
+                minWidth: 60,
+                suppressFilter: true,
+            },
+            {
+                headerName: this.labelDefacto,
+                headerTooltip: this.labelDefacto,
+                field: 'quantityDefacto',
+                width: 60,
+                minWidth: 60,
+                suppressFilter: true,
+            },
+            {
+                headerName: this.labelPrice1Norm,
+                headerTooltip: this.labelPrice1Norm,
+                field: 'price1Norm',
+                width: 60,
+                minWidth: 60,
+                suppressFilter: true,
+            },
+            {
+                headerName: this.labelSum,
+                field: 'sum',
+                width: 60,
+                minWidth: 60,
+                suppressFilter: true,
+            },
+            {
                 headerName: this.labelAgriculturalMachinery,
                 field: 'brandModel',
                 width: 180,
@@ -81,22 +155,8 @@ export class WorksExpensesComponent implements OnInit {
                 suppressFilter: true,
             },
             {
-                headerName: this.labelLastName  + ' ' + this.labelFirstName,
+                headerName: this.labelLastName   + ' ' +this.labelFirstName ,
                 field: 'employee',
-                width: 100,
-                minWidth: 100,
-                suppressFilter: true,
-            },
-            {
-                headerName: this.labelSparePart,
-                field: 'sparePart',
-                width: 200,
-                minWidth: 200,
-                suppressFilter: true,
-            },
-            {
-                headerName: this.labelSparePartPrice,
-                field: 'sparePartPrice',
                 width: 100,
                 minWidth: 100,
                 suppressFilter: true,
@@ -125,12 +185,17 @@ export class WorksExpensesComponent implements OnInit {
             const rows = modelsArray.map(data => {
                 const model = new WorksExpensesModel();
                 model.date = new Date().toLocaleDateString();
-                model.type = modelsArray[i].type;
+                model.workType = 'Cultivat';
+                model.crop = 'Porumb';
+                model.unitOfMeasure = 'Ha';
+                model.quantity = Math.round(Math.random() * 100);
+                model.quantityNorm = Math.round(Math.random() * 100);
+                model.quantityDefacto = Math.round(Math.random() * 100);
+                model.price1Norm = Math.round(Math.random() * 100);
+                model.sum = Math.round(Math.random() * 100);
                 model.brandModel = modelsArray[i].type + ' ' + modelsArray[i].brand + ' ' + modelsArray[i].model;
                 model.identifier = modelsArray[i].identifier;
                 model.employee = 'Roată Ion';
-                model.sparePart = 'Ambreaj la cutia de viteze';
-                model.sparePartPrice = 3400;
                 i++;
                 return model;
             });

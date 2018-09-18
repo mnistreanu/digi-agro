@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {LangService} from '../../../services/lang.service';
 import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {EmployeeService} from '../../../services/employee.service';
@@ -16,6 +16,7 @@ export class EmployeeListComponent implements OnInit {
     context;
 
     constructor(private router: Router,
+                private route: ActivatedRoute,
                 private langService: LangService,
                 private employeeService: EmployeeService) {
     }
@@ -101,12 +102,12 @@ export class EmployeeListComponent implements OnInit {
     }
 
     public add() {
-        this.router.navigate(['/pages/employee/-1']);
+        this.router.navigate(['./-1'], {relativeTo: this.route});
     }
 
     public onEdit(node) {
         const model = node.data;
-        this.router.navigate(['/pages/employee/' + model.id]);
+        this.router.navigate(['./' + model.id], {relativeTo: this.route});
     }
 
 

@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Constants} from '../common/constants';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import {ParcelModel} from '../pages/telemetry/parcel.model';
 import {environment} from '../../environments/environment';
-import {FieldMapper} from "../common/field.mapper";
-import {LangService} from "./lang.service";
+import {FieldMapper} from '../common/field.mapper';
+import {LangService} from './lang.service';
 
 @Injectable({
     providedIn: 'root'

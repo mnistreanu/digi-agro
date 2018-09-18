@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Constants} from '../common/constants';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import {PayloadModel} from '../pages/payload.model';
 import {ReminderModel} from '../pages/reminder/reminder.model';
-import { environment } from '../../environments/environment';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class ReminderService {

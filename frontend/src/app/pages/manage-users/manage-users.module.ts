@@ -7,7 +7,6 @@ import {DirectivesModule} from '../../theme/directives/directives.module';
 import {AgGridModule} from 'ag-grid-angular/main';
 import {EditRendererComponent} from '../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {UserComponent} from './user/user.component';
 import {EditRendererModule} from '../../modules/aggrid/edit-renderer/edit-renderer.module';
 import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-block.module';
 import {UserFormComponent} from './user-form/user-form.component';
@@ -27,7 +26,7 @@ import {TranslateModule} from '@ngx-translate/core';
         MultiselectDropdownModule,
         AgGridModule.withComponents([EditRendererComponent])
     ],
-    declarations: [UserListComponent, UserComponent, UserFormComponent]
+    declarations: [UserListComponent, UserFormComponent]
 })
 export class ManageUsersModule {
 }

@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Constants} from '../common/constants';
 import {MapEventModel} from '../pages/telemetry/map-events/map-event.model';
 import {Observable} from 'rxjs/Rx';
 import {HttpClient} from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class MapEventService {

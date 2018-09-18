@@ -1,6 +1,6 @@
 import {ImageRendererModule} from './image-renderer.module';
 
-describe('CustomImageRendererModule', () => {
+describe('ImageRendererModule', () => {
     let imageRendererModule: ImageRendererModule;
 
     beforeEach(() => {

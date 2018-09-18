@@ -2,10 +2,10 @@ package com.arobs.controller;
 
 import com.arobs.entity.*;
 import com.arobs.model.parcel.ParcelModel;
-import com.arobs.service.AgroWorkTypeService;
-import com.arobs.service.CropService;
+import com.arobs.service.agrowork.AgroWorkService;
+import com.arobs.service.agrowork.AgroWorkTypeService;
+import com.arobs.service.crop.CropService;
 import com.arobs.service.parcel.ParcelCropService;
-import com.arobs.service.parcel.ParcelCropWorkService;
 import com.arobs.service.parcel.ParcelService;
 import com.arobs.utils.StaticUtil;
 import com.google.gson.reflect.TypeToken;
@@ -33,7 +33,7 @@ public class ParcelController {
     @Autowired
     private CropService cropService;
     @Autowired
-    private ParcelCropWorkService parcelCropWorkService;
+    private AgroWorkService agroWorkService;
     @Autowired
     private AgroWorkTypeService agroWorkTypeService;
 
@@ -52,10 +52,10 @@ public class ParcelController {
             Crop crop = cropService.findOne(parcelCrop.getCropId());
             model.setupCropInfo(parcelCrop, crop);
 
-            ParcelCropWork parcelCropWork = parcelCropWorkService.findLast(parcelCrop.getId());
-            if (parcelCropWork != null) {
-                AgroWorkType agroWorkType = agroWorkTypeService.findOne(parcelCropWork.getWorkTypeId());
-                model.setupLastCropWork(parcelCropWork, agroWorkType);
+            AgroWork lastAgroWork = agroWorkService.findLast(parcelCrop.getId());
+            if (lastAgroWork != null) {
+                AgroWorkType agroWorkType = agroWorkTypeService.findOne(lastAgroWork.getWorkType().getId());
+                model.setupLastCropWork(lastAgroWork, agroWorkType);
             }
 
             ParcelGeometry geometry = parcelService.findParcelGeometry(parcel.getId());

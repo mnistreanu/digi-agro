@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TenantService} from '../../../services/tenant.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ColDef, GridOptions} from 'ag-grid';
 import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {LangService} from "../../../services/lang.service";
@@ -16,6 +16,7 @@ export class TenantListComponent implements OnInit {
     context;
 
     constructor(private router: Router,
+                private route: ActivatedRoute,
                 private langService: LangService,
                 private tenantService: TenantService) {
     }
@@ -131,12 +132,12 @@ export class TenantListComponent implements OnInit {
     }
 
     public add() {
-        this.router.navigate(['/pages/manage-tenants/tenant/-1']);
+        this.router.navigate(['./-1'], {relativeTo: this.route});
     }
 
     public onEdit(node) {
         const model = node.data;
-        this.router.navigate(['/pages/manage-tenants/tenant/' + model.id]);
+        this.router.navigate(['./' + model.id], {relativeTo: this.route});
     }
 
 }

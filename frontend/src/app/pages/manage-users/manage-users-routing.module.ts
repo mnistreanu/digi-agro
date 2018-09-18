@@ -5,8 +5,7 @@ import {UserFormComponent} from './user-form/user-form.component';
 
 const routes: Routes = [
     {path: '', component: UserListComponent},
-    // { path: 'user/:id', component: UserComponent, data: { breadcrumb: 'User Form' }}
-    {path: 'user/:id', component: UserFormComponent, data: {breadcrumb: 'User Form'}}
+    {path: ':id', component: UserFormComponent, data: {breadcrumb: 'User Form'}}
 ];
 
 @NgModule({

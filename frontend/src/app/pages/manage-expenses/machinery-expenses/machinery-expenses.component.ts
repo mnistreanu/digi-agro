@@ -2,7 +2,10 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {MachineService} from '../../../services/machine.service';
-import {MachineryExpensesModel} from './machinery-expenses.model';
+import {MachineryExpenseListModel} from './machinery-expense-list.model';
+import {Router, RouterLink} from '@angular/router';
+import {MachineryExpenseService} from '../../../services/machinery-expense.service';
+import {DateUtil} from '../../../common/dateUtil';
 
 @Component({
     selector: 'app-machinery-expenses',
@@ -23,7 +26,8 @@ export class MachineryExpensesComponent implements OnInit {
     labelSparePart: string;
     labelSparePartPrice: string;
 
-    constructor(private machineService: MachineService,
+    constructor(private machineryExpenseService: MachineryExpenseService,
+                private router: Router,
                 private langService: LangService) {
     }
 
@@ -62,23 +66,17 @@ export class MachineryExpensesComponent implements OnInit {
         const headers: ColDef[] = [
             {
                 headerName: this.labelDate,
-                field: 'date',
+                field: 'expenseDate',
                 width: 90,
                 minWidth: 90,
                 suppressFilter: true,
+                valueFormatter: (params) => DateUtil.formatDateWithTime(params.value)
             },
             {
                 headerName: this.labelAgriculturalMachinery,
-                field: 'brandModel',
+                field: 'machine',
                 width: 180,
                 minWidth: 180
-            },
-            {
-                headerName: this.labelIdentifier,
-                field: 'identifier',
-                width: 60,
-                minWidth: 60,
-                suppressFilter: true,
             },
             {
                 headerName: this.labelLastName  + ' ' + this.labelFirstName,
@@ -120,21 +118,8 @@ export class MachineryExpensesComponent implements OnInit {
 
 
     public setupRows() {
-        let i = 0;
-        this.machineService.findAll().subscribe(modelsArray => {
-            const rows = modelsArray.map(data => {
-                const model = new MachineryExpensesModel();
-                model.date = new Date().toLocaleDateString();
-                model.type = modelsArray[i].type;
-                model.brandModel = modelsArray[i].type + ' ' + modelsArray[i].brand + ' ' + modelsArray[i].model;
-                model.identifier = modelsArray[i].identifier;
-                model.employee = 'Roată Ion';
-                model.sparePart = 'Ambreaj la cutia de viteze';
-                model.sparePartPrice = 3400;
-                i++;
-                return model;
-            });
-            this.options.api.setRowData(rows);
+        this.machineryExpenseService.find().subscribe(models => {
+            this.options.api.setRowData(models);
         });
     }
 
@@ -148,5 +133,14 @@ export class MachineryExpensesComponent implements OnInit {
                 this.options.api.sizeColumnsToFit();
             }
         }, 500);
+    }
+
+    public add() {
+        this.router.navigate(['/pages/expenses/machinery/-1']);
+    }
+
+    public onSelectionChanged() {
+        const model = this.options.api.getSelectedRows()[0];
+        this.router.navigate(['/pages/expenses/machinery/' + model.expenseId]);
     }
 }

@@ -5,7 +5,7 @@ import {TenantComponent} from './tenant/tenant.component';
 
 const routes: Routes = [
     {path: '', component: TenantListComponent},
-    {path: 'tenant/:id', component: TenantComponent, data: {breadcrumb: 'Tenant Form'}}
+    {path: ':id', component: TenantComponent, data: {breadcrumb: 'Tenant Form'}}
 ];
 
 @NgModule({

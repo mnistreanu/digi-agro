@@ -25,7 +25,7 @@ export class PagesComponent implements OnInit, AfterViewInit {
     }
 
     public ngAfterViewInit(): void {
-        document.getElementById('preloader').style['display'] = 'none';
+        document.getElementById('pre-loader').style['display'] = 'none';
     }
 
     public getCurrentPageName(): void {

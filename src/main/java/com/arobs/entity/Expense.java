@@ -15,7 +15,10 @@ public class Expense {
     private Long id;
 
     @Column(name = "tenant_id")
-    private Long tenant;
+    private Long tenantId;
+
+    @Column(name = "agro_work_id")
+    private Long agroWorkId;
 
     @Column(name = "expense_date")
     private Date expenseDate;
@@ -37,12 +40,20 @@ public class Expense {
         this.id = id;
     }
 
-    public Long getTenant() {
-        return tenant;
+    public Long getTenantId() {
+        return tenantId;
     }
 
-    public void setTenant(Long tenant) {
-        this.tenant = tenant;
+    public void setTenantId(Long tenantId) {
+        this.tenantId = tenantId;
+    }
+
+    public Long getAgroWorkId() {
+        return agroWorkId;
+    }
+
+    public void setAgroWorkId(Long agroWorkId) {
+        this.agroWorkId = agroWorkId;
     }
 
     public Date getExpenseDate() {
@@ -76,4 +87,5 @@ public class Expense {
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
+
 }

@@ -7,8 +7,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {RouterModule} from '@angular/router';
 import {NotificationListComponent} from './notification-list.component';
-import {ImageRendererComponent} from '../../../modules/aggrid/image-renderer/image-renderer.component';
 import {ImageRendererModule} from '../../../modules/aggrid/image-renderer/image-renderer.module';
+import {ImageRendererComponent} from '../../../modules/aggrid/image-renderer/image-renderer.component';
 
 export const routes = [
     {path: '', component: NotificationListComponent, pathMatch: 'full'}

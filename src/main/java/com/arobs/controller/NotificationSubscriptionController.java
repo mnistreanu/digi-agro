@@ -2,13 +2,12 @@ package com.arobs.controller;
 
 import com.arobs.entity.NotificationSubscription;
 import com.arobs.entity.NotificationType;
-import com.arobs.model.PayloadModel;
 import com.arobs.model.notification.NotificationChangeSubscriptionModel;
 import com.arobs.model.notification.NotificationSubscriptionModel;
 import com.arobs.model.notification.NotificationTypeModel;
 import com.arobs.service.AuthService;
-import com.arobs.service.NotificationSubscriptionService;
-import com.arobs.service.NotificationTypeService;
+import com.arobs.service.notification.NotificationSubscriptionService;
+import com.arobs.service.notification.NotificationTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;

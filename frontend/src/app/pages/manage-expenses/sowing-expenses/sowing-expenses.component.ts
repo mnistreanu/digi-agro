@@ -2,7 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ColDef, ColGroupDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {WeatherService} from '../../../services/weather.service';
-import {CustomImageRendererComponent} from '../../../modules/aggrid/custom-image-renderer/custom-image-renderer.component';
+import {ImageRendererComponent} from '../../../modules/aggrid/image-renderer/image-renderer.component';
 import {SowingExpensesModel} from './sowing-expenses.model';
 
 @Component({
@@ -71,7 +71,7 @@ export class SowingExpensesComponent implements OnInit {
             {
                 headerName: '',
                 field: 'icon',
-                cellRendererFramework: CustomImageRendererComponent,
+                cellRendererFramework: ImageRendererComponent,
                 cellRendererParams: {
                     iconField: 'icon'
                 },
@@ -190,25 +190,25 @@ export class SowingExpensesComponent implements OnInit {
 
 
     public setupRows() {
-        this.weatherService.findWeatherHistory().subscribe(payloadModel => {
-            const rows = payloadModel.payload.map(data => {
-                const model = new SowingExpensesModel();
-                model.date = new Date(data.dt).toLocaleDateString();
-                model.icon = '/assets/img/crops/wheat.png';
-                model.crop = 'Porumb';
-                model.variety = 'Mama';
-                model.cropAndVariety = 'Porumb "Mama"',
-                model.unitOfMeasure = 'tone';
-                model.sownArea = 121;
-                model.parcels = 'Jora de Sus, Campul din deal, Delta Dunarii',
-                model.sown1Ha = 51;
-                model.totalSown = model.sownArea * model.sown1Ha;
-                model.unitPrice = 15.20;
-                model.totalAmount = model.unitPrice * model.unitPrice;
-                return model;
-            });
-            this.options.api.setRowData(rows);
-        });
+        // this.weatherService.findWeatherHistory().subscribe(payloadModel => {
+        //     const rows = payloadModel.payload.map(data => {
+        //         const model = new SowingExpensesModel();
+        //         model.date = new Date(data.dt).toLocaleDateString();
+        //         model.icon = '/assets/img/crops/wheat.png';
+        //         model.crop = 'Porumb';
+        //         model.variety = 'Mama';
+        //         model.cropAndVariety = 'Porumb "Mama"',
+        //         model.unitOfMeasure = 'tone';
+        //         model.sownArea = 121;
+        //         model.parcels = 'Jora de Sus, Campul din deal, Delta Dunarii',
+        //         model.sown1Ha = 51;
+        //         model.totalSown = model.sownArea * model.sown1Ha;
+        //         model.unitPrice = 15.20;
+        //         model.totalAmount = model.unitPrice * model.unitPrice;
+        //         return model;
+        //     });
+        //     this.options.api.setRowData(rows);
+        // });
     }
 
     public onGridReady() {

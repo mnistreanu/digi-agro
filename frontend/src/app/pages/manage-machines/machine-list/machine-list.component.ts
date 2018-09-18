@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {ColDef, GridOptions} from 'ag-grid';
 import {MachineService} from '../../../services/machine.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {LangService} from '../../../services/lang.service';
 
 @Component({
@@ -16,6 +16,7 @@ export class MachineListComponent implements OnInit {
     context;
 
     constructor(private router: Router,
+                private route: ActivatedRoute,
                 private langService: LangService,
                 private machineService: MachineService) {
     }
@@ -113,12 +114,12 @@ export class MachineListComponent implements OnInit {
 
 
     public add() {
-        this.router.navigate(['/pages/manage-machines/machine/-1']);
+        this.router.navigate(['./-1'], {relativeTo: this.route});
     }
 
     public onEdit(node) {
         const model = node.data;
-        this.router.navigate(['/pages/manage-machines/machine/' + model.id]);
+        this.router.navigate(['./' + model.id], {relativeTo: this.route});
     }
 
 }

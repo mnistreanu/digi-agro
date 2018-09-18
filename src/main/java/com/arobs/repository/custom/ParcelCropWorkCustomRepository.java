@@ -8,6 +8,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 @Repository
+@Deprecated
 public class ParcelCropWorkCustomRepository {
 
     @PersistenceContext

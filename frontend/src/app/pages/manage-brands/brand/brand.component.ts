@@ -105,7 +105,7 @@ export class BrandComponent implements OnInit {
     public remove() {
         this.brandService.remove(this.model).subscribe(() => {
             this.toastr.success(this.labels[Messages.REMOVED]);
-            this.router.navigate(['/pages/manage-brands']);
+            this.router.navigate(['../'], {relativeTo: this.route});
         });
     }
 

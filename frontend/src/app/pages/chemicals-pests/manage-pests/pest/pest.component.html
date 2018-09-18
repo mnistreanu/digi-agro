@@ -1,0 +1,44 @@
+<form [formGroup]="form" *ngIf="model" (keydown.enter)="$event.preventDefault()">
+
+    <div widget class="card bottom-30">
+        <div class="card-header">
+            <span translate>nav.harmful-organism</span>
+            <div class="widget-controls">
+                <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
+                <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
+                <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
+                <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>
+                <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+            </div>
+        </div>
+        <div class="card-body widget-body">
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <label for="nameRo" translate>nameRo</label>
+                    <input id="nameRo" class="form-control checking-field" formControlName="nameRo">
+                    <app-form-error-block [control]="form.get('nameRo')"
+                                          [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <label for="nameRu" translate>nameRu</label>
+                    <input id="nameRu" class="form-control checking-field" formControlName="nameRu">
+                    <app-form-error-block [control]="form.get('nameRu')"
+                                          [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-danger" *ngIf="model.id != null"
+                        (click)="remove()" translate>action.remove
+                </button>
+                <button class="btn btn-success pull-right" (click)="save(form)" translate>action.save</button>
+            </div>
+
+        </div>
+    </div>
+
+</form>

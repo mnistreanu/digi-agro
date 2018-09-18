@@ -1,1 +1,3 @@
-export interface SelectItem {id : number , name : number}
+export class SelectItem {
+    constructor(public id : any, public name : any) {}
+}

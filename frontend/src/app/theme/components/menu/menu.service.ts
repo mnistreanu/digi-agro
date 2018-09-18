@@ -36,11 +36,29 @@ export class MenuService {
 
         if (isSuperAdmin || isAdmin) {
             menuItems.push({
-                title: 'nav.users',
-                routerLink: '/pages/manage-users',
-                icon: 'fa-users',
+                title: 'nav.enterprise',
+                routerLink: 'enterprise',
+                icon: 'fa fa-building',
                 selected: false,
-                expanded: false
+                expanded: false,
+                subMenu: [
+                    {
+                        title: 'nav.branches',
+                        routerLink: 'enterprise/manage-branches'
+                    },
+                    {
+                        title: 'nav.users',
+                        routerLink: 'enterprise/manage-users'
+                    },
+                    {
+                        title: 'nav.employees',
+                        routerLink: 'enterprise/manage-employees'
+                    },
+                    {
+                        title: 'nav.machines',
+                        routerLink: 'enterprise/manage-machines'
+                    },
+                ]
             });
         }
 
@@ -48,7 +66,7 @@ export class MenuService {
             menuItems.push({
                 title: 'nav.branches',
                 routerLink: '/pages/manage-branches',
-                icon: 'fas fa-code-branch',
+                icon: 'fa fa-code-branch',
                 selected: false,
                 expanded: false
             });
@@ -71,7 +89,7 @@ export class MenuService {
             menuItems.push({
                 title: 'nav.machines',
                 routerLink: '/pages/manage-machines',
-                icon: 'fas fa-car',
+                icon: 'fa fa-car',
                 selected: false,
                 expanded: false
             });
@@ -147,7 +165,7 @@ export class MenuService {
             menuItems.push({
                 title: 'nav.crops',
                 routerLink: 'manage-crops',
-                icon: 'fas fa-leaf',
+                icon: 'fa fa-leaf',
                 selected: false,
                 expanded: false,
                 subMenu: [
@@ -157,7 +175,35 @@ export class MenuService {
                     },
                     {
                         title: 'nav.crops-varieties',
+                        routerLink: 'manage-crops/crop-variety-tree'
+                    },
+                    {
+                        title: 'nav.crop-varieties',
                         routerLink: 'manage-crops/crop-varieties'
+                    }
+                ]
+            });
+        }
+
+        if (isSuperAdmin || isAdmin) {
+            menuItems.push({
+                title: 'nav.chemicals-and-pests',
+                routerLink: 'chemicals-pests',
+                icon: 'fa fa-flask',
+                selected: false,
+                expanded: false,
+                subMenu: [
+                    {
+                        title: 'nav.pesticides',
+                        routerLink: 'chemicals-pests/pesticide'
+                    },
+                    {
+                        title: 'nav.fertilizers',
+                        routerLink: 'chemicals-pests/fertilizer'
+                    },
+                    {
+                        title: 'nav.harmful-organisms',
+                        routerLink: 'chemicals-pests/pest'
                     }
                 ]
             });
@@ -194,6 +240,30 @@ export class MenuService {
                     {
                         title: 'nav.fertilizers',
                         routerLink: 'expenses/fertilizers',
+                    },
+                ]
+            });
+        }
+
+        if (isAdmin || isUser) {
+            menuItems.push({
+                title: 'nav.agricultural-works',
+                routerLink: 'agro-works',
+                icon: 'fa fa-pied-piper',
+                selected: false,
+                expanded: false,
+                subMenu: [
+                    {
+                        title: 'nav.sowing',
+                        routerLink: 'agro-works/sowing',
+                    },
+                    {
+                        title: 'nav.other-agricultural-works',
+                        routerLink: 'agro-works/works',
+                    },
+                    {
+                        title: 'nav.harvesting',
+                        routerLink: 'agro-works/harvesting',
                     },
                 ]
             });

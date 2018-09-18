@@ -9,8 +9,8 @@ import {GeoService} from '../../../services/geo.service';
 import {LangService} from '../../../services/lang.service';
 import {GeoLocalizedItem} from '../../../interfaces/geo-localized-item.interface';
 import { SelectItem } from '../../../dto/select-item.dto';
-import { CropService } from '../../../services/crop.service';
-import { CropModel } from '../crop-variety/crop.model';
+import { CropService } from '../../../services/crop/crop.service';
+import { CropModel } from '../crop.model';
 
 @Component({
     selector: 'app-crop',

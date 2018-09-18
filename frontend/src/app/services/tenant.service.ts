@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Constants} from '../common/constants';
 import {HttpClient} from '@angular/common/http';
 import {TenantModel} from '../pages/manage-tenants/tenant/tenant.model';
 import {Observable} from 'rxjs/Rx';
 import {ListItem} from '../interfaces/list-item.interface';
-import { environment } from '../../environments/environment';
+import {environment} from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
