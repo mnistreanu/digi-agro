@@ -20,7 +20,27 @@ public class WeatherSchedulerTest {
 	}
 	
 	@Test
-	public void testReadWeather() {
+	public void testReadWeatherSnapshotsByCity() {
 		weatherScheduler.synchronizeWeatherSnapshotsByCity();
+	}
+	
+	@Test
+	public void testReadWeatherCoord() {
+		weatherScheduler.synchronizeWeatherSnapshotsByCoord();
+	}
+	
+	@Test
+	public void testReadWeatherHistory() {
+		weatherScheduler.synchronizeWeatherHistory();
+	}
+	
+	@Test
+	public void testReadWeatherForecastsHour() {
+		weatherScheduler.synchronizeWeatherForecastsHour();
+	}
+	
+	@Test
+	public void testReadForecastsDaily() {
+		weatherScheduler.synchronizeWeatherForecastsDaily();
 	}
 }
