@@ -54,25 +54,31 @@ export class FertilizerListComponent implements OnInit {
                 }
             },
             {
-                headerName: 'name RO',
+                headerName: 'fertilizer.type',
+                field: 'typeId',
+                width: 150,
+                minWidth: 100
+            },
+            {
+                headerName: 'fertilizer.name-ro',
                 field: 'nameRo',
                 width: 150,
                 minWidth: 100
             },
             {
-                headerName: 'name RU',
+                headerName: 'fertilizer.name-ru',
                 field: 'nameRu',
                 width: 150,
                 minWidth: 100
             },
             {
-                headerName: 'description RO',
+                headerName: 'fertilizer.description-ro',
                 field: 'descriptionRo',
                 width: 300,
                 minWidth: 200
             },
             {
-                headerName: 'description RU',
+                headerName: 'fertilizer.description-ru',
                 field: 'descriptionRu',
                 width: 300,
                 minWidth: 200

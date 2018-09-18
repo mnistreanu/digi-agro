@@ -1,11 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgModule, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, RouterModule, Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {LangService} from '../../../../services/lang.service';
 import {Messages} from '../../../../common/messages';
 import {FertilizerModel} from '../fertilizer.model';
 import {FertilizerService} from '../../../../services/chemicals-pests/fertilizer.service';
+
+@NgModule({
+    imports: [
+        RouterModule,
+    ],
+    providers: []
+})
 
 @Component({
     selector: 'app-fertilizer',
@@ -24,6 +31,7 @@ export class FertilizerComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private langService: LangService,
                 private router: Router,
+                private routerLink: RouterLink,
                 private route: ActivatedRoute,
                 private fertilizerService: FertilizerService,
                 private toastr: ToastrService) {
@@ -65,10 +73,11 @@ export class FertilizerComponent implements OnInit {
     private buildForm() {
 
         this.form = this.fb.group({
+            typeId: [this.model.typeId, Validators.required],
             nameRo: [this.model.nameRo, Validators.required],
-            nameRu: [this.model.nameRu, Validators.required],
+            nameRu: [this.model.nameRu],
             descriptionRo: [this.model.descriptionRo, Validators.required],
-            descriptionRu: [this.model.descriptionRu, Validators.required]
+            descriptionRu: [this.model.descriptionRu],
         });
     }
 
@@ -87,7 +96,7 @@ export class FertilizerComponent implements OnInit {
         this.fertilizerService.save(this.model).subscribe((model) => {
             this.model = model;
             this.toastr.success(this.labels[Messages.SAVED]);
-            this.router.navigate(['/pages/employee']);
+            this.router.navigate(['./fertilizer-list'], { relativeTo: this.route });
         });
 
     }
@@ -95,7 +104,7 @@ export class FertilizerComponent implements OnInit {
     public remove() {
         this.fertilizerService.remove(this.model).subscribe(() => {
             this.toastr.success(this.labels[Messages.REMOVED]);
-            this.router.navigate(['/pages/employee']);
+            this.router.navigate(['chemicals-pests/fertilizer-list']);
         });
     }
 

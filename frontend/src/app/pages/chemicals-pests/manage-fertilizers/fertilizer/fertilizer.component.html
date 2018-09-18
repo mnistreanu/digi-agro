@@ -14,19 +14,50 @@
         <div class="card-body widget-body">
 
             <div class="form-group row">
-                <div class="col-sm-1">
+                <div class="col-sm-2">
+                    <label for="typeId" translate>fertilizer.type</label>
+                </div>
+                <div class="col-sm-10">
+                    <select id="typeId" class="form-control custom-select" formControlName="typeId">
+                        <option value="1" translate>fertilizer.type-mineral</option>
+                        <option value="2" translate>fertilizer.type-chemical</option>
+                        <option value="3" translate>fertilizer.type-organic</option>
+                    </select>
+                    <app-form-error-block [control]="form.get('typeId')"
+                                          [formSubmitted]="submitted"></app-form-error-block>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-2">
                     <label for="nameRo" translate>fertilizer.name-ro</label>
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-10">
                     <input id="nameRo" class="form-control checking-field" formControlName="nameRo">
                     <app-form-error-block [control]="form.get('nameRo')"
                                           [formSubmitted]="submitted"></app-form-error-block>
 
                 </div>
-                <div class="col-sm-1">
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-2">
+                    <label for="descriptionRo" translate>fertilizer.description-ro</label>
+                </div>
+                <div class="col-sm-10">
+                    <textarea id="descriptionRo" class="form-control checking-field" style="height: 300px; min-height: 100%;"
+                              formControlName="descriptionRo"></textarea>
+                    <app-form-error-block [control]="form.get('descriptionRo')"
+                                          [formSubmitted]="submitted"></app-form-error-block>
+
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-2">
                     <label for="nameRu" translate>fertilizer.name-ru</label>
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-10">
                     <input id="nameRu" class="form-control checking-field" formControlName="nameRu">
                     <app-form-error-block [control]="form.get('nameRu')"
                                           [formSubmitted]="submitted"></app-form-error-block>
@@ -34,20 +65,12 @@
             </div>
 
             <div class="form-group row">
-                <div class="col-sm-1">
-                    <label for="descriptionRo" translate>fertilizer.name-ro</label>
+                <div class="col-sm-2">
+                    <label for="descriptionRu" translate>fertilizer.description-ru</label>
                 </div>
-                <div class="col-sm-5">
-                    <textarea id="descriptionRo" class="form-control checking-field" formControlName="descriptionRo"></textarea>
-                    <app-form-error-block [control]="form.get('descriptionRo')"
-                                          [formSubmitted]="submitted"></app-form-error-block>
-
-                </div>
-                <div class="col-sm-1">
-                    <label for="descriptionRu" translate>fertilizer.name-ru</label>
-                </div>
-                <div class="col-sm-5">
-                    <textarea id="descriptionRu" class="form-control checking-field" formControlName="descriptionRu"></textarea>
+                <div class="col-sm-10">
+                    <textarea id="descriptionRu" class="form-control checking-field" style="height: 300px; min-height: 100%;"
+                              formControlName="descriptionRu"></textarea>
                     <app-form-error-block [control]="form.get('descriptionRu')"
                                           [formSubmitted]="submitted"></app-form-error-block>
                 </div>            </div>
