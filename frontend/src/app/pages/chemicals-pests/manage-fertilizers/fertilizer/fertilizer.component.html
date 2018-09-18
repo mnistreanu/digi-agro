@@ -18,12 +18,12 @@
                     <label for="typeId" translate>fertilizer.type</label>
                 </div>
                 <div class="col-sm-10">
-                    <select id="typeId" class="form-control custom-select" formControlName="typeId">
-                        <option value="1" translate>fertilizer.type-mineral</option>
-                        <option value="2" translate>fertilizer.type-chemical</option>
-                        <option value="3" translate>fertilizer.type-organic</option>
+                    <select id="typeId" class="form-control custom-select" formControlName="fertilizerType">
+                        <option value="MINERAL" translate>fertilizer-type.MINERAL</option>
+                        <option value="CHEMICAL" translate>fertilizer-type.CHEMICAL</option>
+                        <option value="ORGANIC" translate>fertilizer-type.ORGANIC</option>
                     </select>
-                    <app-form-error-block [control]="form.get('typeId')"
+                    <app-form-error-block [control]="form.get('fertilizerType')"
                                           [formSubmitted]="submitted"></app-form-error-block>
 
                 </div>

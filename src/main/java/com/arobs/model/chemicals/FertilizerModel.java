@@ -2,13 +2,14 @@ package com.arobs.model.chemicals;
 
 
 import com.arobs.entity.Fertilizer;
+import com.arobs.enums.FertilizerType;
 
 import java.io.Serializable;
 
 public class FertilizerModel implements Serializable {
 
     private Long id;
-    private Long typeId;
+    private FertilizerType fertilizerType;
     private String nameRo;
     private String nameRu;
     private String descriptionRo;
@@ -19,7 +20,7 @@ public class FertilizerModel implements Serializable {
 
     public FertilizerModel(Fertilizer fertilizer) {
         this.id = fertilizer.getId();
-        this.typeId = fertilizer.getTypeId();
+        this.fertilizerType = fertilizer.getFertilizerType();
         this.nameRo = fertilizer.getNameRo();
         this.nameRu = fertilizer.getNameRu();
         this.descriptionRo = fertilizer.getDescriptionRo();
@@ -34,12 +35,12 @@ public class FertilizerModel implements Serializable {
         this.id = id;
     }
 
-    public Long getTypeId() {
-        return typeId;
+    public FertilizerType getFertilizerType() {
+        return fertilizerType;
     }
 
-    public void setTypeId(Long typeId) {
-        this.typeId = typeId;
+    public void setFertilizerType(FertilizerType fertilizerType) {
+        this.fertilizerType = fertilizerType;
     }
 
     public String getNameRo() {

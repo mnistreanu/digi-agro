@@ -2,6 +2,7 @@ package com.arobs.service.chemicals;
 
 import com.arobs.entity.Employee;
 import com.arobs.entity.Fertilizer;
+import com.arobs.enums.FertilizerType;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.EmployeeModel;
 import com.arobs.model.chemicals.FertilizerModel;
@@ -18,18 +19,22 @@ public class FertilizerService implements HasRepository<FertilizerRepository> {
     @Autowired
     private FertilizerRepository fertilizerRepository;
 
+    @Override
+    public FertilizerRepository getRepository() {
+        return fertilizerRepository;
+    }
+
     public List<Fertilizer> find() {
         return getRepository().find();
     }
 
-    public List<Fertilizer> find(Long typeId) {
-        return getRepository().find(typeId);
+    public List<Fertilizer> find(FertilizerType fertilizerType) {
+        return getRepository().find(fertilizerType);
     }
 
     public Fertilizer findOne(Long fertilizerId) {
         return getRepository().findOne(fertilizerId);
     }
-
 
     @Transactional
     public Fertilizer save(FertilizerModel model) {
@@ -47,7 +52,7 @@ public class FertilizerService implements HasRepository<FertilizerRepository> {
     }
 
     private void copyValues(Fertilizer entity, FertilizerModel model) {
-        entity.setTypeId(model.getTypeId());
+        entity.setFertilizerType(model.getFertilizerType());
         entity.setNameRo(model.getNameRo());
         entity.setNameRu(model.getNameRu());
         entity.setDescriptionRo(model.getDescriptionRo());
@@ -57,9 +62,5 @@ public class FertilizerService implements HasRepository<FertilizerRepository> {
     @Transactional
     public void remove(Long id) {
         getRepository().remove(id);
-    }
-    @Override
-    public FertilizerRepository getRepository() {
-        return fertilizerRepository;
     }
 }

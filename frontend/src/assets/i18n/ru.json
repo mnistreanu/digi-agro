@@ -69,15 +69,17 @@
 	},
 	"fertilizer": {
 		"add-edit": "Добавить / редактировать удобрение",
-		"type-chemical": "Химический",
+		"description-ro": "Описание (Рум)",
+		"description-ru": "Описание (Рус)",
 		"name": "Название",
 		"name-ro": "Название (Рум)",
-		"description-ro": "Описание (Рум)",
 		"name-ru": "Название (Рус)",
-		"description-ru": "Описание (Рус)",
-		"type": "Тип",
-		"type-mineral": "Минеральная",
-		"type-organic": "Органическое"
+		"type": "Тип"
+	},
+	"fertilizer-type": {
+		"CHEMICAL": "Химический",
+		"MINERAL": "Минеральная",
+		"ORGANIC": "Органическое"
 	},
 	"forecast": {
 		"additional_info": "Дополнительная информация",

@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FertilizerService} from '../../../../services/chemicals-pests/fertilizer.service';
 import {LangService} from '../../../../services/lang.service';
 import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
+import {FertilizerModel} from '../fertilizer.model';
 
 @Component({
     selector: 'app-fertilizer-list',
@@ -56,7 +57,7 @@ export class FertilizerListComponent implements OnInit {
             },
             {
                 headerName: 'fertilizer.type',
-                field: 'typeId',
+                field: 'fertilizerType',
                 width: 150,
                 minWidth: 100
             },
@@ -97,7 +98,16 @@ export class FertilizerListComponent implements OnInit {
 
     private setupRows() {
         this.fertilizerService.find().subscribe(models => {
+            this.adjustModels(models);
             this.options.api.setRowData(models);
+        });
+    }
+
+    private adjustModels(models: FertilizerModel[]) {
+        models.forEach(model => {
+            this.langService
+                .get('fertilizer-type.' + model.fertilizerType)
+                .subscribe(m => model.fertilizerType = m);
         });
     }
 

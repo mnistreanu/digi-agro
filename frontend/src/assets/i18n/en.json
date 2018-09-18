@@ -69,15 +69,17 @@
 	},
 	"fertilizer": {
 		"add-edit": "Add / Edit fertilizer",
-		"type-chemical": "Chemical",
+		"description-ro": "Description",
+		"description-ru": "Description",
 		"name": "Name",
 		"name-ro": "Name",
-		"description-ro": "Description",
 		"name-ru": "Name",
-		"description-ru": "Description",
-		"type": "Type",
-		"type-mineral": "Mineral",
-		"type-organic": "Organic"
+		"type": "Type"
+	},
+	"fertilizer-type": {
+		"CHEMICAL": "Chemical",
+		"MINERAL": "Mineral",
+		"ORGANIC": "Organic"
 	},
 	"forecast": {
 		"additional_info": "Additional information",

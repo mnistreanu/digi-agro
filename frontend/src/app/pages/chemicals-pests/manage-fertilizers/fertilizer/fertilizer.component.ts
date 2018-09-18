@@ -72,7 +72,7 @@ export class FertilizerComponent implements OnInit {
     private buildForm() {
 
         this.form = this.fb.group({
-            typeId: [this.model.typeId, Validators.required],
+            fertilizerType: [this.model.fertilizerType, Validators.required],
             nameRo: [this.model.nameRo, Validators.required],
             nameRu: [this.model.nameRu],
             descriptionRo: [this.model.descriptionRo, Validators.required],

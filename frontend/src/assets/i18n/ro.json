@@ -69,15 +69,17 @@
 	},
 	"fertilizer": {
 		"add-edit": "Adăugați / modificați îngrășământul",
-		"type-chemical": "Chimică",
+		"description-ro": "Descriere (Rom)",
+		"description-ru": "Descriere (Rus)",
 		"name": "Denumire",
 		"name-ro": "Denumire (Rom)",
-		"description-ro": "Descriere (Rom)",
 		"name-ru": "Denumire (Rus)",
-		"description-ru": "Descriere (Rus)",
-		"type": "Tip",
-		"type-mineral": "Minerală",
-		"type-organic": "Organic"
+		"type": "Tip"
+	},
+	"fertilizer-type": {
+		"CHEMICAL": "Chimică",
+		"MINERAL": "Minerală",
+		"ORGANIC": "Organic"
 	},
 	"forecast": {
 		"additional_info": "Informații suplimnetare",

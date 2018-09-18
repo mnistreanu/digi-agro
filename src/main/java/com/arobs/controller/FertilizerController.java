@@ -2,6 +2,7 @@ package com.arobs.controller;
 
 import com.arobs.entity.Employee;
 import com.arobs.entity.Fertilizer;
+import com.arobs.enums.FertilizerType;
 import com.arobs.model.EmployeeModel;
 import com.arobs.model.chemicals.FertilizerModel;
 import com.arobs.service.chemicals.FertilizerService;
@@ -31,10 +32,10 @@ public class FertilizerController {
         return ResponseEntity.ok(models);
     }
 
-    @RequestMapping(value = "/by-type/{typeId}", method = RequestMethod.GET)
-    public ResponseEntity<List<FertilizerModel>> getFertilizers(@PathVariable("typeId") final Long typeId) {
+    @RequestMapping(value = "/by-type/{type}", method = RequestMethod.GET)
+    public ResponseEntity<List<FertilizerModel>> getFertilizers(@PathVariable("type") FertilizerType type) {
 
-        List<Fertilizer> fertilizers = fertilizerService.find(typeId);
+        List<Fertilizer> fertilizers = fertilizerService.find(type);
         List<FertilizerModel> models = fertilizers.stream().map(FertilizerModel::new).collect(Collectors.toList());
 
         return ResponseEntity.ok(models);
