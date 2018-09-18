@@ -181,7 +181,7 @@ export class MenuService {
                     },
                     {
                         title: 'nav.fertilizers',
-                        routerLink: 'chemicals-pests/fertilizer-list'
+                        routerLink: 'chemicals-pests/fertilizer'
                     },
                     {
                         title: 'nav.harmful-organisms',

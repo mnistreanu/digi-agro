@@ -31,7 +31,6 @@ export class FertilizerComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private langService: LangService,
                 private router: Router,
-                private routerLink: RouterLink,
                 private route: ActivatedRoute,
                 private fertilizerService: FertilizerService,
                 private toastr: ToastrService) {
@@ -96,7 +95,7 @@ export class FertilizerComponent implements OnInit {
         this.fertilizerService.save(this.model).subscribe((model) => {
             this.model = model;
             this.toastr.success(this.labels[Messages.SAVED]);
-            this.router.navigate(['./fertilizer-list'], { relativeTo: this.route });
+            this.router.navigate(['../'], { relativeTo: this.route });
         });
 
     }
@@ -104,7 +103,7 @@ export class FertilizerComponent implements OnInit {
     public remove() {
         this.fertilizerService.remove(this.model).subscribe(() => {
             this.toastr.success(this.labels[Messages.REMOVED]);
-            this.router.navigate(['chemicals-pests/fertilizer-list']);
+            this.router.navigate(['../'], { relativeTo: this.route });
         });
     }
 

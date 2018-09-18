@@ -22,7 +22,7 @@ const routes: Routes = [
     {path: 'pesticide-list', component: PesticideListComponent},
     {path: 'pesticide/:id', component: PesticideComponent, data: {breadcrumb: 'Pesticide Form'}},
 
-    {path: 'fertilizer-list', component: FertilizerListComponent},
+    {path: 'fertilizer', component: FertilizerListComponent},
     {path: 'fertilizer/:id', component: FertilizerComponent, data: {breadcrumb: 'Fertilizer Form'}}
 ];
 
