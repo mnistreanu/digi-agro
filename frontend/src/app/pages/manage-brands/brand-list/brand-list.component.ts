@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ColDef, GridOptions} from 'ag-grid';
 import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {BrandService} from '../../../services/brand.service';
@@ -17,6 +17,7 @@ export class BrandListComponent implements OnInit {
 
     constructor(private router: Router,
                 private langService: LangService,
+                private route: ActivatedRoute,
                 private brandService: BrandService) {
     }
 
@@ -89,12 +90,12 @@ export class BrandListComponent implements OnInit {
     }
 
     public add() {
-        this.router.navigate(['/pages/manage-brands/brand/-1']);
+        this.router.navigate(['./-1'], {relativeTo: this.route});
     }
 
     public onEdit(node) {
         const model = node.data;
-        this.router.navigate(['/pages/manage-brands/brand/' + model.id]);
+        this.router.navigate(['./' + model.id], {relativeTo: this.route});
     }
 
 }

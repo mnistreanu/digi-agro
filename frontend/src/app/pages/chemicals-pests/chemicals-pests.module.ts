@@ -16,10 +16,10 @@ import {FertilizerListComponent} from './manage-fertilizers/fertilizer-list/fert
 import {FertilizerComponent} from './manage-fertilizers/fertilizer/fertilizer.component';
 
 const routes: Routes = [
-    {path: 'pest-list', component: PestListComponent},
+    {path: 'pest', component: PestListComponent},
     {path: 'pest/:id', component: PestComponent, data: {breadcrumb: 'Pest Form'}},
 
-    {path: 'pesticide-list', component: PesticideListComponent},
+    {path: 'pesticide', component: PesticideListComponent},
     {path: 'pesticide/:id', component: PesticideComponent, data: {breadcrumb: 'Pesticide Form'}},
 
     {path: 'fertilizer', component: FertilizerListComponent},

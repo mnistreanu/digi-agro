@@ -194,7 +194,7 @@ export class BranchComponent implements OnInit {
     public remove() {
         this.branchService.remove(this.model).subscribe(() => {
             this.toastr.success(this.labelRemoved);
-            this.router.navigate(['/pages/manage-branches']);
+            this.router.navigate(['../'], {relativeTo: this.route});
         });
     }
 

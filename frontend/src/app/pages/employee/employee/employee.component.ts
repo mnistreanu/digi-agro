@@ -86,7 +86,7 @@ export class EmployeeComponent implements OnInit {
         this.employeeService.save(this.model).subscribe((model) => {
             this.model = model;
             this.toastr.success(this.labels[Messages.SAVED]);
-            this.router.navigate(['/pages/employee']);
+            this.router.navigate(['../'], {relativeTo: this.route});
         });
 
     }
@@ -94,7 +94,7 @@ export class EmployeeComponent implements OnInit {
     public remove() {
         this.employeeService.remove(this.model).subscribe(() => {
             this.toastr.success(this.labels[Messages.REMOVED]);
-            this.router.navigate(['/pages/employee']);
+            this.router.navigate(['../'], {relativeTo: this.route});
         });
     }
 

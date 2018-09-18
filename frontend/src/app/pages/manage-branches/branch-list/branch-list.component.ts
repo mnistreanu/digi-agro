@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ColDef, GridOptions} from 'ag-grid';
 import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {BranchService} from '../../../services/branch.service';
@@ -17,6 +17,7 @@ export class BranchListComponent implements OnInit {
     context;
 
     constructor(private router: Router,
+                private route: ActivatedRoute,
                 private langService: LangService,
                 private branchService: BranchService) {
     }
@@ -159,12 +160,12 @@ export class BranchListComponent implements OnInit {
     }
 
     public add() {
-        this.router.navigate(['/pages/manage-branches/branch/-1']);
+        this.router.navigate(['./-1'], {relativeTo: this.route});
     }
 
     public onEdit(node) {
         const model = node.data;
-        this.router.navigate(['/pages/manage-branches/branch/' + model.id]);
+        this.router.navigate(['./' + model.id], {relativeTo: this.route});
     }
 
 }

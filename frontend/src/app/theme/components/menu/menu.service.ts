@@ -195,7 +195,7 @@ export class MenuService {
                 subMenu: [
                     {
                         title: 'nav.pesticides',
-                        routerLink: 'chemicals-pests/pesticide-list'
+                        routerLink: 'chemicals-pests/pesticide'
                     },
                     {
                         title: 'nav.fertilizers',
@@ -203,7 +203,7 @@ export class MenuService {
                     },
                     {
                         title: 'nav.harmful-organisms',
-                        routerLink: 'chemicals-pests/pest-list'
+                        routerLink: 'chemicals-pests/pest'
                     }
                 ]
             });

@@ -177,7 +177,7 @@ export class TenantComponent implements OnInit {
     public remove() {
         this.tenantService.remove(this.model).subscribe(() => {
             this.toastr.success(this.labelRemoved);
-            this.router.navigate(['/pages/manage-tenants']);
+            this.router.navigate(['../'], {relativeTo: this.route});
         });
     }
 

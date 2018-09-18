@@ -85,7 +85,7 @@ export class PesticideComponent implements OnInit {
         this.pesticideService.save(this.model).subscribe((model) => {
             this.model = model;
             this.toastr.success(this.labels[Messages.SAVED]);
-            this.router.navigate(['/pages/employee']);
+            this.router.navigate(['../'], { relativeTo: this.route });
         });
 
     }
@@ -93,7 +93,7 @@ export class PesticideComponent implements OnInit {
     public remove() {
         this.pesticideService.remove(this.model).subscribe(() => {
             this.toastr.success(this.labels[Messages.REMOVED]);
-            this.router.navigate(['/pages/employee']);
+            this.router.navigate(['../'], { relativeTo: this.route });
         });
     }
 

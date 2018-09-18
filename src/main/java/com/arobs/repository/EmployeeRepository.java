@@ -16,7 +16,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query("UPDATE Employee e SET e.active = false WHERE e.id = :id")
     void remove(@Param("id") Long id);
 
-    @Query("SELECT e FROM Employee e WHERE e.tenant.id = :tenantId")
+    @Query("SELECT e FROM Employee e WHERE e.active = true AND e.tenant.id = :tenantId")
     List<Employee> find(@Param("tenantId") Long tenantId);
 
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {PesticideService} from '../../../../services/chemicals-pests/pesticide.service';
 import {LangService} from '../../../../services/lang.service';
 import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
@@ -16,6 +16,7 @@ export class PesticideListComponent implements OnInit {
     context;
 
     constructor(private router: Router,
+                private route: ActivatedRoute,
                 private langService: LangService,
                 private pesticideService: PesticideService) {
     }
@@ -95,12 +96,12 @@ export class PesticideListComponent implements OnInit {
     }
 
     public add() {
-        this.router.navigate(['/pages/chemicals-pests/pesticide/-1']);
+        this.router.navigate(['./-1'], { relativeTo: this.route });
     }
 
     public onEdit(node) {
         const model = node.data;
-        this.router.navigate(['/pages/chemicals-pests/pesticide/' + model.id]);
+        this.router.navigate(['./' + model.id], { relativeTo: this.route });
     }
 
 

@@ -242,7 +242,7 @@ export class UserFormComponent implements OnInit {
     public remove() {
         this.userService.remove(this.model).subscribe(() => {
             this.toastr.success(this.labelRemoved);
-            this.router.navigate(['/pages/manage-users']);
+            this.router.navigate(['../'], {relativeTo: this.route});
         });
     }
 

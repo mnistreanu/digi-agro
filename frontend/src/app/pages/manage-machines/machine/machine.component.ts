@@ -205,7 +205,7 @@ export class MachineComponent implements OnInit {
         this.machineService.save(this.model).subscribe((model) => {
             this.model = model;
             this.toastr.success(this.labels[Messages.SAVED]);
-            this.router.navigate(['/pages/manage-machines']);
+            this.router.navigate(['../'], {relativeTo: this.route});
         });
     }
 
@@ -231,7 +231,7 @@ export class MachineComponent implements OnInit {
     public remove() {
         this.machineService.remove(this.model).subscribe(() => {
             this.toastr.success(this.labels[Messages.REMOVED]);
-            this.router.navigate(['/pages/manage-machines']);
+            this.router.navigate(['../'], {relativeTo: this.route});
         });
     }
 

@@ -5,7 +5,7 @@ import {MachineComponent} from './machine/machine.component';
 
 const routes: Routes = [
     {path: '', component: MachineListComponent},
-    {path: 'machine/:id', component: MachineComponent, data: {breadcrumb: 'Machine Form'}}
+    {path: ':id', component: MachineComponent, data: {breadcrumb: 'Machine Form'}}
 ];
 
 @NgModule({

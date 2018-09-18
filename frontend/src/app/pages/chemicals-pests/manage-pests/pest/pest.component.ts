@@ -85,7 +85,7 @@ export class PestComponent implements OnInit {
         this.pestService.save(this.model).subscribe((model) => {
             this.model = model;
             this.toastr.success(this.labels[Messages.SAVED]);
-            this.router.navigate(['/pages/employee']);
+            this.router.navigate(['../'], {relativeTo: this.route});
         });
 
     }
@@ -93,7 +93,7 @@ export class PestComponent implements OnInit {
     public remove() {
         this.pestService.remove(this.model).subscribe(() => {
             this.toastr.success(this.labels[Messages.REMOVED]);
-            this.router.navigate(['/pages/employee']);
+            this.router.navigate(['../'], {relativeTo: this.route});
         });
     }
 
