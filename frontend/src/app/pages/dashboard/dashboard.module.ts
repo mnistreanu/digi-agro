@@ -34,10 +34,10 @@ export const routes = [
     ],
     declarations: [
         DashboardComponent,
-        TodoComponent,
-        ChatComponent,
-        FeedComponent,
-        DatamapComponent,
+        // TodoComponent,
+        // ChatComponent,
+        // FeedComponent,
+        // DatamapComponent,
         DynamicChartComponent,
         BriefParcelMapComponent
     ]
