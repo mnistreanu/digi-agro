@@ -91,4 +91,9 @@ public class MachineryExpenseService {
 
         return getModel(expense);
     }
+
+    @Transactional
+    public void remove(Long expenseId) {
+        expenseService.remove(expenseId);
+    }
 }

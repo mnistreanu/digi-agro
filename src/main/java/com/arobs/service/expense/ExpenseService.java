@@ -58,4 +58,9 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
     public Expense save(Expense expense) {
         return getRepository().save(expense);
     }
+
+    @Transactional
+    public void remove(Long id) {
+        getRepository().remove(id, new Date());
+    }
 }

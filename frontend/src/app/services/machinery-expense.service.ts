@@ -27,4 +27,8 @@ export class MachineryExpenseService {
     save(model: MachineryExpenseModel): Observable<MachineryExpenseModel> {
         return this.http.post<MachineryExpenseModel>(this.api + '/', model);
     }
+
+    remove(model: MachineryExpenseModel): Observable<void> {
+        return this.http.delete<void>(this.api + '/' + model.id);
+    }
 }
