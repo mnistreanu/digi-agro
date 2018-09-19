@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
-import {LangService} from '../../../services/lang.service';
-import {MachineService} from '../../../services/machine.service';
+import {LangService} from '../../../../services/lang.service';
+import {MachineService} from '../../../../services/machine.service';
 import {MachineryExpenseListModel} from './machinery-expense-list.model';
 import {Router, RouterLink} from '@angular/router';
-import {MachineryExpenseService} from '../../../services/machinery-expense.service';
-import {DateUtil} from '../../../common/dateUtil';
+import {MachineryExpenseService} from '../../../../services/machinery-expense.service';
+import {DateUtil} from '../../../../common/dateUtil';
 
 @Component({
     selector: 'app-machinery-expenses',

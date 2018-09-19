@@ -7,7 +7,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {MultiselectDropdownModule} from 'angular-2-dropdown-multiselect';
 import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-block.module';
 import {AgGridModule} from 'ag-grid-angular';
-import {MachineryExpensesComponent} from './machinery-expenses/machinery-expenses.component';
+import {MachineryExpensesComponent} from './machinery-expenses/list/machinery-expenses.component';
 import {FuelExpensesComponent} from './fuel-expenses/fuel-expenses.component';
 import {SowingExpensesComponent} from './sowing-expenses/sowing-expenses.component';
 import {WorksExpensesComponent} from './works-expenses/works-expenses.component';
@@ -17,8 +17,8 @@ import {ImageRendererComponent} from '../../modules/aggrid/image-renderer/image-
 import {ImageRendererModule} from '../../modules/aggrid/image-renderer/image-renderer.module';
 import {PinnedRowRendererModule} from '../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.module';
 import {PinnedRowRendererComponent} from '../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
-import { MachineryExpensesFormComponent } from './machinery-expenses/machinery-expenses-form/machinery-expenses-form.component';
-import { ExpenseItemTableComponent } from './machinery-expenses/expense-item-table/expense-item-table.component';
+import {MachineryExpensesFormComponent} from './machinery-expenses/form/machinery-expenses-form.component';
+import {ExpenseItemTableComponent} from './machinery-expenses/expense-item-table/expense-item-table.component';
 import {DeleteRendererComponent} from '../../modules/aggrid/delete-renderer/delete-renderer.component';
 import {DeleteRendererModule} from '../../modules/aggrid/delete-renderer/delete-renderer.module';
 
