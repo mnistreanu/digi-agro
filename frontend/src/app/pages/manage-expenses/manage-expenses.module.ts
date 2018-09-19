@@ -21,6 +21,7 @@ import {MachineryExpensesFormComponent} from './machinery-expenses/form/machiner
 import {ExpenseItemTableComponent} from './machinery-expenses/expense-item-table/expense-item-table.component';
 import {DeleteRendererComponent} from '../../modules/aggrid/delete-renderer/delete-renderer.component';
 import {DeleteRendererModule} from '../../modules/aggrid/delete-renderer/delete-renderer.module';
+import {ConfirmationModalModule} from '../../modules/confirmation-modal/confirmation-modal.module';
 
 export const routes = [
     {path: '', redirectTo: 'expenses', pathMatch: 'full'},
@@ -46,6 +47,7 @@ export const routes = [
         ImageRendererModule,
         PinnedRowRendererModule,
         DeleteRendererModule,
+        ConfirmationModalModule,
         AgGridModule.withComponents([ImageRendererComponent, PinnedRowRendererComponent, DeleteRendererComponent]),
         RouterModule.forChild(routes)
     ],
