@@ -1,7 +1,7 @@
 export class ExpenseItemModel {
     id: number;
     title: string;
-    cost: number;
+    totalCost: number;
 
     deleted: boolean;
     readOnly: boolean;

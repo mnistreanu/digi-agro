@@ -105,13 +105,13 @@ export class ExpenseItemTableComponent implements OnInit {
         const summaryRow = new ExpenseItemModel();
         summaryRow.readOnly = true;
         summaryRow.title = 'TOTAL';
-        summaryRow.cost = 0;
+        summaryRow.totalCost = 0;
         models.forEach(model => this.aggregate(summaryRow, model, true));
         this.options.pinnedBottomRowData = [summaryRow];
     }
 
     private aggregate(source: ExpenseItemModel, item: ExpenseItemModel, applyAddition) {
-        const sumFields = ['cost'];
+        const sumFields = ['totalCost'];
         sumFields.forEach(field => {
             source[field] = source[field] || 0;
             if (applyAddition) {
