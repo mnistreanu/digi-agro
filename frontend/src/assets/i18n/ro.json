@@ -1,6 +1,7 @@
 {
 	"action": {
 		"add": "Adăuga",
+		"back": "Înapoi",
 		"cancel": "Anulare",
 		"confirm": "Confirmare",
 		"create": "Creare",

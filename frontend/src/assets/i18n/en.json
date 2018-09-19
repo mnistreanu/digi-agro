@@ -1,6 +1,7 @@
 {
 	"action": {
 		"add": "Add",
+		"back": "Back",
 		"cancel": "Cancel",
 		"confirm": "Confirm",
 		"create": "Add",

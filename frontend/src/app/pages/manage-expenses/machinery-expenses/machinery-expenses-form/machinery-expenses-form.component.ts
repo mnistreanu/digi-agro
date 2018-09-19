@@ -135,7 +135,7 @@ export class MachineryExpensesFormComponent implements OnInit {
         });
     }
 
-    public save() {
+    save() {
         this.submitted = true;
 
         if (!this.form.valid) {
@@ -156,4 +156,7 @@ export class MachineryExpensesFormComponent implements OnInit {
         });
     }
 
+    back() {
+        this.router.navigate(['../'], {relativeTo: this.route});
+    }
 }
