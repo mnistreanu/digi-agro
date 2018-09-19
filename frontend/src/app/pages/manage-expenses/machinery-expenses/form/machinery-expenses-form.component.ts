@@ -156,6 +156,14 @@ export class MachineryExpensesFormComponent implements OnInit {
         });
     }
 
+    remove() {
+        // todo: show confirm dialog
+        this.machineryExpenseService.remove(this.model).subscribe(() => {
+            this.toastr.success(this.labels[Messages.REMOVED]);
+            this.back();
+        });
+    }
+
     back() {
         this.router.navigate(['../'], {relativeTo: this.route});
     }

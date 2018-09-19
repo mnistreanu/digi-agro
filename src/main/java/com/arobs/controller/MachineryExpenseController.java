@@ -37,10 +37,9 @@ public class MachineryExpenseController {
         return ResponseEntity.ok(machineryExpenseService.save(model, tenant));
     }
 
-//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-//    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-//    public void remove(@PathVariable Long id) {
-//        machineService.remove(id);
-//    }
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void remove(@PathVariable Long id) {
+        machineryExpenseService.remove(id);
+    }
 
 }

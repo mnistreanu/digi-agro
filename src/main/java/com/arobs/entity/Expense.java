@@ -32,6 +32,8 @@ public class Expense {
     @Column(name = "created_at")
     private Date createdAt;
 
+    private Date deletedAt;
+
     public Long getId() {
         return id;
     }
@@ -88,4 +90,11 @@ public class Expense {
         this.createdAt = createdAt;
     }
 
+    public Date getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(Date deletedAt) {
+        this.deletedAt = deletedAt;
+    }
 }
