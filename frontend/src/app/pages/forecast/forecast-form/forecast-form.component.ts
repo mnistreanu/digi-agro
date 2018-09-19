@@ -21,10 +21,10 @@ import {ForecastHarvestModel} from '../forecast-harvest.model';
 })
 export class ForecastFormComponent implements OnInit {
 
-    private form: FormGroup;
-    private formSubmitted = false;
+    form: FormGroup;
+    formSubmitted = false;
 
-    private model: ForecastModel;
+    model: ForecastModel;
 
     private area: number;
     private parcelMap;
