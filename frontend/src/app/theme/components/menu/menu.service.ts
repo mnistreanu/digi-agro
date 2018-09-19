@@ -185,7 +185,7 @@ export class MenuService {
             });
         }
 
-        if (isSuperAdmin || isAdmin) {
+        if (isSuperAdmin || isAdmin || isUser) {
             menuItems.push({
                 title: 'nav.chemicals-and-pests',
                 routerLink: 'chemicals-pests',
