@@ -5,8 +5,10 @@
 		"cancel": "Cancel",
 		"confirm": "Confirm",
 		"create": "Add",
+		"no": "No",
 		"remove": "Remove",
-		"save": "Save"
+		"save": "Save",
+		"yes": "Yes"
 	},
 	"agro-work": {
 		"date": "Date",
@@ -27,6 +29,10 @@
 	},
 	"brand": {
 		"brand": "Brand"
+	},
+	"confirmation": {
+		"confirm-removing": "Are you sure want to delete?",
+		"title": "Confirmation"
 	},
 	"contact": {
 		"phone": "Phone"

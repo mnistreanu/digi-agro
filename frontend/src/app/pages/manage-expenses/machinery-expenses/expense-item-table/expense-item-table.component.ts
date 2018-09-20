@@ -5,6 +5,7 @@ import {DeleteRendererComponent} from '../../../../modules/aggrid/delete-rendere
 import {ExpenseItemModel} from './expense-item.model';
 import {NumericUtil} from '../../../../common/numericUtil';
 import {PinnedRowRendererComponent} from '../../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
+import {ModalService} from '../../../../services/modal.service';
 
 @Component({
     selector: 'app-expense-item-table',
@@ -13,13 +14,17 @@ import {PinnedRowRendererComponent} from '../../../../modules/aggrid/pinned-row-
 })
 export class ExpenseItemTableComponent implements OnInit {
 
-    @Input()
-    models: ExpenseItemModel[];
+    @Input() models: ExpenseItemModel[];
+
+    confirmationModalId = 'expense-item-remove-confirmation-modal';
 
     options: GridOptions;
     context;
 
-    constructor(private langService: LangService) {
+    currentModel: ExpenseItemModel;
+
+    constructor(private langService: LangService,
+                private modalService: ModalService) {
     }
 
     ngOnInit() {
@@ -161,12 +166,17 @@ export class ExpenseItemTableComponent implements OnInit {
     }
 
     public onDelete(node) {
-        const model = node.data;
-        model.deleted = true;
-        this.options.api.updateRowData({remove: [model]});
+        this.modalService.open(this.confirmationModalId);
+        this.currentModel = node.data;
+    }
+
+    private remove() {
+        this.currentModel.deleted = true;
+        this.options.api.updateRowData({remove: [this.currentModel]});
         const summaryRow = this.getSummaryRow();
-        this.aggregate(summaryRow, model, false);
+        this.aggregate(summaryRow, this.currentModel, false);
         this.updateSummaryRow();
+        this.currentModel = null;
     }
 
     private getSummaryRow() {

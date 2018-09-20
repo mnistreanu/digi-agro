@@ -5,8 +5,10 @@
 		"cancel": "Anulare",
 		"confirm": "Confirmare",
 		"create": "Creare",
+		"no": "Nu",
 		"remove": "Ștergere",
-		"save": "Salvare"
+		"save": "Salvare",
+		"yes": "Da"
 	},
 	"agro-work": {
 		"date": "Data",
@@ -27,6 +29,10 @@
 	},
 	"brand": {
 		"brand": "Brand"
+	},
+	"confirmation": {
+		"confirm-removing": "Sigur doriți să ștergeți?",
+		"title": "Confirmare"
 	},
 	"contact": {
 		"phone": "Telefon"
