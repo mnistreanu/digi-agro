@@ -18,9 +18,9 @@ public class PesticideService implements HasRepository<PesticideRepository> {
         return getRepository().find();
     }
 
-    public List<Pesticide> find(Long typeId) {
-        return getRepository().find(typeId);
-    }
+//    public List<Pesticide> find(Long typeId) {
+//        return getRepository().find(typeId);
+//    }
 
     @Override
     public PesticideRepository getRepository() {

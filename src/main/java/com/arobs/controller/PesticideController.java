@@ -31,12 +31,12 @@ public class PesticideController {
         return ResponseEntity.ok(models);
     }
 
-    @RequestMapping(value = "/{typeId}", method = RequestMethod.GET)
-    public ResponseEntity<List<PesticideModel>> getPesticides(@PathVariable("typeId") final Long typeId) {
-
-        List<Pesticide> organisms = pesticideService.find(typeId);
-        List<PesticideModel> models = organisms.stream().map(PesticideModel::new).collect(Collectors.toList());
-
-        return ResponseEntity.ok(models);
-    }
+//    @RequestMapping(value = "/{typeId}", method = RequestMethod.GET)
+//    public ResponseEntity<List<PesticideModel>> getPesticides(@PathVariable("typeId") final Long typeId) {
+//
+//        List<Pesticide> organisms = pesticideService.find(typeId);
+//        List<PesticideModel> models = organisms.stream().map(PesticideModel::new).collect(Collectors.toList());
+//
+//        return ResponseEntity.ok(models);
+//    }
 }
