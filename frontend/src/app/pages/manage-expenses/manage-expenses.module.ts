@@ -22,17 +22,19 @@ import {ExpenseItemTableComponent} from './machinery-expenses/expense-item-table
 import {DeleteRendererComponent} from '../../modules/aggrid/delete-renderer/delete-renderer.component';
 import {DeleteRendererModule} from '../../modules/aggrid/delete-renderer/delete-renderer.module';
 import {ConfirmationModalModule} from '../../modules/confirmation-modal/confirmation-modal.module';
+import {EditRendererModule} from '../../modules/aggrid/edit-renderer/edit-renderer.module';
+import {EditRendererComponent} from '../../modules/aggrid/edit-renderer/edit-renderer.component';
+import {AdminGuard} from '../../guards/admin-guard';
 
 export const routes = [
     {path: '', redirectTo: 'expenses', pathMatch: 'full'},
-    {path: 'machinery', component: MachineryExpensesComponent, data: {breadcrumb: 'machinery'}},
-    {path: 'machinery/:id', component: MachineryExpensesFormComponent, data: {breadcrumb: 'machinery form'}},
-    {path: 'fuel', component: FuelExpensesComponent, data: {breadcrumb: 'fuel'}},
-    {path: 'sowing', component: SowingExpensesComponent, data: {breadcrumb: 'sowing'}},
-    {path: 'works', component: WorksExpensesComponent, data: {breadcrumb: 'works'}},
-//    {path: 'chemicals', component: ChemicalsExpensesComponent, data: {breadcrumb: 'chemicals'}},
-    {path: 'fertilizers', component: FertilizersExpensesComponent, data: {breadcrumb: 'fertilizers'}},
-    {path: 'pesticides', component: PesticidesExpensesComponent, data: {breadcrumb: 'pesticides'}}
+    {path: 'machinery', component: MachineryExpensesComponent},
+    {path: 'machinery/:id', component: MachineryExpensesFormComponent, canActivate: [AdminGuard]},
+    {path: 'fuel', component: FuelExpensesComponent},
+    {path: 'sowing', component: SowingExpensesComponent},
+    {path: 'works', component: WorksExpensesComponent},
+    {path: 'fertilizers', component: FertilizersExpensesComponent},
+    {path: 'pesticides', component: PesticidesExpensesComponent}
 ];
 
 @NgModule({
@@ -47,8 +49,14 @@ export const routes = [
         ImageRendererModule,
         PinnedRowRendererModule,
         DeleteRendererModule,
+        EditRendererModule,
         ConfirmationModalModule,
-        AgGridModule.withComponents([ImageRendererComponent, PinnedRowRendererComponent, DeleteRendererComponent]),
+        AgGridModule.withComponents([
+            EditRendererComponent,
+            ImageRendererComponent,
+            PinnedRowRendererComponent,
+            DeleteRendererComponent
+        ]),
         RouterModule.forChild(routes)
     ],
     declarations: [

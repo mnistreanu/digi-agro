@@ -1,11 +1,12 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../../services/lang.service';
-import {MachineService} from '../../../../services/machine.service';
-import {MachineryExpenseListModel} from './machinery-expense-list.model';
-import {Router, RouterLink} from '@angular/router';
+import {Router} from '@angular/router';
 import {MachineryExpenseService} from '../../../../services/machinery-expense.service';
 import {DateUtil} from '../../../../common/dateUtil';
+import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
+import {AuthService} from '../../../../services/auth/auth.service';
+import {Authorities} from '../../../../common/authorities';
 
 @Component({
     selector: 'app-machinery-expenses',
@@ -14,6 +15,9 @@ import {DateUtil} from '../../../../common/dateUtil';
     styleUrls: ['./machinery-expenses.component.scss']
 })
 export class MachineryExpensesComponent implements OnInit {
+
+    readOnly;
+
     options: GridOptions;
     context;
 
@@ -27,13 +31,19 @@ export class MachineryExpensesComponent implements OnInit {
     labelSparePartPrice: string;
 
     constructor(private machineryExpenseService: MachineryExpenseService,
+                private authService: AuthService,
                 private router: Router,
                 private langService: LangService) {
     }
 
     ngOnInit() {
+        this.setupTableMode();
         this.setupLabels();
         this.setupGrid();
+    }
+
+    private setupTableMode() {
+        this.readOnly = this.authService.hasAuthority(Authorities.ROLE_USER);
     }
 
     private setupLabels() {
@@ -54,7 +64,6 @@ export class MachineryExpensesComponent implements OnInit {
         this.options.enableColResize = true;
         this.options.enableSorting = true;
         this.options.enableFilter = true;
-        this.options.rowSelection = 'single';
         this.options.columnDefs = this.setupHeaders();
         this.context = {componentParent: this};
 
@@ -63,7 +72,24 @@ export class MachineryExpensesComponent implements OnInit {
 
     private setupHeaders() {
 
-        const headers: ColDef[] = [
+        let headers: ColDef[] = [];
+
+        if (!this.readOnly) {
+            headers.push({
+                field: 'edit',
+                width: 24,
+                minWidth: 24,
+                editable: false,
+                suppressResize: true,
+                suppressMenu: true,
+                cellRendererFramework: EditRendererComponent,
+                cellStyle: () => {
+                    return {padding: 0};
+                }
+            });
+        }
+
+        headers = headers.concat([
             {
                 headerName: this.labelDate,
                 field: 'expenseDate',
@@ -79,7 +105,7 @@ export class MachineryExpensesComponent implements OnInit {
                 minWidth: 180
             },
             {
-                headerName: this.labelLastName  + ' ' + this.labelFirstName,
+                headerName: this.labelLastName + ' ' + this.labelFirstName,
                 field: 'employee',
                 width: 100,
                 minWidth: 100,
@@ -110,8 +136,8 @@ export class MachineryExpensesComponent implements OnInit {
                 field: '',
                 width: 60,
                 minWidth: 60,
-            },
-        ];
+            }
+        ]);
 
         return headers;
     }
@@ -139,8 +165,8 @@ export class MachineryExpensesComponent implements OnInit {
         this.router.navigate(['/pages/expenses/machinery/-1']);
     }
 
-    public onSelectionChanged() {
-        const model = this.options.api.getSelectedRows()[0];
+    public onEdit(node) {
+        const model = node.data;
         this.router.navigate(['/pages/expenses/machinery/' + model.expenseId]);
     }
 }

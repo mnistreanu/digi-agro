@@ -1,17 +1,20 @@
-<div id="confirmation-modal" class="modal fade"
+<div [id]="id" class="modal fade"
      tabindex="-1" role="dialog" aria-labelledby="confirmation-modal" aria-hidden="true">
 
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Confirmation</h5>
+            <div class="modal-header modal-danger">
+                <h4 class="modal-title" id="modal-error-label">
+                    <i class="fa fa-warning"></i>
+                    <span translate>confirmation.title</span>
+                </h4>
             </div>
-            <div class="modal-body">
-                Are you sure want to delete this item?
+            <div class="modal-body text-center">
+                <span translate>{{ body }}</span>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-danger">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="cancel()" translate>action.no</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="confirm()" translate>action.yes</button>
             </div>
         </div>
     </div>

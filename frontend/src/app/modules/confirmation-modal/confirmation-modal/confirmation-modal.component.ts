@@ -1,15 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-confirmation-modal',
-  templateUrl: './confirmation-modal.component.html',
-  styleUrls: ['./confirmation-modal.component.scss']
+    selector: 'app-confirmation-modal',
+    templateUrl: './confirmation-modal.component.html',
+    styleUrls: ['./confirmation-modal.component.scss']
 })
 export class ConfirmationModalComponent implements OnInit {
 
-  constructor() { }
+    @Input() id;
+    @Input() body = 'confirmation.confirm-removing';
 
-  ngOnInit() {
-  }
+    @Output() canceled: EventEmitter<void> = new EventEmitter();
+    @Output() confirmed: EventEmitter<void> = new EventEmitter();
+
+    constructor() {
+    }
+
+    ngOnInit() {
+    }
+
+    cancel() {
+        this.canceled.emit();
+    }
+
+    confirm() {
+        this.confirmed.emit();
+    }
 
 }

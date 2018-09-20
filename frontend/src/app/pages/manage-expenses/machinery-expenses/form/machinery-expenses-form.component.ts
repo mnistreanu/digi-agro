@@ -9,6 +9,7 @@ import {MachineService} from '../../../../services/machine.service';
 import {EmployeeService} from '../../../../services/employee.service';
 import {Messages} from '../../../../common/messages';
 import {MachineryExpenseService} from '../../../../services/machinery-expense.service';
+import {ModalService} from '../../../../services/modal.service';
 
 @Component({
     selector: 'app-machinery-expenses-form',
@@ -17,6 +18,7 @@ import {MachineryExpenseService} from '../../../../services/machinery-expense.se
 })
 export class MachineryExpensesFormComponent implements OnInit {
 
+    confirmationModalId = 'expense-remove-confirmation-modal';
 
     form: FormGroup;
     submitted = false;
@@ -49,6 +51,7 @@ export class MachineryExpensesFormComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
+                private modalService: ModalService,
                 private machineryExpenseService: MachineryExpenseService,
                 private machineService: MachineService,
                 private employeeService: EmployeeService,
@@ -146,7 +149,7 @@ export class MachineryExpensesFormComponent implements OnInit {
         Object.assign(this.model, this.form.value);
         this.submitted = false;
 
-        this.model.expenseItems.filter(item => {
+        this.model.expenseItems = this.model.expenseItems.filter(item => {
             return !item.deleted || (item.deleted && item.id != null);
         });
 
@@ -156,8 +159,11 @@ export class MachineryExpensesFormComponent implements OnInit {
         });
     }
 
+    prepareRemove() {
+        this.modalService.open(this.confirmationModalId);
+    }
+
     remove() {
-        // todo: show confirm dialog
         this.machineryExpenseService.remove(this.model).subscribe(() => {
             this.toastr.success(this.labels[Messages.REMOVED]);
             this.back();
