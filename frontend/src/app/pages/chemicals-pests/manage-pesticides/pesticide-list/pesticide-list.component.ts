@@ -44,7 +44,7 @@ export class PesticideListComponent implements OnInit {
         const headers: ColDef[] = [
             {
                 field: 'edit',
-                width: 24,
+                width: 30,
                 minWidth: 24,
                 maxWidth: 30,
                 editable: false,
@@ -62,32 +62,33 @@ export class PesticideListComponent implements OnInit {
                 minWidth: 100
             },
             {
-                headerName: 'name RO',
+                headerName: 'info.name',
                 field: 'nameRo',
                 width: 300,
                 minWidth: 200
             },
+            // {
+            //     headerName: 'info.description',
+            //     field: 'descriptionRo',
+            //     width: 300,
+            //     minWidth: 200
+            // },
             {
-                headerName: 'description RO',
-                field: 'descriptionRo',
-                width: 300,
-                minWidth: 200
-            },
-            {
-                headerName: 'pests RO',
-                field: 'pestsRo',
-                width: 300,
-                minWidth: 200
-            },
-            {
-                headerName: 'active Substance',
+                headerName: 'pesticide.active-substance',
                 field: 'activeSubstance',
                 width: 300,
                 minWidth: 200
             },
             {
-                headerName: 'toxicity Group',
+                headerName: 'pesticide.toxicity-group',
+                headerTooltip: 'pesticide.toxicity-group',
                 field: 'toxicityGroup',
+                width: 44,
+                minWidth: 44
+            },
+            {
+                headerName: 'pest.pests',
+                field: 'pestsRo',
                 width: 300,
                 minWidth: 200
             },
@@ -96,6 +97,10 @@ export class PesticideListComponent implements OnInit {
         headers.forEach(header => {
             if (header.headerName) {
                 this.langService.get(header.headerName).subscribe(m => header.headerName = m);
+            }
+
+            if (header.headerTooltip) {
+                this.langService.get(header.headerTooltip).subscribe(m => header.headerTooltip = m);
             }
         });
 

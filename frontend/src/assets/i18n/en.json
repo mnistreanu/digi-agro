@@ -288,12 +288,17 @@
 		"space-between-rows": "Space Between Rows",
 		"the-parcels": "the parcels"
 	},
+	"pest": {
+		"pest": "Pest",
+		"pests": "Pests"
+	},
 	"pesticide": {
 		"comments": "Comments",
-		"name": "Name",
+		"active-substance": "Active substance",
 		"phase": "Phase",
 		"result": "Result",
 		"spray-date": "Spray date",
+		"toxicity-group": "Toxicity group",
 		"type": "Type"
 	},
 	"pesticide-type": {

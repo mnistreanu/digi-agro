@@ -288,12 +288,17 @@
 		"space-between-rows": "Spațiu între rânduri",
 		"the-parcels": "parcelele"
 	},
+	"pest": {
+		"pest": "Dăunător",
+		"pests": "Dăunători"
+	},
 	"pesticide": {
 		"comments": "Comentarii",
-		"name": "Denumire",
+		"active-substance": "Substanța activă",
 		"phase": "Faza",
 		"result": "Rezultat",
 		"spray-date": "Data pulverizării",
+		"toxicity-group": "Grupa de toxicitate",
 		"type": "Tip"
 	},
 	"pesticide-type": {

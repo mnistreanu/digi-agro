@@ -288,12 +288,17 @@
 		"space-between-rows": "Пространство между рядами",
 		"the-parcels": "участки"
 	},
+	"pest": {
+		"pest": "Вредитель",
+		"pests": "Вредители"
+	},
 	"pesticide": {
 		"comments": "Комментарии",
-		"name": "Название",
+		"active-substance": "Активное вещество",
 		"phase": "Фаза",
 		"result": "Результат",
 		"spray-date": "Дата распыления",
+		"toxicity-group": "Группа токсичности",
 		"type": "Тип"
 	},
 	"pesticide-type": {
