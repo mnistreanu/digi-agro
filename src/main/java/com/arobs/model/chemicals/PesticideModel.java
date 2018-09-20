@@ -2,40 +2,39 @@ package com.arobs.model.chemicals;
 
 
 import com.arobs.entity.Pesticide;
+import com.arobs.enums.PesticideType;
 
 import java.io.Serializable;
 
 public class PesticideModel implements Serializable {
 
     private Long id;
-    private Long typeId;
+    private PesticideType pesticideType;
     private String nameRo;
     private String nameRu;
     private String name2Ro;
     private String name2Ru;
     private String descriptionRo;
     private String descriptionRu;
-    private String harmfulOrganismsRo;
-    private String harmfulOrganismsRu;
+    private String pestsRo;
+    private String pestsRu;
     private String activeSubstance;
-    private Double consumptionNorm;
+    private Integer toxicityGroup;
 
     public PesticideModel() {
     }
 
     public PesticideModel(Pesticide pesticide) {
         this.id = pesticide.getId();
-        this.typeId = pesticide.getTypeId();
+        this.pesticideType = pesticide.getPesticideType();
         this.nameRo = pesticide.getNameRo();
         this.nameRu = pesticide.getNameRu();
-        this.name2Ro = pesticide.getName2Ro();
-        this.name2Ru = pesticide.getName2Ru();
         this.descriptionRo = pesticide.getDescriptionRo();
         this.descriptionRu = pesticide.getDescriptionRu();
-        this.harmfulOrganismsRo = pesticide.getHarmfulOrganismsRo();
-        this.harmfulOrganismsRu = pesticide.getHarmfulOrganismsRu();
+        this.pestsRo = pesticide.getPestsRo();
+        this.pestsRu = pesticide.getPestsRu();
         this.activeSubstance = pesticide.getActiveSubstance();
-        this.consumptionNorm = pesticide.getConsumptionNorm();
+        this.toxicityGroup = pesticide.getToxicityGroup();
     }
 
     public Long getId() {
@@ -46,12 +45,12 @@ public class PesticideModel implements Serializable {
         this.id = id;
     }
 
-    public Long getTypeId() {
-        return typeId;
+    public PesticideType getPesticideType() {
+        return pesticideType;
     }
 
-    public void setTypeId(Long typeId) {
-        this.typeId = typeId;
+    public void setPesticideType(PesticideType pesticideType) {
+        this.pesticideType = pesticideType;
     }
 
     public String getNameRo() {
@@ -102,20 +101,20 @@ public class PesticideModel implements Serializable {
         this.descriptionRu = descriptionRu;
     }
 
-    public String getHarmfulOrganismsRo() {
-        return harmfulOrganismsRo;
+    public String getPestsRo() {
+        return pestsRo;
     }
 
-    public void setHarmfulOrganismsRo(String harmfulOrganismsRo) {
-        this.harmfulOrganismsRo = harmfulOrganismsRo;
+    public void setPestsRo(String pestsRo) {
+        this.pestsRo = pestsRo;
     }
 
-    public String getHarmfulOrganismsRu() {
-        return harmfulOrganismsRu;
+    public String getPestsRu() {
+        return pestsRu;
     }
 
-    public void setHarmfulOrganismsRu(String harmfulOrganismsRu) {
-        this.harmfulOrganismsRu = harmfulOrganismsRu;
+    public void setPestsRu(String pestsRu) {
+        this.pestsRu = pestsRu;
     }
 
     public String getActiveSubstance() {
@@ -126,11 +125,11 @@ public class PesticideModel implements Serializable {
         this.activeSubstance = activeSubstance;
     }
 
-    public Double getConsumptionNorm() {
-        return consumptionNorm;
+    public Integer getToxicityGroup() {
+        return toxicityGroup;
     }
 
-    public void setConsumptionNorm(Double consumptionNorm) {
-        this.consumptionNorm = consumptionNorm;
+    public void setToxicityGroup(Integer toxicityGroup) {
+        this.toxicityGroup = toxicityGroup;
     }
 }

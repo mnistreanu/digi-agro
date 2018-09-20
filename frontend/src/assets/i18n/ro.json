@@ -294,24 +294,31 @@
 		"space-between-rows": "Spațiu între rânduri",
 		"the-parcels": "parcelele"
 	},
-	"pesticides": {
+	"pest": {
+		"pest": "Dăunător",
+		"pests": "Dăunători"
+	},
+	"pesticide": {
 		"comments": "Comentarii",
-		"name": "Denumire",
+		"active-substance": "Substanța activă",
 		"phase": "Faza",
 		"result": "Rezultat",
 		"spray-date": "Data pulverizării",
-		"type": "Tip",
-		"type-acaricide": "Acaricide",
-		"type-defoliant-desiccant": "Defolianti si desicanti",
-		"type-fungicide": "Fungicide",
-		"type-growth-regulation": "Regulatori de crestere",
-		"type-herbicide": "Erbicide",
-		"type-insecticide": "Insecticide",
-		"type-insectofungicide": "Insectofungicide",
-		"type-miscellaneous-auxiliary-product": "Produse diverse si auxiliare",
-		"type-nematocide-soil-desinfectant": "Nematocide, dezinfectanti ai solului",
-		"type-pheromone": "Feromoni",
-		"type-rodenticide-molluscicide-repellant": "Rodenticide, moluscocide, repelenti"
+		"toxicity-group": "Grupa de toxicitate",
+		"type": "Tip"
+	},
+	"pesticide-type": {
+		"ACARICIDE": "Acaricide",
+		"DEFOLIANT_DESICCANT": "Defolianti si desicanti",
+		"FUNGICIDE": "Fungicide",
+		"GROWTH_REGULATION": "Regulatori de crestere",
+		"HERBICIDE": "Erbicide",
+		"INSECTICIDE": "Insecticide",
+		"INSECTOFUNGICIDE": "Insectofungicide",
+		"MISCELLANEOUS_AUXILIARY_PRODUCT": "Produse diverse si auxiliare",
+		"NEMATOCIDE_SOIL_DESINFECTANT": "Nematocide, dezinfectanti ai solului",
+		"PHEROMONE": "Feromoni",
+		"RODENTICIDE_MOLLUSCICIDE_REPELLANT": "Rodenticide, moluscocide, repelenti"
 	},
 	"reminder": {
 		"enter-new-event": "Doar introduceți numele evenimentului",

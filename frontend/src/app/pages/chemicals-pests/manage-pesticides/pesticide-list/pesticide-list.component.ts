@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {PesticideService} from '../../../../services/chemicals-pests/pesticide.service';
 import {LangService} from '../../../../services/lang.service';
 import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
+import {PesticideModel} from "../pesticide.model";
 
 @Component({
     selector: 'app-pesticide-list',
@@ -43,7 +44,7 @@ export class PesticideListComponent implements OnInit {
         const headers: ColDef[] = [
             {
                 field: 'edit',
-                width: 24,
+                width: 30,
                 minWidth: 24,
                 maxWidth: 30,
                 editable: false,
@@ -55,22 +56,51 @@ export class PesticideListComponent implements OnInit {
                 }
             },
             {
-                headerName: 'name RO',
+                headerName: 'pesticide.type',
+                field: 'pesticideType',
+                width: 150,
+                minWidth: 100
+            },
+            {
+                headerName: 'info.name',
                 field: 'nameRo',
                 width: 300,
                 minWidth: 200
             },
+            // {
+            //     headerName: 'info.description',
+            //     field: 'descriptionRo',
+            //     width: 300,
+            //     minWidth: 200
+            // },
             {
-                headerName: 'name RU',
-                field: 'nameRu',
+                headerName: 'pesticide.active-substance',
+                field: 'activeSubstance',
                 width: 300,
                 minWidth: 200
-            }
+            },
+            {
+                headerName: 'pesticide.toxicity-group',
+                headerTooltip: 'pesticide.toxicity-group',
+                field: 'toxicityGroup',
+                width: 44,
+                minWidth: 44
+            },
+            {
+                headerName: 'pest.pests',
+                field: 'pestsRo',
+                width: 300,
+                minWidth: 200
+            },
         ];
 
         headers.forEach(header => {
             if (header.headerName) {
                 this.langService.get(header.headerName).subscribe(m => header.headerName = m);
+            }
+
+            if (header.headerTooltip) {
+                this.langService.get(header.headerTooltip).subscribe(m => header.headerTooltip = m);
             }
         });
 
@@ -79,7 +109,16 @@ export class PesticideListComponent implements OnInit {
 
     private setupRows() {
         this.pesticideService.find().subscribe(models => {
+            this.adjustModels(models);
             this.options.api.setRowData(models);
+        });
+    }
+
+    private adjustModels(models: PesticideModel[]) {
+        models.forEach(model => {
+            this.langService
+                .get('pesticide-type.' + model.pesticideType)
+                .subscribe(m => model.pesticideType = m);
         });
     }
 

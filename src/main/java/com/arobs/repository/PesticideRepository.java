@@ -15,9 +15,9 @@ public interface PesticideRepository extends JpaRepository<Pesticide, Long> {
             "ORDER BY p.nameRo ")
     List<Pesticide> find();
 
-    @Query("SELECT p FROM Pesticide p " +
-            "WHERE p.typeId= :typeId " +
-            "ORDER BY p.nameRo ")
-    List<Pesticide> find(@Param("typeId") Long typeId);
+//    @Query("SELECT p FROM Pesticide p " +
+//            "WHERE p.typeId= :typeId " +
+//            "ORDER BY p.nameRo ")
+//    List<Pesticide> find(@Param("typeId") Long typeId);
 }
 

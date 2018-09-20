@@ -1,5 +1,7 @@
 package com.arobs.entity;
 
+import com.arobs.enums.PesticideType;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,20 +16,15 @@ public class Pesticide {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (name = "pesticide_type_id")
-    private Long typeId;
+    @Enumerated(EnumType.STRING)
+    @Column (name = "pesticide_type")
+    private PesticideType pesticideType;
 
     @Column (name = "name_ro")
     private String nameRo;
 
     @Column (name = "name_ru")
     private String nameRu;
-
-    @Column (name = "name2_ro")
-    private String name2Ro;
-
-    @Column (name = "name2_ru")
-    private String name2Ru;
 
     @Column (name = "description_ro", length = 4096)
     private String descriptionRo;
@@ -36,22 +33,22 @@ public class Pesticide {
     private String descriptionRu;
 
     @ManyToMany
-    @JoinTable(name="pesticide_harmful_organism",
+    @JoinTable(name="pesticide_pest",
             joinColumns= @JoinColumn(name="pesticide_id"),
-            inverseJoinColumns = @JoinColumn(name = "harmful_organism_id"))
+            inverseJoinColumns = @JoinColumn(name = "pest_id"))
     private List<Pest> pests;
 
-    @Column (name = "harmful_organisms_ro", length = 4098)
-    private String harmfulOrganismsRo;
+    @Column (name = "pests_ro", length = 4098)
+    private String pestsRo;
 
-    @Column (name = "harmful_organisms_ru", length = 4098)
-    private String harmfulOrganismsRu;
+    @Column (name = "pests_ru", length = 4098)
+    private String pestsRu;
 
     @Column (name = "active_substance")
     private String activeSubstance;
 
-    @Column (name = "consumption_norm")
-    private Double consumptionNorm;
+    @Column (name = "toxicity_group")
+    private Integer toxicityGroup;
 
     public Pesticide() {
     }
@@ -64,12 +61,12 @@ public class Pesticide {
         this.id = id;
     }
 
-    public Long getTypeId() {
-        return typeId;
+    public PesticideType getPesticideType() {
+        return pesticideType;
     }
 
-    public void setTypeId(Long typeId) {
-        this.typeId = typeId;
+    public void setPesticideType(PesticideType pesticideType) {
+        this.pesticideType = pesticideType;
     }
 
     public String getNameRo() {
@@ -86,22 +83,6 @@ public class Pesticide {
 
     public void setNameRu(String nameRu) {
         this.nameRu = nameRu;
-    }
-
-    public String getName2Ro() {
-        return name2Ro;
-    }
-
-    public void setName2Ro(String name2Ro) {
-        this.name2Ro = name2Ro;
-    }
-
-    public String getName2Ru() {
-        return name2Ru;
-    }
-
-    public void setName2Ru(String name2Ru) {
-        this.name2Ru = name2Ru;
     }
 
     public String getDescriptionRo() {
@@ -128,20 +109,20 @@ public class Pesticide {
         this.pests = pests;
     }
 
-    public String getHarmfulOrganismsRo() {
-        return harmfulOrganismsRo;
+    public String getPestsRo() {
+        return pestsRo;
     }
 
-    public void setHarmfulOrganismsRo(String harmfulOrganismsRo) {
-        this.harmfulOrganismsRo = harmfulOrganismsRo;
+    public void setPestsRo(String pestsRo) {
+        this.pestsRo = pestsRo;
     }
 
-    public String getHarmfulOrganismsRu() {
-        return harmfulOrganismsRu;
+    public String getPestsRu() {
+        return pestsRu;
     }
 
-    public void setHarmfulOrganismsRu(String harmfulOrganismsRu) {
-        this.harmfulOrganismsRu = harmfulOrganismsRu;
+    public void setPestsRu(String pestsRu) {
+        this.pestsRu = pestsRu;
     }
 
     public String getActiveSubstance() {
@@ -152,11 +133,11 @@ public class Pesticide {
         this.activeSubstance = activeSubstance;
     }
 
-    public Double getConsumptionNorm() {
-        return consumptionNorm;
+    public Integer getToxicityGroup() {
+        return toxicityGroup;
     }
 
-    public void setConsumptionNorm(Double consumptionNorm) {
-        this.consumptionNorm = consumptionNorm;
+    public void setToxicityGroup(Integer toxicityGroup) {
+        this.toxicityGroup = toxicityGroup;
     }
 }

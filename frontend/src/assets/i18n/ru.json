@@ -294,24 +294,31 @@
 		"space-between-rows": "Пространство между рядами",
 		"the-parcels": "участки"
 	},
-	"pesticides": {
+	"pest": {
+		"pest": "Вредитель",
+		"pests": "Вредители"
+	},
+	"pesticide": {
 		"comments": "Комментарии",
-		"name": "Название",
+		"active-substance": "Активное вещество",
 		"phase": "Фаза",
 		"result": "Результат",
 		"spray-date": "Дата распыления",
-		"type": "Тип",
-		"type-acaricide": "Акарициды",
-		"type-defoliant-desiccant": "Дефолианты и осушители",
-		"type-fungicide": "Фунгициды",
-		"type-growth-regulation": "Регуляторы роста",
-		"type-herbicide": "Гербициды",
-		"type-insecticide": "Инсектициды",
-		"type-insectofungicide": "Фунгициды",
-		"type-miscellaneous-auxiliary-product": "Разные и вспомогательные продукты",
-		"type-nematocide-soil-desinfectant": "Нематоциды, дезинфицирующие средства для почвы",
-		"type-pheromone": "Феромоны",
-		"type-rodenticide-molluscicide-repellant": "Родентициды, моллюскициды, репелленты"
+		"toxicity-group": "Группа токсичности",
+		"type": "Тип"
+	},
+	"pesticide-type": {
+		"ACARICIDE": "Акарициды",
+		"DEFOLIANT_DESICCANT": "Дефолианты и осушители",
+		"FUNGICIDE": "Фунгициды",
+		"GROWTH_REGULATION": "Регуляторы роста",
+		"HERBICIDE": "Гербициды",
+		"INSECTICIDE": "Инсектициды",
+		"INSECTOFUNGICIDE": "Фунгициды",
+		"MISCELLANEOUS_AUXILIARY_PRODUCT": "Разные и вспомогательные продукты",
+		"NEMATOCIDE_SOIL_DESINFECTANT": "Нематоциды, дезинфицирующие средства для почвы",
+		"PHEROMONE": "Феромоны",
+		"RODENTICIDE_MOLLUSCICIDE_REPELLANT": "Родентициды, моллюскициды, репелленты"
 	},
 	"reminder": {
 		"enter-new-event": "Просто введите название события",
