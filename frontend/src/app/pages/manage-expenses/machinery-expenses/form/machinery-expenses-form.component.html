@@ -35,11 +35,11 @@
             <div class="form-group row">
                 <div class="col-sm-6">
                     <label translate>Machines</label>
-                    <ss-multiselect-dropdown [options]="machines" *ngIf="machines"
-                                             [texts]="multiSelectControlTexts"
-                                             [settings]="multiSelectControlSettings"
-                                             formControlName="machines">
-                    </ss-multiselect-dropdown>
+                    <angular2-multiselect [settings]="multiSelectSettings"
+                                          [data]="machines"
+                                          formControlName="machines">
+                    </angular2-multiselect>
+
                 </div>
                 <div class="col-sm-6">
                     <label translate>Employees</label>

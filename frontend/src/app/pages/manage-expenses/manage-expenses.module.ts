@@ -25,6 +25,7 @@ import {ConfirmationModalModule} from '../../modules/confirmation-modal/confirma
 import {EditRendererModule} from '../../modules/aggrid/edit-renderer/edit-renderer.module';
 import {EditRendererComponent} from '../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {AdminGuard} from '../../guards/admin-guard';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 
 export const routes = [
     {path: '', redirectTo: 'expenses', pathMatch: 'full'},
@@ -44,6 +45,7 @@ export const routes = [
         FormsModule,
         ReactiveFormsModule,
         MultiselectDropdownModule,
+        AngularMultiSelectModule,
         DirectivesModule,
         FormErrorBlockModule,
         ImageRendererModule,

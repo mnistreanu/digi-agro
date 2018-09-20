@@ -172,9 +172,9 @@
 		"chemicals-and-pests": "Химикаты и вредители",
 		"costs-forecasting": "Прогнозирование затрат",
 		"costs-forecasting-form": "Прогнозирование затрат FORM",
+		"crop-varieties": "Сельскохозяйственные сорта",
 		"crops": "Сельхоз. культуры",
 		"crops-varieties": "Сельскохозяйственные культуры и сорта",
-		"crop-varieties": "Сельскохозяйственные сорта",
 		"dashboard": "Главная",
 		"employees": "Работники",
 		"enterprise": "Предприятие",
@@ -299,8 +299,8 @@
 		"pests": "Вредители"
 	},
 	"pesticide": {
-		"comments": "Комментарии",
 		"active-substance": "Активное вещество",
+		"comments": "Комментарии",
 		"phase": "Фаза",
 		"result": "Результат",
 		"spray-date": "Дата распыления",
@@ -339,6 +339,14 @@
 		"select-all": "Выбрать все",
 		"unselect-all": "Снять все",
 		"username-changed-relogin": "Имя пользователя было изменено! Пожалуйста, перезайдите в систему"
+	},
+	"select-dropdown": {
+		"select-all": "Выбрать все",
+		"select": "Выберите",
+		"deselect-all": "Убрать все",
+		"select-all-filtered": "Выбрать отфильтрованные элементы",
+		"deselect-all-filtered": "Убрать отфильтрованные элементы",
+		"search-placeholder": "Поиск"
 	},
 	"slider": {
 		"next": "Следующий",

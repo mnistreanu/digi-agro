@@ -25,8 +25,19 @@ export class MachineryExpensesFormComponent implements OnInit {
 
     model: MachineryExpenseModel;
 
-    machines: IMultiSelectOption[];
+    machines: any[];
     employees: IMultiSelectOption[];
+
+    multiSelectSettings = {
+        enableSearchFilter: true,
+        badgeShowLimit: 1,
+        text: this.langService.instant('select-dropdown.select'),
+        selectAllText: this.langService.instant('select-dropdown.select-all'),
+        unSelectAllText: this.langService.instant('select-dropdown.deselect-all'),
+        searchPlaceholderText: this.langService.instant('select-dropdown.search-placeholder'),
+        filterSelectAllText: this.langService.instant('select-dropdown.select-all-filtered'),
+        filterUnSelectAllText: this.langService.instant('select-dropdown.deselect-all-filtered'),
+    };
 
     public multiSelectControlSettings: IMultiSelectSettings = {
         checkedStyle: 'fontawesome',
@@ -79,12 +90,16 @@ export class MachineryExpensesFormComponent implements OnInit {
                 this.machines = models.map(model => {
                     return {
                         id: model.id,
-                        name: model.identifier + ' ' + model.model + ' ' + model.brand
+                        itemName: this.getMachineLabel(model)
                     };
                 });
                 resolve();
             });
         });
+    }
+
+    private getMachineLabel(model) {
+        return model.identifier + ' ' + model.model + ' ' + model.brand;
     }
 
     private setupEmployees(): Promise<void> {
@@ -130,12 +145,26 @@ export class MachineryExpensesFormComponent implements OnInit {
 
     private buildForm() {
         const expenseDate = this.model.expenseDate ? this.model.expenseDate.toISOString().substring(0, 10) : null;
+        const selectedMachines = [];
+
         this.form = this.fb.group({
             title: [this.model.title, Validators.required],
             expenseDate: [expenseDate, Validators.required],
-            machines: [this.model.machines || []],
+            machines: [this.getSelectedMachines()],
             employees: [this.model.employees || []],
         });
+    }
+
+    private getSelectedMachines() {
+
+        let selectedMachines = [];
+        if (this.model.machines && this.model.machines.length > 0) {
+            const map = {};
+            this.machines.forEach(item => map[item.id] = item);
+            selectedMachines = this.model.machines.map(machineId => map[machineId]);
+        }
+
+        return selectedMachines;
     }
 
     save() {
@@ -148,6 +177,8 @@ export class MachineryExpensesFormComponent implements OnInit {
 
         Object.assign(this.model, this.form.value);
         this.submitted = false;
+
+        this.model.machines = this.form.value.machines.map(item => item.id);
 
         this.model.expenseItems = this.model.expenseItems.filter(item => {
             return !item.deleted || (item.deleted && item.id != null);

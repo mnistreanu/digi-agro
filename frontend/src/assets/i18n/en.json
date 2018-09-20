@@ -172,9 +172,9 @@
 		"chemicals-and-pests": "Chemicals & Pests",
 		"costs-forecasting": "Costs forecasting",
 		"costs-forecasting-form": "Costs forecasting FORM",
+		"crop-varieties": "Crop varieties",
 		"crops": "Crops",
 		"crops-varieties": "Crops & Varieties",
-		"crop-varieties": "Crop varieties",
 		"dashboard": "Dashboard",
 		"employees": "Employees",
 		"enterprise": "Enterprise",
@@ -299,8 +299,8 @@
 		"pests": "Pests"
 	},
 	"pesticide": {
-		"comments": "Comments",
 		"active-substance": "Active substance",
+		"comments": "Comments",
 		"phase": "Phase",
 		"result": "Result",
 		"spray-date": "Spray date",
@@ -339,6 +339,14 @@
 		"select-all": "Select all",
 		"unselect-all": "Unselect all",
 		"username-changed-relogin": "Username Changed! Please, re-login in the system"
+	},
+	"select-dropdown": {
+		"select-all": "Select All",
+		"select": "Select",
+		"deselect-all": "Deselect All",
+		"select-all-filtered": "Select all filtered results",
+		"deselect-all-filtered": "Deselect all filtered results",
+		"search-placeholder": "Search"
 	},
 	"slider": {
 		"next": "Next",

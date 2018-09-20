@@ -172,9 +172,9 @@
 		"chemicals-and-pests": "Chimicale si dăunatori",
 		"costs-forecasting": "Prognoză costuri",
 		"costs-forecasting-form": "Prognoză costuri FORM",
+		"crop-varieties": "Soiri agricole",
 		"crops": "Culturi agricole",
 		"crops-varieties": "Culturi agricole și soiuri",
-		"crop-varieties": "Soiri agricole",
 		"dashboard": "Dashboard",
 		"employees": "Angajați",
 		"enterprise": "Întreprindere",
@@ -299,8 +299,8 @@
 		"pests": "Dăunători"
 	},
 	"pesticide": {
-		"comments": "Comentarii",
 		"active-substance": "Substanța activă",
+		"comments": "Comentarii",
 		"phase": "Faza",
 		"result": "Rezultat",
 		"spray-date": "Data pulverizării",
@@ -339,6 +339,14 @@
 		"select-all": "Selectează toate",
 		"unselect-all": "Deselectează toate",
 		"username-changed-relogin": "Numele de utilizatorul a fost modificata! Reintrați în sistem"
+	},
+	"select-dropdown": {
+		"select-all": "Selectează toate",
+		"select": "Selectați",
+		"deselect-all": "Deselectează toate",
+		"select-all-filtered": "Selectează elemente filtrate",
+		"deselect-all-filtered": "Deselectează elemente filtrate",
+		"search-placeholder": "Căutare"
 	},
 	"slider": {
 		"next": "Următor",
