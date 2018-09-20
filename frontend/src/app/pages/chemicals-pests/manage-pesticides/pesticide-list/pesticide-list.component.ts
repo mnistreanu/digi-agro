@@ -89,7 +89,7 @@ export class PesticideListComponent implements OnInit {
             {
                 headerName: 'pest.pests',
                 field: 'pestsRo',
-                width: 300,
+                width: 400,
                 minWidth: 200
             },
         ];

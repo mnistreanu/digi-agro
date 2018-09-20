@@ -15,42 +15,14 @@ export class SowingWorksComponent implements OnInit {
     options: GridOptions;
     context;
 
-    labelDate: string;
-    labelCrop: string;
-    labelCropVariety: string;
-    labelSeeds: string;
-    labelUnitOfMeasureShort: string;
-    labelUnitOfMeasureLong: string;
-    labelArea: string;
-    labelParcels: string;
-    labelWorks: string;
-    labelConsumed1Ha: string;
-    labelConsumedTotal: string;
-    labelPriceUnit: string;
-    labelCostTotal: string;
 
     constructor(private weatherService: WeatherService,
                 private langService: LangService) {
     }
 
     ngOnInit() {
-        this.setupLabels();
         this.setupGrid();
     }
-
-    private setupLabels() {
-        this.langService.get('crop.planting-date').subscribe(msg => this.labelDate = msg);
-        this.langService.get('crop.name').subscribe(msg => this.labelCrop = msg);
-        this.langService.get('crop.variety').subscribe(msg => this.labelCropVariety = msg);
-        this.langService.get('crop.seeds').subscribe(msg => this.labelSeeds = msg);
-        this.langService.get('crop.unit-of-measure-short').subscribe(msg => this.labelUnitOfMeasureShort = msg);
-        this.langService.get('crop.unit-of-measure-long').subscribe(msg => this.labelUnitOfMeasureLong = msg);
-        this.langService.get('parcel.area').subscribe(msg => this.labelArea = msg);
-        this.langService.get('parcel.parcels').subscribe(msg => this.labelParcels = msg);
-        this.langService.get('works.sowing').subscribe(msg => this.labelWorks = msg);
-        this.langService.get('crop.labelConsumed1Ha').subscribe(msg => this.labelConsumed1Ha = msg);
-    }
-
 
     private setupGrid() {
         this.options = <GridOptions>{};
@@ -69,49 +41,54 @@ export class SowingWorksComponent implements OnInit {
 
         const headers: (ColDef | ColGroupDef)[] = [
             {
-                headerName: '',
-                field: 'icon',
-                cellRendererFramework: ImageRendererComponent,
-                cellRendererParams: {
-                    iconField: 'icon'
-                },
-                width: 40,
-                minWidth: 40,
-            },
-            {
-                headerName: this.labelDate,
-                field: 'date',
-                width: 90,
-                minWidth: 90,
-                suppressFilter: true,
-            },
-            {
-                headerName: this.labelSeeds,
-                field: 'cropAndVariety',
-                width: 180,
-                minWidth: 180
-            },
-            {
-                headerName: this.labelUnitOfMeasureShort,
-                field: 'unitOfMeasure',
-                width: 60,
-                minWidth: 60,
-                suppressFilter: true,
-                headerTooltip: this.labelUnitOfMeasureLong,
-            },
-            {
-                headerName: this.labelArea,
-                field: 'sownArea',
-                width: 50,
-                minWidth: 50,
-                suppressFilter: true,
-            },
-            {
-                headerName: this.labelParcels,
-                field: 'parcels',
-                width: 200,
-                minWidth: 200,
-                suppressFilter: true,
+                headerName: 'crop.name',
+                children: [
+                    {
+                        headerName: '',
+                        field: 'icon',
+                        cellRendererFramework: ImageRendererComponent,
+                        cellRendererParams: {
+                            iconField: 'icon'
+                        },
+                        width: 40,
+                        minWidth: 40,
+                    },
+                    {
+                        headerName: 'crop.planting-date',
+                        field: 'date',
+                        width: 90,
+                        minWidth: 90,
+                        suppressFilter: true,
+                    },
+                    {
+                        headerName: 'crop.seeds',
+                        field: 'cropAndVariety',
+                        width: 180,
+                        minWidth: 180
+                    },
+                    {
+                        headerName: 'crop.unit-of-measure-short',
+                        field: 'unitOfMeasure',
+                        width: 60,
+                        minWidth: 60,
+                        suppressFilter: true,
+                        headerTooltip: 'crop.unit-of-measure-long',
+                    },
+                    {
+                        headerName: 'parcel.area',
+                        field: 'sownArea',
+                        width: 50,
+                        minWidth: 50,
+                        suppressFilter: true,
+                    },
+                    {
+                        headerName: 'parcel.parcels',
+                        field: 'parcels',
+                        width: 200,
+                        minWidth: 200,
+                        suppressFilter: true,
+                    }
+                ]
             },
             {
                 headerName: 'Norma de insamintare',
@@ -134,7 +111,7 @@ export class SowingWorksComponent implements OnInit {
                 ]
             },
             {
-                headerName: this.labelWorks,
+                headerName: 'expenses.sowing',
                 children: [
                     {
                         headerName: '1 Ha',
@@ -184,6 +161,24 @@ export class SowingWorksComponent implements OnInit {
                 ]
             },
         ];
+
+        headers.forEach(header => {
+            if (header.headerName) {
+                this.langService.get(header.headerName).subscribe(m => header.headerName = m);
+            }
+
+            if (header.children) {
+                header.children.forEach(childHeader => {
+                    if (childHeader.headerName) {
+                        this.langService.get(childHeader.headerName).subscribe(m => childHeader.headerName = m);
+                    }
+                });
+            }
+
+            if (header.headerTooltip) {
+                this.langService.get(header.headerTooltip).subscribe(m => header.headerTooltip = m);
+            }
+        });
 
         return headers;
     }
