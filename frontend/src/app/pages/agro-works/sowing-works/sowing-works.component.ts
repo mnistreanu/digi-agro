@@ -167,11 +167,13 @@ export class SowingWorksComponent implements OnInit {
                 this.langService.get(header.headerName).subscribe(m => header.headerName = m);
             }
 
-            header.children.forEach(childHeader => {
-                if (childHeader.headerName) {
-                    this.langService.get(childHeader.headerName).subscribe(m => childHeader.headerName = m);
-                }
-            });
+            if (header.children) {
+                header.children.forEach(childHeader => {
+                    if (childHeader.headerName) {
+                        this.langService.get(childHeader.headerName).subscribe(m => childHeader.headerName = m);
+                    }
+                });
+            }
 
             if (header.headerTooltip) {
                 this.langService.get(header.headerTooltip).subscribe(m => header.headerTooltip = m);
