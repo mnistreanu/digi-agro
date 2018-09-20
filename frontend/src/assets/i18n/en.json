@@ -288,24 +288,26 @@
 		"space-between-rows": "Space Between Rows",
 		"the-parcels": "the parcels"
 	},
-	"pesticides": {
+	"pesticide": {
 		"comments": "Comments",
 		"name": "Name",
 		"phase": "Phase",
 		"result": "Result",
 		"spray-date": "Spray date",
-		"type": "Type",
-		"type-acaricide": "Acaricides",
-		"type-defoliant-desiccant": "Defoliants and desiccants",
-		"type-fungicide": "Fungicides",
-		"type-growth-regulation": "Growth regulators",
-		"type-herbicide": "Herbicides",
-		"type-insecticide": "Insecticides",
-		"type-insectofungicide": "Insectofungicides",
-		"type-miscellaneous-auxiliary-product": "Miscellaneous and auxiliary products",
-		"type-nematocide-soil-desinfectant": "Nematocides, soil disinfectants",
-		"type-pheromone": "Pheromones",
-		"type-rodenticide-molluscicide-repellant": "Rodenticides, molluscicides, repellents"
+		"type": "Type"
+	},
+	"pesticide-type": {
+		"ACARICIDE": "Acaricides",
+		"DEFOLIANT_DESICCANT": "Defoliants and desiccants",
+		"FUNGICIDE": "Fungicides",
+		"GROWTH_REGULATION": "Growth regulators",
+		"HERBICIDE": "Herbicides",
+		"INSECTICIDE": "Insecticides",
+		"INSECTOFUNGICIDE": "Insectofungicides",
+		"MISCELLANEOUS_AUXILIARY_PRODUCT": "Miscellaneous and auxiliary products",
+		"NEMATOCIDE_SOIL_DESINFECTANT": "Nematocides, soil disinfectants",
+		"PHEROMONE": "Pheromones",
+		"RODENTICIDE_MOLLUSCICIDE_REPELLANT": "Rodenticides, molluscicides, repellents"
 	},
 	"reminder": {
 		"enter-new-event": "Just enter event name to create a new one",

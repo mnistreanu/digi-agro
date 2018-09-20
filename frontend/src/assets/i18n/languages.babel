@@ -5113,7 +5113,7 @@
                 </children>
             </folder_node>
             <folder_node>
-                <name>pesticides</name>
+                <name>pesticide</name>
                 <children>
                     <concept_node>
                         <name>comments</name>
@@ -5241,8 +5241,13 @@
                             </translation>
                         </translations>
                     </concept_node>
+                </children>
+            </folder_node>
+            <folder_node>
+                <name>pesticide-type</name>
+                <children>
                     <concept_node>
-                        <name>type-acaricide</name>
+                        <name>ACARICIDE</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -5263,7 +5268,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>type-defoliant-desiccant</name>
+                        <name>DEFOLIANT_DESICCANT</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -5284,7 +5289,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>type-fungicide</name>
+                        <name>FUNGICIDE</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -5305,7 +5310,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>type-growth-regulation</name>
+                        <name>GROWTH_REGULATION</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -5326,7 +5331,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>type-herbicide</name>
+                        <name>HERBICIDE</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -5347,7 +5352,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>type-insecticide</name>
+                        <name>INSECTICIDE</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -5368,7 +5373,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>type-insectofungicide</name>
+                        <name>INSECTOFUNGICIDE</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -5389,7 +5394,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>type-miscellaneous-auxiliary-product</name>
+                        <name>MISCELLANEOUS_AUXILIARY_PRODUCT</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -5410,7 +5415,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>type-nematocide-soil-desinfectant</name>
+                        <name>NEMATOCIDE_SOIL_DESINFECTANT</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -5431,7 +5436,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>type-pheromone</name>
+                        <name>PHEROMONE</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -5452,7 +5457,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>type-rodenticide-molluscicide-repellant</name>
+                        <name>RODENTICIDE_MOLLUSCICIDE_REPELLANT</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>

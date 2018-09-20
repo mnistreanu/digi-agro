@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {PesticideService} from '../../../../services/chemicals-pests/pesticide.service';
 import {LangService} from '../../../../services/lang.service';
 import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
+import {PesticideModel} from "../pesticide.model";
 
 @Component({
     selector: 'app-pesticide-list',
@@ -55,17 +56,41 @@ export class PesticideListComponent implements OnInit {
                 }
             },
             {
+                headerName: 'pesticide.type',
+                field: 'pesticideType',
+                width: 150,
+                minWidth: 100
+            },
+            {
                 headerName: 'name RO',
                 field: 'nameRo',
                 width: 300,
                 minWidth: 200
             },
             {
-                headerName: 'name RU',
-                field: 'nameRu',
+                headerName: 'description RO',
+                field: 'descriptionRo',
                 width: 300,
                 minWidth: 200
-            }
+            },
+            {
+                headerName: 'pests RO',
+                field: 'pestsRo',
+                width: 300,
+                minWidth: 200
+            },
+            {
+                headerName: 'active Substance',
+                field: 'activeSubstance',
+                width: 300,
+                minWidth: 200
+            },
+            {
+                headerName: 'toxicity Group',
+                field: 'toxicityGroup',
+                width: 300,
+                minWidth: 200
+            },
         ];
 
         headers.forEach(header => {
@@ -79,7 +104,16 @@ export class PesticideListComponent implements OnInit {
 
     private setupRows() {
         this.pesticideService.find().subscribe(models => {
+            this.adjustModels(models);
             this.options.api.setRowData(models);
+        });
+    }
+
+    private adjustModels(models: PesticideModel[]) {
+        models.forEach(model => {
+            this.langService
+                .get('pesticide-type.' + model.pesticideType)
+                .subscribe(m => model.pesticideType = m);
         });
     }
 
