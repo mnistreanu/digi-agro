@@ -1,9 +1,12 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
-import {LangService} from '../../../services/lang.service';
-import {MachineService} from '../../../services/machine.service';
-import {FuelExpensesModel} from './fuel-expenses.model';
-import { PinnedRowRendererComponent } from '../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
+import {Router} from '@angular/router';
+import {LangService} from '../../../../services/lang.service';
+import {DateUtil} from '../../../../common/dateUtil';
+import { PinnedRowRendererComponent } from '../../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
+import {AuthService} from '../../../../services/auth/auth.service';
+import {FuelExpenseService} from '../../../../services/fuel-expense.service';
+import {Authorities} from '../../../../common/authorities';
 
 @Component({
     selector: 'app-fuel-expenses',
@@ -12,6 +15,8 @@ import { PinnedRowRendererComponent } from '../../../modules/aggrid/pinned-row-r
     styleUrls: ['./fuel-expenses.component.scss']
 })
 export class FuelExpensesComponent implements OnInit {
+    readOnly;
+
     options: GridOptions;
     context;
 
@@ -28,13 +33,21 @@ export class FuelExpensesComponent implements OnInit {
     labelSolidol: string;
     labelNegrol: string;
 
-    constructor(private machineService: MachineService, private langService: LangService) {
+    constructor(private fuelExpenseService: FuelExpenseService,
+                private authService: AuthService,
+                private router: Router,
+                private langService: LangService) {
 
     }
 
     ngOnInit() {
+        this.setupTableMode();
         this.setupLabels();
         this.setupGrid();
+    }
+
+    private setupTableMode() {
+        this.readOnly = this.authService.hasAuthority(Authorities.ROLE_USER);
     }
 
     private setupLabels() {
@@ -78,7 +91,8 @@ export class FuelExpensesComponent implements OnInit {
                 minWidth: 90,
                 suppressFilter: true,
                 pinnedRowCellRenderer: 'customPinnedRowRenderer',
-                pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } }
+                pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } },
+                valueFormatter: (params) => DateUtil.formatDateWithTime(params.value)
             },
             {
                 headerName: this.labelAgriculturalMachinery,
@@ -161,29 +175,12 @@ export class FuelExpensesComponent implements OnInit {
         return headers;
     }
 
-
     public setupRows() {
-        let i = 0;
-        this.machineService.findAll().subscribe(modelsArray => {
-            const rows = modelsArray.map(data => {
-                const model = new FuelExpensesModel();
-                model.date = new Date().toLocaleDateString();
-                model.type = modelsArray[i].type;
-                model.brandModel = modelsArray[i].type + ' ' + modelsArray[i].brand + ' ' + modelsArray[i].model;
-                model.identifier = modelsArray[i].identifier;
-                model.employee = 'Roată Ion';
-                model.unitOfMeasure = 'L';
-                model.diesel = 120;
-                model.oil = 9;
-                model.solidol = 1;
-                model.negrol = 1;
-                i++;
-                return model;
-            });
-            this.options.api.setRowData(rows);
-            this.setupSummaryRow(rows);
+        this.fuelExpenseService.find().subscribe(models => {
+            this.options.api.setRowData(models);
         });
     }
+
 
     private setupSummaryRow(rows) {
         const summaryRow = {
@@ -206,5 +203,14 @@ export class FuelExpensesComponent implements OnInit {
                 this.options.api.sizeColumnsToFit();
             }
         }, 500);
+    }
+
+    public add() {
+        this.router.navigate(['/pages/expenses/fuel/-1']);
+    }
+
+    public onEdit(node) {
+        const model = node.data;
+        this.router.navigate(['/pages/expenses/fuel/' + model.expenseId]);
     }
 }

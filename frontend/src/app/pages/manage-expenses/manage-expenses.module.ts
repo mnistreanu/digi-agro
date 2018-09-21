@@ -8,7 +8,7 @@ import {MultiselectDropdownModule} from 'angular-2-dropdown-multiselect';
 import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-block.module';
 import {AgGridModule} from 'ag-grid-angular';
 import {MachineryExpensesComponent} from './machinery-expenses/list/machinery-expenses.component';
-import {FuelExpensesComponent} from './fuel-expenses/fuel-expenses.component';
+import {FuelExpensesComponent} from './fuel-expenses/list/fuel-expenses.component';
 import {SowingExpensesComponent} from './sowing-expenses/sowing-expenses.component';
 import {WorksExpensesComponent} from './works-expenses/works-expenses.component';
 import {FertilizersExpensesComponent} from './fertilizers-expenses/fertilizers-expenses.component';
@@ -26,12 +26,14 @@ import {EditRendererModule} from '../../modules/aggrid/edit-renderer/edit-render
 import {EditRendererComponent} from '../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {AdminGuard} from '../../guards/admin-guard';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
+import {FuelExpensesFormComponent} from './fuel-expenses/form/fuel-expenses-form.component';
 
 export const routes = [
     {path: '', redirectTo: 'expenses', pathMatch: 'full'},
     {path: 'machinery', component: MachineryExpensesComponent},
     {path: 'machinery/:id', component: MachineryExpensesFormComponent, canActivate: [AdminGuard]},
     {path: 'fuel', component: FuelExpensesComponent},
+    {path: 'fuel/:id', component: FuelExpensesFormComponent, canActivate: [AdminGuard]},
     {path: 'sowing', component: SowingExpensesComponent},
     {path: 'works', component: WorksExpensesComponent},
     {path: 'fertilizers', component: FertilizersExpensesComponent},
@@ -64,6 +66,7 @@ export const routes = [
     declarations: [
         MachineryExpensesComponent,
         FuelExpensesComponent,
+        FuelExpensesFormComponent,
         SowingExpensesComponent,
         WorksExpensesComponent,
         PesticidesExpensesComponent,

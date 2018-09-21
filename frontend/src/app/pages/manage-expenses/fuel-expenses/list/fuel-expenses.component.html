@@ -10,7 +10,10 @@
         </div>
     </div>
     <div class="card-body widget-body">
-        <ag-grid-angular class="ag-theme-balham ag-small-padding"
+        <div>
+            <button class="btn btn-sm btn-primary" *ngIf="!readOnly" (click)="add()" translate>action.add</button>
+        </div>
+        <ag-grid-angular class="ag-theme-balham "
                          style="width: 100%; height: 400px; min-height: 100%; box-sizing: border-box;"
                          *ngIf="options"
                          [gridOptions]="options"

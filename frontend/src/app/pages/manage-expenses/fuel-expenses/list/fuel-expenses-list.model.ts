@@ -1,4 +1,4 @@
-export class FuelExpensesModel {
+export class FuelExpensesListModel {
   date: string;
   type: string;
   brandModel: string;
