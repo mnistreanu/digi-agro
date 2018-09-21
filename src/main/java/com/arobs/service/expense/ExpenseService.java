@@ -2,6 +2,8 @@ package com.arobs.service.expense;
 
 import com.arobs.entity.Expense;
 import com.arobs.interfaces.HasRepository;
+import com.arobs.model.expense.ExpenseModel;
+import com.arobs.model.expense.FuelExpenseModel;
 import com.arobs.model.expense.MachineryExpenseModel;
 import com.arobs.repository.ExpenseRepository;
 import com.arobs.service.AuthService;
@@ -34,7 +36,7 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
     }
 
     @Transactional
-    public Expense save(MachineryExpenseModel model, Long tenant) {
+    public Expense save(ExpenseModel model, Long tenant) {
 
         Expense expense;
 

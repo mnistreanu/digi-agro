@@ -6,57 +6,62 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MachineryExpenseModel {
+public class MachineryExpenseModel extends ExpenseModel{
 
-    private Long id;
-    private String title;
-    private Date expenseDate;
-
-    private List<ExpenseItemModel> expenseItems = new ArrayList<>();
+//    private Long id;
+//    private String title;
+//    private Date expenseDate;
+//
+//    private List<ExpenseItemModel> expenseItems = new ArrayList<>();
 
     private List<Long> machines = new ArrayList<>();
     private List<Long> employees = new ArrayList<>();
 
     public MachineryExpenseModel() {
+        super();
     }
 
     public MachineryExpenseModel(Expense expense) {
-        id = expense.getId();
-        title = expense.getTitle();
-        expenseDate = expense.getExpenseDate();
+        super(expense);
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Date getExpenseDate() {
-        return expenseDate;
-    }
-
-    public void setExpenseDate(Date expenseDate) {
-        this.expenseDate = expenseDate;
-    }
-
-    public List<ExpenseItemModel> getExpenseItems() {
-        return expenseItems;
-    }
-
-    public void setExpenseItems(List<ExpenseItemModel> expenseItems) {
-        this.expenseItems = expenseItems;
-    }
+//    public MachineryExpenseModel(Expense expense) {
+//        id = expense.getId();
+//        title = expense.getTitle();
+//        expenseDate = expense.getExpenseDate();
+//    }
+//
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+//
+//    public String getTitle() {
+//        return title;
+//    }
+//
+//    public void setTitle(String title) {
+//        this.title = title;
+//    }
+//
+//    public Date getExpenseDate() {
+//        return expenseDate;
+//    }
+//
+//    public void setExpenseDate(Date expenseDate) {
+//        this.expenseDate = expenseDate;
+//    }
+//
+//    public List<ExpenseItemModel> getExpenseItems() {
+//        return expenseItems;
+//    }
+//
+//    public void setExpenseItems(List<ExpenseItemModel> expenseItems) {
+//        this.expenseItems = expenseItems;
+//    }
 
     public List<Long> getMachines() {
         return machines;
