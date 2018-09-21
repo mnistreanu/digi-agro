@@ -893,6 +893,35 @@
         </sql>
     </changeSet>
 
+
+    <changeSet id="insert-fuel-expense" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <sql>
+            INSERT INTO expense(id, tenant_id, title, expense_date) VALUES
+            (2, 1, 'Cheltuieli combustibil bgrigada nr.1', '2018-09-21');
+
+            SELECT nextval('expense_id_seq');
+
+            INSERT INTO expense_item(id, expense_id, title, actual_qty, unit_of_measure) VALUES
+            (4, 2, 'Motorină', 350, 'l'),
+            (5, 2, 'Ulei', 12, 'l'),
+            (6, 2, 'Solidol', 1, 'l'),
+            (7, 2, 'Negrol', 2, 'l');
+
+            SELECT nextval('expense_item_id_seq');
+            SELECT nextval('expense_item_id_seq');
+            SELECT nextval('expense_item_id_seq');
+            SELECT nextval('expense_item_id_seq');
+
+            INSERT INTO expense_resource(id, expense_id, resource_id, table_name) VALUES
+            (1, 2, 1, 'machine'),
+            (2, 2, 1, 'employee');
+
+            SELECT nextval('expense_resource_id_seq');
+            SELECT nextval('expense_resource_id_seq');
+        </sql>
+    </changeSet>
+
+
     <changeSet id="insert_pesticides_v1" author="mihai.gorgos" failOnError="true" runOnChange="false">
         <validCheckSum>ANY</validCheckSum>
         <sql>
