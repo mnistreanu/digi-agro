@@ -14,6 +14,9 @@ public class Expense {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "category_id")
+    private Long categoryId;
+
     @Column(name = "tenant_id")
     private Long tenantId;
 
@@ -40,6 +43,14 @@ public class Expense {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Long getTenantId() {
