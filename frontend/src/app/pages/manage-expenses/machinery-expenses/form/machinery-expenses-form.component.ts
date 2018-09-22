@@ -4,9 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LangService} from '../../../../services/lang.service';
 import {MachineryExpenseModel} from './machinery-expense.model';
-import {IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts} from 'angular-2-dropdown-multiselect';
 import {MachineService} from '../../../../services/machine.service';
-import {EmployeeService} from '../../../../services/employee.service';
 import {Messages} from '../../../../common/messages';
 import {MachineryExpenseService} from '../../../../services/machinery-expense.service';
 import {ModalService} from '../../../../services/modal.service';
@@ -26,7 +24,8 @@ export class MachineryExpensesFormComponent implements OnInit {
     model: MachineryExpenseModel;
 
     machines: any[];
-    employees: IMultiSelectOption[];
+    employees: any[];
+    employeeMap: any;
 
     multiSelectSettings = {
         enableSearchFilter: true,
@@ -36,25 +35,7 @@ export class MachineryExpensesFormComponent implements OnInit {
         unSelectAllText: this.langService.instant('select-dropdown.deselect-all'),
         searchPlaceholderText: this.langService.instant('select-dropdown.search-placeholder'),
         filterSelectAllText: this.langService.instant('select-dropdown.select-all-filtered'),
-        filterUnSelectAllText: this.langService.instant('select-dropdown.deselect-all-filtered'),
-    };
-
-    public multiSelectControlSettings: IMultiSelectSettings = {
-        checkedStyle: 'fontawesome',
-        buttonClasses: 'btn btn-secondary btn-block',
-        dynamicTitleMaxItems: 3,
-        displayAllSelectedText: true,
-        showCheckAll: true,
-        showUncheckAll: true
-    };
-
-    public multiSelectControlTexts: IMultiSelectTexts = {
-        checkAll: this.langService.instant(Messages.SELECT_ALL),
-        uncheckAll: this.langService.instant(Messages.UNSELECT_ALL),
-        checked: this.langService.instant(Messages.ITEM_SELECTED),
-        checkedPlural: this.langService.instant(Messages.ITEMS_SELECTED),
-        defaultTitle: this.langService.instant(Messages.PLEASE_SELECT),
-        allSelected: this.langService.instant(Messages.ALL_SELECTED),
+        filterUnSelectAllText: this.langService.instant('select-dropdown.deselect-all-filtered')
     };
 
     private labels: any;
@@ -65,15 +46,13 @@ export class MachineryExpensesFormComponent implements OnInit {
                 private modalService: ModalService,
                 private machineryExpenseService: MachineryExpenseService,
                 private machineService: MachineService,
-                private employeeService: EmployeeService,
                 private langService: LangService,
                 private toastr: ToastrService) {
     }
 
     ngOnInit() {
         this.setupLabels();
-        this.setupMachines()
-            .then(() => this.setupEmployees())
+        this.setupResources()
             .then(() => this.restoreModel());
     }
 
@@ -84,14 +63,18 @@ export class MachineryExpensesFormComponent implements OnInit {
         this.langService.get(Messages.VALIDATION_FAIL).subscribe(m => this.labels[Messages.VALIDATION_FAIL] = m);
     }
 
-    private setupMachines(): Promise<void> {
+    private setupResources(): Promise<void> {
         return new Promise((resolve) => {
-            this.machineService.findAll().subscribe(models => {
-                this.machines = models.map(model => {
-                    return {
-                        id: model.id,
-                        itemName: this.getMachineLabel(model)
-                    };
+            this.machineService.findAll().subscribe(machineModels => {
+                this.machines = [];
+                this.employees = [];
+                this.employeeMap = {};
+                machineModels.forEach(machine => {
+                    this.machines.push({
+                        id: machine.id,
+                        itemName: this.getMachineLabel(machine)
+                    });
+                    this.registerEmployees(machine.id, machine.employees);
                 });
                 resolve();
             });
@@ -102,18 +85,38 @@ export class MachineryExpensesFormComponent implements OnInit {
         return model.identifier + ' ' + model.model + ' ' + model.brand;
     }
 
-    private setupEmployees(): Promise<void> {
-        return new Promise((resolve) => {
-            this.employeeService.findAll().subscribe(models => {
-                this.employees = models.map(model => {
-                    return {
-                        id: model.id,
-                        name: model.firstName + ' ' + model.lastName
-                    };
-                });
-                resolve();
-            });
+    private registerEmployees(machineId, items) {
+        if (!items) {
+            return;
+        }
+        items.forEach(employee => {
+            let listModel = this.employeeMap[employee.id];
+
+            if (!listModel) {
+                listModel = {
+                    id: employee.id,
+                    itemName: this.getEmployeeLabel(employee),
+                    machineMap: {}
+                };
+                this.employeeMap[employee.id] = listModel;
+                this.employees.push(listModel);
+            }
+
+            listModel.machineMap[machineId] = machineId;
         });
+    }
+
+    private getEmployeeLabel(model) {
+        return model.firstName + ' ' + model.lastName;
+    }
+
+    public resetUnlinkedEmployees() {
+        const machineIds = this.form.controls['machines'].value.map(m => m.id);
+        const employeesControl = this.form.controls['employees'];
+        const employees = employeesControl.value.filter(employee => {
+            return machineIds.some(machineId => employee.machineMap[machineId]);
+        });
+        employeesControl.setValue(employees);
     }
 
     private restoreModel() {
@@ -145,13 +148,12 @@ export class MachineryExpensesFormComponent implements OnInit {
 
     private buildForm() {
         const expenseDate = this.model.expenseDate ? this.model.expenseDate.toISOString().substring(0, 10) : null;
-        const selectedMachines = [];
 
         this.form = this.fb.group({
             title: [this.model.title, Validators.required],
             expenseDate: [expenseDate, Validators.required],
             machines: [this.getSelectedMachines()],
-            employees: [this.model.employees || []],
+            employees: [this.getSelectedEmployees()],
         });
     }
 
@@ -167,6 +169,18 @@ export class MachineryExpensesFormComponent implements OnInit {
         return selectedMachines;
     }
 
+    private getSelectedEmployees() {
+
+        let selectedEmployees = [];
+        if (this.model.employees && this.model.employees.length > 0) {
+            const map = {};
+            this.employees.forEach(item => map[item.id] = item);
+            selectedEmployees = this.model.employees.map(id => map[id]);
+        }
+
+        return selectedEmployees;
+    }
+
     save() {
         this.submitted = true;
 
@@ -179,6 +193,7 @@ export class MachineryExpensesFormComponent implements OnInit {
         this.submitted = false;
 
         this.model.machines = this.form.value.machines.map(item => item.id);
+        this.model.employees = this.form.value.employees.map(item => item.id);
 
         this.model.expenseItems = this.model.expenseItems.filter(item => {
             return !item.deleted || (item.deleted && item.id != null);

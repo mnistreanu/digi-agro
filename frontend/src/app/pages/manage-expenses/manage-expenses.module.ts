@@ -46,7 +46,7 @@ export const routes = [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        MultiselectDropdownModule,
+        MultiselectDropdownModule,      // todo: remove
         AngularMultiSelectModule,
         DirectivesModule,
         FormErrorBlockModule,

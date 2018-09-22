@@ -37,17 +37,17 @@
                     <label translate>Machines</label>
                     <angular2-multiselect [settings]="multiSelectSettings"
                                           [data]="machines"
+                                          (onDeSelect)="resetUnlinkedEmployees()"
                                           formControlName="machines">
                     </angular2-multiselect>
 
                 </div>
                 <div class="col-sm-6">
                     <label translate>Employees</label>
-                    <ss-multiselect-dropdown [options]="employees" *ngIf="employees"
-                                             [texts]="multiSelectControlTexts"
-                                             [settings]="multiSelectControlSettings"
-                                             formControlName="employees">
-                    </ss-multiselect-dropdown>
+                    <angular2-multiselect [settings]="multiSelectSettings"
+                                          [data]="employees"
+                                          formControlName="employees">
+                    </angular2-multiselect>
                 </div>
             </div>
 
