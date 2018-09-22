@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ToastrService} from 'ngx-toastr';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {LangService} from '../../../../services/lang.service';
 import {MachineryExpenseModel} from './machinery-expense.model';
 import {MachineService} from '../../../../services/machine.service';
-import {Messages} from '../../../../common/messages';
 import {MachineryExpenseService} from '../../../../services/machinery-expense.service';
 import {ModalService} from '../../../../services/modal.service';
+import {MessageService} from '../../../../services/message.service';
+import {LangService} from '../../../../services/lang.service';
 
 @Component({
     selector: 'app-machinery-expenses-form',
@@ -38,8 +37,6 @@ export class MachineryExpensesFormComponent implements OnInit {
         filterUnSelectAllText: this.langService.instant('select-dropdown.deselect-all-filtered')
     };
 
-    private labels: any;
-
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
@@ -47,20 +44,12 @@ export class MachineryExpensesFormComponent implements OnInit {
                 private machineryExpenseService: MachineryExpenseService,
                 private machineService: MachineService,
                 private langService: LangService,
-                private toastr: ToastrService) {
+                private messageService: MessageService) {
     }
 
     ngOnInit() {
-        this.setupLabels();
         this.setupResources()
             .then(() => this.restoreModel());
-    }
-
-    private setupLabels() {
-        this.labels = {};
-        this.langService.get(Messages.SAVED).subscribe(m => this.labels[Messages.SAVED] = m);
-        this.langService.get(Messages.REMOVED).subscribe(m => this.labels[Messages.REMOVED] = m);
-        this.langService.get(Messages.VALIDATION_FAIL).subscribe(m => this.labels[Messages.VALIDATION_FAIL] = m);
     }
 
     private setupResources(): Promise<void> {
@@ -185,7 +174,7 @@ export class MachineryExpensesFormComponent implements OnInit {
         this.submitted = true;
 
         if (!this.form.valid) {
-            this.toastr.warning(this.labels[Messages.VALIDATION_FAIL]);
+            this.messageService.validationFailed();
             return;
         }
 
@@ -201,7 +190,7 @@ export class MachineryExpensesFormComponent implements OnInit {
 
         this.machineryExpenseService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.toastr.success(this.labels[Messages.SAVED]);
+            this.messageService.saved();
         });
     }
 
@@ -211,7 +200,7 @@ export class MachineryExpensesFormComponent implements OnInit {
 
     remove() {
         this.machineryExpenseService.remove(this.model).subscribe(() => {
-            this.toastr.success(this.labels[Messages.REMOVED]);
+            this.messageService.removed();
             this.back();
         });
     }
