@@ -896,6 +896,19 @@
         </sql>
     </changeSet>
 
+    <changeSet id="update-machinery-fuel-expense-tenant1" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <sql>
+            UPDATE expense SET category_id=7 WHERE id=1;
+            UPDATE expense SET category_id=8 WHERE id=2;
+
+            UPDATE expense_item SET category_id=7 WHERE id=2;
+            UPDATE expense_item SET category_id=9 WHERE id=3;
+            UPDATE expense_item SET category_id=10 WHERE id=4;
+            UPDATE expense_item SET category_id=11 WHERE id=5;
+            UPDATE expense_item SET category_id=12 WHERE id=6;
+        </sql>
+    </changeSet>
+
     <changeSet id="insert-fuel-expense" author="maxim.nistreanu" failOnError="true" runOnChange="true">
         <sql>
             INSERT INTO expense(id, tenant_id, title, expense_date) VALUES
