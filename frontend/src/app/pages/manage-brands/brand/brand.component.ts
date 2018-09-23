@@ -3,7 +3,7 @@ import {BrandService} from '../../../services/brand.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BrandModel} from './brand.model';
-import {MessageService} from '../../../services/message.service';
+import {AlertService} from '../../../services/alert.service';
 
 @Component({
     selector: 'app-brand',
@@ -21,7 +21,7 @@ export class BrandComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
-                private messageService: MessageService,
+                private alertService: AlertService,
                 private brandService: BrandService) {
     }
 
@@ -74,7 +74,7 @@ export class BrandComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.messageService.validationFailed();
+            this.alertService.validationFailed();
             return;
         }
 
@@ -84,14 +84,14 @@ export class BrandComponent implements OnInit {
 
         this.brandService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.messageService.saved();
+            this.alertService.saved();
         });
 
     }
 
     public remove() {
         this.brandService.remove(this.model).subscribe(() => {
-            this.messageService.removed();
+            this.alertService.removed();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
     }

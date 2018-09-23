@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PestModel} from '../pest.model';
 import {PestService} from '../../../../services/chemicals-pests/pest.service';
-import {MessageService} from '../../../../services/message.service';
+import {AlertService} from '../../../../services/alert.service';
 
 @Component({
     selector: 'app-harmful-organism',
@@ -22,7 +22,7 @@ export class PestComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
-                private messageService: MessageService,
+                private alertService: AlertService,
                 private pestService: PestService) {
     }
 
@@ -64,7 +64,7 @@ export class PestComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.messageService.validationFailed();
+            this.alertService.validationFailed();
             return;
         }
 
@@ -73,7 +73,7 @@ export class PestComponent implements OnInit {
 
         this.pestService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.messageService.saved();
+            this.alertService.saved();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
 
@@ -81,7 +81,7 @@ export class PestComponent implements OnInit {
 
     public remove() {
         this.pestService.remove(this.model).subscribe(() => {
-            this.messageService.removed();
+            this.alertService.removed();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
     }

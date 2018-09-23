@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {FertilizerModel} from '../fertilizer.model';
 import {FertilizerService} from '../../../../services/chemicals-pests/fertilizer.service';
-import {MessageService} from '../../../../services/message.service';
+import {AlertService} from '../../../../services/alert.service';
 
 @NgModule({
     imports: [
@@ -25,7 +25,7 @@ export class FertilizerComponent implements OnInit {
     model: FertilizerModel;
 
     constructor(private fb: FormBuilder,
-                private messageService: MessageService,
+                private alertService: AlertService,
                 private router: Router,
                 private route: ActivatedRoute,
                 private fertilizerService: FertilizerService) {
@@ -72,7 +72,7 @@ export class FertilizerComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.messageService.validationFailed();
+            this.alertService.validationFailed();
             return;
         }
 
@@ -81,7 +81,7 @@ export class FertilizerComponent implements OnInit {
 
         this.fertilizerService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.messageService.saved();
+            this.alertService.saved();
             this.router.navigate(['../'], { relativeTo: this.route });
         });
 
@@ -89,7 +89,7 @@ export class FertilizerComponent implements OnInit {
 
     public remove() {
         this.fertilizerService.remove(this.model).subscribe(() => {
-            this.messageService.removed();
+            this.alertService.removed();
             this.router.navigate(['../'], { relativeTo: this.route });
         });
     }

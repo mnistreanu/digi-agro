@@ -5,7 +5,7 @@ import {SelectItem} from '../../../dto/select-item.dto';
 import {CropVarietyModel} from './crop-variety.model';
 import {CropVarietyService} from '../../../services/crop/crop-variety.service';
 import {UnitOfMeasure} from '../../../enums/unit-of-measure.enum';
-import {MessageService} from '../../../services/message.service';
+import {AlertService} from '../../../services/alert.service';
 
 @Component({
     selector: 'app-crop',
@@ -25,7 +25,7 @@ export class CropVarietyComponent implements OnInit {
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                private messageService: MessageService,
+                private alertService: AlertService,
                 private cropVarietyService: CropVarietyService) {
     }
 
@@ -84,7 +84,7 @@ export class CropVarietyComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.messageService.validationFailed();
+            this.alertService.validationFailed();
             return;
         }
 
@@ -94,12 +94,12 @@ export class CropVarietyComponent implements OnInit {
         if (this.model.id) {
             this.cropVarietyService.update(this.model.id, form.value).subscribe((model) => {
                 this.model = model;
-                this.messageService.saved();
+                this.alertService.saved();
             });
         } else {
             this.cropVarietyService.create(form.value).subscribe((model) => {
                 this.model = model;
-                this.messageService.saved();
+                this.alertService.saved();
             });
         }
 
@@ -107,7 +107,7 @@ export class CropVarietyComponent implements OnInit {
 
     public remove() {
         this.cropVarietyService.remove(this.model.id).subscribe(() => {
-            this.messageService.removed();
+            this.alertService.removed();
             this.router.navigate(['/pages/manage-crops/crop-varieties']);
         });
     }

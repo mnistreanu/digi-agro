@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {SelectItem} from '../../../dto/select-item.dto';
 import {CropService} from '../../../services/crop/crop.service';
 import {CropModel} from '../crop.model';
-import {MessageService} from '../../../services/message.service';
+import {AlertService} from '../../../services/alert.service';
 
 @Component({
     selector: 'app-crop',
@@ -23,7 +23,7 @@ export class CropComponent implements OnInit {
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                private messageService: MessageService,
+                private alertService: AlertService,
                 private cropService: CropService) {
     }
 
@@ -73,7 +73,7 @@ export class CropComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.messageService.validationFailed();
+            this.alertService.validationFailed();
             return;
         }
 
@@ -83,12 +83,12 @@ export class CropComponent implements OnInit {
         if (this.model.id) {
             this.cropService.update(this.model.id, this.form.value).subscribe((model) => {
                 this.model = model;
-                this.messageService.saved();
+                this.alertService.saved();
             });
         } else {
             this.cropService.create(this.form.value).subscribe((model) => {
                 this.model = model;
-                this.messageService.saved();
+                this.alertService.saved();
             });
         }
 
@@ -96,7 +96,7 @@ export class CropComponent implements OnInit {
 
     public remove() {
         this.cropService.remove(this.model.id).subscribe(() => {
-            this.messageService.removed();
+            this.alertService.removed();
             this.router.navigate(['/pages/manage-crops']);
         });
     }

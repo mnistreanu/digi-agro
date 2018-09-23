@@ -8,7 +8,7 @@ import {MachineService} from '../../../services/machine.service';
 import {LangService} from '../../../services/lang.service';
 import {MachineTelemetryService} from '../../../services/machine-telemetry.service';
 import {MachineModel} from '../../manage-machines/machine/machine.model';
-import {MessageService} from '../../../services/message.service';
+import {AlertService} from '../../../services/alert.service';
 
 @Component({
     selector: 'app-machine-telemetry',
@@ -30,7 +30,7 @@ export class MachineTelemetryComponent implements OnInit {
     constructor(private machineTelemetryService: MachineTelemetryService,
                 private machineService: MachineService,
                 private langService: LangService,
-                private messageService: MessageService) {
+                private alertService: AlertService) {
     }
 
 
@@ -146,7 +146,7 @@ export class MachineTelemetryComponent implements OnInit {
         const value = params.newValue;
 
         this.machineTelemetryService.updateCoordinate(model.id, field, value).subscribe(() => {
-            this.messageService.saved();
+            this.alertService.saved();
             this.dataChanged.emit(this.models);
         });
     }
@@ -190,7 +190,7 @@ export class MachineTelemetryComponent implements OnInit {
 
             this.models.push(item);
             this.dataChanged.emit(this.models);
-            this.messageService.saved();
+            this.alertService.saved();
         });
     }
 
@@ -201,7 +201,7 @@ export class MachineTelemetryComponent implements OnInit {
         this.machineTelemetryService.remove(model).subscribe(() => {
             this.models.splice(this.models.indexOf(model), 1);
             this.dataChanged.emit(this.models);
-            this.messageService.removed();
+            this.alertService.removed();
         });
     }
 

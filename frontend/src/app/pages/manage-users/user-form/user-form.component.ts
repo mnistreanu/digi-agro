@@ -11,7 +11,7 @@ import {ListItem} from '../../../interfaces/list-item.interface';
 import {IMultiSelectSettings} from 'angular-2-dropdown-multiselect';
 import {BranchService} from '../../../services/branch.service';
 import {Authorities} from '../../../common/authorities';
-import {MessageService} from '../../../services/message.service';
+import {AlertService} from '../../../services/alert.service';
 
 @Component({
     selector: 'app-user-form',
@@ -43,7 +43,7 @@ export class UserFormComponent implements OnInit {
                 private userService: UserService,
                 private branchService: BranchService,
                 private tenantService: TenantService,
-                private messageService: MessageService) {
+                private alertService: AlertService) {
     }
 
     ngOnInit() {
@@ -213,7 +213,7 @@ export class UserFormComponent implements OnInit {
 
         this.userService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.messageService.saved();
+            this.alertService.saved();
         });
 
     }
@@ -229,7 +229,7 @@ export class UserFormComponent implements OnInit {
 
     public remove() {
         this.userService.remove(this.model).subscribe(() => {
-            this.messageService.removed();
+            this.alertService.removed();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
     }

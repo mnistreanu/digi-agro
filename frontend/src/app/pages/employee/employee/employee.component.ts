@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EmployeeService} from '../../../services/employee.service';
 import {EmployeeModel} from './employee.model';
-import {MessageService} from '../../../services/message.service';
+import {AlertService} from '../../../services/alert.service';
 
 @Component({
     selector: 'app-employee',
@@ -20,7 +20,7 @@ export class EmployeeComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
-                private messageService: MessageService,
+                private alertService: AlertService,
                 private employeeService: EmployeeService) {
     }
 
@@ -63,7 +63,7 @@ export class EmployeeComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.messageService.validationFailed();
+            this.alertService.validationFailed();
             return;
         }
 
@@ -72,7 +72,7 @@ export class EmployeeComponent implements OnInit {
 
         this.employeeService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.messageService.saved();
+            this.alertService.saved();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
 
@@ -80,7 +80,7 @@ export class EmployeeComponent implements OnInit {
 
     public remove() {
         this.employeeService.remove(this.model).subscribe(() => {
-            this.messageService.removed();
+            this.alertService.removed();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
     }

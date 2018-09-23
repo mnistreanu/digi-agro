@@ -13,7 +13,7 @@ import {LangService} from '../../../services/lang.service';
 import {GeoLocalizedItem} from '../../../interfaces/geo-localized-item.interface';
 import {GeoService} from '../../../services/geo.service';
 import {TenantModel} from '../../manage-tenants/tenant/tenant.model';
-import {MessageService} from '../../../services/message.service';
+import {AlertService} from '../../../services/alert.service';
 
 @Component({
     selector: 'app-branch',
@@ -42,7 +42,7 @@ export class BranchComponent implements OnInit {
                 private storageService: StorageService,
                 private langService: LangService,
                 private geoService: GeoService,
-                private messageService: MessageService,
+                private alertService: AlertService,
                 private tenantService: TenantService) {
     }
 
@@ -166,7 +166,7 @@ export class BranchComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.messageService.validationFailed();
+            this.alertService.validationFailed();
             return;
         }
 
@@ -176,14 +176,14 @@ export class BranchComponent implements OnInit {
 
         this.branchService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.messageService.saved();
+            this.alertService.saved();
         });
 
     }
 
     public remove() {
         this.branchService.remove(this.model).subscribe(() => {
-            this.messageService.removed();
+            this.alertService.removed();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
     }

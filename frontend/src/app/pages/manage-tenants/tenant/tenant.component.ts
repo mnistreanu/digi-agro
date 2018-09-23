@@ -6,7 +6,7 @@ import {TenantService} from '../../../services/tenant.service';
 import {GeoService} from '../../../services/geo.service';
 import {LangService} from '../../../services/lang.service';
 import {GeoLocalizedItem} from '../../../interfaces/geo-localized-item.interface';
-import {MessageService} from '../../../services/message.service';
+import {AlertService} from '../../../services/alert.service';
 
 @Component({
     selector: 'app-tenant',
@@ -31,7 +31,7 @@ export class TenantComponent implements OnInit {
                 private geoService: GeoService,
                 private langService: LangService,
                 private tenantService: TenantService,
-                private messageService: MessageService) {
+                private alertService: AlertService) {
     }
 
     ngOnInit() {
@@ -146,7 +146,7 @@ export class TenantComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.messageService.validationFailed();
+            this.alertService.validationFailed();
             return;
         }
 
@@ -156,14 +156,14 @@ export class TenantComponent implements OnInit {
 
         this.tenantService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.messageService.saved();
+            this.alertService.saved();
         });
 
     }
 
     public remove() {
         this.tenantService.remove(this.model).subscribe(() => {
-            this.messageService.removed();
+            this.alertService.removed();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
     }

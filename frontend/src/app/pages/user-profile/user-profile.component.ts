@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 import {Constants} from '../../common/constants';
 import {LangService} from '../../services/lang.service';
 import {environment} from '../../../environments/environment';
-import {MessageService} from '../../services/message.service';
+import {AlertService} from '../../services/alert.service';
 
 @Component({
     selector: 'app-user-profile',
@@ -33,7 +33,7 @@ export class UserProfileComponent implements OnInit {
                 private langService: LangService,
                 private authService: AuthService,
                 private userService: UserService,
-                private messageService: MessageService,
+                private alertService: AlertService,
                 private toastr: ToastrService) {
     }
 
@@ -82,7 +82,7 @@ export class UserProfileComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.messageService.validationFailed();
+            this.alertService.validationFailed();
             return;
         }
 
@@ -98,7 +98,7 @@ export class UserProfileComponent implements OnInit {
 
         this.userService.saveProfile(this.model, this.logoFile).subscribe((model) => {
             this.model = model;
-            this.messageService.saved();
+            this.alertService.saved();
             if (usernameChanged) {
                 this.toastr.success(this.labelUsernameChangedRelogin);
                 this.router.navigate([Constants.LOGIN_PAGE]);

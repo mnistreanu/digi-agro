@@ -8,7 +8,7 @@ import {DateUtil} from '../../../common/dateUtil';
 import {Messages} from '../../../common/messages';
 import {NumericUtil} from '../../../common/numericUtil';
 import {LangService} from '../../../services/lang.service';
-import {MessageService} from '../../../services/message.service';
+import {AlertService} from '../../../services/alert.service';
 
 @Component({
     selector: 'app-map-events',
@@ -27,7 +27,7 @@ export class MapEventsComponent implements OnInit {
 
     constructor(private mapEventService: MapEventService,
                 private langService: LangService,
-                private messageService: MessageService) {
+                private alertService: AlertService) {
     }
 
     ngOnInit() {
@@ -131,7 +131,7 @@ export class MapEventsComponent implements OnInit {
         const value = params.newValue;
 
         this.mapEventService.update(model.id, field, value).subscribe(() => {
-            this.messageService.saved();
+            this.alertService.saved();
             this.dataChanged.emit(this.models);
         });
     }
@@ -174,7 +174,7 @@ export class MapEventsComponent implements OnInit {
             this.models.push(item);
             this.dataChanged.emit(this.models);
 
-            this.messageService.saved();
+            this.alertService.saved();
         });
     }
 
@@ -185,7 +185,7 @@ export class MapEventsComponent implements OnInit {
         this.mapEventService.remove(model).subscribe(() => {
             this.models.splice(this.models.indexOf(model), 1);
             this.dataChanged.emit(this.models);
-            this.messageService.removed();
+            this.alertService.removed();
         });
     }
 

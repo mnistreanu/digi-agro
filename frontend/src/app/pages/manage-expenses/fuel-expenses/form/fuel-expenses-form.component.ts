@@ -9,7 +9,7 @@ import {EmployeeService} from '../../../../services/employee.service';
 import {Messages} from '../../../../common/messages';
 import {FuelExpenseService} from '../../../../services/fuel-expense.service';
 import {ModalService} from '../../../../services/modal.service';
-import {MessageService} from '../../../../services/message.service';
+import {AlertService} from '../../../../services/alert.service';
 
 @Component({
     selector: 'app-fuel-expenses-form',
@@ -65,7 +65,7 @@ export class FuelExpensesFormComponent implements OnInit {
                 private machineService: MachineService,
                 private employeeService: EmployeeService,
                 private langService: LangService,
-                private messageService: MessageService) {
+                private alertService: AlertService) {
     }
 
     ngOnInit() {
@@ -160,7 +160,7 @@ export class FuelExpensesFormComponent implements OnInit {
         this.submitted = true;
 
         if (!this.form.valid) {
-            this.messageService.validationFailed();
+            this.alertService.validationFailed();
             return;
         }
 
@@ -175,7 +175,7 @@ export class FuelExpensesFormComponent implements OnInit {
 
         this.fuelExpenseService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.messageService.saved();
+            this.alertService.saved();
         });
     }
 
@@ -185,7 +185,7 @@ export class FuelExpensesFormComponent implements OnInit {
 
     remove() {
         this.fuelExpenseService.remove(this.model).subscribe(() => {
-            this.messageService.removed();
+            this.alertService.removed();
             this.back();
         });
     }

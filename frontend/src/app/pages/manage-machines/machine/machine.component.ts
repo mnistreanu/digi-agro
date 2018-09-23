@@ -13,7 +13,7 @@ import {EmployeeService} from '../../../services/employee.service';
 import {EmployeeModel} from '../../employee/employee/employee.model';
 import {IMultiSelectSettings, IMultiSelectTexts} from 'angular-2-dropdown-multiselect';
 import {ListItem} from '../../../interfaces/list-item.interface';
-import {MessageService} from '../../../services/message.service';
+import {AlertService} from '../../../services/alert.service';
 
 
 @Component({
@@ -61,7 +61,7 @@ export class MachineComponent implements OnInit {
                 private brandService: BrandService,
                 private machineService: MachineService,
                 private employeeService: EmployeeService,
-                private messageService: MessageService) {
+                private alertService: AlertService) {
     }
 
     ngOnInit() {
@@ -181,7 +181,7 @@ export class MachineComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.messageService.validationFailed();
+            this.alertService.validationFailed();
             return;
         }
 
@@ -194,7 +194,7 @@ export class MachineComponent implements OnInit {
 
         this.machineService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.messageService.saved();
+            this.alertService.saved();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
     }
@@ -220,7 +220,7 @@ export class MachineComponent implements OnInit {
 
     public remove() {
         this.machineService.remove(this.model).subscribe(() => {
-            this.messageService.removed();
+            this.alertService.removed();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
     }

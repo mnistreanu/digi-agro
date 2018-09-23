@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PesticideModel} from '../pesticide.model';
 import {PesticideService} from '../../../../services/chemicals-pests/pesticide.service';
-import {MessageService} from '../../../../services/message.service';
+import {AlertService} from '../../../../services/alert.service';
 
 @Component({
     selector: 'app-pesticide',
@@ -20,7 +20,7 @@ export class PesticideComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
-                private messageService: MessageService,
+                private alertService: AlertService,
                 private pesticideService: PesticideService) {
     }
 
@@ -62,7 +62,7 @@ export class PesticideComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.messageService.validationFailed();
+            this.alertService.validationFailed();
             return;
         }
 
@@ -71,7 +71,7 @@ export class PesticideComponent implements OnInit {
 
         this.pesticideService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.messageService.saved();
+            this.alertService.saved();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
 
@@ -79,7 +79,7 @@ export class PesticideComponent implements OnInit {
 
     public remove() {
         this.pesticideService.remove(this.model).subscribe(() => {
-            this.messageService.removed();
+            this.alertService.removed();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
     }
