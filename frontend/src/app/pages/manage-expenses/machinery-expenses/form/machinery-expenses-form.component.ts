@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MachineryExpenseModel} from './machinery-expense.model';
 import {MachineService} from '../../../../services/machine.service';
-import {MachineryExpenseService} from '../../../../services/machinery-expense.service';
+import {MachineryExpenseService} from '../../../../services/expenses/machinery-expense.service';
 import {ModalService} from '../../../../services/modal.service';
 import {AlertService} from '../../../../services/alert.service';
 import {LangService} from '../../../../services/lang.service';

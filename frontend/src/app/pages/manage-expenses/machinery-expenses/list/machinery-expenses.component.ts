@@ -2,7 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../../services/lang.service';
 import {Router} from '@angular/router';
-import {MachineryExpenseService} from '../../../../services/machinery-expense.service';
+import {MachineryExpenseService} from '../../../../services/expenses/machinery-expense.service';
 import {DateUtil} from '../../../../common/dateUtil';
 import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {AuthService} from '../../../../services/auth/auth.service';

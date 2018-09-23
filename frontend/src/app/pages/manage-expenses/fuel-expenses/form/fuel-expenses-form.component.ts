@@ -7,7 +7,7 @@ import {IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts} from 'angul
 import {MachineService} from '../../../../services/machine.service';
 import {EmployeeService} from '../../../../services/employee.service';
 import {Messages} from '../../../../common/messages';
-import {FuelExpenseService} from '../../../../services/fuel-expense.service';
+import {FuelExpenseService} from '../../../../services/expenses/fuel-expense.service';
 import {ModalService} from '../../../../services/modal.service';
 import {AlertService} from '../../../../services/alert.service';
 

@@ -5,7 +5,7 @@ import {LangService} from '../../../../services/lang.service';
 import {DateUtil} from '../../../../common/dateUtil';
 import { PinnedRowRendererComponent } from '../../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
 import {AuthService} from '../../../../services/auth/auth.service';
-import {FuelExpenseService} from '../../../../services/fuel-expense.service';
+import {FuelExpenseService} from '../../../../services/expenses/fuel-expense.service';
 import {Authorities} from '../../../../common/authorities';
 
 @Component({
