@@ -1,12 +1,9 @@
 export class Messages {
 
+    // todo: remove this file
+
     public static UNAUTHORIZED = 'Unauthorized';
     public static FORBIDDEN = 'Forbidden';
-
-    public static VALIDATION_FAIL = 'validation.fail';
-    public static ADDED = 'response.added';
-    public static SAVED = 'response.saved';
-    public static REMOVED = 'response.removed';
 
     public static SELECT_ALL = 'response.select-all';
     public static UNSELECT_ALL = 'response.unselect-all';

@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ToastrService} from 'ngx-toastr';
-import {LangService} from '../../../services/lang.service';
-import {Messages} from '../../../common/messages';
 import {NotificationSubscriptionService} from '../../../services/notification/notification-subscription.service';
 import {NotificationSubscriptionModel} from './notification-subscription.model';
+import {AlertService} from '../../../services/alert.service';
 
 @Component({
     selector: 'app-notification-subscription',
@@ -14,20 +12,12 @@ export class NotificationSubscriptionComponent implements OnInit {
 
     public models: NotificationSubscriptionModel[] = [];
 
-    private labelSaved: string;
-
-    constructor(private toastrService: ToastrService,
-                private langService: LangService,
+    constructor(private alertService: AlertService,
                 private notificationSubscriptionService: NotificationSubscriptionService) {
     }
 
     ngOnInit() {
-        this.setupLabels();
         this.setupModels();
-    }
-
-    private setupLabels() {
-        this.langService.get(Messages.SAVED).subscribe(msg => this.labelSaved = msg);
     }
 
     private setupModels() {
@@ -42,7 +32,7 @@ export class NotificationSubscriptionComponent implements OnInit {
     changeSubscription(event, model) {
         model.subscribed = event.target.checked;
         this.notificationSubscriptionService.changeSubscription(model.typeModel.id, model.subscribed).subscribe(() => {
-            this.toastrService.success(this.labelSaved);
+            this.alertService.saved();
         });
     }
 

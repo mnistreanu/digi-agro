@@ -5,7 +5,7 @@ import {ToastrService} from 'ngx-toastr';
 @Injectable({
     providedIn: 'root'
 })
-export class MessageService {
+export class AlertService {
 
     constructor(private langService: LangService,
                 private toastrService: ToastrService) {

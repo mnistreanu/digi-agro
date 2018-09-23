@@ -8,6 +8,7 @@ import {DateUtil} from '../../../common/dateUtil';
 import {Messages} from '../../../common/messages';
 import {NumericUtil} from '../../../common/numericUtil';
 import {LangService} from '../../../services/lang.service';
+import {AlertService} from '../../../services/alert.service';
 
 @Component({
     selector: 'app-map-events',
@@ -24,26 +25,14 @@ export class MapEventsComponent implements OnInit {
 
     models: MapEventModel[] = [];
 
-    labelAdded: string;
-    labelSaved: string;
-    labelRemoved: string;
-
     constructor(private mapEventService: MapEventService,
                 private langService: LangService,
-                private toastr: ToastrService) {
+                private alertService: AlertService) {
     }
 
     ngOnInit() {
-        this.setupLabels();
         this.setupGrid();
     }
-
-    private setupLabels() {
-        this.langService.get(Messages.ADDED).subscribe(msg => this.labelAdded = msg);
-        this.langService.get(Messages.SAVED).subscribe(msg => this.labelSaved = msg);
-        this.langService.get(Messages.REMOVED).subscribe(msg => this.labelRemoved = msg);
-    }
-
 
     private setupGrid() {
         this.options = <GridOptions>{};
@@ -142,7 +131,7 @@ export class MapEventsComponent implements OnInit {
         const value = params.newValue;
 
         this.mapEventService.update(model.id, field, value).subscribe(() => {
-            this.toastr.success(this.labelSaved);
+            this.alertService.saved();
             this.dataChanged.emit(this.models);
         });
     }
@@ -185,7 +174,7 @@ export class MapEventsComponent implements OnInit {
             this.models.push(item);
             this.dataChanged.emit(this.models);
 
-            this.toastr.success(this.labelAdded);
+            this.alertService.saved();
         });
     }
 
@@ -196,7 +185,7 @@ export class MapEventsComponent implements OnInit {
         this.mapEventService.remove(model).subscribe(() => {
             this.models.splice(this.models.indexOf(model), 1);
             this.dataChanged.emit(this.models);
-            this.toastr.success(this.labelRemoved);
+            this.alertService.removed();
         });
     }
 

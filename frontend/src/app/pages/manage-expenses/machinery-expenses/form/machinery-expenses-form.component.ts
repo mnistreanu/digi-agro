@@ -5,7 +5,7 @@ import {MachineryExpenseModel} from './machinery-expense.model';
 import {MachineService} from '../../../../services/machine.service';
 import {MachineryExpenseService} from '../../../../services/machinery-expense.service';
 import {ModalService} from '../../../../services/modal.service';
-import {MessageService} from '../../../../services/message.service';
+import {AlertService} from '../../../../services/alert.service';
 import {LangService} from '../../../../services/lang.service';
 
 @Component({
@@ -44,7 +44,7 @@ export class MachineryExpensesFormComponent implements OnInit {
                 private machineryExpenseService: MachineryExpenseService,
                 private machineService: MachineService,
                 private langService: LangService,
-                private messageService: MessageService) {
+                private alertService: AlertService) {
     }
 
     ngOnInit() {
@@ -174,7 +174,7 @@ export class MachineryExpensesFormComponent implements OnInit {
         this.submitted = true;
 
         if (!this.form.valid) {
-            this.messageService.validationFailed();
+            this.alertService.validationFailed();
             return;
         }
 
@@ -190,7 +190,7 @@ export class MachineryExpensesFormComponent implements OnInit {
 
         this.machineryExpenseService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.messageService.saved();
+            this.alertService.saved();
         });
     }
 
@@ -200,7 +200,7 @@ export class MachineryExpensesFormComponent implements OnInit {
 
     remove() {
         this.machineryExpenseService.remove(this.model).subscribe(() => {
-            this.messageService.removed();
+            this.alertService.removed();
             this.back();
         });
     }

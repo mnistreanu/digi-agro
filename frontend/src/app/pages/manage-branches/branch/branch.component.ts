@@ -13,6 +13,7 @@ import {LangService} from '../../../services/lang.service';
 import {GeoLocalizedItem} from '../../../interfaces/geo-localized-item.interface';
 import {GeoService} from '../../../services/geo.service';
 import {TenantModel} from '../../manage-tenants/tenant/tenant.model';
+import {AlertService} from '../../../services/alert.service';
 
 @Component({
     selector: 'app-branch',
@@ -34,10 +35,6 @@ export class BranchComponent implements OnInit {
 
     private tenant: TenantModel;
 
-    private labelSaved: string;
-    private labelRemoved: string;
-    private labelValidationError: string;
-
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
@@ -45,12 +42,11 @@ export class BranchComponent implements OnInit {
                 private storageService: StorageService,
                 private langService: LangService,
                 private geoService: GeoService,
-                private tenantService: TenantService,
-                private toastr: ToastrService) {
+                private alertService: AlertService,
+                private tenantService: TenantService) {
     }
 
     ngOnInit() {
-        this.setupLabels();
         const tenantId = this.storageService.getItem(Constants.TENANT);
         this.tenantService.findOne(tenantId).subscribe(tenant => {
             this.tenant = tenant;
@@ -65,12 +61,6 @@ export class BranchComponent implements OnInit {
                 }
             });
         });
-    }
-
-    private setupLabels() {
-        this.langService.get(Messages.SAVED).subscribe(m => this.labelSaved = m);
-        this.langService.get(Messages.REMOVED).subscribe(m => this.labelRemoved = m);
-        this.langService.get(Messages.VALIDATION_FAIL).subscribe(m => this.labelValidationError = m);
     }
 
     private setupModel(id) {
@@ -176,7 +166,7 @@ export class BranchComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.toastr.warning(this.labelValidationError);
+            this.alertService.validationFailed();
             return;
         }
 
@@ -186,14 +176,14 @@ export class BranchComponent implements OnInit {
 
         this.branchService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.toastr.success(this.labelSaved);
+            this.alertService.saved();
         });
 
     }
 
     public remove() {
         this.branchService.remove(this.model).subscribe(() => {
-            this.toastr.success(this.labelRemoved);
+            this.alertService.removed();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
     }

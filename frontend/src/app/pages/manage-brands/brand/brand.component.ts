@@ -3,9 +3,7 @@ import {BrandService} from '../../../services/brand.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BrandModel} from './brand.model';
-import {ToastrService} from 'ngx-toastr';
-import {Messages} from '../../../common/messages';
-import {LangService} from '../../../services/lang.service';
+import {AlertService} from '../../../services/alert.service';
 
 @Component({
     selector: 'app-brand',
@@ -20,18 +18,14 @@ export class BrandComponent implements OnInit {
     model: BrandModel;
     isNew: boolean;
 
-    labels: any;
-
     constructor(private fb: FormBuilder,
-                private langService: LangService,
                 private router: Router,
                 private route: ActivatedRoute,
-                private brandService: BrandService,
-                private toastr: ToastrService) {
+                private alertService: AlertService,
+                private brandService: BrandService) {
     }
 
     ngOnInit() {
-        this.setupLabels();
         this.route.params.subscribe(params => {
             const id = params['id'];
 
@@ -42,13 +36,6 @@ export class BrandComponent implements OnInit {
                 this.setupModel(id);
             }
         });
-    }
-
-    private setupLabels() {
-        this.labels = {};
-        this.langService.get(Messages.SAVED).subscribe(m => this.labels[Messages.SAVED] = m);
-        this.langService.get(Messages.REMOVED).subscribe(m => this.labels[Messages.REMOVED] = m);
-        this.langService.get(Messages.VALIDATION_FAIL).subscribe(m => this.labels[Messages.VALIDATION_FAIL] = m);
     }
 
     private setupModel(id) {
@@ -87,7 +74,7 @@ export class BrandComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.toastr.warning(this.labels[Messages.VALIDATION_FAIL]);
+            this.alertService.validationFailed();
             return;
         }
 
@@ -97,14 +84,14 @@ export class BrandComponent implements OnInit {
 
         this.brandService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.toastr.success(this.labels[Messages.SAVED]);
+            this.alertService.saved();
         });
 
     }
 
     public remove() {
         this.brandService.remove(this.model).subscribe(() => {
-            this.toastr.success(this.labels[Messages.REMOVED]);
+            this.alertService.removed();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
     }

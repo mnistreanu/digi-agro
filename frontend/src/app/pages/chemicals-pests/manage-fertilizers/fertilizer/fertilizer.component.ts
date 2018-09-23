@@ -1,11 +1,9 @@
 import {Component, NgModule, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, RouterModule, Router, RouterLink, RouterLinkActive} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {LangService} from '../../../../services/lang.service';
-import {Messages} from '../../../../common/messages';
+import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {FertilizerModel} from '../fertilizer.model';
 import {FertilizerService} from '../../../../services/chemicals-pests/fertilizer.service';
+import {AlertService} from '../../../../services/alert.service';
 
 @NgModule({
     imports: [
@@ -26,18 +24,14 @@ export class FertilizerComponent implements OnInit {
 
     model: FertilizerModel;
 
-    labels: any;
-
     constructor(private fb: FormBuilder,
-                private langService: LangService,
+                private alertService: AlertService,
                 private router: Router,
                 private route: ActivatedRoute,
-                private fertilizerService: FertilizerService,
-                private toastr: ToastrService) {
+                private fertilizerService: FertilizerService) {
     }
 
     ngOnInit() {
-        this.setupLabels();
         this.route.params.subscribe(params => {
             const id = params['id'];
 
@@ -48,13 +42,6 @@ export class FertilizerComponent implements OnInit {
                 this.setupModel(id);
             }
         });
-    }
-
-    private setupLabels() {
-        this.labels = {};
-        this.langService.get(Messages.SAVED).subscribe(m => this.labels[Messages.SAVED] = m);
-        this.langService.get(Messages.REMOVED).subscribe(m => this.labels[Messages.REMOVED] = m);
-        this.langService.get(Messages.VALIDATION_FAIL).subscribe(m => this.labels[Messages.VALIDATION_FAIL] = m);
     }
 
     private setupModel(id) {
@@ -85,7 +72,7 @@ export class FertilizerComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.toastr.warning(this.labels[Messages.VALIDATION_FAIL]);
+            this.alertService.validationFailed();
             return;
         }
 
@@ -94,7 +81,7 @@ export class FertilizerComponent implements OnInit {
 
         this.fertilizerService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.toastr.success(this.labels[Messages.SAVED]);
+            this.alertService.saved();
             this.router.navigate(['../'], { relativeTo: this.route });
         });
 
@@ -102,7 +89,7 @@ export class FertilizerComponent implements OnInit {
 
     public remove() {
         this.fertilizerService.remove(this.model).subscribe(() => {
-            this.toastr.success(this.labels[Messages.REMOVED]);
+            this.alertService.removed();
             this.router.navigate(['../'], { relativeTo: this.route });
         });
     }

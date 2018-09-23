@@ -5,11 +5,11 @@ import {UserService} from '../../services/user.service';
 import {AuthService} from '../../services/auth/auth.service';
 import {emailValidator} from '../../theme/validators/email.validator';
 import {UserAccountModel} from '../manage-users/user/user-account.model';
-import {Messages} from '../../common/messages';
 import {Router} from '@angular/router';
 import {Constants} from '../../common/constants';
 import {LangService} from '../../services/lang.service';
-import { environment } from '../../../environments/environment';
+import {environment} from '../../../environments/environment';
+import {AlertService} from '../../services/alert.service';
 
 @Component({
     selector: 'app-user-profile',
@@ -26,8 +26,6 @@ export class UserProfileComponent implements OnInit {
     logoUrl: string;
 
     labelFileIsTooBig: string;
-    labelSaved: string;
-    labelValidationFail: string;
     labelUsernameChangedRelogin: string;
 
     constructor(private router: Router,
@@ -35,6 +33,7 @@ export class UserProfileComponent implements OnInit {
                 private langService: LangService,
                 private authService: AuthService,
                 private userService: UserService,
+                private alertService: AlertService,
                 private toastr: ToastrService) {
     }
 
@@ -51,8 +50,6 @@ export class UserProfileComponent implements OnInit {
     private setupLabels() {
         this.langService.get('validation.file-to-big').subscribe((message) => this.labelFileIsTooBig = message);
         this.langService.get('response.username-changed-relogin').subscribe((message) => this.labelUsernameChangedRelogin = message);
-        this.langService.get(Messages.SAVED).subscribe((message) => this.labelSaved = message);
-        this.langService.get(Messages.VALIDATION_FAIL).subscribe((message) => this.labelValidationFail = message);
     }
 
     private buildForm() {
@@ -85,7 +82,7 @@ export class UserProfileComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.toastr.warning(this.labelValidationFail);
+            this.alertService.validationFailed();
             return;
         }
 
@@ -101,7 +98,7 @@ export class UserProfileComponent implements OnInit {
 
         this.userService.saveProfile(this.model, this.logoFile).subscribe((model) => {
             this.model = model;
-            this.toastr.success(this.labelSaved);
+            this.alertService.saved();
             if (usernameChanged) {
                 this.toastr.success(this.labelUsernameChangedRelogin);
                 this.router.navigate([Constants.LOGIN_PAGE]);

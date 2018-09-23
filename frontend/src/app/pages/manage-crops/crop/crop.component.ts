@@ -1,16 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {TenantModel} from '../../manage-tenants/tenant/tenant.model';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {TenantService} from '../../../services/tenant.service';
-import {ToastrService} from 'ngx-toastr';
-import {Messages} from '../../../common/messages';
-import {GeoService} from '../../../services/geo.service';
-import {LangService} from '../../../services/lang.service';
-import {GeoLocalizedItem} from '../../../interfaces/geo-localized-item.interface';
-import { SelectItem } from '../../../dto/select-item.dto';
-import { CropService } from '../../../services/crop/crop.service';
-import { CropModel } from '../crop.model';
+import {SelectItem} from '../../../dto/select-item.dto';
+import {CropService} from '../../../services/crop/crop.service';
+import {CropModel} from '../crop.model';
+import {AlertService} from '../../../services/alert.service';
 
 @Component({
     selector: 'app-crop',
@@ -27,20 +21,13 @@ export class CropComponent implements OnInit {
 
     cropCategorySelectItems: SelectItem[] = [];
 
-    private labelSaved: string;
-    private labelRemoved: string;
-    private labelValidationError: string;
-
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                private geoService: GeoService,
-                private langService: LangService,
-                private cropService: CropService,
-                private toastr: ToastrService) {
+                private alertService: AlertService,
+                private cropService: CropService) {
     }
 
     ngOnInit() {
-        this.setupLabels();
 
         this.cropService.findCategoryItems().subscribe(data => {
             this.cropCategorySelectItems = data;
@@ -56,12 +43,6 @@ export class CropComponent implements OnInit {
                 this.setupModel(id);
             }
         });
-    }
-
-    private setupLabels() {
-        this.langService.get(Messages.SAVED).subscribe(m => this.labelSaved = m);
-        this.langService.get(Messages.REMOVED).subscribe(m => this.labelRemoved = m);
-        this.langService.get(Messages.VALIDATION_FAIL).subscribe(m => this.labelValidationError = m);
     }
 
 
@@ -92,7 +73,7 @@ export class CropComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.toastr.warning(this.labelValidationError);
+            this.alertService.validationFailed();
             return;
         }
 
@@ -102,12 +83,12 @@ export class CropComponent implements OnInit {
         if (this.model.id) {
             this.cropService.update(this.model.id, this.form.value).subscribe((model) => {
                 this.model = model;
-                this.toastr.success(this.labelSaved);
+                this.alertService.saved();
             });
         } else {
             this.cropService.create(this.form.value).subscribe((model) => {
                 this.model = model;
-                this.toastr.success(this.labelSaved);
+                this.alertService.saved();
             });
         }
 
@@ -115,7 +96,7 @@ export class CropComponent implements OnInit {
 
     public remove() {
         this.cropService.remove(this.model.id).subscribe(() => {
-            this.toastr.success(this.labelRemoved);
+            this.alertService.removed();
             this.router.navigate(['/pages/manage-crops']);
         });
     }
