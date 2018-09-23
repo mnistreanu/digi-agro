@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {LangService} from '../../../../services/lang.service';
-import {Messages} from '../../../../common/messages';
 import {PestModel} from '../pest.model';
 import {PestService} from '../../../../services/chemicals-pests/pest.service';
+import {MessageService} from '../../../../services/message.service';
 
 @Component({
     selector: 'app-harmful-organism',
@@ -22,15 +20,13 @@ export class PestComponent implements OnInit {
     labels: any;
 
     constructor(private fb: FormBuilder,
-                private langService: LangService,
                 private router: Router,
                 private route: ActivatedRoute,
-                private pestService: PestService,
-                private toastr: ToastrService) {
+                private messageService: MessageService,
+                private pestService: PestService) {
     }
 
     ngOnInit() {
-        this.setupLabels();
         this.route.params.subscribe(params => {
             const id = params['id'];
 
@@ -41,13 +37,6 @@ export class PestComponent implements OnInit {
                 this.setupModel(id);
             }
         });
-    }
-
-    private setupLabels() {
-        this.labels = {};
-        this.langService.get(Messages.SAVED).subscribe(m => this.labels[Messages.SAVED] = m);
-        this.langService.get(Messages.REMOVED).subscribe(m => this.labels[Messages.REMOVED] = m);
-        this.langService.get(Messages.VALIDATION_FAIL).subscribe(m => this.labels[Messages.VALIDATION_FAIL] = m);
     }
 
     private setupModel(id) {
@@ -75,7 +64,7 @@ export class PestComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.toastr.warning(this.labels[Messages.VALIDATION_FAIL]);
+            this.messageService.validationFailed();
             return;
         }
 
@@ -84,7 +73,7 @@ export class PestComponent implements OnInit {
 
         this.pestService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.toastr.success(this.labels[Messages.SAVED]);
+            this.messageService.saved();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
 
@@ -92,7 +81,7 @@ export class PestComponent implements OnInit {
 
     public remove() {
         this.pestService.remove(this.model).subscribe(() => {
-            this.toastr.success(this.labels[Messages.REMOVED]);
+            this.messageService.removed();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
     }

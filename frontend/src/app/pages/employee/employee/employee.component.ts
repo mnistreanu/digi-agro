@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {LangService} from '../../../services/lang.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {Messages} from '../../../common/messages';
 import {EmployeeService} from '../../../services/employee.service';
 import {EmployeeModel} from './employee.model';
+import {MessageService} from '../../../services/message.service';
 
 @Component({
     selector: 'app-employee',
@@ -19,18 +17,14 @@ export class EmployeeComponent implements OnInit {
 
     model: EmployeeModel;
 
-    labels: any;
-
     constructor(private fb: FormBuilder,
-                private langService: LangService,
                 private router: Router,
                 private route: ActivatedRoute,
-                private employeeService: EmployeeService,
-                private toastr: ToastrService) {
+                private messageService: MessageService,
+                private employeeService: EmployeeService) {
     }
 
     ngOnInit() {
-        this.setupLabels();
         this.route.params.subscribe(params => {
             const id = params['id'];
 
@@ -41,13 +35,6 @@ export class EmployeeComponent implements OnInit {
                 this.setupModel(id);
             }
         });
-    }
-
-    private setupLabels() {
-        this.labels = {};
-        this.langService.get(Messages.SAVED).subscribe(m => this.labels[Messages.SAVED] = m);
-        this.langService.get(Messages.REMOVED).subscribe(m => this.labels[Messages.REMOVED] = m);
-        this.langService.get(Messages.VALIDATION_FAIL).subscribe(m => this.labels[Messages.VALIDATION_FAIL] = m);
     }
 
     private setupModel(id) {
@@ -76,7 +63,7 @@ export class EmployeeComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.toastr.warning(this.labels[Messages.VALIDATION_FAIL]);
+            this.messageService.validationFailed();
             return;
         }
 
@@ -85,7 +72,7 @@ export class EmployeeComponent implements OnInit {
 
         this.employeeService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.toastr.success(this.labels[Messages.SAVED]);
+            this.messageService.saved();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
 
@@ -93,7 +80,7 @@ export class EmployeeComponent implements OnInit {
 
     public remove() {
         this.employeeService.remove(this.model).subscribe(() => {
-            this.toastr.success(this.labels[Messages.REMOVED]);
+            this.messageService.removed();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
     }

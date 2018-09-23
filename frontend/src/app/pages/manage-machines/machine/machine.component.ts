@@ -4,7 +4,6 @@ import {BrandService} from '../../../services/brand.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MachineModel} from './machine.model';
-import {ToastrService} from 'ngx-toastr';
 import {Messages} from '../../../common/messages';
 import {LangService} from '../../../services/lang.service';
 import {WorkTypeService} from '../../../services/work-type.service';
@@ -14,6 +13,7 @@ import {EmployeeService} from '../../../services/employee.service';
 import {EmployeeModel} from '../../employee/employee/employee.model';
 import {IMultiSelectSettings, IMultiSelectTexts} from 'angular-2-dropdown-multiselect';
 import {ListItem} from '../../../interfaces/list-item.interface';
+import {MessageService} from '../../../services/message.service';
 
 
 @Component({
@@ -53,8 +53,6 @@ export class MachineComponent implements OnInit {
     };
 
 
-    private labels: any;
-
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
@@ -63,22 +61,14 @@ export class MachineComponent implements OnInit {
                 private brandService: BrandService,
                 private machineService: MachineService,
                 private employeeService: EmployeeService,
-                private toastr: ToastrService) {
+                private messageService: MessageService) {
     }
 
     ngOnInit() {
-        this.setupLabels();
         this.setupBrands()
             .then(() => this.setupEmployees())
             .then(() => this.setupWorkTypes())
             .then(() => this.restoreModel());
-    }
-
-    private setupLabels() {
-        this.labels = {};
-        this.langService.get(Messages.SAVED).subscribe(m => this.labels[Messages.SAVED] = m);
-        this.langService.get(Messages.REMOVED).subscribe(m => this.labels[Messages.REMOVED] = m);
-        this.langService.get(Messages.VALIDATION_FAIL).subscribe(m => this.labels[Messages.VALIDATION_FAIL] = m);
     }
 
     private setupBrands(): Promise<void> {
@@ -191,7 +181,7 @@ export class MachineComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.toastr.warning(this.labels[Messages.VALIDATION_FAIL]);
+            this.messageService.validationFailed();
             return;
         }
 
@@ -204,7 +194,7 @@ export class MachineComponent implements OnInit {
 
         this.machineService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.toastr.success(this.labels[Messages.SAVED]);
+            this.messageService.saved();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
     }
@@ -230,7 +220,7 @@ export class MachineComponent implements OnInit {
 
     public remove() {
         this.machineService.remove(this.model).subscribe(() => {
-            this.toastr.success(this.labels[Messages.REMOVED]);
+            this.messageService.removed();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
     }

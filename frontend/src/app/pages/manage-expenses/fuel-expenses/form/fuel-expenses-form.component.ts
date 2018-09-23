@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ToastrService} from 'ngx-toastr';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LangService} from '../../../../services/lang.service';
@@ -10,6 +9,7 @@ import {EmployeeService} from '../../../../services/employee.service';
 import {Messages} from '../../../../common/messages';
 import {FuelExpenseService} from '../../../../services/fuel-expense.service';
 import {ModalService} from '../../../../services/modal.service';
+import {MessageService} from '../../../../services/message.service';
 
 @Component({
     selector: 'app-fuel-expenses-form',
@@ -57,8 +57,6 @@ export class FuelExpensesFormComponent implements OnInit {
         allSelected: this.langService.instant(Messages.ALL_SELECTED),
     };
 
-    private labels: any;
-
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
@@ -67,21 +65,13 @@ export class FuelExpensesFormComponent implements OnInit {
                 private machineService: MachineService,
                 private employeeService: EmployeeService,
                 private langService: LangService,
-                private toastr: ToastrService) {
+                private messageService: MessageService) {
     }
 
     ngOnInit() {
-        this.setupLabels();
         this.setupMachines()
             .then(() => this.setupEmployees())
             .then(() => this.restoreModel());
-    }
-
-    private setupLabels() {
-        this.labels = {};
-        this.langService.get(Messages.SAVED).subscribe(m => this.labels[Messages.SAVED] = m);
-        this.langService.get(Messages.REMOVED).subscribe(m => this.labels[Messages.REMOVED] = m);
-        this.langService.get(Messages.VALIDATION_FAIL).subscribe(m => this.labels[Messages.VALIDATION_FAIL] = m);
     }
 
     private setupMachines(): Promise<void> {
@@ -145,7 +135,6 @@ export class FuelExpensesFormComponent implements OnInit {
 
     private buildForm() {
         const expenseDate = this.model.expenseDate ? this.model.expenseDate.toISOString().substring(0, 10) : null;
-        const selectedMachines = [];
 
         this.form = this.fb.group({
             title: [this.model.title, Validators.required],
@@ -171,7 +160,7 @@ export class FuelExpensesFormComponent implements OnInit {
         this.submitted = true;
 
         if (!this.form.valid) {
-            this.toastr.warning(this.labels[Messages.VALIDATION_FAIL]);
+            this.messageService.validationFailed();
             return;
         }
 
@@ -186,7 +175,7 @@ export class FuelExpensesFormComponent implements OnInit {
 
         this.fuelExpenseService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.toastr.success(this.labels[Messages.SAVED]);
+            this.messageService.saved();
         });
     }
 
@@ -196,7 +185,7 @@ export class FuelExpensesFormComponent implements OnInit {
 
     remove() {
         this.fuelExpenseService.remove(this.model).subscribe(() => {
-            this.toastr.success(this.labels[Messages.REMOVED]);
+            this.messageService.removed();
             this.back();
         });
     }

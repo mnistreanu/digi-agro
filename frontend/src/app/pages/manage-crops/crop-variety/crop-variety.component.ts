@@ -1,14 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Messages } from '../../../common/messages';
-import { GeoService } from '../../../services/geo.service';
-import { LangService } from '../../../services/lang.service';
-import { SelectItem } from '../../../dto/select-item.dto';
-import { CropVarietyModel } from './crop-variety.model';
-import { CropVarietyService } from '../../../services/crop/crop-variety.service';
-import { UnitOfMeasure } from '../../../enums/unit-of-measure.enum';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {SelectItem} from '../../../dto/select-item.dto';
+import {CropVarietyModel} from './crop-variety.model';
+import {CropVarietyService} from '../../../services/crop/crop-variety.service';
+import {UnitOfMeasure} from '../../../enums/unit-of-measure.enum';
+import {MessageService} from '../../../services/message.service';
 
 @Component({
     selector: 'app-crop',
@@ -26,20 +23,13 @@ export class CropVarietyComponent implements OnInit {
     unitOfMeasureSelectItems: SelectItem[] = [];
     cropSelectItems: SelectItem[] = [];
 
-    private labelSaved: string;
-    private labelRemoved: string;
-    private labelValidationError: string;
-
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                private geoService: GeoService,
-                private langService: LangService,   
-                private cropVarietyService: CropVarietyService,
-                private toastr: ToastrService) {
+                private messageService: MessageService,
+                private cropVarietyService: CropVarietyService) {
     }
 
     ngOnInit() {
-        this.setupLabels();
 
         this.cropVarietyService.findCategoryItems().subscribe(data => {
             this.cropSelectItems = data;
@@ -62,13 +52,6 @@ export class CropVarietyComponent implements OnInit {
             }
         });
     }
-
-    private setupLabels() {
-        this.langService.get(Messages.SAVED).subscribe(m => this.labelSaved = m);
-        this.langService.get(Messages.REMOVED).subscribe(m => this.labelRemoved = m);
-        this.langService.get(Messages.VALIDATION_FAIL).subscribe(m => this.labelValidationError = m);
-    }
-
 
     private setupModel(id) {
         this.cropVarietyService.findOne(id).subscribe(model => {
@@ -101,11 +84,9 @@ export class CropVarietyComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.toastr.warning(this.labelValidationError);
+            this.messageService.validationFailed();
             return;
         }
-
-        console.log(form.value)
 
         this.isNew = false;
         this.submitted = false;
@@ -113,12 +94,12 @@ export class CropVarietyComponent implements OnInit {
         if (this.model.id) {
             this.cropVarietyService.update(this.model.id, form.value).subscribe((model) => {
                 this.model = model;
-                this.toastr.success(this.labelSaved);
+                this.messageService.saved();
             });
         } else {
             this.cropVarietyService.create(form.value).subscribe((model) => {
                 this.model = model;
-                this.toastr.success(this.labelSaved);
+                this.messageService.saved();
             });
         }
 
@@ -126,7 +107,7 @@ export class CropVarietyComponent implements OnInit {
 
     public remove() {
         this.cropVarietyService.remove(this.model.id).subscribe(() => {
-            this.toastr.success(this.labelRemoved);
+            this.messageService.removed();
             this.router.navigate(['/pages/manage-crops/crop-varieties']);
         });
     }

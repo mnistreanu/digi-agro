@@ -1,15 +1,14 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {MachineTelemetryModel} from './machine-telemetry.model';
-import {ToastrService} from 'ngx-toastr';
 import {NumericUtil} from '../../../common/numericUtil';
 import {DeleteRendererComponent} from '../../../modules/aggrid/delete-renderer/delete-renderer.component';
-import {Messages} from '../../../common/messages';
 import {DateUtil} from '../../../common/dateUtil';
 import {MachineService} from '../../../services/machine.service';
 import {LangService} from '../../../services/lang.service';
 import {MachineTelemetryService} from '../../../services/machine-telemetry.service';
 import {MachineModel} from '../../manage-machines/machine/machine.model';
+import {MessageService} from '../../../services/message.service';
 
 @Component({
     selector: 'app-machine-telemetry',
@@ -28,27 +27,16 @@ export class MachineTelemetryComponent implements OnInit {
 
     models: MachineTelemetryModel[] = [];
 
-    labelAdded: string;
-    labelSaved: string;
-    labelRemoved: string;
-
     constructor(private machineTelemetryService: MachineTelemetryService,
                 private machineService: MachineService,
                 private langService: LangService,
-                private toastr: ToastrService) {
+                private messageService: MessageService) {
     }
 
 
     ngOnInit(): void {
-        this.setupLabels();
         this.setupMachines()
             .then(() => this.setupGrid());
-    }
-
-    private setupLabels() {
-        this.langService.get(Messages.ADDED).subscribe(msg => this.labelAdded = msg);
-        this.langService.get(Messages.SAVED).subscribe(msg => this.labelSaved = msg);
-        this.langService.get(Messages.REMOVED).subscribe(msg => this.labelRemoved = msg);
     }
 
     private setupMachines(): Promise<void> {
@@ -158,7 +146,7 @@ export class MachineTelemetryComponent implements OnInit {
         const value = params.newValue;
 
         this.machineTelemetryService.updateCoordinate(model.id, field, value).subscribe(() => {
-            this.toastr.success(this.labelSaved);
+            this.messageService.saved();
             this.dataChanged.emit(this.models);
         });
     }
@@ -202,7 +190,7 @@ export class MachineTelemetryComponent implements OnInit {
 
             this.models.push(item);
             this.dataChanged.emit(this.models);
-            this.toastr.success(this.labelAdded);
+            this.messageService.saved();
         });
     }
 
@@ -213,7 +201,7 @@ export class MachineTelemetryComponent implements OnInit {
         this.machineTelemetryService.remove(model).subscribe(() => {
             this.models.splice(this.models.indexOf(model), 1);
             this.dataChanged.emit(this.models);
-            this.toastr.success(this.labelRemoved);
+            this.messageService.removed();
         });
     }
 

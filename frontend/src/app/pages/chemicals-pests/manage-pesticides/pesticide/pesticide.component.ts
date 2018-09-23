@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {LangService} from '../../../../services/lang.service';
-import {Messages} from '../../../../common/messages';
 import {PesticideModel} from '../pesticide.model';
 import {PesticideService} from '../../../../services/chemicals-pests/pesticide.service';
+import {MessageService} from '../../../../services/message.service';
 
 @Component({
     selector: 'app-pesticide',
@@ -19,18 +17,14 @@ export class PesticideComponent implements OnInit {
 
     model: PesticideModel;
 
-    labels: any;
-
     constructor(private fb: FormBuilder,
-                private langService: LangService,
                 private router: Router,
                 private route: ActivatedRoute,
-                private pesticideService: PesticideService,
-                private toastr: ToastrService) {
+                private messageService: MessageService,
+                private pesticideService: PesticideService) {
     }
 
     ngOnInit() {
-        this.setupLabels();
         this.route.params.subscribe(params => {
             const id = params['id'];
 
@@ -41,13 +35,6 @@ export class PesticideComponent implements OnInit {
                 this.setupModel(id);
             }
         });
-    }
-
-    private setupLabels() {
-        this.labels = {};
-        this.langService.get(Messages.SAVED).subscribe(m => this.labels[Messages.SAVED] = m);
-        this.langService.get(Messages.REMOVED).subscribe(m => this.labels[Messages.REMOVED] = m);
-        this.langService.get(Messages.VALIDATION_FAIL).subscribe(m => this.labels[Messages.VALIDATION_FAIL] = m);
     }
 
     private setupModel(id) {
@@ -75,7 +62,7 @@ export class PesticideComponent implements OnInit {
         this.submitted = true;
 
         if (!form.valid) {
-            this.toastr.warning(this.labels[Messages.VALIDATION_FAIL]);
+            this.messageService.validationFailed();
             return;
         }
 
@@ -84,16 +71,16 @@ export class PesticideComponent implements OnInit {
 
         this.pesticideService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.toastr.success(this.labels[Messages.SAVED]);
-            this.router.navigate(['../'], { relativeTo: this.route });
+            this.messageService.saved();
+            this.router.navigate(['../'], {relativeTo: this.route});
         });
 
     }
 
     public remove() {
         this.pesticideService.remove(this.model).subscribe(() => {
-            this.toastr.success(this.labels[Messages.REMOVED]);
-            this.router.navigate(['../'], { relativeTo: this.route });
+            this.messageService.removed();
+            this.router.navigate(['../'], {relativeTo: this.route});
         });
     }
 

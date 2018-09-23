@@ -3,7 +3,6 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserAccountModel} from '../user/user-account.model';
 import {emailValidator} from '../../../theme/validators/email.validator';
 import {matchPasswordValidator} from '../../../theme/validators/match-password.validator';
-import {ToastrService} from 'ngx-toastr';
 import {UserService} from '../../../services/user.service';
 import {AuthService} from '../../../services/auth/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -11,9 +10,8 @@ import {TenantService} from '../../../services/tenant.service';
 import {ListItem} from '../../../interfaces/list-item.interface';
 import {IMultiSelectSettings} from 'angular-2-dropdown-multiselect';
 import {BranchService} from '../../../services/branch.service';
-import {Messages} from '../../../common/messages';
 import {Authorities} from '../../../common/authorities';
-import {LangService} from '../../../services/lang.service';
+import {MessageService} from '../../../services/message.service';
 
 @Component({
     selector: 'app-user-form',
@@ -38,9 +36,6 @@ export class UserFormComponent implements OnInit {
         dynamicTitleMaxItems: 10
     };
 
-    labelSaved: string;
-    labelRemoved: string;
-
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
@@ -48,12 +43,10 @@ export class UserFormComponent implements OnInit {
                 private userService: UserService,
                 private branchService: BranchService,
                 private tenantService: TenantService,
-                private langService: LangService,
-                private toastr: ToastrService) {
+                private messageService: MessageService) {
     }
 
     ngOnInit() {
-        this.setupLabels();
         this.setupTenants();
         this.route.params.subscribe(params => {
             const id = params['id'];
@@ -65,11 +58,6 @@ export class UserFormComponent implements OnInit {
                 this.setupModel(id);
             }
         });
-    }
-
-    private setupLabels() {
-        this.langService.get(Messages.SAVED).subscribe((msg) => this.labelSaved = msg);
-        this.langService.get(Messages.REMOVED).subscribe((msg) => this.labelRemoved = msg);
     }
 
     private setupTenants() {
@@ -225,7 +213,7 @@ export class UserFormComponent implements OnInit {
 
         this.userService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.toastr.success(this.labelSaved);
+            this.messageService.saved();
         });
 
     }
@@ -241,7 +229,7 @@ export class UserFormComponent implements OnInit {
 
     public remove() {
         this.userService.remove(this.model).subscribe(() => {
-            this.toastr.success(this.labelRemoved);
+            this.messageService.removed();
             this.router.navigate(['../'], {relativeTo: this.route});
         });
     }
