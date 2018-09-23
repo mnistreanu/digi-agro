@@ -72,6 +72,15 @@
 		"fertilizers": "Расходы на удобрения",
 		"fuel": "Расходы на топливо",
 		"pesticides": "Расходы на пестициды",
+		"sowing": "Расходы на посев",
+		"categories": "Категории расходов"
+	},
+	"expense-category": {
+		"machinery": "Расходы на ремонт сельскохозяйственной техники",
+		"works": "Расходы на сельскохозяйственные работы",
+		"fertilizers": "Расходы на удобрения",
+		"fuel": "Расходы на топливо",
+		"pesticides": "Расходы на пестициды",
 		"sowing": "Расходы на посев"
 	},
 	"fertilizer": {
@@ -172,9 +181,9 @@
 		"chemicals-and-pests": "Химикаты и вредители",
 		"costs-forecasting": "Прогнозирование затрат",
 		"costs-forecasting-form": "Прогнозирование затрат FORM",
-		"crop-varieties": "Сельскохозяйственные сорта",
 		"crops": "Сельхоз. культуры",
 		"crops-varieties": "Сельскохозяйственные культуры и сорта",
+		"crop-varieties": "Сельскохозяйственные сорта",
 		"dashboard": "Главная",
 		"employees": "Работники",
 		"enterprise": "Предприятие",
@@ -200,6 +209,7 @@
 		"tasks": "Задания",
 		"telemetry": "Телеметрия",
 		"tenants": "Клиенты",
+		"expense-categories": "Категории расходов",
 		"users": "Пользователями",
 		"various-chemicals": "Различные химикаты",
 		"weather": "Погода",
@@ -299,8 +309,8 @@
 		"pests": "Вредители"
 	},
 	"pesticide": {
-		"active-substance": "Активное вещество",
 		"comments": "Комментарии",
+		"active-substance": "Активное вещество",
 		"phase": "Фаза",
 		"result": "Результат",
 		"spray-date": "Дата распыления",
@@ -341,12 +351,12 @@
 		"username-changed-relogin": "Имя пользователя было изменено! Пожалуйста, перезайдите в систему"
 	},
 	"select-dropdown": {
-		"select-all": "Выбрать все",
-		"select": "Выберите",
 		"deselect-all": "Убрать все",
-		"select-all-filtered": "Выбрать отфильтрованные элементы",
 		"deselect-all-filtered": "Убрать отфильтрованные элементы",
-		"search-placeholder": "Поиск"
+		"search-placeholder": "Поиск",
+		"select": "Выберите",
+		"select-all": "Выбрать все",
+		"select-all-filtered": "Выбрать отфильтрованные элементы"
 	},
 	"slider": {
 		"next": "Следующий",

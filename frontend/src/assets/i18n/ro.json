@@ -72,6 +72,15 @@
 		"fertilizers": "Cheltuieli pentru îngrășăminte",
 		"fuel": "Cheltuieli pentru combustibil",
 		"pesticides": "Cheltuieli pentru pesticide",
+		"sowing": "Cheltuieli pentru însămânțare",
+		"categories": "Categorii de cheltuieli"
+	},
+	"expense-category": {
+		"machinery": "Cheltuieli pentru repararea mașinilor agricole",
+		"works": "Cheltuieli pentru lucrări agricole",
+		"fertilizers": "Cheltuieli pentru îngrășăminte",
+		"fuel": "Cheltuieli pentru combustibil",
+		"pesticides": "Cheltuieli pentru pesticide",
 		"sowing": "Cheltuieli pentru însămânțare"
 	},
 	"fertilizer": {
@@ -172,9 +181,9 @@
 		"chemicals-and-pests": "Chimicale si dăunatori",
 		"costs-forecasting": "Prognoză costuri",
 		"costs-forecasting-form": "Prognoză costuri FORM",
-		"crop-varieties": "Soiri agricole",
 		"crops": "Culturi agricole",
 		"crops-varieties": "Culturi agricole și soiuri",
+		"crop-varieties": "Soiri agricole",
 		"dashboard": "Dashboard",
 		"employees": "Angajați",
 		"enterprise": "Întreprindere",
@@ -200,6 +209,7 @@
 		"tasks": "Sarcini",
 		"telemetry": "Telemetrie",
 		"tenants": "Clienți",
+		"expense-categories": "Categorii de cheltuieli",
 		"users": "Utilizatori",
 		"various-chemicals": "Diverse chimicale",
 		"weather": "Date meteo",
@@ -299,8 +309,8 @@
 		"pests": "Dăunători"
 	},
 	"pesticide": {
-		"active-substance": "Substanța activă",
 		"comments": "Comentarii",
+		"active-substance": "Substanța activă",
 		"phase": "Faza",
 		"result": "Rezultat",
 		"spray-date": "Data pulverizării",
@@ -341,12 +351,12 @@
 		"username-changed-relogin": "Numele de utilizatorul a fost modificata! Reintrați în sistem"
 	},
 	"select-dropdown": {
-		"select-all": "Selectează toate",
-		"select": "Selectați",
 		"deselect-all": "Deselectează toate",
-		"select-all-filtered": "Selectează elemente filtrate",
 		"deselect-all-filtered": "Deselectează elemente filtrate",
-		"search-placeholder": "Căutare"
+		"search-placeholder": "Căutare",
+		"select": "Selectați",
+		"select-all": "Selectează toate",
+		"select-all-filtered": "Selectează elemente filtrate"
 	},
 	"slider": {
 		"next": "Următor",

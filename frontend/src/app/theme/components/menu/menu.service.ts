@@ -58,6 +58,10 @@ export class MenuService {
                         title: 'nav.machines',
                         routerLink: 'enterprise/manage-machines'
                     },
+                    {
+                        title: 'nav.expense-categories',
+                        routerLink: 'enterprise/manage-expense-categories'
+                    },
                 ]
             });
         }

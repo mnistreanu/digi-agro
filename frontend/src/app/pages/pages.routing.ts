@@ -34,6 +34,12 @@ export const routes: Routes = [
             {path: 'blank', component: BlankComponent, data: {breadcrumb: 'Blank page'}},
             {path: 'user-profile', component: UserProfileComponent, data: {breadcrumb: 'User Profile'}},
             {
+                path: 'enterprise',
+                loadChildren: 'app/pages/enterprise/enterprise.module#EnterpriseModule',
+                data: {breadcrumb: 'Expenses'},
+                canActivate: [SuperAdminOrAdminGuard]
+            },
+            {
                 path: 'manage-users',
                 loadChildren: 'app/pages/manage-users/manage-users.module#ManageUsersModule',
                 data: {breadcrumb: 'Manage Users'},

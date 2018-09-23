@@ -72,6 +72,15 @@
 		"fertilizers": "Expenses for fertilizers",
 		"fuel": "Expenses for fuel",
 		"pesticides": "Expenses for pesticides",
+		"sowing": "Expenses for sowing",
+		"categories": "Expense categories"
+	},
+	"expense-category": {
+		"machinery": "Expenses for repairing agricultural machinery",
+		"works": "Expenses for agricultural works",
+		"fertilizers": "Expenses for fertilizers",
+		"fuel": "Expenses for fuel",
+		"pesticides": "Expenses for pesticides",
 		"sowing": "Expenses for sowing"
 	},
 	"fertilizer": {
@@ -172,9 +181,9 @@
 		"chemicals-and-pests": "Chemicals & Pests",
 		"costs-forecasting": "Costs forecasting",
 		"costs-forecasting-form": "Costs forecasting FORM",
-		"crop-varieties": "Crop varieties",
 		"crops": "Crops",
 		"crops-varieties": "Crops & Varieties",
+		"crop-varieties": "Crop varieties",
 		"dashboard": "Dashboard",
 		"employees": "Employees",
 		"enterprise": "Enterprise",
@@ -200,6 +209,7 @@
 		"tasks": "Tasks",
 		"telemetry": "Telemetry",
 		"tenants": "Tenants",
+		"expense-categories": "Expense categories",
 		"users": "Users",
 		"various-chemicals": "Various chemicals",
 		"weather": "Weather",
@@ -299,8 +309,8 @@
 		"pests": "Pests"
 	},
 	"pesticide": {
-		"active-substance": "Active substance",
 		"comments": "Comments",
+		"active-substance": "Active substance",
 		"phase": "Phase",
 		"result": "Result",
 		"spray-date": "Spray date",
@@ -341,12 +351,12 @@
 		"username-changed-relogin": "Username Changed! Please, re-login in the system"
 	},
 	"select-dropdown": {
-		"select-all": "Select All",
-		"select": "Select",
 		"deselect-all": "Deselect All",
-		"select-all-filtered": "Select all filtered results",
 		"deselect-all-filtered": "Deselect all filtered results",
-		"search-placeholder": "Search"
+		"search-placeholder": "Search",
+		"select": "Select",
+		"select-all": "Select All",
+		"select-all-filtered": "Select all filtered results"
 	},
 	"slider": {
 		"next": "Next",
