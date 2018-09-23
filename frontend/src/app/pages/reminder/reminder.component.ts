@@ -8,6 +8,7 @@ import {AgroWorkTypeModel} from './agro-work-type.model';
 import {ToastrService} from 'ngx-toastr';
 import {Messages} from '../../common/messages';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AlertService} from '../../services/alert.service';
 
 @Component({
     selector: 'app-reminder',
@@ -29,33 +30,22 @@ export class ReminderComponent implements OnInit {
     eventForm: FormGroup;
     formSubmitted = false;
 
-    labelValidationFail: string;
-    labelRemoved: string;
-    labelSaved: string;
-
     constructor(private appConfig: AppConfig,
                 private fb: FormBuilder,
                 private reminderService: ReminderService,
-                private toaStrService: ToastrService,
+                private alertService: AlertService,
                 private langService: LangService) {
     }
 
     ngOnInit(): void {
         this.config = this.appConfig.config;
 
-        this.setupLabels();
         this.setupCalendarOptions();
         this.$calendar = jQuery('#calendar');
         this.$calendar.fullCalendar(this.calendarOptions);
         jQuery('.draggable').draggable(this.dragOptions);
         this.findAgroWorkTypes();
         this.findReminders();
-    }
-
-    private setupLabels() {
-        this.langService.get(Messages.VALIDATION_FAIL).subscribe((message) => this.labelValidationFail = message);
-        this.langService.get(Messages.SAVED).subscribe((message) => this.labelSaved = message);
-        this.langService.get(Messages.REMOVED).subscribe((message) => this.labelRemoved = message);
     }
 
     private setupCalendarOptions() {
@@ -149,7 +139,7 @@ export class ReminderComponent implements OnInit {
         this.formSubmitted = true;
 
         if (!this.eventForm.valid) {
-            this.toaStrService.warning(this.labelValidationFail);
+            this.alertService.validationFailed();
             return;
         }
 
@@ -160,7 +150,7 @@ export class ReminderComponent implements OnInit {
         this.reminderService.save(this.event).subscribe(data => {
             this.event.id = data.id;
 
-            this.toaStrService.success(this.labelSaved);
+            this.alertService.saved();
 
             if (isNew) {
                 this.$calendar.fullCalendar('renderEvent', this.event, true);
@@ -177,7 +167,7 @@ export class ReminderComponent implements OnInit {
     remove() {
         this.reminderService.remove(this.event.id).subscribe(() => {
             this.$calendar.fullCalendar('removeEvents', this.event.id);
-            this.toaStrService.success(this.labelRemoved);
+            this.alertService.removed();
         });
     }
 
@@ -186,7 +176,7 @@ export class ReminderComponent implements OnInit {
         const start = event.start;
         const end = event.end;
         this.reminderService.changeEventTime(id, start, end).subscribe(() => {
-            this.toaStrService.success(this.labelSaved);
+            this.alertService.saved();
         });
     }
 

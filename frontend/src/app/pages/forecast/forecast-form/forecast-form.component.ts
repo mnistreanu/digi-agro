@@ -8,12 +8,12 @@ import {CropVarietyModel} from '../../manage-crops/crop-variety.model';
 import {IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts} from 'angular-2-dropdown-multiselect';
 import {ParcelService} from '../../../services/parcel.service';
 import {LangService} from '../../../services/lang.service';
-import {ToastrService} from 'ngx-toastr';
 import {Messages} from '../../../common/messages';
 import {ForecastService} from '../../../services/forecast.service';
 import {ForecastModel} from '../forecast.model';
 import {ForecastSnapshotModel} from '../forecast-snapshot.model';
 import {ForecastHarvestModel} from '../forecast-harvest.model';
+import {AlertService} from '../../../services/alert.service';
 
 @Component({
     selector: 'app-forecast-form',
@@ -54,9 +54,6 @@ export class ForecastFormComponent implements OnInit {
         allSelected: this.langService.instant(Messages.ALL_SELECTED),
     };
 
-    labelSaved: string;
-    labelRemoved: string;
-    labelValidationFail: string;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
@@ -65,7 +62,7 @@ export class ForecastFormComponent implements OnInit {
                 private cropService: CropService,
                 private parcelService: ParcelService,
                 private langService: LangService,
-                private toastrService: ToastrService) {
+                private alertService: AlertService) {
     }
 
     ngOnInit() {
@@ -79,15 +76,6 @@ export class ForecastFormComponent implements OnInit {
                 this.setupModel(id);
             }
         });
-
-        this.setupLabels();
-    }
-
-
-    private setupLabels() {
-        this.langService.get(Messages.SAVED).subscribe((message) => this.labelSaved = message);
-        this.langService.get(Messages.VALIDATION_FAIL).subscribe((message) => this.labelValidationFail = message);
-        this.langService.get(Messages.REMOVED).subscribe((message) => this.labelRemoved = message);
     }
 
     private prepareNew() {
@@ -216,7 +204,7 @@ export class ForecastFormComponent implements OnInit {
         this.formSubmitted = true;
 
         if (!this.form.valid) {
-            this.toastrService.warning(this.labelValidationFail);
+            this.alertService.validationFailed();
             return;
         }
 
@@ -236,13 +224,13 @@ export class ForecastFormComponent implements OnInit {
 
         this.forecastService.save(this.model).subscribe((model) => {
             this.model = model;
-            this.toastrService.success(this.labelSaved);
+            this.alertService.saved();
         });
     }
 
     onRemove() {
         this.forecastService.remove(this.model.id).subscribe(() => {
-            this.toastrService.success(this.labelRemoved);
+            this.alertService.removed();
             this.router.navigate(['/pages/forecasting']);
         });
     }
