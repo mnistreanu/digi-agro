@@ -80,16 +80,13 @@
 		"works": "Cheltuieli pentru lucrări agricole",
 		"fertilizers": "Cheltuieli pentru îngrășăminte",
 		"fuel": "Cheltuieli pentru combustibil",
+		"name": "Denumire categorie",
 		"pesticides": "Cheltuieli pentru pesticide",
 		"sowing": "Cheltuieli pentru însămânțare"
 	},
 	"fertilizer": {
 		"add-edit": "Adăugați / modificați îngrășământul",
-		"description-ro": "Descriere (Rom)",
-		"description-ru": "Descriere (Rus)",
 		"name": "Denumire",
-		"name-ro": "Denumire (Rom)",
-		"name-ru": "Denumire (Rus)",
 		"type": "Tip"
 	},
 	"fertilizer-type": {
@@ -136,8 +133,12 @@
 	"info": {
 		"creation-time": "Timpul de creație",
 		"description": "Descriere",
+		"description-ro": "Descriere (Rom)",
+		"description-ru": "Descriere (Rus)",
 		"information": "Informație",
-		"name": "Denumire"
+		"name": "Denumire",
+		"name-ro": "Denumire (Rom)",
+		"name-ru": "Denumire (Rus)"
 	},
 	"language": {
 		"language": "Limba"
@@ -306,7 +307,8 @@
 	},
 	"pest": {
 		"pest": "Dăunător",
-		"pests": "Dăunători"
+		"pests-ru": "Dăunători (Rus)",
+		"pests-ro": "Dăunători (Rom)"
 	},
 	"pesticide": {
 		"comments": "Comentarii",

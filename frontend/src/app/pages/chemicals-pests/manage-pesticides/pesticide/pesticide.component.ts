@@ -52,8 +52,15 @@ export class PesticideComponent implements OnInit {
     private buildForm() {
 
         this.form = this.fb.group({
+            pesticideType: [this.model.pesticideType, Validators.required],
             nameRo: [this.model.nameRo, Validators.required],
-            nameRu: [this.model.nameRu, Validators.required]
+            nameRu: [this.model.nameRu],
+            descriptionRo: [this.model.descriptionRo],
+            descriptionRu: [this.model.descriptionRu],
+            pestsRo: [this.model.pestsRo, Validators.required],
+            pestsRu: [this.model.pestsRu],
+            activeSubstance: [this.model.activeSubstance],
+            toxicityGroup: [this.model.toxicityGroup],
         });
     }
 

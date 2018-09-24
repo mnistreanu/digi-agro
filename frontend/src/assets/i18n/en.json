@@ -80,16 +80,13 @@
 		"works": "Expenses for agricultural works",
 		"fertilizers": "Expenses for fertilizers",
 		"fuel": "Expenses for fuel",
+		"name": "Category name",
 		"pesticides": "Expenses for pesticides",
 		"sowing": "Expenses for sowing"
 	},
 	"fertilizer": {
 		"add-edit": "Add / Edit fertilizer",
-		"description-ro": "Description",
-		"description-ru": "Description",
 		"name": "Name",
-		"name-ro": "Name",
-		"name-ru": "Name",
 		"type": "Type"
 	},
 	"fertilizer-type": {
@@ -136,8 +133,12 @@
 	"info": {
 		"creation-time": "Creation Time",
 		"description": "Description",
+		"description-ro": "Description",
+		"description-ru": "Description",
 		"information": "Information",
-		"name": "Name"
+		"name": "Name",
+		"name-ro": "Name",
+		"name-ru": "Name"
 	},
 	"language": {
 		"language": "Language"
@@ -306,7 +307,8 @@
 	},
 	"pest": {
 		"pest": "Pest",
-		"pests": "Pests"
+		"pests-ru": "Pests",
+		"pests-ro": "Pests"
 	},
 	"pesticide": {
 		"comments": "Comments",

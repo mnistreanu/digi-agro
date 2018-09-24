@@ -30,7 +30,7 @@ export class ExpenseCategoriesComponent implements OnInit {
     }
 
     private setupLabels() {
-        this.langService.get('pesticides.name').subscribe(msg => this.labelName = msg);
+        this.langService.get('expense-category.name').subscribe(msg => this.labelName = msg);
     }
 
     private setupGrid() {
@@ -50,7 +50,7 @@ export class ExpenseCategoriesComponent implements OnInit {
 
         const headers: ColDef[] = [
             {
-                headerName: 'Denumirea categorie',
+                headerName: this.labelName,
                 field: 'name',
                 width: 200,
                 minWidth: 200,
