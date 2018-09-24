@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {PesticideService} from '../../../../services/chemicals-pests/pesticide.service';
 import {LangService} from '../../../../services/lang.service';
 import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
-import {PesticideModel} from "../pesticide.model";
+import {PesticideModel} from '../pesticide.model';
 
 @Component({
     selector: 'app-pesticide-list',

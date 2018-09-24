@@ -1,13 +1,13 @@
 import { ChemicalsPestsModule } from './chemicals-pests.module';
 
 describe('ChemicalsPestsModule', () => {
-  let employeeModule: ChemicalsPestsModule;
+  let chemicalsPestsModule: ChemicalsPestsModule;
 
   beforeEach(() => {
-    employeeModule = new ChemicalsPestsModule();
+    chemicalsPestsModule = new ChemicalsPestsModule();
   });
 
   it('should create an instance', () => {
-    expect(employeeModule).toBeTruthy();
+    expect(chemicalsPestsModule).toBeTruthy();
   });
 });
