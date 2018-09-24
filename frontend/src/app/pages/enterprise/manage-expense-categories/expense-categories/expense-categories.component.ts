@@ -71,7 +71,6 @@ export class ExpenseCategoriesComponent implements OnInit {
             console.log(models);
             this.adjustModels(models);
             this.options.api.setRowData(models);
-            this.setupSummaryRow(models);
         });
     }
 
