@@ -58,8 +58,8 @@ export class PesticideListComponent implements OnInit {
             {
                 headerName: 'pesticide.type',
                 field: 'pesticideType',
-                width: 150,
-                minWidth: 100
+                width: 180,
+                minWidth: 180
             },
             {
                 headerName: 'info.name',
