@@ -11,6 +11,7 @@ import {ImageRendererComponent} from '../../modules/aggrid/image-renderer/image-
 import {ImageRendererModule} from '../../modules/aggrid/image-renderer/image-renderer.module';
 import {PinnedRowRendererModule} from '../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.module';
 import {PinnedRowRendererComponent} from '../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
+import {EditRendererComponent} from '../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {ExpenseCategoryTreeComponent} from './manage-expense-categories/expense-category-tree/expense-category-tree.component';
 import {ExpenseCategoryComponent} from './manage-expense-categories/expense-category/expense-category.component';
 
@@ -30,7 +31,7 @@ export const routes = [
         FormErrorBlockModule,
         ImageRendererModule,
         PinnedRowRendererModule,
-        AgGridModule.withComponents([ImageRendererComponent, PinnedRowRendererComponent]),
+        AgGridModule.withComponents([EditRendererComponent, ImageRendererComponent, PinnedRowRendererComponent]),
         RouterModule.forChild(routes)
     ],
     declarations: [
@@ -41,3 +42,4 @@ export const routes = [
 
 export class EnterpriseModule {
 }
+

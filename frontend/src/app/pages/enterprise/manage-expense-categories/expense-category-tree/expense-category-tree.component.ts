@@ -53,25 +53,24 @@ export class ExpenseCategoryTreeComponent implements OnInit {
 
         const headers: ColDef[] = [
             {
-                headerName: 'edit',
                 field: 'edit',
-                // width: 30,
-                // minWidth: 24,
-                // maxWidth: 30,
+                width: 24,
+                minWidth: 24,
+                maxWidth: 30,
                 editable: false,
                 suppressResize: true,
                 suppressMenu: true,
-                // cellRendererFramework: EditRendererComponent,
-                // cellStyle: () => {
-                //     return {padding: 0};
-                // }
+                cellRendererFramework: EditRendererComponent,
+                cellStyle: () => {
+                    return {padding: 0};
+                }
             },
             {
                 headerName: this.labelName,
                 field: 'name',
                 width: 200,
                 minWidth: 200,
-                pinned: 'left',
+                // pinned: 'left',
                 cellRenderer: 'agGroupCellRenderer',
                 suppressFilter: true
             },

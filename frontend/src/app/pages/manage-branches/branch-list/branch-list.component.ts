@@ -4,7 +4,7 @@ import {ColDef, GridOptions} from 'ag-grid';
 import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {BranchService} from '../../../services/branch.service';
 import {BranchModel} from '../branch/branch.model';
-import {LangService} from "../../../services/lang.service";
+import {LangService} from '../../../services/lang.service';
 
 @Component({
     selector: 'app-branch-list',

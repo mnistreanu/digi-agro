@@ -15,7 +15,7 @@ export class ExpenseCategoryComponent implements OnInit {
     form: FormGroup;
     submitted = false;
     model: ExpenseCategoryModel;
-    mainCategories: ExpenseCategoryModel = [];
+    mainCategories: ExpenseCategoryModel[] = [];
 
     constructor(private fb: FormBuilder,
                 private router: Router,
