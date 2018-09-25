@@ -108,7 +108,7 @@ export const routes: Routes = [
             },
             {
                 path: 'expenses',
-                loadChildren: 'app/pages/manage-expenses/manage-expenses.module#ManageExpensesModule',
+                loadChildren: 'app/pages/expenses/expenses.module#ExpensesModule',
                 data: {breadcrumb: 'Expenses'},
                 canActivate: [AuthGuard]
             },

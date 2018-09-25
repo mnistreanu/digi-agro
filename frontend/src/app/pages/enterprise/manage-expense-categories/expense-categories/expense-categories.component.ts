@@ -4,7 +4,7 @@ import {FieldMapper} from '../../../../common/field.mapper';
 import {LangService} from '../../../../services/lang.service';
 import {PinnedRowRendererComponent} from '../../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
 import {ExpenseCategoriesModel} from './expense-categories.model';
-import {ExpensesService} from '../../../../services/expenses/expenses.service';
+import {ExpenseCategoryService} from '../../../../services/expenses/expense-category.service';
 
 @Component({
     selector: 'app-expense-categories',
@@ -18,7 +18,7 @@ export class ExpenseCategoriesComponent implements OnInit {
 
     labelName: string;
 
-    constructor(private expensesService: ExpensesService,
+    constructor(private expensesService: ExpenseCategoryService,
                 private langService: LangService) {
 
     }
@@ -66,7 +66,7 @@ export class ExpenseCategoriesComponent implements OnInit {
 
 
     private setupTreeData() {
-        this.expensesService.findCategoriesTree().subscribe(payloadModel => {
+        this.expensesService.getTree().subscribe(payloadModel => {
             const models = payloadModel.payload;
             console.log(models);
             this.adjustModels(models);

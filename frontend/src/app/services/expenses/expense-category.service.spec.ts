@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { ExpensesService } from './machinery-expense.service';
 
-describe('ExpensesService', () => {
+describe('ExpenseCategoryService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [ExpensesService]

@@ -7,15 +7,15 @@ import {environment} from '../../../environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class ExpensesService {
+export class ExpenseCategoryService {
 
-    private api: string = environment.apiUrl + '/expenses';
+    private api: string = environment.apiUrl + '/expense-category';
 
     constructor(private http: HttpClient) {
     }
 
-    public findCategoriesTree(): Observable<PayloadModel> {
-        return this.http.get<PayloadModel>(this.api + '/categories-tree');
+    public getTree(): Observable<PayloadModel> {
+        return this.http.get<PayloadModel>(this.api + '/tree');
     }
 
 }

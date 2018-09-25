@@ -868,7 +868,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="reset-expense" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+    <changeSet id="reset-expense-v1" author="maxim.nistreanu" failOnError="true" runOnChange="true">
         <sql>
             delete from expense_resource;
             delete from expense_item;
@@ -882,50 +882,38 @@
 
     <changeSet id="insert-machinery-expense" author="maxim.nistreanu" failOnError="true" runOnChange="true">
         <sql>
-            INSERT INTO expense(id, tenant_id, title, expense_date) VALUES
-                (1, 1, 'Reparație tractorului', '2018-09-16');
+            INSERT INTO expense(id, tenant_id, category_id, title, expense_date, created_by, created_at) VALUES
+                (1, 1, 7, 'Reparație tractorului', '2018-09-16', 3, '2018-09-16');
 
-            SELECT nextval('expense_id_seq');
-
-            INSERT INTO expense_item(expense_id, title, total_cost) VALUES
-                (1, 'Ambreiaj la cutia de viteze', 3400);
+            INSERT INTO expense_item(expense_id, category_id, title, total_cost) VALUES
+                (1, 7, 'Ambreiaj la cutia de viteze', 3400);
 
             INSERT INTO expense_resource(expense_id, resource_id, table_name) VALUES
                 (1, 1, 'machine'),
                 (1, 1, 'employee');
-        </sql>
-    </changeSet>
 
-    <changeSet id="update-machinery-fuel-expense-tenant1" author="maxim.nistreanu" failOnError="true" runOnChange="true">
-        <sql>
-            UPDATE expense SET category_id=7 WHERE id=1;
-            UPDATE expense SET category_id=8 WHERE id=2;
-
-            UPDATE expense_item SET category_id=7 WHERE id=2;
-            UPDATE expense_item SET category_id=9 WHERE id=3;
-            UPDATE expense_item SET category_id=10 WHERE id=4;
-            UPDATE expense_item SET category_id=11 WHERE id=5;
-            UPDATE expense_item SET category_id=12 WHERE id=6;
+            SELECT setval('expense_id_seq', (SELECT MAX(id) FROM expense));
+            SELECT setval('expense_item_id_seq', (SELECT MAX(id) FROM expense_item));
         </sql>
     </changeSet>
 
     <changeSet id="insert-fuel-expense" author="maxim.nistreanu" failOnError="true" runOnChange="true">
         <sql>
-            INSERT INTO expense(id, tenant_id, title, expense_date) VALUES
-                (2, 1, 'Cheltuieli combustibil bgrigada nr.1', '2018-09-21');
+            INSERT INTO expense(id, tenant_id, category_id, title, expense_date, created_by, created_at) VALUES
+                (2, 1, 8, 'Cheltuieli combustibil bgrigada nr.1', '2018-09-21', 3, '2018-09-16');
 
-            SELECT nextval('expense_id_seq');
-
-            INSERT INTO expense_item(expense_id, title, actual_qty, unit_of_measure) VALUES
-                (2, 'Motorină', 350, 'l'),
-                (2, 'Ulei', 12, 'l'),
-                (2, 'Solidol', 1, 'l'),
-                (2, 'Negrol', 2, 'l');
-
+            INSERT INTO expense_item(expense_id, category_id, title, actual_qty, unit_of_measure) VALUES
+                (2, 9, 'Motorină', 350, 'l'),
+                (2, 10, 'Ulei', 12, 'l'),
+                (2, 11, 'Solidol', 1, 'l'),
+                (2, 12, 'Negrol', 2, 'l');
 
             INSERT INTO expense_resource(expense_id, resource_id, table_name) VALUES
                 (2, 1, 'machine'),
                 (2, 1, 'employee');
+
+            SELECT setval('expense_id_seq', (SELECT MAX(id) FROM expense));
+            SELECT setval('expense_item_id_seq', (SELECT MAX(id) FROM expense_item));
         </sql>
     </changeSet>
 

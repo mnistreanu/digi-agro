@@ -2,9 +2,8 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
-import {MachineryExpenseModel} from '../../pages/manage-expenses/machinery-expenses/form/machinery-expense.model';
-import {ExpenseItemModel} from '../../pages/manage-expenses/machinery-expenses/expense-item-table/expense-item.model';
-import {MachineryExpenseListModel} from '../../pages/manage-expenses/machinery-expenses/list/machinery-expense-list.model';
+import {MachineryExpenseModel} from '../../pages/expenses/machinery-expenses/form/machinery-expense.model';
+import {MachineryExpenseListModel} from '../../pages/expenses/machinery-expenses/list/machinery-expense-list.model';
 
 @Injectable({
     providedIn: 'root'

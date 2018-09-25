@@ -222,6 +222,10 @@ export class MenuService {
                 expanded: false,
                 subMenu: [
                     {
+                        title: 'expenses.expenses',
+                        routerLink: 'expenses',
+                    },
+                    {
                         title: 'nav.agricultural-machinery',
                         routerLink: 'expenses/machinery',
                     },

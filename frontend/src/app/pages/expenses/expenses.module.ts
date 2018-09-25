@@ -27,9 +27,10 @@ import {EditRendererComponent} from '../../modules/aggrid/edit-renderer/edit-ren
 import {AdminGuard} from '../../guards/admin-guard';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import {FuelExpensesFormComponent} from './fuel-expenses/form/fuel-expenses-form.component';
+import { ExpenseListComponent } from './expense-list/expense-list.component';
 
 export const routes = [
-    {path: '', redirectTo: 'expenses', pathMatch: 'full'},
+    {path: '', component: ExpenseListComponent},
     {path: 'machinery', component: MachineryExpensesComponent},
     {path: 'machinery/:id', component: MachineryExpensesFormComponent, canActivate: [AdminGuard]},
     {path: 'fuel', component: FuelExpensesComponent},
@@ -72,9 +73,10 @@ export const routes = [
         PesticidesExpensesComponent,
         FertilizersExpensesComponent,
         MachineryExpensesFormComponent,
-        ExpenseItemTableComponent
+        ExpenseItemTableComponent,
+        ExpenseListComponent
     ]
 })
 
-export class ManageExpensesModule {
+export class ExpensesModule {
 }

@@ -8,6 +8,7 @@ public class ExpenseItemModel {
 
     private Long id;
     private String title;
+    private Double amount;
     private BigDecimal totalCost;
 
     private boolean deleted = false;
@@ -18,6 +19,7 @@ public class ExpenseItemModel {
     public ExpenseItemModel(ExpenseItem entity) {
         id = entity.getId();
         title = entity.getTitle();
+        amount = entity.getActualQuantity();
         totalCost = entity.getTotalCost();
     }
 
@@ -51,5 +53,13 @@ public class ExpenseItemModel {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
     }
 }
