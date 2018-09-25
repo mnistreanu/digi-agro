@@ -2,7 +2,7 @@
 
     <div widget class="card bottom-30">
         <div class="card-header">
-            <span translate>nav.expense-category</span>
+            <span translate>expenses.categories</span>
             <div class="widget-controls">
                 <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
                 <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
@@ -14,93 +14,24 @@
         <div class="card-body widget-body">
 
             <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="pesticideType" translate>pesticide.type</label>
-                    <select id="pesticideType" class="form-control" formControlName="pesticideType">
-                        <option value="" disabled></option>
-                        <option value="ACARICIDE" translate>pesticide-type.ACARICIDE</option>
-                        <option value="HERBICIDE" translate>pesticide-type.HERBICIDE</option>
-                        <option value="FUNGICIDE" translate>pesticide-type.FUNGICIDE</option>
-                        <option value="INSECTOFUNGICIDE" translate>pesticide-type.INSECTOFUNGICIDE</option>
-                        <option value="GROWTH_REGULATION" translate>pesticide-type.GROWTH_REGULATION</option>
-                        <option value="DEFOLIANT_DESICCANT" translate>pesticide-type.DEFOLIANT_DESICCANT</option>
-                        <option value="PHEROMONE" translate>pesticide-type.PHEROMONE</option>
-                        <option value="INSECTICIDE" translate>pesticide-type.INSECTICIDE</option>
-                        <option value="NEMATOCIDE_SOIL_DESINFECTANT" translate>pesticide-type.NEMATOCIDE_SOIL_DESINFECTANT</option>
-                        <option value="MISCELLANEOUS_AUXILIARY_PRODUCT" translate>pesticide-type.MISCELLANEOUS_AUXILIARY_PRODUCT</option>
-                        <option value="RODENTICIDE_MOLLUSCICIDE_REPELLANT" translate>pesticide-type.RODENTICIDE_MOLLUSCICIDE_REPELLANT</option>
+                <div class="col-sm-12">
+                    <label for="parentId" translate>expense-category.parent</label>
+                    <select id="parentId" class="form-control custom-select" formControlName="parentId">
+                        <option *ngFor="let category of mainCategories"
+                                [ngValue]="category.id">{{category.name}}
+                        </option>
                     </select>
-                    <app-form-error-block [control]="form.get('pesticideType')"
+                    <app-form-error-block [control]="form.get('parentId')"
                                           [formSubmitted]="submitted"></app-form-error-block>
-                </div>
-                <div class="col-sm-4">
-                    <label for="activeSubstance" translate>pesticide.active-substance</label>
-                    <input id="activeSubstance" class="form-control checking-field" formControlName="activeSubstance">
-                </div>
-                <div class="col-sm-2">
-                    <label for="toxicityGroup" translate>pesticide.toxicity-group</label>
-                    <select id="toxicityGroup" class="form-control" formControlName="toxicityGroup">
-                        <option value="" disabled></option>
-                        <option value="1">I</option>
-                        <option value="2">II</option>
-                        <option value="3">III</option>
-                        <option value="4">IV</option>
-                    </select>
                 </div>
             </div>
 
             <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="nameRo" translate>info.name-ro</label>
-                    <input id="nameRo" class="form-control checking-field" formControlName="nameRo">
-                    <app-form-error-block [control]="form.get('nameRo')"
+                <div class="col-sm-12">
+                    <label for="name" translate>info.name</label>
+                    <input id="name" class="form-control checking-field" formControlName="name">
+                    <app-form-error-block [control]="form.get('name')"
                     [formSubmitted]="submitted"></app-form-error-block>
-                </div>
-                <div class="col-sm-6">
-                    <label for="nameRu" translate>info.name-ru</label>
-                    <input id="nameRu" class="form-control checking-field" formControlName="nameRu">
-                    <app-form-error-block [control]="form.get('nameRu')"
-                                          [formSubmitted]="submitted"></app-form-error-block>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-sm-12">
-                    <label for="descriptionRo" translate>info.description-ro</label>
-                    <textarea id="descriptionRo" class="form-control checking-field" formControlName="descriptionRo"></textarea>
-                    <app-form-error-block [control]="form.get('descriptionRo')" [formSubmitted]="submitted">
-
-                    </app-form-error-block>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-sm-12">
-                    <label for="descriptionRu" translate>info.description-ru</label>
-                    <textarea id="descriptionRu" class="form-control checking-field" formControlName="descriptionRu"></textarea>
-                    <app-form-error-block [control]="form.get('descriptionRu')" [formSubmitted]="submitted">
-
-                    </app-form-error-block>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-sm-12">
-                    <label for="pestsRo" translate>pest.pests-ro</label>
-                    <textarea id="pestsRo" class="form-control checking-field" formControlName="pestsRo"></textarea>
-                    <app-form-error-block [control]="form.get('pestsRo')" [formSubmitted]="submitted">
-
-                    </app-form-error-block>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-sm-12">
-                    <label for="pestsRu" translate>pest.pests-ru</label>
-                    <textarea id="pestsRu" class="form-control checking-field" formControlName="pestsRu"></textarea>
-                    <app-form-error-block [control]="form.get('pestsRu')" [formSubmitted]="submitted">
-
-                    </app-form-error-block>
                 </div>
             </div>
 

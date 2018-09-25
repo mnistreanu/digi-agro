@@ -11,10 +11,12 @@ import {ImageRendererComponent} from '../../modules/aggrid/image-renderer/image-
 import {ImageRendererModule} from '../../modules/aggrid/image-renderer/image-renderer.module';
 import {PinnedRowRendererModule} from '../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.module';
 import {PinnedRowRendererComponent} from '../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
-import {ExpenseCategoriesComponent} from './manage-expense-categories/expense-categories/expense-categories.component';
+import {ExpenseCategoryTreeComponent} from './manage-expense-categories/expense-category-tree/expense-category-tree.component';
+import {ExpenseCategoryComponent} from './manage-expense-categories/expense-category/expense-category.component';
 
 export const routes = [
-    {path: 'manage-expense-categories', component: ExpenseCategoriesComponent, data: {breadcrumb: 'Expense categories'}},
+    {path: 'manage-expense-categories', component: ExpenseCategoryTreeComponent, data: {breadcrumb: 'Expense categories'}},
+    {path: 'manage-expense-categories/:id', component: ExpenseCategoryComponent, data: {breadcrumb: 'Expense category'}},
 ];
 
 @NgModule({
@@ -32,7 +34,8 @@ export const routes = [
         RouterModule.forChild(routes)
     ],
     declarations: [
-        ExpenseCategoriesComponent,
+        ExpenseCategoryTreeComponent,
+        ExpenseCategoryComponent
     ]
 })
 

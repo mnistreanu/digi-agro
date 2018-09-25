@@ -81,6 +81,7 @@
 		"fertilizers": "Expenses for fertilizers",
 		"fuel": "Expenses for fuel",
 		"name": "Category name",
+		"parent": "Main category",
 		"pesticides": "Expenses for pesticides",
 		"sowing": "Expenses for sowing"
 	},

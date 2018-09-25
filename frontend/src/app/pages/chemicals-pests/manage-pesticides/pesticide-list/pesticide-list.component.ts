@@ -67,12 +67,6 @@ export class PesticideListComponent implements OnInit {
                 width: 300,
                 minWidth: 200
             },
-            // {
-            //     headerName: 'info.description',
-            //     field: 'descriptionRo',
-            //     width: 300,
-            //     minWidth: 200
-            // },
             {
                 headerName: 'pesticide.active-substance',
                 field: 'activeSubstance',

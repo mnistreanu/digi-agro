@@ -1,4 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ColDef, GridOptions} from 'ag-grid';
 import {FieldMapper} from '../../../../common/field.mapper';
 import {LangService} from '../../../../services/lang.service';
@@ -19,6 +20,8 @@ export class ExpenseCategoryTreeComponent implements OnInit {
     labelName: string;
 
     constructor(private expensesService: ExpensesService,
+                private router: Router,
+                private route: ActivatedRoute,
                 private langService: LangService) {
 
     }
@@ -124,5 +127,14 @@ export class ExpenseCategoryTreeComponent implements OnInit {
                 this.options.api.sizeColumnsToFit();
             }
         }, 500);
+    }
+
+    public add() {
+        this.router.navigate(['./-1'], { relativeTo: this.route });
+    }
+
+    public onEdit(node) {
+        const model = node.data;
+        this.router.navigate(['./' + model.id], { relativeTo: this.route });
     }
 }

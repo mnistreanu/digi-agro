@@ -81,6 +81,7 @@
 		"fertilizers": "Cheltuieli pentru îngrășăminte",
 		"fuel": "Cheltuieli pentru combustibil",
 		"name": "Denumire categorie",
+		"parent": "Categoria principală",
 		"pesticides": "Cheltuieli pentru pesticide",
 		"sowing": "Cheltuieli pentru însămânțare"
 	},
