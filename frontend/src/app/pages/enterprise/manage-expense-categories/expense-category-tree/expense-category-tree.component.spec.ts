@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ExpenseCategoriesComponent} from './expense-categories.component';
+import {ExpenseCategoryTreeComponent} from './expense-category-tree.component';
 
-describe('ExpenseCategoriesComponent', () => {
-    let component: ExpenseCategoriesComponent;
-    let fixture: ComponentFixture<ExpenseCategoriesComponent>;
+describe('ExpenseCategoryTreeComponent', () => {
+    let component: ExpenseCategoryTreeComponent;
+    let fixture: ComponentFixture<ExpenseCategoryTreeComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ExpenseCategoriesComponent]
+            declarations: [ExpenseCategoryTreeComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ExpenseCategoriesComponent);
+        fixture = TestBed.createComponent(ExpenseCategoryTreeComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

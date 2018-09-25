@@ -71,6 +71,7 @@
 		"fuel": "Expenses for fuel",
 		"machinery": "Expenses for repairing agricultural machinery",
 		"name": "Category name",
+        "parent": "Main category",
 		"pesticides": "Expenses for pesticides",
 		"sowing": "Expenses for sowing",
 		"works": "Expenses for agricultural works"
@@ -314,8 +315,9 @@
 	},
 	"pest": {
 		"pest": "Pest",
-		"pests-ro": "Pests",
-		"pests-ru": "Pests"
+		"pests": "Pests",
+		"pests-ru": "Pests",
+		"pests-ro": "Pests"
 	},
 	"pesticide": {
 		"active-substance": "Active substance",

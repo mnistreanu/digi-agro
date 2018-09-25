@@ -12,8 +12,6 @@ public class PesticideModel implements Serializable {
     private PesticideType pesticideType;
     private String nameRo;
     private String nameRu;
-    private String name2Ro;
-    private String name2Ru;
     private String descriptionRo;
     private String descriptionRu;
     private String pestsRo;
@@ -67,22 +65,6 @@ public class PesticideModel implements Serializable {
 
     public void setNameRu(String nameRu) {
         this.nameRu = nameRu;
-    }
-
-    public String getName2Ro() {
-        return name2Ro;
-    }
-
-    public void setName2Ro(String name2Ro) {
-        this.name2Ro = name2Ro;
-    }
-
-    public String getName2Ru() {
-        return name2Ru;
-    }
-
-    public void setName2Ru(String name2Ru) {
-        this.name2Ru = name2Ru;
     }
 
     public String getDescriptionRo() {

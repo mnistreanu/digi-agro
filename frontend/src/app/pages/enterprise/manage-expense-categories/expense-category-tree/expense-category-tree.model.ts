@@ -1,9 +1,9 @@
-export class ExpenseCategoriesModel {
+export class ExpenseCategoryTreeModel {
 
     id: number;
     parentId: number;
     defaultName: string;
     name: string;
 
-    children: ExpenseCategoriesModel[];
+    children: ExpenseCategoryTreeModel[];
 }

@@ -71,6 +71,7 @@
 		"fuel": "Cheltuieli pentru combustibil",
 		"machinery": "Cheltuieli pentru repararea mașinilor agricole",
 		"name": "Denumire categorie",
+        "parent": "Categoria principală",
 		"pesticides": "Cheltuieli pentru pesticide",
 		"sowing": "Cheltuieli pentru însămânțare",
 		"works": "Cheltuieli pentru lucrări agricole"
@@ -314,7 +315,8 @@
 	},
 	"pest": {
 		"pest": "Dăunător",
-		"pests-ro": "Dăunători (Rom)",
+		"pests": "Dăunători",
+        "pests-ro": "Dăunători (Rom)",
 		"pests-ru": "Dăunători (Rus)"
 	},
 	"pesticide": {

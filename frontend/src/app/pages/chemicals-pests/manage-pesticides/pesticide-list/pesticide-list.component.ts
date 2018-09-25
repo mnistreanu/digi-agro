@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {PesticideService} from '../../../../services/chemicals-pests/pesticide.service';
 import {LangService} from '../../../../services/lang.service';
 import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
-import {PesticideModel} from "../pesticide.model";
+import {PesticideModel} from '../pesticide.model';
 
 @Component({
     selector: 'app-pesticide-list',
@@ -58,8 +58,8 @@ export class PesticideListComponent implements OnInit {
             {
                 headerName: 'pesticide.type',
                 field: 'pesticideType',
-                width: 150,
-                minWidth: 100
+                width: 180,
+                minWidth: 180
             },
             {
                 headerName: 'info.name',
@@ -67,12 +67,6 @@ export class PesticideListComponent implements OnInit {
                 width: 300,
                 minWidth: 200
             },
-            // {
-            //     headerName: 'info.description',
-            //     field: 'descriptionRo',
-            //     width: 300,
-            //     minWidth: 200
-            // },
             {
                 headerName: 'pesticide.active-substance',
                 field: 'activeSubstance',
