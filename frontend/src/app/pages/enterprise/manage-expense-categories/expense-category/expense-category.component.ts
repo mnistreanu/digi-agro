@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AlertService} from '../../../../services/alert.service';
 import {ExpenseCategoryModel} from './expense-category.model';
-import {ExpensesService} from '../../../../services/expenses/expenses.service';
+import {ExpenseCategoryService} from '../../../../services/expenses/expense-category.service';
 
 @Component({
     selector: 'app-expense-category',
@@ -15,17 +15,17 @@ export class ExpenseCategoryComponent implements OnInit {
     form: FormGroup;
     submitted = false;
     model: ExpenseCategoryModel;
-    mainCategories: ExpenseCategoryModel = [];
+    mainCategories: ExpenseCategoryModel[] = [];
 
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
                 private alertService: AlertService,
-                private expensesService: ExpensesService) {
+                private expenseCategoryService: ExpenseCategoryService) {
     }
 
     ngOnInit() {
-        this.expensesService.findCategoriesTree().subscribe(payloadModel => {
+        this.expenseCategoryService.getTree().subscribe(payloadModel => {
             const models = payloadModel.payload;
             models.forEach((model: ExpenseCategoryModel) => {
                 this.mainCategories.push(model);
@@ -45,7 +45,7 @@ export class ExpenseCategoryComponent implements OnInit {
     }
 
     private setupModel(id) {
-        this.expensesService.findOneCategory(id).subscribe(model => {
+        this.expenseCategoryService.findOneCategory(id).subscribe(model => {
             this.model = model;
             this.buildForm();
         });
@@ -78,7 +78,7 @@ export class ExpenseCategoryComponent implements OnInit {
         Object.assign(this.model, form.value);
         this.submitted = false;
 
-        this.expensesService.saveCategory(this.model).subscribe((model) => {
+        this.expenseCategoryService.saveCategory(this.model).subscribe((model) => {
             this.model = model;
             this.alertService.saved();
             this.router.navigate(['../'], {relativeTo: this.route});
@@ -87,7 +87,7 @@ export class ExpenseCategoryComponent implements OnInit {
     }
 
     // public remove() {
-    //     this.expensesService.removeCategory(this.model).subscribe(() => {
+    //     this.expenseCategoryService.removeCategory(this.model).subscribe(() => {
     //         this.alertService.removed();
     //         this.router.navigate(['../'], {relativeTo: this.route});
     //     });
