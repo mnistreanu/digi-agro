@@ -2,6 +2,7 @@ package com.arobs.model.expense;
 
 import java.util.Date;
 
+@Deprecated
 public class FuelExpenseListModel {
 
     private Long expenseId;

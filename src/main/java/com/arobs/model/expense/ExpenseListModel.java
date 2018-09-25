@@ -12,6 +12,8 @@ public class ExpenseListModel {
     private Double amount;
     private Double cost;
 
+    private String category;
+
     private String createdBy;
     private Date createdAt;
 
@@ -88,5 +90,13 @@ public class ExpenseListModel {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

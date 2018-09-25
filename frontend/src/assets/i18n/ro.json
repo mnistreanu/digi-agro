@@ -71,7 +71,7 @@
 		"fuel": "Cheltuieli pentru combustibil",
 		"machinery": "Cheltuieli pentru repararea mașinilor agricole",
 		"name": "Denumire categorie",
-        "parent": "Categoria principală",
+		"parent": "Categoria principală",
 		"pesticides": "Cheltuieli pentru pesticide",
 		"sowing": "Cheltuieli pentru însămânțare",
 		"works": "Cheltuieli pentru lucrări agricole"
@@ -83,13 +83,13 @@
 		"categories": "Categorii de cheltuieli",
 		"cost": "Preț",
 		"date": "Data",
+		"element": "Element",
+		"expenses": "Cheltuieli",
 		"fertilizers": "Cheltuieli pentru îngrășăminte",
 		"fuel": "Cheltuieli pentru combustibil",
 		"pesticides": "Cheltuieli pentru pesticide",
 		"responsible-persons": "Persoane responsabile",
-		"sowing": "Cheltuieli pentru însămânțare",
-		"expenses": "Cheltuieli",
-		"element": "Element"
+		"sowing": "Cheltuieli pentru însămânțare"
 	},
 	"fertilizer": {
 		"add-edit": "Adăugați / modificați îngrășământul",
@@ -316,7 +316,7 @@
 	"pest": {
 		"pest": "Dăunător",
 		"pests": "Dăunători",
-        "pests-ro": "Dăunători (Rom)",
+		"pests-ro": "Dăunători (Rom)",
 		"pests-ru": "Dăunători (Rus)"
 	},
 	"pesticide": {

@@ -16,6 +16,8 @@ public class ExpenseModel {
     private Date expenseDate;
     private List<ExpenseItemModel> expenseItems = new ArrayList<>();
 
+    private List<Long> machines = new ArrayList<>();
+    private List<Long> employees = new ArrayList<>();
 
     public ExpenseModel() {
         // empty
@@ -59,4 +61,19 @@ public class ExpenseModel {
         this.expenseItems = expenseItems;
     }
 
+    public List<Long> getMachines() {
+        return machines;
+    }
+
+    public void setMachines(List<Long> machines) {
+        this.machines = machines;
+    }
+
+    public List<Long> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Long> employees) {
+        this.employees = employees;
+    }
 }

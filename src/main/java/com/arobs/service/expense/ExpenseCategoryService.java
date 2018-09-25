@@ -15,6 +15,10 @@ public class ExpenseCategoryService implements HasRepository<ExpenseCategoryRepo
     @Autowired
     private ExpenseCategoryRepository expenseCategoryRepository;
 
+    public ExpenseCategory findOne(Long id) {
+        return getRepository().findOne(id);
+    }
+
     public List<ExpenseCategory> findDefault() {
            return getRepository().findDefault();
     }

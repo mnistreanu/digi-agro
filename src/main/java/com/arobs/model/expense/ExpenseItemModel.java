@@ -11,6 +11,10 @@ public class ExpenseItemModel {
     private Double amount;
     private BigDecimal totalCost;
 
+    private Long categoryId;
+    private String category;
+
+
     private boolean deleted = false;
 
     public ExpenseItemModel() {
@@ -21,6 +25,9 @@ public class ExpenseItemModel {
         title = entity.getTitle();
         amount = entity.getActualQuantity();
         totalCost = entity.getTotalCost();
+
+        categoryId = entity.getCategory().getId();
+        category = entity.getCategory().getName();
     }
 
     public Long getId() {
@@ -61,5 +68,21 @@ public class ExpenseItemModel {
 
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

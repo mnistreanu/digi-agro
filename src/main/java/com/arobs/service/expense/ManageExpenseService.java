@@ -3,7 +3,8 @@ package com.arobs.service.expense;
 import com.arobs.entity.*;
 import com.arobs.model.expense.ExpenseItemModel;
 import com.arobs.model.expense.ExpenseListModel;
-import com.arobs.model.expense.MachineryExpenseModel;
+import com.arobs.model.expense.ExpenseModel;
+import com.arobs.model.expense.ExpenseModel;
 import com.arobs.service.EmployeeService;
 import com.arobs.service.MachineService;
 import com.arobs.service.UserAccountService;
@@ -30,13 +31,16 @@ public class ManageExpenseService {
     private MachineService machineService;
     @Autowired
     private UserAccountService userAccountService;
-
+    @Autowired
+    private ExpenseCategoryService expenseCategoryService;
+    
+    
     public List<ExpenseListModel> find(Long tenantId) {
         List<Expense> expenses = expenseService.find(tenantId);
         List<ExpenseListModel> models = new ArrayList<>();
 
         for (Expense expense : expenses) {
-            MachineryExpenseModel expenseModel = getModel(expense);
+            ExpenseModel expenseModel = getModel(expense);
             List<Employee> employees = employeeService.findAll(expenseModel.getEmployees());
             List<Machine> machines = machineService.findAll(expenseModel.getMachines());
             UserAccount createdBy = userAccountService.findOne(expense.getCreatedBy());
@@ -56,19 +60,20 @@ public class ManageExpenseService {
                 listModel.setMachine(machinesStr);
                 listModel.setCreatedBy(createdBy.getFullName());
                 listModel.setCreatedAt(expense.getCreatedAt());
+                listModel.setCategory(expenseItemModel.getCategory());
             }
         }
 
         return models;
     }
 
-    public MachineryExpenseModel findOne(Long expenseId) {
+    public ExpenseModel findOne(Long expenseId) {
         Expense expense = expenseService.findOne(expenseId);
         return getModel(expense);
     }
 
-    public MachineryExpenseModel getModel(Expense expense) {
-        MachineryExpenseModel expenseModel = new MachineryExpenseModel(expense);
+    public ExpenseModel getModel(Expense expense) {
+        ExpenseModel expenseModel = new ExpenseModel(expense);
         List<ExpenseItem> expenseItems = expenseItemService.find(expense.getId());
         for (ExpenseItem expenseItem : expenseItems) {
             expenseModel.getExpenseItems().add(new ExpenseItemModel(expenseItem));
@@ -88,7 +93,7 @@ public class ManageExpenseService {
     }
 
     @Transactional
-    public MachineryExpenseModel save(MachineryExpenseModel model, Long tenant) {
+    public ExpenseModel save(ExpenseModel model, Long tenant) {
 
         Expense expense = expenseService.save(model, tenant);
         expenseItemService.save(model.getExpenseItems(), expense);

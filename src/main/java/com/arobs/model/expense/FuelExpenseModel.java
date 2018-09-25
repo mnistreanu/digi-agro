@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Deprecated
 public class FuelExpenseModel extends ExpenseModel{
 
     private List<Long> machines = new ArrayList<>();
