@@ -2,13 +2,12 @@ package com.arobs.controller.expense;
 
 import com.arobs.entity.ExpenseCategory;
 import com.arobs.model.PayloadModel;
+
 import com.arobs.model.expense.ExpenseCategoryModel;
 import com.arobs.service.expense.ExpenseCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -50,4 +49,19 @@ public class ExpenseCategoryController {
         payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
         return ResponseEntity.ok(payloadModel);
     }
+
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<ExpenseCategoryModel> getModel(@PathVariable Long id) {
+        ExpenseCategoryModel pesticideModel = categoryService.findOneModel(id);
+        return ResponseEntity.ok(pesticideModel);
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public ResponseEntity<ExpenseCategory> save(@RequestBody ExpenseCategoryModel model,
+                                                HttpSession session) {
+        Long tenantId = (Long) session.getAttribute("tenant");
+        return ResponseEntity.ok(categoryService.save(model, tenantId));
+    }
+
 }
