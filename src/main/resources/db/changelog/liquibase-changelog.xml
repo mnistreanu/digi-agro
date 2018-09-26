@@ -815,7 +815,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert_pests" author="mihai.gorgos" failOnError="true" >
+    <changeSet id="insert_pests" author="mihai.gorgos" failOnError="true" runOnChange="false">
         <validCheckSum>ANY</validCheckSum>
         <sql>
             INSERT INTO pest (id, name_ro) VALUES (1, 'Rapăn');
@@ -834,12 +834,14 @@
             INSERT INTO pest (id, name_ro) VALUES (14, 'Bolile dructelor în perioada de păstrare');
             INSERT INTO pest (id, name_ro) VALUES (15, 'Molii minere');
 
+            SELECT SETVAL('pest_id_seq', (SELECT MAX(id) FROM pest)+1);
+
             UPDATE pest SET name_ru=name_ro WHERE name_ru IS NULL;
         </sql>
     </changeSet>
 
 
-    <changeSet id="insert_fertilizers_v1" author="mihai.gorgos" failOnError="true" >
+    <changeSet id="insert_fertilizers_v1" author="mihai.gorgos" failOnError="true" runOnChange="false">
         <validCheckSum>ANY</validCheckSum>
         <sql>
             DELETE FROM fertilizer;
@@ -855,20 +857,26 @@
                 (7, 'MINERAL', 'NITROCALCAR (CAN) granulat', 'Nitrocalcarul (can) granulat este un îngrășământ pe bază de nitrat de amoniu, completat cu dolomită sau carbonat de calciu ce asigură culturilor o aprovizionare suplimentară cu Calciu (Ca) și Magneziu (Mg). Este un îngrășământ de tip granulat, tratat cu agenți de condiționare pentru a preveni aglomerarea.'),
                 (8, 'MINERAL', 'UREE granulata', 'Ureea granulată este un îngrășământ cu azot, acesta regăsindu-se sub formă amidica. Este un produs NOU, cu o granulaţie substanţial îmbunătăţită, granulele fiind mai compacte şi suprafaţa mai netedă. Se solubilizează mai încet, împiedicând pierderea în atmosferă a azotului.');
 
-            SELECT nextval('fertilizer_id_seq');
-            SELECT nextval('fertilizer_id_seq');
-            SELECT nextval('fertilizer_id_seq');
-            SELECT nextval('fertilizer_id_seq');
-            SELECT nextval('fertilizer_id_seq');
-            SELECT nextval('fertilizer_id_seq');
-            SELECT nextval('fertilizer_id_seq');
-            SELECT nextval('fertilizer_id_seq');
+            SELECT SETVAL('fertilizer_id_seq', (SELECT MAX(id) FROM fertilizer)+1);
 
             UPDATE fertilizer SET name_ru=name_ro, description_ru=description_ro WHERE name_ru IS NULL;
         </sql>
     </changeSet>
 
-    <changeSet id="reset-expense-v1" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+    <!--<changeSet id="reset-expense-v1" author="maxim.nistreanu" failOnError="true" runOnChange="true">-->
+        <!--<sql>-->
+            <!--delete from expense_resource;-->
+            <!--delete from expense_item;-->
+            <!--delete from expense;-->
+
+            <!--SELECT setval('expense_resource_id_seq', 1);-->
+            <!--SELECT setval('expense_item_id_seq', 1);-->
+            <!--SELECT setval('expense_id_seq', 1);-->
+        <!--</sql>-->
+    <!--</changeSet>-->
+
+    <changeSet id="insert-machinery-expense" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <validCheckSum>ANY</validCheckSum>
         <sql>
             delete from expense_resource;
             delete from expense_item;
@@ -877,43 +885,53 @@
             SELECT setval('expense_resource_id_seq', 1);
             SELECT setval('expense_item_id_seq', 1);
             SELECT setval('expense_id_seq', 1);
-        </sql>
-    </changeSet>
 
-    <changeSet id="insert-machinery-expense" author="maxim.nistreanu" failOnError="true" runOnChange="true">
-        <sql>
             INSERT INTO expense(id, tenant_id, category_id, title, expense_date, created_by, created_at) VALUES
-                (1, 1, 7, 'Reparație tractorului', '2018-09-16', 3, '2018-09-16');
+                (1, 1, 7, 'Reparație tractorului', '2018-09-16', 3, '2018-09-16'),
+                (2, 1, 7, 'Schimbat roți la combină', '2018-09-26', 3, '2018-09-26');
 
             INSERT INTO expense_item(expense_id, category_id, title, total_cost) VALUES
-                (1, 7, 'Ambreiaj la cutia de viteze', 3400);
+                (1, 7, 'Ambreiaj la cutia de viteze', 3400),
+                (2, 7, 'Roată R32', 12000);
 
             INSERT INTO expense_resource(expense_id, resource_id, table_name) VALUES
                 (1, 1, 'machine'),
-                (1, 1, 'employee');
-
-            SELECT setval('expense_id_seq', (SELECT MAX(id) FROM expense));
-            SELECT setval('expense_item_id_seq', (SELECT MAX(id) FROM expense_item));
-        </sql>
-    </changeSet>
-
-    <changeSet id="insert-fuel-expense" author="maxim.nistreanu" failOnError="true" runOnChange="true">
-        <sql>
-            INSERT INTO expense(id, tenant_id, category_id, title, expense_date, created_by, created_at) VALUES
-                (2, 1, 8, 'Cheltuieli combustibil bgrigada nr.1', '2018-09-21', 3, '2018-09-16');
-
-            INSERT INTO expense_item(expense_id, category_id, title, actual_qty, unit_of_measure) VALUES
-                (2, 9, 'Motorină', 350, 'l'),
-                (2, 10, 'Ulei', 12, 'l'),
-                (2, 11, 'Solidol', 1, 'l'),
-                (2, 12, 'Negrol', 2, 'l');
-
-            INSERT INTO expense_resource(expense_id, resource_id, table_name) VALUES
-                (2, 1, 'machine'),
+                (1, 1, 'employee'),
+                (2, 2, 'machine'),
                 (2, 1, 'employee');
 
             SELECT setval('expense_id_seq', (SELECT MAX(id) FROM expense));
             SELECT setval('expense_item_id_seq', (SELECT MAX(id) FROM expense_item));
+            SELECT setval('expense_resource_id_seq', (SELECT MAX(id) FROM expense_resource));
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert-fuel-expense" author="maxim.nistreanu" failOnError="true" runOnChange="true">
+        <validCheckSum>ANY</validCheckSum>
+        <sql>
+            INSERT INTO expense(id, tenant_id, category_id, title, expense_date, created_by, created_at) VALUES
+                (3, 1, 8, 'Combustibil bgrigada tractoare', '2018-09-21', 3, '2018-09-16'),
+                (4, 1, 8, 'Combustibil bgrigada combine', '2018-09-27', 3, '2018-09-27');
+
+            INSERT INTO expense_item(expense_id, category_id, title, actual_qty, unit_of_measure) VALUES
+                (3, 9, 'Motorină', 350, 'l'),
+                (3, 10, 'Ulei', 12, 'l'),
+                (3, 11, 'Solidol', 1, 'l'),
+                (3, 12, 'Negrol', 2, 'l'),
+                (4, 9, 'Motorină', 870, 'l'),
+                (4, 10, 'Ulei', 21, 'l'),
+                (4, 11, 'Solidol', 3, 'l'),
+                (4, 12, 'Negrol', 5, 'l');
+
+            INSERT INTO expense_resource(expense_id, resource_id, table_name) VALUES
+                (3, 1, 'machine'),
+                (3, 1, 'employee'),
+                (4, 2, 'machine'),
+                (4, 1, 'employee');
+
+            SELECT setval('expense_id_seq', (SELECT MAX(id) FROM expense));
+            SELECT setval('expense_item_id_seq', (SELECT MAX(id) FROM expense_item));
+            SELECT setval('expense_resource_id_seq', (SELECT MAX(id) FROM expense_resource));
         </sql>
     </changeSet>
 
@@ -929,6 +947,8 @@
             INSERT INTO pesticide(id, pesticide_type, name_ro, description_ro, pests_ro, active_substance, toxicity_group  ) VALUES (6, 'FUNGICIDE', 'Maccani', 'Producator: BASF SE, GERMANIA', 'Rapanul marului, Fainarea marului', 'ditianon, piraclostrobin', 3);
             INSERT INTO pesticide(id, pesticide_type, name_ro, description_ro, pests_ro, active_substance, toxicity_group  ) VALUES (7, 'INSECTICIDE', 'Nuprid Oil SC', 'Producator: ALCHIMEX S.A., Romania+NUFARM GmbH &amp; Co. KG, Austria', 'Paduchele de San Jose - larve hibernante, acarianul rosu al pomilor - oua de iarna, afide, paduchele testos', 'imidacloprid', 3);
 
+            SELECT setval('pesticide_id_seq', (SELECT MAX(id) FROM pesticide)+1);
+
             UPDATE pesticide SET name_ru=name_ro, description_ru=description_ro, pests_ru=pests_ro WHERE id>0;
         </sql>
     </changeSet>
@@ -943,12 +963,7 @@
             INSERT INTO expense_category(id, default_name) VALUES (5, 'expense-category.fertilizers');
             INSERT INTO expense_category(id, default_name) VALUES (6, 'expense-category.pesticides');
 
-            SELECT nextval('expense_category_id_seq');
-            SELECT nextval('expense_category_id_seq');
-            SELECT nextval('expense_category_id_seq');
-            SELECT nextval('expense_category_id_seq');
-            SELECT nextval('expense_category_id_seq');
-            SELECT nextval('expense_category_id_seq');
+            SELECT setval('expense_category_id_seq', (SELECT MAX(id) FROM expense_category)+1);
         </sql>
     </changeSet>
 
@@ -968,16 +983,7 @@
             INSERT INTO expense_category(id, tenant_id, default_name, name) VALUES (15, 1, 'expense-category.fertilizers', 'Cheltuieli pentru îngrășăminte');
             INSERT INTO expense_category(id, tenant_id, default_name, name) VALUES (16, 1, 'expense-category.pesticides', 'Cheltuieli pentru pesticide');
 
-            SELECT nextval('expense_category_id_seq');
-            SELECT nextval('expense_category_id_seq');
-            SELECT nextval('expense_category_id_seq');
-            SELECT nextval('expense_category_id_seq');
-            SELECT nextval('expense_category_id_seq');
-            SELECT nextval('expense_category_id_seq');
-            SELECT nextval('expense_category_id_seq');
-            SELECT nextval('expense_category_id_seq');
-            SELECT nextval('expense_category_id_seq');
-            SELECT nextval('expense_category_id_seq');
+            SELECT setval('expense_category_id_seq', (SELECT MAX(id) FROM expense_category)+1);
         </sql>
     </changeSet>
 </databaseChangeLog>
