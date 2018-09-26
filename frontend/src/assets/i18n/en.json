@@ -66,23 +66,29 @@
 		"events": "Events",
 		"message": "Message"
 	},
-	"expenses": {
-		"agricultural-machinery": "Expenses for repairing agricultural machinery",
-		"agricultural-works": "Expenses for agricultural works",
-		"fertilizers": "Expenses for fertilizers",
-		"fuel": "Expenses for fuel",
-		"pesticides": "Expenses for pesticides",
-		"sowing": "Expenses for sowing",
-		"categories": "Expense categories"
-	},
 	"expense-category": {
-		"machinery": "Expenses for repairing agricultural machinery",
-		"works": "Expenses for agricultural works",
 		"fertilizers": "Expenses for fertilizers",
 		"fuel": "Expenses for fuel",
+		"machinery": "Expenses for repairing agricultural machinery",
 		"name": "Category name",
 		"parent": "Main category",
 		"pesticides": "Expenses for pesticides",
+		"sowing": "Expenses for sowing",
+		"works": "Expenses for agricultural works"
+	},
+	"expenses": {
+		"agricultural-machinery": "Expenses for repairing agricultural machinery",
+		"agricultural-works": "Expenses for agricultural works",
+		"amount": "Amount",
+		"categories": "Expense categories",
+		"cost": "Cost",
+		"date": "Date",
+		"element": "Element",
+		"expenses": "Expenses",
+		"fertilizers": "Expenses for fertilizers",
+		"fuel": "Expenses for fuel",
+		"pesticides": "Expenses for pesticides",
+		"responsible-persons": "Responsible Persons",
 		"sowing": "Expenses for sowing"
 	},
 	"fertilizer": {
@@ -132,6 +138,7 @@
 		"village-city": "Village/City"
 	},
 	"info": {
+		"created-by": "Created By",
 		"creation-time": "Creation Time",
 		"description": "Description",
 		"description-ro": "Description",
@@ -183,12 +190,13 @@
 		"chemicals-and-pests": "Chemicals & Pests",
 		"costs-forecasting": "Costs forecasting",
 		"costs-forecasting-form": "Costs forecasting FORM",
+		"crop-varieties": "Crop varieties",
 		"crops": "Crops",
 		"crops-varieties": "Crops & Varieties",
-		"crop-varieties": "Crop varieties",
 		"dashboard": "Dashboard",
 		"employees": "Employees",
 		"enterprise": "Enterprise",
+		"expense-categories": "Expense categories",
 		"expenses-management": "Expenses management",
 		"fertilizers": "Fertilizers",
 		"forecast-list": "List",
@@ -211,7 +219,6 @@
 		"tasks": "Tasks",
 		"telemetry": "Telemetry",
 		"tenants": "Tenants",
-		"expense-categories": "Expense categories",
 		"users": "Users",
 		"various-chemicals": "Various chemicals",
 		"weather": "Weather",
@@ -309,12 +316,12 @@
 	"pest": {
 		"pest": "Pest",
 		"pests": "Pests",
-		"pests-ru": "Pests",
-		"pests-ro": "Pests"
+		"pests-ro": "Pests",
+		"pests-ru": "Pests"
 	},
 	"pesticide": {
-		"comments": "Comments",
 		"active-substance": "Active substance",
+		"comments": "Comments",
 		"phase": "Phase",
 		"result": "Result",
 		"spray-date": "Spray date",

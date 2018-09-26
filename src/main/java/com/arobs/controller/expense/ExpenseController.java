@@ -1,8 +1,10 @@
-package com.arobs.controller;
+package com.arobs.controller.expense;
 
+import com.arobs.model.expense.ExpenseListModel;
 import com.arobs.model.expense.MachineryExpenseListModel;
 import com.arobs.model.expense.MachineryExpenseModel;
 import com.arobs.service.expense.MachineryExpenseService;
+import com.arobs.service.expense.ManageExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,20 +13,20 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@RequestMapping("/machinery-expense")
-public class MachineryExpenseController {
+@RequestMapping("/expense")
+public class ExpenseController {
 
     @Autowired
-    private MachineryExpenseService machineryExpenseService;
+    private ManageExpenseService manageExpenseService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<List<MachineryExpenseListModel>> getModels(HttpSession session) {
+    public ResponseEntity<List<ExpenseListModel>> getModels(HttpSession session) {
         Long tenant = (Long) session.getAttribute("tenant");
-        List<MachineryExpenseListModel> models = machineryExpenseService.find(tenant);
+        List<ExpenseListModel> models = manageExpenseService.find(tenant);
         return ResponseEntity.ok(models);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<MachineryExpenseModel> getModel(@PathVariable Long id) {
         MachineryExpenseModel expenseModel = machineryExpenseService.findOne(id);
         return ResponseEntity.ok(expenseModel);
@@ -41,5 +43,5 @@ public class MachineryExpenseController {
     public void remove(@PathVariable Long id) {
         machineryExpenseService.remove(id);
     }
-
+    */
 }

@@ -1,6 +1,6 @@
-package com.arobs.controller;
+package com.arobs.controller.expense;
 
-import com.arobs.entity.*;
+import com.arobs.entity.ExpenseCategory;
 import com.arobs.model.PayloadModel;
 import com.arobs.model.expense.ExpenseCategoryModel;
 import com.arobs.service.expense.ExpenseCategoryService;
@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/expenses")
-public class ExpensesController {
+@RequestMapping("/expense-category")
+public class ExpenseCategoryController {
 
     @Autowired
     private ExpenseCategoryService categoryService;
 
-    @RequestMapping(value = "/categories-tree", method = RequestMethod.GET)
+    @RequestMapping(value = "/tree", method = RequestMethod.GET)
     public ResponseEntity<PayloadModel> getCategoriesTree(HttpSession session) {
         Long tenantId = (Long) session.getAttribute("tenant");
 
@@ -50,17 +50,17 @@ public class ExpensesController {
     }
 
 
-    @RequestMapping(value = "category/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<ExpenseCategoryModel> getModel(@PathVariable Long id) {
-        ExpenseCategoryModel pesticideModel = categoryService.findOneModel(id);
-        return ResponseEntity.ok(pesticideModel);
+        ExpenseCategory category = categoryService.findOne(id);
+        return ResponseEntity.ok(new ExpenseCategoryModel(category));
     }
 
-    @RequestMapping(value = "category/", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<ExpenseCategory> save(@RequestBody ExpenseCategoryModel model,
-                                          HttpSession session) {
+                                                HttpSession session) {
         Long tenantId = (Long) session.getAttribute("tenant");
         return ResponseEntity.ok(categoryService.save(model, tenantId));
     }
-    
+
 }

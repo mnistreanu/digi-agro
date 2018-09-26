@@ -66,23 +66,29 @@
 		"events": "Evenimente",
 		"message": "Mesaj"
 	},
-	"expenses": {
-		"agricultural-machinery": "Cheltuieli pentru repararea mașinilor agricole",
-		"agricultural-works": "Cheltuieli pentru lucrări agricole",
-		"fertilizers": "Cheltuieli pentru îngrășăminte",
-		"fuel": "Cheltuieli pentru combustibil",
-		"pesticides": "Cheltuieli pentru pesticide",
-		"sowing": "Cheltuieli pentru însămânțare",
-		"categories": "Categorii de cheltuieli"
-	},
 	"expense-category": {
-		"machinery": "Cheltuieli pentru repararea mașinilor agricole",
-		"works": "Cheltuieli pentru lucrări agricole",
 		"fertilizers": "Cheltuieli pentru îngrășăminte",
 		"fuel": "Cheltuieli pentru combustibil",
+		"machinery": "Cheltuieli pentru repararea mașinilor agricole",
 		"name": "Denumire categorie",
 		"parent": "Categoria principală",
 		"pesticides": "Cheltuieli pentru pesticide",
+		"sowing": "Cheltuieli pentru însămânțare",
+		"works": "Cheltuieli pentru lucrări agricole"
+	},
+	"expenses": {
+		"agricultural-machinery": "Cheltuieli pentru repararea mașinilor agricole",
+		"agricultural-works": "Cheltuieli pentru lucrări agricole",
+		"amount": "Cantitate",
+		"categories": "Categorii de cheltuieli",
+		"cost": "Preț",
+		"date": "Data",
+		"element": "Element",
+		"expenses": "Cheltuieli",
+		"fertilizers": "Cheltuieli pentru îngrășăminte",
+		"fuel": "Cheltuieli pentru combustibil",
+		"pesticides": "Cheltuieli pentru pesticide",
+		"responsible-persons": "Persoane responsabile",
 		"sowing": "Cheltuieli pentru însămânțare"
 	},
 	"fertilizer": {
@@ -132,6 +138,7 @@
 		"village-city": "Sat/Oraș"
 	},
 	"info": {
+		"created-by": "Creat de",
 		"creation-time": "Timpul de creație",
 		"description": "Descriere",
 		"description-ro": "Descriere (Rom)",
@@ -183,12 +190,13 @@
 		"chemicals-and-pests": "Chimicale si dăunatori",
 		"costs-forecasting": "Prognoză costuri",
 		"costs-forecasting-form": "Prognoză costuri FORM",
+		"crop-varieties": "Soiri agricole",
 		"crops": "Culturi agricole",
 		"crops-varieties": "Culturi agricole și soiuri",
-		"crop-varieties": "Soiri agricole",
 		"dashboard": "Dashboard",
 		"employees": "Angajați",
 		"enterprise": "Întreprindere",
+		"expense-categories": "Categorii de cheltuieli",
 		"expenses-management": "Evidența cheltuielilor",
 		"fertilizers": "Îngrășăminte",
 		"forecast-list": "Lista",
@@ -211,7 +219,6 @@
 		"tasks": "Sarcini",
 		"telemetry": "Telemetrie",
 		"tenants": "Clienți",
-		"expense-categories": "Categorii de cheltuieli",
 		"users": "Utilizatori",
 		"various-chemicals": "Diverse chimicale",
 		"weather": "Date meteo",
@@ -309,12 +316,12 @@
 	"pest": {
 		"pest": "Dăunător",
 		"pests": "Dăunători",
-		"pests-ru": "Dăunători (Rus)",
-		"pests-ro": "Dăunători (Rom)"
+		"pests-ro": "Dăunători (Rom)",
+		"pests-ru": "Dăunători (Rus)"
 	},
 	"pesticide": {
-		"comments": "Comentarii",
 		"active-substance": "Substanța activă",
+		"comments": "Comentarii",
 		"phase": "Faza",
 		"result": "Rezultat",
 		"spray-date": "Data pulverizării",

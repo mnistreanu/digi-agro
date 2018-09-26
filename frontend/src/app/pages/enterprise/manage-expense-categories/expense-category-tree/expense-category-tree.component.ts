@@ -3,9 +3,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ColDef, GridOptions} from 'ag-grid';
 import {FieldMapper} from '../../../../common/field.mapper';
 import {LangService} from '../../../../services/lang.service';
-import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
+import {ExpenseCategoryService} from '../../../../services/expenses/expense-category.service';
 import {ExpenseCategoryTreeModel} from './expense-category-tree.model';
-import {ExpensesService} from '../../../../services/expenses/expenses.service';
+import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
 
 @Component({
     selector: 'app-expense-category-tree',
@@ -19,7 +19,7 @@ export class ExpenseCategoryTreeComponent implements OnInit {
 
     labelName: string;
 
-    constructor(private expensesService: ExpensesService,
+    constructor(private expenseCategoryService: ExpenseCategoryService,
                 private router: Router,
                 private route: ActivatedRoute,
                 private langService: LangService) {
@@ -82,7 +82,7 @@ export class ExpenseCategoryTreeComponent implements OnInit {
 
 
     private setupTreeData() {
-        this.expensesService.findCategoriesTree().subscribe(payloadModel => {
+        this.expenseCategoryService.getTree().subscribe(payloadModel => {
             const models = payloadModel.payload;
             console.log(models);
             this.adjustModels(models);
