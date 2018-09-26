@@ -92,7 +92,7 @@
 		"sowing": "Expenses for sowing"
 	},
 	"fertilizer": {
-		"add-edit": "Add / Edit fertilizer",
+		"add-edit": "Add / edit fertilizer",
 		"name": "Name",
 		"type": "Type"
 	},
@@ -314,6 +314,7 @@
 		"the-parcels": "the parcels"
 	},
 	"pest": {
+		"add-edit": "Add / edit pest",
 		"pest": "Pest",
 		"pests": "Pests",
 		"pests-ro": "Pests",

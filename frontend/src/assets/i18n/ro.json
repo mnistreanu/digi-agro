@@ -92,7 +92,7 @@
 		"sowing": "Cheltuieli pentru însămânțare"
 	},
 	"fertilizer": {
-		"add-edit": "Adăugați / modificați îngrășământul",
+		"add-edit": "Adăugați / redactați îngrășământul",
 		"name": "Denumire",
 		"type": "Tip"
 	},
@@ -314,6 +314,7 @@
 		"the-parcels": "parcelele"
 	},
 	"pest": {
+		"add-edit": "Adăugați / redactați dăunătorul",
 		"pest": "Dăunător",
 		"pests": "Dăunători",
 		"pests-ro": "Dăunători (Rom)",
