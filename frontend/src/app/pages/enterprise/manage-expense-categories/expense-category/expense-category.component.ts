@@ -45,7 +45,7 @@ export class ExpenseCategoryComponent implements OnInit {
     }
 
     private setupModel(id) {
-        this.expenseCategoryService.findOneCategory(id).subscribe(model => {
+        this.expenseCategoryService.findOne(id).subscribe(model => {
             this.model = model;
             this.buildForm();
         });
@@ -78,7 +78,7 @@ export class ExpenseCategoryComponent implements OnInit {
         Object.assign(this.model, form.value);
         this.submitted = false;
 
-        this.expenseCategoryService.saveCategory(this.model).subscribe((model) => {
+        this.expenseCategoryService.save(this.model).subscribe((model) => {
             this.model = model;
             this.alertService.saved();
             this.router.navigate(['../'], {relativeTo: this.route});
@@ -87,7 +87,7 @@ export class ExpenseCategoryComponent implements OnInit {
     }
 
     // public remove() {
-    //     this.expenseCategoryService.removeCategory(this.model).subscribe(() => {
+    //     this.expenseCategoryService.remove(this.model).subscribe(() => {
     //         this.alertService.removed();
     //         this.router.navigate(['../'], {relativeTo: this.route});
     //     });

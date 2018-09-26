@@ -16,6 +16,11 @@ public class ExpenseCategoryService implements HasRepository<ExpenseCategoryRepo
     @Autowired
     private ExpenseCategoryRepository expenseCategoryRepository;
 
+    @Override
+    public ExpenseCategoryRepository getRepository() {
+        return expenseCategoryRepository;
+    }
+
     public ExpenseCategory findOne(Long id) {
         return getRepository().findOne(id);
     }
@@ -26,24 +31,6 @@ public class ExpenseCategoryService implements HasRepository<ExpenseCategoryRepo
 
     public List<ExpenseCategory> find(Long tenantId) {
         return getRepository().find(tenantId);
-    }
-
-    //    public List<ListItemModel> fetchItems() {
-//        return getRepository().fetchItems();
-//    }
-
-    @Override
-    public ExpenseCategoryRepository getRepository() {
-        return expenseCategoryRepository;
-    }
-
-    public ExpenseCategory findOne(Long id) {
-        return getRepository().findOne(id);
-    }
-
-    public ExpenseCategoryModel findOneModel(Long id) {
-        ExpenseCategoryModel model = new ExpenseCategoryModel(getRepository().findOne(id));
-        return model;
     }
 
     @Transactional

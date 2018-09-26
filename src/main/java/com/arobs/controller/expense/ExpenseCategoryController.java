@@ -2,7 +2,6 @@ package com.arobs.controller.expense;
 
 import com.arobs.entity.ExpenseCategory;
 import com.arobs.model.PayloadModel;
-
 import com.arobs.model.expense.ExpenseCategoryModel;
 import com.arobs.service.expense.ExpenseCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +52,8 @@ public class ExpenseCategoryController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<ExpenseCategoryModel> getModel(@PathVariable Long id) {
-        ExpenseCategoryModel pesticideModel = categoryService.findOneModel(id);
-        return ResponseEntity.ok(pesticideModel);
+        ExpenseCategory category = categoryService.findOne(id);
+        return ResponseEntity.ok(new ExpenseCategoryModel(category));
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)

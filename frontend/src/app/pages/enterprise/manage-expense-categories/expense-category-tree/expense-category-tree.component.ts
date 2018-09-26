@@ -5,6 +5,7 @@ import {FieldMapper} from '../../../../common/field.mapper';
 import {LangService} from '../../../../services/lang.service';
 import {ExpenseCategoryService} from '../../../../services/expenses/expense-category.service';
 import {ExpenseCategoryTreeModel} from './expense-category-tree.model';
+import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
 
 @Component({
     selector: 'app-expense-category-tree',

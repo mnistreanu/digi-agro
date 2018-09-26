@@ -20,15 +20,15 @@ export class ExpenseCategoryService {
     }
 
 
-    findOneCategory(id: number): Observable<ExpenseCategoryModel> {
-        return this.http.get<ExpenseCategoryModel>(this.api + '/category/' + id);
+    findOne(id: number): Observable<ExpenseCategoryModel> {
+        return this.http.get<ExpenseCategoryModel>(this.api + '/' + id);
     }
 
-    saveCategory(model: ExpenseCategoryModel): Observable<ExpenseCategoryModel> {
-        return this.http.post<ExpenseCategoryModel>(this.api + '/category/', model);
+    save(model: ExpenseCategoryModel): Observable<ExpenseCategoryModel> {
+        return this.http.post<ExpenseCategoryModel>(this.api + '/', model);
     }
 
-    removeCategory(model: ExpenseCategoryModel): Observable<void> {
-        return this.http.delete<void>(this.api + '/category/' + model.id);
+    remove(model: ExpenseCategoryModel): Observable<void> {
+        return this.http.delete<void>(this.api + '/' + model.id);
     }
 }
