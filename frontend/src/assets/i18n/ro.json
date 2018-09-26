@@ -79,7 +79,7 @@
 	"expenses": {
 		"agricultural-machinery": "Cheltuieli pentru repararea mașinilor agricole",
 		"agricultural-works": "Cheltuieli pentru lucrări agricole",
-		"amount": "Cantitate",
+		"quantity": "Cantitate",
 		"categories": "Categorii de cheltuieli",
 		"cost": "Preț",
 		"date": "Data",

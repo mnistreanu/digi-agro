@@ -54,7 +54,7 @@ public class ManageExpenseService {
                 listModel.setExpenseId(expense.getId());
                 listModel.setExpenseDate(expense.getExpenseDate());
                 listModel.setElement(expenseItemModel.getTitle());
-                listModel.setAmount(expenseItemModel.getAmount());
+                listModel.setQuantity(expenseItemModel.getQuantity());
                 listModel.setCost(expenseItemModel.getTotalCost() != null ? expenseItemModel.getTotalCost().doubleValue() : null);
                 listModel.setEmployee(employeeStr);
                 listModel.setMachine(machinesStr);

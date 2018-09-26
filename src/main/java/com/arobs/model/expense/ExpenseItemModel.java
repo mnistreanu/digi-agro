@@ -8,7 +8,7 @@ public class ExpenseItemModel {
 
     private Long id;
     private String title;
-    private Double amount;
+    private Double quantity;
     private BigDecimal totalCost;
 
     private Long categoryId;
@@ -23,7 +23,7 @@ public class ExpenseItemModel {
     public ExpenseItemModel(ExpenseItem entity) {
         id = entity.getId();
         title = entity.getTitle();
-        amount = entity.getActualQuantity();
+        quantity = entity.getActualQuantity();
         totalCost = entity.getTotalCost();
 
         categoryId = entity.getCategory().getId();
@@ -62,12 +62,12 @@ public class ExpenseItemModel {
         this.deleted = deleted;
     }
 
-    public Double getAmount() {
-        return amount;
+    public Double getQuantity() {
+        return quantity;
     }
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
     }
 
     public Long getCategoryId() {

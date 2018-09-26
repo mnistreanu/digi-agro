@@ -103,8 +103,8 @@ export class ExpenseListComponent implements OnInit {
                 suppressFilter: true,
             },
             {
-                headerName: 'expenses.amount',
-                field: 'amount',
+                headerName: 'expenses.quantity',
+                field: 'quantity',
                 width: 100,
                 minWidth: 100,
                 suppressFilter: true,

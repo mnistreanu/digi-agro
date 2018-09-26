@@ -5,6 +5,6 @@ export class ExpenseListModel {
     machine: string;
     employee: string;
     element: string;
-    amount: number;
+    quantity: number;
     cost: number;
 }

@@ -79,7 +79,7 @@
 	"expenses": {
 		"agricultural-machinery": "Expenses for repairing agricultural machinery",
 		"agricultural-works": "Expenses for agricultural works",
-		"amount": "Amount",
+		"quantity": "Quantity",
 		"categories": "Expense categories",
 		"cost": "Cost",
 		"date": "Date",

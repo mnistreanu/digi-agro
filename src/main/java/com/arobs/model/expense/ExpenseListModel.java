@@ -9,7 +9,7 @@ public class ExpenseListModel {
     private String machine;
     private String employee;
     private String element;
-    private Double amount;
+    private Double quantity;
     private Double cost;
 
     private String category;
@@ -60,12 +60,12 @@ public class ExpenseListModel {
         this.element = element;
     }
 
-    public Double getAmount() {
-        return amount;
+    public Double getQuantity() {
+        return quantity;
     }
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
     }
 
     public Double getCost() {
