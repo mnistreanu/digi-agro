@@ -2,7 +2,6 @@ package com.arobs.controller;
 
 import com.arobs.entity.Pesticide;
 import com.arobs.model.chemicals.PesticideModel;
-import com.arobs.model.expense.MachineryExpenseModel;
 import com.arobs.service.chemicals.PesticideService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

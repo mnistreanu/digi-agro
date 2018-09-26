@@ -10,13 +10,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ExpenseCategoryRepository extends JpaRepository<ExpenseCategory, Integer> {
+public interface ExpenseCategoryRepository extends JpaRepository<ExpenseCategory, Long> {
 
     @Query("SELECT ec FROM ExpenseCategory ec WHERE ec.tenantId IS NULL")
     List<ExpenseCategory> findDefault();
-
-//    @Query("SELECT ec FROM ExpenseCategory ec WHERE ec.tenantId IS NULL")
-//    void copyDefault(Long tenantId);
 
     @Query("SELECT ec FROM ExpenseCategory ec WHERE ec.tenantId = :tenantId")
     List<ExpenseCategory> find(@Param("tenantId") Long tenantId);

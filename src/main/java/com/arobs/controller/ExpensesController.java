@@ -1,22 +1,12 @@
 package com.arobs.controller;
 
-import com.arobs.entity.AgroWork;
-import com.arobs.entity.AgroWorkType;
-import com.arobs.entity.Crop;
-import com.arobs.entity.ExpenseCategory;
-import com.arobs.enums.UnitOfMeasure;
+import com.arobs.entity.*;
 import com.arobs.model.PayloadModel;
-import com.arobs.model.agrowork.OtherWorksModel;
 import com.arobs.model.expense.ExpenseCategoryModel;
-import com.arobs.service.agrowork.AgroWorkService;
-import com.arobs.service.agrowork.AgroWorkTypeService;
-import com.arobs.service.crop.CropService;
 import com.arobs.service.expense.ExpenseCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -58,4 +48,19 @@ public class ExpensesController {
         payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
         return ResponseEntity.ok(payloadModel);
     }
+
+
+    @RequestMapping(value = "category/{id}", method = RequestMethod.GET)
+    public ResponseEntity<ExpenseCategoryModel> getModel(@PathVariable Long id) {
+        ExpenseCategoryModel pesticideModel = categoryService.findOneModel(id);
+        return ResponseEntity.ok(pesticideModel);
+    }
+
+    @RequestMapping(value = "category/", method = RequestMethod.POST)
+    public ResponseEntity<ExpenseCategory> save(@RequestBody ExpenseCategoryModel model,
+                                          HttpSession session) {
+        Long tenantId = (Long) session.getAttribute("tenant");
+        return ResponseEntity.ok(categoryService.save(model, tenantId));
+    }
+    
 }
