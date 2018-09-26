@@ -27,17 +27,7 @@ export class PesticidesExpensesComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.setupLabels();
         this.setupGrid();
-    }
-
-    private setupLabels() {
-        this.langService.get('pesticides.spray-date').subscribe(msg => this.labelDate = msg);
-        this.langService.get('pesticides.name').subscribe(msg => this.labelName = msg);
-        this.langService.get('pesticides.type').subscribe(msg => this.labelType = msg);
-        this.langService.get('pesticides.phase').subscribe(msg => this.labelPhase = msg);
-        this.langService.get('pesticides.result').subscribe(msg => this.labelResult = msg);
-        this.langService.get('pesticides.comments').subscribe(msg => this.labelComments = msg);
     }
 
 
@@ -60,48 +50,49 @@ export class PesticidesExpensesComponent implements OnInit {
 
         const headers: ColDef[] = [
             {
-                headerName: this.labelDate,
+                headerName: 'pesticide.spray-date',
+                headerTooltip: 'pesticide.spray-date',
                 field: 'date',
-                width: 90,
-                minWidth: 90,
+                width: 130,
+                minWidth: 130,
                 suppressFilter: true,
                 pinnedRowCellRenderer: 'customPinnedRowRenderer',
                 pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } }
             },
             {
-                headerName: this.labelName,
+                headerName: 'info.name',
                 field: 'name',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: this.labelType,
+                headerName: 'pesticide.type',
                 field: 'type',
-                width: 60,
-                minWidth: 60,
+                width: 200,
+                minWidth: 200,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelPhase,
+                headerName: 'pesticide.phase',
                 field: 'phase',
                 width: 140,
                 minWidth: 140,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelResult,
-//                headerTooltip: this.labelUnitOfMeasureLong,
+                headerName: 'pesticide.result',
+                headerTooltip: 'pesticide.result',
                 field: 'result',
-                width: 60,
-                minWidth: 60,
+                width: 200,
+                minWidth: 200,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelComments,
-//                headerTooltip: this.labelUnitOfMeasureLong,
+                headerName: 'pesticide.comments',
+                headerTooltip: 'pesticide.comments',
                 field: 'comments',
-                width: 60,
-                minWidth: 60,
+                width: 300,
+                minWidth: 300,
                 suppressFilter: true,
             },
             {
@@ -118,7 +109,15 @@ export class PesticidesExpensesComponent implements OnInit {
             },
 
         ];
+        headers.forEach(header => {
+            if (header.headerName) {
+                this.langService.get(header.headerName).subscribe(m => header.headerName = m);
+            }
 
+            if (header.headerTooltip) {
+                this.langService.get(header.headerTooltip).subscribe(m => header.headerTooltip = m);
+            }
+        });
 
         return headers;
     }
@@ -130,11 +129,12 @@ export class PesticidesExpensesComponent implements OnInit {
             const rows = modelsArray.map(data => {
                 const model = new PesticidesExpensesModel();
                 model.date = new Date().toLocaleDateString();
-                model.type = modelsArray[i].type;
-                model.name = modelsArray[i].model;
-                model.phase = modelsArray[i].identifier;
+                model.type = 'Insecticid';
+                model.name = 'FASTAC 10 EC';
+                model.phase = 'Floarea 3 patrimi';
                 model.result = 'Pozitiv';
-                model.comments = 'Managerul ( brigadiri, agronomul) efectueaza evidenta in jurnalul personal zilnic + complecteaza un blanc pentru raport; (de obicei complecteaza contabilitatea)';
+                model.comments = 'Managerul ( brigadiri, agronomul) efectueaza evidenta in jurnalul ' +
+                    'personal zilnic + complecteaza un blanc pentru raport; (de obicei complecteaza contabilitatea)';
                 i++;
                 return model;
             });
