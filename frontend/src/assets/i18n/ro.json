@@ -89,10 +89,13 @@
 		"fuel": "Cheltuieli pentru combustibil",
 		"pesticides": "Cheltuieli pentru pesticide",
 		"responsible-persons": "Persoane responsabile",
-		"sowing": "Cheltuieli pentru însămânțare"
+		"sowing": "Cheltuieli pentru însămânțare",
+		"total-cost": "Cost total",
+		"total-spent": "Total cheltuit",
+		"unit-cost": "Preț unitar"
 	},
 	"fertilizer": {
-		"add-edit": "Adăugați / modificați îngrășământul",
+		"add-edit": "Adăugați / redactați îngrășământul",
 		"name": "Denumire",
 		"type": "Tip"
 	},
@@ -314,6 +317,7 @@
 		"the-parcels": "parcelele"
 	},
 	"pest": {
+		"add-edit": "Adăugați / redactați dăunătorul",
 		"pest": "Dăunător",
 		"pests": "Dăunători",
 		"pests-ro": "Dăunători (Rom)",
@@ -387,6 +391,7 @@
 		"l": "Litru",
 		"mdl": "Lei",
 		"q": "Chintal",
+		"quantity": "Cantitatea",
 		"ron": "Lei",
 		"t": "Tonă",
 		"unit-long": "Unitatea de măsură",

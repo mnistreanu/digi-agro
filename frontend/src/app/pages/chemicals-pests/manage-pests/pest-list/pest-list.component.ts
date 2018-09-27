@@ -55,15 +55,15 @@ export class PestListComponent implements OnInit {
                 }
             },
             {
-                headerName: 'name RO',
+                headerName: 'info.name-ro',
                 field: 'nameRo',
-                width: 300,
+                width: 400,
                 minWidth: 200
             },
             {
-                headerName: 'name RU',
+                headerName: 'info.name-ru',
                 field: 'nameRu',
-                width: 300,
+                width: 400,
                 minWidth: 200
             }
         ];
