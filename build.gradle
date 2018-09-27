@@ -1,28 +1,19 @@
 buildscript {
-	ext {
-		springBootVersion = '1.5.8.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath ("net.saliman:gradle-cobertura-plugin:2.5.4")
-	}
+    ext {
+        springBootVersion = '1.5.8.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath ("net.saliman:gradle-cobertura-plugin:2.5.4")
+    }
 }
 
 plugins {
   id "net.saliman.cobertura" version "2.5.4"
-  id 'java'
-}
-
-
-jar {
-    manifest {
-        attributes(
-                'Main-Class': 'com.arobs.Application'
-        )
-    }
+  id 'war'
 }
 
 apply plugin: 'java'
@@ -32,7 +23,11 @@ apply plugin: 'io.spring.dependency-management'
 
 apply plugin: net.saliman.gradle.plugin.cobertura.CoberturaPlugin
 
-//apply plugin: 'war'
+apply plugin: 'war'
+war {
+    baseName = 'digi-agro'
+    version =  '0.1'
+}
 
 def jobpath = new File(buildDir.toString() + "/reports/cobertura")
 mkdir jobpath
@@ -56,14 +51,14 @@ bootRun {
     main = 'com.arobs.Application'
 }
 repositories {
-	mavenCentral()
-	maven {
+    mavenCentral()
+    maven {
       url "https://plugins.gradle.org/m2/"
     }
 }
 
 test {
-	ignoreFailures = true
+    ignoreFailures = true
 }
 
 configurations {
@@ -71,24 +66,23 @@ configurations {
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
 //    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.liquibase:liquibase-core')
-	compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.liquibase:liquibase-core')
+    compile('org.springframework.boot:spring-boot-starter-web')
 
-	compile('org.springframework.boot:spring-boot-starter-security')
-	compile('io.jsonwebtoken:jjwt:0.7.0')
+    compile('org.springframework.boot:spring-boot-starter-security')
+    compile('io.jsonwebtoken:jjwt:0.7.0')
 
-	compile('com.google.code.gson:gson:2.8.2')
-	compile 'org.json:json:20171018'
+    compile('com.google.code.gson:gson:2.8.2')
+    compile 'org.json:json:20171018'
 
     compile('org.jdto:jdto:1.4')
     compile('commons-lang:commons-lang:2.6')
 
-	runtime('org.postgresql:postgresql')
+    runtime('org.postgresql:postgresql')
 
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile ("net.saliman:gradle-cobertura-plugin:2.5.4")
 }

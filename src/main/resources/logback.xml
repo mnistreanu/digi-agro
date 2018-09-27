@@ -6,7 +6,7 @@
 	
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-			<pattern>%d{HH:mm:ss.SSS} %-5level %logger{5} - %msg%n</pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{5} - %msg%n</pattern>
 		</encoder>
 	</appender>
 	
@@ -22,15 +22,15 @@
 		</rollingPolicy>
 		
 		<encoder>
-			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
 		</encoder>
 	</appender>	
 
 	<logger name="com.arobs" level="debug"/>
-<!-- 	<logger name="org.hibernate.SQL" level="debug"/> -->
-<!-- 	<logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="trace"/> -->
-    <logger name="org.hibernate.SQL" level="error"/>
-    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="error"/>
+	<logger name="org.hibernate.SQL" level="debug"/>
+	<logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="trace"/>
+<!--     <logger name="org.hibernate.SQL" level="error"/> -->
+<!--     <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="error"/> -->
 
 	<root level="info" >
 		<appender-ref ref="STDOUT" />	
