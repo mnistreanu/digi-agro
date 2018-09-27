@@ -1,10 +1,14 @@
 export class ExpenseListModel {
     expenseId: number;
     expenseDate: string;
-    category: string;
     machine: string;
     employee: string;
     element: string;
     quantity: number;
     cost: number;
+
+    parentCategoryId: number;
+    parentCategory: string;
+    categoryId: number;
+    category: string;
 }

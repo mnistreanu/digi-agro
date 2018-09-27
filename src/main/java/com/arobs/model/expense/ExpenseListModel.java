@@ -12,7 +12,10 @@ public class ExpenseListModel {
     private Double quantity;
     private Double cost;
 
+    private Long parentCategoryId;
+    private String parentCategory;
     private String category;
+    private Long categoryId;
 
     private String createdBy;
     private Date createdAt;
@@ -98,5 +101,29 @@ public class ExpenseListModel {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public Long getParentCategoryId() {
+        return parentCategoryId;
+    }
+
+    public void setParentCategoryId(Long parentCategoryId) {
+        this.parentCategoryId = parentCategoryId;
+    }
+
+    public String getParentCategory() {
+        return parentCategory;
+    }
+
+    public void setParentCategory(String parentCategory) {
+        this.parentCategory = parentCategory;
     }
 }

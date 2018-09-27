@@ -7,6 +7,7 @@ import {DateUtil} from '../../../common/dateUtil';
 import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {Authorities} from '../../../common/authorities';
 import {ExpenseService} from '../../../services/expenses/expense.service';
+import {ExpenseListModel} from './expense-list.model';
 @Component({
     selector: 'app-expense-list',
     templateUrl: './expense-list.component.html',
@@ -88,34 +89,34 @@ export class ExpenseListComponent implements OnInit {
                 minWidth: 100,
                 suppressFilter: true,
             },
-            {
-                headerName: 'expense-category.name',
-                field: 'category',
-                width: 200,
-                minWidth: 200,
-                suppressFilter: true,
-            },
-            {
-                headerName: 'expenses.element',
-                field: 'element',
-                width: 200,
-                minWidth: 200,
-                suppressFilter: true,
-            },
-            {
-                headerName: 'expenses.quantity',
-                field: 'quantity',
-                width: 100,
-                minWidth: 100,
-                suppressFilter: true,
-            },
-            {
-                headerName: 'expenses.cost',
-                field: 'cost',
-                width: 100,
-                minWidth: 100,
-                suppressFilter: true,
-            },
+            // {
+            //     headerName: 'expense-category.name',
+            //     field: 'category',
+            //     width: 200,
+            //     minWidth: 200,
+            //     suppressFilter: true,
+            // },
+            // {
+            //     headerName: 'expenses.element',
+            //     field: 'element',
+            //     width: 200,
+            //     minWidth: 200,
+            //     suppressFilter: true,
+            // },
+            // {
+            //     headerName: 'expenses.quantity',
+            //     field: 'quantity',
+            //     width: 100,
+            //     minWidth: 100,
+            //     suppressFilter: true,
+            // },
+            // {
+            //     headerName: 'expenses.cost',
+            //     field: 'cost',
+            //     width: 100,
+            //     minWidth: 100,
+            //     suppressFilter: true,
+            // },
             {
                 headerName: 'info.created-by',
                 field: 'createdBy',
@@ -143,8 +144,142 @@ export class ExpenseListComponent implements OnInit {
 
     public setupRows() {
         this.expenseService.find().subscribe(models => {
+            models = this.adjustModels(models);
             this.options.api.setRowData(models);
         });
+    }
+
+    private adjustModels(models) {
+        const resultModels = [];
+        const modelMap = {};
+        const columnMap = {};
+        const columns = [];
+        const expenseGroups = this.groupByExpense(models);
+        Object.keys(expenseGroups).forEach((expenseId) => {
+            let group = expenseGroups[expenseId];
+            group = this.aggregateSimilarCategories(group);
+            group.forEach(groupModel => {
+                this.transformCategoryModel(groupModel, resultModels, columns, modelMap, columnMap);
+            });
+        });
+
+        this.registerCategoryColumns(columns);
+
+        return resultModels;
+    }
+
+    private groupByExpense(models: ExpenseListModel[]) {
+        const expenseGroups = {};
+
+        models.forEach(model => {
+            let group = expenseGroups[model.expenseId];
+            if (!group) {
+                group = [];
+                expenseGroups[model.expenseId] = group;
+            }
+            group.push(model);
+        });
+
+        return expenseGroups;
+    }
+
+    private aggregateSimilarCategories(models: ExpenseListModel[]) {
+        const categoryModels = {};
+        const resultModels = [];
+
+        models.forEach(model => {
+            const categoryModel = categoryModels[model.categoryId];
+            if (categoryModel) {
+                const fields = ['quantity', 'cost'];
+                fields.forEach(field => {
+                   categoryModel[field] = categoryModel[field] || 0;
+                   categoryModel[field] += model[field] || 0;
+                });
+            }
+            else {
+                categoryModels[model.categoryId] = model;
+                resultModels.push(model);
+            }
+        });
+
+        return resultModels;
+    }
+
+    private transformCategoryModel(model, models, columns, modelMap, columnMap) {
+        const parentCategoryId = 'p-' + (model.parentCategoryId == null ? model.categoryId : model.parentCategoryId);
+        const childCategoryId = parentCategoryId + '-c-' + model.categoryId;
+
+        if (!modelMap[parentCategoryId]) {
+            modelMap[parentCategoryId] = model;
+            models.push(model);
+        }
+
+        const aggregatedModel = modelMap[parentCategoryId];
+
+        const quantityField = 'quantity_' + model.categoryId;
+        const costField = 'cost_' + model.categoryId;
+
+        aggregatedModel[quantityField] = model.quantity;
+        aggregatedModel[costField] = model.cost;
+
+
+        let parentColumn = columnMap[parentCategoryId];
+
+        if (!parentColumn) {
+            parentColumn = {
+                headerName: model.parentCategory,  // todo: replace with parentCategory
+                width: 180,
+                minWidth: 180,
+                children: []
+            };
+            columnMap[parentCategoryId] = parentColumn;
+            columns.push(parentColumn);
+        }
+
+        let childColumn = columnMap[childCategoryId];
+        if (!childColumn) {
+
+            const quantityTitle = this.langService.instant('expenses.quantity');
+            const costTitle = this.langService.instant('expenses.cost');
+
+            childColumn = {
+                headerName: model.category,
+                width: 180,
+                minWidth: 180,
+                columnGroupShow: parentColumn.children.length == 0 ? 'close' : 'open',
+                children: [
+                    {
+                        headerName: quantityTitle,
+                        field: quantityField,
+                        width: 180,
+                        minWidth: 180,
+                        columnGroupShow: 'close'
+                    },
+                    {
+                        headerName: costTitle,
+                        field: costField,
+                        width: 180,
+                        minWidth: 180,
+                        columnGroupShow: 'open'
+                    }
+                ]
+            };
+            columnMap[childCategoryId] = childColumn;
+            parentColumn.children = parentColumn.children.concat(childColumn);
+        }
+    }
+
+    private registerCategoryColumns(columns) {
+        let gridColumns = this.options.columnDefs;
+        let index = 0;
+        for (const column of gridColumns) {
+            if (column['field'] == 'createdBy') {
+                break;
+            }
+            index++;
+        }
+        gridColumns = gridColumns.slice(0, index).concat(columns).concat(gridColumns.slice(index));
+        this.options.api.setColumnDefs(gridColumns);
     }
 
     public onGridReady() {

@@ -11,6 +11,8 @@ public class ExpenseItemModel {
     private Double quantity;
     private BigDecimal totalCost;
 
+    private Long parentCategoryId;
+    private String parentCategory;
     private Long categoryId;
     private String category;
 
@@ -26,6 +28,7 @@ public class ExpenseItemModel {
         quantity = entity.getActualQuantity();
         totalCost = entity.getTotalCost();
 
+        parentCategoryId = entity.getCategory().getParentId();
         categoryId = entity.getCategory().getId();
         category = entity.getCategory().getName();
     }
@@ -84,5 +87,13 @@ public class ExpenseItemModel {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public Long getParentCategoryId() {
+        return parentCategoryId;
+    }
+
+    public void setParentCategoryId(Long parentCategoryId) {
+        this.parentCategoryId = parentCategoryId;
     }
 }
