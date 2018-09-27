@@ -89,7 +89,10 @@
 		"fuel": "Cheltuieli pentru combustibil",
 		"pesticides": "Cheltuieli pentru pesticide",
 		"responsible-persons": "Persoane responsabile",
-		"sowing": "Cheltuieli pentru însămânțare"
+		"sowing": "Cheltuieli pentru însămânțare",
+		"total-cost": "Cost total",
+		"total-spent": "Total cheltuit",
+		"unit-cost": "Preț unitar"
 	},
 	"fertilizer": {
 		"add-edit": "Adăugați / redactați îngrășământul",
@@ -388,6 +391,7 @@
 		"l": "Litru",
 		"mdl": "Lei",
 		"q": "Chintal",
+		"quantity": "Cantitatea",
 		"ron": "Lei",
 		"t": "Tonă",
 		"unit-long": "Unitatea de măsură",

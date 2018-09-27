@@ -75,7 +75,28 @@ export class ExpenseItemTableComponent implements OnInit {
                 editable: params => !params.data.readOnly
             },
             {
-                headerName: 'Cost',
+                headerName: 'unit-of-measure.quantity',
+                field: 'quantity',
+                width: 150,
+                minWidth: 150,
+                editable: params => !params.data.readOnly,
+            },
+            {
+                headerName: 'unit-of-measure.unit-long',
+                field: 'unitOfMeasure',
+                width: 175,
+                minWidth: 175,
+                editable: params => !params.data.readOnly
+            },
+            {
+                headerName: 'expenses.unit-cost',
+                field: 'unitCost',
+                width: 150,
+                minWidth: 150,
+                editable: params => !params.data.readOnly,
+            },
+            {
+                headerName: 'expenses.total-cost',
                 field: 'totalCost',
                 width: 175,
                 minWidth: 175,
@@ -109,7 +130,7 @@ export class ExpenseItemTableComponent implements OnInit {
     private setupSummaryRow(models) {
         const summaryRow = new ExpenseItemModel();
         summaryRow.readOnly = true;
-        summaryRow.title = 'TOTAL';
+        this.langService.get('expenses.total-spent').subscribe(m => summaryRow.title = m);
         summaryRow.totalCost = 0;
         models.forEach(model => this.aggregate(summaryRow, model, true));
         this.options.pinnedBottomRowData = [summaryRow];

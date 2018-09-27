@@ -89,7 +89,10 @@
 		"fuel": "Expenses for fuel",
 		"pesticides": "Expenses for pesticides",
 		"responsible-persons": "Responsible Persons",
-		"sowing": "Expenses for sowing"
+		"sowing": "Expenses for sowing",
+		"total-cost": "Total cost",
+		"total-spent": "Total spent",
+		"unit-cost": "Unit cost"
 	},
 	"fertilizer": {
 		"add-edit": "Add / edit fertilizer",
@@ -388,6 +391,7 @@
 		"l": "Litre",
 		"mdl": "Lei",
 		"q": "Quintal",
+		"quantity": "Quantity",
 		"ron": "Lei",
 		"t": "Ton",
 		"unit-long": "Unit of measure",
