@@ -8,11 +8,11 @@ import {PinnedRowRendererComponent} from '../../../../modules/aggrid/pinned-row-
 import {ModalService} from '../../../../services/modal.service';
 
 @Component({
-    selector: 'app-expense-item-table',
-    templateUrl: './expense-item-table.component.html',
-    styleUrls: ['./expense-item-table.component.scss']
+    selector: 'app-fuel-expense-item-table',
+    templateUrl: './fuel-expense-item-table.component.html',
+    styleUrls: ['./fuel-expense-item-table.component.scss']
 })
-export class ExpenseItemTableComponent implements OnInit {
+export class FuelExpenseItemTableComponent implements OnInit {
 
     @Input() models: ExpenseItemModel[];
 
