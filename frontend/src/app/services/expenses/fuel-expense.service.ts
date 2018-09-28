@@ -3,7 +3,7 @@ import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import {FuelExpenseModel} from '../../pages/expenses/fuel-expenses/form/fuel-expense.model';
-import {ExpenseItemModel} from '../../pages/expenses/fuel-expenses/expense-item-table/expense-item.model';
+import {FuelExpenseItemModel} from '../../pages/expenses/fuel-expenses/expense-item-table/fuel-expense-item.model';
 import {FuelExpensesListModel} from '../../pages/expenses/fuel-expenses/list/fuel-expenses-list.model';
 
 @Injectable({

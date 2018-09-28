@@ -2,10 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {LangService} from '../../../../services/lang.service';
 import {ColDef, GridOptions} from 'ag-grid';
 import {DeleteRendererComponent} from '../../../../modules/aggrid/delete-renderer/delete-renderer.component';
-import {ExpenseItemModel} from './expense-item.model';
 import {NumericUtil} from '../../../../common/numericUtil';
 import {PinnedRowRendererComponent} from '../../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
 import {ModalService} from '../../../../services/modal.service';
+import {FuelExpenseItemModel} from './fuel-expense-item.model';
 
 @Component({
     selector: 'app-fuel-expense-item-table',
@@ -14,14 +14,14 @@ import {ModalService} from '../../../../services/modal.service';
 })
 export class FuelExpenseItemTableComponent implements OnInit {
 
-    @Input() models: ExpenseItemModel[];
+    @Input() models: FuelExpenseItemModel[];
 
     confirmationModalId = 'expense-item-remove-confirmation-modal';
 
     options: GridOptions;
     context;
 
-    currentModel: ExpenseItemModel;
+    currentModel: FuelExpenseItemModel;
 
     constructor(private langService: LangService,
                 private modalService: ModalService) {
@@ -107,7 +107,7 @@ export class FuelExpenseItemTableComponent implements OnInit {
     }
 
     private setupSummaryRow(models) {
-        const summaryRow = new ExpenseItemModel();
+        const summaryRow = new FuelExpenseItemModel();
         summaryRow.readOnly = true;
         summaryRow.title = 'TOTAL';
         summaryRow.totalCost = 0;
@@ -115,7 +115,7 @@ export class FuelExpenseItemTableComponent implements OnInit {
         this.options.pinnedBottomRowData = [summaryRow];
     }
 
-    private aggregate(source: ExpenseItemModel, item: ExpenseItemModel, applyAddition) {
+    private aggregate(source: FuelExpenseItemModel, item: FuelExpenseItemModel, applyAddition) {
         const sumFields = ['totalCost'];
         sumFields.forEach(field => {
             source[field] = source[field] || 0;
@@ -158,7 +158,7 @@ export class FuelExpenseItemTableComponent implements OnInit {
     }
 
     public add() {
-        const model = new ExpenseItemModel();
+        const model = new FuelExpenseItemModel();
         this.models.push(model);
         this.options.api.updateRowData({
             add: [model]

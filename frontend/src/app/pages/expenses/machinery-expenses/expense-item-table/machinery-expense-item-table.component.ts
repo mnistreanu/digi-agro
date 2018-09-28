@@ -2,26 +2,26 @@ import {Component, Input, OnInit} from '@angular/core';
 import {LangService} from '../../../../services/lang.service';
 import {ColDef, GridOptions} from 'ag-grid';
 import {DeleteRendererComponent} from '../../../../modules/aggrid/delete-renderer/delete-renderer.component';
-import {ExpenseItemModel} from './expense-item.model';
+import {MachineryExpenseItemModel} from './machinery-expense-item.model';
 import {NumericUtil} from '../../../../common/numericUtil';
 import {PinnedRowRendererComponent} from '../../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
 import {ModalService} from '../../../../services/modal.service';
 
 @Component({
     selector: 'app-expense-item-table',
-    templateUrl: './expense-item-table.component.html',
-    styleUrls: ['./expense-item-table.component.scss']
+    templateUrl: './machinery-expense-item-table.component.html',
+    styleUrls: ['./machinery-expense-item-table.component.scss']
 })
-export class ExpenseItemTableComponent implements OnInit {
+export class MachineryExpenseItemTableComponent implements OnInit {
 
-    @Input() models: ExpenseItemModel[];
+    @Input() models: MachineryExpenseItemModel[];
 
     confirmationModalId = 'expense-item-remove-confirmation-modal';
 
     options: GridOptions;
     context;
 
-    currentModel: ExpenseItemModel;
+    currentModel: MachineryExpenseItemModel;
 
     constructor(private langService: LangService,
                 private modalService: ModalService) {
@@ -129,7 +129,7 @@ export class ExpenseItemTableComponent implements OnInit {
     }
 
     private setupSummaryRow(models) {
-        const summaryRow = new ExpenseItemModel();
+        const summaryRow = new MachineryExpenseItemModel();
         summaryRow.readOnly = true;
         this.langService.get('expenses.total-spent').subscribe(m => summaryRow.title = m);
         summaryRow.totalCost = 0;
@@ -137,7 +137,7 @@ export class ExpenseItemTableComponent implements OnInit {
         this.options.pinnedBottomRowData = [summaryRow];
     }
 
-    private aggregate(source: ExpenseItemModel, item: ExpenseItemModel, applyAddition) {
+    private aggregate(source: MachineryExpenseItemModel, item: MachineryExpenseItemModel, applyAddition) {
         const sumFields = ['totalCost'];
         sumFields.forEach(field => {
             source[field] = source[field] || 0;
@@ -180,7 +180,7 @@ export class ExpenseItemTableComponent implements OnInit {
     }
 
     public add() {
-        const model = new ExpenseItemModel();
+        const model = new MachineryExpenseItemModel();
         this.models.push(model);
         this.options.api.updateRowData({
             add: [model]

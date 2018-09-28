@@ -18,7 +18,7 @@ import {ImageRendererModule} from '../../modules/aggrid/image-renderer/image-ren
 import {PinnedRowRendererModule} from '../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.module';
 import {PinnedRowRendererComponent} from '../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
 import {MachineryExpensesFormComponent} from './machinery-expenses/form/machinery-expenses-form.component';
-import {ExpenseItemTableComponent} from './machinery-expenses/expense-item-table/expense-item-table.component';
+import {MachineryExpenseItemTableComponent} from './machinery-expenses/expense-item-table/machinery-expense-item-table.component';
 import {DeleteRendererComponent} from '../../modules/aggrid/delete-renderer/delete-renderer.component';
 import {DeleteRendererModule} from '../../modules/aggrid/delete-renderer/delete-renderer.module';
 import {ConfirmationModalModule} from '../../modules/confirmation-modal/confirmation-modal.module';
@@ -74,7 +74,7 @@ export const routes = [
         PesticidesExpensesComponent,
         FertilizersExpensesComponent,
         MachineryExpensesFormComponent,
-        ExpenseItemTableComponent,
+        MachineryExpenseItemTableComponent,
         FuelExpenseItemTableComponent,
         ExpenseListComponent
     ]

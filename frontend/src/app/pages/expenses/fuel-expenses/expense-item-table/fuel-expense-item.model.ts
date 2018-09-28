@@ -1,4 +1,4 @@
-export class ExpenseItemModel {
+export class FuelExpenseItemModel {
     id: number;
     title: string;
     totalCost: number;

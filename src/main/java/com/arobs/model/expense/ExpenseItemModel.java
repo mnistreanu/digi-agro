@@ -27,10 +27,11 @@ public class ExpenseItemModel {
         title = entity.getTitle();
         quantity = entity.getActualQuantity();
         totalCost = entity.getTotalCost();
-
-        parentCategoryId = entity.getCategory().getParentId();
-        categoryId = entity.getCategory().getId();
-        category = entity.getCategory().getName();
+        if (entity.getCategory() != null) {
+            parentCategoryId = entity.getCategory().getParentId();
+            categoryId = entity.getCategory().getId();
+            category = entity.getCategory().getName();
+        }
     }
 
     public Long getId() {

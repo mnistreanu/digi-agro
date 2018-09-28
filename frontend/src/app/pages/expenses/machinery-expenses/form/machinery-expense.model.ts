@@ -1,4 +1,4 @@
-import {ExpenseItemModel} from '../expense-item-table/expense-item.model';
+import {MachineryExpenseItemModel} from '../expense-item-table/machinery-expense-item.model';
 
 export class MachineryExpenseModel {
     id: number;
@@ -10,6 +10,6 @@ export class MachineryExpenseModel {
     machines: number[];
     employees: number[];
 
-    expenseItems: ExpenseItemModel[] = [];
+    expenseItems: MachineryExpenseItemModel[] = [];
 }
 

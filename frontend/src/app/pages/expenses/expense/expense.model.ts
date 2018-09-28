@@ -1,5 +1,5 @@
 
-import {ExpenseItemModel} from '../machinery-expenses/expense-item-table/expense-item.model';
+import {MachineryExpenseItemModel} from '../machinery-expenses/expense-item-table/machinery-expense-item.model';
 export class ExpenseModel {
     id: number;
     title: string;
@@ -8,6 +8,6 @@ export class ExpenseModel {
     machines: number[];
     employees: number[];
 
-    expenseItems: ExpenseItemModel[] = [];
+    expenseItems: MachineryExpenseItemModel[] = [];
 }
 

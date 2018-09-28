@@ -1,4 +1,4 @@
-export class ExpenseItemModel {
+export class MachineryExpenseItemModel {
     id: number;
     title: string;
     // quantity: number;
