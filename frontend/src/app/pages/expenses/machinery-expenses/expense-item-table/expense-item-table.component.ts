@@ -192,7 +192,7 @@ export class ExpenseItemTableComponent implements OnInit {
         this.currentModel = node.data;
     }
 
-    private remove() {
+    public remove() {
         this.currentModel.deleted = true;
         this.options.api.updateRowData({remove: [this.currentModel]});
         const summaryRow = this.getSummaryRow();
