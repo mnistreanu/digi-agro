@@ -68,38 +68,39 @@ export class ExpenseItemTableComponent implements OnInit {
                 }
             },
             {
-                headerName: 'Title',
+                headerName: 'expenses.details',
                 field: 'title',
-                width: 175,
-                minWidth: 175,
+                width: 300,
+                minWidth: 300,
                 editable: params => !params.data.readOnly
             },
+            // {
+            //     headerName: 'unit-of-measure.quantity',
+            //     field: 'quantity',
+            //     width: 80,
+            //     minWidth: 80,
+            //     editable: params => !params.data.readOnly,
+            // },
+            // {
+            //     headerName: 'unit-of-measure.unit-long',
+            //     headerTooltip: 'unit-of-measure.unit-long',
+            //     field: 'unitOfMeasure',
+            //     width: 125,
+            //     minWidth: 125,
+            //     editable: params => !params.data.readOnly
+            // },
+            // {
+            //     headerName: 'expenses.unit-cost',
+            //     field: 'unitCost',
+            //     width: 80,
+            //     minWidth: 80,
+            //     editable: params => !params.data.readOnly,
+            // },
             {
-                headerName: 'unit-of-measure.quantity',
-                field: 'quantity',
-                width: 150,
-                minWidth: 150,
-                editable: params => !params.data.readOnly,
-            },
-            {
-                headerName: 'unit-of-measure.unit-long',
-                field: 'unitOfMeasure',
-                width: 175,
-                minWidth: 175,
-                editable: params => !params.data.readOnly
-            },
-            {
-                headerName: 'expenses.unit-cost',
-                field: 'unitCost',
-                width: 150,
-                minWidth: 150,
-                editable: params => !params.data.readOnly,
-            },
-            {
-                headerName: 'expenses.total-cost',
+                headerName: 'expenses.cost',
                 field: 'totalCost',
-                width: 175,
-                minWidth: 175,
+                width: 120,
+                minWidth: 120,
                 editable: params => !params.data.readOnly,
                 valueSetter: (params) => this.costValueSetter(params),
                 onCellValueChanged: (params) => this.onCostChange(params)

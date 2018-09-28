@@ -7,6 +7,9 @@ import {MachineryExpenseService} from '../../../../services/expenses/machinery-e
 import {ModalService} from '../../../../services/modal.service';
 import {AlertService} from '../../../../services/alert.service';
 import {LangService} from '../../../../services/lang.service';
+import {ExpenseCategoryModel} from '../../../enterprise/manage-expense-categories/expense-category/expense-category.model';
+import {ExpenseCategoryService} from '../../../../services/expenses/expense-category.service';
+import {ExpenseCategoryTreeModel} from '../../../enterprise/manage-expense-categories/expense-category-tree/expense-category-tree.model';
 
 @Component({
     selector: 'app-machinery-expenses-form',
@@ -20,7 +23,9 @@ export class MachineryExpensesFormComponent implements OnInit {
     form: FormGroup;
     submitted = false;
 
-    model: MachineryExpenseModel;
+    model: MachineryExpenseModel ;
+    mainCategories: ExpenseCategoryTreeModel[] = [];
+    subCategories: ExpenseCategoryTreeModel;
 
     machines: any[];
     employees: any[];
@@ -42,6 +47,7 @@ export class MachineryExpensesFormComponent implements OnInit {
                 private route: ActivatedRoute,
                 private modalService: ModalService,
                 private machineryExpenseService: MachineryExpenseService,
+                private expenseCategoryService: ExpenseCategoryService,
                 private machineService: MachineService,
                 private langService: LangService,
                 private alertService: AlertService) {
@@ -53,6 +59,14 @@ export class MachineryExpensesFormComponent implements OnInit {
     }
 
     private setupResources(): Promise<void> {
+        this.expenseCategoryService.getTree().subscribe(payloadModel => {
+            const treeModels = payloadModel.payload;
+            treeModels.forEach((treeModel: ExpenseCategoryTreeModel) => {
+                this.mainCategories.push(treeModel);
+            });
+
+        });
+
         return new Promise((resolve) => {
             this.machineService.findAll().subscribe(machineModels => {
                 this.machines = [];
@@ -139,6 +153,8 @@ export class MachineryExpensesFormComponent implements OnInit {
         const expenseDate = this.model.expenseDate ? this.model.expenseDate.toISOString().substring(0, 10) : null;
 
         this.form = this.fb.group({
+            expenseCategoryId: [this.model.expenseCategoryId, Validators.required],
+            expenseSubCategoryId: [this.model.expenseSubCategoryId],
             title: [this.model.title, Validators.required],
             expenseDate: [expenseDate, Validators.required],
             machines: [this.getSelectedMachines()],

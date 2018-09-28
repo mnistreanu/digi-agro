@@ -58,6 +58,7 @@
 	},
 	"employee": {
 		"employee": "Employee",
+		"employees": "Employees",
 		"first-name": "Fist Name",
 		"last-name": "Last Name",
 		"title": "Title"
@@ -79,15 +80,16 @@
 	"expenses": {
 		"agricultural-machinery": "Expenses for repairing agricultural machinery",
 		"agricultural-works": "Expenses for agricultural works",
-		"quantity": "Quantity",
 		"categories": "Expense categories",
 		"cost": "Cost",
 		"date": "Date",
+		"details": "Expense details",
 		"element": "Element",
 		"expenses": "Expenses",
 		"fertilizers": "Expenses for fertilizers",
 		"fuel": "Expenses for fuel",
 		"pesticides": "Expenses for pesticides",
+		"quantity": "Quantity",
 		"responsible-persons": "Responsible Persons",
 		"sowing": "Expenses for sowing",
 		"total-cost": "Total cost",
@@ -149,7 +151,8 @@
 		"information": "Information",
 		"name": "Name",
 		"name-ro": "Name",
-		"name-ru": "Name"
+		"name-ru": "Name",
+		"title": "Description"
 	},
 	"language": {
 		"language": "Language"
@@ -390,6 +393,7 @@
 		"kg": "Kg",
 		"l": "Litre",
 		"mdl": "Lei",
+		"pieces": "Pieces",
 		"q": "Quintal",
 		"quantity": "Quantity",
 		"ron": "Lei",

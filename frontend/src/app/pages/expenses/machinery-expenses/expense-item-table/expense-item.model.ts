@@ -1,9 +1,9 @@
 export class ExpenseItemModel {
     id: number;
     title: string;
-    quantity: number;
-    unitOfMeasure: string;
-    unitCost: number;
+    // quantity: number;
+    // unitOfMeasure: string;
+    // unitCost: number;
     totalCost: number;
 
     deleted: boolean;

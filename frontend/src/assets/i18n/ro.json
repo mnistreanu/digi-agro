@@ -58,6 +58,7 @@
 	},
 	"employee": {
 		"employee": "Angajat",
+		"employees": "Angajați",
 		"first-name": "Prenume",
 		"last-name": "Nume",
 		"title": "Titlu"
@@ -79,15 +80,16 @@
 	"expenses": {
 		"agricultural-machinery": "Cheltuieli pentru repararea mașinilor agricole",
 		"agricultural-works": "Cheltuieli pentru lucrări agricole",
-		"quantity": "Cantitate",
 		"categories": "Categorii de cheltuieli",
 		"cost": "Preț",
 		"date": "Data",
+		"details": "Detalii cheltuieli",
 		"element": "Element",
 		"expenses": "Cheltuieli",
 		"fertilizers": "Cheltuieli pentru îngrășăminte",
 		"fuel": "Cheltuieli pentru combustibil",
 		"pesticides": "Cheltuieli pentru pesticide",
+		"quantity": "Cantitate",
 		"responsible-persons": "Persoane responsabile",
 		"sowing": "Cheltuieli pentru însămânțare",
 		"total-cost": "Cost total",
@@ -149,7 +151,8 @@
 		"information": "Informație",
 		"name": "Denumire",
 		"name-ro": "Denumire (Rom)",
-		"name-ru": "Denumire (Rus)"
+		"name-ru": "Denumire (Rus)",
+		"title": "Descriere"
 	},
 	"language": {
 		"language": "Limba"
@@ -390,6 +393,7 @@
 		"kg": "Kg",
 		"l": "Litru",
 		"mdl": "Lei",
+		"pieces": "Bucăți",
 		"q": "Chintal",
 		"quantity": "Cantitatea",
 		"ron": "Lei",
