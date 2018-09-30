@@ -24,7 +24,7 @@ export class MachineryExpensesFormComponent implements OnInit {
     submitted = false;
 
     model: MachineryExpenseModel ;
-    subCategories: ExpenseCategoryTreeModel = [];
+    subCategories: ExpenseCategoryTreeModel[] = [];
 
     machines: any[];
     employees: any[];
@@ -144,13 +144,13 @@ export class MachineryExpensesFormComponent implements OnInit {
 
     private prepareNewModel() {
         this.model = new MachineryExpenseModel();
+        this.model.expenseDate = new Date();
         this.buildForm();
     }
 
 
     private buildForm() {
         const expenseDate = this.model.expenseDate ? this.model.expenseDate.toISOString().substring(0, 10) : null;
-
         this.form = this.fb.group({
             title: [this.model.title, Validators.required],
             expenseDate: [expenseDate, Validators.required],
