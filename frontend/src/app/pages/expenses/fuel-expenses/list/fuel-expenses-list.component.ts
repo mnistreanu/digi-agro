@@ -139,7 +139,6 @@ export class FuelExpensesComponent implements OnInit {
     private transformModels(expenseModels) {
 
         const fuelMap = {};
-        const fuelFields = [];
 
         expenseModels.forEach(expenseModel => {
             expenseModel.fuels.forEach(fuelModel => {
@@ -148,7 +147,7 @@ export class FuelExpensesComponent implements OnInit {
             });
         });
 
-        fuelFields = Object.keys(fuelMap);
+        const fuelFields = Object.keys(fuelMap);
         this.registerFuelColumns(fuelFields);
         return fuelFields;
     }
