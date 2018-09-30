@@ -9,6 +9,7 @@ import {ICellRendererParams} from 'ag-grid';
 })
 export class EditRendererComponent implements ICellRendererAngularComp {
 
+    render: boolean;
     params: ICellRendererParams;
 
     constructor() {
@@ -20,6 +21,7 @@ export class EditRendererComponent implements ICellRendererAngularComp {
 
     agInit(params: ICellRendererParams): void {
         this.params = params;
+        this.render = !params.node.isRowPinned();
     }
 
     onEdit() {
