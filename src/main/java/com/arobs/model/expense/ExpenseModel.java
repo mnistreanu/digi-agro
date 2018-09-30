@@ -12,6 +12,7 @@ import java.util.List;
 public class ExpenseModel {
 
     private Long id;
+    private Long categoryId;
     private String title;
     private Date expenseDate;
     private List<ExpenseItemModel> expenseItems = new ArrayList<>();
@@ -27,6 +28,7 @@ public class ExpenseModel {
         this.id = expense.getId();
         this.title = expense.getTitle();
         this.expenseDate = expense.getExpenseDate();
+        this.categoryId = expense.getCategoryId();
     }
 
     public Long getId() {
@@ -35,6 +37,14 @@ public class ExpenseModel {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getTitle() {

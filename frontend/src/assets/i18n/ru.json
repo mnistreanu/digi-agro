@@ -60,6 +60,7 @@
 		"employee": "Работник",
 		"employees": "Сотрудники",
 		"first-name": "Имя",
+		"first-last-name": "Имя Фамилия",
 		"last-name": "Фамилия",
 		"title": "Титул"
 	},

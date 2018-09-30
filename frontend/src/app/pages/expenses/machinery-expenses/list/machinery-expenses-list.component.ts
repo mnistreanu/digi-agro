@@ -11,24 +11,15 @@ import {Authorities} from '../../../../common/authorities';
 @Component({
     selector: 'app-machinery-expenses',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: './machinery-expenses.component.html',
-    styleUrls: ['./machinery-expenses.component.scss']
+    templateUrl: './machinery-expenses-list.component.html',
+    styleUrls: ['./machinery-expenses-list.component.scss']
 })
-export class MachineryExpensesComponent implements OnInit {
+export class MachineryExpensesListComponent implements OnInit {
 
     readOnly;
 
     options: GridOptions;
     context;
-
-    labelMachineType: string;
-    labelAgriculturalMachinery: string;
-    labelIdentifier: string;
-    labelDate: string;
-    labelFirstName: string;
-    labelLastName: string;
-    labelSparePart: string;
-    labelSparePartPrice: string;
 
     constructor(private machineryExpenseService: MachineryExpenseService,
                 private authService: AuthService,
@@ -38,25 +29,12 @@ export class MachineryExpensesComponent implements OnInit {
 
     ngOnInit() {
         this.setupTableMode();
-        this.setupLabels();
         this.setupGrid();
     }
 
     private setupTableMode() {
         this.readOnly = this.authService.hasAuthority(Authorities.ROLE_USER);
     }
-
-    private setupLabels() {
-        this.langService.get('machine.type').subscribe(msg => this.labelMachineType = msg);
-        this.langService.get('machine.agricultural-machinery').subscribe(msg => this.labelAgriculturalMachinery = msg);
-        this.langService.get('machine.identifier').subscribe(msg => this.labelIdentifier = msg);
-        this.langService.get('machine.repairing-date').subscribe(msg => this.labelDate = msg);
-        this.langService.get('employee.first-name').subscribe(msg => this.labelFirstName = msg);
-        this.langService.get('employee.last-name').subscribe(msg => this.labelLastName = msg);
-        this.langService.get('machine.spare-part').subscribe(msg => this.labelSparePart = msg);
-        this.langService.get('machine.spare-part-price').subscribe(msg => this.labelSparePartPrice = msg);
-    }
-
 
     private setupGrid() {
         this.options = <GridOptions>{};
@@ -91,53 +69,63 @@ export class MachineryExpensesComponent implements OnInit {
 
         headers = headers.concat([
             {
-                headerName: this.labelDate,
+                headerName: 'machine.repairing-date',
                 field: 'expenseDate',
-                width: 90,
-                minWidth: 90,
-                suppressFilter: true,
-                valueFormatter: (params) => DateUtil.formatDateWithTime(params.value)
+                width: 100,
+                minWidth: 100,
+                valueFormatter: (params) => DateUtil.formatDate(params.value)
             },
             {
-                headerName: this.labelAgriculturalMachinery,
-                field: 'machine',
+                headerName: 'machine.agricultural-machinery',
+                field: 'machinesString',
                 width: 180,
                 minWidth: 180
             },
             {
-                headerName: this.labelLastName + ' ' + this.labelFirstName,
-                field: 'employee',
-                width: 100,
-                minWidth: 100,
-                suppressFilter: true,
+                headerName: 'employee.first-last-name',
+                field: 'employeesString',
+                width: 150,
+                minWidth: 150,
             },
             {
-                headerName: this.labelSparePart,
+                headerName: 'machine.spare-part',
                 field: 'sparePart',
                 width: 200,
                 minWidth: 200,
-                suppressFilter: true,
             },
             {
-                headerName: this.labelSparePartPrice,
+                headerName: 'machine.spare-part-price',
                 field: 'sparePartPrice',
-                width: 100,
-                minWidth: 100,
+                width: 80,
+                minWidth: 80,
                 suppressFilter: true,
             },
             {
-                headerName: 'Registered By',
-                field: '',
+                headerName: 'info.registered-by',
+                hide: true,
+                field: 'createdAt',
                 width: 100,
                 minWidth: 100,
+                valueFormatter: (params) => DateUtil.formatDate(params.value)
             },
             {
-                headerName: 'At',
-                field: '',
-                width: 60,
-                minWidth: 60,
+                headerName: 'info.registered-at',
+                hide: true,
+                field: 'createdBy',
+                width: 100,
+                minWidth: 100,
             }
         ]);
+
+        headers.forEach(header => {
+            if (header.headerName) {
+                this.langService.get(header.headerName).subscribe(m => header.headerName = m);
+            }
+
+            if (header.headerTooltip) {
+                this.langService.get(header.headerTooltip).subscribe(m => header.headerTooltip = m);
+            }
+        });
 
         return headers;
     }
@@ -145,6 +133,24 @@ export class MachineryExpensesComponent implements OnInit {
 
     public setupRows() {
         this.machineryExpenseService.find().subscribe(models => {
+            models.forEach(model => {
+                model.employees.forEach(employee => {
+                    if (model.employeesString) {
+                        model.employeesString = model.employeesString + ', ' + employee.firstName + ' ' + employee.lastName;
+                    } else {
+                        model.employeesString = employee.firstName + ' ' + employee.lastName;
+                    }
+                });
+
+                model.machines.forEach(machine => {
+                    if (model.machinesString) {
+                        model.machinesString = model.machinesString + ', ' + machine.brand + ' ' + machine.model
+                            + ' (' + machine.identifier + ')';
+                    } else {
+                        model.machinesString = machine.brand + ' ' + machine.model + ' (' + machine.identifier + ')';
+                    }
+                });
+            });
             this.options.api.setRowData(models);
         });
     }

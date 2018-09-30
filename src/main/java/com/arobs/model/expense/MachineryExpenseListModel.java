@@ -1,16 +1,25 @@
 package com.arobs.model.expense;
 
-import java.util.Date;
+import com.arobs.model.EmployeeModel;
+import com.arobs.model.MachineModel;
 
-@Deprecated
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class MachineryExpenseListModel {
 
     private Long expenseId;
     private Date expenseDate;
-    private String machine;
-    private String employee;
+    private List<MachineModel> machines = new ArrayList<>();
+//    private String machines;
+    private List<EmployeeModel> employees = new ArrayList<>();
+//    private String employees;
     private String sparePart;
-    private Double sparePartPrice;
+    private BigDecimal sparePartPrice;
+    private Date createdAt;
+    private String createdBy;
 
     public MachineryExpenseListModel() {
     }
@@ -31,20 +40,37 @@ public class MachineryExpenseListModel {
         this.expenseDate = expenseDate;
     }
 
-    public String getMachine() {
-        return machine;
+//    public String getMachines() {
+//        return machines;
+//    }
+//
+//    public void setMachines(String machines) {
+//        this.machines = machines;
+//    }
+//
+//    public String getEmployees() {
+//        return employees;
+//    }
+//
+//    public void setEmployees(String employees) {
+//        this.employees = employees;
+//    }
+
+
+    public List<MachineModel> getMachines() {
+        return machines;
     }
 
-    public void setMachine(String machine) {
-        this.machine = machine;
+    public void setMachines(List<MachineModel> machines) {
+        this.machines = machines;
     }
 
-    public String getEmployee() {
-        return employee;
+    public List<EmployeeModel> getEmployees() {
+        return employees;
     }
 
-    public void setEmployee(String employee) {
-        this.employee = employee;
+    public void setEmployees(List<EmployeeModel> employees) {
+        this.employees = employees;
     }
 
     public String getSparePart() {
@@ -55,11 +81,27 @@ public class MachineryExpenseListModel {
         this.sparePart = sparePart;
     }
 
-    public Double getSparePartPrice() {
+    public BigDecimal getSparePartPrice() {
         return sparePartPrice;
     }
 
-    public void setSparePartPrice(Double sparePartPrice) {
+    public void setSparePartPrice(BigDecimal sparePartPrice) {
         this.sparePartPrice = sparePartPrice;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 }

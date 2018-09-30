@@ -15,7 +15,7 @@ export class DateUtil {
 
     public static formatDate(date: Date): string {
         const datePipe = new DatePipe('en-US');
-        return datePipe.transform(date, 'dd/MM/yyyy');
+        return datePipe.transform(date, 'dd.MM.yyyy');
     }
 
     public static formatLocalizedDate(value) {

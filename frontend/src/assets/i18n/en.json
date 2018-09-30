@@ -59,7 +59,8 @@
 	"employee": {
 		"employee": "Employee",
 		"employees": "Employees",
-		"first-name": "Fist Name",
+		"first-name": "First Name",
+		"first-last-name": "First & Last name",
 		"last-name": "Last Name",
 		"title": "Title"
 	},

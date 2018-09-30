@@ -7,7 +7,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {MultiselectDropdownModule} from 'angular-2-dropdown-multiselect';
 import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-block.module';
 import {AgGridModule} from 'ag-grid-angular';
-import {MachineryExpensesComponent} from './machinery-expenses/list/machinery-expenses.component';
+import {MachineryExpensesListComponent} from './machinery-expenses/list/machinery-expenses-list.component';
 import {FuelExpensesComponent} from './fuel-expenses/list/fuel-expenses.component';
 import {SowingExpensesComponent} from './sowing-expenses/sowing-expenses.component';
 import {WorksExpensesComponent} from './works-expenses/works-expenses.component';
@@ -32,7 +32,7 @@ import {FuelExpenseItemTableComponent} from './fuel-expenses/expense-item-table/
 
 export const routes = [
     {path: '', component: ExpenseListComponent},
-    {path: 'machinery', component: MachineryExpensesComponent},
+    {path: 'machinery', component: MachineryExpensesListComponent},
     {path: 'machinery/:id', component: MachineryExpensesFormComponent, canActivate: [AdminGuard]},
     {path: 'fuel', component: FuelExpensesComponent},
     {path: 'fuel/:id', component: FuelExpensesFormComponent, canActivate: [AdminGuard]},
@@ -66,7 +66,7 @@ export const routes = [
         RouterModule.forChild(routes)
     ],
     declarations: [
-        MachineryExpensesComponent,
+        MachineryExpensesListComponent,
         FuelExpensesComponent,
         FuelExpensesFormComponent,
         SowingExpensesComponent,

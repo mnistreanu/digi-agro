@@ -14,8 +14,23 @@ import java.util.List;
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
     @Query("SELECT e FROM Expense e " +
-            "WHERE e.deletedAt IS null AND e.tenantId = :tenantId")
+            "WHERE e.deletedAt IS null " +
+            "AND e.tenantId = :tenantId ")
     List<Expense> find(@Param("tenantId") Long tenantId);
+
+    @Query("SELECT e FROM Expense e " +
+            "WHERE e.deletedAt IS null " +
+            "AND e.tenantId = :tenantId " +
+            "AND e.categoryId = (SELECT ec.id from ExpenseCategory ec WHERE ec.tenantId = :tenantId AND ec.parentId = :categoryId) ")
+    List<Expense> find(@Param("tenantId") Long tenantId, @Param("categoryId") Long categoryId);
+
+    @Query("SELECT e FROM Expense e " +
+            "WHERE e.deletedAt IS null " +
+            "AND e.tenantId = :tenantId " +
+            "AND e.categoryId = (SELECT ec.id from ExpenseCategory ec WHERE ec.tenantId = :tenantId AND ec.parentId = :categoryId) " +
+            "AND e.expenseDate BETWEEN :dateFrom AND :dateTo")
+    List<Expense> find(@Param("tenantId") Long tenantId, @Param("categoryId") Long categoryId,
+                       @Param("dateFrom") Date dateFrom, @Param("dateTo") Date dateTo);
 
     @Modifying
     @Query("UPDATE Expense e SET e.deletedAt = :date WHERE e.id = :id")

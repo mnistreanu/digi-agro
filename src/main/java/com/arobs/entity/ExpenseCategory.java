@@ -9,6 +9,8 @@ import javax.persistence.*;
 @Table(name = "expense_category")
 public class ExpenseCategory {
 
+    public static final long MACHINERY = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

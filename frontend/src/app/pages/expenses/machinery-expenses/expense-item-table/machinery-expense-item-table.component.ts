@@ -68,7 +68,7 @@ export class MachineryExpenseItemTableComponent implements OnInit {
                 }
             },
             {
-                headerName: 'expenses.details',
+                headerName: 'machine.spare-part',
                 field: 'title',
                 width: 300,
                 minWidth: 300,
@@ -97,7 +97,7 @@ export class MachineryExpenseItemTableComponent implements OnInit {
             //     editable: params => !params.data.readOnly,
             // },
             {
-                headerName: 'expenses.cost',
+                headerName: 'machine.spare-part-price',
                 field: 'totalCost',
                 width: 120,
                 minWidth: 120,

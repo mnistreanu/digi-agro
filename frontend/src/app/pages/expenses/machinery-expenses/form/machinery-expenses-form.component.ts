@@ -24,8 +24,7 @@ export class MachineryExpensesFormComponent implements OnInit {
     submitted = false;
 
     model: MachineryExpenseModel ;
-    mainCategories: ExpenseCategoryTreeModel[] = [];
-    subCategories: ExpenseCategoryTreeModel;
+    subCategories: ExpenseCategoryTreeModel = [];
 
     machines: any[];
     employees: any[];
@@ -62,7 +61,7 @@ export class MachineryExpensesFormComponent implements OnInit {
         this.expenseCategoryService.getTree().subscribe(payloadModel => {
             const treeModels = payloadModel.payload;
             treeModels.forEach((treeModel: ExpenseCategoryTreeModel) => {
-                this.mainCategories.push(treeModel);
+                this.subCategories.push(treeModel);
             });
 
         });
@@ -85,7 +84,7 @@ export class MachineryExpensesFormComponent implements OnInit {
     }
 
     private getMachineLabel(model) {
-        return model.identifier + ' ' + model.model + ' ' + model.brand;
+        return model.brand + ' ' + model.model + ' (' + model.identifier + ')';
     }
 
     private registerEmployees(machineId, items) {
@@ -153,8 +152,6 @@ export class MachineryExpensesFormComponent implements OnInit {
         const expenseDate = this.model.expenseDate ? this.model.expenseDate.toISOString().substring(0, 10) : null;
 
         this.form = this.fb.group({
-            expenseCategoryId: [this.model.expenseCategoryId, Validators.required],
-            expenseSubCategoryId: [this.model.expenseSubCategoryId],
             title: [this.model.title, Validators.required],
             expenseDate: [expenseDate, Validators.required],
             machines: [this.getSelectedMachines()],
