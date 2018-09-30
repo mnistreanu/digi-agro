@@ -1,7 +1,8 @@
 export class FuelExpenseItemModel {
     id: number;
     title: string;
-    totalCost: number;
+    category: string;
+    quantity: number;
 
     deleted: boolean;
     readOnly: boolean;

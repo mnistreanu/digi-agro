@@ -1,12 +1,19 @@
+import {MachineModel} from '../../../manage-machines/machine/machine.model';
+import {EmployeeModel} from '../../../employee/employee/employee.model';
+import {FuelExpenseItemModel} from '../expense-item-table/fuel-expense-item.model';
+
 export class FuelExpensesListModel {
   date: string;
-  type: string;
-  brandModel: string;
-  identifier: string;
-  employee: string;
-  unitOfMeasure: string;
-  diesel: number;
-  oil: number;
-  solidol: number;
-  negrol: number;
+  title: string;
+  machines: MachineModel[];
+  machinesString: string;
+  employees: EmployeeModel[];
+  employeesString: string;
+  fuels: FuelExpenseItemModel[];
+
+  // unitOfMeasure: string;
+  // diesel: number;
+  // oil: number;
+  // solidol: number;
+  // negrol: number;
 }

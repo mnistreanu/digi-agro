@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class ExpenseCategory {
 
     public static final long MACHINERY = 1L;
+    public static final long FUEL = 2L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -6,28 +6,26 @@ import com.arobs.entity.ExpenseCategory;
 import com.arobs.entity.Machine;
 import com.arobs.model.EmployeeModel;
 import com.arobs.model.MachineModel;
-import com.arobs.model.expense.ExpenseItemModel;
-import com.arobs.model.expense.ExpenseModel;
-import com.arobs.model.expense.MachineryExpenseListModel;
-import com.arobs.model.expense.MachineryExpenseModel;
+import com.arobs.model.expense.*;
 import com.arobs.service.EmployeeService;
 import com.arobs.service.MachineService;
-import com.arobs.service.expense.ExpenseItemService;
-import com.arobs.service.expense.ExpenseResourceService;
 import com.arobs.service.expense.ExpenseService;
-import com.arobs.service.expense.MachineryExpenseService;
+import com.arobs.service.expense.FuelExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/machinery-expense")
-public class MachineryExpenseController {
+@RequestMapping("/fuel-expense")
+public class FuelExpenseController {
+
+    @Autowired
+    private FuelExpenseService fuelExpenseService;
 
     @Autowired
     private ExpenseService expenseService;
@@ -39,11 +37,11 @@ public class MachineryExpenseController {
     private MachineService machineService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<List<MachineryExpenseListModel>> getModels(HttpSession session) {
+    public ResponseEntity<List<FuelExpenseListModel>> getModels(HttpSession session) {
         Long tenantId = (Long) session.getAttribute("tenant");
+        List<Expense> expenses = expenseService.find(tenantId, ExpenseCategory.FUEL);
 
-        List<Expense> expenses = expenseService.find(tenantId, ExpenseCategory.MACHINERY);
-        List<MachineryExpenseListModel> resultModels = new ArrayList<>();
+        List<FuelExpenseListModel> resultModels = new ArrayList<>();
 
         for (Expense expense : expenses) {
             ExpenseModel expenseModel = expenseService.getModel(expense);
@@ -60,23 +58,21 @@ public class MachineryExpenseController {
                 machineModels.add(new MachineModel(machine));
             }
 
+            FuelExpenseListModel listModel = new FuelExpenseListModel();
+            listModel.setExpenseId(expense.getId());
+            listModel.setExpenseDate(expense.getExpenseDate());
+            listModel.setEmployees(employeeModels);
+            listModel.setMachines(machineModels);
+            listModel.setFuels(expenseModel.getExpenseItems());
+            listModel.setCreatedAt(expense.getCreatedAt());
+            listModel.setCreatedBy("" + expense.getCreatedBy());
+            resultModels.add(listModel);
 
-            for (ExpenseItemModel expenseItemModel : expenseModel.getExpenseItems()) {
-                MachineryExpenseListModel listModel = new MachineryExpenseListModel();
-                resultModels.add(listModel);
-                listModel.setExpenseId(expense.getId());
-                listModel.setExpenseDate(expense.getExpenseDate());
-                listModel.setSparePart(expenseItemModel.getTitle());
-                listModel.setSparePartPrice(expenseItemModel.getTotalCost());
-                listModel.setEmployees(employeeModels);
-                listModel.setMachines(machineModels);
-                listModel.setCreatedAt(expense.getCreatedAt());
-                listModel.setCreatedBy("" + expense.getCreatedBy());
-            }
         }
 
         return ResponseEntity.ok(resultModels);
     }
+
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<ExpenseModel> getModel(@PathVariable Long id) {
@@ -95,5 +91,4 @@ public class MachineryExpenseController {
     public void remove(@PathVariable Long id) {
         expenseService.remove(id);
     }
-
 }

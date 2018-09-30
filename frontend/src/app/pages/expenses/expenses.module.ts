@@ -8,7 +8,7 @@ import {MultiselectDropdownModule} from 'angular-2-dropdown-multiselect';
 import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-block.module';
 import {AgGridModule} from 'ag-grid-angular';
 import {MachineryExpensesListComponent} from './machinery-expenses/list/machinery-expenses-list.component';
-import {FuelExpensesComponent} from './fuel-expenses/list/fuel-expenses.component';
+import {FuelExpensesComponent} from './fuel-expenses/list/fuel-expenses-list.component';
 import {SowingExpensesComponent} from './sowing-expenses/sowing-expenses.component';
 import {WorksExpensesComponent} from './works-expenses/works-expenses.component';
 import {FertilizersExpensesComponent} from './fertilizers-expenses/fertilizers-expenses.component';

@@ -3,7 +3,7 @@ import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import {MachineryExpenseModel} from '../../pages/expenses/machinery-expenses/form/machinery-expense.model';
-import {MachineryExpenseListModel} from '../../pages/expenses/machinery-expenses/list/machinery-expense-list.model';
+import {MachineryExpenseListModel} from '../../pages/expenses/machinery-expenses/list/machinery-expenses-list.model';
 
 @Injectable({
     providedIn: 'root'

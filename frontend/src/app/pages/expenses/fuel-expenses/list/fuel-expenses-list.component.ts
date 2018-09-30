@@ -1,30 +1,31 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
-import {LangService} from '../../../../services/lang.service';
 import {Router} from '@angular/router';
-import {MachineryExpenseService} from '../../../../services/expenses/machinery-expense.service';
+import {LangService} from '../../../../services/lang.service';
 import {DateUtil} from '../../../../common/dateUtil';
-import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
+import { PinnedRowRendererComponent } from '../../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
 import {AuthService} from '../../../../services/auth/auth.service';
+import {FuelExpenseService} from '../../../../services/expenses/fuel-expense.service';
 import {Authorities} from '../../../../common/authorities';
+import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
 
 @Component({
-    selector: 'app-machinery-expenses',
+    selector: 'app-fuel-expenses',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: './machinery-expenses-list.component.html',
-    styleUrls: ['./machinery-expenses-list.component.scss']
+    templateUrl: './fuel-expenses-list.component.html',
+    styleUrls: ['./fuel-expenses-list.component.scss']
 })
-export class MachineryExpensesListComponent implements OnInit {
-
+export class FuelExpensesComponent implements OnInit {
     readOnly;
 
     options: GridOptions;
     context;
 
-    constructor(private machineryExpenseService: MachineryExpenseService,
+    constructor(private fuelExpenseService: FuelExpenseService,
                 private authService: AuthService,
                 private router: Router,
                 private langService: LangService) {
+
     }
 
     ngOnInit() {
@@ -36,13 +37,17 @@ export class MachineryExpensesListComponent implements OnInit {
         this.readOnly = this.authService.hasAuthority(Authorities.ROLE_USER);
     }
 
+
     private setupGrid() {
         this.options = <GridOptions>{};
 
         this.options.enableColResize = true;
         this.options.enableSorting = true;
         this.options.enableFilter = true;
+        this.options.rowSelection = 'single';
         this.options.columnDefs = this.setupHeaders();
+        this.options.frameworkComponents = { customPinnedRowRenderer: PinnedRowRendererComponent };
+
         this.context = {componentParent: this};
 
         this.setupRows();
@@ -87,19 +92,36 @@ export class MachineryExpensesListComponent implements OnInit {
                 width: 150,
                 minWidth: 150,
             },
-            {
-                headerName: 'machine.spare-part',
-                field: 'sparePart',
-                width: 200,
-                minWidth: 200,
-            },
-            {
-                headerName: 'machine.spare-part-price',
-                field: 'sparePartPrice',
-                width: 80,
-                minWidth: 80,
-                suppressFilter: true,
-            },
+            // {
+            //     headerName: '',
+            //     field: 'diesel',
+            //     width: 100,
+            //     minWidth: 100,
+            //     suppressFilter: true,
+            //     pinnedRowCellRenderer: 'customPinnedRowRenderer',
+            //     pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } }
+            // },
+            // {
+            //     headerName: '',
+            //     field: 'oil',
+            //     width: 80,
+            //     minWidth: 80,
+            //     suppressFilter: true,
+            // },
+            // {
+            //     headerName: '',
+            //     field: 'solidol',
+            //     width: 80,
+            //     minWidth: 80,
+            //     suppressFilter: true,
+            // },
+            // {
+            //     headerName: '',
+            //     field: 'negrol',
+            //     width: 80,
+            //     minWidth: 80,
+            //     suppressFilter: true,
+            // },
             {
                 headerName: 'info.registered-at',
                 hide: true,
@@ -115,6 +137,7 @@ export class MachineryExpensesListComponent implements OnInit {
                 width: 100,
                 minWidth: 100,
             }
+
         ]);
 
         headers.forEach(header => {
@@ -125,14 +148,33 @@ export class MachineryExpensesListComponent implements OnInit {
             if (header.headerTooltip) {
                 this.langService.get(header.headerTooltip).subscribe(m => header.headerTooltip = m);
             }
+
+            // if (header.field == 'employeesString') {
+            //     headers.push();
+            // }
         });
 
         return headers;
     }
 
-
     public setupRows() {
-        this.machineryExpenseService.find().subscribe(models => {
+        this.fuelExpenseService.find().subscribe(models => {
+
+            debugger;
+            if (models.length > 0) {
+                const fuelModels = models[0].fuels;
+                if (fuelModels.length > 0) {
+                    const fuelColumn = {
+                        headerName: fuelModels[0].category,
+                        field: fuelModels[0].category,
+                        width: 180,
+                        minWidth: 180,
+                    };
+
+                }
+            }
+
+
             models.forEach(model => {
                 model.employees.forEach(employee => {
                     if (model.employeesString) {
@@ -155,6 +197,18 @@ export class MachineryExpensesListComponent implements OnInit {
         });
     }
 
+
+    private setupSummaryRow(rows) {
+        const summaryRow = {
+            date: 'TOTAL',
+            diesel: 0
+        };
+        rows.forEach(source => {
+            summaryRow.diesel += source.diesel || 0;
+        });
+        this.options.api.setPinnedBottomRowData([summaryRow]);
+    }
+
     public onGridReady() {
         this.options.api.sizeColumnsToFit();
     }
@@ -168,11 +222,11 @@ export class MachineryExpensesListComponent implements OnInit {
     }
 
     public add() {
-        this.router.navigate(['/pages/expenses/machinery/-1']);
+        this.router.navigate(['/pages/expenses/fuel/-1']);
     }
 
     public onEdit(node) {
         const model = node.data;
-        this.router.navigate(['/pages/expenses/machinery/' + model.expenseId]);
+        this.router.navigate(['/pages/expenses/fuel/' + model.expenseId]);
     }
 }

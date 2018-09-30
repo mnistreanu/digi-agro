@@ -13,9 +13,7 @@ public class MachineryExpenseListModel {
     private Long expenseId;
     private Date expenseDate;
     private List<MachineModel> machines = new ArrayList<>();
-//    private String machines;
     private List<EmployeeModel> employees = new ArrayList<>();
-//    private String employees;
     private String sparePart;
     private BigDecimal sparePartPrice;
     private Date createdAt;
@@ -39,23 +37,6 @@ public class MachineryExpenseListModel {
     public void setExpenseDate(Date expenseDate) {
         this.expenseDate = expenseDate;
     }
-
-//    public String getMachines() {
-//        return machines;
-//    }
-//
-//    public void setMachines(String machines) {
-//        this.machines = machines;
-//    }
-//
-//    public String getEmployees() {
-//        return employees;
-//    }
-//
-//    public void setEmployees(String employees) {
-//        this.employees = employees;
-//    }
-
 
     public List<MachineModel> getMachines() {
         return machines;

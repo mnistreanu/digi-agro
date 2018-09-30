@@ -1,6 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {FuelExpensesComponent} from "./fuel-expenses.component";
+import {FuelExpensesComponent} from './fuel-expenses-list.component';
 
 describe('FuelExpensesComponent', () => {
     let component: FuelExpensesComponent;

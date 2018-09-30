@@ -1,19 +1,23 @@
 package com.arobs.model.expense;
 
-import java.util.Date;
+import com.arobs.model.EmployeeModel;
+import com.arobs.model.MachineModel;
 
-@Deprecated
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class FuelExpenseListModel {
 
     private Long expenseId;
     private Date expenseDate;
-    private String machine;
-    private String employee;
+    private List<MachineModel> machines = new ArrayList<>();
+    private List<EmployeeModel> employees = new ArrayList<>();
+    private List<ExpenseItemModel> fuels = new ArrayList<>();
+
     private String unitOfMeasure;
-    private Double diesel;
-    private Double oil;
-    private Double solidol;
-    private Double negrol;
+    private Date createdAt;
+    private String createdBy;
 
     public FuelExpenseListModel() {
     }
@@ -34,20 +38,20 @@ public class FuelExpenseListModel {
         this.expenseDate = expenseDate;
     }
 
-    public String getMachine() {
-        return machine;
+    public List<MachineModel> getMachines() {
+        return machines;
     }
 
-    public void setMachine(String machine) {
-        this.machine = machine;
+    public void setMachines(List<MachineModel> machines) {
+        this.machines = machines;
     }
 
-    public String getEmployee() {
-        return employee;
+    public List<EmployeeModel> getEmployees() {
+        return employees;
     }
 
-    public void setEmployee(String employee) {
-        this.employee = employee;
+    public void setEmployees(List<EmployeeModel> employees) {
+        this.employees = employees;
     }
 
     public String getUnitOfMeasure() {
@@ -58,35 +62,27 @@ public class FuelExpenseListModel {
         this.unitOfMeasure = unitOfMeasure;
     }
 
-    public Double getDiesel() {
-        return diesel;
+    public List<ExpenseItemModel> getFuels() {
+        return fuels;
     }
 
-    public void setDiesel(Double diesel) {
-        this.diesel = diesel;
+    public void setFuels(List<ExpenseItemModel> fuels) {
+        this.fuels = fuels;
     }
 
-    public Double getOil() {
-        return oil;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setOil(Double oil) {
-        this.oil = oil;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Double getSolidol() {
-        return solidol;
+    public String getCreatedBy() {
+        return createdBy;
     }
 
-    public void setSolidol(Double solidol) {
-        this.solidol = solidol;
-    }
-
-    public Double getNegrol() {
-        return negrol;
-    }
-
-    public void setNegrol(Double negrol) {
-        this.negrol = negrol;
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 }
