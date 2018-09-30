@@ -3,7 +3,7 @@ import {ColDef, GridOptions} from 'ag-grid';
 import {Router} from '@angular/router';
 import {LangService} from '../../../../services/lang.service';
 import {DateUtil} from '../../../../common/dateUtil';
-import { PinnedRowRendererComponent } from '../../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
+import {PinnedRowRendererComponent} from '../../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
 import {AuthService} from '../../../../services/auth/auth.service';
 import {FuelExpenseService} from '../../../../services/expenses/fuel-expense.service';
 import {Authorities} from '../../../../common/authorities';
@@ -46,7 +46,7 @@ export class FuelExpensesComponent implements OnInit {
         this.options.enableFilter = true;
         this.options.rowSelection = 'single';
         this.options.columnDefs = this.setupHeaders();
-        this.options.frameworkComponents = { customPinnedRowRenderer: PinnedRowRendererComponent };
+        this.options.frameworkComponents = {customPinnedRowRenderer: PinnedRowRendererComponent};
 
         this.context = {componentParent: this};
 
@@ -92,36 +92,6 @@ export class FuelExpensesComponent implements OnInit {
                 width: 150,
                 minWidth: 150,
             },
-            // {
-            //     headerName: '',
-            //     field: 'diesel',
-            //     width: 100,
-            //     minWidth: 100,
-            //     suppressFilter: true,
-            //     pinnedRowCellRenderer: 'customPinnedRowRenderer',
-            //     pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } }
-            // },
-            // {
-            //     headerName: '',
-            //     field: 'oil',
-            //     width: 80,
-            //     minWidth: 80,
-            //     suppressFilter: true,
-            // },
-            // {
-            //     headerName: '',
-            //     field: 'solidol',
-            //     width: 80,
-            //     minWidth: 80,
-            //     suppressFilter: true,
-            // },
-            // {
-            //     headerName: '',
-            //     field: 'negrol',
-            //     width: 80,
-            //     minWidth: 80,
-            //     suppressFilter: true,
-            // },
             {
                 headerName: 'info.registered-at',
                 hide: true,
@@ -148,10 +118,6 @@ export class FuelExpensesComponent implements OnInit {
             if (header.headerTooltip) {
                 this.langService.get(header.headerTooltip).subscribe(m => header.headerTooltip = m);
             }
-
-            // if (header.field == 'employeesString') {
-            //     headers.push();
-            // }
         });
 
         return headers;
@@ -159,52 +125,74 @@ export class FuelExpensesComponent implements OnInit {
 
     public setupRows() {
         this.fuelExpenseService.find().subscribe(models => {
-
-            debugger;
-            if (models.length > 0) {
-                const fuelModels = models[0].fuels;
-                if (fuelModels.length > 0) {
-                    const fuelColumn = {
-                        headerName: fuelModels[0].category,
-                        field: fuelModels[0].category,
-                        width: 180,
-                        minWidth: 180,
-                    };
-
-                }
-            }
-
-
+            const dynamicFields = this.transformModels(models);
             models.forEach(model => {
-                model.employees.forEach(employee => {
-                    if (model.employeesString) {
-                        model.employeesString = model.employeesString + ', ' + employee.firstName + ' ' + employee.lastName;
-                    } else {
-                        model.employeesString = employee.firstName + ' ' + employee.lastName;
-                    }
-                });
-
-                model.machines.forEach(machine => {
-                    if (model.machinesString) {
-                        model.machinesString = model.machinesString + ', ' + machine.brand + ' ' + machine.model
-                            + ' (' + machine.identifier + ')';
-                    } else {
-                        model.machinesString = machine.brand + ' ' + machine.model + ' (' + machine.identifier + ')';
-                    }
-                });
+                model.employeesString = model.employees.map(employee => employee.firstName + ' ' + employee.lastName).join(', ');
+                model.machinesString = model.machines
+                    .map(machine => machine.brand + ' ' + machine.model + ' (' + machine.identifier + ')').join(', ');
             });
             this.options.api.setRowData(models);
+            this.setupSummaryRow(models, dynamicFields);
         });
     }
 
+    private transformModels(expenseModels) {
 
-    private setupSummaryRow(rows) {
-        const summaryRow = {
-            date: 'TOTAL',
-            diesel: 0
-        };
-        rows.forEach(source => {
-            summaryRow.diesel += source.diesel || 0;
+        const fuelMap = {};
+        const fuelFields = [];
+
+        expenseModels.forEach(expenseModel => {
+            expenseModel.fuels.forEach(fuelModel => {
+                expenseModel[fuelModel.category] = fuelModel.quantity;
+                fuelMap[fuelModel.category] = fuelModel.category;
+            });
+        });
+
+        fuelFields = Object.keys(fuelMap);
+        this.registerFuelColumns(fuelFields);
+        return fuelFields;
+    }
+
+    private registerFuelColumns(fuelFields) {
+
+        let gridColumns = this.options.columnDefs;
+        const index = this.getFuelStartColumnIndex();
+        const columns = [];
+
+        fuelFields.forEach(fuel => {
+            const fuelColumn = {
+                headerName: fuel,
+                field: fuel,
+                width: 180,
+                minWidth: 180,
+                pinnedRowCellRenderer: 'customPinnedRowRenderer',
+                pinnedRowCellRendererParams: { style: { fontWeight: 'bold' } }
+            };
+            columns.push(fuelColumn);
+        });
+
+        gridColumns = gridColumns.slice(0, index).concat(columns).concat(gridColumns.slice(index));
+        this.options.api.setColumnDefs(gridColumns);
+    }
+
+    private getFuelStartColumnIndex() {
+        const gridColumns = this.options.columnDefs;
+        let index = 0;
+        for (const column of gridColumns) {
+            if (column['field'] == 'createdAt') {
+                break;
+            }
+            index++;
+        }
+        return index;
+    }
+
+    private setupSummaryRow(models, dynamicFields) {
+        const summaryRow = {};
+        models.forEach(source => {
+            dynamicFields.forEach(field => {
+                summaryRow[field] = (summaryRow[field] || 0) + (source[field] || 0);
+            });
         });
         this.options.api.setPinnedBottomRowData([summaryRow]);
     }
