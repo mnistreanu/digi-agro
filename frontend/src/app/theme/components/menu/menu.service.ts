@@ -34,7 +34,7 @@ export class MenuService {
             });
         }
 
-        if (isSuperAdmin || isAdmin) {
+        if (isSuperAdmin || isAdmin ) {
             menuItems.push({
                 title: 'nav.enterprise',
                 routerLink: 'enterprise',

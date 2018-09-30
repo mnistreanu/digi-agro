@@ -21,8 +21,8 @@ public class ExpenseCategory {
     @Column (name = "parent_id")
     private Long parentId;
 
-    @Column (name = "default_name")
-    private String defaultName;
+    @Column (name = "default_category_id")
+    private Long defaultCategoryId;
 
     @Column (name = "name")
     private String name;
@@ -54,19 +54,19 @@ public class ExpenseCategory {
         this.parentId = parentId;
     }
 
-    public String getDefaultName() {
-        return defaultName;
-    }
-
-    public void setDefaultName(String defaultName) {
-        this.defaultName = defaultName;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getDefaultCategoryId() {
+        return defaultCategoryId;
+    }
+
+    public void setDefaultCategoryId(Long defaultCategoryId) {
+        this.defaultCategoryId = defaultCategoryId;
     }
 }

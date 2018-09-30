@@ -21,13 +21,13 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     @Query("SELECT e FROM Expense e " +
             "WHERE e.deletedAt IS null " +
             "AND e.tenantId = :tenantId " +
-            "AND e.categoryId = (SELECT ec.id from ExpenseCategory ec WHERE ec.tenantId = :tenantId AND ec.parentId = :categoryId) ")
+            "AND e.categoryId = (SELECT cat.id from ExpenseCategory cat WHERE cat.tenantId = :tenantId AND cat.defaultCategoryId = :categoryId) ")
     List<Expense> find(@Param("tenantId") Long tenantId, @Param("categoryId") Long categoryId);
 
     @Query("SELECT e FROM Expense e " +
             "WHERE e.deletedAt IS null " +
             "AND e.tenantId = :tenantId " +
-            "AND e.categoryId = (SELECT ec.id from ExpenseCategory ec WHERE ec.tenantId = :tenantId AND ec.parentId = :categoryId) " +
+            "AND e.categoryId = (SELECT cat.id from ExpenseCategory cat WHERE cat.tenantId = :tenantId AND cat.defaultCategoryId = :categoryId) " +
             "AND e.expenseDate BETWEEN :dateFrom AND :dateTo")
     List<Expense> find(@Param("tenantId") Long tenantId, @Param("categoryId") Long categoryId,
                        @Param("dateFrom") Date dateFrom, @Param("dateTo") Date dateTo);

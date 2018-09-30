@@ -371,6 +371,20 @@
         </sql>
     </changeSet>
 
+    <changeSet id="insert-tenant-1-admin" author="mihai.gorgos" failOnError="true" runOnChange="false">
+        <sql>
+            <!--password: test123 -->
+            INSERT INTO user_account (id, username, password, first_name, last_name, language) values(5, 'tenant1-admin', '$2a$10$J.79O6b/Zo9rPAivWonK1ufA3yB.dsH1UJMVZRrarOrBiDzFRT9NO', 'Tenant 1', 'Admin', 'ro');
+
+            select nextval('user_account_id_seq');
+
+            INSERT INTO user_authority (user_id, authority_id) VALUES (5, 2);
+
+            INSERT INTO tenant_user (user_id, tenant_id) VALUES (5, 1);
+        </sql>
+    </changeSet>
+
+
     <changeSet id="insert-notification-subscriptions-for-3-users" author="mihai.gorgos" failOnError="true" runOnChange="true">
         <sql>
             <!--password: test123 -->
@@ -863,17 +877,39 @@
         </sql>
     </changeSet>
 
-    <!--<changeSet id="reset-expense-v1" author="maxim.nistreanu" failOnError="true" runOnChange="true">-->
-        <!--<sql>-->
-            <!--delete from expense_resource;-->
-            <!--delete from expense_item;-->
-            <!--delete from expense;-->
+    <changeSet id="insert_default_expense_categories" author="mihai.gorgos" failOnError="true" runOnChange="false">
+        <validCheckSum>ANY</validCheckSum>
+        <sql>
+            INSERT INTO expense_category(id, name) VALUES (1, 'expense-category.machinery');
+            INSERT INTO expense_category(id, name) VALUES (2, 'expense-category.fuel');
+            INSERT INTO expense_category(id, name) VALUES (3, 'expense-category.sowing');
+            INSERT INTO expense_category(id, name) VALUES (4, 'expense-category.works');
+            INSERT INTO expense_category(id, name) VALUES (5, 'expense-category.fertilizers');
+            INSERT INTO expense_category(id, name) VALUES (6, 'expense-category.pesticides');
 
-            <!--SELECT setval('expense_resource_id_seq', 1);-->
-            <!--SELECT setval('expense_item_id_seq', 1);-->
-            <!--SELECT setval('expense_id_seq', 1);-->
-        <!--</sql>-->
-    <!--</changeSet>-->
+            SELECT setval('expense_category_id_seq', (SELECT MAX(id) FROM expense_category)+1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert_tenant_1_expense_categories" author="mihai.gorgos" failOnError="true" runOnChange="false">
+        <validCheckSum>ANY</validCheckSum>
+        <sql>
+            INSERT INTO expense_category(id, tenant_id, default_category_id, name) VALUES ( 7, 1, 1, 'Cheltuieli pentru repararea mașinilor agricole');
+
+            INSERT INTO expense_category(id, tenant_id, default_category_id, name) VALUES ( 8, 1, 2, 'Cheltuieli pentru combustibil');
+            INSERT INTO expense_category(id, tenant_id, parent_id, name) VALUES ( 9, 1, 8, 'Motorină');
+            INSERT INTO expense_category(id, tenant_id, parent_id, name) VALUES (10, 1, 8, 'Ulei');
+            INSERT INTO expense_category(id, tenant_id, parent_id, name) VALUES (11, 1, 8, 'Solidol');
+            INSERT INTO expense_category(id, tenant_id, parent_id, name) VALUES (12, 1, 8, 'Negrol');
+
+            INSERT INTO expense_category(id, tenant_id, default_category_id, name) VALUES (13, 1, 3, 'Cheltuieli pentru însămânțare');
+            INSERT INTO expense_category(id, tenant_id, default_category_id, name) VALUES (14, 1, 4, 'Cheltuieli pentru lucrări agricole');
+            INSERT INTO expense_category(id, tenant_id, default_category_id, name) VALUES (15, 1, 5, 'Cheltuieli pentru îngrășăminte');
+            INSERT INTO expense_category(id, tenant_id, default_category_id, name) VALUES (16, 1, 6, 'Cheltuieli pentru pesticide');
+
+            SELECT setval('expense_category_id_seq', (SELECT MAX(id) FROM expense_category)+1);
+        </sql>
+    </changeSet>
 
     <changeSet id="insert-machinery-expense" author="maxim.nistreanu" failOnError="true" runOnChange="true">
         <validCheckSum>ANY</validCheckSum>
@@ -952,37 +988,4 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert_default_expense_categories" author="mihai.gorgos" failOnError="true" runOnChange="false">
-        <validCheckSum>ANY</validCheckSum>
-        <sql>
-            INSERT INTO expense_category(id, default_name) VALUES (1, 'expense-category.machinery');
-            INSERT INTO expense_category(id, default_name) VALUES (2, 'expense-category.fuel');
-            INSERT INTO expense_category(id, default_name) VALUES (3, 'expense-category.sowing');
-            INSERT INTO expense_category(id, default_name) VALUES (4, 'expense-category.works');
-            INSERT INTO expense_category(id, default_name) VALUES (5, 'expense-category.fertilizers');
-            INSERT INTO expense_category(id, default_name) VALUES (6, 'expense-category.pesticides');
-
-            SELECT setval('expense_category_id_seq', (SELECT MAX(id) FROM expense_category)+1);
-        </sql>
-    </changeSet>
-
-    <changeSet id="insert_tenant_1_expense_categories" author="mihai.gorgos" failOnError="true" runOnChange="false">
-        <validCheckSum>ANY</validCheckSum>
-        <sql>
-            INSERT INTO expense_category(id, tenant_id, default_name, name) VALUES ( 7, 1, 'expense-category.machinery', 'Cheltuieli pentru repararea mașinilor agricole');
-
-            INSERT INTO expense_category(id, tenant_id, default_name, name) VALUES ( 8, 1, 'expense-category.fuel', 'Cheltuieli pentru combustibil');
-            INSERT INTO expense_category(id, tenant_id, parent_id, name) VALUES ( 9, 1, 8, 'Motorină');
-            INSERT INTO expense_category(id, tenant_id, parent_id, name) VALUES (10, 1, 8, 'Ulei');
-            INSERT INTO expense_category(id, tenant_id, parent_id, name) VALUES (11, 1, 8, 'Solidol');
-            INSERT INTO expense_category(id, tenant_id, parent_id, name) VALUES (12, 1, 8, 'Negrol');
-
-            INSERT INTO expense_category(id, tenant_id, default_name, name) VALUES (13, 1, 'expense-category.sowing', 'Cheltuieli pentru însămânțare');
-            INSERT INTO expense_category(id, tenant_id, default_name, name) VALUES (14, 1, 'expense-category.works', 'Cheltuieli pentru lucrări agricole');
-            INSERT INTO expense_category(id, tenant_id, default_name, name) VALUES (15, 1, 'expense-category.fertilizers', 'Cheltuieli pentru îngrășăminte');
-            INSERT INTO expense_category(id, tenant_id, default_name, name) VALUES (16, 1, 'expense-category.pesticides', 'Cheltuieli pentru pesticide');
-
-            SELECT setval('expense_category_id_seq', (SELECT MAX(id) FROM expense_category)+1);
-        </sql>
-    </changeSet>
 </databaseChangeLog>
