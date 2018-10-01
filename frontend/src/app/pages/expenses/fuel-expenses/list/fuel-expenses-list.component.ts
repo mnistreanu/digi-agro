@@ -142,7 +142,7 @@ export class FuelExpensesComponent implements OnInit {
 
         expenseModels.forEach(expenseModel => {
             expenseModel.fuels.forEach(fuelModel => {
-                expenseModel[fuelModel.category] = fuelModel.quantity;
+                expenseModel[fuelModel.category] = (expenseModel[fuelModel.category] || 0) + (fuelModel.quantity || 0);
                 fuelMap[fuelModel.category] = fuelModel.category;
             });
         });
