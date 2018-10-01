@@ -19,6 +19,8 @@ public class ExpenseItemService implements HasRepository<ExpenseItemRepository> 
 
     @Autowired
     private ExpenseItemRepository expenseItemRepository;
+    @Autowired
+    private ExpenseCategoryService expenseCategoryService;
 
     @Override
     public ExpenseItemRepository getRepository() {
@@ -54,8 +56,13 @@ public class ExpenseItemService implements HasRepository<ExpenseItemRepository> 
                 continue;
             }
 
+            if (model.getCategoryId() != null) {
+                expenseItem.setCategory(expenseCategoryService.findOne(model.getCategoryId()));
+            }
+
             expenseItem.setTitle(model.getTitle());
             expenseItem.setTotalCost(model.getTotalCost());
+            expenseItem.setActualQuantity(model.getQuantity());
             items.add(expenseItem);
         }
 

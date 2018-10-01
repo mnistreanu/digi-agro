@@ -6,6 +6,7 @@ import {NumericUtil} from '../../../../common/numericUtil';
 import {PinnedRowRendererComponent} from '../../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
 import {ModalService} from '../../../../services/modal.service';
 import {FuelExpenseItemModel} from './fuel-expense-item.model';
+import {ExpenseCategoryModel} from '../../../enterprise/manage-expense-categories/expense-category/expense-category.model';
 
 @Component({
     selector: 'app-fuel-expense-item-table',
@@ -15,6 +16,9 @@ import {FuelExpenseItemModel} from './fuel-expense-item.model';
 export class FuelExpenseItemTableComponent implements OnInit {
 
     @Input() models: FuelExpenseItemModel[];
+    @Input() categories: ExpenseCategoryModel[];
+
+    categoryMap: any;
 
     confirmationModalId = 'expense-item-remove-confirmation-modal';
 
@@ -28,7 +32,31 @@ export class FuelExpenseItemTableComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.setupCategories();
         this.setupGrid();
+    }
+
+    private setupCategories() {
+        this.categoryMap = {};
+        this.categories.forEach(model => this.categoryMap[model.name] = model.id);
+    }
+
+    private extractCategoryLabels() {
+        return Object.keys(this.categoryMap);
+    }
+
+    private lookupCategoryId(key) {
+        return this.categoryMap[key];
+    }
+
+    private lookupCategoryLabel(value) {
+        for (const key in this.categoryMap) {
+            if (this.categoryMap.hasOwnProperty(key)) {
+                if (value === this.categoryMap[key]) {
+                    return key;
+                }
+            }
+        }
     }
 
     private setupGrid() {
@@ -68,6 +96,19 @@ export class FuelExpenseItemTableComponent implements OnInit {
                 }
             },
             {
+                headerName: 'Category',
+                field: 'categoryId',
+                width: 150,
+                minWidth: 150,
+                editable: params => !params.data.readOnly,
+                cellEditor: 'agSelectCellEditor',
+                cellEditorParams: {
+                    values: this.extractCategoryLabels()
+                },
+                valueFormatter: (params) => this.lookupCategoryLabel(params.value),
+                valueParser: (params) => this.lookupCategoryId(params.newValue)
+            },
+            {
                 headerName: 'Title',
                 field: 'title',
                 width: 175,
@@ -75,13 +116,13 @@ export class FuelExpenseItemTableComponent implements OnInit {
                 editable: params => !params.data.readOnly
             },
             {
-                headerName: 'Cost',
-                field: 'totalCost',
+                headerName: 'Quantity',
+                field: 'quantity',
                 width: 175,
                 minWidth: 175,
                 editable: params => !params.data.readOnly,
-                valueSetter: (params) => this.costValueSetter(params),
-                onCellValueChanged: (params) => this.onCostChange(params)
+                valueSetter: (params) => this.valueSetter(params),
+                onCellValueChanged: (params) => this.onValueChange(params)
             }
         ];
 
@@ -110,13 +151,12 @@ export class FuelExpenseItemTableComponent implements OnInit {
         const summaryRow = new FuelExpenseItemModel();
         summaryRow.readOnly = true;
         summaryRow.title = 'TOTAL';
-        summaryRow.totalCost = 0;
         models.forEach(model => this.aggregate(summaryRow, model, true));
         this.options.pinnedBottomRowData = [summaryRow];
     }
 
     private aggregate(source: FuelExpenseItemModel, item: FuelExpenseItemModel, applyAddition) {
-        const sumFields = ['totalCost'];
+        const sumFields = ['quantity'];
         sumFields.forEach(field => {
             source[field] = source[field] || 0;
             if (applyAddition) {
@@ -128,7 +168,7 @@ export class FuelExpenseItemTableComponent implements OnInit {
         });
     }
 
-    private costValueSetter(params) {
+    private valueSetter(params) {
         const newValue = params.newValue;
         if (newValue == params.oldValue) {
             return false;
@@ -144,7 +184,7 @@ export class FuelExpenseItemTableComponent implements OnInit {
         return true;
     }
 
-    private onCostChange(params) {
+    private onValueChange(params) {
         const field = params.colDef.field;
         const newValue = params.newValue || 0;
         const oldValue = params.oldValue || 0;
@@ -159,6 +199,7 @@ export class FuelExpenseItemTableComponent implements OnInit {
 
     public add() {
         const model = new FuelExpenseItemModel();
+        model.categoryId = this.categories[0].id;
         this.models.push(model);
         this.options.api.updateRowData({
             add: [model]

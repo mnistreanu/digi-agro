@@ -1,6 +1,7 @@
 package com.arobs.service.expense;
 
 import com.arobs.entity.Expense;
+import com.arobs.entity.ExpenseCategory;
 import com.arobs.entity.ExpenseItem;
 import com.arobs.entity.ExpenseResource;
 import com.arobs.interfaces.HasRepository;
@@ -22,15 +23,14 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
 
     @Autowired
     private ExpenseRepository expenseRepository;
-
     @Autowired
     private AuthService authService;
-
     @Autowired
     private ExpenseItemService expenseItemService;
-
     @Autowired
     private ExpenseResourceService expenseResourceService;
+    @Autowired
+    private ExpenseCategoryService expenseCategoryService;
 
     @Override
     public ExpenseRepository getRepository() {
@@ -76,7 +76,7 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
 
 
     @Transactional
-    public Expense save(ExpenseModel model, Long tenant) {
+    public Expense save(ExpenseModel model, Long tenant, Long defaultCategoryId) {
 
         Expense expense;
 
@@ -90,7 +90,9 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
             expense = findOne(model.getId());
         }
 
-        expense.setCategoryId(model.getCategoryId());
+        ExpenseCategory expenseCategory = expenseCategoryService.findDefault(defaultCategoryId);
+        expense.setCategoryId(expenseCategory.getId());
+
         expense.setTitle(model.getTitle());
         expense.setExpenseDate(model.getExpenseDate());
 
@@ -104,9 +106,9 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
     }
 
     @Transactional
-    public ExpenseModel saveModel(ExpenseModel model, Long tenant) {
+    public ExpenseModel saveModel(ExpenseModel model, Long tenant, Long defaultCategoryId) {
 
-        Expense expense = this.save(model, tenant);
+        Expense expense = save(model, tenant, defaultCategoryId);
         expenseItemService.save(model.getExpenseItems(), expense);
         expenseResourceService.save(expense.getId(), model.getMachines(), "machine");
         expenseResourceService.save(expense.getId(), model.getEmployees(), "employee");

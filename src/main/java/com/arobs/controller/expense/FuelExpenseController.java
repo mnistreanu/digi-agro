@@ -6,26 +6,22 @@ import com.arobs.entity.ExpenseCategory;
 import com.arobs.entity.Machine;
 import com.arobs.model.EmployeeModel;
 import com.arobs.model.MachineModel;
-import com.arobs.model.expense.*;
+import com.arobs.model.expense.ExpenseModel;
+import com.arobs.model.expense.FuelExpenseListModel;
 import com.arobs.service.EmployeeService;
 import com.arobs.service.MachineService;
 import com.arobs.service.expense.ExpenseService;
-import com.arobs.service.expense.FuelExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/fuel-expense")
 public class FuelExpenseController {
-
-    @Autowired
-    private FuelExpenseService fuelExpenseService;
 
     @Autowired
     private ExpenseService expenseService;
@@ -84,7 +80,7 @@ public class FuelExpenseController {
     public ResponseEntity<ExpenseModel> save(@RequestBody ExpenseModel model,
                                              HttpSession session) {
         Long tenant = (Long) session.getAttribute("tenant");
-        return ResponseEntity.ok(expenseService.saveModel(model, tenant));
+        return ResponseEntity.ok(expenseService.saveModel(model, tenant, ExpenseCategory.FUEL));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

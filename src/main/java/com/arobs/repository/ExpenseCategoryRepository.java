@@ -11,11 +11,13 @@ import java.util.List;
 @Repository
 public interface ExpenseCategoryRepository extends JpaRepository<ExpenseCategory, Long> {
 
-    @Query("SELECT ec FROM ExpenseCategory ec WHERE ec.tenantId IS NULL")
-    List<ExpenseCategory> findDefault();
-
     @Query("SELECT ec FROM ExpenseCategory ec WHERE ec.tenantId = :tenantId")
     List<ExpenseCategory> find(@Param("tenantId") Long tenantId);
 
+    @Query("SELECT ec FROM ExpenseCategory ec WHERE ec.parentId = :parentId")
+    List<ExpenseCategory> findByParent(@Param("parentId") Long parentId);
+
+    @Query("SELECT ec FROM ExpenseCategory ec WHERE ec.defaultCategoryId = :defaultCategoryId")
+    ExpenseCategory findDefault(@Param("defaultCategoryId") Long defaultCategoryId);
 }
 

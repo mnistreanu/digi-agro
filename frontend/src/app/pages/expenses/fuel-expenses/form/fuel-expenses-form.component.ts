@@ -10,6 +10,8 @@ import {Messages} from '../../../../common/messages';
 import {FuelExpenseService} from '../../../../services/expenses/fuel-expense.service';
 import {ModalService} from '../../../../services/modal.service';
 import {AlertService} from '../../../../services/alert.service';
+import {ExpenseCategoryService} from '../../../../services/expenses/expense-category.service';
+import {ExpenseCategoryModel} from '../../../enterprise/manage-expense-categories/expense-category/expense-category.model';
 
 @Component({
     selector: 'app-fuel-expenses-form',
@@ -24,6 +26,7 @@ export class FuelExpensesFormComponent implements OnInit {
     submitted = false;
 
     model: FuelExpenseModel;
+    categories: ExpenseCategoryModel[];
 
     machines: any[];
     employees: IMultiSelectOption[];
@@ -62,6 +65,7 @@ export class FuelExpensesFormComponent implements OnInit {
                 private route: ActivatedRoute,
                 private modalService: ModalService,
                 private fuelExpenseService: FuelExpenseService,
+                private expenseCategoryService: ExpenseCategoryService,
                 private machineService: MachineService,
                 private employeeService: EmployeeService,
                 private langService: LangService,
@@ -71,6 +75,7 @@ export class FuelExpensesFormComponent implements OnInit {
     ngOnInit() {
         this.setupMachines()
             .then(() => this.setupEmployees())
+            .then(() => this.setupCategories())
             .then(() => this.restoreModel());
     }
 
@@ -106,6 +111,15 @@ export class FuelExpensesFormComponent implements OnInit {
         });
     }
 
+    private setupCategories(): Promise<void> {
+        return new Promise((resolve) => {
+            this.expenseCategoryService.find('fuel').subscribe(models => {
+                this.categories = models;
+                resolve();
+            });
+        });
+    }
+
     private restoreModel() {
         this.route.params.subscribe(params => {
             const id = params['id'];
@@ -131,7 +145,6 @@ export class FuelExpensesFormComponent implements OnInit {
         this.model = new FuelExpenseModel();
         this.buildForm();
     }
-
 
     private buildForm() {
         const expenseDate = this.model.expenseDate ? this.model.expenseDate.toISOString().substring(0, 10) : null;

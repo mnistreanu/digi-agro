@@ -4,7 +4,6 @@ import com.arobs.entity.*;
 import com.arobs.model.expense.ExpenseItemModel;
 import com.arobs.model.expense.ExpenseListModel;
 import com.arobs.model.expense.ExpenseModel;
-import com.arobs.model.expense.ExpenseModel;
 import com.arobs.service.EmployeeService;
 import com.arobs.service.MachineService;
 import com.arobs.service.UserAccountService;
@@ -99,9 +98,9 @@ public class ManageExpenseService {
     }
 
     @Transactional
-    public ExpenseModel save(ExpenseModel model, Long tenant) {
+    public ExpenseModel save(ExpenseModel model, Long tenant, Long defaultCategoryId) {
 
-        Expense expense = expenseService.save(model, tenant);
+        Expense expense = expenseService.save(model, tenant, defaultCategoryId);
         expenseItemService.save(model.getExpenseItems(), expense);
         expenseResourceService.save(expense.getId(), model.getMachines(), "machine");
         expenseResourceService.save(expense.getId(), model.getEmployees(), "employee");

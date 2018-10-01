@@ -88,7 +88,7 @@ public class MachineryExpenseController {
     public ResponseEntity<ExpenseModel> save(@RequestBody ExpenseModel model,
                                              HttpSession session) {
         Long tenant = (Long) session.getAttribute("tenant");
-        return ResponseEntity.ok(expenseService.saveModel(model, tenant));
+        return ResponseEntity.ok(expenseService.saveModel(model, tenant, ExpenseCategory.MACHINERY));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

@@ -4,6 +4,7 @@ import com.arobs.entity.ExpenseCategory;
 import com.arobs.model.PayloadModel;
 import com.arobs.model.expense.ExpenseCategoryModel;
 import com.arobs.service.expense.ExpenseCategoryService;
+import com.sun.org.apache.xml.internal.security.keys.keyresolver.implementations.RetrievalMethodResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/expense-category")
@@ -47,6 +49,13 @@ public class ExpenseCategoryController {
         payloadModel.setPayload(list.toArray(arr));
         payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
         return ResponseEntity.ok(payloadModel);
+    }
+
+    @RequestMapping(value = "/category/{categoryName}", method = RequestMethod.GET)
+    public ResponseEntity<List<ExpenseCategoryModel>> getCategoriesTree(@PathVariable String categoryName) {
+        List<ExpenseCategory> categories = categoryService.find(categoryName);
+        List<ExpenseCategoryModel> models = categories.stream().map(ExpenseCategoryModel::new).collect(Collectors.toList());
+        return ResponseEntity.ok(models);
     }
 
 
