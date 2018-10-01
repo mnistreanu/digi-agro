@@ -59,6 +59,15 @@ export class FuelExpenseItemTableComponent implements OnInit {
         }
     }
 
+    private categoryValueSetter(params) {
+        const newValue = params.newValue;
+
+        const field = params.colDef.field;
+        params.data[field] = this.lookupCategoryId(newValue);
+
+        return true;
+    }
+
     private setupGrid() {
         this.options = <GridOptions>{};
 
@@ -105,8 +114,8 @@ export class FuelExpenseItemTableComponent implements OnInit {
                 cellEditorParams: {
                     values: this.extractCategoryLabels()
                 },
-                valueFormatter: (params) => this.lookupCategoryLabel(params.value),
-                valueParser: (params) => this.lookupCategoryId(params.newValue)
+                valueGetter: (params) => this.lookupCategoryLabel(params.data.categoryId),
+                valueSetter: (params) => this.categoryValueSetter(params)
             },
             {
                 headerName: 'Title',
