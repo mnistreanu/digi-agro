@@ -1,6 +1,6 @@
 import {MachineModel} from '../../../manage-machines/machine/machine.model';
 import {EmployeeModel} from '../../../employee/employee/employee.model';
-export class MachineryExpenseListModel {
+export class MachineryExpensesListModel {
   expenseId: number;
   expenseCategoryId: number;
   expenseDate: string;

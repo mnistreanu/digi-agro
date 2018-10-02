@@ -1,4 +1,4 @@
-export class SowingExpensesModel {
+export class SowingExpensesListModel {
   date: string;
   icon: string;
   crop: string;

@@ -8,8 +8,9 @@ import {MultiselectDropdownModule} from 'angular-2-dropdown-multiselect';
 import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-block.module';
 import {AgGridModule} from 'ag-grid-angular';
 import {MachineryExpensesListComponent} from './machinery-expenses/list/machinery-expenses-list.component';
-import {FuelExpensesComponent} from './fuel-expenses/list/fuel-expenses-list.component';
-import {SowingExpensesComponent} from './sowing-expenses/sowing-expenses.component';
+import {SowingExpensesListComponent} from './sowing-expenses/list/sowing-expenses-list.component';
+import {SowingExpensesFormComponent} from './sowing-expenses/form/sowing-expenses-form.component';
+import {FuelExpensesListComponent} from './fuel-expenses/list/fuel-expenses-list.component';
 import {WorksExpensesComponent} from './works-expenses/works-expenses.component';
 import {FertilizersExpensesComponent} from './fertilizers-expenses/fertilizers-expenses.component';
 import {PesticidesExpensesComponent} from './pesticides-expenses/pesticides-expenses.component';
@@ -29,17 +30,22 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2
 import {FuelExpensesFormComponent} from './fuel-expenses/form/fuel-expenses-form.component';
 import { ExpenseListComponent } from './expense-list/expense-list.component';
 import {FuelExpenseItemTableComponent} from './fuel-expenses/expense-item-table/fuel-expense-item-table.component';
+import {SowingExpenseItemTableComponent} from './sowing-expenses/expense-item-table/sowing-expense-item-table.component';
 
 export const routes = [
     {path: '', component: ExpenseListComponent},
     {path: 'machinery', component: MachineryExpensesListComponent},
     {path: 'machinery/:id', component: MachineryExpensesFormComponent, canActivate: [AdminGuard]},
-    {path: 'fuel', component: FuelExpensesComponent},
+    {path: 'fuel', component: FuelExpensesListComponent},
     {path: 'fuel/:id', component: FuelExpensesFormComponent, canActivate: [AdminGuard]},
-    {path: 'sowing', component: SowingExpensesComponent},
+    {path: 'sowing', component: SowingExpensesListComponent},
+    {path: 'sowing/:id', component: SowingExpensesFormComponent},
     {path: 'works', component: WorksExpensesComponent},
+    {path: 'works/:id', component: WorksExpensesComponent},
     {path: 'fertilizers', component: FertilizersExpensesComponent},
-    {path: 'pesticides', component: PesticidesExpensesComponent}
+    {path: 'fertilizers/:id', component: FertilizersExpensesComponent},
+    {path: 'pesticides', component: PesticidesExpensesComponent},
+    {path: 'pesticides/:id', component: PesticidesExpensesComponent},
 ];
 
 @NgModule({
@@ -67,15 +73,17 @@ export const routes = [
     ],
     declarations: [
         MachineryExpensesListComponent,
-        FuelExpensesComponent,
+        MachineryExpensesFormComponent,
+        MachineryExpenseItemTableComponent,
+        FuelExpensesListComponent,
         FuelExpensesFormComponent,
-        SowingExpensesComponent,
+        FuelExpenseItemTableComponent,
+        SowingExpensesListComponent,
+        SowingExpensesFormComponent,
+        SowingExpenseItemTableComponent,
         WorksExpensesComponent,
         PesticidesExpensesComponent,
         FertilizersExpensesComponent,
-        MachineryExpensesFormComponent,
-        MachineryExpenseItemTableComponent,
-        FuelExpenseItemTableComponent,
         ExpenseListComponent
     ]
 })

@@ -1,17 +1,15 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ColDef, ColGroupDef, GridOptions} from 'ag-grid';
-import {LangService} from '../../../services/lang.service';
-import {WeatherService} from '../../../services/weather.service';
-import {ImageRendererComponent} from '../../../modules/aggrid/image-renderer/image-renderer.component';
-import {SowingExpensesModel} from './sowing-expenses.model';
+import {LangService} from '../../../../services/lang.service';
+import {ImageRendererComponent} from '../../../../modules/aggrid/image-renderer/image-renderer.component';
 
 @Component({
-    selector: 'app-sowing-expenses',
+    selector: 'app-sowing-expenses-list',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: './sowing-expenses.component.html',
-    styleUrls: ['./sowing-expenses.component.scss']
+    templateUrl: './sowing-expenses-list.component.html',
+    styleUrls: ['./sowing-expenses-list.component.scss']
 })
-export class SowingExpensesComponent implements OnInit {
+export class SowingExpensesListComponent implements OnInit {
     options: GridOptions;
     context;
 
@@ -29,8 +27,7 @@ export class SowingExpensesComponent implements OnInit {
     labelPriceUnit: string;
     labelCostTotal: string;
 
-    constructor(private weatherService: WeatherService,
-                private langService: LangService) {
+    constructor(private langService: LangService) {
     }
 
     ngOnInit() {

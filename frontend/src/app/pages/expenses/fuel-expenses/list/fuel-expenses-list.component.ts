@@ -15,7 +15,7 @@ import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/ed
     templateUrl: './fuel-expenses-list.component.html',
     styleUrls: ['./fuel-expenses-list.component.scss']
 })
-export class FuelExpensesComponent implements OnInit {
+export class FuelExpensesListComponent implements OnInit {
     readOnly;
 
     options: GridOptions;
@@ -162,8 +162,8 @@ export class FuelExpensesComponent implements OnInit {
             const fuelColumn = {
                 headerName: fuel,
                 field: fuel,
-                width: 180,
-                minWidth: 180,
+                width: 120,
+                minWidth: 120,
                 pinnedRowCellRenderer: 'customPinnedRowRenderer',
                 pinnedRowCellRendererParams: { style: { fontWeight: 'bold' } }
             };
