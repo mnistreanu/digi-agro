@@ -59,8 +59,8 @@
 	"employee": {
 		"employee": "Employee",
 		"employees": "Employees",
-		"first-name": "First Name",
 		"first-last-name": "First & Last name",
+		"first-name": "First Name",
 		"last-name": "Last Name",
 		"title": "Title"
 	},
@@ -93,6 +93,7 @@
 		"quantity": "Quantity",
 		"responsible-persons": "Responsible Persons",
 		"sowing": "Expenses for sowing",
+		"norm-at": "Norm at",
 		"total-cost": "Total cost",
 		"total-spent": "Total spent",
 		"unit-cost": "Unit cost"
@@ -312,6 +313,8 @@
 		"last-work": "Last Work",
 		"last-work-date": "Last Work Date",
 		"name": "Parcel",
+		"one-ha": "1 Ha",
+		"total-ha": "Total Ha",
 		"parcels": "Parcels",
 		"planted-at": "Planted At",
 		"plants-count": "Number of plants",

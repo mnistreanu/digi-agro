@@ -4,7 +4,8 @@ public enum UnitOfMeasure {
     Tone("t"),
     Quintal("q"),
     Kilogram("kg"),
-    Litre("l");
+    Litre("l"),
+    SowingUnit("su");
 
     private String unitOfMeasure;
 

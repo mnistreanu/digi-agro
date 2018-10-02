@@ -46,7 +46,7 @@ public class FuelExpenseService {
 //                FuelExpenseListModel listModel = new FuelExpenseListModel();
 //                models.add(listModel);
 //                listModel.setExpenseId(expense.getId());
-//                listModel.setExpenseDate(expense.getExpenseDate());
+//                listModel.setPlantingDate(expense.getExpenseDate());
 //                listModel.setEmployee(employeeStr);
 //                listModel.setMachine(machinesStr);
 //            }

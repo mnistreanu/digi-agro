@@ -30,4 +30,8 @@ public class ParcelService implements HasRepository<ParcelRepository> {
         return parcelGeometryRepository.findOne(parcelId);
     }
 
+    public List<Parcel> findAll(List<Long> ids) {
+        return getRepository().findAll(ids);
+    }
+
 }

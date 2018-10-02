@@ -59,8 +59,8 @@
 	"employee": {
 		"employee": "Работник",
 		"employees": "Сотрудники",
-		"first-name": "Имя",
 		"first-last-name": "Имя Фамилия",
+		"first-name": "Имя",
 		"last-name": "Фамилия",
 		"title": "Титул"
 	},
@@ -93,6 +93,7 @@
 		"quantity": "Количество",
 		"responsible-persons": "Ответственные лица",
 		"sowing": "Расходы на посев",
+		"norm-at": "Норма на",
 		"total-cost": "Общая стоимость",
 		"total-spent": "Всего потрачено",
 		"unit-cost": "Цена за единицу"
@@ -312,6 +313,8 @@
 		"last-work": "Последняя работа",
 		"last-work-date": "Дата последней работы",
 		"name": "Участок",
+		"one-ha": "1 га",
+		"total-ha": "1 га",
 		"parcels": "Участки",
 		"planted-at": "Дата посадки",
 		"plants-count": "Количество растений",

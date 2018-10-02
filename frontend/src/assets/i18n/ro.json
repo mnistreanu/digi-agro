@@ -59,8 +59,8 @@
 	"employee": {
 		"employee": "Angajat",
 		"employees": "Angajați",
-		"first-name": "Prenume",
 		"first-last-name": "Prenume Nume",
+		"first-name": "Prenume",
 		"last-name": "Nume",
 		"title": "Titlu"
 	},
@@ -93,6 +93,7 @@
 		"quantity": "Cantitate",
 		"responsible-persons": "Persoane responsabile",
 		"sowing": "Cheltuieli pentru însămânțare",
+		"norm-at": "Norma la",
 		"total-cost": "Cost total",
 		"total-spent": "Total cheltuit",
 		"unit-cost": "Preț unitar"
@@ -312,6 +313,8 @@
 		"last-work": "Ultima lucrare",
 		"last-work-date": "Ultima dată de lucru",
 		"name": "Parcela",
+		"one-ha": "1 Ha",
+		"total-ha": "Total Ha",
 		"parcels": "Parcele",
 		"planted-at": "Data plantării",
 		"plants-count": "Numărul de plante",

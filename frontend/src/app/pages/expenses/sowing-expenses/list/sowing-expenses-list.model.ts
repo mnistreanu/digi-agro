@@ -1,14 +1,16 @@
 export class SowingExpensesListModel {
-  date: string;
+  plantingDate: string;
   icon: string;
   crop: string;
   variety: string;
   cropAndVariety: string;
   unitOfMeasure: string;
-  sownArea: number;
+  area: number;
   parcels: string;
-  sown1Ha: number;
-  totalSown: number;
+  normSow1Ha: number;
+  normSowTotal: number;
+  actualSown1Ha: number;
+  actualSownTotal: number;
   unitPrice: number;
   totalAmount: number;
 }
