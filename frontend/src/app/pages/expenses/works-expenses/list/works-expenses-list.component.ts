@@ -2,7 +2,9 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../../services/lang.service';
 import {MachineService} from '../../../../services/machine.service';
-import {WorksExpensesModel} from './works-expenses-list.model';
+import {WorksExpensesListModel} from './works-expenses-list.model';
+import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
+import {WorksExpenseService} from '../../../../services/expenses/works-expense.service';
 
 @Component({
     selector: 'app-works-expenses',
@@ -10,52 +12,54 @@ import {WorksExpensesModel} from './works-expenses-list.model';
     templateUrl: './works-expenses-list.component.html',
     styleUrls: ['./works-expenses-list.component.scss']
 })
-export class WorksExpensesComponent implements OnInit {
+export class WorksExpensesListComponent implements OnInit {
+    readOnly;
     options: GridOptions;
     context;
 
-    labelDate: string;
-    labelAgroWorkType: string;
-    labelCrop: string;
-    labelUnitOfMeasureShort: string;
-    labelUnitOfMeasureLong: string;
-    labelQuantity: string;
-    labelNorm: string;
-    labelDefacto: string;
-    labelPrice1Norm: string;
-    labelSum: string;
-    labelMachineType: string;
-    labelAgriculturalMachinery: string;
-    labelIdentifier: string;
-    labelFirstName: string;
-    labelLastName: string;
+    // labelDate: string;
+    // labelAgroWorkType: string;
+    // labelCrop: string;
+    // labelUnitOfMeasureShort: string;
+    // labelUnitOfMeasureLong: string;
+    // labelQuantity: string;
+    // labelNorm: string;
+    // labelDefacto: string;
+    // labelPrice1Norm: string;
+    // labelSum: string;
+    // labelMachineType: string;
+    // labelAgriculturalMachinery: string;
+    // labelIdentifier: string;
+    // labelFirstName: string;
+    // labelLastName: string;
 
     constructor(private machineService: MachineService,
+                private worksExpenseService: WorksExpenseService,
                 private langService: LangService) {
     }
 
     ngOnInit() {
-        this.setupLabels();
+        // this.setupLabels();
         this.setupGrid();
     }
-
-    private setupLabels() {
-        this.langService.get('agro-work.date').subscribe(msg => this.labelDate = msg);
-        this.langService.get('agro-work.type').subscribe(msg => this.labelAgroWorkType = msg);
-        this.langService.get('crop.name').subscribe(msg => this.labelCrop = msg);
-        this.langService.get('unit-of-measure.unit-short').subscribe(msg => this.labelUnitOfMeasureShort = msg);
-        this.langService.get('unit-of-measure.unit-long').subscribe(msg => this.labelUnitOfMeasureLong = msg);
-        this.langService.get('agro-work.quantity').subscribe(msg => this.labelQuantity = msg);
-        this.langService.get('agro-work.norm').subscribe(msg => this.labelNorm = msg);
-        this.langService.get('agro-work.defacto').subscribe(msg => this.labelDefacto = msg);
-        this.langService.get('agro-work.price-1-norm').subscribe(msg => this.labelPrice1Norm = msg);
-        this.langService.get('agro-work.sum').subscribe(msg => this.labelSum = msg);
-        this.langService.get('machine.type').subscribe(msg => this.labelMachineType = msg);
-        this.langService.get('machine.agricultural-machinery').subscribe(msg => this.labelAgriculturalMachinery = msg);
-        this.langService.get('machine.identifier').subscribe(msg => this.labelIdentifier = msg);
-        this.langService.get('employee.first-name').subscribe(msg => this.labelFirstName = msg);
-        this.langService.get('employee.last-name').subscribe(msg => this.labelLastName = msg);
-    }
+    //
+    // private setupLabels() {
+    //     this.langService.get('agro-work.date').subscribe(msg => this.labelDate = msg);
+    //     this.langService.get('agro-work.type').subscribe(msg => this.labelAgroWorkType = msg);
+    //     this.langService.get('crop.name').subscribe(msg => this.labelCrop = msg);
+    //     this.langService.get('unit-of-measure.unit-short').subscribe(msg => this.labelUnitOfMeasureShort = msg);
+    //     this.langService.get('unit-of-measure.unit-long').subscribe(msg => this.labelUnitOfMeasureLong = msg);
+    //     this.langService.get('agro-work.quantity').subscribe(msg => this.labelQuantity = msg);
+    //     this.langService.get('agro-work.norm').subscribe(msg => this.labelNorm = msg);
+    //     this.langService.get('agro-work.defacto').subscribe(msg => this.labelDefacto = msg);
+    //     this.langService.get('agro-work.price-1-norm').subscribe(msg => this.labelPrice1Norm = msg);
+    //     this.langService.get('agro-work.sum').subscribe(msg => this.labelSum = msg);
+    //     this.langService.get('machine.type').subscribe(msg => this.labelMachineType = msg);
+    //     this.langService.get('machine.agricultural-machinery').subscribe(msg => this.labelAgriculturalMachinery = msg);
+    //     this.langService.get('machine.identifier').subscribe(msg => this.labelIdentifier = msg);
+    //     this.langService.get('employee.first-name').subscribe(msg => this.labelFirstName = msg);
+    //     this.langService.get('employee.last-name').subscribe(msg => this.labelLastName = msg);
+    // }
 
 
     private setupGrid() {
@@ -73,89 +77,106 @@ export class WorksExpensesComponent implements OnInit {
 
     private setupHeaders() {
 
-        const headers: ColDef[] = [
+        let headers: ColDef[] = [];
+
+        if (!this.readOnly) {
+            headers.push({
+                field: 'edit',
+                width: 24,
+                minWidth: 24,
+                editable: false,
+                suppressResize: true,
+                suppressMenu: true,
+                cellRendererFramework: EditRendererComponent,
+                cellStyle: () => {
+                    return {padding: 0};
+                }
+            });
+        }
+
+        headers = headers.concat([
             {
-                headerName: this.labelDate,
+                headerName: 'agro-work.date',
                 field: 'date',
                 width: 90,
                 minWidth: 90,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelAgroWorkType,
+                headerName: 'agro-work.type',
                 field: 'workType',
                 width: 100,
                 minWidth: 100,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelCrop,
+                headerName: 'crop.name',
                 field: 'crop',
                 width: 180,
                 minWidth: 180
             },
             {
-                headerName: this.labelUnitOfMeasureShort,
-                headerTooltip: this.labelUnitOfMeasureLong,
+                headerName: 'unit-of-measure.unit-short',
+                headerTooltip: 'unit-of-measure.unit-long',
                 field: 'unitOfMeasure',
                 width: 60,
                 minWidth: 60,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelQuantity,
-                headerTooltip: this.labelQuantity,
+                headerName: 'expenses.quantity',
+                headerTooltip: 'expenses.quantity',
                 field: 'quantity',
                 width: 60,
                 minWidth: 60,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelNorm,
-                headerTooltip: this.labelNorm,
+                headerName: 'expenses.norm',
+                headerTooltip: 'expenses.norm',
                 field: 'quantityNorm',
                 width: 60,
                 minWidth: 60,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelDefacto,
-                headerTooltip: this.labelDefacto,
+                headerName: 'expenses.defacto',
+                headerTooltip: 'expenses.defacto',
                 field: 'quantityDefacto',
                 width: 60,
                 minWidth: 60,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelPrice1Norm,
-                headerTooltip: this.labelPrice1Norm,
+                headerName: 'expenses.price-1-norm',
+                headerTooltip: 'expenses.price-1-norm',
                 field: 'price1Norm',
                 width: 60,
                 minWidth: 60,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelSum,
+                headerName: 'expenses.sum',
                 field: 'sum',
                 width: 60,
                 minWidth: 60,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelAgriculturalMachinery,
+                headerName: 'machine.agricultural-machinery',
                 field: 'brandModel',
                 width: 180,
                 minWidth: 180
             },
+            // {
+            //     headerName: this.labelIdentifier,
+            //     field: 'identifier',
+            //     width: 60,
+            //     minWidth: 60,
+            //     suppressFilter: true,
+            // },
             {
-                headerName: this.labelIdentifier,
-                field: 'identifier',
-                width: 60,
-                minWidth: 60,
-                suppressFilter: true,
-            },
-            {
-                headerName: this.labelLastName   + ' ' +this.labelFirstName ,
+                headerName: 'employee.first-last-name' ,
                 field: 'employee',
                 width: 100,
                 minWidth: 100,
@@ -173,7 +194,26 @@ export class WorksExpensesComponent implements OnInit {
                 width: 60,
                 minWidth: 60,
             },
-        ];
+        ]);
+
+
+        headers.forEach(header => {
+            if (header.headerName) {
+                this.langService.get(header.headerName).subscribe(m => header.headerName = m);
+
+                if (header.children) {
+                    header.children.forEach(childHeader => {
+                        if (childHeader.headerName) {
+                            this.langService.get(childHeader.headerName).subscribe(m => childHeader.headerName = m);
+                        }
+                    });
+                }
+            }
+
+            if (header.headerTooltip) {
+                this.langService.get(header.headerTooltip).subscribe(m => header.headerTooltip = m);
+            }
+        });
 
         return headers;
     }
@@ -183,7 +223,7 @@ export class WorksExpensesComponent implements OnInit {
         let i = 0;
         this.machineService.findAll().subscribe(modelsArray => {
             const rows = modelsArray.map(data => {
-                const model = new WorksExpensesModel();
+                const model = new WorksExpensesListModel();
                 model.date = new Date().toLocaleDateString();
                 model.workType = 'Cultivat';
                 model.crop = 'Porumb';

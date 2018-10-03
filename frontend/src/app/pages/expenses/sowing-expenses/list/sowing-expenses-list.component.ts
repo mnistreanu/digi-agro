@@ -70,7 +70,7 @@ export class SowingExpensesListComponent implements OnInit {
 
     private setupHeaders() {
 
-        let headers: ColDef[] = [];
+        let headers: (ColDef | ColGroupDef)[] = [];
 
         if (!this.readOnly) {
             headers.push({
@@ -146,8 +146,7 @@ export class SowingExpensesListComponent implements OnInit {
                         width: 100,
                         minWidth: 100,
                         suppressFilter: true,
-                    },
-
+                    }
                 ]
             },
             {
@@ -206,13 +205,13 @@ export class SowingExpensesListComponent implements OnInit {
             if (header.headerName) {
                 this.langService.get(header.headerName).subscribe(m => header.headerName = m);
 
-                if (header.children) {
-                    header.children.forEach(childHeader => {
-                        if (childHeader.headerName) {
-                            this.langService.get(childHeader.headerName).subscribe(m => childHeader.headerName = m);
-                        }
-                    });
-                }
+                // if (header.children) {
+                //     header.children.forEach(childHeader => {
+                //         if (childHeader.headerName) {
+                //             this.langService.get(childHeader.headerName).subscribe(m => childHeader.headerName = m);
+                //         }
+                //     });
+                // }
             }
 
             if (header.headerTooltip) {

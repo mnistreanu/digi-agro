@@ -12,11 +12,6 @@
 	},
 	"agro-work": {
 		"date": "Date",
-		"defacto": "De facto",
-		"norm": "Norm",
-		"price-1-norm": "Price per 1 / norm",
-		"quantity": "Quantity",
-		"sum": "Sum",
 		"type": "Type of work"
 	},
 	"auth": {
@@ -84,16 +79,20 @@
 		"categories": "Expense categories",
 		"cost": "Cost",
 		"date": "Date",
+		"defacto": "De facto",
 		"details": "Expense details",
 		"element": "Element",
 		"expenses": "Expenses",
 		"fertilizers": "Expenses for fertilizers",
 		"fuel": "Expenses for fuel",
+		"norm": "Norm",
 		"pesticides": "Expenses for pesticides",
+		"price-1-norm": "Price per 1 / norm",
 		"quantity": "Quantity",
 		"responsible-persons": "Responsible Persons",
 		"sowing": "Expenses for sowing",
 		"norm-at": "Norm at",
+		"sum": "Sum",
 		"total-cost": "Total cost",
 		"total-spent": "Total spent",
 		"unit-cost": "Unit cost"

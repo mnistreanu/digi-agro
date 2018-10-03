@@ -1,4 +1,4 @@
-export class WorksExpensesModel {
+export class WorksExpensesListModel {
     date: string;
     workType: string;
     crop: string;

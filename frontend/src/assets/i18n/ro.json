@@ -12,11 +12,6 @@
 	},
 	"agro-work": {
 		"date": "Data",
-		"defacto": "De facto",
-		"norm": "Norma",
-		"price-1-norm": "Prețul pe 1 / norma",
-		"quantity": "Cantitate",
-		"sum": "Suma",
 		"type": "Tipul lucrării"
 	},
 	"auth": {
@@ -84,16 +79,20 @@
 		"categories": "Categorii de cheltuieli",
 		"cost": "Preț",
 		"date": "Data",
+		"defacto": "De facto",
 		"details": "Detalii cheltuieli",
 		"element": "Element",
 		"expenses": "Cheltuieli",
 		"fertilizers": "Cheltuieli pentru îngrășăminte",
 		"fuel": "Cheltuieli pentru combustibil",
+		"norm": "Norma",
 		"pesticides": "Cheltuieli pentru pesticide",
+		"price-1-norm": "Prețul pe 1 / norma",
 		"quantity": "Cantitate",
 		"responsible-persons": "Persoane responsabile",
 		"sowing": "Cheltuieli pentru însămânțare",
 		"norm-at": "Norma la",
+		"sum": "Suma",
 		"total-cost": "Cost total",
 		"total-spent": "Total cheltuit",
 		"unit-cost": "Preț unitar"

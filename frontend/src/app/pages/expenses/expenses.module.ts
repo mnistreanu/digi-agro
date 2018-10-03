@@ -11,7 +11,7 @@ import {MachineryExpensesListComponent} from './machinery-expenses/list/machiner
 import {SowingExpensesListComponent} from './sowing-expenses/list/sowing-expenses-list.component';
 import {SowingExpensesFormComponent} from './sowing-expenses/form/sowing-expenses-form.component';
 import {FuelExpensesListComponent} from './fuel-expenses/list/fuel-expenses-list.component';
-import {WorksExpensesComponent} from './works-expenses/list/works-expenses-list.component';
+import {WorksExpensesListComponent} from './works-expenses/list/works-expenses-list.component';
 import {FertilizersExpensesComponent} from './fertilizers-expenses/fertilizers-expenses.component';
 import {PesticidesExpensesComponent} from './pesticides-expenses/pesticides-expenses.component';
 import {ImageRendererComponent} from '../../modules/aggrid/image-renderer/image-renderer.component';
@@ -40,8 +40,8 @@ export const routes = [
     {path: 'fuel/:id', component: FuelExpensesFormComponent, canActivate: [AdminGuard]},
     {path: 'sowing', component: SowingExpensesListComponent},
     {path: 'sowing/:id', component: SowingExpensesFormComponent},
-    {path: 'works', component: WorksExpensesComponent},
-    {path: 'works/:id', component: WorksExpensesComponent},
+    {path: 'works', component: WorksExpensesListComponent},
+    {path: 'works/:id', component: WorksExpensesListComponent},
     {path: 'fertilizers', component: FertilizersExpensesComponent},
     {path: 'fertilizers/:id', component: FertilizersExpensesComponent},
     {path: 'pesticides', component: PesticidesExpensesComponent},
@@ -81,7 +81,7 @@ export const routes = [
         SowingExpensesListComponent,
         SowingExpensesFormComponent,
         SowingExpenseItemTableComponent,
-        WorksExpensesComponent,
+        WorksExpensesListComponent,
         PesticidesExpensesComponent,
         FertilizersExpensesComponent,
         ExpenseListComponent
