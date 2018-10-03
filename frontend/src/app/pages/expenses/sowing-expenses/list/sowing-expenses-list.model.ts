@@ -1,5 +1,7 @@
 export class SowingExpensesListModel {
-  plantingDate: string;
+  expenseId: number;
+  expenseCategoryId: number;
+  expenseDate: string;
   icon: string;
   crop: string;
   variety: string;

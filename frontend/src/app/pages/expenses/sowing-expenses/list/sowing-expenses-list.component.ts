@@ -3,7 +3,9 @@ import {ColDef, ColGroupDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../../services/lang.service';
 import {ImageRendererComponent} from '../../../../modules/aggrid/image-renderer/image-renderer.component';
 import {SowingExpenseService} from '../../../../services/expenses/sowing-expense.service';
-import {SowingExpensesListModel} from "./sowing-expenses-list.model";
+import {SowingExpensesListModel} from './sowing-expenses-list.model';
+import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
+import {DateUtil} from "../../../../common/dateUtil";
 
 @Component({
     selector: 'app-sowing-expenses-list',
@@ -12,6 +14,8 @@ import {SowingExpensesListModel} from "./sowing-expenses-list.model";
     styleUrls: ['./sowing-expenses-list.component.scss']
 })
 export class SowingExpensesListComponent implements OnInit {
+    readOnly;
+
     options: GridOptions;
     context;
     //
@@ -66,41 +70,49 @@ export class SowingExpensesListComponent implements OnInit {
 
     private setupHeaders() {
 
-        const headers: (ColDef | ColGroupDef)[] = [
+        let headers: ColDef[] = [];
+
+        if (!this.readOnly) {
+            headers.push({
+                field: 'edit',
+                width: 24,
+                minWidth: 24,
+                editable: false,
+                suppressResize: true,
+                suppressMenu: true,
+                cellRendererFramework: EditRendererComponent,
+                cellStyle: () => {
+                    return {padding: 0};
+                }
+            });
+        }
+
+        headers = headers.concat([
             {
-                headerName: '',
-                field: 'icon',
-                cellRendererFramework: ImageRendererComponent,
-                cellRendererParams: {
-                    iconField: 'icon'
-                },
-                width: 40,
-                minWidth: 40,
+                headerName: 'expenses.date',
+                field: 'expenseDate',
+                width: 90,
+                minWidth: 90,
+                suppressFilter: true,
+                valueFormatter: (params) => DateUtil.formatDate(params.value)
             },
-            // {
-            //     headerName: 'crop.planting-date',
-            //     field: 'plantingDate',
-            //     width: 90,
-            //     minWidth: 90,
-            //     suppressFilter: true,
-            // },
             {
                 headerName: 'crop.seeds',
-                field: 'crop',
+                field: 'cropAndVariety',
                 width: 180,
                 minWidth: 180
             },
-            {
-                headerName: 'crop.variety',
-                field: 'variety',
-                width: 180,
-                minWidth: 180
-            },
+            // {
+            //     headerName: 'crop.variety',
+            //     field: 'variety',
+            //     width: 180,
+            //     minWidth: 180
+            // },
             {
                 headerName: 'crop.unit-of-measure-short',
                 field: 'unitOfMeasure',
-                width: 60,
-                minWidth: 60,
+                width: 100,
+                minWidth: 100,
                 suppressFilter: true,
                 headerTooltip: 'crop.unit-of-measure-long',
             },
@@ -188,7 +200,7 @@ export class SowingExpensesListComponent implements OnInit {
                     },
                 ]
             },
-        ];
+        ]);
 
         headers.forEach(header => {
             if (header.headerName) {
@@ -214,37 +226,10 @@ export class SowingExpensesListComponent implements OnInit {
 
     public setupRows() {
         this.sowingExpenseService.find().subscribe(models => {
-            // models.forEach(model => {
-            //     let listModel: SowingExpensesListModel;
-            //     listModel.expenseDate = model.expenseDate;
-            //     listModel.icon = '/assets/img/crops/wheat.png';
-            //     listModel.crop = 'Porumb';
-            //     listModel.variety = 'Mama';
-            //     listModel.cropAndVariety = 'Porumb "Mama"';
-            //     listModel.unitOfMeasure = 'tone';
-            //     listModel.area = 121;
-            //     listModel.parcels = 'Jora de Sus, Campul din deal, Delta Dunarii';
-            //     listModel.sown1Ha = 51;
-            //     listModel.sownTotal = listModel.area * listModel.sown1Ha;
-            //     listModel.unitPrice = 15.20;
-            //     listModel.totalAmount = listModel.unitPrice * listModel.unitPrice;
-            // });
-            // const rows = models.payload.map(data => {
-            //     const model = new SowingExpensesListModel();
-            //     model.date = new Date(data.dt).toLocaleDateString();
-            //     model.icon = '/assets/img/crops/wheat.png';
-            //     model.crop = 'Porumb';
-            //     model.variety = 'Mama';
-            //     model.cropAndVariety = 'Porumb "Mama"',
-            //     model.unitOfMeasure = 'tone';
-            //     model.sownArea = 121;
-            //     model.parcels = 'Jora de Sus, Campul din deal, Delta Dunarii',
-            //     model.sown1Ha = 51;
-            //     model.sownTotal = model.sownArea * model.sown1Ha;
-            //     model.unitPrice = 15.20;
-            //     model.totalAmount = model.unitPrice * model.unitPrice;
-            //     return model;
-            // });
+            models.forEach(model => {
+                model.cropAndVariety = model.crop + ' ' + model.variety;
+                model.unitOfMeasure = this.langService.instant('unit-of-measure.' + model.unitOfMeasure);
+            });
 
             debugger;
             this.options.api.setRowData(models);

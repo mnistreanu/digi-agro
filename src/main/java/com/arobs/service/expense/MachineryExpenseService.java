@@ -46,7 +46,7 @@ public class MachineryExpenseService {
 //                MachineryExpenseListModel listModel = new MachineryExpenseListModel();
 //                models.add(listModel);
 //                listModel.setExpenseId(expense.getId());
-//                listModel.setPlantingDate(expense.getExpenseDate());
+//                listModel.setExpenseDate(expense.getExpenseDate());
 //                listModel.setSparePart(expenseItemModel.getTitle());
 //                listModel.setSparePartPrice(expenseItemModel.getTotalCost());
 //                listModel.setEmployees(employeeStr);

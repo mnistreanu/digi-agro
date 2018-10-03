@@ -43,7 +43,8 @@ public class SowingExpenseController {
             }
 
             SowingExpenseListModel model1 = new SowingExpenseListModel();
-            model1.setPlantingDate(expense.getExpenseDate());
+            model1.setExpenseId(expense.getId());
+            model1.setExpenseDate(expense.getExpenseDate());
             model1.setCrop("Porumb");
             model1.setVariety("Mama");
             model1.setIcon("corn.png");
@@ -58,7 +59,8 @@ public class SowingExpenseController {
             resultModels.add(model1);
 
             SowingExpenseListModel model2 = new SowingExpenseListModel();
-            model2.setPlantingDate(expense.getExpenseDate());
+            model2.setExpenseId(expense.getId());
+            model2.setExpenseDate(expense.getExpenseDate());
             model2.setCrop("Cartof");
             model2.setVariety("Irga");
             model1.setIcon("potatoes.png");
@@ -73,7 +75,8 @@ public class SowingExpenseController {
             resultModels.add(model2);
 
             SowingExpenseListModel model3 = new SowingExpenseListModel();
-            model3.setPlantingDate(expense.getExpenseDate());
+            model3.setExpenseId(expense.getId());
+            model3.setExpenseDate(expense.getExpenseDate());
             model3.setCrop("Griu");
             model3.setVariety("Aktios");
             model1.setIcon("wheat.png");
@@ -91,7 +94,7 @@ public class SowingExpenseController {
 //                SowingExpenseListModel listModel = new SowingExpenseListModel();
 //                resultModels.add(listModel);
 //                listModel.setExpenseId(expense.getId());
-//                listModel.setPlantingDate(expense.getPlantingDate());
+//                listModel.setExpenseDate(expense.getExpenseDate());
 //                listModel.setSparePart(expenseItemModel.getTitle());
 //                listModel.setSparePartPrice(expenseItemModel.getTotalCost());
 //                listModel.setParcels(parcelModels);

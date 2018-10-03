@@ -10,7 +10,7 @@ import java.util.List;
 public class SowingExpenseListModel {
 
     private Long expenseId;
-    private Date plantingDate;
+    private Date expenseDate;
     private List<ParcelModel> parcels = new ArrayList<>();
     private String crop;
     private String variety;
@@ -38,12 +38,12 @@ public class SowingExpenseListModel {
         this.expenseId = expenseId;
     }
 
-    public Date getPlantingDate() {
-        return plantingDate;
+    public Date getExpenseDate() {
+        return expenseDate;
     }
 
-    public void setPlantingDate(Date expenseDate) {
-        this.plantingDate = expenseDate;
+    public void setExpenseDate(Date expenseDate) {
+        this.expenseDate = expenseDate;
     }
 
     public List<ParcelModel> getParcels() {
