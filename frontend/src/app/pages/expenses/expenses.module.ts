@@ -11,7 +11,7 @@ import {MachineryExpensesListComponent} from './machinery-expenses/list/machiner
 import {SowingExpensesListComponent} from './sowing-expenses/list/sowing-expenses-list.component';
 import {SowingExpensesFormComponent} from './sowing-expenses/form/sowing-expenses-form.component';
 import {FuelExpensesListComponent} from './fuel-expenses/list/fuel-expenses-list.component';
-import {WorksExpensesComponent} from './works-expenses/works-expenses.component';
+import {WorksExpensesComponent} from './works-expenses/list/works-expenses-list.component';
 import {FertilizersExpensesComponent} from './fertilizers-expenses/fertilizers-expenses.component';
 import {PesticidesExpensesComponent} from './pesticides-expenses/pesticides-expenses.component';
 import {ImageRendererComponent} from '../../modules/aggrid/image-renderer/image-renderer.component';

@@ -2,6 +2,7 @@ import {FuelExpenseItemModel} from '../expense-item-table/fuel-expense-item.mode
 
 export class FuelExpenseModel {
     id: number;
+    categoryId = 2;
     title: string;
     expenseDate: Date;
 

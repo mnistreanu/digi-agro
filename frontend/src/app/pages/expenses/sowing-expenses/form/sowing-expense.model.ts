@@ -2,7 +2,7 @@ import {SowingExpenseItemModel} from '../expense-item-table/sowing-expense-item.
 
 export class SowingExpenseModel {
     id: number;
-    categoryId = 7;
+    categoryId = 3;
     title: string;
     expenseDate: Date;
 

@@ -1,6 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {WorksExpensesComponent} from "./works-expenses.component";
+import {WorksExpensesComponent} from "./works-expenses-list.component";
 
 describe('OtherWorksComponent', () => {
     let component: WorksExpensesComponent;

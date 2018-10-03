@@ -2,7 +2,7 @@ import {MachineryExpenseItemModel} from '../expense-item-table/machinery-expense
 
 export class MachineryExpenseModel {
     id: number;
-    categoryId = 7;
+    categoryId = 1;
     title: string;
     expenseDate: Date;
 

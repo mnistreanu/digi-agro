@@ -1,14 +1,14 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
-import {LangService} from '../../../services/lang.service';
-import {MachineService} from '../../../services/machine.service';
-import {WorksExpensesModel} from './works-expenses.model';
+import {LangService} from '../../../../services/lang.service';
+import {MachineService} from '../../../../services/machine.service';
+import {WorksExpensesModel} from './works-expenses-list.model';
 
 @Component({
     selector: 'app-works-expenses',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: './works-expenses.component.html',
-    styleUrls: ['./works-expenses.component.scss']
+    templateUrl: './works-expenses-list.component.html',
+    styleUrls: ['./works-expenses-list.component.scss']
 })
 export class WorksExpensesComponent implements OnInit {
     options: GridOptions;
