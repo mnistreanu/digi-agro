@@ -17,49 +17,14 @@ export class WorksExpensesListComponent implements OnInit {
     options: GridOptions;
     context;
 
-    // labelDate: string;
-    // labelAgroWorkType: string;
-    // labelCrop: string;
-    // labelUnitOfMeasureShort: string;
-    // labelUnitOfMeasureLong: string;
-    // labelQuantity: string;
-    // labelNorm: string;
-    // labelDefacto: string;
-    // labelPrice1Norm: string;
-    // labelSum: string;
-    // labelMachineType: string;
-    // labelAgriculturalMachinery: string;
-    // labelIdentifier: string;
-    // labelFirstName: string;
-    // labelLastName: string;
-
     constructor(private machineService: MachineService,
                 private worksExpenseService: WorksExpenseService,
                 private langService: LangService) {
     }
 
     ngOnInit() {
-        // this.setupLabels();
         this.setupGrid();
     }
-    //
-    // private setupLabels() {
-    //     this.langService.get('agro-work.date').subscribe(msg => this.labelDate = msg);
-    //     this.langService.get('agro-work.type').subscribe(msg => this.labelAgroWorkType = msg);
-    //     this.langService.get('crop.name').subscribe(msg => this.labelCrop = msg);
-    //     this.langService.get('unit-of-measure.unit-short').subscribe(msg => this.labelUnitOfMeasureShort = msg);
-    //     this.langService.get('unit-of-measure.unit-long').subscribe(msg => this.labelUnitOfMeasureLong = msg);
-    //     this.langService.get('agro-work.quantity').subscribe(msg => this.labelQuantity = msg);
-    //     this.langService.get('agro-work.norm').subscribe(msg => this.labelNorm = msg);
-    //     this.langService.get('agro-work.defacto').subscribe(msg => this.labelDefacto = msg);
-    //     this.langService.get('agro-work.price-1-norm').subscribe(msg => this.labelPrice1Norm = msg);
-    //     this.langService.get('agro-work.sum').subscribe(msg => this.labelSum = msg);
-    //     this.langService.get('machine.type').subscribe(msg => this.labelMachineType = msg);
-    //     this.langService.get('machine.agricultural-machinery').subscribe(msg => this.labelAgriculturalMachinery = msg);
-    //     this.langService.get('machine.identifier').subscribe(msg => this.labelIdentifier = msg);
-    //     this.langService.get('employee.first-name').subscribe(msg => this.labelFirstName = msg);
-    //     this.langService.get('employee.last-name').subscribe(msg => this.labelLastName = msg);
-    // }
 
 
     private setupGrid() {
@@ -201,12 +166,12 @@ export class WorksExpensesListComponent implements OnInit {
             if (header.headerName) {
                 this.langService.get(header.headerName).subscribe(m => header.headerName = m);
 
-                if (header.children) {
-                    header.children.forEach(childHeader => {
-                        if (childHeader.headerName) {
-                            this.langService.get(childHeader.headerName).subscribe(m => childHeader.headerName = m);
-                        }
-                    });
+                if (header.hasOwnProperty('children')) {
+                    // header.children.forEach(childHeader => {
+                    //     if (childHeader.headerName) {
+                    //         this.langService.get(childHeader.headerName).subscribe(m => childHeader.headerName = m);
+                    //     }
+                    // });
                 }
             }
 

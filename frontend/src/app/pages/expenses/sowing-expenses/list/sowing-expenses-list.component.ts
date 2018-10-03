@@ -5,7 +5,7 @@ import {ImageRendererComponent} from '../../../../modules/aggrid/image-renderer/
 import {SowingExpenseService} from '../../../../services/expenses/sowing-expense.service';
 import {SowingExpensesListModel} from './sowing-expenses-list.model';
 import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
-import {DateUtil} from "../../../../common/dateUtil";
+import {DateUtil} from '../../../../common/dateUtil';
 
 @Component({
     selector: 'app-sowing-expenses-list',
@@ -18,20 +18,6 @@ export class SowingExpensesListComponent implements OnInit {
 
     options: GridOptions;
     context;
-    //
-    // labelDate: string;
-    // labelCrop: string;
-    // labelCropVariety: string;
-    // labelSeeds: string;
-    // labelUnitOfMeasureShort: string;
-    // labelUnitOfMeasureLong: string;
-    // labelArea: string;
-    // labelParcels: string;
-    // labelExpenses: string;
-    // labelConsumed1Ha: string;
-    // labelConsumedTotal: string;
-    // labelPriceUnit: string;
-    // labelCostTotal: string;
 
     constructor(private langService: LangService,
                 private sowingExpenseService: SowingExpenseService) {
@@ -40,19 +26,6 @@ export class SowingExpensesListComponent implements OnInit {
     ngOnInit() {
         this.setupGrid();
     }
-
-    // private setupLabels() {
-    //     this.langService.get('crop.planting-date').subscribe(msg => this.labelDate = msg);
-    //     this.langService.get('crop.name').subscribe(msg => this.labelCrop = msg);
-    //     this.langService.get('crop.variety').subscribe(msg => this.labelCropVariety = msg);
-    //     this.langService.get('crop.seeds').subscribe(msg => this.labelSeeds = msg);
-    //     this.langService.get('crop.unit-of-measure-short').subscribe(msg => this.labelUnitOfMeasureShort = msg);
-    //     this.langService.get('crop.unit-of-measure-long').subscribe(msg => this.labelUnitOfMeasureLong = msg);
-    //     this.langService.get('parcel.area').subscribe(msg => this.labelArea = msg);
-    //     this.langService.get('parcel.parcels').subscribe(msg => this.labelParcels = msg);
-    //     this.langService.get('expenses.sowing').subscribe(msg => this.labelExpenses = msg);
-    //     this.langService.get('crop.labelConsumed1Ha').subscribe(msg => this.labelConsumed1Ha = msg);
-    // }
 
 
     private setupGrid() {
@@ -102,12 +75,6 @@ export class SowingExpensesListComponent implements OnInit {
                 width: 180,
                 minWidth: 180
             },
-            // {
-            //     headerName: 'crop.variety',
-            //     field: 'variety',
-            //     width: 180,
-            //     minWidth: 180
-            // },
             {
                 headerName: 'crop.unit-of-measure-short',
                 field: 'unitOfMeasure',
@@ -205,13 +172,13 @@ export class SowingExpensesListComponent implements OnInit {
             if (header.headerName) {
                 this.langService.get(header.headerName).subscribe(m => header.headerName = m);
 
-                // if (header.children) {
-                //     header.children.forEach(childHeader => {
-                //         if (childHeader.headerName) {
-                //             this.langService.get(childHeader.headerName).subscribe(m => childHeader.headerName = m);
-                //         }
-                //     });
-                // }
+                if (header.hasOwnProperty('children')) {
+                    // header.children.forEach(childHeader => {
+                    //     if (childHeader.headerName) {
+                    //         this.langService.get(childHeader.headerName).subscribe(m => childHeader.headerName = m);
+                    //     }
+                    // });
+                }
             }
 
             if (header.headerTooltip) {
