@@ -243,11 +243,11 @@ export class MenuService {
                     },
                     {
                         title: 'nav.pesticides',
-                        routerLink: 'expenses/pesticides',
+                        routerLink: 'expenses/pesticide',
                     },
                     {
                         title: 'nav.fertilizers',
-                        routerLink: 'expenses/fertilizers',
+                        routerLink: 'expenses/fertilizer',
                     },
                 ]
             });

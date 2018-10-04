@@ -1,17 +1,17 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
-import {LangService} from '../../../services/lang.service';
-import {MachineService} from '../../../services/machine.service';
-import {PinnedRowRendererComponent} from '../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
-import {FertilizersExpensesModel} from './fertilizers-expenses.model';
+import {LangService} from '../../../../services/lang.service';
+import {MachineService} from '../../../../services/machine.service';
+import {PinnedRowRendererComponent} from '../../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
+import {FertilizerExpensesListModel} from './fertilizer-expenses-list.model';
 
 @Component({
-    selector: 'app-fertilizers-expenses',
+    selector: 'app-fertilizer-expenses-list',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: './fertilizers-expenses.component.html',
-    styleUrls: ['./fertilizers-expenses.component.scss']
+    templateUrl: './fertilizer-expenses-list.component.html',
+    styleUrls: ['./fertilizer-expenses-list.component.scss']
 })
-export class FertilizersExpensesComponent implements OnInit {
+export class FertilizerExpensesListComponent implements OnInit {
     options: GridOptions;
     context;
 
@@ -166,7 +166,7 @@ export class FertilizersExpensesComponent implements OnInit {
         let i = 0;
         this.machineService.findAll().subscribe(modelsArray => {
             const rows = modelsArray.map(data => {
-                const model = new FertilizersExpensesModel();
+                const model = new FertilizerExpensesListModel();
                 model.date = new Date().toLocaleDateString();
                 model.type = modelsArray[i].type;
                 model.brandModel = modelsArray[i].type + ' ' + modelsArray[i].brand + ' ' + modelsArray[i].model;

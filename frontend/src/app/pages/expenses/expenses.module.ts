@@ -12,8 +12,6 @@ import {SowingExpensesListComponent} from './sowing-expenses/list/sowing-expense
 import {SowingExpensesFormComponent} from './sowing-expenses/form/sowing-expenses-form.component';
 import {FuelExpensesListComponent} from './fuel-expenses/list/fuel-expenses-list.component';
 import {WorksExpensesListComponent} from './works-expenses/list/works-expenses-list.component';
-import {FertilizersExpensesComponent} from './fertilizers-expenses/fertilizers-expenses.component';
-import {PesticidesExpensesComponent} from './pesticides-expenses/pesticides-expenses.component';
 import {ImageRendererComponent} from '../../modules/aggrid/image-renderer/image-renderer.component';
 import {ImageRendererModule} from '../../modules/aggrid/image-renderer/image-renderer.module';
 import {PinnedRowRendererModule} from '../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.module';
@@ -31,6 +29,11 @@ import {FuelExpensesFormComponent} from './fuel-expenses/form/fuel-expenses-form
 import { ExpenseListComponent } from './expense-list/expense-list.component';
 import {FuelExpenseItemTableComponent} from './fuel-expenses/expense-item-table/fuel-expense-item-table.component';
 import {SowingExpenseItemTableComponent} from './sowing-expenses/expense-item-table/sowing-expense-item-table.component';
+import {WorksExpensesFormComponent} from './works-expenses/form/works-expenses-form.component';
+import {PesticideExpensesListComponent} from './pesticide-expenses/list/pesticide-expenses-list.component';
+import {PesticideExpensesFormComponent} from './pesticide-expenses/form/pesticide-expenses-form.component';
+import {FertilizerExpensesFormComponent} from './fertilizer-expenses/form/fertilizer-expenses-form.component';
+import {FertilizerExpensesListComponent} from './fertilizer-expenses/list/fertilizer-expenses-list.component';
 
 export const routes = [
     {path: '', component: ExpenseListComponent},
@@ -41,11 +44,11 @@ export const routes = [
     {path: 'sowing', component: SowingExpensesListComponent},
     {path: 'sowing/:id', component: SowingExpensesFormComponent},
     {path: 'works', component: WorksExpensesListComponent},
-    {path: 'works/:id', component: WorksExpensesListComponent},
-    {path: 'fertilizers', component: FertilizersExpensesComponent},
-    {path: 'fertilizers/:id', component: FertilizersExpensesComponent},
-    {path: 'pesticides', component: PesticidesExpensesComponent},
-    {path: 'pesticides/:id', component: PesticidesExpensesComponent},
+    {path: 'works/:id', component: WorksExpensesFormComponent},
+    {path: 'fertilizer', component: FertilizerExpensesListComponent},
+    {path: 'fertilizer/:id', component: FertilizerExpensesFormComponent},
+    {path: 'pesticide', component: PesticideExpensesListComponent},
+    {path: 'pesticide/:id', component: PesticideExpensesFormComponent},
 ];
 
 @NgModule({
@@ -82,8 +85,11 @@ export const routes = [
         SowingExpensesFormComponent,
         SowingExpenseItemTableComponent,
         WorksExpensesListComponent,
-        PesticidesExpensesComponent,
-        FertilizersExpensesComponent,
+        WorksExpensesFormComponent,
+        PesticideExpensesListComponent,
+        PesticideExpensesFormComponent,
+        FertilizerExpensesListComponent,
+        FertilizerExpensesFormComponent,
         ExpenseListComponent
     ]
 })

@@ -1,17 +1,17 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
-import {LangService} from '../../../services/lang.service';
-import {MachineService} from '../../../services/machine.service';
-import {PinnedRowRendererComponent} from '../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
-import {PesticidesExpensesModel} from './pesticides-expenses.model';
+import {LangService} from '../../../../services/lang.service';
+import {MachineService} from '../../../../services/machine.service';
+import {PinnedRowRendererComponent} from '../../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
+import {PesticideExpensesListModel} from './pesticide-expenses-list.model';
 
 @Component({
-    selector: 'app-pesticides-expenses',
+    selector: 'app-pesticides-expenses-list',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: './pesticides-expenses.component.html',
-    styleUrls: ['./pesticides-expenses.component.scss']
+    templateUrl: './pesticide-expenses-list.component.html',
+    styleUrls: ['./pesticide-expenses-list.component.scss']
 })
-export class PesticidesExpensesComponent implements OnInit {
+export class PesticideExpensesListComponent implements OnInit {
     options: GridOptions;
     context;
 
@@ -127,7 +127,7 @@ export class PesticidesExpensesComponent implements OnInit {
         let i = 0;
         this.machineService.findAll().subscribe(modelsArray => {
             const rows = modelsArray.map(data => {
-                const model = new PesticidesExpensesModel();
+                const model = new PesticideExpensesListModel();
                 model.date = new Date().toLocaleDateString();
                 model.type = 'Insecticid';
                 model.name = 'FASTAC 10 EC';
