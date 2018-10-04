@@ -1,11 +1,10 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ColDef, ColGroupDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../../services/lang.service';
-import {ImageRendererComponent} from '../../../../modules/aggrid/image-renderer/image-renderer.component';
 import {SowingExpenseService} from '../../../../services/expenses/sowing-expense.service';
-import {SowingExpensesListModel} from './sowing-expenses-list.model';
 import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {DateUtil} from '../../../../common/dateUtil';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'app-sowing-expenses-list',
@@ -19,14 +18,15 @@ export class SowingExpensesListComponent implements OnInit {
     options: GridOptions;
     context;
 
-    constructor(private langService: LangService,
+    constructor(private router: Router,
+                private route: ActivatedRoute,
+                private langService: LangService,
                 private sowingExpenseService: SowingExpenseService) {
     }
 
     ngOnInit() {
         this.setupGrid();
     }
-
 
     private setupGrid() {
         this.options = <GridOptions>{};
@@ -86,30 +86,23 @@ export class SowingExpensesListComponent implements OnInit {
             {
                 headerName: 'parcel.area',
                 field: 'area',
-                width: 50,
-                minWidth: 50,
+                width: 80,
+                minWidth: 80,
                 suppressFilter: true,
             },
-            // {
-            //     headerName: 'parcel.parcels',
-            //     field: 'parcels',
-            //     width: 200,
-            //     minWidth: 200,
-            //     suppressFilter: true,
-            // },
             {
                 headerName: 'expenses.norm-at',
                 children: [
                     {
                         headerName: 'parcel.one-ha',
-                        field: 'normSow1Ha',
-                        width: 60,
-                        minWidth: 60,
+                        field: 'normSown1Ha',
+                        width: 70,
+                        minWidth: 70,
                         suppressFilter: true,
                     },
                     {
                         headerName: 'parcel.total-ha',
-                        field: 'normSowTotal',
+                        field: 'normSownTotal',
                         width: 100,
                         minWidth: 100,
                         suppressFilter: true,
@@ -122,8 +115,8 @@ export class SowingExpensesListComponent implements OnInit {
                     {
                         headerName: 'parcel.one-ha',
                         field: 'actualSown1Ha',
-                        width: 60,
-                        minWidth: 60,
+                        width: 70,
+                        minWidth: 70,
                         suppressFilter: true,
                     },
                     {
@@ -136,8 +129,8 @@ export class SowingExpensesListComponent implements OnInit {
                     {
                         headerName: 'expenses.unit-cost',
                         field: 'unitPrice',
-                        width: 60,
-                        minWidth: 60,
+                        width: 70,
+                        minWidth: 70,
                         suppressFilter: true,
                     },
                     {
@@ -173,12 +166,12 @@ export class SowingExpensesListComponent implements OnInit {
             if (header.headerName) {
                 this.langService.get(header.headerName).subscribe(m => header.headerName = m);
 
-                if (header.hasOwnProperty('children')) {
-                    // header.children.forEach(childHeader => {
-                    //     if (childHeader.headerName) {
-                    //         this.langService.get(childHeader.headerName).subscribe(m => childHeader.headerName = m);
-                    //     }
-                    // });
+                if (header['children']) {
+                    header['children'].forEach(childHeader => {
+                        if (childHeader.headerName) {
+                            this.langService.get(childHeader.headerName).subscribe(m => childHeader.headerName = m);
+                        }
+                    });
                 }
             }
 
@@ -194,7 +187,7 @@ export class SowingExpensesListComponent implements OnInit {
     public setupRows() {
         this.sowingExpenseService.find().subscribe(models => {
             models.forEach(model => {
-                model.cropAndVariety = model.crop + ' ' + model.variety;
+                model['cropAndVariety'] = model.crop + ' ' + model.variety;
                 model.unitOfMeasure = this.langService.instant('unit-of-measure.' + model.unitOfMeasure);
             });
 
@@ -212,5 +205,14 @@ export class SowingExpensesListComponent implements OnInit {
                 this.options.api.sizeColumnsToFit();
             }
         }, 500);
+    }
+
+    public add() {
+        this.router.navigate(['./-1'], {relativeTo: this.route});
+    }
+
+    public onEdit(node) {
+        const model = node.data;
+        this.router.navigate(['./' + model.expenseId], {relativeTo: this.route});
     }
 }

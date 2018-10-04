@@ -26,11 +26,10 @@ import {ConfirmationModalModule} from '../../modules/confirmation-modal/confirma
 import {EditRendererModule} from '../../modules/aggrid/edit-renderer/edit-renderer.module';
 import {EditRendererComponent} from '../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {AdminGuard} from '../../guards/admin-guard';
-import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
+import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import {FuelExpensesFormComponent} from './fuel-expenses/form/fuel-expenses-form.component';
-import { ExpenseListComponent } from './expense-list/expense-list.component';
+import {ExpenseListComponent} from './expense-list/expense-list.component';
 import {FuelExpenseItemTableComponent} from './fuel-expenses/expense-item-table/fuel-expense-item-table.component';
-import {SowingExpenseItemTableComponent} from './sowing-expenses/expense-item-table/sowing-expense-item-table.component';
 
 export const routes = [
     {path: '', component: ExpenseListComponent},
@@ -80,7 +79,6 @@ export const routes = [
         FuelExpenseItemTableComponent,
         SowingExpensesListComponent,
         SowingExpensesFormComponent,
-        SowingExpenseItemTableComponent,
         WorksExpensesListComponent,
         PesticidesExpensesComponent,
         FertilizersExpensesComponent,

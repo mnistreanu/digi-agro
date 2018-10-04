@@ -1,14 +1,23 @@
-import {SowingExpenseItemModel} from '../expense-item-table/sowing-expense-item.model';
-
 export class SowingExpenseModel {
-    id: number;
-    categoryId = 3;
-    title: string;
+    expenseId: number;
     expenseDate: Date;
 
-    machines: number[];
-    employees: number[];
+    parcels: number[];
 
-    expenseItems: SowingExpenseItemModel[] = [];
+    crop: string;
+    variety: string;
+    unitOfMeasure: string;
+
+    area: number;
+    normSown1Ha: number;
+    normSownTotal: number;
+
+    actualSown1Ha: number;
+    actualSownTotal: number;
+    unitPrice: number;
+    totalAmount: number;
+
+    createdAt: Date;
+    createdBy: string;
 }
 

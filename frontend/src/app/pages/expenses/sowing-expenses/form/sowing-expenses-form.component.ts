@@ -2,14 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SowingExpenseModel} from './sowing-expense.model';
-import {MachineService} from '../../../../services/machine.service';
 import {ModalService} from '../../../../services/modal.service';
 import {AlertService} from '../../../../services/alert.service';
 import {LangService} from '../../../../services/lang.service';
-import {ExpenseCategoryModel} from '../../../enterprise/manage-expense-categories/expense-category/expense-category.model';
-import {ExpenseCategoryService} from '../../../../services/expenses/expense-category.service';
-import {ExpenseCategoryTreeModel} from '../../../enterprise/manage-expense-categories/expense-category-tree/expense-category-tree.model';
 import {SowingExpenseService} from '../../../../services/expenses/sowing-expense.service';
+import {ParcelService} from '../../../../services/parcel.service';
 
 @Component({
     selector: 'app-sowing-expenses-form',
@@ -23,12 +20,11 @@ export class SowingExpensesFormComponent implements OnInit {
     form: FormGroup;
     submitted = false;
 
-    model: SowingExpenseModel ;
-    subCategories: ExpenseCategoryTreeModel[] = [];
+    model: SowingExpenseModel;
 
-    machines: any[];
-    employees: any[];
-    employeeMap: any;
+    crops: any[] = [];
+    cropVarieties: any[] = [];
+    parcels: any[] = [];
 
     multiSelectSettings = {
         enableSearchFilter: true,
@@ -46,80 +42,41 @@ export class SowingExpensesFormComponent implements OnInit {
                 private route: ActivatedRoute,
                 private modalService: ModalService,
                 private sowingExpenseService: SowingExpenseService,
-                private expenseCategoryService: ExpenseCategoryService,
-                private machineService: MachineService,
+                private parcelService: ParcelService,
                 private langService: LangService,
                 private alertService: AlertService) {
     }
 
     ngOnInit() {
-        this.setupResources()
+        this.setupParcels()
             .then(() => this.restoreModel());
     }
 
-    private setupResources(): Promise<void> {
-        this.expenseCategoryService.getTree().subscribe(payloadModel => {
-            const treeModels = payloadModel.payload;
-            treeModels.forEach((treeModel: ExpenseCategoryTreeModel) => {
-                this.subCategories.push(treeModel);
-            });
-
-        });
-
+    private setupParcels(): Promise<void> {
         return new Promise((resolve) => {
-            this.machineService.findAll().subscribe(machineModels => {
-                this.machines = [];
-                this.employees = [];
-                this.employeeMap = {};
-                machineModels.forEach(machine => {
-                    this.machines.push({
-                        id: machine.id,
-                        itemName: this.getMachineLabel(machine)
-                    });
-                    this.registerEmployees(machine.id, machine.employees);
+            this.parcelService.find().subscribe(models => {
+                this.parcels = [];
+                models.forEach(parcelModel => {
+                   this.parcels.push({
+                       id: parcelModel.id,
+                       itemName: parcelModel.name
+                   });
                 });
                 resolve();
             });
         });
     }
 
-    private getMachineLabel(model) {
-        return model.brand + ' ' + model.model + ' (' + model.identifier + ')';
-    }
-
-    private registerEmployees(machineId, items) {
-        if (!items) {
-            return;
+    private getSelectedParcels() {
+        let selectedItems = [];
+        if (this.model.parcels && this.model.parcels.length > 0) {
+            const map = {};
+            this.parcels.forEach(item => map[item.id] = item);
+            selectedItems = this.model.parcels.map(id => map[id]);
         }
-        items.forEach(employee => {
-            let listModel = this.employeeMap[employee.id];
-
-            if (!listModel) {
-                listModel = {
-                    id: employee.id,
-                    itemName: this.getEmployeeLabel(employee),
-                    machineMap: {}
-                };
-                this.employeeMap[employee.id] = listModel;
-                this.employees.push(listModel);
-            }
-
-            listModel.machineMap[machineId] = machineId;
-        });
+        return selectedItems;
     }
 
-    private getEmployeeLabel(model) {
-        return model.firstName + ' ' + model.lastName;
-    }
-
-    public resetUnlinkedEmployees() {
-        const machineIds = this.form.controls['machines'].value.map(m => m.id);
-        const employeesControl = this.form.controls['employees'];
-        const employees = employeesControl.value.filter(employee => {
-            return machineIds.some(machineId => employee.machineMap[machineId]);
-        });
-        employeesControl.setValue(employees);
-    }
 
     private restoreModel() {
         this.route.params.subscribe(params => {
@@ -137,7 +94,6 @@ export class SowingExpensesFormComponent implements OnInit {
     private setupModel(id) {
         this.sowingExpenseService.findOne(id).subscribe(model => {
             this.model = model;
-            this.model.expenseDate = this.model.expenseDate ? new Date(this.model.expenseDate) : null;
             this.buildForm();
         });
     }
@@ -150,37 +106,21 @@ export class SowingExpensesFormComponent implements OnInit {
 
 
     private buildForm() {
-        const expenseDate = this.model.expenseDate ? this.model.expenseDate.toISOString().substring(0, 10) : null;
+        const expenseDate = this.model.expenseDate ? new Date(this.model.expenseDate).toISOString().substring(0, 10) : null;
         this.form = this.fb.group({
-            title: [this.model.title, Validators.required],
             expenseDate: [expenseDate, Validators.required],
-            machines: [this.getSelectedMachines()],
-            employees: [this.getSelectedEmployees()],
+            crop: [this.model.crop, Validators.required],
+            variety: [this.model.variety, Validators.required],
+            unitOfMeasure: [this.model.unitOfMeasure, Validators.required],
+            normSown1Ha: [this.model.normSown1Ha],
+            normSownTotal: [this.model.normSownTotal],
+            actualSown1Ha: [this.model.actualSown1Ha],
+            actualSownTotal: [this.model.actualSownTotal],
+            unitPrice: [this.model.unitPrice],
+            totalAmount: [this.model.totalAmount],
+            parcels: [this.getSelectedParcels()]
         });
-    }
-
-    private getSelectedMachines() {
-
-        let selectedMachines = [];
-        if (this.model.machines && this.model.machines.length > 0) {
-            const map = {};
-            this.machines.forEach(item => map[item.id] = item);
-            selectedMachines = this.model.machines.map(machineId => map[machineId]);
-        }
-
-        return selectedMachines;
-    }
-
-    private getSelectedEmployees() {
-
-        let selectedEmployees = [];
-        if (this.model.employees && this.model.employees.length > 0) {
-            const map = {};
-            this.employees.forEach(item => map[item.id] = item);
-            selectedEmployees = this.model.employees.map(id => map[id]);
-        }
-
-        return selectedEmployees;
+        console.log(this.form);
     }
 
     save() {
@@ -194,17 +134,10 @@ export class SowingExpensesFormComponent implements OnInit {
         Object.assign(this.model, this.form.value);
         this.submitted = false;
 
-        this.model.machines = this.form.value.machines.map(item => item.id);
-        this.model.employees = this.form.value.employees.map(item => item.id);
-
-        this.model.expenseItems = this.model.expenseItems.filter(item => {
-            return !item.deleted || (item.deleted && item.id != null);
-        });
-
-        this.sowingExpenseService.save(this.model).subscribe((model) => {
-            this.model = model;
-            this.alertService.saved();
-        });
+        // this.sowingExpenseService.save(this.model).subscribe((model) => {
+        //     this.model = model;
+        //     this.alertService.saved();
+        // });
     }
 
     prepareRemove() {
@@ -212,10 +145,10 @@ export class SowingExpensesFormComponent implements OnInit {
     }
 
     remove() {
-        this.sowingExpenseService.remove(this.model).subscribe(() => {
-            this.alertService.removed();
-            this.back();
-        });
+        // this.sowingExpenseService.remove(this.model).subscribe(() => {
+        //     this.alertService.removed();
+        //     this.back();
+        // });
     }
 
     back() {
