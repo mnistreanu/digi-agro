@@ -1,4 +1,5 @@
 export class PesticideExpensesListModel {
+  expenseDate: string;
   date: string;
   name: string;
   type: string;
