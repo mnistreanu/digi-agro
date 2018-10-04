@@ -30,7 +30,7 @@ public class SowingExpenseController {
     public ResponseEntity<List<SowingExpenseListModel>> getModels(HttpSession session) {
         Long tenantId = (Long) session.getAttribute("tenant");
 
-        List<Expense> expenses = expenseService.find(tenantId, ExpenseCategory.MACHINERY);
+        List<Expense> expenses = expenseService.find(tenantId, ExpenseCategory.SOWING);
         List<SowingExpenseListModel> resultModels = new ArrayList<>();
 
         for (Expense expense : expenses) {
@@ -54,7 +54,7 @@ public class SowingExpenseController {
             model1.setActualSown1Ha((double)((int)(Math.random() * 10000))/100);
             model1.setUnitPrice(BigDecimal.valueOf((double)((int)(Math.random() * 10000))/100));
             model1.setCreatedAt(expense.getCreatedAt());
-            model1.setCreatedBy("" + expense.getCreatedBy());
+            model1.setCreatedBy("Mihalici");
             model1.setParcels(parcelModels);
             resultModels.add(model1);
 
@@ -70,7 +70,7 @@ public class SowingExpenseController {
             model2.setActualSown1Ha((double)((int)(Math.random() * 10000))/100);
             model2.setUnitPrice(BigDecimal.valueOf((double)((int)(Math.random() * 10000))/100));
             model2.setCreatedAt(expense.getCreatedAt());
-            model2.setCreatedBy("" + expense.getCreatedBy());
+            model2.setCreatedBy("Ivan Dulin");
             model2.setParcels(parcelModels);
             resultModels.add(model2);
 
@@ -86,7 +86,7 @@ public class SowingExpenseController {
             model3.setActualSown1Ha((double)((int)(Math.random() * 10000))/100);
             model3.setUnitPrice(BigDecimal.valueOf((double)((int)(Math.random() * 10000))/100));
             model3.setCreatedAt(expense.getCreatedAt());
-            model3.setCreatedBy("" + expense.getCreatedBy());
+            model3.setCreatedBy("Jorik Vartanov");
             model3.setParcels(parcelModels);
             resultModels.add(model3);
 

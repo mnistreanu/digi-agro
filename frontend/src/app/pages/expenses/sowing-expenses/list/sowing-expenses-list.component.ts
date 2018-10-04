@@ -150,19 +150,20 @@ export class SowingExpensesListComponent implements OnInit {
                 ]
             },
             {
-                headerName: 'Registered',
+                headerName: 'info.registered',
                 children: [
                     {
-                        headerName: 'By',
-                        field: '',
+                        headerName: 'info.by',
+                        field: 'createdBy',
                         width: 100,
                         minWidth: 100,
                     },
                     {
-                        headerName: 'At',
-                        field: '',
-                        width: 60,
-                        minWidth: 60,
+                        headerName: 'info.at',
+                        field: 'createdAt',
+                        width: 90,
+                        minWidth: 90,
+                        valueFormatter: (params) => DateUtil.formatDate(params.value)
                     },
                 ]
             },
@@ -197,7 +198,6 @@ export class SowingExpensesListComponent implements OnInit {
                 model.unitOfMeasure = this.langService.instant('unit-of-measure.' + model.unitOfMeasure);
             });
 
-            debugger;
             this.options.api.setRowData(models);
         });
     }

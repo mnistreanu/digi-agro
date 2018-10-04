@@ -15,4 +15,7 @@ export class SowingExpensesListModel {
   actualSownTotal: number;
   unitPrice: number;
   totalAmount: number;
+
+  createdAt: string;
+  createdBy: string;
 }

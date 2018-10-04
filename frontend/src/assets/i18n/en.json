@@ -144,6 +144,8 @@
 		"village-city": "Village/City"
 	},
 	"info": {
+		"at": "At",
+		"by": "By",
 		"created-by": "Created By",
 		"creation-time": "Creation Time",
 		"description": "Description",
@@ -153,6 +155,7 @@
 		"name": "Name",
 		"name-ro": "Name",
 		"name-ru": "Name",
+		"registered": "Registered",
 		"title": "Description"
 	},
 	"language": {

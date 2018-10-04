@@ -5,7 +5,8 @@ public enum UnitOfMeasure {
     Quintal("q"),
     Kilogram("kg"),
     Litre("l"),
-    SowingUnit("su");
+    SowingUnit("su"),
+    Ha("ha");
 
     private String unitOfMeasure;
 

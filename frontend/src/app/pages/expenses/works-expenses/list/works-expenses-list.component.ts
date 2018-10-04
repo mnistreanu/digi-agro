@@ -1,10 +1,11 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ColDef, GridOptions} from 'ag-grid';
+import {ColDef, ColGroupDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../../services/lang.service';
 import {MachineService} from '../../../../services/machine.service';
 import {WorksExpensesListModel} from './works-expenses-list.model';
 import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {WorksExpenseService} from '../../../../services/expenses/works-expense.service';
+import {DateUtil} from '../../../../common/dateUtil';
 
 @Component({
     selector: 'app-works-expenses',
@@ -42,7 +43,7 @@ export class WorksExpensesListComponent implements OnInit {
 
     private setupHeaders() {
 
-        let headers: ColDef[] = [];
+        let headers: (ColDef | ColGroupDef) [] = [];
 
         if (!this.readOnly) {
             headers.push({
@@ -61,11 +62,12 @@ export class WorksExpensesListComponent implements OnInit {
 
         headers = headers.concat([
             {
-                headerName: 'agro-work.date',
-                field: 'date',
+                headerName: 'expenses.date',
+                field: 'expenseDate',
                 width: 90,
                 minWidth: 90,
                 suppressFilter: true,
+                valueFormatter: (params) => DateUtil.formatDate(params.value)
             },
             {
                 headerName: 'agro-work.type',
@@ -129,35 +131,34 @@ export class WorksExpensesListComponent implements OnInit {
             },
             {
                 headerName: 'machine.agricultural-machinery',
-                field: 'brandModel',
+                field: 'machinesString',
                 width: 180,
                 minWidth: 180
             },
-            // {
-            //     headerName: this.labelIdentifier,
-            //     field: 'identifier',
-            //     width: 60,
-            //     minWidth: 60,
-            //     suppressFilter: true,
-            // },
             {
                 headerName: 'employee.first-last-name' ,
-                field: 'employee',
+                field: 'employeesString',
                 width: 100,
                 minWidth: 100,
                 suppressFilter: true,
             },
             {
-                headerName: 'Registered By',
-                field: '',
-                width: 100,
-                minWidth: 100,
-            },
-            {
-                headerName: 'At',
-                field: '',
-                width: 60,
-                minWidth: 60,
+                headerName: 'info.registered',
+                children: [
+                    {
+                        headerName: 'info.by',
+                        field: 'createdBy',
+                        width: 100,
+                        minWidth: 100,
+                    },
+                    {
+                        headerName: 'info.at',
+                        field: 'createdAt',
+                        width: 90,
+                        minWidth: 90,
+                        valueFormatter: (params) => DateUtil.formatDate(params.value)
+                    },
+                ]
             },
         ]);
 
@@ -185,26 +186,28 @@ export class WorksExpensesListComponent implements OnInit {
 
 
     public setupRows() {
-        let i = 0;
-        this.machineService.findAll().subscribe(modelsArray => {
-            const rows = modelsArray.map(data => {
-                const model = new WorksExpensesListModel();
-                model.date = new Date().toLocaleDateString();
-                model.workType = 'Cultivat';
-                model.crop = 'Porumb';
-                model.unitOfMeasure = 'Ha';
-                model.quantity = Math.round(Math.random() * 100);
-                model.quantityNorm = Math.round(Math.random() * 100);
-                model.quantityDefacto = Math.round(Math.random() * 100);
-                model.price1Norm = Math.round(Math.random() * 100);
-                model.sum = Math.round(Math.random() * 100);
-                model.brandModel = modelsArray[i].type + ' ' + modelsArray[i].brand + ' ' + modelsArray[i].model;
-                model.identifier = modelsArray[i].identifier;
-                model.employee = 'Roată Ion';
-                i++;
-                return model;
+        this.worksExpenseService.find().subscribe(models => {
+            models.forEach(model => {
+                model.employees.forEach(employee => {
+                    if (model.employeesString) {
+                        model.employeesString = model.employeesString + ', ' + employee.firstName + ' ' + employee.lastName;
+                    } else {
+                        model.employeesString = employee.firstName + ' ' + employee.lastName;
+                    }
+                });
+
+                model.machines.forEach(machine => {
+                    if (model.machinesString) {
+                        model.machinesString = model.machinesString + ', ' + machine.brand + ' ' + machine.model
+                            + ' (' + machine.identifier + ')';
+                    } else {
+                        model.machinesString = machine.brand + ' ' + machine.model + ' (' + machine.identifier + ')';
+                    }
+                });
             });
-            this.options.api.setRowData(rows);
+
+            debugger;
+            this.options.api.setRowData(models);
         });
     }
 

@@ -144,6 +144,8 @@
 		"village-city": "Sat/Oraș"
 	},
 	"info": {
+		"at": "La",
+		"by": "De",
 		"created-by": "Creat de",
 		"creation-time": "Timpul de creație",
 		"description": "Descriere",
@@ -153,6 +155,7 @@
 		"name": "Denumire",
 		"name-ro": "Denumire (Rom)",
 		"name-ru": "Denumire (Rus)",
+		"registered": "Înregistrat",
 		"title": "Descriere"
 	},
 	"language": {

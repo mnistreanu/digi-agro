@@ -11,6 +11,10 @@ public class ExpenseCategory {
 
     public static final long MACHINERY = 1L;
     public static final long FUEL = 2L;
+    public static final long SOWING = 3L;
+    public static final long WORKS = 4L;
+    public static final long FERTILIZERS = 5L;
+    public static final long PESTICIDES = 6L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
