@@ -7,7 +7,6 @@ import {MachineryExpenseService} from '../../../../services/expenses/machinery-e
 import {ModalService} from '../../../../services/modal.service';
 import {AlertService} from '../../../../services/alert.service';
 import {LangService} from '../../../../services/lang.service';
-import {ExpenseCategoryModel} from '../../../enterprise/manage-expense-categories/expense-category/expense-category.model';
 import {ExpenseCategoryService} from '../../../../services/expenses/expense-category.service';
 import {ExpenseCategoryTreeModel} from '../../../enterprise/manage-expense-categories/expense-category-tree/expense-category-tree.model';
 

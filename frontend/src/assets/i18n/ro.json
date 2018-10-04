@@ -316,14 +316,14 @@
 		"last-work-date": "Ultima dată de lucru",
 		"name": "Parcela",
 		"one-ha": "1 Ha",
-		"total-ha": "Total Ha",
 		"parcels": "Parcele",
 		"planted-at": "Data plantării",
 		"plants-count": "Numărul de plante",
 		"rows-count": "Numărul de rânduri",
 		"space-between-plants": "Spațiu între plante",
 		"space-between-rows": "Spațiu între rânduri",
-		"the-parcels": "parcelele"
+		"the-parcels": "parcelele",
+		"total-ha": "Total Ha"
 	},
 	"pest": {
 		"add-edit": "Adăugați / redactați dăunătorul",

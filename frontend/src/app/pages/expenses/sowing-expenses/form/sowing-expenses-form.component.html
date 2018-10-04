@@ -2,62 +2,116 @@
 
     <div widget class="card bottom-30">
         <div class="card-header">
-            <span translate>expenses.agricultural-machinery</span>
-            <!--<div class="widget-controls">-->
-                <!--&lt;!&ndash;<a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>&ndash;&gt;-->
-                <!--&lt;!&ndash;<a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>&ndash;&gt;-->
-                <!--&lt;!&ndash;<a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>&ndash;&gt;-->
-                <!--&lt;!&ndash;<a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>&ndash;&gt;-->
-                <!--<a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>-->
-            <!--</div>-->
+            <span translate>expenses.sowing</span>
         </div>
         <div class="card-body widget-body">
 
-
             <div class="form-group row">
                 <div class="col-sm-6">
-                    <label for="expense-title" translate>info.description</label>
-                    <input id="expense-title" class="form-control checking-field" formControlName="title" />
-                    <app-form-error-block [control]="form.get('title')"
-                                          [formSubmitted]="submitted">
-                    </app-form-error-block>
-                </div>
-
-                <div class="col-sm-6">
                     <label for="expense-date" translate>expenses.date</label>
-                    <input id="expense-date" type="date" class="form-control checking-field" formControlName="expenseDate" />
+                    <input id="expense-date" type="date" class="form-control checking-field"
+                           formControlName="expenseDate"/>
                     <app-form-error-block [control]="form.get('expenseDate')"
                                           [formSubmitted]="submitted">
                     </app-form-error-block>
                 </div>
+                <div class="col-sm-6">
+                    <label translate>unit-of-measure.unit-long</label>
+                    <!-- todo: default value... -->
+                    <select class="form-control checking-field" formControlName="unitOfMeasure">
+                        <option value="kg" translate>unit-of-measure.kg</option>
+                        <option value="su" translate>unit-of-measure.su</option>
+                        <option value="t" translate>unit-of-measure.t</option>
+                    </select>
+
+                    <app-form-error-block [control]="form.get('unitOfMeasure')"
+                                          [formSubmitted]="formSubmitted">
+                    </app-form-error-block>
+                </div>
             </div>
 
             <div class="form-group row">
                 <div class="col-sm-6">
-                    <label translate>machine.agricultural-machinery</label>
-                    <angular2-multiselect [settings]="multiSelectSettings"
-                                          [data]="machines"
-                                          (onDeSelect)="resetUnlinkedEmployees()"
-                                          formControlName="machines">
-                    </angular2-multiselect>
-
+                    <label translate>crop.name</label>
+                    <select class="form-control custom-select" formControlName="crop">
+                        <option *ngFor="let crop of crops" [ngValue]="crop.id">{{crop.name}}</option>
+                    </select>
+                    <app-form-error-block [control]="form.get('crop')"
+                                          [formSubmitted]="submitted">
+                    </app-form-error-block>
                 </div>
                 <div class="col-sm-6">
-                    <label translate>employee.employees</label>
-                    <angular2-multiselect [settings]="multiSelectSettings"
-                                          [data]="employees"
-                                          formControlName="employees">
-                    </angular2-multiselect>
+                    <label translate>crop.variety</label>
+                    <select class="form-control custom-select" formControlName="variety">
+                        <option *ngFor="let v of cropVarieties" [ngValue]="v.id">{{v.name}}</option>
+                    </select>
+                    <app-form-error-block [control]="form.get('variety')"
+                                          [formSubmitted]="submitted">
+                    </app-form-error-block>
                 </div>
             </div>
 
             <div class="form-group">
-                <app-expense-item-table [models]="model.expenseItems">
-                </app-expense-item-table>
+                <label translate>parcel.parcels</label>
+                <angular2-multiselect [settings]="multiSelectSettings"
+                                      [data]="parcels"
+                                      formControlName="parcels">
+                </angular2-multiselect>
             </div>
 
             <div class="form-group">
-                <button class="btn btn-danger" *ngIf="model.id != null" (click)="prepareRemove()" translate>action.remove</button>
+                <fieldset class="border p-2">
+                    <legend class="w-auto" translate>expenses.norm-at</legend>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="norm-sown-1-ha" translate>parcel.one-ha</label>
+                            <input id="norm-sown-1-ha" class="form-control checking-field" formControlName="normSown1Ha">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="norm-sown-1-ha-total" translate>parcel.total-ha</label>
+                            <input id="norm-sown-1-ha-total" class="form-control checking-field"
+                                   formControlName="normSownTotal">
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="form-group">
+                <fieldset class="border p-2">
+                    <legend class="w-auto" translate>expenses.sowing</legend>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="actual-sown-1-ha" translate>parcel.one-ha</label>
+                            <input id="actual-sown-1-ha" class="form-control checking-field"
+                                   formControlName="actualSown1Ha">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="actual-sown-1-ha-total" translate>parcel.total-ha</label>
+                            <input id="actual-sown-1-ha-total" class="form-control checking-field"
+                                   formControlName="actualSownTotal">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="unit-price" translate>expenses.unit-cost</label>
+                            <input id="unit-price" class="form-control checking-field" formControlName="unitPrice">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="total-amount" translate>expenses.total-cost</label>
+                            <input id="total-amount" class="form-control checking-field"
+                                   formControlName="totalAmount">
+                        </div>
+                    </div>
+
+                </fieldset>
+            </div>
+
+
+            <div class="form-group">
+                <button class="btn btn-danger" *ngIf="model.expenseId != null" (click)="prepareRemove()" translate>
+                    action.remove
+                </button>
                 <button class="btn btn-success pull-right" (click)="save()" translate>action.save</button>
                 <button class="btn btn-default mr-1 pull-right" (click)="back()" translate>action.back</button>
             </div>

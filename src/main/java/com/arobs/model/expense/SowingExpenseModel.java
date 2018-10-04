@@ -7,27 +7,34 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SowingExpenseListModel {
+public class SowingExpenseModel {
 
     private Long expenseId;
     private Date expenseDate;
-    private List<ParcelModel> parcels = new ArrayList<>();
+
+    private List<Long> parcels = new ArrayList<>();
+
     private String crop;
     private String variety;
     private String icon;
     private String unitOfMeasure;
     private Double area;
-    private Double normSow1Ha;
-//    private Double normSowTotal;
+    private Double normSown1Ha;
     private Double actualSown1Ha;
-//    private Double sownTotal;
     private BigDecimal unitPrice;
-//    private BigDecimal totalAmount;
 
     private Date createdAt;
     private String createdBy;
 
-    public SowingExpenseListModel() {
+    public SowingExpenseModel() {
+    }
+
+    public Double getNormSownTotal() {
+        return this.area * this.normSown1Ha;
+    }
+
+    public BigDecimal getTotalAmount() {
+        return BigDecimal.valueOf(unitPrice.doubleValue() * this.getActualSownTotal());
     }
 
     public Long getExpenseId() {
@@ -46,11 +53,11 @@ public class SowingExpenseListModel {
         this.expenseDate = expenseDate;
     }
 
-    public List<ParcelModel> getParcels() {
+    public List<Long> getParcels() {
         return parcels;
     }
 
-    public void setParcels(List<ParcelModel> parcels) {
+    public void setParcels(List<Long> parcels) {
         this.parcels = parcels;
     }
 
@@ -94,16 +101,12 @@ public class SowingExpenseListModel {
         this.area = area;
     }
 
-    public Double getNormSow1Ha() {
-        return normSow1Ha;
+    public Double getNormSown1Ha() {
+        return normSown1Ha;
     }
 
-    public void setNormSow1Ha(Double normSow1Ha) {
-        this.normSow1Ha = normSow1Ha;
-    }
-
-    public Double getNormSowTotal() {
-        return this.area * this.normSow1Ha;
+    public void setNormSown1Ha(Double normSown1Ha) {
+        this.normSown1Ha = normSown1Ha;
     }
 
     public Double getActualSown1Ha() {
@@ -126,10 +129,6 @@ public class SowingExpenseListModel {
         this.unitPrice = unitPrice;
     }
 
-    public BigDecimal getTotalAmount() {
-        return BigDecimal.valueOf(unitPrice.doubleValue() * this.getActualSownTotal());
-    }
-
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -145,4 +144,5 @@ public class SowingExpenseListModel {
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
+
 }
