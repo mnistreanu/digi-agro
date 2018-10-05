@@ -1,9 +1,11 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ColDef, GridOptions} from 'ag-grid';
+import {ColDef, ColGroupDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../../services/lang.service';
 import {MachineService} from '../../../../services/machine.service';
 import {PinnedRowRendererComponent} from '../../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
 import {PesticideExpensesListModel} from './pesticide-expenses-list.model';
+import {DateUtil} from '../../../../common/dateUtil';
+import {PesticideExpenseService} from '../../../../services/expenses/pesticide-expense.service';
 
 @Component({
     selector: 'app-pesticides-expenses-list',
@@ -15,14 +17,15 @@ export class PesticideExpensesListComponent implements OnInit {
     options: GridOptions;
     context;
 
-    labelDate: string;
-    labelName: string;
-    labelType: string;
-    labelPhase: string;
-    labelResult: string;
-    labelComments: string;
-
-    constructor(private machineService: MachineService, private langService: LangService) {
+    // labelDate: string;
+    // labelName: string;
+    // labelType: string;
+    // labelPhase: string;
+    // labelResult: string;
+    // labelComments: string;
+    //
+    constructor(private pesticideExpenseService: PesticideExpenseService,
+                private langService: LangService) {
 
     }
 
@@ -48,26 +51,26 @@ export class PesticideExpensesListComponent implements OnInit {
 
     private setupHeaders() {
 
-        const headers: ColDef[] = [
+        const headers: (ColDef | ColGroupDef)[] = [
             {
                 headerName: 'pesticide.spray-date',
                 headerTooltip: 'pesticide.spray-date',
-                field: 'date',
+                field: 'expenseDate',
                 width: 130,
                 minWidth: 130,
-                suppressFilter: true,
                 pinnedRowCellRenderer: 'customPinnedRowRenderer',
-                pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } }
+                pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } },
+                valueFormatter: (params) => DateUtil.formatDate(params.value)
             },
             {
                 headerName: 'info.name',
-                field: 'name',
+                field: 'pesticideName',
                 width: 200,
                 minWidth: 200
             },
             {
                 headerName: 'pesticide.type',
-                field: 'type',
+                field: 'pesticideType',
                 width: 200,
                 minWidth: 200,
                 suppressFilter: true,
@@ -91,27 +94,40 @@ export class PesticideExpensesListComponent implements OnInit {
                 headerName: 'pesticide.comments',
                 headerTooltip: 'pesticide.comments',
                 field: 'comments',
-                width: 300,
-                minWidth: 300,
+                width: 400,
+                minWidth: 200,
                 suppressFilter: true,
             },
             {
-                headerName: 'Registered By',
-                field: '',
-                width: 100,
-                minWidth: 100,
+                headerName: 'info.registered',
+                children: [
+                    {
+                        headerName: 'info.by',
+                        field: 'createdBy',
+                        width: 100,
+                        minWidth: 100,
+                    },
+                    {
+                        headerName: 'info.at',
+                        field: 'createdAt',
+                        width: 90,
+                        minWidth: 90,
+                        valueFormatter: (params) => DateUtil.formatDate(params.value)
+                    },
+                ]
             },
-            {
-                headerName: 'At',
-                field: '',
-                width: 60,
-                minWidth: 60,
-            },
-
         ];
         headers.forEach(header => {
             if (header.headerName) {
                 this.langService.get(header.headerName).subscribe(m => header.headerName = m);
+            }
+
+            if (header.hasOwnProperty('children')) {
+                header['children'].forEach(childHeader => {
+                    if (childHeader.headerName) {
+                        this.langService.get(childHeader.headerName).subscribe(m => childHeader.headerName = m);
+                    }
+                });
             }
 
             if (header.headerTooltip) {
@@ -124,23 +140,14 @@ export class PesticideExpensesListComponent implements OnInit {
 
 
     public setupRows() {
-        let i = 0;
-        this.machineService.findAll().subscribe(modelsArray => {
-            const rows = modelsArray.map(data => {
-                const model = new PesticideExpensesListModel();
-                model.date = new Date().toLocaleDateString();
-                model.type = 'Insecticid';
-                model.name = 'FASTAC 10 EC';
-                model.phase = 'Floarea 3 patrimi';
-                model.result = 'Pozitiv';
-                model.comments = 'Managerul ( brigadiri, agronomul) efectueaza evidenta in jurnalul ' +
-                    'personal zilnic + complecteaza un blanc pentru raport; (de obicei complecteaza contabilitatea)';
-                i++;
-                return model;
+        this.pesticideExpenseService.find().subscribe(models => {
+            models.forEach(model => {
+                model.pesticideType = this.langService.instant('pesticide-type.' + model.pesticideType);
             });
-            this.options.api.setRowData(rows);
-            this.setupSummaryRow(rows);
+            debugger;
+            this.options.api.setRowData(models);
         });
+
     }
 
     private setupSummaryRow(rows) {

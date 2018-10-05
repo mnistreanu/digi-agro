@@ -32,7 +32,7 @@ public class PesticideExpenseController {
     public ResponseEntity<List<PesticideExpenseListModel>> getModels(HttpSession session) {
         Long tenantId = (Long) session.getAttribute("tenant");
 
-        List<Expense> expenses = expenseService.find(tenantId, ExpenseCategory.SOWING);
+        List<Expense> expenses = expenseService.find(tenantId, ExpenseCategory.MACHINERY);
         List<PesticideExpenseListModel> resultModels = new ArrayList<>();
 
         for (Expense expense : expenses) {
@@ -48,13 +48,11 @@ public class PesticideExpenseController {
             model1.setExpenseId(expense.getId());
             model1.setExpenseDate(expense.getExpenseDate());
             model1.setCrop("Porumb");
-            model1.setVariety("Mama");
-            model1.setIcon("corn.png");
-            model1.setUnitOfMeasure(UnitOfMeasure.Kilogram.getUnitOfMeasure());
-            model1.setArea((double)((int)(Math.random() * 10000))/100);
-            model1.setNormSow1Ha((double)((int)(Math.random() * 10000))/100);
-            model1.setActualSown1Ha((double)((int)(Math.random() * 10000))/100);
-            model1.setUnitPrice(BigDecimal.valueOf((double)((int)(Math.random() * 10000))/100));
+            model1.setPesticideType("INSECTICIDE");
+            model1.setPesticideName("Armetil cobre");
+            model1.setPhase("Umflarea mugurilor");
+            model1.setResult("A avut efect pozitiv");
+            model1.setComments("Se putea si mai bine");
             model1.setCreatedAt(expense.getCreatedAt());
             model1.setCreatedBy("Mihalici");
             model1.setParcels(parcelModels);
@@ -64,13 +62,11 @@ public class PesticideExpenseController {
             model2.setExpenseId(expense.getId());
             model2.setExpenseDate(expense.getExpenseDate());
             model2.setCrop("Cartof");
-            model2.setVariety("Irga");
-            model1.setIcon("potatoes.png");
-            model2.setUnitOfMeasure(UnitOfMeasure.Kilogram.getUnitOfMeasure());
-            model2.setArea((double)((int)(Math.random() * 10000))/100);
-            model2.setNormSow1Ha((double)((int)(Math.random() * 10000))/100);
-            model2.setActualSown1Ha((double)((int)(Math.random() * 10000))/100);
-            model2.setUnitPrice(BigDecimal.valueOf((double)((int)(Math.random() * 10000))/100));
+            model2.setPesticideType("HERBICIDE");
+            model2.setPesticideName("Herbastres");
+            model2.setPhase("Butonul roz");
+            model2.setResult("Diverse probleme, dar merge");
+            model2.setComments("Se putea si mai bine");
             model2.setCreatedAt(expense.getCreatedAt());
             model2.setCreatedBy("Ivan Dulin");
             model2.setParcels(parcelModels);
@@ -80,13 +76,11 @@ public class PesticideExpenseController {
             model3.setExpenseId(expense.getId());
             model3.setExpenseDate(expense.getExpenseDate());
             model3.setCrop("Griu");
-            model3.setVariety("Aktios");
-            model1.setIcon("wheat.png");
-            model3.setUnitOfMeasure(UnitOfMeasure.Kilogram.getUnitOfMeasure());
-            model3.setArea((double)((int)(Math.random() * 10000))/100);
-            model3.setNormSow1Ha((double)((int)(Math.random() * 10000))/100);
-            model3.setActualSown1Ha((double)((int)(Math.random() * 10000))/100);
-            model3.setUnitPrice(BigDecimal.valueOf((double)((int)(Math.random() * 10000))/100));
+            model3.setPesticideType("INSECTICIDE");
+            model3.setPesticideName("Arahno killer 2000");
+            model3.setPhase("in perioada infloirtului");
+            model3.setResult("Vau vau ce interesant");
+            model3.setComments("Se putea si mai bine");
             model3.setCreatedAt(expense.getCreatedAt());
             model3.setCreatedBy("Jorik Vartanov");
             model3.setParcels(parcelModels);

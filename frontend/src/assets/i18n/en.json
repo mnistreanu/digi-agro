@@ -316,14 +316,14 @@
 		"last-work-date": "Last Work Date",
 		"name": "Parcel",
 		"one-ha": "1 Ha",
+		"total-ha": "Total Ha",
 		"parcels": "Parcels",
 		"planted-at": "Planted At",
 		"plants-count": "Number of plants",
 		"rows-count": "Number of rows",
 		"space-between-plants": "Space Between Plants",
 		"space-between-rows": "Space Between Rows",
-		"the-parcels": "the parcels",
-		"total-ha": "Total Ha"
+		"the-parcels": "the parcels"
 	},
 	"pest": {
 		"add-edit": "Add / edit pest",
@@ -396,6 +396,7 @@
 	},
 	"unit-of-measure": {
 		"eur": "EUR",
+		"ha": "ha",
 		"kg": "Kg",
 		"l": "Litre",
 		"mdl": "Lei",

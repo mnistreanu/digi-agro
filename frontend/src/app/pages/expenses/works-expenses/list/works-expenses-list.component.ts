@@ -168,11 +168,11 @@ export class WorksExpensesListComponent implements OnInit {
                 this.langService.get(header.headerName).subscribe(m => header.headerName = m);
 
                 if (header.hasOwnProperty('children')) {
-                    // header.children.forEach(childHeader => {
-                    //     if (childHeader.headerName) {
-                    //         this.langService.get(childHeader.headerName).subscribe(m => childHeader.headerName = m);
-                    //     }
-                    // });
+                    header['children'].forEach(childHeader => {
+                        if (childHeader.headerName) {
+                            this.langService.get(childHeader.headerName).subscribe(m => childHeader.headerName = m);
+                        }
+                    });
                 }
             }
 
@@ -188,6 +188,8 @@ export class WorksExpensesListComponent implements OnInit {
     public setupRows() {
         this.worksExpenseService.find().subscribe(models => {
             models.forEach(model => {
+                model.unitOfMeasure = this.langService.instant('unit-of-measure.' + model.unitOfMeasure);
+
                 model.employees.forEach(employee => {
                     if (model.employeesString) {
                         model.employeesString = model.employeesString + ', ' + employee.firstName + ' ' + employee.lastName;
@@ -206,7 +208,6 @@ export class WorksExpensesListComponent implements OnInit {
                 });
             });
 
-            debugger;
             this.options.api.setRowData(models);
         });
     }

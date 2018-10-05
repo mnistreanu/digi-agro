@@ -1,8 +1,7 @@
 export class PesticideExpensesListModel {
   expenseDate: string;
-  date: string;
-  name: string;
-  type: string;
+  pesticideName: string;
+  pesticideType: string;
   phase: string;
   result: string;
   comments: string;
