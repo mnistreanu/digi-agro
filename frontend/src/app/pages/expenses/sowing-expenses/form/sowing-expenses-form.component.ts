@@ -118,7 +118,8 @@ export class SowingExpensesFormComponent implements OnInit {
             actualSownTotal: [this.model.actualSownTotal],
             unitPrice: [this.model.unitPrice],
             totalAmount: [this.model.totalAmount],
-            parcels: [this.getSelectedParcels()]
+            parcels: [this.getSelectedParcels()],
+            area: [this.model.area],
         });
         console.log(this.form);
     }
