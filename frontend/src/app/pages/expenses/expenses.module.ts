@@ -28,7 +28,6 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2
 import {FuelExpensesFormComponent} from './fuel-expenses/form/fuel-expenses-form.component';
 import { ExpenseListComponent } from './expense-list/expense-list.component';
 import {FuelExpenseItemTableComponent} from './fuel-expenses/expense-item-table/fuel-expense-item-table.component';
-import {SowingExpenseItemTableComponent} from './sowing-expenses/expense-item-table/sowing-expense-item-table.component';
 import {WorksExpensesFormComponent} from './works-expenses/form/works-expenses-form.component';
 import {PesticideExpensesListComponent} from './pesticide-expenses/list/pesticide-expenses-list.component';
 import {PesticideExpensesFormComponent} from './pesticide-expenses/form/pesticide-expenses-form.component';
@@ -83,7 +82,6 @@ export const routes = [
         FuelExpenseItemTableComponent,
         SowingExpensesListComponent,
         SowingExpensesFormComponent,
-        SowingExpenseItemTableComponent,
         WorksExpensesListComponent,
         WorksExpensesFormComponent,
         PesticideExpensesListComponent,
