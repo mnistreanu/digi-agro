@@ -99,7 +99,11 @@
 	},
 	"fertilizer": {
 		"add-edit": "Добавить / редактировать удобрение",
+		"comments": "Комментарии",
 		"name": "Название",
+		"phase": "Фаза",
+		"result": "Результат",
+		"spray-date": "Дата распыления",
 		"type": "Тип"
 	},
 	"fertilizer-type": {

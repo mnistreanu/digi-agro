@@ -1,12 +1,14 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ColDef, GridOptions} from 'ag-grid';
+import {ColDef, ColGroupDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../../services/lang.service';
 import {MachineService} from '../../../../services/machine.service';
 import {PinnedRowRendererComponent} from '../../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
 import {FertilizerExpensesListModel} from './fertilizer-expenses-list.model';
+import {DateUtil} from '../../../../common/dateUtil';
+import {FertilizerExpenseService} from '../../../../services/expenses/fertilizer-expense.service';
 
 @Component({
-    selector: 'app-fertilizer-expenses-list',
+    selector: 'app-fertilizers-expenses-list',
     encapsulation: ViewEncapsulation.None,
     templateUrl: './fertilizer-expenses-list.component.html',
     styleUrls: ['./fertilizer-expenses-list.component.scss']
@@ -15,41 +17,20 @@ export class FertilizerExpensesListComponent implements OnInit {
     options: GridOptions;
     context;
 
-    labelMachineType: string;
-    labelAgriculturalMachinery: string;
-    labelIdentifier: string;
-    labelDate: string;
-    labelFirstName: string;
-    labelLastName: string;
-    labelUnitOfMeasureShort: string;
-    labelUnitOfMeasureLong: string;
-    labelDiesel: string;
-    labelOil: string;
-    labelSolidol: string;
-    labelNegrol: string;
-
-    constructor(private machineService: MachineService, private langService: LangService) {
+    // labelDate: string;
+    // labelName: string;
+    // labelType: string;
+    // labelPhase: string;
+    // labelResult: string;
+    // labelComments: string;
+    //
+    constructor(private fertilizerExpenseService: FertilizerExpenseService,
+                private langService: LangService) {
 
     }
 
     ngOnInit() {
-        this.setupLabels();
         this.setupGrid();
-    }
-
-    private setupLabels() {
-        this.langService.get('machine.type').subscribe(msg => this.labelMachineType = msg);
-        this.langService.get('machine.agricultural-machinery').subscribe(msg => this.labelAgriculturalMachinery = msg);
-        this.langService.get('machine.identifier').subscribe(msg => this.labelIdentifier = msg);
-        this.langService.get('machine.repairing-date').subscribe(msg => this.labelDate = msg);
-        this.langService.get('employee.first-name').subscribe(msg => this.labelFirstName = msg);
-        this.langService.get('employee.last-name').subscribe(msg => this.labelLastName = msg);
-        this.langService.get('unit-of-measure.unit-short').subscribe(msg => this.labelUnitOfMeasureShort = msg);
-        this.langService.get('unit-of-measure.unit-long').subscribe(msg => this.labelUnitOfMeasureLong = msg);
-        this.langService.get('fuel.diesel').subscribe(msg => this.labelDiesel = msg);
-        this.langService.get('fuel.oil').subscribe(msg => this.labelOil = msg);
-        this.langService.get('fuel.solidol').subscribe(msg => this.labelSolidol = msg);
-        this.langService.get('fuel.negrol').subscribe(msg => this.labelNegrol = msg);
     }
 
 
@@ -70,119 +51,103 @@ export class FertilizerExpensesListComponent implements OnInit {
 
     private setupHeaders() {
 
-        const headers: ColDef[] = [
+        const headers: (ColDef | ColGroupDef)[] = [
             {
-                headerName: this.labelDate,
-                field: 'date',
-                width: 90,
-                minWidth: 90,
-                suppressFilter: true,
+                headerName: 'fertilizer.spray-date',
+                headerTooltip: 'fertilizer.spray-date',
+                field: 'expenseDate',
+                width: 130,
+                minWidth: 130,
                 pinnedRowCellRenderer: 'customPinnedRowRenderer',
-                pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } }
+                pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } },
+                valueFormatter: (params) => DateUtil.formatDate(params.value)
             },
             {
-                headerName: this.labelAgriculturalMachinery,
-                field: 'brandModel',
+                headerName: 'info.name',
+                field: 'fertilizerName',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: this.labelIdentifier,
-                field: 'identifier',
-                width: 60,
-                minWidth: 60,
+                headerName: 'fertilizer.type',
+                field: 'fertilizerType',
+                width: 200,
+                minWidth: 200,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelLastName  + ' ' + this.labelFirstName,
-                field: 'employee',
+                headerName: 'fertilizer.phase',
+                field: 'phase',
                 width: 140,
                 minWidth: 140,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelUnitOfMeasureShort,
-                headerTooltip: this.labelUnitOfMeasureLong,
-                field: 'unitOfMeasure',
-                width: 60,
-                minWidth: 60,
+                headerName: 'fertilizer.result',
+                headerTooltip: 'fertilizer.result',
+                field: 'result',
+                width: 200,
+                minWidth: 200,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelDiesel,
-                field: 'diesel',
-                width: 100,
-                minWidth: 100,
-                suppressFilter: true,
-                // allow gui to set aggregations for this column
-//                enableValue: true,
-                // restrict aggregations to sum
-//                allowedAggFuncs: ['sum'],
-                pinnedRowCellRenderer: 'customPinnedRowRenderer',
-                pinnedRowCellRendererParams: { style: { color: 'red', fontWeight: 'bold' } }
-            },
-            {
-                headerName: this.labelOil,
-                field: 'oil',
-                width: 80,
-                minWidth: 80,
+                headerName: 'fertilizer.comments',
+                headerTooltip: 'fertilizer.comments',
+                field: 'comments',
+                width: 400,
+                minWidth: 200,
                 suppressFilter: true,
             },
             {
-                headerName: this.labelSolidol,
-                field: 'solidol',
-                width: 80,
-                minWidth: 80,
-                suppressFilter: true,
+                headerName: 'info.registered',
+                children: [
+                    {
+                        headerName: 'info.by',
+                        field: 'createdBy',
+                        width: 100,
+                        minWidth: 100,
+                    },
+                    {
+                        headerName: 'info.at',
+                        field: 'createdAt',
+                        width: 90,
+                        minWidth: 90,
+                        valueFormatter: (params) => DateUtil.formatDate(params.value)
+                    },
+                ]
             },
-            {
-                headerName: this.labelNegrol,
-                field: 'negrol',
-                width: 80,
-                minWidth: 80,
-                suppressFilter: true,
-            },
-            {
-                headerName: 'Registered By',
-                field: '',
-                width: 100,
-                minWidth: 100,
-            },
-            {
-                headerName: 'At',
-                field: '',
-                width: 60,
-                minWidth: 60,
-            },
-
         ];
+        headers.forEach(header => {
+            if (header.headerName) {
+                this.langService.get(header.headerName).subscribe(m => header.headerName = m);
+            }
 
+            if (header.hasOwnProperty('children')) {
+                header['children'].forEach(childHeader => {
+                    if (childHeader.headerName) {
+                        this.langService.get(childHeader.headerName).subscribe(m => childHeader.headerName = m);
+                    }
+                });
+            }
+
+            if (header.headerTooltip) {
+                this.langService.get(header.headerTooltip).subscribe(m => header.headerTooltip = m);
+            }
+        });
 
         return headers;
     }
 
 
     public setupRows() {
-        let i = 0;
-        this.machineService.findAll().subscribe(modelsArray => {
-            const rows = modelsArray.map(data => {
-                const model = new FertilizerExpensesListModel();
-                model.date = new Date().toLocaleDateString();
-                model.type = modelsArray[i].type;
-                model.brandModel = modelsArray[i].type + ' ' + modelsArray[i].brand + ' ' + modelsArray[i].model;
-                model.identifier = modelsArray[i].identifier;
-                model.employee = 'Roată Ion';
-                model.unitOfMeasure = 'L';
-                model.diesel = 120;
-                model.oil = 9;
-                model.solidol = 1;
-                model.negrol = 1;
-                i++;
-                return model;
+        this.fertilizerExpenseService.find().subscribe(models => {
+            models.forEach(model => {
+                model.fertilizerType = this.langService.instant('fertilizer-type.' + model.fertilizerType);
             });
-            this.options.api.setRowData(rows);
-            this.setupSummaryRow(rows);
+            debugger;
+            this.options.api.setRowData(models);
         });
+
     }
 
     private setupSummaryRow(rows) {
