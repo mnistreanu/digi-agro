@@ -99,7 +99,11 @@
 	},
 	"fertilizer": {
 		"add-edit": "Add / edit fertilizer",
+		"comments": "Comments",
 		"name": "Name",
+		"phase": "Phase",
+		"result": "Result",
+		"spray-date": "Spray date",
 		"type": "Type"
 	},
 	"fertilizer-type": {

@@ -11,17 +11,24 @@ public class FertilizerExpenseListModel {
 
     private Long expenseId;
     private Date expenseDate;
+
+    private String pesticideType;
+    private String pesticideName;
+    private String phase;
+    private String result;
+    private String comments;
+
     private List<ParcelModel> parcels = new ArrayList<>();
     private String crop;
-    private String variety;
-    private String icon;
-    private String unitOfMeasure;
-    private Double area;
-    private Double normSow1Ha;
+//    private String variety;
+//    private String icon;
+//    private String unitOfMeasure;
+//    private Double area;
+//    private Double normSow1Ha;
 //    private Double normSowTotal;
-    private Double actualSown1Ha;
+//    private Double actualSown1Ha;
 //    private Double sownTotal;
-    private BigDecimal unitPrice;
+//    private BigDecimal unitPrice;
 //    private BigDecimal totalAmount;
 
     private Date createdAt;
@@ -46,6 +53,46 @@ public class FertilizerExpenseListModel {
         this.expenseDate = expenseDate;
     }
 
+    public String getFertilizerType() {
+        return pesticideType;
+    }
+
+    public void setFertilizerType(String pesticideType) {
+        this.pesticideType = pesticideType;
+    }
+
+    public String getFertilizerName() {
+        return pesticideName;
+    }
+
+    public void setFertilizerName(String pesticideName) {
+        this.pesticideName = pesticideName;
+    }
+
+    public String getPhase() {
+        return phase;
+    }
+
+    public void setPhase(String phase) {
+        this.phase = phase;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
     public List<ParcelModel> getParcels() {
         return parcels;
     }
@@ -60,74 +107,6 @@ public class FertilizerExpenseListModel {
 
     public void setCrop(String crop) {
         this.crop = crop;
-    }
-
-    public String getVariety() {
-        return variety;
-    }
-
-    public void setVariety(String cropVariety) {
-        this.variety = cropVariety;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public String getUnitOfMeasure() {
-        return unitOfMeasure;
-    }
-
-    public void setUnitOfMeasure(String unitOfMeasure) {
-        this.unitOfMeasure = unitOfMeasure;
-    }
-
-    public Double getArea() {
-        return area;
-    }
-
-    public void setArea(Double area) {
-        this.area = area;
-    }
-
-    public Double getNormSow1Ha() {
-        return normSow1Ha;
-    }
-
-    public void setNormSow1Ha(Double normSow1Ha) {
-        this.normSow1Ha = normSow1Ha;
-    }
-
-    public Double getNormSowTotal() {
-        return this.area * this.normSow1Ha;
-    }
-
-    public Double getActualSown1Ha() {
-        return actualSown1Ha;
-    }
-
-    public void setActualSown1Ha(Double actualSown1Ha) {
-        this.actualSown1Ha = actualSown1Ha;
-    }
-
-    public Double getActualSownTotal() {
-        return this.area * this.actualSown1Ha;
-    }
-
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public BigDecimal getTotalAmount() {
-        return BigDecimal.valueOf(unitPrice.doubleValue() * this.getActualSownTotal());
     }
 
     public Date getCreatedAt() {

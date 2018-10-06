@@ -99,7 +99,11 @@
 	},
 	"fertilizer": {
 		"add-edit": "Adăugați / redactați îngrășământul",
+		"comments": "Comentarii",
 		"name": "Denumire",
+		"phase": "Faza",
+		"result": "Rezultat",
+		"spray-date": "Data pulverizării",
 		"type": "Tip"
 	},
 	"fertilizer-type": {
