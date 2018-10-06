@@ -14,7 +14,7 @@ public class ExpenseItem {
     private Long id;
 
     @Column(name = "expense_id")
-    private Long expseneId;
+    private Long expenseId;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -55,12 +55,12 @@ public class ExpenseItem {
         this.id = id;
     }
 
-    public Long getExpseneId() {
-        return expseneId;
+    public Long getExpenseId() {
+        return expenseId;
     }
 
-    public void setExpseneId(Long expseneId) {
-        this.expseneId = expseneId;
+    public void setExpenseId(Long expenseId) {
+        this.expenseId = expenseId;
     }
 
     public ExpenseCategory getCategory() {

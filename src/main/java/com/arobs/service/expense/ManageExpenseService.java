@@ -9,7 +9,6 @@ import com.arobs.service.MachineService;
 import com.arobs.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +31,8 @@ public class ManageExpenseService {
     private UserAccountService userAccountService;
     @Autowired
     private ExpenseCategoryService expenseCategoryService;
-    
-    
+
+
     public List<ExpenseListModel> find(Long tenantId) {
         List<Expense> expenses = expenseService.find(tenantId);
         List<ExpenseListModel> models = new ArrayList<>();
@@ -88,8 +87,7 @@ public class ManageExpenseService {
         for (ExpenseResource expenseResource : expenseResources) {
             if (expenseResource.getTableName().equals("machine")) {
                 expenseModel.getMachines().add(expenseResource.getResourceId());
-            }
-            else if (expenseResource.getTableName().equals("employee")) {
+            } else if (expenseResource.getTableName().equals("employee")) {
                 expenseModel.getEmployees().add(expenseResource.getResourceId());
             }
         }
@@ -97,19 +95,5 @@ public class ManageExpenseService {
         return expenseModel;
     }
 
-    @Transactional
-    public ExpenseModel save(ExpenseModel model, Long tenant, Long defaultCategoryId) {
 
-        Expense expense = expenseService.save(model, tenant, defaultCategoryId);
-        expenseItemService.save(model.getExpenseItems(), expense);
-        expenseResourceService.save(expense.getId(), model.getMachines(), "machine");
-        expenseResourceService.save(expense.getId(), model.getEmployees(), "employee");
-
-        return getModel(expense);
-    }
-
-    @Transactional
-    public void remove(Long expenseId) {
-        expenseService.remove(expenseId);
-    }
 }

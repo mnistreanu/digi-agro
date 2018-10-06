@@ -1,11 +1,15 @@
+import {CropVarietyModel} from '../../../manage-crops/crop-variety/crop-variety.model';
+import {CropModel} from '../../../manage-crops/crop/crop.model';
+
 export class SowingExpenseModel {
     expenseId: number;
     expenseDate: Date;
 
     parcels: number[];
 
-    crop: string;
-    variety: string;
+    cropModel: CropModel;
+    cropVarietyModel: CropVarietyModel;
+    cropAndVariety: string;
     unitOfMeasure: string;
 
     area: number;

@@ -12,7 +12,6 @@ public class ExpenseItemModel {
     private BigDecimal totalCost;
 
     private Long parentCategoryId;
-    private String parentCategory;
     private Long categoryId;
     private String category;
 

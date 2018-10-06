@@ -1,7 +1,5 @@
 package com.arobs.entity;
 
-import com.arobs.enums.UnitOfMeasure;
-
 import javax.persistence.*;
 
 /**

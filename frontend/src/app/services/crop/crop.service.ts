@@ -17,6 +17,10 @@ export class CropService {
     constructor(private http: HttpClient) {
     }
 
+    public find(): Observable<CropModel[]> {
+        return this.http.get<CropModel[]>(this.api + '/');
+    }
+
     // public findAll(): Observable<CropDTO[]> {
     //     return this.http.get<CropDTO[]>(this.api+"?page_no=0&rows_per_page=10&filter=&sort=");
     // }
@@ -61,7 +65,7 @@ export class CropService {
         return this.http.post<CropModel>(this.api, model);
     }
 
-    update(id:number, model: FormData): Observable<CropModel> {
+    update(id: number, model: FormData): Observable<CropModel> {
         return this.http.put<CropModel>(this.api + '/' + id, model);
     }
 

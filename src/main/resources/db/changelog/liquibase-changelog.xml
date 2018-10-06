@@ -988,4 +988,39 @@
         </sql>
     </changeSet>
 
+    <changeSet id="drop-expense-goal-tables" author="maxim.nistreanu" failOnError="false" runOnChange="true">
+        <sql>
+            DROP TABLE expense_goal_resource;
+            DROP TABLE expense_goal;
+        </sql>
+    </changeSet>
+
+    <changeSet id="insert-sowing-expenses" author="maxim.nistreanu" failOnError="true">
+        <sql>
+
+            INSERT INTO expense(id, tenant_id, category_id, expense_date, created_by, created_at) VALUES
+                (5, 1, 13, '2018-09-21', 3, '2018-09-16');
+
+            INSERT INTO expense_resource(expense_id, resource_id, table_name) VALUES
+                (5, 1, 'parcel'),
+                (5, 1, 'crop'),
+                (5, 1, 'crop_variety');
+
+            INSERT INTO expense_detail(id, expense_item_id, item_key, item_value) VALUES
+                (1, 12, 'AREA', 100);
+
+            INSERT INTO expense_norm(id, expense_item_id, per_unit, total) VALUES
+                (1, 12, 20, 200);
+
+            INSERT INTO expense_item(id, expense_id, unit_of_measure, actual_per_unit, actual_qty, unit_cost, total_cost) VALUES
+                (12, 5, 'su', 50, 500, 10, 5000);
+
+            SELECT setval('expense_id_seq', (SELECT MAX(id) FROM expense));
+            SELECT setval('expense_item_id_seq', (SELECT MAX(id) FROM expense_item));
+            SELECT setval('expense_detail_id_seq', (SELECT MAX(id) FROM expense_detail));
+            SELECT setval('expense_norm_id_seq', (SELECT MAX(id) FROM expense_norm));
+            SELECT setval('expense_resource_id_seq', (SELECT MAX(id) FROM expense_resource));
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

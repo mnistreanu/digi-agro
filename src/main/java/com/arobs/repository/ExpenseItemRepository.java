@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface ExpenseItemRepository extends JpaRepository<ExpenseItem, Long> {
 
-    @Query("SELECT ei FROM ExpenseItem ei WHERE ei.expseneId = :expenseId")
+    @Query("SELECT ei FROM ExpenseItem ei WHERE ei.expenseId = :expenseId")
     List<ExpenseItem> find(@Param("expenseId") Long expenseId);
 
     @Modifying

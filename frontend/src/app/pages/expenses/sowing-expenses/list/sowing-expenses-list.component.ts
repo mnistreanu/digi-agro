@@ -5,6 +5,7 @@ import {SowingExpenseService} from '../../../../services/expenses/sowing-expense
 import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {DateUtil} from '../../../../common/dateUtil';
 import {ActivatedRoute, Router} from '@angular/router';
+import {FieldMapper} from '../../../../common/field.mapper';
 
 @Component({
     selector: 'app-sowing-expenses-list',
@@ -186,8 +187,13 @@ export class SowingExpensesListComponent implements OnInit {
 
     public setupRows() {
         this.sowingExpenseService.find().subscribe(models => {
+            const mapper = new FieldMapper(this.langService.getLanguage());
+            const nameField = mapper.get('name');
             models.forEach(model => {
-                model['cropAndVariety'] = model.crop + ' ' + model.variety;
+                model.cropAndVariety = model.cropModel[nameField];
+                if (model.cropVarietyModel) {
+                    model.cropAndVariety += ' ' + model.cropVarietyModel[nameField];
+                }
                 model.unitOfMeasure = this.langService.instant('unit-of-measure.' + model.unitOfMeasure);
             });
 

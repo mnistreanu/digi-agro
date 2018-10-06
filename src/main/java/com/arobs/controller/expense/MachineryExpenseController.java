@@ -9,13 +9,9 @@ import com.arobs.model.MachineModel;
 import com.arobs.model.expense.ExpenseItemModel;
 import com.arobs.model.expense.ExpenseModel;
 import com.arobs.model.expense.MachineryExpenseListModel;
-import com.arobs.model.expense.MachineryExpenseModel;
 import com.arobs.service.EmployeeService;
 import com.arobs.service.MachineService;
-import com.arobs.service.expense.ExpenseItemService;
-import com.arobs.service.expense.ExpenseResourceService;
 import com.arobs.service.expense.ExpenseService;
-import com.arobs.service.expense.MachineryExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/machinery-expense")

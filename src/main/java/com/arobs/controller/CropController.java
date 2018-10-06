@@ -33,6 +33,14 @@ public class CropController {
     @Autowired
     private CropVarietyService cropVarietyService;
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ResponseEntity<List<CropModel>> find() {
+        List<Crop> crops = cropService.find(null);
+        List<CropModel> models = crops.stream().map(CropModel::new).collect(Collectors.toList());
+        return ResponseEntity.ok(models);
+    }
+
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<CropModel> findById(@PathVariable("id") final Long id) {

@@ -53,7 +53,6 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
         return getRepository().findOne(id);
     }
 
-
     public ExpenseModel getModel(Expense expense) {
         ExpenseModel expenseModel = new ExpenseModel(expense);
         List<ExpenseItem> expenseItems = expenseItemService.find(expense.getId());
@@ -116,11 +115,6 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
         return getModel(expense);
     }
 
-//    @Transactional
-//    public void remove(Long expenseId) {
-//        expenseService.remove(expenseId);
-//    }
-//
     @Transactional
     public Expense save(Expense expense) {
         return getRepository().save(expense);

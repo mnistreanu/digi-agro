@@ -1,6 +1,7 @@
 package com.arobs.model.expense;
 
-import com.arobs.model.parcel.ParcelModel;
+import com.arobs.model.CropModel;
+import com.arobs.model.CropVarietyModel;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -14,8 +15,11 @@ public class SowingExpenseModel {
 
     private List<Long> parcels = new ArrayList<>();
 
-    private String crop;
-    private String variety;
+    private Long cropId;
+    private CropModel cropModel;
+    private Long cropVarietyId;
+    private CropVarietyModel cropVarietyModel;
+
     private String icon;
     private String unitOfMeasure;
     private Double area;
@@ -61,20 +65,20 @@ public class SowingExpenseModel {
         this.parcels = parcels;
     }
 
-    public String getCrop() {
-        return crop;
+    public CropModel getCropModel() {
+        return cropModel;
     }
 
-    public void setCrop(String crop) {
-        this.crop = crop;
+    public void setCropModel(CropModel cropModel) {
+        this.cropModel = cropModel;
     }
 
-    public String getVariety() {
-        return variety;
+    public CropVarietyModel getCropVarietyModel() {
+        return cropVarietyModel;
     }
 
-    public void setVariety(String cropVariety) {
-        this.variety = cropVariety;
+    public void setCropVarietyModel(CropVarietyModel cropVarietyModel) {
+        this.cropVarietyModel = cropVarietyModel;
     }
 
     public String getIcon() {
@@ -145,4 +149,19 @@ public class SowingExpenseModel {
         this.createdBy = createdBy;
     }
 
+    public Long getCropId() {
+        return cropId;
+    }
+
+    public void setCropId(Long cropId) {
+        this.cropId = cropId;
+    }
+
+    public Long getCropVarietyId() {
+        return cropVarietyId;
+    }
+
+    public void setCropVarietyId(Long cropVarietyId) {
+        this.cropVarietyId = cropVarietyId;
+    }
 }

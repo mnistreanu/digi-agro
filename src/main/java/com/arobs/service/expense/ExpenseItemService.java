@@ -4,9 +4,7 @@ import com.arobs.entity.Expense;
 import com.arobs.entity.ExpenseItem;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.expense.ExpenseItemModel;
-import com.arobs.model.expense.MachineryExpenseModel;
 import com.arobs.repository.ExpenseItemRepository;
-import com.arobs.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +43,7 @@ public class ExpenseItemService implements HasRepository<ExpenseItemRepository> 
             ExpenseItem expenseItem;
             if (model.getId() == null) {
                 expenseItem = new ExpenseItem();
-                expenseItem.setExpseneId(expense.getId());
+                expenseItem.setExpenseId(expense.getId());
             }
             else {
                 expenseItem = findOne(model.getId());
@@ -81,5 +79,10 @@ public class ExpenseItemService implements HasRepository<ExpenseItemRepository> 
     @Transactional
     public void save(List<ExpenseItem> items) {
         getRepository().save(items);
+    }
+
+    @Transactional
+    public ExpenseItem save(ExpenseItem items) {
+        return getRepository().save(items);
     }
 }

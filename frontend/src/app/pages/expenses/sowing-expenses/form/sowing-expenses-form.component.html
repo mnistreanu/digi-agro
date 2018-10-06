@@ -17,35 +17,30 @@
                 </div>
                 <div class="col-sm-6">
                     <label translate>unit-of-measure.unit-long</label>
-                    <!-- todo: default value... -->
                     <select class="form-control checking-field" formControlName="unitOfMeasure">
                         <option value="kg" translate>unit-of-measure.kg</option>
                         <option value="su" translate>unit-of-measure.su</option>
                         <option value="t" translate>unit-of-measure.t</option>
                     </select>
-
-                    <app-form-error-block [control]="form.get('unitOfMeasure')"
-                                          [formSubmitted]="formSubmitted">
-                    </app-form-error-block>
                 </div>
             </div>
 
             <div class="form-group row">
                 <div class="col-sm-6">
                     <label translate>crop.name</label>
-                    <select class="form-control custom-select" formControlName="crop">
-                        <option *ngFor="let crop of crops" [ngValue]="crop.id">{{crop.name}}</option>
+                    <select class="form-control custom-select" formControlName="cropId" (change)="onCropChange()">
+                        <option *ngFor="let crop of crops" [ngValue]="crop.id">{{crop.itemName}}</option>
                     </select>
-                    <app-form-error-block [control]="form.get('crop')"
+                    <app-form-error-block [control]="form.get('cropId')"
                                           [formSubmitted]="submitted">
                     </app-form-error-block>
                 </div>
                 <div class="col-sm-6">
                     <label translate>crop.variety</label>
-                    <select class="form-control custom-select" formControlName="variety">
-                        <option *ngFor="let v of cropVarieties" [ngValue]="v.id">{{v.name}}</option>
+                    <select class="form-control custom-select" formControlName="cropVarietyId">
+                        <option *ngFor="let v of cropVarieties" [ngValue]="v.id">{{v.itemName}}</option>
                     </select>
-                    <app-form-error-block [control]="form.get('variety')"
+                    <app-form-error-block [control]="form.get('cropVarietyId')"
                                           [formSubmitted]="submitted">
                     </app-form-error-block>
                 </div>
@@ -61,7 +56,11 @@
 
             <div class="form-group">
                 <label for="parcel-area" translate>parcel.area</label>
-                <input id="parcel-area" class="form-control checking-field" formControlName="area">
+                <input id="parcel-area" type="number" class="form-control checking-field"
+                       formControlName="area" (change)="onAriaChange()">
+                <app-form-error-block [control]="form.get('area')"
+                                      [formSubmitted]="submitted">
+                </app-form-error-block>
             </div>
 
             <div class="form-group">
@@ -70,12 +69,19 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <label for="norm-sown-1-ha" translate>parcel.one-ha</label>
-                            <input id="norm-sown-1-ha" class="form-control checking-field" formControlName="normSown1Ha">
+                            <input id="norm-sown-1-ha"  type="number" class="form-control checking-field"
+                                   formControlName="normSown1Ha" (change)="onNormChange()">
+                            <app-form-error-block [control]="form.get('normSown1Ha')"
+                                                  [formSubmitted]="submitted">
+                            </app-form-error-block>
                         </div>
                         <div class="col-sm-6">
                             <label for="norm-sown-1-ha-total" translate>parcel.total-ha</label>
-                            <input id="norm-sown-1-ha-total" class="form-control checking-field"
+                            <input id="norm-sown-1-ha-total" class="form-control-plaintext" readonly
                                    formControlName="normSownTotal">
+                            <app-form-error-block [control]="form.get('normSownTotal')"
+                                                  [formSubmitted]="submitted">
+                            </app-form-error-block>
                         </div>
                     </div>
                 </fieldset>
@@ -87,12 +93,15 @@
                     <div class="form-group row">
                         <div class="col-sm-6">
                             <label for="actual-sown-1-ha" translate>parcel.one-ha</label>
-                            <input id="actual-sown-1-ha" class="form-control checking-field"
-                                   formControlName="actualSown1Ha">
+                            <input id="actual-sown-1-ha"  type="number" class="form-control checking-field"
+                                   formControlName="actualSown1Ha" (change)="onActualExpenseChange()">
+                            <app-form-error-block [control]="form.get('actualSown1Ha')"
+                                                  [formSubmitted]="submitted">
+                            </app-form-error-block>
                         </div>
                         <div class="col-sm-6">
                             <label for="actual-sown-1-ha-total" translate>parcel.total-ha</label>
-                            <input id="actual-sown-1-ha-total" class="form-control checking-field"
+                            <input id="actual-sown-1-ha-total" class="form-control-plaintext" readonly
                                    formControlName="actualSownTotal">
                         </div>
                     </div>
@@ -100,11 +109,15 @@
                     <div class="form-group row">
                         <div class="col-sm-6">
                             <label for="unit-price" translate>expenses.unit-cost</label>
-                            <input id="unit-price" class="form-control checking-field" formControlName="unitPrice">
+                            <input id="unit-price" type="number" class="form-control checking-field"
+                                   formControlName="unitPrice" (change)="onActualExpenseChange()">
+                            <app-form-error-block [control]="form.get('unitPrice')"
+                                                  [formSubmitted]="submitted">
+                            </app-form-error-block>
                         </div>
                         <div class="col-sm-6">
                             <label for="total-amount" translate>expenses.total-cost</label>
-                            <input id="total-amount" class="form-control checking-field"
+                            <input id="total-amount" class="form-control-plaintext" readonly
                                    formControlName="totalAmount">
                         </div>
                     </div>
