@@ -5,6 +5,6 @@ export class CropModel {
     cropId: number;
     nameRo: string;
     nameRu: string;
-    desriptionRo: string;
-    desriptionRu: string;
+    descriptionRo: string;
+    descriptionRu: string;
 }

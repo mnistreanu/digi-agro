@@ -17,13 +17,6 @@ export class FertilizerExpensesListComponent implements OnInit {
     options: GridOptions;
     context;
 
-    // labelDate: string;
-    // labelName: string;
-    // labelType: string;
-    // labelPhase: string;
-    // labelResult: string;
-    // labelComments: string;
-    //
     constructor(private fertilizerExpenseService: FertilizerExpenseService,
                 private langService: LangService) {
 
@@ -64,7 +57,7 @@ export class FertilizerExpensesListComponent implements OnInit {
             },
             {
                 headerName: 'info.name',
-                field: 'fertilizerName',
+                field: 'fertilizerModel.nameRo',
                 width: 200,
                 minWidth: 200
             },
@@ -142,7 +135,7 @@ export class FertilizerExpensesListComponent implements OnInit {
     public setupRows() {
         this.fertilizerExpenseService.find().subscribe(models => {
             models.forEach(model => {
-                model.fertilizerType = this.langService.instant('fertilizer-type.' + model.fertilizerType);
+                model.fertilizerType = this.langService.instant('fertilizer-type.' + model.fertilizerModel.fertilizerType);
             });
             debugger;
             this.options.api.setRowData(models);

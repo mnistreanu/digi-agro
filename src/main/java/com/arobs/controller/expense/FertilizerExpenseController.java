@@ -3,6 +3,9 @@ package com.arobs.controller.expense;
 import com.arobs.entity.Expense;
 import com.arobs.entity.ExpenseCategory;
 import com.arobs.entity.Parcel;
+import com.arobs.enums.FertilizerType;
+import com.arobs.model.CropModel;
+import com.arobs.model.chemicals.FertilizerModel;
 import com.arobs.model.expense.ExpenseModel;
 import com.arobs.model.expense.FertilizerExpenseListModel;
 import com.arobs.model.parcel.ParcelModel;
@@ -42,12 +45,18 @@ public class FertilizerExpenseController {
                 parcelModels.add(new ParcelModel(parcel));
             }
 
+            CropModel porumb = new CropModel();
+            porumb.setNameRo("Porumb");
+
+            FertilizerModel azotat = new FertilizerModel();
+            azotat.setFertilizerType(FertilizerType.MINERAL);
+            azotat.setNameRo("AZOTAT (NITRAT) DE AMONIU granulat");
+
             FertilizerExpenseListModel model1 = new FertilizerExpenseListModel();
             model1.setExpenseId(expense.getId());
             model1.setExpenseDate(expense.getExpenseDate());
-            model1.setCrop("Porumb");
-            model1.setFertilizerType("MINERAL");
-            model1.setFertilizerName("AZOTAT (NITRAT) DE AMONIU granulat");
+            model1.setCropModel(porumb);
+            model1.setFertilizerModel(azotat);
             model1.setPhase("Umflarea mugurilor");
             model1.setResult("A avut efect pozitiv");
             model1.setComments("Se putea si mai bine");
@@ -56,12 +65,18 @@ public class FertilizerExpenseController {
             model1.setParcels(parcelModels);
             resultModels.add(model1);
 
+            CropModel cartof = new CropModel();
+            porumb.setNameRo("Cartof");
+
+            FertilizerModel uree = new FertilizerModel();
+            uree.setFertilizerType(FertilizerType.CHEMICAL);
+            uree.setNameRo("UREE granulata");
+
             FertilizerExpenseListModel model2 = new FertilizerExpenseListModel();
             model2.setExpenseId(expense.getId());
             model2.setExpenseDate(expense.getExpenseDate());
-            model2.setCrop("Cartof");
-            model2.setFertilizerType("CHEMICAL");
-            model2.setFertilizerName("UREE granulata");
+            model2.setCropModel(cartof);
+            model2.setFertilizerModel(uree);
             model2.setPhase("Butonul roz");
             model2.setResult("Diverse probleme, dar merge");
             model2.setComments("Se putea si mai bine");
@@ -70,12 +85,18 @@ public class FertilizerExpenseController {
             model2.setParcels(parcelModels);
             resultModels.add(model2);
 
+            CropModel griu = new CropModel();
+            griu.setNameRo("Griu");
+
+            FertilizerModel nitrocalcar = new FertilizerModel();
+            nitrocalcar.setFertilizerType(FertilizerType.ORGANIC);
+            nitrocalcar.setNameRo("NITROCALCAR (CAN) granulat");
+
             FertilizerExpenseListModel model3 = new FertilizerExpenseListModel();
             model3.setExpenseId(expense.getId());
             model3.setExpenseDate(expense.getExpenseDate());
-            model3.setCrop("Griu");
-            model3.setFertilizerType("ORGANIC");
-            model3.setFertilizerName("NITROCALCAR (CAN) granulat");
+            model3.setCropModel(griu);
+            model3.setFertilizerModel(nitrocalcar);
             model3.setPhase("in perioada infloirtului");
             model3.setResult("Vau vau ce interesant");
             model3.setComments("Se putea si mai bine");
@@ -84,17 +105,6 @@ public class FertilizerExpenseController {
             model3.setParcels(parcelModels);
             resultModels.add(model3);
 
-//            for (ExpenseItemModel expenseItemModel : expenseModel.getExpenseItems()) {
-//                FertilizerExpenseListModel listModel = new FertilizerExpenseListModel();
-//                resultModels.add(listModel);
-//                listModel.setExpenseId(expense.getId());
-//                listModel.setExpenseDate(expense.getExpenseDate());
-//                listModel.setSparePart(expenseItemModel.getTitle());
-//                listModel.setSparePartPrice(expenseItemModel.getTotalCost());
-//                listModel.setParcels(parcelModels);
-//                listModel.setCreatedAt(expense.getCreatedAt());
-//                listModel.setCreatedBy("" + expense.getCreatedBy());
-//            }
         }
 
         return ResponseEntity.ok(resultModels);

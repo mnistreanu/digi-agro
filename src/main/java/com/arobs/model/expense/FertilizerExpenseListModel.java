@@ -1,8 +1,10 @@
 package com.arobs.model.expense;
 
+import com.arobs.model.CropModel;
+import com.arobs.model.chemicals.FertilizerModel;
+import com.arobs.model.chemicals.PesticideModel;
 import com.arobs.model.parcel.ParcelModel;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,24 +14,13 @@ public class FertilizerExpenseListModel {
     private Long expenseId;
     private Date expenseDate;
 
-    private String pesticideType;
-    private String pesticideName;
+    private FertilizerModel fertilizerModel;
     private String phase;
     private String result;
     private String comments;
 
     private List<ParcelModel> parcels = new ArrayList<>();
-    private String crop;
-//    private String variety;
-//    private String icon;
-//    private String unitOfMeasure;
-//    private Double area;
-//    private Double normSow1Ha;
-//    private Double normSowTotal;
-//    private Double actualSown1Ha;
-//    private Double sownTotal;
-//    private BigDecimal unitPrice;
-//    private BigDecimal totalAmount;
+    private CropModel cropModel;
 
     private Date createdAt;
     private String createdBy;
@@ -53,20 +44,13 @@ public class FertilizerExpenseListModel {
         this.expenseDate = expenseDate;
     }
 
-    public String getFertilizerType() {
-        return pesticideType;
+
+    public FertilizerModel getFertilizerModel() {
+        return fertilizerModel;
     }
 
-    public void setFertilizerType(String pesticideType) {
-        this.pesticideType = pesticideType;
-    }
-
-    public String getFertilizerName() {
-        return pesticideName;
-    }
-
-    public void setFertilizerName(String pesticideName) {
-        this.pesticideName = pesticideName;
+    public void setFertilizerModel(FertilizerModel fertilizerModel) {
+        this.fertilizerModel = fertilizerModel;
     }
 
     public String getPhase() {
@@ -101,12 +85,12 @@ public class FertilizerExpenseListModel {
         this.parcels = parcels;
     }
 
-    public String getCrop() {
-        return crop;
+    public CropModel getCropModel() {
+        return cropModel;
     }
 
-    public void setCrop(String crop) {
-        this.crop = crop;
+    public void setCropModel(CropModel cropModel) {
+        this.cropModel = cropModel;
     }
 
     public Date getCreatedAt() {
