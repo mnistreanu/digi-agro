@@ -86,12 +86,12 @@
 		"fertilizers": "Cheltuieli pentru îngrășăminte",
 		"fuel": "Cheltuieli pentru combustibil",
 		"norm": "Norma",
+		"norm-at": "Norma la",
 		"pesticides": "Cheltuieli pentru pesticide",
 		"price-1-norm": "Prețul pe 1 / norma",
 		"quantity": "Cantitate",
 		"responsible-persons": "Persoane responsabile",
 		"sowing": "Cheltuieli pentru însămânțare",
-		"norm-at": "Norma la",
 		"sum": "Suma",
 		"total-cost": "Cost total",
 		"total-spent": "Total cheltuit",
@@ -101,6 +101,7 @@
 		"add-edit": "Adăugați / redactați îngrășământul",
 		"comments": "Comentarii",
 		"name": "Denumire",
+		"origin": "Origine",
 		"phase": "Faza",
 		"result": "Rezultat",
 		"spray-date": "Data pulverizării",
@@ -109,7 +110,7 @@
 	"fertilizer-type": {
 		"CHEMICAL": "Chimică",
 		"MINERAL": "Minerală",
-		"ORGANIC": "Organic"
+		"ORGANIC": "Organică"
 	},
 	"forecast": {
 		"additional_info": "Informații suplimnetare",
@@ -320,14 +321,14 @@
 		"last-work-date": "Ultima dată de lucru",
 		"name": "Parcela",
 		"one-ha": "1 Ha",
-		"total-ha": "Total Ha",
 		"parcels": "Parcele",
 		"planted-at": "Data plantării",
 		"plants-count": "Numărul de plante",
 		"rows-count": "Numărul de rânduri",
 		"space-between-plants": "Spațiu între plante",
 		"space-between-rows": "Spațiu între rânduri",
-		"the-parcels": "parcelele"
+		"the-parcels": "parcelele",
+		"total-ha": "Total Ha"
 	},
 	"pest": {
 		"add-edit": "Adăugați / redactați dăunătorul",

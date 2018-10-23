@@ -58,14 +58,14 @@ export class FertilizerExpensesListComponent implements OnInit {
             {
                 headerName: 'info.name',
                 field: 'fertilizerModel.nameRo',
-                width: 200,
-                minWidth: 200
+                width: 260,
+                minWidth: 260
             },
             {
-                headerName: 'fertilizer.type',
-                field: 'fertilizerType',
-                width: 200,
-                minWidth: 200,
+                headerName: 'fertilizer.origin',
+                field: 'fertilizerModel.fertilizerType',
+                width: 140,
+                minWidth: 140,
                 suppressFilter: true,
             },
             {
@@ -135,9 +135,8 @@ export class FertilizerExpensesListComponent implements OnInit {
     public setupRows() {
         this.fertilizerExpenseService.find().subscribe(models => {
             models.forEach(model => {
-                model.fertilizerType = this.langService.instant('fertilizer-type.' + model.fertilizerModel.fertilizerType);
+                model.fertilizerModel.fertilizerType = this.langService.instant('fertilizer-type.' + model.fertilizerModel.fertilizerType);
             });
-            debugger;
             this.options.api.setRowData(models);
         });
 

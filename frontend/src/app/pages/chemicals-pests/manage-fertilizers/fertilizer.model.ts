@@ -1,6 +1,6 @@
 export class FertilizerModel {
     id: number;
-    fertilizerType: number;
+    fertilizerType: string;
     nameRo: string;
     nameRu: string;
     descriptionRo: string;
