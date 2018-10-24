@@ -94,7 +94,7 @@ export class BranchComponent implements OnInit {
     }
 
     private setupCounties() {
-        const country = 'md'; // TODO de extras valoarea COUNTRY de la tenant
+        const country = 'MD'; // TODO de extras valoarea COUNTRY de la tenant
         const locale = this.langService.getLanguage();
         this.geoService.getCounties(country).subscribe(data => {
             this.counties = data.map((item) => new GeoLocalizedItem(item, locale));
@@ -102,7 +102,7 @@ export class BranchComponent implements OnInit {
     }
 
     private setupCities(county) {
-        const country = 'md'; // TODO de extras valoarea COUNTRY de la tenant
+        const country = 'MD'; // TODO de extras valoarea COUNTRY de la tenant
         const locale = this.langService.getLanguage();
         this.geoService.getCities(country, county).subscribe(data => {
             this.cities = data.map((item) => new GeoLocalizedItem(item, locale));

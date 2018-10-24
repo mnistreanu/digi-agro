@@ -36,7 +36,7 @@ export const routes: Routes = [
             {
                 path: 'enterprise',
                 loadChildren: 'app/pages/enterprise/enterprise.module#EnterpriseModule',
-                data: {breadcrumb: 'Expenses'},
+                data: {breadcrumb: 'Enterprise'},
                 canActivate: [SuperAdminOrAdminGuard]
             },
             {

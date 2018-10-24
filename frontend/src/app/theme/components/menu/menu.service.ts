@@ -67,14 +67,14 @@ export class MenuService {
         }
 
         if (isAdmin) {
-            menuItems.push({
-                title: 'nav.branches',
-                routerLink: '/pages/manage-branches',
-                icon: 'fa fa-code-branch',
-                selected: false,
-                expanded: false
-            });
-
+            // menuItems.push({
+            //     title: 'nav.branches',
+            //     routerLink: '/pages/manage-branches',
+            //     icon: 'fa fa-code-branch',
+            //     selected: false,
+            //     expanded: false
+            // });
+            //
             menuItems.push({
                 title: 'nav.employees',
                 routerLink: '/pages/employee',
