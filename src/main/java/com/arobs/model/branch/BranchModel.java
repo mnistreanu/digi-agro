@@ -1,14 +1,13 @@
-package com.arobs.model.tenantBranch;
+package com.arobs.model.branch;
 
 
-import com.arobs.entity.TenantBranch;
+import com.arobs.entity.Branch;
 
-public class TenantBranchModel {
+public class BranchModel {
 
     private Long id;
     private String name;
     private String description;
-    private String country;
     private String county;
     private String city;
     private String address;
@@ -17,14 +16,13 @@ public class TenantBranchModel {
     private Long parentId;
     private Long tenantId;
 
-    public TenantBranchModel() {
+    public BranchModel() {
     }
 
-    public TenantBranchModel(TenantBranch entity) {
+    public BranchModel(Branch entity) {
         id = entity.getId();
         name = entity.getName();
         description = entity.getDescription();
-        country = entity.getCountry();
         county = entity.getCounty();
         city = entity.getCity();
         address = entity.getAddress();
@@ -59,14 +57,6 @@ public class TenantBranchModel {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public String getCounty() {

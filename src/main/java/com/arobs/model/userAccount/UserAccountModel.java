@@ -1,8 +1,8 @@
 package com.arobs.model.userAccount;
 
 import com.arobs.entity.Authority;
+import com.arobs.entity.Branch;
 import com.arobs.entity.Tenant;
-import com.arobs.entity.TenantBranch;
 import com.arobs.entity.UserAccount;
 import com.arobs.enums.AuthorityName;
 
@@ -68,7 +68,7 @@ public class UserAccountModel {
         }
 
         if (entity.getBranches() != null) {
-            branches = entity.getBranches().stream().map(TenantBranch::getId).collect(Collectors.toList());
+            branches = entity.getBranches().stream().map(Branch::getId).collect(Collectors.toList());
         }
 
     }

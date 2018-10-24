@@ -1,4 +1,4 @@
-package com.arobs.model.tenantBranch;
+package com.arobs.model.branch;
 
 
 import java.util.List;

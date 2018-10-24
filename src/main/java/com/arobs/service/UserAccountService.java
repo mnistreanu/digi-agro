@@ -1,8 +1,8 @@
 package com.arobs.service;
 
 
+import com.arobs.entity.Branch;
 import com.arobs.entity.Tenant;
-import com.arobs.entity.TenantBranch;
 import com.arobs.entity.UserAccount;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.userAccount.UserAccountModel;
@@ -95,7 +95,7 @@ public class UserAccountService implements HasRepository<UserAccountRepository> 
         }
 
         if (model.getBranches() != null) {
-            List<TenantBranch> branches = tenantBranchService.findAll(model.getBranches());
+            List<Branch> branches = tenantBranchService.findAll(model.getBranches());
             if (userAccount.getBranches() == null) {
                 userAccount.setBranches(branches);
             }

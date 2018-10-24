@@ -68,12 +68,6 @@ export class BranchListComponent implements OnInit {
                 minWidth: 200
             },
             {
-                headerName: 'geo.country',
-                field: 'country',
-                width: 200,
-                minWidth: 200
-            },
-            {
                 headerName: 'geo.county',
                 field: 'county',
                 width: 200,

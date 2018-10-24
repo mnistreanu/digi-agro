@@ -2,7 +2,6 @@ package com.arobs.entity;
 
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -34,7 +33,7 @@ public class UserAccount {
             name = "user_branch",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "branch_id", referencedColumnName = "id")})
-    private List<TenantBranch> branches;
+    private List<Branch> branches;
 
     private String email;
     private String firstName;
@@ -159,11 +158,11 @@ public class UserAccount {
         this.tenants = tenants;
     }
 
-    public List<TenantBranch> getBranches() {
+    public List<Branch> getBranches() {
         return branches;
     }
 
-    public void setBranches(List<TenantBranch> branches) {
+    public void setBranches(List<Branch> branches) {
         this.branches = branches;
     }
 

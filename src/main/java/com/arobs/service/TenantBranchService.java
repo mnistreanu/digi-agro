@@ -1,8 +1,8 @@
 package com.arobs.service;
 
-import com.arobs.entity.TenantBranch;
+import com.arobs.entity.Branch;
 import com.arobs.interfaces.HasRepository;
-import com.arobs.model.tenantBranch.TenantBranchModel;
+import com.arobs.model.branch.BranchModel;
 import com.arobs.repository.TenantBranchRepository;
 import com.arobs.repository.custom.CommonCustomRepository;
 import com.arobs.utils.StaticUtil;
@@ -29,16 +29,16 @@ public class TenantBranchService implements HasRepository<TenantBranchRepository
         return tenantBranchRepository;
     }
 
-    public TenantBranch findOne(Long id) {
+    public Branch findOne(Long id) {
         return getRepository().findOne(id);
     }
 
-    public List<TenantBranch> find(List<Long> tenants) {
+    public List<Branch> find(List<Long> tenants) {
         return getRepository().find(tenants);
     }
 
-    public List<TenantBranch> find(List<Long> tenants, Long skipRootId) {
-        List<TenantBranch> branches = find(tenants);
+    public List<Branch> find(List<Long> tenants, Long skipRootId) {
+        List<Branch> branches = find(tenants);
         if (skipRootId != null) {
             List<Long> treeDown = new ArrayList<>();
             getTreeDown(skipRootId, treeDown);
@@ -47,7 +47,7 @@ public class TenantBranchService implements HasRepository<TenantBranchRepository
         return branches;
     }
 
-    public List<TenantBranch> findAll(List<Long> ids) {
+    public List<Branch> findAll(List<Long> ids) {
 
         if (StaticUtil.isEmpty(ids)) {
             return new ArrayList<>();
@@ -56,16 +56,16 @@ public class TenantBranchService implements HasRepository<TenantBranchRepository
     }
 
     public boolean isUnique(Long currentId, String value) {
-        return commonCustomRepository.isUnique("TenantBranch", currentId, "name", value);
+        return commonCustomRepository.isUnique("Branch", currentId, "name", value);
     }
 
     @Transactional
-    public TenantBranch save(TenantBranchModel model) {
+    public Branch save(BranchModel model) {
 
-        TenantBranch branch;
+        Branch branch;
 
         if (model.getId() == null) {
-            branch = new TenantBranch();
+            branch = new Branch();
             branch.setTenant(model.getTenantId() == null ? null : tenantService.findOne(model.getTenantId()));
         }
         else {
@@ -77,10 +77,9 @@ public class TenantBranchService implements HasRepository<TenantBranchRepository
         return save(branch);
     }
 
-    private void copyValues(TenantBranch entity, TenantBranchModel model) {
+    private void copyValues(Branch entity, BranchModel model) {
         entity.setName(model.getName());
         entity.setDescription(model.getDescription());
-        entity.setCountry(model.getCountry());
         entity.setCounty(model.getCounty());
         entity.setCity(model.getCity());
         entity.setAddress(model.getAddress());
@@ -89,7 +88,7 @@ public class TenantBranchService implements HasRepository<TenantBranchRepository
     }
 
     @Transactional
-    public TenantBranch save(TenantBranch TenantBranch) {
+    public Branch save(Branch TenantBranch) {
         return getRepository().save(TenantBranch);
     }
 

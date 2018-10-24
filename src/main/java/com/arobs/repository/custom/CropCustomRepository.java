@@ -2,14 +2,6 @@ package com.arobs.repository.custom;
 
 
 import com.arobs.entity.Crop;
-import com.arobs.model.CropModel;
-import com.arobs.model.tenantBranch.TenantBranchModel;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.reflect.TypeToken;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

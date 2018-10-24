@@ -19,6 +19,25 @@
          </sql>
      </changeSet>
 
+    <changeSet id="insert-2-branches-each-tenant" author="mihai.gorgos" failOnError="true" >
+        <validCheckSum>ANY</validCheckSum>
+        <sql>
+            INSERT INTO branch(id, tenant_id, name, description, phones, county_id, city, address)
+            VALUES (11, 1, 'Filiala Nord', 'Filiala de la Briceni', '99-88-77-66, 11-22-33-44', 'BR', 'Jlobeni', 'la vale de riu');
+
+            INSERT INTO branch(id, tenant_id, name, description, phones, county_id, city, address)
+            VALUES (12, 1, 'Filiala Sud', 'Filiala de la Cahul', '12-34-56-78, 90-78-56-34', 'CH', 'Furduleni', 'Linga Dunare');
+
+            INSERT INTO branch(id, tenant_id, name, description, phones, county_id, city, address)
+            VALUES (13, 2, 'Filiala Vest', 'Filiala de la Ungheni', '99-88-77-66, 11-22-33-44', 'UN', 'Bubueci', 'Linga Romania');
+
+            INSERT INTO branch(id, tenant_id, name, description, phones, county_id, city, address)
+            VALUES (14, 2, 'Filiala Est', 'Filiala de la Stefan Voda', '12-34-56-78, 90-78-56-34', 'SV', 'Cipusesti', 'Linga Ucraina');
+
+            SELECT setval('branch_id_seq', (SELECT MAX(id) FROM branch));
+        </sql>
+    </changeSet>
+
     <changeSet id="insert-super-admin" author="maxim.nistreanu" failOnError="true" runOnChange="true">
         <sql>
             <!--password: test123 -->

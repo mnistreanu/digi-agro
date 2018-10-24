@@ -5,7 +5,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class TenantBranch {
+@Table(name = "branch")
+public class Branch {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -17,7 +18,7 @@ public class TenantBranch {
 
     @ManyToOne
     @JoinColumn(name = "parent_id")
-    private TenantBranch parent;
+    private Branch parent;
 
     @NotNull
     @Column(columnDefinition = "varchar(128)")
@@ -26,14 +27,10 @@ public class TenantBranch {
     @Column(columnDefinition = "varchar(1024)")
     private String description;
 
-    @NotNull
-    @Column(name = "country_id", columnDefinition = "char(2)")
-    private String country;
-
     @Column(name = "county_id", columnDefinition = "char(2)")
     private String county;
 
-    @Column(name = "city")
+    @Column(name = "city", columnDefinition = "varchar(128)")
     private String city;
 
     @Column(name = "address", columnDefinition = "varchar(1024)")
@@ -42,10 +39,7 @@ public class TenantBranch {
     @Column(name = "phones", columnDefinition = "varchar(128)")
     private String phones;
 
-    @Column(columnDefinition = "boolean default true")
-    private boolean active = true;
-
-    public TenantBranch() {
+    public Branch() {
     }
 
     public Long getId() {
@@ -80,14 +74,6 @@ public class TenantBranch {
         this.description = description;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
     public String getCounty() {
         return county;
     }
@@ -120,19 +106,12 @@ public class TenantBranch {
         this.phones = phones;
     }
 
-    public TenantBranch getParent() {
+    public Branch getParent() {
         return parent;
     }
 
-    public void setParent(TenantBranch parent) {
+    public void setParent(Branch parent) {
         this.parent = parent;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
 }

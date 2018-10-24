@@ -74,7 +74,6 @@ export class BranchComponent implements OnInit {
     private prepareNewModel() {
         this.model = new BranchModel();
         this.isNew = true;
-        this.model.country = this.tenant.country;
         this.model.county = this.tenant.county;
         this.model.city = this.tenant.city;
         this.fetchParentListItems();
@@ -91,32 +90,19 @@ export class BranchComponent implements OnInit {
     public onCountryChange() {
         this.form.controls['county'].setValue(null);
         this.form.controls['city'].setValue(null);
-        this.setupCounties(this.form.controls['country'].value);
+        this.setupCounties();
     }
 
-    private setupCounties(country) {
-        if (!country) {
-            this.counties = [];
-            return;
-        }
+    private setupCounties() {
+        const country = 'md'; // TODO de extras valoarea COUNTRY de la tenant
         const locale = this.langService.getLanguage();
         this.geoService.getCounties(country).subscribe(data => {
             this.counties = data.map((item) => new GeoLocalizedItem(item, locale));
         });
     }
 
-    public onCountyChange() {
-        this.form.controls['city'].setValue(null);
-        const country = this.form.controls['country'].value;
-        const county = this.form.controls['county'].value;
-        this.setupCities(country, county);
-    }
-
-    private setupCities(country, county) {
-        if (!country || !county) {
-            this.cities = [];
-            return;
-        }
+    private setupCities(county) {
+        const country = 'md'; // TODO de extras valoarea COUNTRY de la tenant
         const locale = this.langService.getLanguage();
         this.geoService.getCities(country, county).subscribe(data => {
             this.cities = data.map((item) => new GeoLocalizedItem(item, locale));
@@ -128,7 +114,6 @@ export class BranchComponent implements OnInit {
         this.form = this.fb.group({
             name: new FormControl(this.model.name, [Validators.required, Validators.maxLength(128)]),
             description: new FormControl(this.model.description, [Validators.maxLength(1024)]),
-            country: new FormControl(this.model.country, [Validators.required, Validators.maxLength(2)]),
             county: [this.model.county, Validators.maxLength(2)],
             city: [this.model.city, Validators.maxLength(255)],
             address: [this.model.address, Validators.maxLength(1024)],
@@ -136,9 +121,8 @@ export class BranchComponent implements OnInit {
             parentId: [this.model.parentId]
         });
 
-        this.setupCountries();
-        this.setupCounties(this.model.country);
-        this.setupCities(this.model.country, this.model.county);
+        this.setupCounties();
+        this.setupCities(this.model.county);
     }
 
     public onNameChange() {
