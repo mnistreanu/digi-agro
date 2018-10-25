@@ -2,13 +2,14 @@ package com.arobs.model.branch;
 
 
 import com.arobs.entity.Branch;
+import com.arobs.entity.County;
 
 public class BranchModel {
 
     private Long id;
     private String name;
     private String description;
-    private String county;
+    private County county;
     private String city;
     private String address;
     private String phones;
@@ -59,11 +60,11 @@ public class BranchModel {
         this.description = description;
     }
 
-    public String getCounty() {
+    public County getCounty() {
         return county;
     }
 
-    public void setCounty(String county) {
+    public void setCounty(County county) {
         this.county = county;
     }
 

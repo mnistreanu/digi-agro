@@ -80,7 +80,7 @@ public class TenantBranchService implements HasRepository<TenantBranchRepository
     private void copyValues(Branch entity, BranchModel model) {
         entity.setName(model.getName());
         entity.setDescription(model.getDescription());
-        entity.setCounty(model.getCounty());
+        entity.setCountyId(model.getCounty().getId());
         entity.setCity(model.getCity());
         entity.setAddress(model.getAddress());
         entity.setPhones(model.getPhones());

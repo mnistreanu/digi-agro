@@ -28,7 +28,11 @@ public class Branch {
     private String description;
 
     @Column(name = "county_id", columnDefinition = "char(2)")
-    private String county;
+    private String countyId;
+
+    @ManyToOne (fetch = FetchType.EAGER)
+    @JoinColumn(name = "county_id", insertable = false, updatable = false)
+    private County county;
 
     @Column(name = "city", columnDefinition = "varchar(128)")
     private String city;
@@ -74,11 +78,19 @@ public class Branch {
         this.description = description;
     }
 
-    public String getCounty() {
+    public String getCountyId() {
+        return countyId;
+    }
+
+    public void setCountyId(String countyId) {
+        this.countyId = countyId;
+    }
+
+    public County getCounty() {
         return county;
     }
 
-    public void setCounty(String county) {
+    public void setCounty(County county) {
         this.county = county;
     }
 

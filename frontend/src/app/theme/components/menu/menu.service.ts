@@ -75,21 +75,21 @@ export class MenuService {
             //     expanded: false
             // });
             //
-            menuItems.push({
-                title: 'nav.employees',
-                routerLink: '/pages/employee',
-                icon: 'fa-users',
-                selected: false,
-                expanded: false
-            });
+            // menuItems.push({
+            //     title: 'nav.employees',
+            //     routerLink: '/pages/employee',
+            //     icon: 'fa-users',
+            //     selected: false,
+            //     expanded: false
+            // });
 
-            menuItems.push({
-                title: 'nav.brands',
-                routerLink: '/pages/manage-brands',
-                icon: 'fa-bold',
-                selected: false,
-                expanded: false
-            });
+            // menuItems.push({
+            //     title: 'nav.brands',
+            //     routerLink: '/pages/manage-brands',
+            //     icon: 'fa-bold',
+            //     selected: false,
+            //     expanded: false
+            // });
             menuItems.push({
                 title: 'nav.machines',
                 routerLink: '/pages/manage-machines',

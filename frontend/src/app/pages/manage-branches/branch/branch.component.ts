@@ -66,6 +66,7 @@ export class BranchComponent implements OnInit {
     private setupModel(id) {
         this.branchService.findOne(id).subscribe(model => {
             this.model = model;
+            this.model.county = this.model.county.id;
             this.buildForm();
             this.fetchParentListItems();
         });
@@ -74,35 +75,40 @@ export class BranchComponent implements OnInit {
     private prepareNewModel() {
         this.model = new BranchModel();
         this.isNew = true;
+        this.model.country = this.tenant.country;
         this.model.county = this.tenant.county;
         this.model.city = this.tenant.city;
         this.fetchParentListItems();
         this.buildForm();
     }
 
-    private setupCountries() {
-        const locale = this.langService.getLanguage();
-        this.geoService.getCountries().subscribe(data => {
-            this.countries = data.map((item) => new GeoLocalizedItem(item, locale));
-        });
-    }
+    // private setupCountries() {
+    //     const locale = this.langService.getLanguage();
+    //     this.geoService.getCountries().subscribe(data => {
+    //         this.countries = data.map((item) => new GeoLocalizedItem(item, locale));
+    //     });
+    // }
 
-    public onCountryChange() {
-        this.form.controls['county'].setValue(null);
-        this.form.controls['city'].setValue(null);
-        this.setupCounties();
-    }
+    // public onCountryChange() {
+    //     this.form.controls['county'].setValue(null);
+    //     this.form.controls['city'].setValue(null);
+    //     this.setupCounties();
+    // }
 
     private setupCounties() {
-        const country = 'MD'; // TODO de extras valoarea COUNTRY de la tenant
         const locale = this.langService.getLanguage();
-        this.geoService.getCounties(country).subscribe(data => {
+        this.geoService.getCounties(this.tenant.country).subscribe(data => {
             this.counties = data.map((item) => new GeoLocalizedItem(item, locale));
         });
     }
 
-    private setupCities(county) {
-        const country = 'MD'; // TODO de extras valoarea COUNTRY de la tenant
+    public onCountyChange() {
+        this.form.controls['city'].setValue(null);
+        const county = this.form.controls['county'].value;
+        this.setupCities(this.tenant.country, county);
+    }
+
+    private setupCities(country, county) {
         const locale = this.langService.getLanguage();
         this.geoService.getCities(country, county).subscribe(data => {
             this.cities = data.map((item) => new GeoLocalizedItem(item, locale));
@@ -122,7 +128,7 @@ export class BranchComponent implements OnInit {
         });
 
         this.setupCounties();
-        this.setupCities(this.model.county);
+        this.setupCities(this.tenant.country, this.model.county);
     }
 
     public onNameChange() {
@@ -168,8 +174,12 @@ export class BranchComponent implements OnInit {
     public remove() {
         this.branchService.remove(this.model).subscribe(() => {
             this.alertService.removed();
-            this.router.navigate(['../'], {relativeTo: this.route});
+            this.back();
         });
+    }
+
+    back() {
+        this.router.navigate(['../'], {relativeTo: this.route});
     }
 
 }

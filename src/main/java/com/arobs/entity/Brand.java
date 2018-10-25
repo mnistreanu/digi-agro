@@ -12,9 +12,6 @@ public class Brand {
 
     private String name;
 
-    @Column(columnDefinition = "boolean default true")
-    private boolean active = true;
-
     public Brand() {
     }
 
@@ -34,11 +31,4 @@ public class Brand {
         this.name = name;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
 }

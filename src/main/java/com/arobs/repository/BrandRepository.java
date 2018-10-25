@@ -12,13 +12,13 @@ import java.util.List;
 @Repository
 public interface BrandRepository extends JpaRepository<Brand, Long> {
     
-    @Query("SELECT b FROM Brand b WHERE b.active = true")
+    @Query("SELECT b FROM Brand b")
     List<Brand> findAll();
 
     @Modifying
-    @Query("UPDATE Brand b SET b.active = false WHERE b.id = :id")
+    @Query("DELETE FROM Brand b WHERE b.id = :id")
     void remove(@Param("id") Long id);
 
-    @Query("SELECT b FROM Brand b WHERE b.name = :name AND b.active = true")
+    @Query("SELECT b FROM Brand b WHERE b.name = :name")
     Brand find(@Param("name") String name);
 }

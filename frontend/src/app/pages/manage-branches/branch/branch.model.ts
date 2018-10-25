@@ -3,7 +3,8 @@ export class BranchModel {
     id: number;
     name: string;
     description: string;
-    county: string;
+    country: string;
+    county: any;
     city: string;
     address: string;
     phones: string;

@@ -5,6 +5,7 @@ import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-
 import {BranchService} from '../../../services/branch.service';
 import {BranchModel} from '../branch/branch.model';
 import {LangService} from '../../../services/lang.service';
+import {FieldMapper} from "../../../common/field.mapper";
 
 @Component({
     selector: 'app-branch-list',
@@ -114,6 +115,10 @@ export class BranchListComponent implements OnInit {
         const modelMap = {};
 
         for (const model of models) {
+            const fieldMapper = new FieldMapper(this.langService.getLanguage());
+            const nameField = fieldMapper.get('name');
+            model.county = model.county[nameField];
+
             modelMap[model.id] = model;
             if (model.parentId == null) {
                 treeModels.push(model);
