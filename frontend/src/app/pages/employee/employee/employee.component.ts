@@ -81,8 +81,11 @@ export class EmployeeComponent implements OnInit {
     public remove() {
         this.employeeService.remove(this.model).subscribe(() => {
             this.alertService.removed();
-            this.router.navigate(['../'], {relativeTo: this.route});
+            this.back();
         });
+    }
+    back() {
+        this.router.navigate(['../'], {relativeTo: this.route});
     }
 
 }

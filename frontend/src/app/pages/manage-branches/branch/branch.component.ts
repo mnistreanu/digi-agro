@@ -146,7 +146,7 @@ export class BranchComponent implements OnInit {
         const tenants = [];
         tenants.push(this.tenant.id);
         this.branchService.fetchListItems(this.model.id, tenants).subscribe(parents => {
-            parents.unshift({id: null, name: 'None'});
+            parents.unshift({id: null, name: '-'});
             this.parents = parents;
         });
     }

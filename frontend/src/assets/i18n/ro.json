@@ -19,8 +19,9 @@
 		"logout": "Ieșire"
 	},
 	"branch": {
-		"branch": "Filial",
-		"branches": "Filiale"
+		"branch": "Filiala",
+		"branches": "Filiale",
+		"subordinates-to": "Se subordoneaza la"
 	},
 	"brand": {
 		"brand": "Brand"

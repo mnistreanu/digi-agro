@@ -20,7 +20,8 @@
 	},
 	"branch": {
 		"branch": "Branch",
-		"branches": "Branches"
+		"branches": "Branches",
+		"subordinates-to": "Subordinates to"
 	},
 	"brand": {
 		"brand": "Brand"

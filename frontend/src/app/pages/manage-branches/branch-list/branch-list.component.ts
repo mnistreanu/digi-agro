@@ -5,7 +5,7 @@ import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-
 import {BranchService} from '../../../services/branch.service';
 import {BranchModel} from '../branch/branch.model';
 import {LangService} from '../../../services/lang.service';
-import {FieldMapper} from "../../../common/field.mapper";
+import {FieldMapper} from '../../../common/field.mapper';
 
 @Component({
     selector: 'app-branch-list',
@@ -58,21 +58,21 @@ export class BranchListComponent implements OnInit {
             {
                 headerName: 'info.name',
                 field: 'name',
-                width: 200,
+                width: 250,
                 minWidth: 200,
                 cellRenderer: 'agGroupCellRenderer'
             },
-            {
-                headerName: 'info.description',
-                field: 'description',
-                width: 200,
-                minWidth: 200
-            },
+            // {
+            //     headerName: 'info.description',
+            //     field: 'description',
+            //     width: 200,
+            //     minWidth: 200
+            // },
             {
                 headerName: 'geo.county',
                 field: 'county',
-                width: 200,
-                minWidth: 200
+                width: 120,
+                minWidth: 120
             },
             {
                 headerName: 'geo.village-city',

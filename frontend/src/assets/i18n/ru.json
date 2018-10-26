@@ -20,7 +20,8 @@
 	},
 	"branch": {
 		"branch": "Филиал",
-		"branches": "Филиалы"
+		"branches": "Филиалы",
+		"subordinates-to": "Подчиняется"
 	},
 	"brand": {
 		"brand": "Марка"
