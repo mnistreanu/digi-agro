@@ -39,30 +39,30 @@ export const routes: Routes = [
                 data: {breadcrumb: 'Enterprise'},
                 canActivate: [SuperAdminOrAdminGuard]
             },
-            {
-                path: 'manage-users',
-                loadChildren: 'app/pages/manage-users/manage-users.module#ManageUsersModule',
-                data: {breadcrumb: 'Manage Users'},
-                canActivate: [SuperAdminOrAdminGuard]
-            },
-            {
-                path: 'employee',
-                loadChildren: 'app/pages/employee/employee.module#EmployeeModule',
-                data: {breadcrumb: 'Employee'},
-                canActivate: [AdminGuard]
-            },
-            {
-                path: 'manage-brands',
-                loadChildren: 'app/pages/manage-brands/manage-brands.module#ManageBrandsModule',
-                data: {breadcrumb: 'Manage Brands'},
-                canActivate: [AdminGuard]
-            },
-            {
-                path: 'manage-machines',
-                loadChildren: 'app/pages/manage-machines/manage-machines.module#ManageMachinesModule',
-                data: {breadcrumb: 'Manage Machines'},
-                canActivate: [AdminGuard]
-            },
+            // {
+            //     path: 'manage-users',
+            //     loadChildren: 'app/pages/manage-users/manage-users.module#ManageUsersModule',
+            //     data: {breadcrumb: 'Manage Users'},
+            //     canActivate: [SuperAdminOrAdminGuard]
+            // },
+            // {
+            //     path: 'employee',
+            //     loadChildren: 'app/pages/employee/employee.module#EmployeeModule',
+            //     data: {breadcrumb: 'Employee'},
+            //     canActivate: [AdminGuard]
+            // },
+            // {
+            //     path: 'manage-brands',
+            //     loadChildren: 'app/pages/manage-brands/manage-brands.module#ManageBrandsModule',
+            //     data: {breadcrumb: 'Manage Brands'},
+            //     canActivate: [AdminGuard]
+            // },
+            // {
+            //     path: 'manage-machines',
+            //     loadChildren: 'app/pages/manage-machines/manage-machines.module#ManageMachinesModule',
+            //     data: {breadcrumb: 'Manage Machines'},
+            //     canActivate: [AdminGuard]
+            // },
             {
                 path: 'telemetry',
                 loadChildren: 'app/pages/telemetry/telemetry.module#TelemetryModule',
@@ -82,12 +82,12 @@ export const routes: Routes = [
                 data: {breadcrumb: 'Manage Tenants'},
                 canActivate: [SuperAdminGuard]
             },
-            {
-                path: 'manage-branches',
-                loadChildren: 'app/pages/manage-branches/manage-branches.module#ManageBranchesModule',
-                data: {breadcrumb: 'Manage Branches'},
-                canActivate: [AdminGuard]
-            },
+            // {
+            //     path: 'manage-branches',
+            //     loadChildren: 'app/pages/manage-branches/manage-branches.module#ManageBranchesModule',
+            //     data: {breadcrumb: 'Manage Branches'},
+            //     canActivate: [AdminGuard]
+            // },
             {
                 path: 'reminder',
                 loadChildren: 'app/pages/reminder/reminder.module#ReminderModule',

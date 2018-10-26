@@ -1,4 +1,4 @@
-import {EmployeeModel} from '../../employee/employee/employee.model';
+import {EmployeeModel} from '../../manage-employees/employee/employee.model';
 
 export class MachineModel {
 

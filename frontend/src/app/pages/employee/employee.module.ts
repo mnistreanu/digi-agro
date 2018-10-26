@@ -8,8 +8,8 @@ import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-bl
 import {DirectivesModule} from '../../theme/directives/directives.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
-import {EmployeeListComponent} from './employee-list/employee-list.component';
-import {EmployeeComponent} from './employee/employee.component';
+import {EmployeeListComponent} from '../enterprise/manage-employees/employee-list/employee-list.component';
+import {EmployeeComponent} from '../enterprise/manage-employees/employee/employee.component';
 
 const routes: Routes = [
     {path: '', component: EmployeeListComponent},

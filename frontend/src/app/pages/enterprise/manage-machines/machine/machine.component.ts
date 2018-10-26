@@ -1,19 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {MachineService} from '../../../services/machine.service';
-import {BrandService} from '../../../services/brand.service';
+import {MachineService} from '../../../../services/machine.service';
+import {BrandService} from '../../../../services/brand.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MachineModel} from './machine.model';
-import {Messages} from '../../../common/messages';
-import {LangService} from '../../../services/lang.service';
-import {WorkTypeService} from '../../../services/work-type.service';
-import {AgroWorkTypeModel} from '../../reminder/agro-work-type.model';
-import {FieldMapper} from '../../../common/field.mapper';
-import {EmployeeService} from '../../../services/employee.service';
-import {EmployeeModel} from '../../employee/employee/employee.model';
+import {Messages} from '../../../../common/messages';
+import {LangService} from '../../../../services/lang.service';
+import {WorkTypeService} from '../../../../services/work-type.service';
+import {AgroWorkTypeModel} from '../../../reminder/agro-work-type.model';
+import {FieldMapper} from '../../../../common/field.mapper';
+import {EmployeeService} from '../../../../services/employee.service';
+import {EmployeeModel} from '../../manage-employees/employee/employee.model';
 import {IMultiSelectSettings, IMultiSelectTexts} from 'angular-2-dropdown-multiselect';
-import {ListItem} from '../../../interfaces/list-item.interface';
-import {AlertService} from '../../../services/alert.service';
+import {ListItem} from '../../../../interfaces/list-item.interface';
+import {AlertService} from '../../../../services/alert.service';
 
 
 @Component({

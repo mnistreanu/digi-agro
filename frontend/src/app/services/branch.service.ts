@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
-import {BranchModel} from '../pages/manage-branches/branch/branch.model';
+import {BranchModel} from '../pages/enterprise/manage-branches/branch/branch.model';
 import {ListItem} from '../interfaces/list-item.interface';
 import { environment } from '../../environments/environment';
 

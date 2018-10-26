@@ -1,41 +1,28 @@
 import {Component, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
-import {UserService} from '../../../services/user.service';
-import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {ActivatedRoute, Router} from '@angular/router';
-import {LangService} from '../../../services/lang.service';
+import {LangService} from '../../../../services/lang.service';
+import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
+import {EmployeeService} from '../../../../services/employee.service';
 
 @Component({
-    selector: 'app-user-list',
-    templateUrl: './user-list.component.html',
-    styleUrls: ['./user-list.component.scss']
+    selector: 'app-employee-list',
+    templateUrl: './employee-list.component.html',
+    styleUrls: ['./employee-list.component.scss']
 })
-export class UserListComponent implements OnInit {
+export class EmployeeListComponent implements OnInit {
 
     options: GridOptions;
     context;
 
-    labelUsername: string;
-    labelFirstName: string;
-    labelLastName: string;
-    labelEmail: string;
-
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private langService: LangService,
-                private userService: UserService) {
+                private employeeService: EmployeeService) {
     }
 
     ngOnInit() {
-        this.setupLabels();
         this.setupGrid();
-    }
-
-    private setupLabels() {
-        this.langService.get('user.username').subscribe((msg) => this.labelUsername = msg);
-        this.langService.get('user.firstname').subscribe((msg) => this.labelFirstName = msg);
-        this.langService.get('user.lastname').subscribe((msg) => this.labelLastName = msg);
-        this.langService.get('user.email').subscribe((msg) => this.labelEmail = msg);
     }
 
     private setupGrid() {
@@ -58,6 +45,7 @@ export class UserListComponent implements OnInit {
                 field: 'edit',
                 width: 24,
                 minWidth: 24,
+                maxWidth: 30,
                 editable: false,
                 suppressResize: true,
                 suppressMenu: true,
@@ -67,36 +55,36 @@ export class UserListComponent implements OnInit {
                 }
             },
             {
-                headerName: this.labelUsername,
-                field: 'username',
-                width: 250,
+                headerName: 'employee.title',
+                field: 'title',
+                width: 200,
                 minWidth: 200
             },
             {
-                headerName: this.labelFirstName,
+                headerName: 'employee.first-name',
                 field: 'firstName',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: this.labelLastName,
+                headerName: 'employee.last-name',
                 field: 'lastName',
                 width: 200,
                 minWidth: 200
-            },
-            {
-                headerName: this.labelEmail,
-                field: 'email',
-                width: 250,
-                minWidth: 200
             }
         ];
+
+        headers.forEach(header => {
+            if (header.headerName) {
+                this.langService.get(header.headerName).subscribe(m => header.headerName = m);
+            }
+        });
 
         return headers;
     }
 
     private setupRows() {
-        this.userService.findAll().subscribe(models => {
+        this.employeeService.findAll().subscribe(models => {
             this.options.api.setRowData(models);
         });
     }
@@ -113,7 +101,7 @@ export class UserListComponent implements OnInit {
         }, 500);
     }
 
-    public addUser() {
+    public add() {
         this.router.navigate(['./-1'], {relativeTo: this.route});
     }
 

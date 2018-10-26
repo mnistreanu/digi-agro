@@ -55,7 +55,7 @@ export class MenuService {
                         routerLink: 'enterprise/manage-employees'
                     },
                     {
-                        title: 'nav.machines',
+                        title: 'nav.agricultural-machinery',
                         routerLink: 'enterprise/manage-machines'
                     },
                     {
@@ -90,13 +90,13 @@ export class MenuService {
             //     selected: false,
             //     expanded: false
             // });
-            menuItems.push({
-                title: 'nav.machines',
-                routerLink: '/pages/manage-machines',
-                icon: 'fa fa-car',
-                selected: false,
-                expanded: false
-            });
+            // menuItems.push({
+            //     title: 'nav.machines',
+            //     routerLink: '/pages/manage-machines',
+            //     icon: 'fa fa-car',
+            //     selected: false,
+            //     expanded: false
+            // });
         }
 
         if (isAdmin || isUser) {

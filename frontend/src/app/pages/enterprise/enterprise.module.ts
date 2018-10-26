@@ -15,17 +15,28 @@ import {EditRendererComponent} from '../../modules/aggrid/edit-renderer/edit-ren
 import {EditRendererModule} from '../../modules/aggrid/edit-renderer/edit-renderer.module';
 import {ExpenseCategoryTreeComponent} from './manage-expense-categories/expense-category-tree/expense-category-tree.component';
 import {ExpenseCategoryComponent} from './manage-expense-categories/expense-category/expense-category.component';
-import {BranchListComponent} from '../manage-branches/branch-list/branch-list.component';
-import {BranchComponent} from '../manage-branches/branch/branch.component';
+import {BranchListComponent} from './manage-branches/branch-list/branch-list.component';
+import {BranchComponent} from './manage-branches/branch/branch.component';
 import {BranchService} from '../../services/branch.service';
-import {EmployeeListComponent} from '../employee/employee-list/employee-list.component';
-import {EmployeeComponent} from '../employee/employee/employee.component';
+import {EmployeeListComponent} from './manage-employees/employee-list/employee-list.component';
+import {EmployeeComponent} from './manage-employees/employee/employee.component';
+import {MachineListComponent} from './manage-machines/machine-list/machine-list.component';
+import {MachineComponent} from './manage-machines/machine/machine.component';
+import {BrandService} from '../../services/brand.service';
+import {MachineService} from '../../services/machine.service';
+import {NguiAutoCompleteModule} from '@ngui/auto-complete';
+import {UserComponent} from './manage-users/user/user.component';
+import {UserListComponent} from './manage-users/user-list/user-list.component';
 
 export const routes = [
     {path: 'manage-branches', component: BranchListComponent, data: {breadcrumb: 'Branches'}},
     {path: 'manage-branches/:id', component: BranchComponent, data: {breadcrumb: 'Branch Form'}},
+    {path: 'manage-users', component: UserListComponent, data: {breadcrumb: 'Users'}},
+    {path: 'manage-users/:id', component: UserComponent, data: {breadcrumb: 'User Form'}},
     {path: 'manage-employees', component: EmployeeListComponent, data: {breadcrumb: 'Employees'}},
     {path: 'manage-employees/:id', component: EmployeeComponent, data: {breadcrumb: 'Employee Form'}},
+    {path: 'manage-machines', component: MachineListComponent, data: {breadcrumb: 'Machines'}},
+    {path: 'manage-machines/:id', component: MachineComponent, data: {breadcrumb: 'Machine Form'}},
     {path: 'manage-expense-categories', component: ExpenseCategoryTreeComponent, data: {breadcrumb: 'Expense categories'}},
     {path: 'manage-expense-categories/:id', component: ExpenseCategoryComponent, data: {breadcrumb: 'Expense category'}},
 ];
@@ -35,6 +46,7 @@ export const routes = [
         TranslateModule,
         CommonModule,
         FormsModule,
+        NguiAutoCompleteModule,
         ReactiveFormsModule,
         MultiselectDropdownModule,
         DirectivesModule,
@@ -48,12 +60,16 @@ export const routes = [
     declarations: [
         BranchListComponent,
         BranchComponent,
+        UserListComponent,
+        UserComponent,
         EmployeeListComponent,
         EmployeeComponent,
+        MachineListComponent,
+        MachineComponent,
         ExpenseCategoryTreeComponent,
         ExpenseCategoryComponent
     ],
-    providers: [BranchService]
+    providers: [BranchService, MachineService, BrandService]
 })
 
 export class EnterpriseModule {

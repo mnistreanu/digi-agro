@@ -1,5 +1,5 @@
-import {EmployeeModel} from '../../../employee/employee/employee.model';
-import {MachineModel} from '../../../manage-machines/machine/machine.model';
+import {EmployeeModel} from '../../../enterprise/manage-employees/employee/employee.model';
+import {MachineModel} from '../../../enterprise/manage-machines/machine/machine.model';
 export class WorksExpensesListModel {
     date: string;
     expenseId: number;

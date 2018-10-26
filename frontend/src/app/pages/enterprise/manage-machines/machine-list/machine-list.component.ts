@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
+import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {ColDef, GridOptions} from 'ag-grid';
+import {MachineService} from '../../../../services/machine.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {LangService} from '../../../services/lang.service';
-import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
-import {EmployeeService} from '../../../services/employee.service';
+import {LangService} from '../../../../services/lang.service';
 
 @Component({
-    selector: 'app-employee-list',
-    templateUrl: './employee-list.component.html',
-    styleUrls: ['./employee-list.component.scss']
+    selector: 'app-machine-list',
+    templateUrl: './machine-list.component.html',
+    styleUrls: ['./machine-list.component.scss']
 })
-export class EmployeeListComponent implements OnInit {
+export class MachineListComponent implements OnInit {
 
     options: GridOptions;
     context;
@@ -18,7 +18,7 @@ export class EmployeeListComponent implements OnInit {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private langService: LangService,
-                private employeeService: EmployeeService) {
+                private machineService: MachineService) {
     }
 
     ngOnInit() {
@@ -35,7 +35,6 @@ export class EmployeeListComponent implements OnInit {
         this.context = {componentParent: this};
 
         this.setupRows();
-
     }
 
     private setupHeaders() {
@@ -55,22 +54,29 @@ export class EmployeeListComponent implements OnInit {
                 }
             },
             {
-                headerName: 'employee.title',
-                field: 'title',
-                width: 200,
-                minWidth: 200
+                headerName: 'machine.type',
+                field: 'type',
+                width: 175,
+                minWidth: 175
             },
             {
-                headerName: 'employee.first-name',
-                field: 'firstName',
-                width: 200,
-                minWidth: 200
+                headerName: 'machine.model',
+                field: 'brandAndModel',
+                width: 175,
+                minWidth: 175
             },
             {
-                headerName: 'employee.last-name',
-                field: 'lastName',
-                width: 200,
-                minWidth: 200
+                headerName: 'machine.identifier',
+                field: 'identifier',
+                width: 100,
+                minWidth: 100,
+                maxWidth: 100
+            },
+            {
+                headerName: 'machine.responsible-persons',
+                field: 'responsiblePersons',
+                width: 300,
+                minWidth: 300
             }
         ];
 
@@ -84,7 +90,12 @@ export class EmployeeListComponent implements OnInit {
     }
 
     private setupRows() {
-        this.employeeService.findAll().subscribe(models => {
+        this.machineService.findAll().subscribe(models => {
+            models.forEach((model) => {
+                model.type = this.langService.instant('machine-type.' + model.type);
+                model['brandAndModel'] = model.brand + ' ' + model.model;
+                model['responsiblePersons'] = model.employees.map(m => m.firstName + ' ' + m.lastName).join(', ');
+            });
             this.options.api.setRowData(models);
         });
     }
@@ -101,6 +112,7 @@ export class EmployeeListComponent implements OnInit {
         }, 500);
     }
 
+
     public add() {
         this.router.navigate(['./-1'], {relativeTo: this.route});
     }
@@ -109,6 +121,5 @@ export class EmployeeListComponent implements OnInit {
         const model = node.data;
         this.router.navigate(['./' + model.id], {relativeTo: this.route});
     }
-
 
 }

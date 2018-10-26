@@ -7,7 +7,7 @@ import {DateUtil} from '../../../common/dateUtil';
 import {MachineService} from '../../../services/machine.service';
 import {LangService} from '../../../services/lang.service';
 import {MachineTelemetryService} from '../../../services/machine-telemetry.service';
-import {MachineModel} from '../../manage-machines/machine/machine.model';
+import {MachineModel} from '../../enterprise/manage-machines/machine/machine.model';
 import {AlertService} from '../../../services/alert.service';
 
 @Component({

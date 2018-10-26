@@ -4,7 +4,7 @@ import {ToastrService} from 'ngx-toastr';
 import {UserService} from '../../services/user.service';
 import {AuthService} from '../../services/auth/auth.service';
 import {emailValidator} from '../../theme/validators/email.validator';
-import {UserAccountModel} from '../manage-users/user/user-account.model';
+import {UserModel} from '../enterprise/manage-users/user/user.model';
 import {Router} from '@angular/router';
 import {Constants} from '../../common/constants';
 import {LangService} from '../../services/lang.service';
@@ -20,7 +20,7 @@ export class UserProfileComponent implements OnInit {
 
     form: FormGroup;
     submitted = false;
-    model: UserAccountModel;
+    model: UserModel;
 
     logoFile: File;
     logoUrl: string;

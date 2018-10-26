@@ -2,18 +2,18 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {Messages} from '../../../common/messages';
+import {Messages} from '../../../../common/messages';
 import {BranchModel} from './branch.model';
-import {BranchService} from '../../../services/branch.service';
-import {ListItem} from '../../../interfaces/list-item.interface';
-import {TenantService} from '../../../services/tenant.service';
-import {StorageService} from '../../../services/storage.service';
-import {Constants} from '../../../common/constants';
-import {LangService} from '../../../services/lang.service';
-import {GeoLocalizedItem} from '../../../interfaces/geo-localized-item.interface';
-import {GeoService} from '../../../services/geo.service';
-import {TenantModel} from '../../manage-tenants/tenant/tenant.model';
-import {AlertService} from '../../../services/alert.service';
+import {BranchService} from '../../../../services/branch.service';
+import {ListItem} from '../../../../interfaces/list-item.interface';
+import {TenantService} from '../../../../services/tenant.service';
+import {StorageService} from '../../../../services/storage.service';
+import {Constants} from '../../../../common/constants';
+import {LangService} from '../../../../services/lang.service';
+import {GeoLocalizedItem} from '../../../../interfaces/geo-localized-item.interface';
+import {GeoService} from '../../../../services/geo.service';
+import {TenantModel} from '../../../manage-tenants/tenant/tenant.model';
+import {AlertService} from '../../../../services/alert.service';
 
 @Component({
     selector: 'app-branch',
