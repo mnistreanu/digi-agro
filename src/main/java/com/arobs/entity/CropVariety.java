@@ -16,6 +16,10 @@ public class CropVariety {
     @Column(name = "crop_id")
     private Long cropId;
 
+    @ManyToOne (fetch = FetchType.EAGER)
+    @JoinColumn (name="crop_id", updatable = false, insertable = false)
+    private Crop crop;
+
     @Column(name = "name_ro")
     private String nameRo;
 
@@ -52,6 +56,14 @@ public class CropVariety {
 
     public void setCropId(Long cropId) {
         this.cropId = cropId;
+    }
+
+    public Crop getCrop() {
+        return crop;
+    }
+
+    public void setCrop(Crop crop) {
+        this.crop = crop;
     }
 
     public String getNameRo() {

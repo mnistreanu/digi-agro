@@ -16,7 +16,7 @@ export class CropVarietyService {
     constructor(private http: HttpClient) {
     }
 
-    public findCategoryItems(): Observable<SelectItem[]> {
+    public findCropItems(): Observable<SelectItem[]> {
         return this.http.get<SelectItem[]>(this.api + '/crops/select_items');
     }
     public findAll(page: number, size: number, filters: Map<string, string>, order: string): Observable<CropVarietyDTO[]> {

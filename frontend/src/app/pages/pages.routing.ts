@@ -82,12 +82,6 @@ export const routes: Routes = [
                 data: {breadcrumb: 'Manage Tenants'},
                 canActivate: [SuperAdminGuard]
             },
-            // {
-            //     path: 'manage-branches',
-            //     loadChildren: 'app/pages/manage-branches/manage-branches.module#ManageBranchesModule',
-            //     data: {breadcrumb: 'Manage Branches'},
-            //     canActivate: [AdminGuard]
-            // },
             {
                 path: 'reminder',
                 loadChildren: 'app/pages/reminder/reminder.module#ReminderModule',

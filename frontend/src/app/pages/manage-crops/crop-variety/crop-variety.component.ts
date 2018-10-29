@@ -6,6 +6,7 @@ import {CropVarietyModel} from './crop-variety.model';
 import {CropVarietyService} from '../../../services/crop/crop-variety.service';
 import {UnitOfMeasure} from '../../../enums/unit-of-measure.enum';
 import {AlertService} from '../../../services/alert.service';
+import {CropService} from '../../../services/crop/crop.service';
 
 @Component({
     selector: 'app-crop',
@@ -21,17 +22,23 @@ export class CropVarietyComponent implements OnInit {
     isNew: boolean;
 
     unitOfMeasureSelectItems: SelectItem[] = [];
+    categorySelectItems: SelectItem[] = [];
     cropSelectItems: SelectItem[] = [];
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private alertService: AlertService,
+                private cropService: CropService,
                 private cropVarietyService: CropVarietyService) {
     }
 
     ngOnInit() {
 
-        this.cropVarietyService.findCategoryItems().subscribe(data => {
+        this.cropService.findCategoryItems().subscribe(data => {
+            this.categorySelectItems = data;
+        });
+
+        this.cropVarietyService.findCropItems().subscribe(data => {
             this.cropSelectItems = data;
         });
 
@@ -56,6 +63,7 @@ export class CropVarietyComponent implements OnInit {
     private setupModel(id) {
         this.cropVarietyService.findOne(id).subscribe(model => {
             this.model = model;
+            this.model.cropCategoryId = model.cropModel.cropCategoryId;
             this.buildForm();
         });
     }
@@ -68,6 +76,7 @@ export class CropVarietyComponent implements OnInit {
 
     private buildForm() {
         this.form = new FormGroup({
+            cropCategoryId: new FormControl(this.model.cropCategoryId, [Validators.required]),
             cropId: new FormControl(this.model.cropId, [Validators.required]),
             nameRo: new FormControl(this.model.nameRo, [Validators.required, Validators.maxLength(128)]),
             nameRu: new FormControl(this.model.nameRu, [Validators.required, Validators.maxLength(128)]),
@@ -108,8 +117,12 @@ export class CropVarietyComponent implements OnInit {
     public remove() {
         this.cropVarietyService.remove(this.model.id).subscribe(() => {
             this.alertService.removed();
-            this.router.navigate(['/pages/manage-crops/crop-varieties']);
+            this.back();
         });
+    }
+
+    back() {
+        this.router.navigate(['../'], {relativeTo: this.route});
     }
 
 }

@@ -66,38 +66,7 @@ export class MenuService {
             });
         }
 
-        if (isAdmin) {
-            // menuItems.push({
-            //     title: 'nav.branches',
-            //     routerLink: '/pages/manage-branches',
-            //     icon: 'fa fa-code-branch',
-            //     selected: false,
-            //     expanded: false
-            // });
-            //
-            // menuItems.push({
-            //     title: 'nav.employees',
-            //     routerLink: '/pages/employee',
-            //     icon: 'fa-users',
-            //     selected: false,
-            //     expanded: false
-            // });
 
-            // menuItems.push({
-            //     title: 'nav.brands',
-            //     routerLink: '/pages/manage-brands',
-            //     icon: 'fa-bold',
-            //     selected: false,
-            //     expanded: false
-            // });
-            // menuItems.push({
-            //     title: 'nav.machines',
-            //     routerLink: '/pages/manage-machines',
-            //     icon: 'fa fa-car',
-            //     selected: false,
-            //     expanded: false
-            // });
-        }
 
         if (isAdmin || isUser) {
             menuItems.push({
@@ -158,7 +127,7 @@ export class MenuService {
         if (isUser) {
             menuItems.push({
                 title: 'nav.crops',
-                routerLink: '/pages/manage-crops/crop-varieties',
+                routerLink: '/pages/manage-crops/crop-variety-list',
                 icon: 'fa fa-leaf',
                 selected: false,
                 expanded: false
@@ -183,7 +152,7 @@ export class MenuService {
                     },
                     {
                         title: 'nav.crop-varieties',
-                        routerLink: 'manage-crops/crop-varieties'
+                        routerLink: 'manage-crops/crop-variety-list'
                     }
                 ]
             });

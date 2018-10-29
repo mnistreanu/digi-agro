@@ -36,21 +36,14 @@
 	"crop": {
 		"category": "Категория",
 		"name": "Сельскохозяйственная культура",
+		"crop": "Сель.хоз. культура",
 		"planting-date": "Дата посадки",
+		"seed-consumption-ha": "Потребление семян, га",
 		"seeds": "Семена",
 		"unit-of-measure-long": "Единица измерения",
 		"unit-of-measure-short": "Ед.И.",
-		"variety": "Сорт"
-	},
-	"crop-variety": {
-		"crop": "",
-		"crop-varieties": "",
-		"description-ro": "",
-		"description-ru": "",
-		"name-ro": "",
-		"name-ru": "",
-		"seed-consumption-ha": "",
-		"unit-of-measure": ""
+		"variety": "Сорт",
+		"varieties": "Сорта сельскохозяйственных культур"
 	},
 	"employee": {
 		"employee": "Работник",
@@ -137,6 +130,7 @@
 	},
 	"general": {
 		"form": "Форма",
+		"lines-per-table": "Строк в таблице",
 		"settings": "Настройки"
 	},
 	"geo": {

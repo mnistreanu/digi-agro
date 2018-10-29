@@ -36,21 +36,14 @@
 	"crop": {
 		"category": "Category",
 		"name": "Agricultural crop",
+		"crop": "Crop",
 		"planting-date": "Planting date",
+		"seed-consumption-ha": "Seed Consumption, Ha",
 		"seeds": "Seeds",
 		"unit-of-measure-long": "Unit of measure",
 		"unit-of-measure-short": "Unit",
-		"variety": "Variety"
-	},
-	"crop-variety": {
-		"crop": "Crop",
-		"crop-varieties": "Crop Varieties",
-		"description-ro": "Description Ro",
-		"description-ru": "Description Ru",
-		"name-ro": "Name Ro",
-		"name-ru": "Name Ru",
-		"seed-consumption-ha": "Seed Consumption Ha",
-		"unit-of-measure": "Unit of Measure"
+		"variety": "Variety",
+		"varieties": "Crop varieties"
 	},
 	"employee": {
 		"employee": "Employee",
@@ -137,6 +130,7 @@
 	},
 	"general": {
 		"form": "Form",
+		"lines-per-table": "Lines per table",
 		"settings": "Settings"
 	},
 	"geo": {

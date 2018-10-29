@@ -36,21 +36,14 @@
 	"crop": {
 		"category": "Categoria",
 		"name": "Cultura agricolă",
+		"crop": "Cultura agricolă",
 		"planting-date": "Data plantării",
+		"seed-consumption-ha": "Consum semințe, Ha",
 		"seeds": "Semințe",
 		"unit-of-measure-long": "Unitatea de măsură",
 		"unit-of-measure-short": "U.m.",
-		"variety": "Soi"
-	},
-	"crop-variety": {
-		"crop": "",
-		"crop-varieties": "",
-		"description-ro": "",
-		"description-ru": "",
-		"name-ro": "",
-		"name-ru": "",
-		"seed-consumption-ha": "",
-		"unit-of-measure": ""
+		"variety": "Soi",
+		"varieties": "Soiuri de culturi agricole"
 	},
 	"employee": {
 		"employee": "Angajat",
@@ -137,6 +130,7 @@
 	},
 	"general": {
 		"form": "Forma",
+		"lines-per-table": "Linii în listă",
 		"settings": "Setări"
 	},
 	"geo": {

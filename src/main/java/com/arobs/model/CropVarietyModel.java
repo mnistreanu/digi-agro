@@ -11,6 +11,7 @@ public class CropVarietyModel implements Serializable {
 
     private Long cropCategoryId;
     private Long cropId;
+    private CropModel cropModel;
     private Long id;
     private String nameRo;
     private String nameRu;
@@ -42,6 +43,7 @@ public class CropVarietyModel implements Serializable {
     public CropVarietyModel(CropVariety cropVariety) {
         this.id = cropVariety.getId();
         this.cropId = cropVariety.getCropId();
+        this.cropModel = new CropModel(cropVariety.getCrop());
         this.nameRo = cropVariety.getNameRo();
         this.nameRu = cropVariety.getNameRu();
         this.descriptionRo = cropVariety.getDescriptionRo();
@@ -64,6 +66,14 @@ public class CropVarietyModel implements Serializable {
 
     public void setCropId(Long cropId) {
         this.cropId = cropId;
+    }
+
+    public CropModel getCropModel() {
+        return cropModel;
+    }
+
+    public void setCropModel(CropModel cropModel) {
+        this.cropModel = cropModel;
     }
 
     public Long getId() {

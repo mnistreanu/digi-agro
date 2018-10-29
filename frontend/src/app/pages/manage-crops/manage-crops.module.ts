@@ -12,7 +12,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {DatatableComponent, NgxDatatableModule} from '@swimlane/ngx-datatable';
 import { CropComponent } from './crop/crop.component';
 import { CropVarietyTreeComponent } from './crop-variety-tree/crop-variety-tree.component';
-import { CropVarietiesListComponent } from './crop-varieties/crop-varieties-list.component';
+import { CropVarietyListComponent } from './crop-variety-list/crop-variety-list.component';
 import { CropVarietyComponent } from './crop-variety/crop-variety.component';
 
 @NgModule({
@@ -33,7 +33,7 @@ import { CropVarietyComponent } from './crop-variety/crop-variety.component';
         DirectivesModule,
         AgGridModule.withComponents([EditRendererComponent])
     ],
-    declarations: [CropsComponent, CropComponent, CropVarietyTreeComponent, CropVarietiesListComponent, CropVarietyComponent]
+    declarations: [CropsComponent, CropComponent, CropVarietyTreeComponent, CropVarietyListComponent, CropVarietyComponent]
 })
 export class ManageCropsModule {
 }
