@@ -51,6 +51,7 @@
 		"first-last-name": "First & Last name",
 		"first-name": "First Name",
 		"last-name": "Last Name",
+		"responsible-persons": "Responsible persons",
 		"title": "Title"
 	},
 	"event": {

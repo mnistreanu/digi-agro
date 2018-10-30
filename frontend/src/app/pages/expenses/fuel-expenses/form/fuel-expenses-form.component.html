@@ -8,7 +8,6 @@
                 <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
                 <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
                 <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>
-                <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
             </div>
         </div>
         <div class="card-body widget-body">
@@ -16,7 +15,7 @@
             <div class="form-group row">
                 <div class="col-sm-6">
                     <!-- todo: translate labels -->
-                    <label for="expense-title" translate>Expense Title</label>
+                    <label for="expense-title" translate>expenses.details</label>
                     <input id="expense-title" class="form-control checking-field" formControlName="title" />
                     <app-form-error-block [control]="form.get('title')"
                                           [formSubmitted]="submitted">
@@ -24,7 +23,7 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <label for="expense-date" translate>Expense Date</label>
+                    <label for="expense-date" translate>expenses.date</label>
                     <input id="expense-date" type="date" class="form-control checking-field" formControlName="expenseDate" />
                     <app-form-error-block [control]="form.get('expenseDate')"
                                           [formSubmitted]="submitted">
@@ -34,7 +33,7 @@
 
             <div class="form-group row">
                 <div class="col-sm-6">
-                    <label translate>Machines</label>
+                    <label translate>machine.agricultural-machinery</label>
                     <angular2-multiselect [settings]="multiSelectSettings"
                                           [data]="machines"
                                           formControlName="machines">
@@ -42,7 +41,7 @@
 
                 </div>
                 <div class="col-sm-6">
-                    <label translate>Employees</label>
+                    <label translate>employee.responsible-persons</label>
                     <ss-multiselect-dropdown [options]="employees" *ngIf="employees"
                                              [texts]="multiSelectControlTexts"
                                              [settings]="multiSelectControlSettings"

@@ -51,6 +51,7 @@
 		"first-last-name": "Имя Фамилия",
 		"first-name": "Имя",
 		"last-name": "Фамилия",
+		"responsible-persons": "Ответственные лица",
 		"title": "Титул"
 	},
 	"event": {

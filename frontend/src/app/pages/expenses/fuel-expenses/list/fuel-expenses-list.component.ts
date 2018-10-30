@@ -87,9 +87,9 @@ export class FuelExpensesListComponent implements OnInit {
                 minWidth: 180
             },
             {
-                headerName: 'employee.first-last-name',
+                headerName: 'employee.responsible-persons',
                 field: 'employeesString',
-                width: 150,
+                width: 200,
                 minWidth: 150,
             },
             {
