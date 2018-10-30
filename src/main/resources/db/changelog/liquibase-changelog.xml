@@ -6,6 +6,56 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+    <!--
+        Lista de raioane din Moldova, in limba romana si rusa
+    -->
+    <changeSet id="insert-counties-md" author="mgorgos" failOnError="true" runOnChange="true">
+        <sql>
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','AN','r-nul Anenii Noi','Новоаненский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','BS','r-nul Basarabeasca','Бессарабский район');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','BL','or.Bălți','Бельцы');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','BE','or.Bender tr.','Бендеры');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','BR','r-nul Briceni','Бричанский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CH','r-nul Cahul','Кагульский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CC','r-nul Camenca tr.','Каменский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CT','r-nul Cantemir','Кантемирский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CL','r-nul Călărași','Каларашский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CS','r-nul Căușeni','Каушанский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CG','r-nul Ceadîr-Lunga','Чадыр-Лунгский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD',' C', 'mun.Chișinău','Кишинев');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CM','r-nul Cimișlia','Чимишлийский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CO','r-nul Comrat','Комратский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CR','r-nul Criuleni','Криулянский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','DN','r-nul Dondușeni','Дондюшанский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','DR','r-nul Drochia','Дрокиевский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','DB','r-nul Dubăsari','Дубоссарский район');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','ED','r-nul Edineț','Единецкий район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','FL','r-nul Fălești','Фалештский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','FR','r-nul Florești','Флорештский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','GL','r-nul Glodeni','Глодянский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','GR','r-nul Grigoriopol tr.','Григориопольский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','HN','r-nul Hîncești','Хынчештский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','IL','r-nul Ialoveni','Яловенский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','LV','r-nul Leova','Леовский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','NS','r-nul Nisporeni','Ниспоренский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','OC','r-nul Ocnița','Окницкий район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','OR','r-nul Orhei','Оргеевский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','RZ','r-nul Rezina','Резинский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','RB','r-nul Rîbnița tr.','Рыбницкий район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','RS','r-nul Rîșcani','Рышканский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','SG','r-nul Sîngerei','Сынжерейский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','SL','r-nul Slobozia tr.','Слободзейский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','SR','r-nul Soroca','Сорокский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','ST','r-nul Strășeni','Страшенский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','SD','r-nul Șoldănești','Шолданештский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','SV','r-nul Ștefan Vodă','Штефан-Водский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','TR','r-nul Taraclia','Тараклийский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','TL','r-nul Telenești','Теленештский район‎');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','TS','or.Tiraspol tr.','Тирасполь');
+            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','UN','r-nul Ungheni','Унгенский район‎');
+        </sql>
+    </changeSet>
+
      <changeSet id="insert-2-tenants" author="mihai.gorgos" failOnError="true" onValidationFail="MARK_RAN">
          <validCheckSum>ANY</validCheckSum>
          <sql>
@@ -67,56 +117,6 @@
         <sql>
             INSERT INTO country (id, name_ro, name_ru) VALUES ('MD', 'Moldova', 'Молдова');
             INSERT INTO country (id, name_ro, name_ru) VALUES ('RO', 'România', 'Румыния');
-        </sql>
-    </changeSet>
-
-    <!--
-        Lista de raioane din Moldova, in limba romana si rusa
-    -->
-    <changeSet id="insert-counties-md" author="mgorgos" failOnError="true" runOnChange="true">
-        <sql>
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','AN','r-nul Anenii Noi','Новоаненский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','BS','r-nul Basarabeasca','Бессарабский район');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','BL','or.Bălți','Бельцы');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','BE','or.Bender tr.','Бендеры');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','BR','r-nul Briceni','Бричанский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CH','r-nul Cahul','Кагульский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CC','r-nul Camenca tr.','Каменский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CT','r-nul Cantemir','Кантемирский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CL','r-nul Călărași','Каларашский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CS','r-nul Căușeni','Каушанский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CG','r-nul Ceadîr-Lunga','Чадыр-Лунгский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD',' C', 'mun.Chișinău','Кишинев');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CM','r-nul Cimișlia','Чимишлийский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CO','r-nul Comrat','Комратский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','CR','r-nul Criuleni','Криулянский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','DN','r-nul Dondușeni','Дондюшанский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','DR','r-nul Drochia','Дрокиевский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','DB','r-nul Dubăsari','Дубоссарский район');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','ED','r-nul Edineț','Единецкий район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','FL','r-nul Fălești','Фалештский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','FR','r-nul Florești','Флорештский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','GL','r-nul Glodeni','Глодянский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','GR','r-nul Grigoriopol tr.','Григориопольский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','HN','r-nul Hîncești','Хынчештский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','IL','r-nul Ialoveni','Яловенский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','LV','r-nul Leova','Леовский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','NS','r-nul Nisporeni','Ниспоренский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','OC','r-nul Ocnița','Окницкий район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','OR','r-nul Orhei','Оргеевский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','RZ','r-nul Rezina','Резинский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','RB','r-nul Rîbnița tr.','Рыбницкий район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','RS','r-nul Rîșcani','Рышканский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','SG','r-nul Sîngerei','Сынжерейский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','SL','r-nul Slobozia tr.','Слободзейский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','SR','r-nul Soroca','Сорокский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','ST','r-nul Strășeni','Страшенский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','SD','r-nul Șoldănești','Шолданештский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','SV','r-nul Ștefan Vodă','Штефан-Водский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','TR','r-nul Taraclia','Тараклийский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','TL','r-nul Telenești','Теленештский район‎');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','TS','or.Tiraspol tr.','Тирасполь');
-            INSERT INTO county (country_id, id, name_ro, name_ru) VALUES ('MD','UN','r-nul Ungheni','Унгенский район‎');
         </sql>
     </changeSet>
 
