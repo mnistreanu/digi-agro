@@ -6,12 +6,12 @@ import 'rxjs/add/operator/catch';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {Authorities} from '../../common/authorities';
-import {UserModel} from '../../pages/enterprise/manage-users/user/user.model';
 import {LangService} from '../lang.service';
 import {StorageService} from '../storage.service';
 import {AuthResponseModel} from './auth-response.model';
 import {AuthRequestModel} from './auth-request.model';
 import { environment } from '../../../environments/environment';
+import {UserAccountModel} from '../../pages/enterprise/manage-users/user/user-account.model';
 
 
 @Injectable({
@@ -79,8 +79,8 @@ export class AuthService {
         return JSON.parse(this.storageService.getItem(Constants.USER_DATA));
     }
 
-    fetchCurrentUser(): Observable<UserModel> {
-        return this.http.get<UserModel>(this.api + '/current-ser');
+    fetchCurrentUser(): Observable<UserAccountModel> {
+        return this.http.get<UserAccountModel>(this.api + '/current-ser');
     }
 
     getToken(): String {
@@ -111,7 +111,7 @@ export class AuthService {
         return this.hasAuthority(Authorities.ROLE_ADMIN);
     }
 
-    updateUser(model: UserModel) {
+    updateUser(model: UserAccountModel) {
         const userData = JSON.parse(this.storageService.getItem(Constants.USER_DATA));
         userData.logoUrl = model.logoUrl;
         this.storageService.setItem(Constants.USER_DATA, JSON.stringify(userData));
