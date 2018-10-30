@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 import {HttpClient} from '@angular/common/http';
 import {UserList} from '../interfaces/user-list.interface';
-import {UserModel} from '../pages/enterprise/manage-users/user/user.model';
 import {environment} from '../../environments/environment';
+import {UserAccountModel} from '../pages/enterprise/manage-users/user/user-account.model';
 
 @Injectable({
     providedIn: 'root'
@@ -19,8 +19,8 @@ export class UserService {
         return this.http.get<UserList[]>(this.api + '/');
     }
 
-    findOne(id: number): Observable<UserModel> {
-        return this.http.get<UserModel>(this.api + '/' + id);
+    findOne(id: number): Observable<UserAccountModel> {
+        return this.http.get<UserAccountModel>(this.api + '/' + id);
     }
 
     validateUsername(id: number, username: string): Observable<boolean> {
@@ -28,21 +28,21 @@ export class UserService {
         return this.http.get<boolean>(this.api + '/validate-username' + queryParams);
     }
 
-    save(user: UserModel): Observable<UserModel> {
-        return this.http.post<UserModel>(this.api + '/', user);
+    save(user: UserAccountModel): Observable<UserAccountModel> {
+        return this.http.post<UserAccountModel>(this.api + '/', user);
     }
 
-    saveProfile(user: UserModel, file: File): Observable<UserModel> {
+    saveProfile(user: UserAccountModel, file: File): Observable<UserAccountModel> {
         const formData = new FormData();
         if (file) {
             formData.append('file', file, file.name);
         }
         formData.append('model', JSON.stringify(user));
 
-        return this.http.post<UserModel>(this.api + '/save-profile', formData);
+        return this.http.post<UserAccountModel>(this.api + '/save-profile', formData);
     }
 
-    remove(user: UserModel): Observable<void> {
+    remove(user: UserAccountModel): Observable<void> {
         return this.http.delete<void>(this.api + '/' + user.id);
     }
 

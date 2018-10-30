@@ -25,14 +25,14 @@ import {MachineComponent} from './manage-machines/machine/machine.component';
 import {BrandService} from '../../services/brand.service';
 import {MachineService} from '../../services/machine.service';
 import {NguiAutoCompleteModule} from '@ngui/auto-complete';
-import {UserComponent} from './manage-users/user/user.component';
 import {UserListComponent} from './manage-users/user-list/user-list.component';
+import {UserFormComponent} from './manage-users/user-form/user-form.component';
 
 export const routes = [
     {path: 'manage-branches', component: BranchListComponent, data: {breadcrumb: 'Branches'}},
     {path: 'manage-branches/:id', component: BranchComponent, data: {breadcrumb: 'Branch Form'}},
     {path: 'manage-users', component: UserListComponent, data: {breadcrumb: 'Users'}},
-    {path: 'manage-users/:id', component: UserComponent, data: {breadcrumb: 'User Form'}},
+    {path: 'manage-users/:id', component: UserFormComponent, data: {breadcrumb: 'User Form'}},
     {path: 'manage-employees', component: EmployeeListComponent, data: {breadcrumb: 'Employees'}},
     {path: 'manage-employees/:id', component: EmployeeComponent, data: {breadcrumb: 'Employee Form'}},
     {path: 'manage-machines', component: MachineListComponent, data: {breadcrumb: 'Machines'}},
@@ -61,7 +61,7 @@ export const routes = [
         BranchListComponent,
         BranchComponent,
         UserListComponent,
-        UserComponent,
+        UserFormComponent,
         EmployeeListComponent,
         EmployeeComponent,
         MachineListComponent,
