@@ -117,6 +117,7 @@ public class CropService implements HasRepository<CropRepository> {
 
     @Transactional
     public void delete(Long id) {
+        // todo: problem with references...
         getRepository().delete(id);
     }
 
