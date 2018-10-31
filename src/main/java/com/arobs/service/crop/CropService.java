@@ -2,8 +2,7 @@ package com.arobs.service.crop;
 
 import com.arobs.entity.Crop;
 import com.arobs.interfaces.HasRepository;
-import com.arobs.model.CropModel;
-import com.arobs.model.ListItemModel;
+import com.arobs.model.crop.CropModel;
 import com.arobs.repository.CropRepository;
 import com.arobs.repository.custom.CropCustomRepository;
 import com.google.gson.Gson;
@@ -15,20 +14,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CropService implements HasRepository<CropRepository> {
-
-    public static final String SORT_DESC = "DESC";
 
     @Autowired
     private CropRepository cropRepository;
 
     @Autowired
     private CropCustomRepository cropCustomRepository;
+
+    @Override
+    public CropRepository getRepository() {
+        return cropRepository;
+    }
 
     public List<Crop> find(Long categoryId) {
         if (categoryId != null) {
@@ -38,13 +42,8 @@ public class CropService implements HasRepository<CropRepository> {
         }
     }
 
-    public List<ListItemModel> fetchItems() {
-        return getRepository().fetchItems();
-    }
-
-    @Override
-    public CropRepository getRepository() {
-        return cropRepository;
+    public Crop findOne(Long id) {
+        return getRepository().findOne(id);
     }
 
     public Page<Crop> findAll(int page, int size) {
@@ -78,11 +77,12 @@ public class CropService implements HasRepository<CropRepository> {
 
 
         List<Crop> crops = cropCustomRepository.findByFilter(page, size, filters, sorts);
+        List<CropModel> models = crops.stream().map(CropModel::new).collect(Collectors.toList());
         long totalFilteredCrops = cropCustomRepository.countFiltered(filters);
 
         JSONObject response = new JSONObject();
         Gson gson = new Gson();
-        JsonElement element = gson.toJsonTree(crops, new TypeToken<List<Crop>>() {}.getType());
+        JsonElement element = gson.toJsonTree(models, new TypeToken<List<CropModel>>() {}.getType());
 
         try {
             response.put("total_count", totalFilteredCrops);
@@ -96,13 +96,15 @@ public class CropService implements HasRepository<CropRepository> {
         return response;
     }
 
+    @Transactional
     public Crop save(CropModel model) {
 
         Crop crop;
 
         if (model.getId() == null) {
             crop = new Crop();
-        } else {
+        }
+        else {
             crop = getRepository().findOne(model.getId());
         }
 
@@ -113,15 +115,9 @@ public class CropService implements HasRepository<CropRepository> {
         return getRepository().save(crop);
     }
 
-    public Crop findOne(Long id) {
-        return getRepository().findOne(id);
-    }
-
+    @Transactional
     public void delete(Long id) {
         getRepository().delete(id);
     }
-
-
-
 
 }

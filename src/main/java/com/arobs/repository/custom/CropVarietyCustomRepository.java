@@ -1,7 +1,6 @@
 package com.arobs.repository.custom;
 
 
-import com.arobs.entity.Crop;
 import com.arobs.entity.CropVariety;
 import org.springframework.stereotype.Repository;
 
@@ -26,7 +25,7 @@ public class CropVarietyCustomRepository {
         for (String filter: filters) {
             if (filter.contains("cropId")) {
                 String[] parts = filter.split(";");
-                querySelect += " AND c.cropId = " + parts[1];
+                querySelect += " AND c.crop.id = " + parts[1];
             }
 
             if (filter.contains("nameRo")) {
@@ -53,7 +52,7 @@ public class CropVarietyCustomRepository {
         for (String filter: sorts) {
             if (filter.contains("cropId")) {
                 String[] parts = filter.split(";");
-                querySelect += " ORDER BY c.cropId " + parts[1];
+                querySelect += " ORDER BY c.crop.id " + parts[1];
                 break;
             }
 
@@ -96,7 +95,7 @@ public class CropVarietyCustomRepository {
         for (String filter: filters) {
             if (filter.contains("cropId")) {
                 String[] parts = filter.split(";");
-                queryCount += " AND c.cropId = " + parts[1];
+                queryCount += " AND c.crop.id = " + parts[1];
             }
 
             if (filter.contains("nameRo")) {

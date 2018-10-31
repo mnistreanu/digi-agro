@@ -7,6 +7,9 @@ import {CropVarietyService} from '../../../services/crop/crop-variety.service';
 import {UnitOfMeasure} from '../../../enums/unit-of-measure.enum';
 import {AlertService} from '../../../services/alert.service';
 import {CropService} from '../../../services/crop/crop.service';
+import {CropCategoryService} from '../../../services/crop/crop-category.service';
+import {FieldMapper} from '../../../common/field.mapper';
+import {LangService} from '../../../services/lang.service';
 
 @Component({
     selector: 'app-crop',
@@ -22,32 +25,64 @@ export class CropVarietyComponent implements OnInit {
     isNew: boolean;
 
     unitOfMeasureSelectItems: SelectItem[] = [];
-    categorySelectItems: SelectItem[] = [];
-    cropSelectItems: SelectItem[] = [];
+    cropCategories: SelectItem[] = [];
+    crops: SelectItem[] = [];
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private alertService: AlertService,
+                private langService: LangService,
+                private cropCategoryService: CropCategoryService,
                 private cropService: CropService,
                 private cropVarietyService: CropVarietyService) {
     }
 
     ngOnInit() {
+        this.setupCategories();
+        this.setupUnitOfMeasure();
+        this.restoreModel();
+    }
 
-        this.cropService.findCategoryItems().subscribe(data => {
-            this.categorySelectItems = data;
+    private setupCategories() {
+        this.cropCategoryService.find().subscribe(models => {
+            const fieldMapper = new FieldMapper(this.langService.getLanguage());
+            const nameField = fieldMapper.get('name');
+            this.cropCategories = models.map(model => {
+                return new SelectItem(model.id, model[nameField]);
+            });
         });
+    }
 
-        this.cropVarietyService.findCropItems().subscribe(data => {
-            this.cropSelectItems = data;
+    public onCropCategoryChange() {
+        const cropCategoryId = this.form.controls['cropCategoryId'].value;
+        this.setupCrops(cropCategoryId, true);
+    }
+
+    private setupCrops(cropCategoryId, updateValue) {
+        this.cropService.findCrops(cropCategoryId).subscribe(data => {
+            const models = data.payload;
+            const fieldMapper = new FieldMapper(this.langService.getLanguage());
+            const nameField = fieldMapper.get('name');
+            this.crops = models.map(model => {
+                return new SelectItem(model.id, model[nameField]);
+            });
+
+            if (updateValue) {
+                const cropControl = this.form.controls['cropId'];
+                const value = this.crops.length > 0 ? this.crops[0].id : null;
+                cropControl.setValue(value);
+            }
         });
+    }
 
+    private setupUnitOfMeasure() {
         const names = Object.keys(UnitOfMeasure);
-
-        for (let mu of names) {
-            this.unitOfMeasureSelectItems.push(new SelectItem(UnitOfMeasure[mu], mu));
+        for (const name of names) {
+            this.unitOfMeasureSelectItems.push(new SelectItem(UnitOfMeasure[name], name));
         }
+    }
 
+    private restoreModel() {
         this.route.params.subscribe(params => {
             const id = params['id'];
 
@@ -63,7 +98,7 @@ export class CropVarietyComponent implements OnInit {
     private setupModel(id) {
         this.cropVarietyService.findOne(id).subscribe(model => {
             this.model = model;
-            this.model.cropCategoryId = model.cropModel.cropCategoryId;
+            this.setupCrops(model.cropCategoryId, false);
             this.buildForm();
         });
     }
@@ -100,18 +135,11 @@ export class CropVarietyComponent implements OnInit {
         this.isNew = false;
         this.submitted = false;
 
-        if (this.model.id) {
-            this.cropVarietyService.update(this.model.id, form.value).subscribe((model) => {
-                this.model = model;
-                this.alertService.saved();
-            });
-        } else {
-            this.cropVarietyService.create(form.value).subscribe((model) => {
-                this.model = model;
-                this.alertService.saved();
-            });
-        }
-
+        Object.assign(this.model, form.value);
+        this.cropVarietyService.save(this.model).subscribe((model) => {
+            this.model = model;
+            this.alertService.saved();
+        });
     }
 
     public remove() {

@@ -1,8 +1,7 @@
 package com.arobs.model.expense;
 
-import com.arobs.model.CropModel;
+import com.arobs.model.crop.CropModel;
 import com.arobs.model.chemicals.FertilizerModel;
-import com.arobs.model.chemicals.PesticideModel;
 import com.arobs.model.parcel.ParcelModel;
 
 import java.util.ArrayList;

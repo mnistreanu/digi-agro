@@ -1,7 +1,7 @@
 package com.arobs.model.expense;
 
-import com.arobs.model.CropModel;
-import com.arobs.model.CropVarietyModel;
+import com.arobs.model.crop.CropModel;
+import com.arobs.model.crop.CropVarietyModel;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

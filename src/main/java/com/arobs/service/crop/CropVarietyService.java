@@ -3,7 +3,7 @@ package com.arobs.service.crop;
 import com.arobs.entity.Crop;
 import com.arobs.entity.CropVariety;
 import com.arobs.interfaces.HasRepository;
-import com.arobs.model.CropVarietyModel;
+import com.arobs.model.crop.CropVarietyModel;
 import com.arobs.repository.CropVarietyRepository;
 import com.arobs.repository.custom.CropVarietyCustomRepository;
 import com.google.gson.Gson;
@@ -13,18 +13,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CropVarietyService implements HasRepository<CropVarietyRepository> {
 
     @Autowired
     private CropVarietyRepository cropVarietyRepository;
-
     @Autowired
     private CropVarietyCustomRepository cropVarietyCustomRepository;
+
+    @Autowired
+    private CropService cropService;
 
     public List<CropVariety> find(Long cropId) {
         return getRepository().find(cropId);
@@ -34,21 +39,25 @@ public class CropVarietyService implements HasRepository<CropVarietyRepository> 
         return getRepository().findOne(id);
     }
 
+    @Transactional
     public void delete(Long id) {
         getRepository().delete(id);
     }
 
+    @Transactional
     public CropVariety save(CropVariety cropVariety) {
         return getRepository().save(cropVariety);
     }
 
+    @Transactional
     public CropVariety save(CropVarietyModel model) {
 
         CropVariety cropVariety;
 
         if (model.getId() == null) {
             cropVariety = new CropVariety();
-        } else {
+        }
+        else {
             cropVariety = getRepository().findOne(model.getId());
         }
 
@@ -56,23 +65,22 @@ public class CropVarietyService implements HasRepository<CropVarietyRepository> 
         cropVariety.setNameRu(model.getNameRu());
         cropVariety.setDescriptionRo(model.getDescriptionRo());
         cropVariety.setDescriptionRu(model.getDescriptionRu());
-        cropVariety.setCropId(model.getCropId());
+        cropVariety.setCrop(cropService.findOne(model.getCropId()));
         cropVariety.setSeedConsumptionHa(model.getSeedConsumptionHa());
         cropVariety.setUnitOfMeasure(model.getUnitOfMeasure());
 
-        return getRepository().save(cropVariety);
+        return save(cropVariety);
     }
 
     public JSONObject findAll() {
 
-        Iterable<CropVariety> iterable = getRepository().findAll();
-        List<CropVariety> cropVarieties = new ArrayList<>();
-        iterable.forEach(cropVarieties::add);
+        Collection<CropVariety> cropVarieties = getRepository().findAll();
+        List<CropVarietyModel> models = cropVarieties.stream().map(CropVarietyModel::new).collect(Collectors.toList());
 
         JSONObject response = new JSONObject();
 
         Gson gson = new Gson();
-        JsonElement element = gson.toJsonTree(cropVarieties, new TypeToken<List<Crop>>() {}.getType());
+        JsonElement element = gson.toJsonTree(models, new TypeToken<List<CropVarietyModel>>() {}.getType());
 
         try {
             response.put("total_count", cropVarieties.size());
@@ -90,11 +98,12 @@ public class CropVarietyService implements HasRepository<CropVarietyRepository> 
 
 
         List<CropVariety> cropVarieties = cropVarietyCustomRepository.findByFilter(page, size, filters, sorts);
+        List<CropVarietyModel> models = cropVarieties.stream().map(CropVarietyModel::new).collect(Collectors.toList());
         long totalFilteredCropVarieties = cropVarietyCustomRepository.countFiltered(filters);
 
         JSONObject response = new JSONObject();
         Gson gson = new Gson();
-        JsonElement element = gson.toJsonTree(cropVarieties, new TypeToken<List<Crop>>() {}.getType());
+        JsonElement element = gson.toJsonTree(models, new TypeToken<List<CropVarietyModel>>() {}.getType());
 
         try {
             response.put("total_count", totalFilteredCropVarieties);

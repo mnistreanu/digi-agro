@@ -1,10 +1,8 @@
 package com.arobs.repository;
 
 import com.arobs.entity.CropCategory;
-import com.arobs.model.ListItemModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,8 +12,5 @@ public interface CropCategoryRepository extends JpaRepository<CropCategory, Inte
 
     @Query("SELECT cc FROM CropCategory cc ")
     List<CropCategory> find();
-
-    @Query("SELECT new com.arobs.model.ListItemModel(c.id, c.nameRo) FROM CropCategory c")
-    List<ListItemModel> fetchItems();
 }
 

@@ -8,6 +8,9 @@ import {ViewChild, ViewEncapsulation} from '@angular/core';
 import {DatatableComponent} from '@swimlane/ngx-datatable';
 import { CropService } from '../../../services/crop/crop.service';
 import { SelectItem } from '../../../dto/select-item.dto';
+import {CropCategoryService} from '../../../services/crop/crop-category.service';
+import {FieldMapper} from '../../../common/field.mapper';
+import {LangService} from '../../../services/lang.service';
 
 @Component({
     selector: 'crops',
@@ -21,23 +24,25 @@ export class CropsComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
+                private langService: LangService,
+                private cropCategoryService: CropCategoryService,
                 private cropService: CropService,
                 private toastr: ToastrService) {
-        // this.fetch((data) => {
-        //     this.temp = [...data];
-        //     this.rows = data;
-        // });
-    
     }
 
     ngOnInit() {
         this.fetchData();
 
-        this.cropService.findCategoryItems().subscribe(data => {
-            this.cropCategorySelectItems = data;
+        this.cropCategoryService.find().subscribe(models => {
+            const fieldMapper = new FieldMapper(this.langService.getLanguage());
+            const nameField = fieldMapper.get('name');
+            this.cropCategorySelectItems = models.map(model => {
+                return new SelectItem(model.id, model[nameField]);
+            });
         });
     }
 
+    // todo: refactor...
 
     editing = {};
     rows = [];

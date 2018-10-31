@@ -5,6 +5,10 @@ import {SelectItem} from '../../../dto/select-item.dto';
 import {CropService} from '../../../services/crop/crop.service';
 import {CropModel} from '../crop.model';
 import {AlertService} from '../../../services/alert.service';
+import {CropCategoryModel} from '../crop-category.model';
+import {CropCategoryService} from '../../../services/crop/crop-category.service';
+import {LangService} from '../../../services/lang.service';
+import {FieldMapper} from '../../../common/field.mapper';
 
 @Component({
     selector: 'app-crop',
@@ -21,16 +25,22 @@ export class CropComponent implements OnInit {
 
     cropCategorySelectItems: SelectItem[] = [];
 
-    constructor(private router: Router,
-                private route: ActivatedRoute,
+    constructor(private route: ActivatedRoute,
+                private router: Router,
                 private alertService: AlertService,
+                private langService: LangService,
+                private cropCategoryService: CropCategoryService,
                 private cropService: CropService) {
     }
 
     ngOnInit() {
 
-        this.cropService.findCategoryItems().subscribe(data => {
-            this.cropCategorySelectItems = data;
+        this.cropCategoryService.find().subscribe(models => {
+            const fieldMapper = new FieldMapper(this.langService.getLanguage());
+            const nameField = fieldMapper.get('name');
+            this.cropCategorySelectItems = models.map(model => {
+                return new SelectItem(model.id, model[nameField]);
+            });
         });
 
         this.route.params.subscribe(params => {
@@ -80,25 +90,22 @@ export class CropComponent implements OnInit {
         this.isNew = false;
         this.submitted = false;
 
-        if (this.model.id) {
-            this.cropService.update(this.model.id, this.form.value).subscribe((model) => {
-                this.model = model;
-                this.alertService.saved();
-            });
-        } else {
-            this.cropService.create(this.form.value).subscribe((model) => {
-                this.model = model;
-                this.alertService.saved();
-            });
-        }
-
+        Object.assign(this.model, form.value);
+        this.cropService.save(this.model).subscribe((model) => {
+            this.model = model;
+            this.alertService.saved();
+        });
     }
 
     public remove() {
         this.cropService.remove(this.model.id).subscribe(() => {
             this.alertService.removed();
-            this.router.navigate(['/pages/manage-crops']);
+            this.back();
         });
+    }
+
+    private back() {
+        this.router.navigate(['../'], {relativeTo: this.route});
     }
 
 }

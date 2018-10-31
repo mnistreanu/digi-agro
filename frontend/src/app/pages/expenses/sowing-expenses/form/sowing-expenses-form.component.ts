@@ -9,6 +9,7 @@ import {SowingExpenseService} from '../../../../services/expenses/sowing-expense
 import {ParcelService} from '../../../../services/parcel.service';
 import {CropService} from '../../../../services/crop/crop.service';
 import {FieldMapper} from '../../../../common/field.mapper';
+import {CropVarietyService} from '../../../../services/crop/crop-variety.service';
 
 @Component({
     selector: 'app-sowing-expenses-form',
@@ -46,6 +47,7 @@ export class SowingExpensesFormComponent implements OnInit {
                 private sowingExpenseService: SowingExpenseService,
                 private parcelService: ParcelService,
                 private cropService: CropService,
+                private cropVarietyService: CropVarietyService,
                 private langService: LangService,
                 private alertService: AlertService) {
     }
@@ -102,7 +104,7 @@ export class SowingExpensesFormComponent implements OnInit {
         const mapper = new FieldMapper(this.langService.getLanguage());
         const nameField = mapper.get('name');
 
-        this.cropService.findVarieties(cropId).subscribe(payload => {
+        this.cropVarietyService.find(cropId).subscribe(payload => {
             const models = payload.payload || [];
             this.cropVarieties = models.map(model => {
                 return {
@@ -178,7 +180,6 @@ export class SowingExpensesFormComponent implements OnInit {
     public onAriaChange() {
         this.calcNorm();
         this.calcActualExpense();
-
     }
 
     public onNormChange() {

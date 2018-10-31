@@ -14,6 +14,9 @@ import {ForecastModel} from '../forecast.model';
 import {ForecastSnapshotModel} from '../forecast-snapshot.model';
 import {ForecastHarvestModel} from '../forecast-harvest.model';
 import {AlertService} from '../../../services/alert.service';
+import {CropCategoryService} from '../../../services/crop/crop-category.service';
+import {CropVarietyService} from '../../../services/crop/crop-variety.service';
+import {FieldMapper} from '../../../common/field.mapper';
 
 @Component({
     selector: 'app-forecast-form',
@@ -60,6 +63,8 @@ export class ForecastFormComponent implements OnInit {
                 private formBuilder: FormBuilder,
                 private forecastService: ForecastService,
                 private cropService: CropService,
+                private cropVarietyService: CropVarietyService,
+                private cropCategoryService: CropCategoryService,
                 private parcelService: ParcelService,
                 private langService: LangService,
                 private alertService: AlertService) {
@@ -117,7 +122,7 @@ export class ForecastFormComponent implements OnInit {
         this.setupCropCategories();
         if (this.model.cropCategoryId != null) {
             this.setupCrops(this.model.cropCategoryId);
-            if (this.model.cropVarietyId != null) {
+            if (this.model.cropId != null) {
                 this.setupCropVarieties(this.model.cropId);
             }
         }
@@ -157,10 +162,13 @@ export class ForecastFormComponent implements OnInit {
     }
 
     private setupCropCategories() {
-        this.cropService.findCategories().subscribe(payloadModel => {
-            const status = payloadModel['status'];
-            const message = payloadModel['message'];
-            this.categories = payloadModel['payload'];
+        this.cropCategoryService.find().subscribe(models => {
+            this.categories = models;
+            const fieldMapper = new FieldMapper(this.langService.getLanguage());
+            const nameField = fieldMapper.get('name');
+            this.categories.forEach(model => {
+                model['name'] = model[nameField];
+            });
         });
     }
 
@@ -177,7 +185,12 @@ export class ForecastFormComponent implements OnInit {
         this.cropService.findCrops(categoryId).subscribe(payloadModel => {
             const status = payloadModel.status;
             const message = payloadModel.message;
+            const fieldMapper = new FieldMapper(this.langService.getLanguage());
+            const nameField = fieldMapper.get('name');
             this.crops = payloadModel.payload;
+            this.crops.forEach(model => {
+                model['name'] = model[nameField];
+            });
         });
     }
 
@@ -189,10 +202,15 @@ export class ForecastFormComponent implements OnInit {
     }
 
     private setupCropVarieties(cropId: number) {
-        this.cropService.findVarieties(cropId).subscribe(payloadModel => {
+        this.cropVarietyService.find(cropId).subscribe(payloadModel => {
             const status = payloadModel.status;
             const message = payloadModel.message;
+            const mapper = new FieldMapper(this.langService.getLanguage());
+            const nameField = mapper.get('name');
             this.cropVarieties = payloadModel.payload;
+            this.cropVarieties.forEach(model => {
+                model['name'] = model[nameField];
+            });
         });
     }
 

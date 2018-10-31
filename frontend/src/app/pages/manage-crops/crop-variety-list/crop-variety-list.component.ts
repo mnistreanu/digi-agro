@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {TenantService} from '../../../services/tenant.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ColDef, GridOptions} from 'ag-grid';
 import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {LangService} from '../../../services/lang.service';
-import { CropVarietyService } from '../../../services/crop/crop-variety.service';
+import {CropVarietyService} from '../../../services/crop/crop-variety.service';
+import {FieldMapper} from '../../../common/field.mapper';
 
 @Component({
     selector: 'app-crop-varieties-list',
@@ -67,19 +67,19 @@ export class CropVarietyListComponent implements OnInit {
             },
             {
                 headerName: 'crop.crop',
-                field: 'crop.nameRo',
+                field: 'cropName',
                 width: 200,
                 minWidth: 200
             },
             {
                 headerName: 'crop.variety',
-                field: 'nameRo',
+                field: 'name',
                 width: 200,
                 minWidth: 200
             },
             {
                 headerName: 'info.description',
-                field: 'descriptionRo',
+                field: 'description',
                 width: 300,
                 minWidth: 200
             },
@@ -109,7 +109,19 @@ export class CropVarietyListComponent implements OnInit {
     private setupRows() {
         this.cropVarietyService.findAll(this.pageNo, this.pageSize, this.filterMap, null).subscribe(data => {
 
-            this.options.api.setRowData(JSON.parse(data['items']));
+            const fieldMapper = new FieldMapper(this.langService.getLanguage());
+            const cropNameField = fieldMapper.get('cropName');
+            const nameField = fieldMapper.get('name');
+            const descriptionField = fieldMapper.get('description');
+
+            const models = JSON.parse(data['items']);
+            models.forEach((model) => {
+                model['cropName'] = model[cropNameField];
+                model['name'] = model[nameField];
+                model['description'] = model[descriptionField];
+            });
+
+            this.options.api.setRowData(models);
             this.totalRecords = data['total_count'];
         });
     }

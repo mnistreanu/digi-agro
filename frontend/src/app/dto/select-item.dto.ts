@@ -1,3 +1,4 @@
 export class SelectItem {
-    constructor(public id : any, public name : any) {}
+    constructor(public id: any, public name: any) {
+    }
 }

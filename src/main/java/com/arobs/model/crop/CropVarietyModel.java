@@ -1,9 +1,7 @@
-package com.arobs.model;
+package com.arobs.model.crop;
 
 import com.arobs.entity.Crop;
-import com.arobs.entity.CropCategory;
 import com.arobs.entity.CropVariety;
-import com.arobs.enums.UnitOfMeasure;
 
 import java.io.Serializable;
 
@@ -11,8 +9,9 @@ public class CropVarietyModel implements Serializable {
 
     private Long cropCategoryId;
     private Long cropId;
-    private CropModel cropModel;
     private Long id;
+    private String cropNameRo;
+    private String cropNameRu;
     private String nameRo;
     private String nameRu;
     private String descriptionRo;
@@ -23,27 +22,13 @@ public class CropVarietyModel implements Serializable {
     public CropVarietyModel() {
     }
 
-    public CropVarietyModel(CropCategory category) {
-        this.id = category.getId();
-//        this.cropCategoryId = category.getId();
-        this.nameRo = category.getNameRo();
-        this.nameRu = category.getNameRu();
-    }
-
-
-    public CropVarietyModel(Crop crop) {
-        this.id = crop.getId();
-        this.cropCategoryId = crop.getCropCategoryId();
-//        this.cropId = crop.getId();
-        this.nameRo = crop.getNameRo();
-        this.nameRu = crop.getNameRu();
-    }
-
-
     public CropVarietyModel(CropVariety cropVariety) {
         this.id = cropVariety.getId();
-        this.cropId = cropVariety.getCropId();
-        this.cropModel = new CropModel(cropVariety.getCrop());
+        Crop crop = cropVariety.getCrop();
+        this.cropId = crop.getId();
+        this.cropNameRo = crop.getNameRo();
+        this.cropNameRu = crop.getNameRu();
+        this.cropCategoryId = crop.getCropCategoryId();
         this.nameRo = cropVariety.getNameRo();
         this.nameRu = cropVariety.getNameRu();
         this.descriptionRo = cropVariety.getDescriptionRo();
@@ -66,14 +51,6 @@ public class CropVarietyModel implements Serializable {
 
     public void setCropId(Long cropId) {
         this.cropId = cropId;
-    }
-
-    public CropModel getCropModel() {
-        return cropModel;
-    }
-
-    public void setCropModel(CropModel cropModel) {
-        this.cropModel = cropModel;
     }
 
     public Long getId() {
@@ -130,5 +107,21 @@ public class CropVarietyModel implements Serializable {
 
     public void setUnitOfMeasure(String unitOfMeasure) {
         this.unitOfMeasure = unitOfMeasure;
+    }
+
+    public String getCropNameRo() {
+        return cropNameRo;
+    }
+
+    public void setCropNameRo(String cropNameRo) {
+        this.cropNameRo = cropNameRo;
+    }
+
+    public String getCropNameRu() {
+        return cropNameRu;
+    }
+
+    public void setCropNameRu(String cropNameRu) {
+        this.cropNameRu = cropNameRu;
     }
 }

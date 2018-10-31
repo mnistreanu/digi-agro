@@ -4,7 +4,7 @@ import com.arobs.entity.Expense;
 import com.arobs.entity.ExpenseCategory;
 import com.arobs.entity.Parcel;
 import com.arobs.enums.FertilizerType;
-import com.arobs.model.CropModel;
+import com.arobs.model.crop.CropModel;
 import com.arobs.model.chemicals.FertilizerModel;
 import com.arobs.model.expense.ExpenseModel;
 import com.arobs.model.expense.FertilizerExpenseListModel;

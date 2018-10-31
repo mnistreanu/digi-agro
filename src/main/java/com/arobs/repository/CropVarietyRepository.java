@@ -1,6 +1,5 @@
 package com.arobs.repository;
 
-import com.arobs.entity.Crop;
 import com.arobs.entity.CropVariety;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,7 +12,7 @@ import java.util.List;
 public interface CropVarietyRepository extends JpaRepository<CropVariety, Long> {
 
     @Query("SELECT v FROM CropVariety v " +
-            "WHERE v.cropId = :cropId " +
+            "WHERE v.crop.id = :cropId " +
             "ORDER BY v.nameRo ")
     List<CropVariety> find(@Param("cropId") Long cropId);
 

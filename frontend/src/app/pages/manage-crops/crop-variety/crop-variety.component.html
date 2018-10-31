@@ -15,9 +15,9 @@
             <div class="form-group row">
                 <div class="col-sm-6">
                     <label for="cropCategoryId" translate>crop.category</label>
-                    <select id="cropCategoryId" class="form-control custom-select" formControlName="cropCategoryId">
-                        <!--<option value="">Select Value</option>-->
-                        <option *ngFor="let item of categorySelectItems" value="{{item.id}}">{{ item.name }}</option>
+                    <select id="cropCategoryId" class="form-control custom-select"
+                            formControlName="cropCategoryId" (change)="onCropCategoryChange()">
+                        <option *ngFor="let item of cropCategories" [ngValue]="item.id">{{ item.name }}</option>
                     </select>
                     <app-form-error-block [control]="form.get('cropCategoryId')" [formSubmitted]="submitted"></app-form-error-block>
                 </div>
@@ -25,8 +25,7 @@
                 <div class="col-sm-6">
                     <label for="cropId" translate>crop.name</label>
                     <select id="cropId" class="form-control custom-select" formControlName="cropId">
-                        <!--<option value="">Select Value</option>-->
-                        <option *ngFor="let item of cropSelectItems" value="{{item.id}}">{{ item.name }}</option>
+                        <option *ngFor="let item of crops" [ngValue]="item.id">{{ item.name }}</option>
                     </select>
                     <app-form-error-block [control]="form.get('cropId')" [formSubmitted]="submitted"></app-form-error-block>
                 </div>

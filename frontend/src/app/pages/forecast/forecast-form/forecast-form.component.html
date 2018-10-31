@@ -34,8 +34,7 @@
                         <select id="crop-category" class="form-control custom-select"
                                 (change)="onCropCategoryChange()"
                                 formControlName="cropCategoryId">
-                            <option *ngFor="let category of categories"
-                                    [ngValue]="category.id">{{category.nameRo}}
+                            <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}
                             </option>
                         </select>
                         <app-form-error-block [control]="form.get('cropCategoryId')"
@@ -50,8 +49,7 @@
                         <select id="crop-name" class="form-control custom-select"
                                 (change)="onCropChange()"
                                 formControlName="cropId">
-                            <option *ngFor="let crop of crops"
-                                    [ngValue]="crop.id">{{crop.nameRo}}
+                            <option *ngFor="let crop of crops" [ngValue]="crop.id">{{crop.name}}
                             </option>
                         </select>
                         <app-form-error-block [control]="form.get('cropId')"
@@ -76,8 +74,7 @@
                     <select id="crop-variety" class="form-control custom-select"
                             formControlName="cropVarietyId">
                         <option selected></option>
-                        <option *ngFor="let variety of cropVarieties"
-                                [ngValue]="variety.id">{{variety.nameRo}}
+                        <option *ngFor="let variety of cropVarieties" [ngValue]="variety.id">{{variety.name}}
                         </option>
                         <app-form-error-block [control]="form.get('cropVarietyId')"
                                               [formSubmitted]="formSubmitted">

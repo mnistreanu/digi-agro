@@ -13,11 +13,8 @@ public class CropVariety {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "crop_id")
-    private Long cropId;
-
-    @ManyToOne (fetch = FetchType.EAGER)
-    @JoinColumn (name="crop_id", updatable = false, insertable = false)
+    @ManyToOne
+    @JoinColumn(name = "crop_id")
     private Crop crop;
 
     @Column(name = "name_ro")
@@ -48,14 +45,6 @@ public class CropVariety {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getCropId() {
-        return cropId;
-    }
-
-    public void setCropId(Long cropId) {
-        this.cropId = cropId;
     }
 
     public Crop getCrop() {

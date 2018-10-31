@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
-import {CropService} from '../../../services/crop/crop.service';
-import {CropVarietyModel} from '../crop-variety.model';
 import {LangService} from '../../../services/lang.service';
-import {CropFieldMapper} from './crop-field.mapper';
+import {FieldMapper} from '../../../common/field.mapper';
+import {CropVarietyTreeModel} from './crop-variety-tree.model';
+import {CropVarietyService} from '../../../services/crop/crop-variety.service';
 
 @Component({
     selector: 'app-crop-variety-tree',
@@ -17,14 +17,11 @@ export class CropVarietyTreeComponent implements OnInit {
     private labelName: string;
     private labelDescription: string;
 
-    private fieldMapper: CropFieldMapper;
-
     constructor(private langService: LangService,
-                private cropService: CropService) {
+                private cropVarietyService: CropVarietyService) {
     }
 
     ngOnInit() {
-        this.fieldMapper = new CropFieldMapper(this.langService.getLanguage());
         this.setupLabels();
         this.setupGrid();
         this.setupCropsTree();
@@ -36,39 +33,27 @@ export class CropVarietyTreeComponent implements OnInit {
     }
 
     private setupCropsTree() {
-        this.cropService.findVarietiesTree().subscribe(payloadModel => {
-            this.adjustTree(payloadModel.payload);
+        this.cropVarietyService.getTree().subscribe(payloadModel => {
+            this.adjustModels(payloadModel.payload);
         });
     }
 
-    private adjustTree(models: CropVarietyModel[]) {
+    private adjustModels(models: CropVarietyTreeModel[]) {
+        models.forEach(model => this.adjustModel(model));
+        this.options.api.setRowData(models);
+    }
 
-        const rows = [];
-        const categories = {};
-        const crops = {};
+    private adjustModel(model: CropVarietyTreeModel) {
+        const fieldMapper = new FieldMapper(this.langService.getLanguage());
+        const nameField = fieldMapper.get('name');
+        const descriptionField = fieldMapper.get('description');
 
-        let parent;
-        models.forEach(model => {
-            if (model.cropCategoryId == null && model.cropId == null) {
-                // category
-                categories[model.id] = model;
-                rows.push(model);
-            } else if (model.cropCategoryId != null) {
-                // crop
-                parent = categories[model.cropCategoryId];
-                parent.children = parent.children || [];
-                parent.children.push(model);
-                crops[model.id] = model;
-            } else {
-                // variety
-                parent = crops[model.cropId];
-                parent.children = parent.children || [];
-                parent.children.push(model);
-            }
-        });
-        
+        model['name'] = model[nameField];
+        model['description'] = model[descriptionField];
 
-        this.options.api.setRowData(rows);
+        if (model.children) {
+            model.children.forEach(child => this.adjustModel(child));
+        }
     }
 
 
@@ -87,14 +72,14 @@ export class CropVarietyTreeComponent implements OnInit {
         const headers: ColDef[] = [
             {
                 headerName: this.labelName,
-                field: this.fieldMapper.getName(),
+                field: 'name',
                 cellRenderer: 'agGroupCellRenderer',
                 width: 200,
                 minWidth: 200
             },
             {
                 headerName: this.labelDescription,
-                field: this.fieldMapper.getDescription(),
+                field: 'description',
                 width: 600,
                 minWidth: 200
             }

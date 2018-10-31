@@ -1,15 +1,12 @@
-package com.arobs.model;
+package com.arobs.model.crop;
 
 import com.arobs.entity.Crop;
 
 public class CropModel {
 
     private Long id;
-
     private Long cropCategoryId;
-
     private String nameRo;
-
     private String nameRu;
 
     public CropModel(Crop entity) {
