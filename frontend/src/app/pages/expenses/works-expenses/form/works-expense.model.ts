@@ -1,14 +1,26 @@
-import {WorksExpenseItemModel} from '../expense-item-table/works-expense-item.model';
+import {CropVarietyModel} from '../../../manage-crops/crop-variety/crop-variety.model';
+import {CropModel} from '../../../manage-crops/crop/crop.model';
 
 export class WorksExpenseModel {
-    id: number;
-    categoryId = 4;
-    title: string;
+    expenseId: number;
     expenseDate: Date;
 
     machines: number[];
     employees: number[];
+    parcels: number[];
 
-    expenseItems: WorksExpenseItemModel[] = [];
+    workTypeId: number;
+    cropCategoryId: number;
+    cropId: number;
+
+    unitOfMeasure: string;
+    quantity: number;
+    quantityNorm: number;
+    quantityDefacto: number;
+    price1Norm: number;
+    sum: number;
+
+    createdAt: Date;
+    createdBy: string;
 }
 

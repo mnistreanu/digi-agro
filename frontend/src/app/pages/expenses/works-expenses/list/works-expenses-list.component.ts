@@ -1,4 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ColDef, ColGroupDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../../services/lang.service';
 import {MachineService} from '../../../../services/machine.service';
@@ -18,7 +19,9 @@ export class WorksExpensesListComponent implements OnInit {
     options: GridOptions;
     context;
 
-    constructor(private machineService: MachineService,
+    constructor(private router: Router,
+                private route: ActivatedRoute,
+                private machineService: MachineService,
                 private worksExpenseService: WorksExpenseService,
                 private langService: LangService) {
     }
@@ -222,5 +225,13 @@ export class WorksExpensesListComponent implements OnInit {
                 this.options.api.sizeColumnsToFit();
             }
         }, 500);
+    }
+    public add() {
+        this.router.navigate(['./-1'], {relativeTo: this.route});
+    }
+
+    public onEdit(node) {
+        const model = node.data;
+        this.router.navigate(['./' + model.expenseId], {relativeTo: this.route});
     }
 }

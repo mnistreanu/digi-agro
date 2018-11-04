@@ -2,35 +2,30 @@
 
     <div widget class="card bottom-30">
         <div class="card-header">
-            <span translate>expenses.works</span>
-            <!--<div class="widget-controls">-->
-                <!--&lt;!&ndash;<a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>&ndash;&gt;-->
-                <!--&lt;!&ndash;<a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>&ndash;&gt;-->
-                <!--&lt;!&ndash;<a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>&ndash;&gt;-->
-                <!--&lt;!&ndash;<a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>&ndash;&gt;-->
-                <!--<a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>-->
-            <!--</div>-->
+            <span translate>expenses.agricultural-works</span>
         </div>
         <div class="card-body widget-body">
 
-
             <div class="form-group row">
                 <div class="col-sm-6">
-                    <label for="expense-title" translate>info.description</label>
-                    <input id="expense-title" class="form-control checking-field" formControlName="title" />
-                    <app-form-error-block [control]="form.get('title')"
-                                          [formSubmitted]="submitted">
-                    </app-form-error-block>
-                </div>
-
-                <div class="col-sm-6">
                     <label for="expense-date" translate>expenses.date</label>
-                    <input id="expense-date" type="date" class="form-control checking-field" formControlName="expenseDate" />
+                    <input id="expense-date" type="date" class="form-control checking-field"
+                           formControlName="expenseDate"/>
                     <app-form-error-block [control]="form.get('expenseDate')"
                                           [formSubmitted]="submitted">
                     </app-form-error-block>
                 </div>
+                <div class="col-sm-6">
+                    <label translate>agro-work.type</label>
+                    <select class="form-control checking-field" formControlName="workTypeId">
+                        <option *ngFor="let workType of workTypes" [ngValue]="workType.id">{{workType.name}}</option>
+                    </select>
+                    <app-form-error-block [control]="form.get('workTypeId')"
+                                          [formSubmitted]="submitted">
+                    </app-form-error-block>
+                </div>
             </div>
+
 
             <div class="form-group row">
                 <div class="col-sm-6">
@@ -51,13 +46,102 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <app-expense-item-table [models]="model.expenseItems">
-                </app-expense-item-table>
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="cropCategoryId" translate>crop.category</label>
+                    <select id="cropCategoryId" class="form-control custom-select"
+                            formControlName="cropCategoryId" (change)="onCropCategoryChange()">
+                        <option *ngFor="let item of cropCategories" [ngValue]="item.id">{{ item.name }}</option>
+                    </select>
+                    <app-form-error-block [control]="form.get('cropCategoryId')" [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="cropId" translate>crop.name</label>
+                    <select id="cropId" class="form-control custom-select" formControlName="cropId">
+                        <option *ngFor="let item of crops" [ngValue]="item.id">{{ item.name }}</option>
+                    </select>
+                    <app-form-error-block [control]="form.get('cropId')" [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label translate>parcel.parcels</label>
+                    <angular2-multiselect [settings]="multiSelectSettings"
+                                          [data]="parcels"
+                                          formControlName="parcels">
+                    </angular2-multiselect>
+                </div>
+
+                <div class="col-sm-6">
+                    <label translate>unit-of-measure.unit-long</label>
+                    <select class="form-control checking-field" formControlName="unitOfMeasure">
+                        <option value="t" translate>unit-of-measure.ha</option>
+                    </select>
+                </div>
             </div>
 
             <div class="form-group">
-                <button class="btn btn-danger" *ngIf="model.id != null" (click)="prepareRemove()" translate>action.remove</button>
+                <label for="quantity" translate>expenses.quantity</label>
+                <input id="quantity" type="number" class="form-control checking-field"
+                       formControlName="quantity" (change)="onQuantityChange()">
+                <app-form-error-block [control]="form.get('quantity')"
+                                      [formSubmitted]="submitted">
+                </app-form-error-block>
+            </div>
+
+            <div class="form-group">
+                <fieldset class="border p-2">
+                    <legend class="w-auto" translate>expenses.norm</legend>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="quantityNorm" translate>expenses.norm</label>
+                            <input id="quantityNorm"  type="number" class="form-control checking-field"
+                                   formControlName="quantityNorm" (change)="onQuantityChange()">
+                            <app-form-error-block [control]="form.get('quantityNorm')"
+                                                  [formSubmitted]="submitted">
+                            </app-form-error-block>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="quantityDefacto" translate>expenses.defacto</label>
+                            <input id="quantityDefacto" type="number" class="form-control checking-field"
+                                   formControlName="quantityDefacto" (change)="onQuantityChange()">
+                            <app-form-error-block [control]="form.get('quantityDefacto')"
+                                                  [formSubmitted]="submitted">
+                            </app-form-error-block>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="form-group">
+                <fieldset class="border p-2">
+                    <legend class="w-auto" translate>expenses.cost</legend>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="price1Norm" translate>expenses.price-1-norm</label>
+                            <input id="price1Norm"  type="number" class="form-control checking-field"
+                                   formControlName="price1Norm" (change)="onPrice1NormChange()">
+                            <app-form-error-block [control]="form.get('price1Norm')"
+                                                  [formSubmitted]="submitted">
+                            </app-form-error-block>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="sum" translate>expenses.sum</label>
+                            <input id="sum" class="form-control-plaintext" readonly
+                                   formControlName="sum">
+                        </div>
+                    </div>
+
+                </fieldset>
+            </div>
+
+
+            <div class="form-group">
+                <button class="btn btn-danger" *ngIf="model.expenseId != null" (click)="prepareRemove()" translate>
+                    action.remove
+                </button>
                 <button class="btn btn-success pull-right" (click)="save()" translate>action.save</button>
                 <button class="btn btn-default mr-1 pull-right" (click)="back()" translate>action.back</button>
             </div>

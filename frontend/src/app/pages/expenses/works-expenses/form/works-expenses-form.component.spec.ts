@@ -10,7 +10,7 @@ describe('WorksExpensesFormComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ WorksExpensesFormComponent ]
     })
-    .compileComponents();
+        .compileComponents();
   }));
 
   beforeEach(() => {

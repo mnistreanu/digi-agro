@@ -28,6 +28,6 @@ export class WorksExpenseService {
     }
 
     remove(model: WorksExpenseModel): Observable<void> {
-        return this.http.delete<void>(this.api + '/' + model.id);
+        return this.http.delete<void>(this.api + '/' + model.expenseId);
     }
 }

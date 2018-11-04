@@ -2,14 +2,17 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {WorksExpenseModel} from './works-expense.model';
-import {MachineService} from '../../../../services/machine.service';
-import {WorksExpenseService} from '../../../../services/expenses/works-expense.service';
 import {ModalService} from '../../../../services/modal.service';
 import {AlertService} from '../../../../services/alert.service';
 import {LangService} from '../../../../services/lang.service';
-import {ExpenseCategoryModel} from '../../../enterprise/manage-expense-categories/expense-category/expense-category.model';
-import {ExpenseCategoryService} from '../../../../services/expenses/expense-category.service';
-import {ExpenseCategoryTreeModel} from '../../../enterprise/manage-expense-categories/expense-category-tree/expense-category-tree.model';
+import {WorksExpenseService} from '../../../../services/expenses/works-expense.service';
+import {ParcelService} from '../../../../services/parcel.service';
+import {CropService} from '../../../../services/crop/crop.service';
+import {FieldMapper} from '../../../../common/field.mapper';
+import {WorkTypeService} from '../../../../services/work-type.service';
+import {GeoLocalizedItem} from '../../../../interfaces/geo-localized-item.interface';
+import {CropCategoryService} from '../../../../services/crop/crop-category.service';
+import {MachineService} from "../../../../services/machine.service";
 
 @Component({
     selector: 'app-works-expenses-form',
@@ -23,12 +26,15 @@ export class WorksExpensesFormComponent implements OnInit {
     form: FormGroup;
     submitted = false;
 
-    model: WorksExpenseModel ;
-    subCategories: ExpenseCategoryTreeModel[] = [];
+    model: WorksExpenseModel;
 
     machines: any[];
     employees: any[];
     employeeMap: any;
+    workTypes: any[];
+    crops: any[];
+    cropCategories: any[] = [];
+    parcels: any[] = [];
 
     multiSelectSettings = {
         enableSearchFilter: true,
@@ -45,26 +51,37 @@ export class WorksExpensesFormComponent implements OnInit {
                 private router: Router,
                 private route: ActivatedRoute,
                 private modalService: ModalService,
+                private workTypeService: WorkTypeService,
                 private worksExpenseService: WorksExpenseService,
-                private expenseCategoryService: ExpenseCategoryService,
                 private machineService: MachineService,
+                private parcelService: ParcelService,
+                private cropCategoryService: CropCategoryService,
+                private cropService: CropService,
                 private langService: LangService,
                 private alertService: AlertService) {
     }
 
     ngOnInit() {
-        this.setupResources()
+        this.setupWorkTypes()
+            .then(() => this.setupMachines())
+            .then(() => this.setupParcels())
             .then(() => this.restoreModel());
+
+        this.setupCropCategories();
     }
 
-    private setupResources(): Promise<void> {
-        this.expenseCategoryService.getTree().subscribe(payloadModel => {
-            const treeModels = payloadModel.payload;
-            treeModels.forEach((treeModel: ExpenseCategoryTreeModel) => {
-                this.subCategories.push(treeModel);
+    private setupWorkTypes(): Promise<void> {
+        const locale = this.langService.getLanguage();
+        return new Promise((resolve) => {
+            this.workTypeService.find().subscribe(data => {
+                this.workTypes = data.map((item) => new GeoLocalizedItem(item, locale));
+                resolve();
             });
-
         });
+    }
+
+
+    private setupMachines(): Promise<void> {
 
         return new Promise((resolve) => {
             this.machineService.findAll().subscribe(machineModels => {
@@ -120,44 +137,59 @@ export class WorksExpensesFormComponent implements OnInit {
         });
         employeesControl.setValue(employees);
     }
+    private setupParcels(): Promise<void> {
+        return new Promise((resolve) => {
+            this.parcelService.find().subscribe(models => {
+                this.parcels = [];
+                models.forEach(parcelModel => {
+                    this.parcels.push({
+                        id: parcelModel.id,
+                        itemName: parcelModel.name
+                    });
+                });
+                resolve();
+            });
+        });
+    }
 
-    private restoreModel() {
-        this.route.params.subscribe(params => {
-            const id = params['id'];
 
-            if (id == -1) {
-                this.prepareNewModel();
+    private setupCropCategories() {
+        const locale = this.langService.getLanguage();
+        this.cropCategoryService.find().subscribe(data => {
+            this.cropCategories = data.map((item) => new GeoLocalizedItem(item, locale));
+        });
+    }
+
+    public onCropCategoryChange() {
+        const cropCategoryId = this.form.controls['cropCategoryId'].value;
+        this.setupCrops(cropCategoryId, true);
+    }
+
+    private setupCrops(cropCategoryId, updateValue) {
+        const locale = this.langService.getLanguage();
+        this.cropService.findCrops(cropCategoryId).subscribe(data => {
+            const models = data.payload;
+            this.crops = models.map((item) => new GeoLocalizedItem(item, locale));
+
+
+            if (updateValue) {
+                const cropControl = this.form.controls['cropId'];
+                const value = this.crops.length > 0 ? this.crops[0].id : null;
+                cropControl.setValue(value);
             }
-            else {
-                this.setupModel(id);
-            }
         });
     }
 
-    private setupModel(id) {
-        this.worksExpenseService.findOne(id).subscribe(model => {
-            this.model = model;
-            this.model.expenseDate = this.model.expenseDate ? new Date(this.model.expenseDate) : null;
-            this.buildForm();
-        });
+    private getSelectedParcels() {
+        let selectedItems = [];
+        if (this.model.parcels && this.model.parcels.length > 0) {
+            const map = {};
+            this.parcels.forEach(item => map[item.id] = item);
+            selectedItems = this.model.parcels.map(id => map[id]);
+        }
+        return selectedItems;
     }
 
-    private prepareNewModel() {
-        this.model = new WorksExpenseModel();
-        this.model.expenseDate = new Date();
-        this.buildForm();
-    }
-
-
-    private buildForm() {
-        const expenseDate = this.model.expenseDate ? this.model.expenseDate.toISOString().substring(0, 10) : null;
-        this.form = this.fb.group({
-            title: [this.model.title, Validators.required],
-            expenseDate: [expenseDate, Validators.required],
-            machines: [this.getSelectedMachines()],
-            employees: [this.getSelectedEmployees()],
-        });
-    }
 
     private getSelectedMachines() {
 
@@ -183,6 +215,74 @@ export class WorksExpensesFormComponent implements OnInit {
         return selectedEmployees;
     }
 
+    private restoreModel() {
+        this.route.params.subscribe(params => {
+            const id = params['id'];
+
+            if (id == -1) {
+                this.prepareNewModel();
+            }
+            else {
+                this.setupModel(id);
+            }
+        });
+    }
+
+    private setupModel(id) {
+        this.worksExpenseService.findOne(id).subscribe(model => {
+            this.model = model;
+            this.buildForm();
+        });
+    }
+
+    private prepareNewModel() {
+        this.model = new WorksExpenseModel();
+        this.model.expenseDate = new Date();
+        this.buildForm();
+    }
+
+
+    private buildForm() {
+        const expenseDate = this.model.expenseDate ? new Date(this.model.expenseDate).toISOString().substring(0, 10) : null;
+
+        this.form = this.fb.group({
+            expenseDate: [expenseDate, Validators.required],
+            workTypeId: [this.model.workTypeId, Validators.required],
+            cropCategoryId: [this.model.cropCategoryId],
+            cropId: [this.model.cropId, Validators.required],
+            unitOfMeasure: [this.model.unitOfMeasure, Validators.required],
+            quantity: [this.model.quantity || 0, Validators.required],
+            quantityNorm: [this.model.quantityNorm || 0, Validators.required],
+            quantityDefacto: [this.model.quantityDefacto || 0],
+            price1Norm: [this.model.price1Norm || 0, Validators.required],
+            sum: [this.model.sum || 0, Validators.required],
+            parcels: [this.getSelectedParcels()],
+            machines: [this.getSelectedMachines()],
+            employees: [this.getSelectedEmployees()],
+        });
+
+    }
+
+    public onQuantityChange () {
+        this.calcSum();
+    }
+
+    public onPrice1NormChange() {
+        this.calcSum();
+    }
+
+    public onActualExpenseChange() {
+        this.calcSum();
+    }
+
+    private calcSum() {
+        const quantity = Number(this.form.controls['quantity'].value);
+        const quantityNorm = Number(this.form.controls['quantityNorm'].value);
+        const quantityDefacto = Number(this.form.controls['quantityDefacto'].value);
+        const sum = quantity * Math.random();
+        this.form.controls['sum'].setValue(sum);
+    }
+
     save() {
         this.submitted = true;
 
@@ -194,12 +294,9 @@ export class WorksExpensesFormComponent implements OnInit {
         Object.assign(this.model, this.form.value);
         this.submitted = false;
 
-        this.model.machines = this.form.value.machines.map(item => item.id);
-        this.model.employees = this.form.value.employees.map(item => item.id);
+        this.model.parcels = this.form.value.parcels.map(item => item.id);
 
-        this.model.expenseItems = this.model.expenseItems.filter(item => {
-            return !item.deleted || (item.deleted && item.id != null);
-        });
+        console.log(this.model);
 
         this.worksExpenseService.save(this.model).subscribe((model) => {
             this.model = model;

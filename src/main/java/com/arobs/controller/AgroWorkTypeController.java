@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/work-type")
-public class WorkTypeController {
+public class AgroWorkTypeController {
 
     @Autowired
     private AgroWorkTypeService agroWorkTypeService;
