@@ -148,11 +148,13 @@ public class Parcel {
     }
 
     public Double getArea() {
-        return area;
+        int intValue = (int)(area.doubleValue() * 100);
+        return ((double)intValue) / 100;
     }
 
     public void setArea(Double area) {
-        this.area = area;
+        int intValue = (int)(area.doubleValue() * 100);
+        this.area = ((double)intValue) / 100;
     }
 
     public Long getLastWorkTypeId() {

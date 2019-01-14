@@ -38,7 +38,7 @@
 
                 </div>
                 <div class="col-sm-6">
-                    <label translate>employee.employees</label>
+                    <label translate>expenses.responsible-persons</label>
                     <angular2-multiselect [settings]="multiSelectSettings"
                                           [data]="employees"
                                           formControlName="employees">
@@ -82,20 +82,22 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="quantity" translate>expenses.quantity</label>
-                <input id="quantity" type="number" class="form-control checking-field"
-                       formControlName="quantity" (change)="onQuantityChange()">
-                <app-form-error-block [control]="form.get('quantity')"
-                                      [formSubmitted]="submitted">
-                </app-form-error-block>
-            </div>
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <label for="quantity" translate>expenses.quantity</label>
+                    <input id="quantity" type="number" class="form-control checking-field"
+                           formControlName="quantity" (change)="onQuantityChange()">
+                    <app-form-error-block [control]="form.get('quantity')"
+                                          [formSubmitted]="submitted">
+                    </app-form-error-block>
+                </div>
+            <!--</div>-->
 
-            <div class="form-group">
-                <fieldset class="border p-2">
-                    <legend class="w-auto" translate>expenses.norm</legend>
-                    <div class="row">
-                        <div class="col-sm-6">
+            <!--<div class="form-group">-->
+                <!--<fieldset class="border p-2">-->
+                    <!--<legend class="w-auto" translate>expenses.norm</legend>-->
+                    <!--<div class="row">-->
+                        <div class="col-sm-4">
                             <label for="quantityNorm" translate>expenses.norm</label>
                             <input id="quantityNorm"  type="number" class="form-control checking-field"
                                    formControlName="quantityNorm" (change)="onQuantityChange()">
@@ -103,7 +105,8 @@
                                                   [formSubmitted]="submitted">
                             </app-form-error-block>
                         </div>
-                        <div class="col-sm-6">
+
+                        <div class="col-sm-4">
                             <label for="quantityDefacto" translate>expenses.defacto</label>
                             <input id="quantityDefacto" type="number" class="form-control checking-field"
                                    formControlName="quantityDefacto" (change)="onQuantityChange()">
@@ -111,11 +114,11 @@
                                                   [formSubmitted]="submitted">
                             </app-form-error-block>
                         </div>
-                    </div>
-                </fieldset>
-            </div>
+                    <!--</div>-->
+                <!--</fieldset>-->
+            <!--</div>-->
 
-            <div class="form-group">
+            <!--<div class="form-group">-->
                 <fieldset class="border p-2">
                     <legend class="w-auto" translate>expenses.cost</legend>
                     <div class="form-group row">

@@ -39,6 +39,12 @@ export const routes: Routes = [
                 data: {breadcrumb: 'Enterprise'},
                 canActivate: [SuperAdminOrAdminGuard]
             },
+            {
+                path: 'farmland',
+                loadChildren: 'app/pages/farmland/farmland.module#FarmlandModule',
+                data: {breadcrumb: 'Farmland'},
+                canActivate: [SuperAdminOrAdminGuard]
+            },
             // {
             //     path: 'manage-users',
             //     loadChildren: 'app/pages/manage-users/manage-users.module#ManageUsersModule',

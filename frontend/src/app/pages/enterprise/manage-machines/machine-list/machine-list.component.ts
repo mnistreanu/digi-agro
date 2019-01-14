@@ -66,6 +66,12 @@ export class MachineListComponent implements OnInit {
                 minWidth: 175
             },
             {
+                headerName: 'machine.group',
+                field: 'group',
+                width: 175,
+                minWidth: 175
+            },
+            {
                 headerName: 'machine.identifier',
                 field: 'identifier',
                 width: 100,
@@ -94,6 +100,7 @@ export class MachineListComponent implements OnInit {
             models.forEach((model) => {
                 model.type = this.langService.instant('machine-type.' + model.type);
                 model['brandAndModel'] = model.brand + ' ' + model.model;
+                model.group = 'Bridaga Verde';
                 model['responsiblePersons'] = model.employees.map(m => m.firstName + ' ' + m.lastName).join(', ');
             });
             this.options.api.setRowData(models);

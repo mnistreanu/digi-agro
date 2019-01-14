@@ -105,7 +105,7 @@ export class FuelExpenseItemTableComponent implements OnInit {
                 }
             },
             {
-                headerName: 'Category',
+                headerName: 'expenses.category',
                 field: 'categoryId',
                 width: 150,
                 minWidth: 150,
@@ -118,14 +118,14 @@ export class FuelExpenseItemTableComponent implements OnInit {
                 valueSetter: (params) => this.categoryValueSetter(params)
             },
             {
-                headerName: 'Title',
+                headerName: 'expenses.details',
                 field: 'title',
                 width: 175,
                 minWidth: 175,
                 editable: params => !params.data.readOnly
             },
             {
-                headerName: 'Quantity',
+                headerName: 'expenses.quantity',
                 field: 'quantity',
                 width: 175,
                 minWidth: 175,

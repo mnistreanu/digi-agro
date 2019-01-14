@@ -78,15 +78,47 @@ export class MenuService {
             });
         }
 
-        if (isAdmin || isUser) {
+        if (isSuperAdmin || isAdmin ) {
             menuItems.push({
-                title: 'nav.parcels',
-                routerLink: '/pages/parcel',
-                icon: 'fa fa-th',
+                title: 'nav.farmland',
+                routerLink: 'farmland',
+                icon: 'fa fa-map-marker',
                 selected: false,
-                expanded: false
+                expanded: false,
+                subMenu: [
+                    {
+                        title: 'nav.parcels',
+                        routerLink: 'parcel'
+                    },
+                    {
+                        title: 'nav.field-diagnosis',
+                        routerLink: 'farmland/field-list'
+                    },
+                    {
+                        title: 'nav.map',
+                        routerLink: 'farmland/map'
+                    },
+                    {
+                        title: 'nav.crop-planner',
+                        routerLink: 'farmland/crop-planner'
+                    },
+                    {
+                        title: 'nav.harvest-summary',
+                        routerLink: 'farmland/harvest-summary'
+                    },
+                ]
             });
         }
+
+        // if (isAdmin || isUser) {
+        //     menuItems.push({
+        //         title: 'nav.parcels',
+        //         routerLink: '/pages/parcel',
+        //         icon: 'fa fa-th',
+        //         selected: false,
+        //         expanded: false
+        //     });
+        // }
 
         if (isAdmin || isUser) {
             menuItems.push({
