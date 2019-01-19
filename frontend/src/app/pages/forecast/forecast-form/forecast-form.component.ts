@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CropService} from '../../../services/crop/crop.service';
 import {CropCategoryModel} from '../../manage-crops/crop-category.model';
-import {CropModel} from '../../manage-crops/crop.model';
+import {CropModel} from '../../manage-crops/crop/crop.model';
 import {CropVarietyModel} from '../../manage-crops/crop-variety.model';
 import {IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts} from 'angular-2-dropdown-multiselect';
 import {ParcelService} from '../../../services/parcel.service';

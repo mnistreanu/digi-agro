@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ColDef, GridOptions} from 'ag-grid';
-import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
-import {LangService} from '../../../services/lang.service';
-import {CropVarietyService} from '../../../services/crop/crop-variety.service';
-import {FieldMapper} from '../../../common/field.mapper';
+import {CropVarietyService} from '../../../../services/crop/crop-variety.service';
+import {LangService} from '../../../../services/lang.service';
+import {FieldMapper} from '../../../../common/field.mapper';
+import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
 
 @Component({
     selector: 'app-crop-varieties-list',

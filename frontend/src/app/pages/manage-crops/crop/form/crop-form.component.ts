@@ -1,21 +1,21 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {SelectItem} from '../../../dto/select-item.dto';
-import {CropService} from '../../../services/crop/crop.service';
+import {SelectItem} from '../../../../dto/select-item.dto';
+import {CropService} from '../../../../services/crop/crop.service';
 import {CropModel} from '../crop.model';
-import {AlertService} from '../../../services/alert.service';
-import {CropCategoryModel} from '../crop-category.model';
-import {CropCategoryService} from '../../../services/crop/crop-category.service';
-import {LangService} from '../../../services/lang.service';
-import {FieldMapper} from '../../../common/field.mapper';
+import {AlertService} from '../../../../services/alert.service';
+import {CropCategoryModel} from '../../crop-category.model';
+import {CropCategoryService} from '../../../../services/crop/crop-category.service';
+import {LangService} from '../../../../services/lang.service';
+import {FieldMapper} from '../../../../common/field.mapper';
 
 @Component({
     selector: 'app-crop',
-    templateUrl: './crop.component.html',
-    styleUrls: ['./crop.component.scss']
+    templateUrl: './crop-form.component.html',
+    styleUrls: ['./crop-form.component.scss']
 })
-export class CropComponent implements OnInit {
+export class CropFormComponent implements OnInit {
 
     form: FormGroup;
     submitted = false;

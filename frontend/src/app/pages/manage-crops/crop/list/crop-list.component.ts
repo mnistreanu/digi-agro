@@ -2,24 +2,24 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {Messages} from '../../../common/messages';
+import {Messages} from '../../../../common/messages';
 
 import {ViewChild, ViewEncapsulation} from '@angular/core';
 import {DatatableComponent} from '@swimlane/ngx-datatable';
-import { CropService } from '../../../services/crop/crop.service';
-import { SelectItem } from '../../../dto/select-item.dto';
-import {CropCategoryService} from '../../../services/crop/crop-category.service';
-import {FieldMapper} from '../../../common/field.mapper';
-import {LangService} from '../../../services/lang.service';
+import { CropService } from '../../../../services/crop/crop.service';
+import { SelectItem } from '../../../../dto/select-item.dto';
+import {CropCategoryService} from '../../../../services/crop/crop-category.service';
+import {FieldMapper} from '../../../../common/field.mapper';
+import {LangService} from '../../../../services/lang.service';
 
 @Component({
     selector: 'crops',
-    templateUrl: './crops.component.html',
+    templateUrl: './crop-list.component.html',
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./crops.component.scss']
+    styleUrls: ['./crop-list.component.scss']
 })
 
-export class CropsComponent implements OnInit {
+export class CropListComponent implements OnInit {
 
     constructor(private fb: FormBuilder,
                 private router: Router,

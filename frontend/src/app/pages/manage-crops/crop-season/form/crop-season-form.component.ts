@@ -1,27 +1,26 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {SelectItem} from '../../../dto/select-item.dto';
-import {CropVarietyModel} from './crop-variety.model';
-import {CropVarietyService} from '../../../services/crop/crop-variety.service';
-import {UnitOfMeasure} from '../../../enums/unit-of-measure.enum';
-import {AlertService} from '../../../services/alert.service';
-import {CropService} from '../../../services/crop/crop.service';
-import {CropCategoryService} from '../../../services/crop/crop-category.service';
-import {FieldMapper} from '../../../common/field.mapper';
-import {LangService} from '../../../services/lang.service';
+import {LangService} from '../../../../services/lang.service';
+import {CropCategoryService} from '../../../../services/crop/crop-category.service';
+import {CropService} from '../../../../services/crop/crop.service';
+import {FieldMapper} from '../../../../common/field.mapper';
+import {CropSeasonModel} from './crop-season-form.model';
+import {SelectItem} from '../../../../dto/select-item.dto';
+import {CropSeasonService} from '../../../../services/crop/crop-season.service';
+import {AlertService} from '../../../../services/alert.service';
 
 @Component({
     selector: 'app-crop',
-    templateUrl: './crop-variety.component.html',
-    styleUrls: ['./crop-variety.component.scss']
+    templateUrl: './crop-season-form.component.html',
+    styleUrls: ['./crop-season-form.component.scss']
 })
-export class CropVarietyComponent implements OnInit {
+export class CropSeasonFormComponent implements OnInit {
 
     form: FormGroup;
     submitted = false;
 
-    model: CropVarietyModel;
+    model: CropSeasonModel;
     isNew: boolean;
 
     unitOfMeasureSelectItems: SelectItem[] = [];
@@ -34,12 +33,11 @@ export class CropVarietyComponent implements OnInit {
                 private langService: LangService,
                 private cropCategoryService: CropCategoryService,
                 private cropService: CropService,
-                private cropVarietyService: CropVarietyService) {
+                private cropSeasonService: CropSeasonService) {
     }
 
     ngOnInit() {
         this.setupCategories();
-        this.setupUnitOfMeasure();
         this.restoreModel();
     }
 
@@ -75,13 +73,6 @@ export class CropVarietyComponent implements OnInit {
         });
     }
 
-    private setupUnitOfMeasure() {
-        const names = Object.keys(UnitOfMeasure);
-        for (const name of names) {
-            this.unitOfMeasureSelectItems.push(new SelectItem(UnitOfMeasure[name], name));
-        }
-    }
-
     private restoreModel() {
         this.route.params.subscribe(params => {
             const id = params['id'];
@@ -96,7 +87,7 @@ export class CropVarietyComponent implements OnInit {
     }
 
     private setupModel(id) {
-        this.cropVarietyService.findOne(id).subscribe(model => {
+        this.cropSeasonService.findOne(id).subscribe(model => {
             this.model = model;
             this.setupCrops(model.cropCategoryId, false);
             this.buildForm();
@@ -104,7 +95,7 @@ export class CropVarietyComponent implements OnInit {
     }
 
     private prepareNewModel() {
-        this.model = new CropVarietyModel();
+        this.model = new CropSeasonModel();
         this.isNew = true;
         this.buildForm();
     }
@@ -136,14 +127,14 @@ export class CropVarietyComponent implements OnInit {
         this.submitted = false;
 
         Object.assign(this.model, form.value);
-        this.cropVarietyService.save(this.model).subscribe((model) => {
+        this.cropSeasonService.save(this.model).subscribe((model) => {
             this.model = model;
             this.alertService.saved();
         });
     }
 
     public remove() {
-        this.cropVarietyService.remove(this.model.id).subscribe(() => {
+        this.cropSeasonService.remove(this.model.id).subscribe(() => {
             this.alertService.removed();
             this.back();
         });

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
-import {LangService} from '../../../services/lang.service';
-import {FieldMapper} from '../../../common/field.mapper';
+import {LangService} from '../../../../services/lang.service';
+import {FieldMapper} from '../../../../common/field.mapper';
 import {CropVarietyTreeModel} from './crop-variety-tree.model';
-import {CropVarietyService} from '../../../services/crop/crop-variety.service';
+import {CropVarietyService} from '../../../../services/crop/crop-variety.service';
 
 @Component({
     selector: 'app-crop-variety-tree',

@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import {PayloadModel} from '../../pages/payload.model';
 import {environment} from '../../../environments/environment';
-import {CropModel} from '../../pages/manage-crops/crop.model';
+import {CropModel} from '../../pages/manage-crops/crop/crop.model';
 
 @Injectable({
     providedIn: 'root'

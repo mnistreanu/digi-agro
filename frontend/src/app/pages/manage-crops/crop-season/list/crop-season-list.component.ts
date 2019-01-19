@@ -1,24 +1,28 @@
 import {Component, OnInit} from '@angular/core';
-import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
-import {ColDef, GridOptions} from 'ag-grid';
-import {MachineService} from '../../../../services/machine.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../../services/lang.service';
+import {CropSeasonService} from '../../../../services/crop/crop-season.service';
+import {FieldMapper} from '../../../../common/field.mapper';
+import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
 
 @Component({
-    selector: 'app-machine-list',
-    templateUrl: './machine-list.component.html',
-    styleUrls: ['./machine-list.component.scss']
+    selector: 'app-crop-seasons-list',
+    templateUrl: './crop-season-list.component.html',
+    styleUrls: ['./crop-season-list.component.scss']
 })
-export class MachineListComponent implements OnInit {
+export class CropSeasonListComponent implements OnInit {
 
     options: GridOptions;
     context;
 
+    filterMap: Map<string, string> = new Map<string, string>();
+
+
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private langService: LangService,
-                private machineService: MachineService) {
+                private cropSeasonService: CropSeasonService) {
     }
 
     ngOnInit() {
@@ -32,9 +36,11 @@ export class MachineListComponent implements OnInit {
         this.options.enableSorting = true;
         this.options.enableFilter = true;
         this.options.columnDefs = this.setupHeaders();
+        this.options.pagination = true;
         this.context = {componentParent: this};
 
         this.setupRows();
+
     }
 
     private setupHeaders() {
@@ -54,41 +60,40 @@ export class MachineListComponent implements OnInit {
                 }
             },
             {
-                headerName: 'machine.type',
-                field: 'type',
-                width: 175,
-                minWidth: 175
+                headerName: 'crop.harvest-year',
+                field: 'harvestYearAndCropName',
+                width: 200,
+                minWidth: 200
             },
             {
-                headerName: 'machine.model',
-                field: 'brandAndModel',
-                width: 175,
-                minWidth: 175
+                headerName: 'crop.variety',
+                field: 'name',
+                width: 200,
+                minWidth: 200
             },
             {
-                headerName: 'machine.group',
-                field: 'group',
-                width: 175,
-                minWidth: 175
-            },
-            {
-                headerName: 'machine.identifier',
-                field: 'identifier',
-                width: 100,
-                minWidth: 100,
-                maxWidth: 100
-            },
-            {
-                headerName: 'machine.responsible-persons',
-                field: 'responsiblePersons',
+                headerName: 'season.start-date',
+                field: 'description',
                 width: 300,
-                minWidth: 300
+                minWidth: 200
+            },
+            {
+                headerName: 'season.end-date',
+                field: 'seedConsumptionHa',
+                width: 200,
+                minWidth: 200
+            },
+            {
+                headerName: 'season.comments',
+                field: 'unitOfMeasure',
+                width: 100,
+                minWidth: 100
             }
         ];
 
-        headers.forEach(header => {
-            if (header.headerName) {
-                this.langService.get(header.headerName).subscribe(m => header.headerName = m);
+        headers.forEach((h) => {
+            if (h.headerName) {
+                this.langService.get(h.headerName).subscribe(m => h.headerName = m);
             }
         });
 
@@ -96,13 +101,20 @@ export class MachineListComponent implements OnInit {
     }
 
     private setupRows() {
-        this.machineService.findAll().subscribe(models => {
+        this.cropSeasonService.find().subscribe(data => {
+
+            const fieldMapper = new FieldMapper(this.langService.getLanguage());
+            const cropNameField = fieldMapper.get('cropName');
+            const nameField = fieldMapper.get('name');
+            const descriptionField = fieldMapper.get('description');
+
+            const models = JSON.parse(data['items']);
             models.forEach((model) => {
-                model.type = this.langService.instant('machine-type.' + model.type);
-                model['brandAndModel'] = model.brand + ' ' + model.model;
-                model['group'] = 'Bridaga Verde';
-                model['responsiblePersons'] = model.employees.map(m => m.firstName + ' ' + m.lastName).join(', ');
+                model['cropName'] = model[cropNameField];
+                model['name'] = model[nameField];
+                model['description'] = model[descriptionField];
             });
+
             this.options.api.setRowData(models);
         });
     }
@@ -118,7 +130,6 @@ export class MachineListComponent implements OnInit {
             }
         }, 500);
     }
-
 
     public add() {
         this.router.navigate(['./-1'], {relativeTo: this.route});

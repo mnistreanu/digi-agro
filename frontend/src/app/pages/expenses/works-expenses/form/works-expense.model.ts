@@ -1,6 +1,3 @@
-import {CropVarietyModel} from '../../../manage-crops/crop-variety/crop-variety.model';
-import {CropModel} from '../../../manage-crops/crop/crop.model';
-
 export class WorksExpenseModel {
     expenseId: number;
     expenseDate: Date;
