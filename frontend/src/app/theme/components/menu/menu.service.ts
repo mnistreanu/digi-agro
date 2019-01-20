@@ -130,41 +130,16 @@ export class MenuService {
             });
         }
 
+
         // if (isUser) {
         //     menuItems.push({
         //         title: 'nav.crops',
-        //         routerLink: '/pages/manage-crops/crop-varieties',
+        //         routerLink: '/pages/manage-crops/crop-variety-list',
         //         icon: 'fa fa-leaf',
         //         selected: false,
         //         expanded: false
-        //         // subMenu: [
-        //         //     {
-        //         //         title: 'nav.crops-varieties',
-        //         //         routerLink: 'crop/crops-varieties',
-        //         //     },
-        //         // ]
         //     });
         // }
-
-        // if (isSuperAdmin || isAdmin) {
-        //     menuItems.push({
-        //         title: 'nav.crops',
-        //         routerLink: '/pages/manage-crops',
-        //         icon: 'fas fa-user-tie',
-        //         selected: false,
-        //         expanded: false
-        //     });
-        // }
-
-        if (isUser) {
-            menuItems.push({
-                title: 'nav.crops',
-                routerLink: '/pages/manage-crops/crop-variety-list',
-                icon: 'fa fa-leaf',
-                selected: false,
-                expanded: false
-            });
-        }
 
         if (isSuperAdmin || isAdmin) {
             menuItems.push({
@@ -176,7 +151,7 @@ export class MenuService {
                 subMenu: [
                     {
                         title: 'nav.crops',
-                        routerLink: 'manage-crops'
+                        routerLink: 'manage-crops/crop-list'
                     },
                     {
                         title: 'nav.crops-varieties',
@@ -185,6 +160,10 @@ export class MenuService {
                     {
                         title: 'nav.crop-varieties',
                         routerLink: 'manage-crops/crop-variety-list'
+                    },
+                    {
+                        title: 'nav.crop-seasons',
+                        routerLink: 'manage-crops/crop-season-list'
                     }
                 ]
             });

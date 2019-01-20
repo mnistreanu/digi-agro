@@ -16,7 +16,7 @@ import {LangService} from '../../../../services/lang.service';
     templateUrl: './crop-variety-form.component.html',
     styleUrls: ['./crop-variety-form.component.scss']
 })
-export class CropVarietyComponent implements OnInit {
+export class CropVarietyFormComponent implements OnInit {
 
     form: FormGroup;
     submitted = false;

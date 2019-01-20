@@ -7,7 +7,7 @@ import {FieldMapper} from '../../../../common/field.mapper';
 import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
 
 @Component({
-    selector: 'app-crop-seasons-list',
+    selector: 'app-crop-season-list',
     templateUrl: './crop-season-list.component.html',
     styleUrls: ['./crop-season-list.component.scss']
 })
@@ -67,25 +67,25 @@ export class CropSeasonListComponent implements OnInit {
             },
             {
                 headerName: 'crop.variety',
-                field: 'name',
+                field: 'variety',
                 width: 200,
                 minWidth: 200
             },
             {
                 headerName: 'season.start-date',
-                field: 'description',
+                field: 'startDate',
                 width: 300,
                 minWidth: 200
             },
             {
                 headerName: 'season.end-date',
-                field: 'seedConsumptionHa',
+                field: 'endDate',
                 width: 200,
                 minWidth: 200
             },
             {
                 headerName: 'season.comments',
-                field: 'unitOfMeasure',
+                field: 'comments',
                 width: 100,
                 minWidth: 100
             }
@@ -102,7 +102,6 @@ export class CropSeasonListComponent implements OnInit {
 
     private setupRows() {
         this.cropSeasonService.find().subscribe(data => {
-
             const fieldMapper = new FieldMapper(this.langService.getLanguage());
             const cropNameField = fieldMapper.get('cropName');
             const nameField = fieldMapper.get('name');
