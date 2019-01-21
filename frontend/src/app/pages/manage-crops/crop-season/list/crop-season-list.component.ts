@@ -5,6 +5,7 @@ import {LangService} from '../../../../services/lang.service';
 import {CropSeasonService} from '../../../../services/crop/crop-season.service';
 import {FieldMapper} from '../../../../common/field.mapper';
 import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
+import {CropSeasonModel} from "../form/crop-season-form.model";
 
 @Component({
     selector: 'app-crop-season-list',
@@ -36,7 +37,6 @@ export class CropSeasonListComponent implements OnInit {
         this.options.enableSorting = true;
         this.options.enableFilter = true;
         this.options.columnDefs = this.setupHeaders();
-        this.options.pagination = true;
         this.context = {componentParent: this};
 
         this.setupRows();
@@ -60,32 +60,26 @@ export class CropSeasonListComponent implements OnInit {
                 }
             },
             {
-                headerName: 'crop.harvest-year',
-                field: 'harvestYearAndCropName',
+                headerName: 'crop.season',
+                field: 'harvestYear',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'crop.variety',
-                field: 'variety',
-                width: 200,
-                minWidth: 200
-            },
-            {
-                headerName: 'season.start-date',
+                headerName: 'agro-work.start-date',
                 field: 'startDate',
                 width: 300,
                 minWidth: 200
             },
             {
-                headerName: 'season.end-date',
+                headerName: 'agro-work.end-date',
                 field: 'endDate',
                 width: 200,
                 minWidth: 200
             },
             {
-                headerName: 'season.comments',
-                field: 'comments',
+                headerName: 'agro-work.yield-goal',
+                field: 'yieldGoal',
                 width: 100,
                 minWidth: 100
             }
@@ -101,21 +95,38 @@ export class CropSeasonListComponent implements OnInit {
     }
 
     private setupRows() {
-        this.cropSeasonService.find().subscribe(data => {
-            const fieldMapper = new FieldMapper(this.langService.getLanguage());
-            const cropNameField = fieldMapper.get('cropName');
-            const nameField = fieldMapper.get('name');
-            const descriptionField = fieldMapper.get('description');
-
-            const models = JSON.parse(data['items']);
-            models.forEach((model) => {
-                model['cropName'] = model[cropNameField];
-                model['name'] = model[nameField];
-                model['description'] = model[descriptionField];
-            });
-
+        this.cropSeasonService.find().subscribe(models => {
+            this.adjustModels(models);
             this.options.api.setRowData(models);
         });
+    }
+
+    // private setupRows() {
+    //     this.cropSeasonService.find().subscribe(data => {
+    //         this.adjustModels(models);
+    //         debugger;
+    //         const fieldMapper = new FieldMapper(this.langService.getLanguage());
+    //         const cropNameField = fieldMapper.get('cropName');
+    //         const nameField = fieldMapper.get('name');
+    //         const descriptionField = fieldMapper.get('description');
+    //
+    //         const models = JSON.parse(data['items']);
+    //         models.forEach((model) => {
+    //             model['cropName'] = model[cropNameField];
+    //             model['name'] = model[nameField];
+    //             model['description'] = model[descriptionField];
+    //         });
+    //
+    //         this.options.api.setRowData(models);
+    //     });
+    // }
+
+    private adjustModels(models: CropSeasonModel[]) {
+        // models.forEach(model => {
+        //     this.langService
+        //         .get('fertilizer-type.' + model.fertilizerType)
+        //         .subscribe(m => model.fertilizerType = m);
+        // });
     }
 
     public onGridReady() {

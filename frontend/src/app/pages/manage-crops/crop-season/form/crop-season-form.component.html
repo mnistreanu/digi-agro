@@ -14,67 +14,74 @@
 
             <div class="form-group row">
                 <div class="col-sm-6">
+                    <label for="harvestYear" translate>crop.harvest-year</label>
+                    <select id="harvestYear" class="form-control custom-select">
+                        <option disabled></option>
+                        <option id="2017">2017</option>
+                        <option id="2018">2018</option>
+                        <option id="2019">2019</option>
+                        <option id="2020">2020</option>
+                        <option id="2021">2021</option>
+                        <option id="2022">2022</option>
+                        <option id="2023">2023</option>
+                        <option id="2024">2024</option>
+                        <option id="2025">2025</option>
+                        <option id="2026">2026</option>
+                        <option id="2027">2027</option>
+                        <option id="2028">2028</option>
+                        <option id="2029">2029</option>
+                    </select>
+                    <app-form-error-block [control]="form.get('harvestYear')" [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+
+                <div class="col-sm-6">
                     <label for="cropCategoryId" translate>crop.category</label>
-                    <select id="cropCategoryId" class="form-control custom-select"
-                            formControlName="cropCategoryId" (change)="onCropCategoryChange()">
+                    <select id="cropCategoryId" class="form-control custom-select" formControlName="cropCategoryId" (change)="onCropCategoryChange()">
                         <option *ngFor="let item of cropCategories" [ngValue]="item.id">{{ item.name }}</option>
                     </select>
                     <app-form-error-block [control]="form.get('cropCategoryId')" [formSubmitted]="submitted"></app-form-error-block>
                 </div>
+            </div>
 
+            <div class="form-group row">
                 <div class="col-sm-6">
                     <label for="cropId" translate>crop.name</label>
-                    <select id="cropId" class="form-control custom-select" formControlName="cropId">
+                    <select id="cropId" class="form-control custom-select" formControlName="cropId" (change)="onCropChange()">
                         <option *ngFor="let item of crops" [ngValue]="item.id">{{ item.name }}</option>
                     </select>
                     <app-form-error-block [control]="form.get('cropId')" [formSubmitted]="submitted"></app-form-error-block>
                 </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="nameRo" translate>info.name-ro</label>
-                    <input id="nameRo" class="form-control checking-field" formControlName="nameRo" />
-                    <app-form-error-block [control]="form.get('nameRo')" [formSubmitted]="submitted"></app-form-error-block>
-                </div>
-                <div class="col-sm-6">
-                    <label for="nameRu" translate>info.name-ru</label>
-                    <input id="nameRu" class="form-control checking-field" formControlName="nameRu" />
-                    <app-form-error-block [control]="form.get('nameRu')" [formSubmitted]="submitted"></app-form-error-block>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-sm-12">
-                    <label for="descriptionRo" translate>info.description-ro</label>
-                    <input id="descriptionRo" class="form-control checking-field" formControlName="descriptionRo" />
-                    <app-form-error-block [control]="form.get('descriptionRo')" [formSubmitted]="submitted"></app-form-error-block>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-sm-12">
-                    <label for="descriptionRu" translate>info.description-ru</label>
-                    <input id="descriptionRu" class="form-control checking-field" formControlName="descriptionRu" />
-                    <app-form-error-block [control]="form.get('descriptionRu')" [formSubmitted]="submitted"></app-form-error-block>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="seedConsumptionHa" translate>crop.seed-consumption-ha</label>
-                    <input id="seedConsumptionHa" class="form-control checking-field" formControlName="seedConsumptionHa" type="number"/>
-                    <app-form-error-block [control]="form.get('seedConsumptionHa')" [formSubmitted]="submitted"></app-form-error-block>
-                </div>
 
                 <div class="col-sm-6">
-                    <label for="unitOfMeasure" translate>unit-of-measure.unit-long</label>
-                    <select id="unitOfMeasure" class="form-control custom-select" formControlName="unitOfMeasure">
-                        <option value="">Select Value</option>
-                        <option *ngFor="let item of unitOfMeasureSelectItems" value="{{item.id}}">{{ item.name }}</option>
+                    <label for="cropVarietyId" translate>crop.variety</label>
+                    <select id="cropVarietyId" class="form-control custom-select" formControlName="cropVarietyId">
+                        <option *ngFor="let item of varieties" [ngValue]="item.id">{{ item.name }}</option>
                     </select>
-                    <app-form-error-block [control]="form.get('unitOfMeasure')" [formSubmitted]="submitted"></app-form-error-block>
+                    <app-form-error-block [control]="form.get('cropVarietyId')" [formSubmitted]="submitted"></app-form-error-block>
                 </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="startDate" translate>agro-work.start-date</label>
+                    <input id="startDate" type="date" class="form-control checking-field" formControlName="startDate" />
+                    <app-form-error-block [control]="form.get('startDate')" [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="endDate" translate>agro-work.end-date</label>
+                    <input id="endDate" type="date" class="form-control checking-field" formControlName="endDate" />
+                    <app-form-error-block [control]="form.get('endDate')" [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label for="yieldGoal" translate>agro-work.yield-goal</label>
+                    <input id="yieldGoal" class="form-control checking-field" formControlName="yieldGoal" type="number"/>
+                    <app-form-error-block [control]="form.get('yieldGoal')" [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+
             </div>
 
 

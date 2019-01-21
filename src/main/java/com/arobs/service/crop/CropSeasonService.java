@@ -53,7 +53,7 @@ public class CropSeasonService implements HasRepository<CropSeasonRepository> {
         season.setHarvestYear(model.getHarvestYear());
         season.setStartDate(model.getStartDate());
         season.setEndDate(model.getEndDate());
-        season.setComments(model.getComments());
+        season.setYieldGoal(model.getYieldGoal());
 
         return save(season);
     }

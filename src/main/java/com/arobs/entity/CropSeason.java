@@ -32,8 +32,8 @@ public class CropSeason {
     @Column (name = "end_date")
     private Date endDate;
 
-    @Column (name = "comments")
-    private String comments;
+    @Column (name = "yield_goal")
+    private Double yieldGoal;
 
     public CropSeason() {
     }
@@ -94,11 +94,11 @@ public class CropSeason {
         this.endDate = endDate;
     }
 
-    public String getComments() {
-        return comments;
+    public Double getYieldGoal() {
+        return yieldGoal;
     }
 
-    public void setComments(String comments) {
-        this.comments = comments;
+    public void setYieldGoal(Double yieldGoal) {
+        this.yieldGoal = yieldGoal;
     }
 }

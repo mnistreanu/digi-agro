@@ -9,6 +9,7 @@ import {CropSeasonModel} from './crop-season-form.model';
 import {SelectItem} from '../../../../dto/select-item.dto';
 import {CropSeasonService} from '../../../../services/crop/crop-season.service';
 import {AlertService} from '../../../../services/alert.service';
+import {CropVarietyService} from '../../../../services/crop/crop-variety.service';
 
 @Component({
     selector: 'app-crop',
@@ -23,9 +24,9 @@ export class CropSeasonFormComponent implements OnInit {
     model: CropSeasonModel;
     isNew: boolean;
 
-    unitOfMeasureSelectItems: SelectItem[] = [];
     cropCategories: SelectItem[] = [];
     crops: SelectItem[] = [];
+    varieties: SelectItem[] = [];
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
@@ -33,6 +34,7 @@ export class CropSeasonFormComponent implements OnInit {
                 private langService: LangService,
                 private cropCategoryService: CropCategoryService,
                 private cropService: CropService,
+                private cropVarietyService: CropVarietyService,
                 private cropSeasonService: CropSeasonService) {
     }
 
@@ -73,6 +75,28 @@ export class CropSeasonFormComponent implements OnInit {
         });
     }
 
+    public onCropChange() {
+        const cropId = this.form.controls['cropId'].value;
+        this.setupCropVarieties(cropId, true);
+    }
+
+    private setupCropVarieties(cropId, updateValue) {
+        this.cropVarietyService.find(cropId).subscribe(data => {
+            const models = data.payload;
+            const fieldMapper = new FieldMapper(this.langService.getLanguage());
+            const nameField = fieldMapper.get('name');
+            this.varieties = models.map(model => {
+                return new SelectItem(model.id, model[nameField]);
+            });
+
+            if (updateValue) {
+                const cropVarietyControl = this.form.controls['cropVarietyId'];
+                const value = this.varieties.length > 0 ? this.varieties[0].id : null;
+                cropVarietyControl.setValue(value);
+            }
+        });
+    }
+
     private restoreModel() {
         this.route.params.subscribe(params => {
             const id = params['id'];
@@ -102,14 +126,13 @@ export class CropSeasonFormComponent implements OnInit {
 
     private buildForm() {
         this.form = new FormGroup({
+            harvestYear: new FormControl(this.model.harvestYear, [Validators.required]),
             cropCategoryId: new FormControl(this.model.cropCategoryId, [Validators.required]),
             cropId: new FormControl(this.model.cropId, [Validators.required]),
-            nameRo: new FormControl(this.model.nameRo, [Validators.required, Validators.maxLength(128)]),
-            nameRu: new FormControl(this.model.nameRu, [Validators.required, Validators.maxLength(128)]),
-            descriptionRo: new FormControl(this.model.descriptionRo, [Validators.required]),
-            descriptionRu: new FormControl(this.model.descriptionRu, [Validators.required]),
-            seedConsumptionHa: new FormControl(this.model.seedConsumptionHa, [Validators.required]),
-            unitOfMeasure: new FormControl(this.model.unitOfMeasure, [Validators.required])
+            cropVarietyId: new FormControl(this.model.cropVarietyId),
+            startDate: new FormControl(this.model.startDate, [Validators.required]),
+            endDate: new FormControl(this.model.endDate, [Validators.required]),
+            yieldGoal: new FormControl(this.model.yieldGoal)
         });
     }
 

@@ -14,7 +14,7 @@ public class CropSeasonModel implements Serializable {
     private Integer harvestYear;
     private Date startDate;
     private Date endDate;
-    private String comments;
+    private Double yieldGoal;
 
     public CropSeasonModel() {
     }
@@ -27,7 +27,7 @@ public class CropSeasonModel implements Serializable {
         this.harvestYear = season.getHarvestYear();
         this.startDate = season.getStartDate();
         this.endDate = season.getEndDate();
-        this.comments = season.getComments();
+        this.yieldGoal = season.getYieldGoal();
     }
 
     public Long getId() {
@@ -86,11 +86,11 @@ public class CropSeasonModel implements Serializable {
         this.endDate = endDate;
     }
 
-    public String getComments() {
-        return comments;
+    public Double getYieldGoal() {
+        return yieldGoal;
     }
 
-    public void setComments(String comments) {
-        this.comments = comments;
+    public void setYieldGoal(Double yieldGoal) {
+        this.yieldGoal = yieldGoal;
     }
 }

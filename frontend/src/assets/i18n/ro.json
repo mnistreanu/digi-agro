@@ -12,7 +12,10 @@
 	},
 	"agro-work": {
 		"date": "Data",
-		"type": "Tipul lucrării"
+		"start-date": "Data început",
+		"end-date": "Data sfârșit",
+		"type": "Tipul lucrării",
+		"yield-goal": "Potențial producție Implicit"
 	},
 	"auth": {
 		"login": "Logare",
@@ -36,8 +39,10 @@
 	"crop": {
 		"category": "Categoria",
 		"crop": "Cultura agricolă",
+		"harvest-year": "An recoltare",
 		"name": "Cultura agricolă",
 		"planting-date": "Data plantării",
+		"season": "Sezon de cultură",
 		"seed-consumption-ha": "Consum semințe, Ha",
 		"seeds": "Semințe",
 		"unit-of-measure-long": "Unitatea de măsură",

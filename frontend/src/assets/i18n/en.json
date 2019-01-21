@@ -12,7 +12,10 @@
 	},
 	"agro-work": {
 		"date": "Date",
-		"type": "Type of work"
+		"start-date": "Start date",
+		"end-date": "End date",
+		"type": "Type of work",
+		"yield-goal": "Default yield goal"
 	},
 	"auth": {
 		"login": "Login",
@@ -36,8 +39,10 @@
 	"crop": {
 		"category": "Category",
 		"crop": "Crop",
+		"harvest-year": "Harvest year",
 		"name": "Agricultural crop",
 		"planting-date": "Planting date",
+		"season": "Crop season",
 		"seed-consumption-ha": "Seed Consumption, Ha",
 		"seeds": "Seeds",
 		"unit-of-measure-long": "Unit of measure",
