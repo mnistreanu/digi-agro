@@ -30,6 +30,8 @@ public class MachineService implements HasRepository<MachineRepository> {
     private TenantService tenantService;
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private MachineGroupService machineGroupService;
 
     @Override
     public MachineRepository getRepository() {
@@ -89,6 +91,13 @@ public class MachineService implements HasRepository<MachineRepository> {
         entity.setPower(model.getPower());
         entity.setSpeedOnRoad(model.getSpeedOnRoad());
         entity.setSpeedInWork(model.getSpeedInWork());
+
+        if (model.getMachineGroupId() == null) {
+            entity.setMachineGroup(null);
+        }
+        else {
+            entity.setMachineGroup(machineGroupService.findOne(model.getMachineGroupId()));
+        }
 
         entity.getWorkTypes().clear();
         if (!StaticUtil.isEmpty(model.getWorkTypes())) {

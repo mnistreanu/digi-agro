@@ -138,6 +138,7 @@
 	"general": {
 		"form": "Форма",
 		"lines-per-table": "Строк в таблице",
+		"none": "Нет",
 		"settings": "Настройки"
 	},
 	"geo": {
@@ -173,7 +174,6 @@
 		"consumption": "Расход",
 		"fabrication-country": "Страна изготовления",
 		"fabrication-year": "Год изготовления",
-		"group": "Группа",
 		"hp": "Л.с.",
 		"identifier": "Ид. номер",
 		"machine": "Машина",
@@ -190,7 +190,8 @@
 		"work-types": "Виды работ"
 	},
 	"machine-group": {
-		"title": "Группы машин"
+		"list": "Группы машин",
+		"title": "Группа"
 	},
 	"machine-motor": {
 		"benzine": "Бензин",

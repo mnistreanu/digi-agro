@@ -138,6 +138,7 @@
 	"general": {
 		"form": "Forma",
 		"lines-per-table": "Linii în listă",
+		"none": "Nu este",
 		"settings": "Setări"
 	},
 	"geo": {
@@ -173,7 +174,6 @@
 		"consumption": "Consum",
 		"fabrication-country": "Țara de origine",
 		"fabrication-year": "Anul de fabricație",
-		"group": "Grup",
 		"hp": "C.p.",
 		"identifier": "Nr. ID",
 		"machine": "Mașină",
@@ -190,7 +190,8 @@
 		"work-types": "Tipuri de lucrul"
 	},
 	"machine-group": {
-		"title": "Grupuri de mașini"
+		"list": "Grupuri de mașini",
+		"title": "Grup"
 	},
 	"machine-motor": {
 		"benzine": "Benzină",

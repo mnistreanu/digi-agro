@@ -18,7 +18,7 @@ export class MachineGroupService {
         return this.http.get<MachineGroupModel>(this.api + '/' + id);
     }
 
-    findAll(): Observable<MachineGroupModel[]> {
+    find(): Observable<MachineGroupModel[]> {
         return this.http.get<MachineGroupModel[]>(this.api + '/');
     }
 

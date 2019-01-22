@@ -138,6 +138,7 @@
 	"general": {
 		"form": "Form",
 		"lines-per-table": "Lines per table",
+		"none": "None",
 		"settings": "Settings"
 	},
 	"geo": {
@@ -173,7 +174,6 @@
 		"consumption": "Consumption",
 		"fabrication-country": "Fabrication Country",
 		"fabrication-year": "Fabrication Year",
-		"group": "Group",
 		"hp": "H.p.",
 		"identifier": "ID",
 		"machine": "Machine",
@@ -190,7 +190,8 @@
 		"work-types": "Work Types"
 	},
 	"machine-group": {
-		"title": "Machine Group"
+		"list": "Machine Groups",
+		"title": "Group"
 	},
 	"machine-motor": {
 		"benzine": "Benzine",

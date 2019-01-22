@@ -146,13 +146,24 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <label translate>machine.responsible-persons</label>
-                    <ss-multiselect-dropdown [options]="employees"
-                                             [texts]="multiSelectTexts"
-                                             [settings]="multiSelectSettings"
-                                             formControlName="employees">
+                    <div>
+                        <label translate>machine.responsible-persons</label>
+                        <ss-multiselect-dropdown [options]="employees"
+                                                 [texts]="multiSelectTexts"
+                                                 [settings]="multiSelectSettings"
+                                                 formControlName="employees">
 
-                    </ss-multiselect-dropdown>
+                        </ss-multiselect-dropdown>
+                    </div>
+                    <div class="mt-2">
+                        <label for="machine-group" translate>machine-group.title</label>
+                        <div>
+                            <select id="machine-group" class="form-control" formControlName="machineGroupId">
+                                <option value="null" translate>general.none</option>
+                                <option *ngFor="let i of machineGroups" [value]="i.id">{{ i.name }}</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
 

@@ -3,6 +3,7 @@ package com.arobs.model.machine;
 
 import com.arobs.entity.AgroWorkType;
 import com.arobs.entity.Machine;
+import com.arobs.entity.MachineGroup;
 import com.arobs.enums.MachineType;
 import com.arobs.enums.MotorType;
 import com.arobs.model.EmployeeModel;
@@ -29,6 +30,9 @@ public class MachineModel {
 
     private Double speedOnRoad;
     private Double speedInWork;
+
+    private MachineGroupModel machineGroupModel;
+    private Long machineGroupId;
 
     private List<EmployeeModel> employees;
 
@@ -62,6 +66,11 @@ public class MachineModel {
 
         if (entity.getWorkTypes() != null) {
             workTypes = entity.getWorkTypes().stream().map(AgroWorkType::getId).collect(Collectors.toList());
+        }
+
+        if (entity.getMachineGroup() != null) {
+            machineGroupModel = new MachineGroupModel(entity.getMachineGroup());
+            machineGroupId = entity.getMachineGroup().getId();
         }
     }
 
@@ -175,5 +184,21 @@ public class MachineModel {
 
     public void setWorkTypes(List<Long> workTypes) {
         this.workTypes = workTypes;
+    }
+
+    public MachineGroupModel getMachineGroupModel() {
+        return machineGroupModel;
+    }
+
+    public void setMachineGroupModel(MachineGroupModel machineGroupModel) {
+        this.machineGroupModel = machineGroupModel;
+    }
+
+    public Long getMachineGroupId() {
+        return machineGroupId;
+    }
+
+    public void setMachineGroupId(Long machineGroupId) {
+        this.machineGroupId = machineGroupId;
     }
 }

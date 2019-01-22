@@ -55,7 +55,7 @@ export class MenuService {
                         routerLink: 'enterprise/manage-employees'
                     },
                     {
-                        title: 'machine-group.title',
+                        title: 'machine-group.list',
                         routerLink: 'enterprise/machine-groups'
                     },
                     {

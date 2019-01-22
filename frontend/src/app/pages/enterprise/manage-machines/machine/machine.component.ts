@@ -14,6 +14,8 @@ import {EmployeeModel} from '../../manage-employees/employee/employee.model';
 import {IMultiSelectSettings, IMultiSelectTexts} from 'angular-2-dropdown-multiselect';
 import {ListItem} from '../../../../interfaces/list-item.interface';
 import {AlertService} from '../../../../services/alert.service';
+import {MachineGroupModel} from '../../machine-groups/machine-group/machine-group.model';
+import {MachineGroupService} from '../../../../services/machine/machine-group.service';
 
 
 @Component({
@@ -36,6 +38,7 @@ export class MachineComponent implements OnInit {
 
     employees: ListItem[];
     workTypes: AgroWorkTypeModel[];
+    machineGroups: MachineGroupModel[];
 
     multiSelectSettings: IMultiSelectSettings = {
         checkedStyle: 'fontawesome',
@@ -60,6 +63,7 @@ export class MachineComponent implements OnInit {
                 private workTypeService: WorkTypeService,
                 private brandService: BrandService,
                 private machineService: MachineService,
+                private machineGroupService: MachineGroupService,
                 private employeeService: EmployeeService,
                 private alertService: AlertService) {
     }
@@ -68,6 +72,7 @@ export class MachineComponent implements OnInit {
         this.setupBrands()
             .then(() => this.setupEmployees())
             .then(() => this.setupWorkTypes())
+            .then(() => this.setupMachineGroups())
             .then(() => this.restoreModel());
     }
 
@@ -101,6 +106,15 @@ export class MachineComponent implements OnInit {
                 const fieldMapper = new FieldMapper(this.langService.getLanguage());
                 const nameField = fieldMapper.get('name');
                 models.forEach(model => model.name = model[nameField]);
+                resolve();
+            });
+        });
+    }
+
+    private setupMachineGroups(): Promise<void> {
+        return new Promise((resolve) => {
+            this.machineGroupService.find().subscribe(models => {
+                this.machineGroups = models;
                 resolve();
             });
         });
@@ -153,6 +167,7 @@ export class MachineComponent implements OnInit {
             speedOnRoad: [this.model.speedOnRoad],
             speedInWork: [this.model.speedInWork],
             employees: [this.model.employees.map(e => e.id)],
+            machineGroupId: [this.model.machineGroupId],
             workTypeControls: this.buildWorkTypeControls()
         });
     }

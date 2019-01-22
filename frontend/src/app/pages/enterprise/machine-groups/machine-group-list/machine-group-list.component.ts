@@ -71,7 +71,7 @@ export class MachineGroupListComponent implements OnInit {
     }
 
     private setupRows() {
-        this.machineGroupService.findAll().subscribe(models => {
+        this.machineGroupService.find().subscribe(models => {
             this.options.api.setRowData(models);
         });
     }
