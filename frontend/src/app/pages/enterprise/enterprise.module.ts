@@ -27,6 +27,8 @@ import {MachineService} from '../../services/machine.service';
 import {NguiAutoCompleteModule} from '@ngui/auto-complete';
 import {UserListComponent} from './manage-users/user-list/user-list.component';
 import {UserFormComponent} from './manage-users/user-form/user-form.component';
+import { MachineGroupListComponent } from './machine-groups/machine-group-list/machine-group-list.component';
+import { MachineGroupComponent } from './machine-groups/machine-group/machine-group.component';
 
 export const routes = [
     {path: 'manage-branches', component: BranchListComponent, data: {breadcrumb: 'Branches'}},
@@ -35,6 +37,8 @@ export const routes = [
     {path: 'manage-users/:id', component: UserFormComponent, data: {breadcrumb: 'User Form'}},
     {path: 'manage-employees', component: EmployeeListComponent, data: {breadcrumb: 'Employees'}},
     {path: 'manage-employees/:id', component: EmployeeComponent, data: {breadcrumb: 'Employee Form'}},
+    {path: 'machine-groups', component: MachineGroupListComponent, data: {breadcrumb: 'Machine Groups'}},
+    {path: 'machine-groups/:id', component: MachineGroupComponent, data: {breadcrumb: 'Machine Group Form'}},
     {path: 'manage-machines', component: MachineListComponent, data: {breadcrumb: 'Machines'}},
     {path: 'manage-machines/:id', component: MachineComponent, data: {breadcrumb: 'Machine Form'}},
     {path: 'manage-expense-categories', component: ExpenseCategoryTreeComponent, data: {breadcrumb: 'Expense categories'}},
@@ -67,7 +71,9 @@ export const routes = [
         MachineListComponent,
         MachineComponent,
         ExpenseCategoryTreeComponent,
-        ExpenseCategoryComponent
+        ExpenseCategoryComponent,
+        MachineGroupListComponent,
+        MachineGroupComponent
     ],
     providers: [BranchService, MachineService, BrandService]
 })

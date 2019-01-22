@@ -12,8 +12,8 @@
 	},
 	"agro-work": {
 		"date": "Data",
-		"start-date": "Data început",
 		"end-date": "Data sfârșit",
+		"start-date": "Data început",
 		"type": "Tipul lucrării",
 		"yield-goal": "Potențial producție Implicit"
 	},
@@ -188,6 +188,9 @@
 		"speed-on-road": "Viteza pe drum",
 		"type": "Tip",
 		"work-types": "Tipuri de lucrul"
+	},
+	"machine-group": {
+		"title": "Grupuri de mașini"
 	},
 	"machine-motor": {
 		"benzine": "Benzină",

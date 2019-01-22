@@ -16,6 +16,9 @@ public class MachineGroup {
     @Column(name = "tenant_id")
     private Long tenantId;
 
+    @Column(columnDefinition = "boolean default true")
+    private boolean active = true;
+
     public Long getId() {
         return id;
     }
@@ -40,4 +43,11 @@ public class MachineGroup {
         this.tenantId = tenantId;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }

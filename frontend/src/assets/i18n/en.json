@@ -12,8 +12,8 @@
 	},
 	"agro-work": {
 		"date": "Date",
-		"start-date": "Start date",
 		"end-date": "End date",
+		"start-date": "Start date",
 		"type": "Type of work",
 		"yield-goal": "Default yield goal"
 	},
@@ -188,6 +188,9 @@
 		"speed-on-road": "Speed On Road",
 		"type": "Type",
 		"work-types": "Work Types"
+	},
+	"machine-group": {
+		"title": "Machine Group"
 	},
 	"machine-motor": {
 		"benzine": "Benzine",

@@ -238,4 +238,8 @@ export class MachineComponent implements OnInit {
             this.form.controls['power'].setValue(null);
         }
     }
+
+    back() {
+        this.router.navigate(['../'], {relativeTo: this.route});
+    }
 }

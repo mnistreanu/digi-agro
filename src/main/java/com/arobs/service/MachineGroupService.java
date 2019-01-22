@@ -45,8 +45,7 @@ public class MachineGroupService implements HasRepository<MachineGroupRepository
         if (model.getId() == null) {
             entity = new MachineGroup();
             entity.setTenantId(tenantId);
-        }
-        else {
+        } else {
             entity = findOne(model.getId());
         }
 
@@ -55,7 +54,6 @@ public class MachineGroupService implements HasRepository<MachineGroupRepository
     }
 
     private void copyValues(MachineGroup entity, MachineGroupModel model) {
-        entity.setTenantId(model.getTenantId());
         entity.setName(model.getName());
     }
 }

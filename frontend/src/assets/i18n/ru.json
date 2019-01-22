@@ -12,8 +12,8 @@
 	},
 	"agro-work": {
 		"date": "Дата",
-		"start-date": "Дата начала",
 		"end-date": "Дата окончания",
+		"start-date": "Дата начала",
 		"type": "Тип работы",
 		"yield-goal": "Цель доходности по умолчанию"
 	},
@@ -188,6 +188,9 @@
 		"speed-on-road": "Скорость на дороге",
 		"type": "Тип",
 		"work-types": "Виды работ"
+	},
+	"machine-group": {
+		"title": "Группы машин"
 	},
 	"machine-motor": {
 		"benzine": "Бензин",
