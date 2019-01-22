@@ -5,7 +5,8 @@ import {LangService} from '../../../../services/lang.service';
 import {CropSeasonService} from '../../../../services/crop/crop-season.service';
 import {FieldMapper} from '../../../../common/field.mapper';
 import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
-import {CropSeasonModel} from "../form/crop-season-form.model";
+import {CropSeasonModel} from '../form/crop-season-form.model';
+import {DateUtil} from "../../../../common/dateUtil";
 
 @Component({
     selector: 'app-crop-season-list',
@@ -61,33 +62,40 @@ export class CropSeasonListComponent implements OnInit {
             },
             {
                 headerName: 'crop.season',
-                field: 'harvestYear',
+                field: 'harvestYearCropVariety',
                 width: 200,
                 minWidth: 200
             },
             {
                 headerName: 'agro-work.start-date',
                 field: 'startDate',
-                width: 300,
+                valueFormatter: params => DateUtil.formatDate(params.value),
+                width: 200,
                 minWidth: 200
             },
             {
                 headerName: 'agro-work.end-date',
                 field: 'endDate',
+                valueFormatter: params => DateUtil.formatDate(params.value),
                 width: 200,
                 minWidth: 200
             },
             {
                 headerName: 'agro-work.yield-goal',
+                headerTooltip: 'agro-work.yield-goal',
                 field: 'yieldGoal',
-                width: 100,
-                minWidth: 100
+                width: 200,
+                minWidth: 200
             }
         ];
 
         headers.forEach((h) => {
             if (h.headerName) {
                 this.langService.get(h.headerName).subscribe(m => h.headerName = m);
+            }
+
+            if (h.headerTooltip) {
+                this.langService.get(h.headerTooltip).subscribe(m => h.headerTooltip = m);
             }
         });
 
@@ -101,32 +109,15 @@ export class CropSeasonListComponent implements OnInit {
         });
     }
 
-    // private setupRows() {
-    //     this.cropSeasonService.find().subscribe(data => {
-    //         this.adjustModels(models);
-    //         debugger;
-    //         const fieldMapper = new FieldMapper(this.langService.getLanguage());
-    //         const cropNameField = fieldMapper.get('cropName');
-    //         const nameField = fieldMapper.get('name');
-    //         const descriptionField = fieldMapper.get('description');
-    //
-    //         const models = JSON.parse(data['items']);
-    //         models.forEach((model) => {
-    //             model['cropName'] = model[cropNameField];
-    //             model['name'] = model[nameField];
-    //             model['description'] = model[descriptionField];
-    //         });
-    //
-    //         this.options.api.setRowData(models);
-    //     });
-    // }
-
     private adjustModels(models: CropSeasonModel[]) {
-        // models.forEach(model => {
-        //     this.langService
-        //         .get('fertilizer-type.' + model.fertilizerType)
-        //         .subscribe(m => model.fertilizerType = m);
-        // });
+        models.forEach(model => {
+            const fieldMapper = new FieldMapper(this.langService.getLanguage());
+            const nameField = fieldMapper.get('name');
+            model.harvestYearCropVariety = model.harvestYear + ' ' + model.cropModel[nameField];
+            if (model.cropVarietyModel != null) {
+                model.harvestYearCropVariety += ' ' + model.cropVarietyModel[nameField];
+            }
+        });
     }
 
     public onGridReady() {

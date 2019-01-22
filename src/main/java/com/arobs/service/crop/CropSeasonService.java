@@ -48,8 +48,8 @@ public class CropSeasonService implements HasRepository<CropSeasonRepository> {
         }
 
         season.setTenantId(model.getTenantId());
-        season.setCropId(model.getCropId());
-        season.setCropVarietyId(model.getCropVarietyId());
+//        season.setCropId(model.getCropId());
+//        season.setCropVarietyModel(model.getCropVarietyModel());
         season.setHarvestYear(model.getHarvestYear());
         season.setStartDate(model.getStartDate());
         season.setEndDate(model.getEndDate());

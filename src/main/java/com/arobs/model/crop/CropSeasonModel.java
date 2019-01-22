@@ -9,9 +9,11 @@ public class CropSeasonModel implements Serializable {
 
     private Long id;
     private Long tenantId;
-    private Long cropId;
-    private Long cropVarietyId;
     private Integer harvestYear;
+    private Long cropId;
+    private CropModel cropModel;
+    private Long cropVarietyId;
+    private CropVarietyModel cropVarietyModel;
     private Date startDate;
     private Date endDate;
     private Double yieldGoal;
@@ -22,9 +24,15 @@ public class CropSeasonModel implements Serializable {
     public CropSeasonModel(CropSeason season) {
         this.id = season.getId();
         this.tenantId = season.getTenantId();
-        this.cropId = season.getCropId();
-        this.cropVarietyId = season.getCropVarietyId();
         this.harvestYear = season.getHarvestYear();
+        if (season.getCrop() != null) {
+            this.cropId = season.getCrop().getId();
+            this.cropModel = new CropModel(season.getCrop());
+        }
+        if (season.getCropVariety() != null) {
+            this.cropVarietyId = season.getCropVariety().getId();
+            this.cropVarietyModel = new CropVarietyModel(season.getCropVariety());
+        }
         this.startDate = season.getStartDate();
         this.endDate = season.getEndDate();
         this.yieldGoal = season.getYieldGoal();
@@ -52,6 +60,22 @@ public class CropSeasonModel implements Serializable {
 
     public void setCropId(Long cropId) {
         this.cropId = cropId;
+    }
+
+    public CropModel getCropModel() {
+        return cropModel;
+    }
+
+    public void setCropModel(CropModel cropModel) {
+        this.cropModel = cropModel;
+    }
+
+    public CropVarietyModel getCropVarietyModel() {
+        return cropVarietyModel;
+    }
+
+    public void setCropVarietyModel(CropVarietyModel cropVarietyModel) {
+        this.cropVarietyModel = cropVarietyModel;
     }
 
     public Long getCropVarietyId() {

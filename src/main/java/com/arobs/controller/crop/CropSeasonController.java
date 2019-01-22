@@ -27,8 +27,8 @@ public class CropSeasonController {
     public ResponseEntity<List<CropSeasonModel>> getSeasonModels(HttpSession session) {
         Long tenantId = (Long) session.getAttribute("tenant");
 
-        List<CropSeason> categories = cropSeasonService.find(tenantId);
-        List<CropSeasonModel> models = categories.stream().map(CropSeasonModel::new).collect(Collectors.toList());
+        List<CropSeason> seasons = cropSeasonService.find(tenantId);
+        List<CropSeasonModel> models = seasons.stream().map(CropSeasonModel::new).collect(Collectors.toList());
 
         return ResponseEntity.ok(models);
     }

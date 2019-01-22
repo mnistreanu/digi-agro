@@ -15,7 +15,6 @@ export class CropSeasonService {
     }
 
     public find(): Observable<CropSeasonModel[]> {
-        debugger;
         return this.http.get<CropSeasonModel[]>(this.api + '/');
     }
 

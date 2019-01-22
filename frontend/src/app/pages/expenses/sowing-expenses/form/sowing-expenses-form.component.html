@@ -37,10 +37,10 @@
                 </div>
                 <div class="col-sm-6">
                     <label translate>crop.variety</label>
-                    <select class="form-control custom-select" formControlName="cropVarietyId">
+                    <select class="form-control custom-select" formControlName="cropVarietyModel">
                         <option *ngFor="let v of cropVarieties" [ngValue]="v.id">{{v.itemName}}</option>
                     </select>
-                    <app-form-error-block [control]="form.get('cropVarietyId')"
+                    <app-form-error-block [control]="form.get('cropVarietyModel')"
                                           [formSubmitted]="submitted">
                     </app-form-error-block>
                 </div>

@@ -76,12 +76,12 @@
                         <label class="col-sm-3 form-control-label m-t-5" *ngIf="cropVarieties && cropVarieties.length > 0" translate>crop.variety</label>
                         <div class="col-sm-3 text-left" *ngIf="cropVarieties && cropVarieties.length > 0">
                             <select id="crop-variety" class="form-control custom-select"
-                                    formControlName="cropVarietyId">
+                                    formControlName="cropVarietyModel">
                                 <option selected></option>
                                 <option *ngFor="let variety of cropVarieties"
                                         [ngValue]="variety.id">{{variety.nameRo}}
                                 </option>
-                                <app-form-error-block [control]="form.get('cropVarietyId')"
+                                <app-form-error-block [control]="form.get('cropVarietyModel')"
                                                   [formSubmitted]="formSubmitted">
                                 </app-form-error-block>
                             </select>

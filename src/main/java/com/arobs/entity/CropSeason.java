@@ -20,11 +20,13 @@ public class CropSeason {
     @Column (name = "harvest_year")
     private Integer harvestYear;
 
-    @Column (name = "crop_id")
-    private Long cropId;
+    @ManyToOne
+    @JoinColumn(name = "crop_id")
+    private Crop crop;
 
-    @Column (name = "crop_variety_id")
-    private Long cropVarietyId;
+    @ManyToOne
+    @JoinColumn(name = "crop_variety_id")
+    private CropVariety cropVariety;
 
     @Column (name = "start_date")
     private Date startDate;
@@ -62,20 +64,20 @@ public class CropSeason {
         this.harvestYear = harvestYear;
     }
 
-    public Long getCropId() {
-        return cropId;
+    public Crop getCrop() {
+        return crop;
     }
 
-    public void setCropId(Long cropId) {
-        this.cropId = cropId;
+    public void setCrop(Crop crop) {
+        this.crop = crop;
     }
 
-    public Long getCropVarietyId() {
-        return cropVarietyId;
+    public CropVariety getCropVariety() {
+        return cropVariety;
     }
 
-    public void setCropVarietyId(Long cropVarietyId) {
-        this.cropVarietyId = cropVarietyId;
+    public void setCropVariety(CropVariety cropVariety) {
+        this.cropVariety = cropVariety;
     }
 
     public Date getStartDate() {
