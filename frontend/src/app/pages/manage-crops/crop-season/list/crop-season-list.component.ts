@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ColDef, GridOptions} from 'ag-grid';
+import {FieldMapper} from '../../../../common/field.mapper';
+import {DateUtil} from '../../../../common/dateUtil';
 import {LangService} from '../../../../services/lang.service';
 import {CropSeasonService} from '../../../../services/crop/crop-season.service';
-import {FieldMapper} from '../../../../common/field.mapper';
 import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
-import {CropSeasonModel} from '../form/crop-season-form.model';
-import {DateUtil} from "../../../../common/dateUtil";
+import {CropSeasonListModel} from './crop-season-list.model';
 
 @Component({
     selector: 'app-crop-season-list',
@@ -109,7 +109,7 @@ export class CropSeasonListComponent implements OnInit {
         });
     }
 
-    private adjustModels(models: CropSeasonModel[]) {
+    private adjustModels(models: CropSeasonListModel[]) {
         models.forEach(model => {
             const fieldMapper = new FieldMapper(this.langService.getLanguage());
             const nameField = fieldMapper.get('name');
