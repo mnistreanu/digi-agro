@@ -55,6 +55,10 @@ export class MenuService {
                         routerLink: 'enterprise/manage-employees'
                     },
                     {
+                        title: 'machine-group.list',
+                        routerLink: 'enterprise/machine-groups'
+                    },
+                    {
                         title: 'nav.agricultural-machinery',
                         routerLink: 'enterprise/manage-machines'
                     },

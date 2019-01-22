@@ -43,6 +43,10 @@ public class Machine {
     private Double speedOnRoad;
     private Double speedInWork;
 
+    @ManyToOne
+    @JoinColumn(name = "machine_group_id")
+    private MachineGroup machineGroup;
+
     @ManyToMany
     @JoinTable(name = "machine_work_type",
             joinColumns = { @JoinColumn(name = "machine_id") },
@@ -186,5 +190,13 @@ public class Machine {
 
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
+    }
+
+    public MachineGroup getMachineGroup() {
+        return machineGroup;
+    }
+
+    public void setMachineGroup(MachineGroup machineGroup) {
+        this.machineGroup = machineGroup;
     }
 }

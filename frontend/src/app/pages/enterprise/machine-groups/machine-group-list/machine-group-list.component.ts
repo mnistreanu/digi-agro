@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {ColDef, GridOptions} from 'ag-grid';
-import {MachineService} from '../../../../services/machine.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LangService} from '../../../../services/lang.service';
+import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
+import {MachineGroupService} from '../../../../services/machine/machine-group.service';
 
 @Component({
-    selector: 'app-machine-list',
-    templateUrl: './machine-list.component.html',
-    styleUrls: ['./machine-list.component.scss']
+    selector: 'app-machine-group-list',
+    templateUrl: './machine-group-list.component.html',
+    styleUrls: ['./machine-group-list.component.scss']
 })
-export class MachineListComponent implements OnInit {
+export class MachineGroupListComponent implements OnInit {
 
     options: GridOptions;
     context;
@@ -18,7 +18,7 @@ export class MachineListComponent implements OnInit {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private langService: LangService,
-                private machineService: MachineService) {
+                private machineGroupService: MachineGroupService) {
     }
 
     ngOnInit() {
@@ -54,35 +54,10 @@ export class MachineListComponent implements OnInit {
                 }
             },
             {
-                headerName: 'machine.type',
-                field: 'type',
+                headerName: 'info.name',
+                field: 'name',
                 width: 175,
                 minWidth: 175
-            },
-            {
-                headerName: 'machine.model',
-                field: 'brandAndModel',
-                width: 175,
-                minWidth: 175
-            },
-            {
-                headerName: 'machine-group.title',
-                field: 'machineGroup',
-                width: 175,
-                minWidth: 175
-            },
-            {
-                headerName: 'machine.identifier',
-                field: 'identifier',
-                width: 100,
-                minWidth: 100,
-                maxWidth: 100
-            },
-            {
-                headerName: 'machine.responsible-persons',
-                field: 'responsiblePersons',
-                width: 300,
-                minWidth: 300
             }
         ];
 
@@ -96,13 +71,7 @@ export class MachineListComponent implements OnInit {
     }
 
     private setupRows() {
-        this.machineService.findAll().subscribe(models => {
-            models.forEach((model) => {
-                model.type = this.langService.instant('machine-type.' + model.type);
-                model['brandAndModel'] = model.brand + ' ' + model.model;
-                model['machineGroup'] = model.machineGroupModel ? model.machineGroupModel.name : null;
-                model['responsiblePersons'] = model.employees.map(m => m.firstName + ' ' + m.lastName).join(', ');
-            });
+        this.machineGroupService.find().subscribe(models => {
             this.options.api.setRowData(models);
         });
     }
@@ -128,5 +97,6 @@ export class MachineListComponent implements OnInit {
         const model = node.data;
         this.router.navigate(['./' + model.id], {relativeTo: this.route});
     }
+
 
 }

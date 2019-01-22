@@ -12,8 +12,8 @@
 	},
 	"agro-work": {
 		"date": "Date",
-		"start-date": "Start date",
 		"end-date": "End date",
+		"start-date": "Start date",
 		"type": "Type of work",
 		"yield-goal": "Default yield goal"
 	},
@@ -138,6 +138,7 @@
 	"general": {
 		"form": "Form",
 		"lines-per-table": "Lines per table",
+		"none": "None",
 		"settings": "Settings"
 	},
 	"geo": {
@@ -173,7 +174,6 @@
 		"consumption": "Consumption",
 		"fabrication-country": "Fabrication Country",
 		"fabrication-year": "Fabrication Year",
-		"group": "Group",
 		"hp": "H.p.",
 		"identifier": "ID",
 		"machine": "Machine",
@@ -188,6 +188,10 @@
 		"speed-on-road": "Speed On Road",
 		"type": "Type",
 		"work-types": "Work Types"
+	},
+	"machine-group": {
+		"list": "Machine Groups",
+		"title": "Group"
 	},
 	"machine-motor": {
 		"benzine": "Benzine",

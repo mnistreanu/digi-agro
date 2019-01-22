@@ -13,10 +13,11 @@ import java.util.List;
 public interface MachineGroupRepository extends JpaRepository<MachineGroup, Long> {
 
     @Modifying
-    @Query("DELETE FROM MachineGroup mg WHERE mg.id = :id")
+    @Query("UPDATE MachineGroup mg SET mg.active = false " +
+            "WHERE mg.id = :id")
     void remove(@Param("id") Long id);
 
     @Query("SELECT mg FROM MachineGroup mg " +
-            "WHERE mg.tenantId = :tenantId")
+            "WHERE mg.tenantId = :tenantId AND mg.active = true")
     List<MachineGroup> find(@Param("tenantId") Long tenantId);
 }

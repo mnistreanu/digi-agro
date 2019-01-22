@@ -1,4 +1,4 @@
-package com.arobs.model;
+package com.arobs.model.machine;
 
 
 import com.arobs.entity.MachineGroup;

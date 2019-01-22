@@ -1,7 +1,7 @@
 package com.arobs.model.expense;
 
 import com.arobs.model.EmployeeModel;
-import com.arobs.model.MachineModel;
+import com.arobs.model.machine.MachineModel;
 
 import java.util.ArrayList;
 import java.util.Date;

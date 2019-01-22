@@ -1,4 +1,5 @@
 import {EmployeeModel} from '../../manage-employees/employee/employee.model';
+import {MachineGroupModel} from '../../machine-groups/machine-group/machine-group.model';
 
 export class MachineModel {
 
@@ -22,4 +23,7 @@ export class MachineModel {
 
     employees: EmployeeModel[];
     workTypes: number[];
+
+    machineGroupModel: MachineGroupModel;
+    machineGroupId: number;
 }

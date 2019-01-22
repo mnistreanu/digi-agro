@@ -1,30 +1,35 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {EmployeeService} from '../../../../services/employee.service';
-import {EmployeeModel} from './employee.model';
 import {AlertService} from '../../../../services/alert.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MachineGroupService} from '../../../../services/machine/machine-group.service';
+import {MachineGroupModel} from './machine-group.model';
 
 @Component({
-    selector: 'app-employee',
-    templateUrl: './employee.component.html',
-    styleUrls: ['./employee.component.scss']
+    selector: 'app-machine-group',
+    templateUrl: './machine-group.component.html',
+    styleUrls: ['./machine-group.component.scss']
 })
-export class EmployeeComponent implements OnInit {
+export class MachineGroupComponent implements OnInit {
 
     form: FormGroup;
     submitted = false;
 
-    model: EmployeeModel;
+    model: MachineGroupModel;
+    isNew: boolean;
 
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
-                private alertService: AlertService,
-                private employeeService: EmployeeService) {
+                private machineGroupService: MachineGroupService,
+                private alertService: AlertService) {
     }
 
     ngOnInit() {
+        this.restoreModel();
+    }
+
+    private restoreModel() {
         this.route.params.subscribe(params => {
             const id = params['id'];
 
@@ -38,23 +43,21 @@ export class EmployeeComponent implements OnInit {
     }
 
     private setupModel(id) {
-        this.employeeService.findOne(id).subscribe(model => {
+        this.machineGroupService.findOne(id).subscribe(model => {
             this.model = model;
             this.buildForm();
         });
     }
 
     private prepareNewModel() {
-        this.model = new EmployeeModel();
+        this.model = new MachineGroupModel();
+        this.isNew = true;
         this.buildForm();
     }
 
     private buildForm() {
-
         this.form = this.fb.group({
-            title: [this.model.title],
-            firstName: [this.model.firstName, Validators.required],
-            lastName: [this.model.lastName, Validators.required]
+            name: [this.model.name, Validators.required]
         });
     }
 
@@ -68,20 +71,21 @@ export class EmployeeComponent implements OnInit {
         }
 
         Object.assign(this.model, form.value);
+
+        this.isNew = false;
         this.submitted = false;
 
-        this.employeeService.save(this.model).subscribe((model) => {
+        this.machineGroupService.save(this.model).subscribe((model) => {
             this.model = model;
             this.alertService.saved();
-            this.router.navigate(['../'], {relativeTo: this.route});
         });
-
     }
 
+
     public remove() {
-        this.employeeService.remove(this.model).subscribe(() => {
+        this.machineGroupService.remove(this.model).subscribe(() => {
             this.alertService.removed();
-            this.back();
+            this.router.navigate(['../'], {relativeTo: this.route});
         });
     }
 

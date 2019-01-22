@@ -12,8 +12,8 @@
 	},
 	"agro-work": {
 		"date": "Data",
-		"start-date": "Data început",
 		"end-date": "Data sfârșit",
+		"start-date": "Data început",
 		"type": "Tipul lucrării",
 		"yield-goal": "Potențial producție Implicit"
 	},
@@ -138,6 +138,7 @@
 	"general": {
 		"form": "Forma",
 		"lines-per-table": "Linii în listă",
+		"none": "Nu este",
 		"settings": "Setări"
 	},
 	"geo": {
@@ -173,7 +174,6 @@
 		"consumption": "Consum",
 		"fabrication-country": "Țara de origine",
 		"fabrication-year": "Anul de fabricație",
-		"group": "Grup",
 		"hp": "C.p.",
 		"identifier": "Nr. ID",
 		"machine": "Mașină",
@@ -188,6 +188,10 @@
 		"speed-on-road": "Viteza pe drum",
 		"type": "Tip",
 		"work-types": "Tipuri de lucrul"
+	},
+	"machine-group": {
+		"list": "Grupuri de mașini",
+		"title": "Grup"
 	},
 	"machine-motor": {
 		"benzine": "Benzină",

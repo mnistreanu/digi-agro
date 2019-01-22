@@ -2,7 +2,7 @@ package com.arobs.service;
 
 import com.arobs.entity.MachineGroup;
 import com.arobs.interfaces.HasRepository;
-import com.arobs.model.MachineGroupModel;
+import com.arobs.model.machine.MachineGroupModel;
 import com.arobs.repository.MachineGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +20,6 @@ public class MachineGroupService implements HasRepository<MachineGroupRepository
     public MachineGroupRepository getRepository() {
         return machineGroupRepository;
     }
-
-//    public boolean isUnique(Long currentId, String field, String value) {
-//        return commonCustomRepository.isUnique("MachineGroup", currentId, field, value);
-//    }
 
     public MachineGroup findOne(Long id) {
         return getRepository().findOne(id);
@@ -49,8 +45,7 @@ public class MachineGroupService implements HasRepository<MachineGroupRepository
         if (model.getId() == null) {
             entity = new MachineGroup();
             entity.setTenantId(tenantId);
-        }
-        else {
+        } else {
             entity = findOne(model.getId());
         }
 
@@ -59,7 +54,6 @@ public class MachineGroupService implements HasRepository<MachineGroupRepository
     }
 
     private void copyValues(MachineGroup entity, MachineGroupModel model) {
-        entity.setTenantId(model.getTenantId());
         entity.setName(model.getName());
     }
 }
