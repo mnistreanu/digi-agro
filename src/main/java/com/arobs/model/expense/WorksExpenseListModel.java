@@ -1,8 +1,7 @@
 package com.arobs.model.expense;
 
 import com.arobs.model.EmployeeModel;
-import com.arobs.model.MachineModel;
-import com.arobs.model.parcel.ParcelModel;
+import com.arobs.model.machine.MachineModel;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

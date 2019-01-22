@@ -1,11 +1,6 @@
 package com.arobs.entity;
 
-import com.arobs.enums.MachineType;
-import com.arobs.enums.MotorType;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "machine_group")

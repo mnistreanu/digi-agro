@@ -5,7 +5,7 @@ import com.arobs.entity.Expense;
 import com.arobs.entity.ExpenseCategory;
 import com.arobs.entity.Machine;
 import com.arobs.model.EmployeeModel;
-import com.arobs.model.MachineModel;
+import com.arobs.model.machine.MachineModel;
 import com.arobs.model.expense.ExpenseModel;
 import com.arobs.model.expense.FuelExpenseListModel;
 import com.arobs.service.EmployeeService;

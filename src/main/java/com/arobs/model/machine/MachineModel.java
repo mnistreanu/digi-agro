@@ -1,13 +1,12 @@
-package com.arobs.model;
+package com.arobs.model.machine;
 
 
 import com.arobs.entity.AgroWorkType;
-import com.arobs.entity.Employee;
 import com.arobs.entity.Machine;
 import com.arobs.enums.MachineType;
 import com.arobs.enums.MotorType;
+import com.arobs.model.EmployeeModel;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 

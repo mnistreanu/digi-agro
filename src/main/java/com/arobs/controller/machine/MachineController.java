@@ -1,7 +1,7 @@
-package com.arobs.controller;
+package com.arobs.controller.machine;
 
 import com.arobs.entity.Machine;
-import com.arobs.model.MachineModel;
+import com.arobs.model.machine.MachineModel;
 import com.arobs.service.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

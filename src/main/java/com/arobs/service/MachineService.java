@@ -1,10 +1,9 @@
 package com.arobs.service;
 
-import com.arobs.entity.Employee;
 import com.arobs.entity.Machine;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.EmployeeModel;
-import com.arobs.model.MachineModel;
+import com.arobs.model.machine.MachineModel;
 import com.arobs.repository.MachineRepository;
 import com.arobs.repository.custom.CommonCustomRepository;
 import com.arobs.service.agrowork.AgroWorkTypeService;
