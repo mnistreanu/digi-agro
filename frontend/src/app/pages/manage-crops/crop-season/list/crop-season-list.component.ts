@@ -110,9 +110,9 @@ export class CropSeasonListComponent implements OnInit {
     }
 
     private adjustModels(models: CropSeasonListModel[]) {
+        const fieldMapper = new FieldMapper(this.langService.getLanguage());
+        const nameField = fieldMapper.get('name');
         models.forEach(model => {
-            const fieldMapper = new FieldMapper(this.langService.getLanguage());
-            const nameField = fieldMapper.get('name');
             model.harvestYearCropVariety = model.harvestYear + ' ' + model.cropModel[nameField];
             if (model.cropVarietyModel != null) {
                 model.harvestYearCropVariety += ' ' + model.cropVarietyModel[nameField];

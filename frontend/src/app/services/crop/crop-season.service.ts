@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import {environment} from '../../../environments/environment';
 import {CropSeasonModel} from '../../pages/manage-crops/crop-season/form/crop-season-form.model';
+import {CropSeasonListModel} from '../../pages/manage-crops/crop-season/list/crop-season-list.model';
 
 @Injectable({
     providedIn: 'root'
@@ -14,8 +15,8 @@ export class CropSeasonService {
     constructor(private http: HttpClient) {
     }
 
-    public find(): Observable<CropSeasonModel[]> {
-        return this.http.get<CropSeasonModel[]>(this.api + '/');
+    public find(): Observable<CropSeasonListModel[]> {
+        return this.http.get<CropSeasonListModel[]>(this.api + '/');
     }
 
     findOne(id: number): Observable<CropSeasonModel> {

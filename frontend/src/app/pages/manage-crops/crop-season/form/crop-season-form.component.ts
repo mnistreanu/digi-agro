@@ -61,16 +61,19 @@ export class CropSeasonFormComponent implements OnInit {
     private setupCrops(cropCategoryId, updateValue) {
         this.cropService.findCrops(cropCategoryId).subscribe(data => {
             const models = data.payload;
-            const fieldMapper = new FieldMapper(this.langService.getLanguage());
-            const nameField = fieldMapper.get('name');
-            this.crops = models.map(model => {
-                return new SelectItem(model.id, model[nameField]);
-            });
+            if (models != null) {
+                const fieldMapper = new FieldMapper(this.langService.getLanguage());
+                const nameField = fieldMapper.get('name');
+                this.crops = models.map(model => {
+                    return new SelectItem(model.id, model[nameField]);
+                });
+                // this.crops.splice(0, 0, new SelectItem(null, ''));
+            } else {
+                this.crops = [];
+            }
 
             if (updateValue) {
-                const cropControl = this.form.controls['cropId'];
-                const value = this.crops.length > 0 ? this.crops[0].id : null;
-                cropControl.setValue(value);
+                // TODO only if necessary
             }
         });
     }
@@ -83,16 +86,19 @@ export class CropSeasonFormComponent implements OnInit {
     private setupCropVarieties(cropId, updateValue) {
         this.cropVarietyService.find(cropId).subscribe(data => {
             const models = data.payload;
-            const fieldMapper = new FieldMapper(this.langService.getLanguage());
-            const nameField = fieldMapper.get('name');
-            this.varieties = models.map(model => {
-                return new SelectItem(model.id, model[nameField]);
-            });
+
+            if (models != null) {
+                const fieldMapper = new FieldMapper(this.langService.getLanguage());
+                const nameField = fieldMapper.get('name');
+                this.varieties = models.map(model => {
+                    return new SelectItem(model.id, model[nameField]);
+                });
+            } else {
+                this.varieties = [];
+            }
 
             if (updateValue) {
-                const cropVarietyControl = this.form.controls['cropVarietyId'];
-                const value = this.varieties.length > 0 ? this.varieties[0].id : null;
-                cropVarietyControl.setValue(value);
+                // TODO only if necessary
             }
         });
     }

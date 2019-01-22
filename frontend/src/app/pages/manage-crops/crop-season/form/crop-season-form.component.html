@@ -53,11 +53,12 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <label for="cropVarietyModel" translate>crop.variety</label>
-                    <select id="cropVarietyModel" class="form-control custom-select" formControlName="cropVarietyModel">
+                    <label for="cropVarietyId" translate>crop.variety</label>
+                    <select id="cropVarietyId" class="form-control custom-select" formControlName="cropVarietyId">
+                        <option disabled></option>
                         <option *ngFor="let item of varieties" [ngValue]="item.id">{{ item.name }}</option>
                     </select>
-                    <app-form-error-block [control]="form.get('cropVarietyModel')" [formSubmitted]="submitted"></app-form-error-block>
+                    <app-form-error-block [control]="form.get('cropVarietyId')" [formSubmitted]="submitted"></app-form-error-block>
                 </div>
             </div>
 
