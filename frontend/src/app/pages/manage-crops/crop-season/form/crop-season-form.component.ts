@@ -120,6 +120,7 @@ export class CropSeasonFormComponent implements OnInit {
         this.cropSeasonService.findOne(id).subscribe(model => {
             this.model = model;
             this.setupCrops(model.cropCategoryId, false);
+            this.setupCropVarieties(model.cropId, false);
             this.buildForm();
         });
     }
@@ -138,15 +139,13 @@ export class CropSeasonFormComponent implements OnInit {
             cropVarietyId: new FormControl(this.model.cropVarietyId),
             startDate: new FormControl(this.model.startDate, [Validators.required]),
             endDate: new FormControl(this.model.endDate, [Validators.required]),
-            yieldGoal: new FormControl(this.model.yieldGoal)
+            yieldGoal: new FormControl(this.model.yieldGoal, [Validators.min(0)])
         });
     }
 
 
     public save(form: FormGroup) {
-
         this.submitted = true;
-
         if (!form.valid) {
             this.alertService.validationFailed();
             return;

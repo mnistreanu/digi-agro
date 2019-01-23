@@ -24,7 +24,7 @@ export class CropSeasonService {
     }
 
     save(model: CropSeasonModel): Observable<CropSeasonModel> {
-        return this.http.post<CropSeasonModel>(this.api, model);
+        return this.http.post<CropSeasonModel>(this.api + '/', model);
     }
 
     remove(id: number): Observable<void> {

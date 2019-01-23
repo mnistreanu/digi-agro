@@ -12,7 +12,13 @@ import java.util.List;
 
 @Service
 public class CropSeasonService implements HasRepository<CropSeasonRepository> {
-    
+
+    @Autowired
+    private CropService cropService;
+
+    @Autowired
+    private CropVarietyService cropVarietyService;
+
     @Autowired
     private CropSeasonRepository cropSeasonRepository;
 
@@ -48,8 +54,10 @@ public class CropSeasonService implements HasRepository<CropSeasonRepository> {
         }
 
         season.setTenantId(model.getTenantId());
-//        season.setCropId(model.getCropId());
-//        season.setCropVarietyModel(model.getCropVarietyModel());
+        season.setCrop(cropService.findOne(model.getCropId()));
+        if (model.getCropVarietyId() != null) {
+            season.setCropVariety(cropVarietyService.findOne(model.getCropVarietyId()));
+        }
         season.setHarvestYear(model.getHarvestYear());
         season.setStartDate(model.getStartDate());
         season.setEndDate(model.getEndDate());

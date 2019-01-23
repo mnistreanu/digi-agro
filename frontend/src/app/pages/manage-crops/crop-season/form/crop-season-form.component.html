@@ -15,28 +15,28 @@
             <div class="form-group row">
                 <div class="col-sm-6">
                     <label for="harvestYear" translate>crop.harvest-year</label>
-                    <select id="harvestYear" class="form-control custom-select">
+                    <select id="harvestYear" class="form-control" formControlName="harvestYear">
                         <option disabled></option>
-                        <option id="2017">2017</option>
-                        <option id="2018">2018</option>
-                        <option id="2019">2019</option>
-                        <option id="2020">2020</option>
-                        <option id="2021">2021</option>
-                        <option id="2022">2022</option>
-                        <option id="2023">2023</option>
-                        <option id="2024">2024</option>
-                        <option id="2025">2025</option>
-                        <option id="2026">2026</option>
-                        <option id="2027">2027</option>
-                        <option id="2028">2028</option>
-                        <option id="2029">2029</option>
+                        <option>2017</option>
+                        <option>2018</option>
+                        <option>2019</option>
+                        <option>2020</option>
+                        <option>2021</option>
+                        <option>2022</option>
+                        <option>2023</option>
+                        <option>2024</option>
+                        <option>2025</option>
+                        <option>2026</option>
+                        <option>2027</option>
+                        <option>2028</option>
+                        <option>2029</option>
                     </select>
                     <app-form-error-block [control]="form.get('harvestYear')" [formSubmitted]="submitted"></app-form-error-block>
                 </div>
 
                 <div class="col-sm-6">
                     <label for="cropCategoryId" translate>crop.category</label>
-                    <select id="cropCategoryId" class="form-control custom-select" formControlName="cropCategoryId" (change)="onCropCategoryChange()">
+                    <select id="cropCategoryId" class="form-control" formControlName="cropCategoryId" (change)="onCropCategoryChange()">
                         <option *ngFor="let item of cropCategories" [ngValue]="item.id">{{ item.name }}</option>
                     </select>
                     <app-form-error-block [control]="form.get('cropCategoryId')" [formSubmitted]="submitted"></app-form-error-block>
@@ -46,7 +46,8 @@
             <div class="form-group row">
                 <div class="col-sm-6">
                     <label for="cropId" translate>crop.name</label>
-                    <select id="cropId" class="form-control custom-select" formControlName="cropId" (change)="onCropChange()">
+                    <select id="cropId" class="form-control" formControlName="cropId" (change)="onCropChange()">
+                        <option disabled></option>
                         <option *ngFor="let item of crops" [ngValue]="item.id">{{ item.name }}</option>
                     </select>
                     <app-form-error-block [control]="form.get('cropId')" [formSubmitted]="submitted"></app-form-error-block>
@@ -54,7 +55,7 @@
 
                 <div class="col-sm-6">
                     <label for="cropVarietyId" translate>crop.variety</label>
-                    <select id="cropVarietyId" class="form-control custom-select" formControlName="cropVarietyId">
+                    <select id="cropVarietyId" class="form-control" formControlName="cropVarietyId">
                         <option disabled></option>
                         <option *ngFor="let item of varieties" [ngValue]="item.id">{{ item.name }}</option>
                     </select>
@@ -79,7 +80,7 @@
             <div class="form-group row">
                 <div class="col-sm-6">
                     <label for="yieldGoal" translate>agro-work.yield-goal</label>
-                    <input id="yieldGoal" class="form-control checking-field" formControlName="yieldGoal" type="number"/>
+                    <input id="yieldGoal" class="form-control checking-field" formControlName="yieldGoal" type="number" min="0"/>
                     <app-form-error-block [control]="form.get('yieldGoal')" [formSubmitted]="submitted"></app-form-error-block>
                 </div>
 
