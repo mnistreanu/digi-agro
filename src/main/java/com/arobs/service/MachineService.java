@@ -50,6 +50,13 @@ public class MachineService implements HasRepository<MachineRepository> {
         return getRepository().find(tenantId);
     }
 
+    public List<Machine> find(Long tenantId, Long machineGroupId) {
+        if (machineGroupId == null) {
+            return find(tenantId);
+        }
+        return getRepository().find(tenantId, machineGroupId);
+    }
+
     public List<Machine> findAll(List<Long> ids) {
         return getRepository().findAll(ids);
     }

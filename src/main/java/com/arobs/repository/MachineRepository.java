@@ -19,4 +19,8 @@ public interface MachineRepository extends JpaRepository<Machine, Long> {
     @Query("SELECT m FROM Machine m " +
             "WHERE m.active = true AND m.tenant.id = :tenantId")
     List<Machine> find(@Param("tenantId") Long tenantId);
+
+    @Query("SELECT m FROM Machine m " +
+            "WHERE m.active = true AND m.tenant.id = :tenantId AND m.machineGroup.id = :machineGroupId")
+    List<Machine> find(@Param("tenantId") Long tenantId, @Param("machineGroupId") Long machineGroupId);
 }

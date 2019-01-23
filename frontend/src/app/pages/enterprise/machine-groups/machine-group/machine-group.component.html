@@ -1,37 +1,39 @@
 <form [formGroup]="form" *ngIf="model" (keydown.enter)="$event.preventDefault()">
 
-  <div widget class="card bottom-30">
-    <div class="card-header">
-      <span translate>machine-group.title</span>
-      <div class="widget-controls">
-        <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
-        <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
-        <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
-        <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>
-        <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
-      </div>
-    </div>
-    <div class="card-body widget-body">
-
-      <div class="form-group row">
-        <div class="col-sm-12">
-          <label for="name" translate>info.name</label>
-          <div>
-            <input id="name" class="form-control" formControlName="name">
-          </div>
-          <app-form-error-block [control]="form.get('name')"
-                                [formSubmitted]="submitted">
-          </app-form-error-block>
+    <div widget class="card bottom-30">
+        <div class="card-header">
+            <span translate>machine-group.title</span>
+            <div class="widget-controls">
+                <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
+                <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
+                <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
+                <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>
+                <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+            </div>
         </div>
-      </div>
+        <div class="card-body widget-body">
 
-      <div class="form-group">
-        <button class="btn btn-danger" *ngIf="!isNew" (click)="remove()" translate>action.remove</button>
-        <button class="btn btn-success pull-right" (click)="save(form)" translate>action.save</button>
-        <button class="btn btn-default mr-1 pull-right" (click)="back()" translate>action.back</button>
-      </div>
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <label for="name" translate>info.name</label>
+                    <div>
+                        <input id="name" class="form-control" formControlName="name">
+                    </div>
+                    <app-form-error-block [control]="form.get('name')"
+                                          [formSubmitted]="submitted">
+                    </app-form-error-block>
+                </div>
+            </div>
 
+            <div class="form-group">
+                <button class="btn btn-danger" *ngIf="!isNew" (click)="remove()" translate>action.remove</button>
+                <button class="btn btn-success pull-right" (click)="save(form)" translate>action.save</button>
+                <button class="btn btn-default mr-1 pull-right" (click)="back()" translate>action.back</button>
+            </div>
+
+        </div>
     </div>
-  </div>
+
+    <app-machine-list *ngIf="!isNew" [machineGroupId]="model.id" [readOnlyMode]="true"></app-machine-list>
 
 </form>

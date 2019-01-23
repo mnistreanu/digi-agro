@@ -20,9 +20,12 @@ public class MachineController {
     private MachineService machineService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<List<MachineModel>> getModels(HttpSession session) {
+    public ResponseEntity<List<MachineModel>> getModels(
+            @RequestParam(value = "machineGroupId", required = false) Long machineGroupId,
+            HttpSession session) {
+
         Long tenant = (Long) session.getAttribute("tenant");
-        List<Machine> items = machineService.find(tenant);
+        List<Machine> items = machineService.find(tenant, machineGroupId);
         List<MachineModel> models = items.stream().map(MachineModel::new).collect(Collectors.toList());
 
         return ResponseEntity.ok(models);

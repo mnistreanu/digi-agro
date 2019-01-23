@@ -30,6 +30,11 @@ export class MachineService {
         return this.http.get<MachineModel[]>(this.api + '/');
     }
 
+    findByGroup(machineGroupId: number) {
+        const queryParams = machineGroupId == null ? '' : '?machineGroupId=' + machineGroupId;
+        return this.http.get<MachineModel[]>(this.api + '/' + queryParams);
+    }
+
     save(model: MachineModel): Observable<MachineModel> {
         return this.http.post<MachineModel>(this.api + '/', model);
     }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {ColDef, GridOptions} from 'ag-grid';
 import {MachineService} from '../../../../services/machine.service';
@@ -11,6 +11,9 @@ import {LangService} from '../../../../services/lang.service';
     styleUrls: ['./machine-list.component.scss']
 })
 export class MachineListComponent implements OnInit {
+
+    @Input() machineGroupId: number;
+    @Input() readOnlyMode: boolean;
 
     options: GridOptions;
     context;
@@ -38,9 +41,10 @@ export class MachineListComponent implements OnInit {
     }
 
     private setupHeaders() {
+        let headers: ColDef[] = [];
 
-        const headers: ColDef[] = [
-            {
+        if (!this.readOnlyMode) {
+            headers.push({
                 field: 'edit',
                 width: 24,
                 minWidth: 24,
@@ -52,7 +56,10 @@ export class MachineListComponent implements OnInit {
                 cellStyle: () => {
                     return {padding: 0};
                 }
-            },
+            });
+        }
+
+        headers = headers.concat([
             {
                 headerName: 'machine.type',
                 field: 'type',
@@ -84,7 +91,7 @@ export class MachineListComponent implements OnInit {
                 width: 300,
                 minWidth: 300
             }
-        ];
+        ]);
 
         headers.forEach(header => {
             if (header.headerName) {
@@ -96,7 +103,7 @@ export class MachineListComponent implements OnInit {
     }
 
     private setupRows() {
-        this.machineService.findAll().subscribe(models => {
+        this.machineService.findByGroup(this.machineGroupId).subscribe(models => {
             models.forEach((model) => {
                 model.type = this.langService.instant('machine-type.' + model.type);
                 model['brandAndModel'] = model.brand + ' ' + model.model;
@@ -105,6 +112,10 @@ export class MachineListComponent implements OnInit {
             });
             this.options.api.setRowData(models);
         });
+    }
+
+    public refreshData() {
+        this.setupRows();
     }
 
     public onGridReady() {

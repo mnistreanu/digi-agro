@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AlertService} from '../../../../services/alert.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MachineGroupService} from '../../../../services/machine/machine-group.service';
 import {MachineGroupModel} from './machine-group.model';
+import {MachineListComponent} from '../../manage-machines/machine-list/machine-list.component';
 
 @Component({
     selector: 'app-machine-group',
@@ -11,6 +12,8 @@ import {MachineGroupModel} from './machine-group.model';
     styleUrls: ['./machine-group.component.scss']
 })
 export class MachineGroupComponent implements OnInit {
+
+    @ViewChild(MachineListComponent) machineListComponent: MachineListComponent;
 
     form: FormGroup;
     submitted = false;
@@ -72,12 +75,16 @@ export class MachineGroupComponent implements OnInit {
 
         Object.assign(this.model, form.value);
 
-        this.isNew = false;
         this.submitted = false;
 
         this.machineGroupService.save(this.model).subscribe((model) => {
             this.model = model;
+            this.isNew = false;
             this.alertService.saved();
+            setTimeout(() => {
+                // timeout: component may not present (*ngIf)
+                this.machineListComponent.refreshData();
+            }, 0);
         });
     }
 
