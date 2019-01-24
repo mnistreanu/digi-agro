@@ -120,8 +120,6 @@ export class CropSeasonFormComponent implements OnInit {
     private setupModel(id) {
         this.cropSeasonService.findOne(id).subscribe(model => {
             this.model = model;
-            this.model.startDate = DateUtil.formatDateISO(this.model.startDate);
-            this.model.endDate = DateUtil.formatDateISO(this.model.endDate);
             this.setupCrops(model.cropCategoryId, false);
             this.setupCropVarieties(model.cropId, false);
             this.buildForm();
@@ -140,8 +138,8 @@ export class CropSeasonFormComponent implements OnInit {
             cropCategoryId: new FormControl(this.model.cropCategoryId, [Validators.required]),
             cropId: new FormControl(this.model.cropId, [Validators.required]),
             cropVarietyId: new FormControl(this.model.cropVarietyId),
-            startDate: new FormControl(this.model.startDate, [Validators.required]),
-            endDate: new FormControl(this.model.endDate, [Validators.required]),
+            startDate: new FormControl(DateUtil.formatDateISO(this.model.startDate), [Validators.required]),
+            endDate: new FormControl(DateUtil.formatDateISO(this.model.endDate), [Validators.required]),
             yieldGoal: new FormControl(this.model.yieldGoal, [Validators.min(0)])
         });
     }
