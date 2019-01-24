@@ -10,6 +10,7 @@ import {SelectItem} from '../../../../dto/select-item.dto';
 import {CropSeasonService} from '../../../../services/crop/crop-season.service';
 import {AlertService} from '../../../../services/alert.service';
 import {CropVarietyService} from '../../../../services/crop/crop-variety.service';
+import {DateUtil} from '../../../../common/dateUtil';
 
 @Component({
     selector: 'app-crop',
@@ -119,6 +120,8 @@ export class CropSeasonFormComponent implements OnInit {
     private setupModel(id) {
         this.cropSeasonService.findOne(id).subscribe(model => {
             this.model = model;
+            this.model.startDate = DateUtil.formatDateISO(this.model.startDate);
+            this.model.endDate = DateUtil.formatDateISO(this.model.endDate);
             this.setupCrops(model.cropCategoryId, false);
             this.setupCropVarieties(model.cropId, false);
             this.buildForm();

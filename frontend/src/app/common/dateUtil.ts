@@ -7,6 +7,11 @@ export class DateUtil {
         return datePipe.transform(date, 'yyyyMMdd');
     }
 
+    public static formatDateISO(date: Date): string {
+        const datePipe = new DatePipe('en-US');
+        return datePipe.transform(date, 'yyyy-MM-dd');
+    }
+
     public static formatDateWithTime(date: Date): string {
         const datePipe = new DatePipe('en-US');
         return datePipe.transform(date, 'dd/MM/yyyy hh:mm');
