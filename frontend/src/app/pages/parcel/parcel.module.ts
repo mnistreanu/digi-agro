@@ -8,11 +8,10 @@ import {TranslateModule} from '@ngx-translate/core';
 import {DirectivesModule} from '../../theme/directives/directives.module';
 import {ParcelListComponent} from './parcel-list/parcel-list.component';
 import {ParcelMapComponent} from './parcel-map/parcel-map.component';
-import {ParcelComponent} from './parcel/parcel.component';
 import {Constants} from '../../common/constants';
 
 export const routes = [
-    {path: '', component: ParcelComponent, pathMatch: 'full'}
+    {path: '', component: ParcelListComponent, pathMatch: 'full'}
 ];
 
 @NgModule({
@@ -26,7 +25,7 @@ export const routes = [
         NguiMapModule.forRoot({apiUrl: Constants.GOOGLE_MAP_API}),
         RouterModule.forChild(routes),
     ],
-    declarations: [ParcelListComponent, ParcelMapComponent, ParcelComponent]
+    declarations: [ParcelListComponent, ParcelMapComponent]
 })
 export class ParcelModule {
 }

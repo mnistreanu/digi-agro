@@ -131,9 +131,9 @@ export const routes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
-                path: 'parcel',
+                path: 'parcels',
                 loadChildren: 'app/pages/parcel/parcel.module#ParcelModule',
-                data: {breadcrumb: 'Parcel'},
+                data: {breadcrumb: 'Parcels'},
                 canActivate: [AuthGuard]
             },
             {

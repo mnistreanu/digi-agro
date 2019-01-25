@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {ParcelModel} from '../../telemetry/parcel.model';
@@ -11,13 +11,11 @@ import {ParcelService} from '../../../services/parcel.service';
 })
 export class ParcelListComponent implements OnInit {
 
-    @Output() dataChanged: EventEmitter<ParcelModel[]> = new EventEmitter<ParcelModel[]>();
-    @Output() centerChanged: EventEmitter<any> = new EventEmitter<any>();
-
     options: GridOptions;
     context;
 
     models: ParcelModel[] = [];
+    selectedParcelFirstCoord: any;
 
     constructor(private parcelService: ParcelService,
                 private langService: LangService) {
@@ -90,7 +88,6 @@ export class ParcelListComponent implements OnInit {
             this.models = models;
             this.adjustGridSize();
             this.parcelService.adjust(this.models);
-            this.dataChanged.emit(this.models);
         });
     }
 
@@ -108,8 +105,7 @@ export class ParcelListComponent implements OnInit {
 
     onSelectionChanged() {
         const model = this.options.api.getSelectedRows()[0];
-        const firstCoord = model.paths[0];
-        this.centerChanged.emit(firstCoord);
+        this.selectedParcelFirstCoord = model.paths[0];
     }
 
 }
