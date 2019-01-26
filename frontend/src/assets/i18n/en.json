@@ -12,8 +12,8 @@
 	},
 	"agro-work": {
 		"date": "Date",
-		"end-date": "End date",
 		"start-date": "Start date",
+		"end-date": "End date",
 		"type": "Type of work",
 		"yield-goal": "Default yield goal"
 	},
@@ -39,12 +39,14 @@
 	"crop": {
 		"category": "Category",
 		"crop": "Crop",
+		"subcultures": "Subcultures",
 		"harvest-year": "Harvest year",
 		"name": "Agricultural crop",
 		"planting-date": "Planting date",
 		"season": "Crop season",
 		"seed-consumption-ha": "Seed Consumption, Ha",
 		"seeds": "Seeds",
+		"subculture": "Subculture",
 		"unit-of-measure-long": "Unit of measure",
 		"unit-of-measure-short": "Unit",
 		"varieties": "Crop varieties",
@@ -214,6 +216,7 @@
 		"costs-forecasting-form": "Costs forecasting FORM",
 		"crop-planner": "Crop planner",
 		"crop-seasons": "Crop seasons",
+		"crop-subcultures": "Subcultures",
 		"crop-varieties": "Crop varieties",
 		"crops": "Crops",
 		"crops-varieties": "Crops & Varieties",

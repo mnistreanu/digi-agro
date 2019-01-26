@@ -16,14 +16,18 @@ import { CropVarietyListComponent } from './crop-variety/list/crop-variety-list.
 import { CropVarietyFormComponent } from './crop-variety/form/crop-variety-form.component';
 import {CropSeasonListComponent} from './crop-season/list/crop-season-list.component';
 import {CropSeasonFormComponent} from './crop-season/form/crop-season-form.component';
+import {CropSubcultureFormComponent} from './crop-subculture/form/crop-subculture-form.component';
+import {CropSubcultureListComponent} from './crop-subculture/list/crop-subculture-list.component';
 
 
 const routes: Routes = [
     {path: 'crop-list', component: CropListComponent},
     {path: 'crop-list/:id', component: CropFormComponent, data: {breadcrumb: 'Crop Form'}},
-    {path: 'crop-variety-tree', component: CropVarietyTreeComponent, pathMatch: 'full', data: {breadcrumb: 'Crop & Varieties'}},
+    {path: 'crop-subculture-list', component: CropSubcultureListComponent, pathMatch: 'full', data: {breadcrumb: 'Crop Subcultures'}},
+    {path: 'crop-subculture-list/:id', component: CropSubcultureFormComponent, pathMatch: 'full', data: {breadcrumb: 'Crop Subculture'}},
     {path: 'crop-variety-list', component: CropVarietyListComponent, pathMatch: 'full', data: {breadcrumb: 'Crop Varieties'}},
     {path: 'crop-variety-list/:id', component: CropVarietyFormComponent, pathMatch: 'full', data: {breadcrumb: 'Crop Variety'}},
+    {path: 'crop-variety-tree', component: CropVarietyTreeComponent, pathMatch: 'full', data: {breadcrumb: 'Crop & Varieties'}},
     {path: 'crop-season-list', component: CropSeasonListComponent, pathMatch: 'full', data: {breadcrumb: 'Crop Seasons'}},
     {path: 'crop-season-list/:id', component: CropSeasonFormComponent, pathMatch: 'full', data: {breadcrumb: 'Crop Season'}},
 ];
@@ -47,6 +51,7 @@ const routes: Routes = [
         AgGridModule.withComponents([EditRendererComponent])
     ],
     declarations: [CropListComponent, CropFormComponent,
+                   CropSubcultureListComponent, CropSubcultureFormComponent,
                    CropVarietyTreeComponent, CropVarietyListComponent, CropVarietyFormComponent,
                    CropSeasonListComponent, CropSeasonFormComponent]
 })

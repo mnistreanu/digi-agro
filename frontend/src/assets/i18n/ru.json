@@ -12,8 +12,8 @@
 	},
 	"agro-work": {
 		"date": "Дата",
-		"end-date": "Дата окончания",
 		"start-date": "Дата начала",
+		"end-date": "Дата окончания",
 		"type": "Тип работы",
 		"yield-goal": "Цель доходности по умолчанию"
 	},
@@ -39,12 +39,14 @@
 	"crop": {
 		"category": "Категория",
 		"crop": "Сель.хоз. культура",
+		"subcultures": "Субкультуры",
 		"harvest-year": "Год урожая",
 		"name": "Сельскохозяйственная культура",
 		"planting-date": "Дата посадки",
 		"season": "Сезон урожая",
 		"seed-consumption-ha": "Потребление семян, га",
 		"seeds": "Семена",
+		"subculture": "Субкультура",
 		"unit-of-measure-long": "Единица измерения",
 		"unit-of-measure-short": "Ед.И.",
 		"varieties": "Сорта сельскохозяйственных культур",
@@ -214,6 +216,7 @@
 		"costs-forecasting-form": "Прогнозирование затрат FORM",
 		"crop-planner": "Планировщик культуры",
 		"crop-seasons": "Посевные сезоны",
+		"crop-subcultures": "Субкультуры",
 		"crop-varieties": "Сельскохозяйственные сорта",
 		"crops": "Сельхоз. культуры",
 		"crops-varieties": "Сельскохозяйственные культуры и сорта",

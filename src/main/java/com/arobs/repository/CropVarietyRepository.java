@@ -12,9 +12,9 @@ import java.util.List;
 public interface CropVarietyRepository extends JpaRepository<CropVariety, Long> {
 
     @Query("SELECT v FROM CropVariety v " +
-            "WHERE v.crop.id = :cropId " +
+            "WHERE v.cropSubculture.id = :cropSubcultureId " +
             "ORDER BY v.nameRo ")
-    List<CropVariety> find(@Param("cropId") Long cropId);
+    List<CropVariety> find(@Param("cropSubcultureId") Long cropSubcultureId);
 
 }
 

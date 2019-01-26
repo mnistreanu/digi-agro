@@ -224,7 +224,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>end-date</name>
+                        <name>start-date</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -245,7 +245,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>start-date</name>
+                        <name>end-date</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -569,6 +569,27 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>subcultures</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ro-RO</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ru-RU</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>harvest-year</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
@@ -675,6 +696,27 @@
                     </concept_node>
                     <concept_node>
                         <name>seeds</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ro-RO</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ru-RU</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>subculture</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -3595,6 +3637,27 @@
                     </concept_node>
                     <concept_node>
                         <name>crop-seasons</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ro-RO</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ru-RU</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>crop-subcultures</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -8213,7 +8276,6 @@
             </folder_node>
         </children>
     </folder_node>
-    <isTemplateProject>false</isTemplateProject>
     <translation_files>
         <translation_file>
             <language>ru-RU</language>

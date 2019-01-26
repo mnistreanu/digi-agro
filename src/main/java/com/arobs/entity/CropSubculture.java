@@ -6,8 +6,8 @@ import javax.persistence.*;
  * Created by mihail.gorgos on 14.07.2018.
  */
 @Entity
-@Table(name = "sub_crop")
-public class SubCrop {
+@Table(name = "crop_subculture")
+public class CropSubculture {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,7 @@ public class SubCrop {
     @Column(name = "description_ru", length = 4000)
     private String descriptionRu;
 
-    public SubCrop() {
+    public CropSubculture() {
     }
 
     public Long getId() {

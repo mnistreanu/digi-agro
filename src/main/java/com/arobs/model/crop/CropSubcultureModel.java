@@ -1,12 +1,11 @@
 package com.arobs.model.crop;
 
 import com.arobs.entity.Crop;
-import com.arobs.entity.CropVariety;
-import com.arobs.entity.SubCrop;
+import com.arobs.entity.CropSubculture;
 
 import java.io.Serializable;
 
-public class SubCropModel implements Serializable {
+public class CropSubcultureModel implements Serializable {
 
     private Long cropCategoryId;
     private Long cropId;
@@ -16,10 +15,10 @@ public class SubCropModel implements Serializable {
     private String descriptionRo;
     private String descriptionRu;
 
-    public SubCropModel() {
+    public CropSubcultureModel() {
     }
 
-    public SubCropModel(SubCrop subCrop) {
+    public CropSubcultureModel(CropSubculture subCrop) {
         this.id = subCrop.getId();
         Crop crop = subCrop.getCrop();
         this.cropId = crop.getId();
