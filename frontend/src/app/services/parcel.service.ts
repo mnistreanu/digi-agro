@@ -17,6 +17,10 @@ export class ParcelService {
                 private langService: LangService) {
     }
 
+    findOne(id: number) {
+        return this.http.get<ParcelModel>(this.api + '/' + id);
+    }
+
     find(): Observable<ParcelModel[]> {
         return this.http.get<ParcelModel[]>(this.api + '/');
     }
