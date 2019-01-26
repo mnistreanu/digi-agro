@@ -3,6 +3,8 @@ import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {ParcelModel} from '../../telemetry/parcel.model';
 import {ParcelService} from '../../../services/parcel.service';
+import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'app-parcel-list',
@@ -17,7 +19,9 @@ export class ParcelListComponent implements OnInit {
     models: ParcelModel[] = [];
     selectedParcelFirstCoord: any;
 
-    constructor(private parcelService: ParcelService,
+    constructor(private router: Router,
+                private route: ActivatedRoute,
+                private parcelService: ParcelService,
                 private langService: LangService) {
     }
 
@@ -41,6 +45,18 @@ export class ParcelListComponent implements OnInit {
     private setupHeaders() {
 
         const headers: ColDef[] = [
+            {
+                field: 'edit',
+                width: 24,
+                minWidth: 24,
+                editable: false,
+                suppressResize: true,
+                suppressMenu: true,
+                cellRendererFramework: EditRendererComponent,
+                cellStyle: () => {
+                    return {padding: 0};
+                }
+            },
             {
                 headerName: 'info.name',
                 field: 'name',
@@ -75,7 +91,9 @@ export class ParcelListComponent implements OnInit {
         ];
 
         headers.forEach(h => {
-            this.langService.get(h.headerName).subscribe(m => h.headerName = m);
+            if (h.headerName) {
+                this.langService.get(h.headerName).subscribe(m => h.headerName = m);
+            }
         });
 
         return headers;
@@ -106,6 +124,11 @@ export class ParcelListComponent implements OnInit {
     onSelectionChanged() {
         const model = this.options.api.getSelectedRows()[0];
         this.selectedParcelFirstCoord = model.paths[0];
+    }
+
+    public onEdit(node) {
+        const model = node.data;
+        this.router.navigate(['./' + model.id], {relativeTo: this.route});
     }
 
 }

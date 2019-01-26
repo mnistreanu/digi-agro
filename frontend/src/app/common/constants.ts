@@ -12,7 +12,7 @@ export class Constants {
     public static PAGE_AFTER_LOGIN = '/pages/dashboard';
     public static ERROR_PAGE = '/error';
 
-    public static GOOGLE_MAP_API = 'https://maps.google.com/maps/api/js?key=AIzaSyC_u-ujFg1xhXlOnOV0GyptTlory-KvlFY';
+    public static GOOGLE_MAP_API = 'https://maps.google.com/maps/api/js?key=AIzaSyC_u-ujFg1xhXlOnOV0GyptTlory-KvlFY&libraries=drawing';
 
     public static MAX_FILE_SIZE = 128000000;
 
