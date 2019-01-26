@@ -26,6 +26,10 @@ public class ParcelService implements HasRepository<ParcelRepository> {
         return getRepository().find(tenantId);
     }
 
+    public Parcel findOne(Long id) {
+        return getRepository().findOne(id);
+    }
+
     public ParcelGeometry findParcelGeometry(Long parcelId) {
         return parcelGeometryRepository.findOne(parcelId);
     }
@@ -33,5 +37,4 @@ public class ParcelService implements HasRepository<ParcelRepository> {
     public List<Parcel> findAll(List<Long> ids) {
         return getRepository().findAll(ids);
     }
-
 }
