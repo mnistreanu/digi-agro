@@ -13,6 +13,7 @@ import {ParcelModel} from '../../telemetry/parcel.model';
 export class ParcelComponent implements OnInit {
 
     parcelModel: ParcelModel;
+    tabIndex = 1;
 
     constructor(private fb: FormBuilder,
                 private router: Router,
@@ -23,6 +24,10 @@ export class ParcelComponent implements OnInit {
 
     ngOnInit() {
         this.restoreModel();
+    }
+
+    changeTab(tabIndex) {
+        this.tabIndex = tabIndex;
     }
 
     private restoreModel() {
@@ -47,5 +52,17 @@ export class ParcelComponent implements OnInit {
     }
 
     private prepareNewModel() {}
+
+    save() {
+        alert('Save');
+    }
+
+    remove() {
+        alert('Delete');
+    }
+
+    back() {
+        this.router.navigate(['../'], {relativeTo: this.route});
+    }
 
 }

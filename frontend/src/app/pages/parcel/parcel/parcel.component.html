@@ -1,4 +1,4 @@
-<div widget class="card bottom-30">
+<div widget class="card bottom-30" *ngIf="parcelModel">
     <div class="card-header">
         <span translate>parcel.parcels</span>
         <div class="widget-controls">
@@ -10,23 +10,29 @@
         </div>
     </div>
     <div class="card-body widget-body">
-        form
-    </div>
-</div>
 
-
-<div widget class="card bottom-30">
-    <div class="card-header">
-        <span translate>geo.map</span>
-        <div class="widget-controls">
-            <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
-            <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
-            <a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>
-            <a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>
-            <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="tabIndex == 1" (click)="changeTab(1)">General</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="tabIndex == 2" (click)="changeTab(2)">Map</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" *ngIf="tabIndex == 1" [class.active]="tabIndex == 1">
+                <app-parcel-info-form *ngIf="parcelModel" [parcelModel]="parcelModel"></app-parcel-info-form>
+            </div>
+            <div class="tab-pane" *ngIf="tabIndex == 2" [class.active]="tabIndex == 2">
+                <app-parcel-map-editor [parcelModel]="parcelModel"></app-parcel-map-editor>
+            </div>
         </div>
-    </div>
-    <div class="card-body widget-body">
-        <app-parcel-map-editor [parcelModel]="parcelModel"></app-parcel-map-editor>
+
+        <div class="mt-3">
+            <button class="btn btn-danger" *ngIf="parcelModel.id != null" (click)="remove()" translate>action.remove</button>
+            <button class="btn btn-success pull-right" (click)="save()" translate>action.save</button>
+            <button class="btn btn-default mr-1 pull-right" (click)="back()" translate>action.back</button>
+        </div>
+
     </div>
 </div>

@@ -13,6 +13,8 @@ import { ParcelComponent } from './parcel/parcel.component';
 import {EditRendererComponent} from '../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {EditRendererModule} from '../../modules/aggrid/edit-renderer/edit-renderer.module';
 import { ParcelMapEditorComponent } from './parcel-map-editor/parcel-map-editor.component';
+import { ParcelInfoFormComponent } from './parcel-info-form/parcel-info-form.component';
+import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-block.module';
 
 export const routes = [
     {path: '', component: ParcelListComponent, pathMatch: 'full'},
@@ -25,13 +27,14 @@ export const routes = [
         TranslateModule,
         FormsModule,
         ReactiveFormsModule,
+        FormErrorBlockModule,
         DirectivesModule,
         EditRendererModule,
         AgGridModule.withComponents([EditRendererComponent]),
         NguiMapModule.forRoot({apiUrl: Constants.GOOGLE_MAP_API}),
         RouterModule.forChild(routes),
     ],
-    declarations: [ParcelListComponent, ParcelMapComponent, ParcelComponent, ParcelMapEditorComponent]
+    declarations: [ParcelListComponent, ParcelMapComponent, ParcelComponent, ParcelMapEditorComponent, ParcelInfoFormComponent]
 })
 export class ParcelModule {
 }
