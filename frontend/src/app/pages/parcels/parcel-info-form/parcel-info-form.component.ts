@@ -12,7 +12,7 @@ export class ParcelInfoFormComponent implements OnInit {
     @Input() parcelModel: ParcelModel;
 
     form: FormGroup;
-    submitted: boolean;
+    forcedValidation: boolean;
 
     constructor(private fb: FormBuilder) {
     }
@@ -31,5 +31,17 @@ export class ParcelInfoFormComponent implements OnInit {
         });
     }
 
+    public validateAndSubmit() {
+        this.forcedValidation = true;
+
+        if (!this.form.valid) {
+            return false;
+        }
+
+        Object.assign(this.parcelModel, this.form.value);
+
+        this.forcedValidation = false;
+        return true;
+    }
 
 }

@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ParcelService} from '../../../services/parcel.service';
 import {AlertService} from '../../../services/alert.service';
 import {ParcelModel} from '../../telemetry/parcel.model';
+import {ParcelInfoFormComponent} from '../parcel-info-form/parcel-info-form.component';
+import {ParcelMapEditorComponent} from '../parcel-map-editor/parcel-map-editor.component';
 
 @Component({
     selector: 'app-parcel',
@@ -11,6 +13,10 @@ import {ParcelModel} from '../../telemetry/parcel.model';
     styleUrls: ['./parcel.component.scss']
 })
 export class ParcelComponent implements OnInit {
+
+    @ViewChild(ParcelInfoFormComponent) parcelInfoFormComponent;
+    @ViewChild(ParcelMapEditorComponent) parcelMapEditorComponent;
+
 
     parcelModel: ParcelModel;
     tabIndex = 1;
@@ -58,11 +64,16 @@ export class ParcelComponent implements OnInit {
     }
 
     save() {
-        alert('Save');
+        console.log('save');
+        const infoFormValid = this.parcelInfoFormComponent.validateAndSubmit();
+        if (!infoFormValid) {
+            this.alertService.validationFailed();
+        }
+        // todo: process map data...
     }
 
     remove() {
-        alert('Delete');
+        console.log('Delete');
     }
 
     back() {

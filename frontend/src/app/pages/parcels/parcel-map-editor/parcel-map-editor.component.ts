@@ -1,6 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {DrawingManager, NguiMapComponent} from '@ngui/map';
 import {ParcelModel} from '../../telemetry/parcel.model';
+import {LatLng} from '../../../interfaces/lat-lng.interface';
 
 declare const google: any;
 
@@ -21,7 +22,7 @@ export class ParcelMapEditorComponent implements OnInit, OnChanges {
     drawingControlOptions: any;
     shapeOptions: any;
 
-    parcelCoordinates: any;
+    parcelCoordinates: LatLng[];
     onDragging: boolean;
 
     constructor() {

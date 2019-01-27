@@ -5,6 +5,7 @@ import {ParcelModel} from '../pages/telemetry/parcel.model';
 import {environment} from '../../environments/environment';
 import {FieldMapper} from '../common/field.mapper';
 import {LangService} from './lang.service';
+import {LatLng} from '../interfaces/lat-lng.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -45,7 +46,7 @@ export class ParcelService {
         });
     }
 
-    private getCenterOfPolygon(paths) {
+    private getCenterOfPolygon(paths): LatLng {
 
         const pointCount = paths.length;
         let lat = 0;

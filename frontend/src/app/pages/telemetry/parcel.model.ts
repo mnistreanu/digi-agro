@@ -1,3 +1,5 @@
+import {LatLng} from '../../interfaces/lat-lng.interface';
+
 export class ParcelModel {
 
     id: number;
@@ -6,11 +8,11 @@ export class ParcelModel {
     landWorthinessPoints: number;
     area: number;
     description: string;
-    coordinates: any;
+    coordinates: [number, number][];
 
-    paths: any[];
+    paths: LatLng[];
     fillColor: string;
-    center: any;
+    center: LatLng;
     icon: string;
 
     cropName: string;
