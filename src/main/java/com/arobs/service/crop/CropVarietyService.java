@@ -29,7 +29,7 @@ public class CropVarietyService implements HasRepository<CropVarietyRepository> 
     private CropVarietyCustomRepository cropVarietyCustomRepository;
 
     @Autowired
-    private CropService cropService;
+    private CropSubcultureService cropSubcultureService;
 
     public List<CropVariety> find(Long cropId) {
         return getRepository().find(cropId);
@@ -65,9 +65,7 @@ public class CropVarietyService implements HasRepository<CropVarietyRepository> 
         cropVariety.setNameRu(model.getNameRu());
         cropVariety.setDescriptionRo(model.getDescriptionRo());
         cropVariety.setDescriptionRu(model.getDescriptionRu());
-        cropVariety.setCrop(cropService.findOne(model.getCropId()));
-        cropVariety.setSeedConsumptionHa(model.getSeedConsumptionHa());
-        cropVariety.setUnitOfMeasure(model.getUnitOfMeasure());
+        cropVariety.setCropSubculture(cropSubcultureService.findOne(model.getCropSubcultureId()));
 
         return save(cropVariety);
     }

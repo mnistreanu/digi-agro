@@ -1,57 +1,59 @@
 package com.arobs.model.crop;
 
 import com.arobs.entity.Crop;
+import com.arobs.entity.CropSubculture;
 import com.arobs.entity.CropVariety;
 
 import java.io.Serializable;
 
 public class CropVarietyModel implements Serializable {
 
-    private Long cropCategoryId;
-    private Long cropId;
+//    private Long cropCategoryId;
+//    private Long cropId;
     private Long id;
-    private String cropNameRo;
-    private String cropNameRu;
+    private Long cropSubcultureId;
+//    private String cropNameRo;
+//    private String cropNameRu;
     private String nameRo;
     private String nameRu;
     private String descriptionRo;
     private String descriptionRu;
-    private Double seedConsumptionHa;
-    private String unitOfMeasure;
 
     public CropVarietyModel() {
     }
 
     public CropVarietyModel(CropVariety cropVariety) {
         this.id = cropVariety.getId();
-        Crop crop = cropVariety.getCrop();
-        this.cropId = crop.getId();
-        this.cropNameRo = crop.getNameRo();
-        this.cropNameRu = crop.getNameRu();
-        this.cropCategoryId = crop.getCropCategoryId();
+        CropSubculture cropSubculture = cropVariety.getCropSubculture();
+        if (cropSubculture != null) {
+            this.cropSubcultureId = cropSubculture.getId();
+        }
+//        this.cropNameRo = cropSubculture.getNameRo();
+//        this.cropNameRu = cropSubculture.getNameRu();
+//        this.cropCategoryId = cropSubculture.getCropCategoryId();
         this.nameRo = cropVariety.getNameRo();
         this.nameRu = cropVariety.getNameRu();
         this.descriptionRo = cropVariety.getDescriptionRo();
         this.descriptionRu = cropVariety.getDescriptionRu();
-        this.seedConsumptionHa = cropVariety.getSeedConsumptionHa();
-        this.unitOfMeasure = cropVariety.getUnitOfMeasure();
+//        this.seedConsumptionHa = cropVariety.getSeedConsumptionHa();
+//        this.unitOfMeasure = cropVariety.getUnitOfMeasure();
     }
 
-    public Long getCropCategoryId() {
-        return cropCategoryId;
-    }
-
-    public void setCropCategoryId(Long cropCategoryId) {
-        this.cropCategoryId = cropCategoryId;
-    }
-
-    public Long getCropId() {
-        return cropId;
-    }
-
-    public void setCropId(Long cropId) {
-        this.cropId = cropId;
-    }
+//    public Long getCropCategoryId() {
+//        return cropCategoryId;
+//    }
+//
+//    public void setCropCategoryId(Long cropCategoryId) {
+//        this.cropCategoryId = cropCategoryId;
+//    }
+//
+//    public Long getCropId() {
+//        return cropId;
+//    }
+//
+//    public void setCropId(Long cropId) {
+//        this.cropId = cropId;
+//    }
 
     public Long getId() {
         return id;
@@ -59,6 +61,14 @@ public class CropVarietyModel implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getCropSubcultureId() {
+        return cropSubcultureId;
+    }
+
+    public void setCropSubcultureId(Long cropSubcultureId) {
+        this.cropSubcultureId = cropSubcultureId;
     }
 
     public String getNameRo() {
@@ -93,35 +103,20 @@ public class CropVarietyModel implements Serializable {
         this.descriptionRu = descriptionRu;
     }
 
-    public Double getSeedConsumptionHa() {
-        return seedConsumptionHa;
-    }
-
-    public void setSeedConsumptionHa(Double seedConsumptionHa) {
-        this.seedConsumptionHa = seedConsumptionHa;
-    }
-
-    public String getUnitOfMeasure() {
-        return unitOfMeasure;
-    }
-
-    public void setUnitOfMeasure(String unitOfMeasure) {
-        this.unitOfMeasure = unitOfMeasure;
-    }
-
-    public String getCropNameRo() {
-        return cropNameRo;
-    }
-
-    public void setCropNameRo(String cropNameRo) {
-        this.cropNameRo = cropNameRo;
-    }
-
-    public String getCropNameRu() {
-        return cropNameRu;
-    }
-
-    public void setCropNameRu(String cropNameRu) {
-        this.cropNameRu = cropNameRu;
-    }
+//
+//    public String getCropNameRo() {
+//        return cropNameRo;
+//    }
+//
+//    public void setCropNameRo(String cropNameRo) {
+//        this.cropNameRo = cropNameRo;
+//    }
+//
+//    public String getCropNameRu() {
+//        return cropNameRu;
+//    }
+//
+//    public void setCropNameRu(String cropNameRu) {
+//        this.cropNameRu = cropNameRu;
+//    }
 }

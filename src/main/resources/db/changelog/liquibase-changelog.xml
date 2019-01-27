@@ -226,6 +226,34 @@
     </changeSet>
 
     <!--
+        Adaugat 18 sub-culturi
+    -->
+    <changeSet id="insert-subcultres" author="mgorgos" failOnError="true" runOnChange="false">
+        <sql>
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (1, 1, 'Subcultură de Grâu', 'Субкультура Пшеница');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (2, 2, 'Subcultură de Secară', 'Субкультура Рожь');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (3, 3, 'Subcultură de Triticale', 'Субкультура Тритикале');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (4, 4, 'Subcultură de Orz', 'Субкультура Ячмень');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (5, 5, 'Subcultură de Ovăz', 'Субкультура Овес');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (6, 6, 'Subcultură de Porumb', 'Субкультура Кукуруза');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (7, 7, 'Subcultură de Sorg', 'Субкультура Сорг');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (8, 8, 'Subcultură de Mei', 'Субкультура Просо');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (9, 9, 'Subcultură de Orez', 'Субкультура Рис');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (10, 10, 'Subcultură de Hrișca', 'Субкультура Гречиха');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (11, 11, 'Subcultură de Floarea soarelui', 'Субкультура Подсолнечник');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (12, 12, 'Subcultură de Rapiță', 'Субкультура Рапс');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (13, 13, 'Subcultură de Sfeclă de zahăr', 'Сахарная свекла');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (14, 14, 'Subcultură de In', 'Субкультура Лён');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (15, 15, 'Subcultură de Cânepă', 'Субкультура Конопля');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (16, 16, 'Subcultură de Tutun', 'Субкультура Табак');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (17, 17, 'Subcultură de Hamei', 'Субкультура Хмель');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (18, 18, 'Subcultură de Soia', 'Субкультура Соя');
+
+             SELECT setval('crop_subculture_id_seq', (SELECT MAX(id) FROM crop_subculture));
+        </sql>
+    </changeSet>
+
+    <!--
         Adaugat soiuri de griu de la BIOCORP-Romania
     -->
     <changeSet id="insert-crop-varieties-griu" author="mgorgos" failOnError="true" runOnChange="true">

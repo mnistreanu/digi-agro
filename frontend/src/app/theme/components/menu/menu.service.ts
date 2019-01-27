@@ -134,18 +134,7 @@ export class MenuService {
             });
         }
 
-
-        // if (isUser) {
-        //     menuItems.push({
-        //         title: 'nav.crops',
-        //         routerLink: '/pages/manage-crops/crop-variety-list',
-        //         icon: 'fa fa-leaf',
-        //         selected: false,
-        //         expanded: false
-        //     });
-        // }
-
-        if (isSuperAdmin || isAdmin) {
+        if (isSuperAdmin || isAdmin || isUser) {
             menuItems.push({
                 title: 'nav.crops',
                 routerLink: 'manage-crops',
@@ -158,12 +147,16 @@ export class MenuService {
                         routerLink: 'manage-crops/crop-list'
                     },
                     {
-                        title: 'nav.crops-varieties',
-                        routerLink: 'manage-crops/crop-variety-tree'
+                        title: 'nav.crop-subcultures',
+                        routerLink: 'manage-crops/crop-subculture-list'
                     },
                     {
                         title: 'nav.crop-varieties',
                         routerLink: 'manage-crops/crop-variety-list'
+                    },
+                    {
+                        title: 'nav.crops-varieties',
+                        routerLink: 'manage-crops/crop-variety-tree'
                     },
                     {
                         title: 'nav.crop-seasons',

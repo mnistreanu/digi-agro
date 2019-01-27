@@ -1,7 +1,6 @@
 package com.arobs.repository;
 
-import com.arobs.entity.CropVariety;
-import com.arobs.entity.SubCrop;
+import com.arobs.entity.CropSubculture;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,12 +9,16 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SubCropRepository extends JpaRepository<SubCrop, Long> {
+public interface CropSubcultureRepository extends JpaRepository<CropSubculture, Long> {
 
-    @Query("SELECT s FROM SubCrop s " +
+    @Query("SELECT s FROM CropSubculture s " +
+            "ORDER BY s.nameRo ")
+    List<CropSubculture> find();
+
+    @Query("SELECT s FROM CropSubculture s " +
             "WHERE s.crop.id = :cropId " +
             "ORDER BY s.nameRo ")
-    List<SubCrop> find(@Param("cropId") Long cropId);
+    List<CropSubculture> find(@Param("cropId") Long cropId);
 
 }
 

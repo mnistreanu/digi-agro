@@ -14,8 +14,8 @@ public class CropVariety {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "crop_id")
-    private Crop crop;
+    @JoinColumn(name = "crop_subculture_id")
+    private CropSubculture cropSubculture;
 
     @Column(name = "name_ro")
     private String nameRo;
@@ -29,13 +29,6 @@ public class CropVariety {
     @Column(name = "description_ru", length = 4000)
     private String descriptionRu;
 
-    @Column(name = "seed_consumption_ha")
-    private Double seedConsumptionHa;
-
-    @Column(name = "unit_of_measure")
-    private String unitOfMeasure;
-
-
     public CropVariety() {
     }
 
@@ -47,12 +40,12 @@ public class CropVariety {
         this.id = id;
     }
 
-    public Crop getCrop() {
-        return crop;
+    public CropSubculture getCropSubculture() {
+        return cropSubculture;
     }
 
-    public void setCrop(Crop crop) {
-        this.crop = crop;
+    public void setCropSubculture(CropSubculture cropSubculture) {
+        this.cropSubculture = cropSubculture;
     }
 
     public String getNameRo() {
@@ -87,19 +80,4 @@ public class CropVariety {
         this.descriptionRo = descriptionRo;
     }
 
-    public Double getSeedConsumptionHa() {
-        return seedConsumptionHa;
-    }
-
-    public void setSeedConsumptionHa(Double seedConsumptionHa) {
-        this.seedConsumptionHa = seedConsumptionHa;
-    }
-
-    public String getUnitOfMeasure() {
-        return unitOfMeasure;
-    }
-
-    public void setUnitOfMeasure(String unitOfMeasure) {
-        this.unitOfMeasure = unitOfMeasure;
-    }
 }
