@@ -14,6 +14,7 @@ export class ParcelComponent implements OnInit {
 
     parcelModel: ParcelModel;
     tabIndex = 1;
+    loadedTabs = {tabIndex: true};
 
     constructor(private fb: FormBuilder,
                 private router: Router,
@@ -28,6 +29,7 @@ export class ParcelComponent implements OnInit {
 
     changeTab(tabIndex) {
         this.tabIndex = tabIndex;
+        this.loadedTabs[this.tabIndex] = true;
     }
 
     private restoreModel() {
@@ -51,7 +53,9 @@ export class ParcelComponent implements OnInit {
         });
     }
 
-    private prepareNewModel() {}
+    private prepareNewModel() {
+        this.parcelModel = new ParcelModel();
+    }
 
     save() {
         alert('Save');

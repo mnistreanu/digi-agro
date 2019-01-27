@@ -126,6 +126,10 @@ export class ParcelListComponent implements OnInit {
         this.selectedParcelFirstCoord = model.paths[0];
     }
 
+    public addParcel() {
+        this.router.navigate(['./-1'], {relativeTo: this.route});
+    }
+
     public onEdit(node) {
         const model = node.data;
         this.router.navigate(['./' + model.id], {relativeTo: this.route});

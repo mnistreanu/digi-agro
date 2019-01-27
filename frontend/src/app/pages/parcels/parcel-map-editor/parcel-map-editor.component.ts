@@ -18,7 +18,6 @@ export class ParcelMapEditorComponent implements OnInit, OnChanges {
     private mapInstance: any;
     private drawingManagerInstance: any;
 
-    center: any;
     drawingControlOptions: any;
     shapeOptions: any;
 
@@ -29,13 +28,14 @@ export class ParcelMapEditorComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
+        console.log('parcel-map-editor: initialization');
         this.initDrawingManager();
         this.setupDrawingControlOptions();
     }
 
     onMapReady(map) {
         this.mapInstance = map;
-        this.setupCenter();
+        this.setupInitialCenter();
         this.setupParcel();
     }
 
@@ -43,13 +43,12 @@ export class ParcelMapEditorComponent implements OnInit, OnChanges {
         this.setupParcel();
     }
 
-    private setupCenter() {
-        if (this.parcelModel) {
-            this.center = this.parcelModel.center;
-        }
-        else {
-            this.center = 'Moldova, Chisinau';
-        }
+    private setupInitialCenter() {
+        const moldovaChisinau = {
+            lat: 47.0105,
+            lng: 28.8638
+        };
+        this.mapInstance.setCenter(moldovaChisinau);
     }
 
     private setupDrawingControlOptions() {
@@ -147,6 +146,11 @@ export class ParcelMapEditorComponent implements OnInit, OnChanges {
         }
 
         if (!this.mapInstance) {
+            return;
+        }
+
+        // todo: do something when model is new (no initial polygon data)
+        if (this.parcelModel.id == null) {
             return;
         }
 

@@ -20,10 +20,10 @@
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane active" *ngIf="tabIndex == 1" [class.active]="tabIndex == 1">
+            <div class="tab-pane active" *ngIf="tabIndex == 1 || loadedTabs[1]" [class.active]="tabIndex == 1">
                 <app-parcel-info-form *ngIf="parcelModel" [parcelModel]="parcelModel"></app-parcel-info-form>
             </div>
-            <div class="tab-pane" *ngIf="tabIndex == 2" [class.active]="tabIndex == 2">
+            <div class="tab-pane" *ngIf="tabIndex == 2  || loadedTabs[2]" [class.active]="tabIndex == 2">
                 <app-parcel-map-editor [parcelModel]="parcelModel"></app-parcel-map-editor>
             </div>
         </div>
