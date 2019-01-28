@@ -9,6 +9,8 @@ public class CropSubcultureModel implements Serializable {
 
     private Long cropCategoryId;
     private Long cropId;
+    private String cropNameRo;
+    private String cropNameRu;
     private Long id;
     private String nameRo;
     private String nameRu;
@@ -21,8 +23,12 @@ public class CropSubcultureModel implements Serializable {
     public CropSubcultureModel(CropSubculture subCrop) {
         this.id = subCrop.getId();
         Crop crop = subCrop.getCrop();
-        this.cropId = crop.getId();
-        this.cropCategoryId = crop.getCropCategoryId();
+        if (crop != null) {
+            this.cropId = crop.getId();
+            this.cropCategoryId = crop.getCropCategoryId();
+            this.cropNameRo = crop.getNameRo();
+            this.cropNameRu = crop.getNameRu();
+        }
         this.nameRo = subCrop.getNameRo();
         this.nameRu = subCrop.getNameRu();
         this.descriptionRo = subCrop.getDescriptionRo();
@@ -43,6 +49,22 @@ public class CropSubcultureModel implements Serializable {
 
     public void setCropId(Long cropId) {
         this.cropId = cropId;
+    }
+
+    public String getCropNameRo() {
+        return cropNameRo;
+    }
+
+    public void setCropNameRo(String cropNameRo) {
+        this.cropNameRo = cropNameRo;
+    }
+
+    public String getCropNameRu() {
+        return cropNameRu;
+    }
+
+    public void setCropNameRu(String cropNameRu) {
+        this.cropNameRu = cropNameRu;
     }
 
     public Long getId() {

@@ -106,10 +106,8 @@ export class CropSubcultureFormComponent implements OnInit {
             cropId: new FormControl(this.model.cropId, [Validators.required]),
             nameRo: new FormControl(this.model.nameRo, [Validators.required, Validators.maxLength(128)]),
             nameRu: new FormControl(this.model.nameRu, [Validators.required, Validators.maxLength(128)]),
-            descriptionRo: new FormControl(this.model.descriptionRo, [Validators.required]),
-            descriptionRu: new FormControl(this.model.descriptionRu, [Validators.required]),
-            seedConsumptionHa: new FormControl(this.model.seedConsumptionHa, [Validators.required]),
-            unitOfMeasure: new FormControl(this.model.unitOfMeasure, [Validators.required])
+            descriptionRo: new FormControl(this.model.descriptionRo),
+            descriptionRu: new FormControl(this.model.descriptionRu),
         });
     }
 
