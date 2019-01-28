@@ -88,13 +88,15 @@ public class ParcelService implements HasRepository<ParcelRepository> {
         ParcelModel model = new ParcelModel(parcel);
 
         ParcelCrop parcelCrop = parcelCropService.find(parcel.getId());
-        Crop crop = cropService.findOne(parcelCrop.getCropId());
-        model.setupCropInfo(parcelCrop, crop);
+        if (parcelCrop != null) {
+            Crop crop = cropService.findOne(parcelCrop.getCropId());
+            model.setupCropInfo(parcelCrop, crop);
 
-        AgroWork lastAgroWork = agroWorkService.findLast(parcelCrop.getId());
-        if (lastAgroWork != null) {
-            AgroWorkType agroWorkType = agroWorkTypeService.findOne(lastAgroWork.getWorkType().getId());
-            model.setupLastCropWork(lastAgroWork, agroWorkType);
+            AgroWork lastAgroWork = agroWorkService.findLast(parcelCrop.getId());
+            if (lastAgroWork != null) {
+                AgroWorkType agroWorkType = agroWorkTypeService.findOne(lastAgroWork.getWorkType().getId());
+                model.setupLastCropWork(lastAgroWork, agroWorkType);
+            }
         }
 
         ParcelGeometry geometry = parcelGeometryService.find(parcel.getId());
