@@ -17,7 +17,7 @@ export class ParcelListComponent implements OnInit {
     context;
 
     models: ParcelModel[] = [];
-    selectedParcelFirstCoord: any;
+    center: any;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
@@ -123,7 +123,7 @@ export class ParcelListComponent implements OnInit {
 
     onSelectionChanged() {
         const model = this.options.api.getSelectedRows()[0];
-        this.selectedParcelFirstCoord = model.paths[0];
+        this.center = model.center;
     }
 
     public addParcel() {

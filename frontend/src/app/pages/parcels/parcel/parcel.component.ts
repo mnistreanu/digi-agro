@@ -20,10 +20,9 @@ export class ParcelComponent implements OnInit {
 
     parcelModel: ParcelModel;
     tabIndex = 1;
-    loadedTabs = {tabIndex: true};
+    loadedTabs = {1: true};
 
-    constructor(private fb: FormBuilder,
-                private router: Router,
+    constructor(private router: Router,
                 private route: ActivatedRoute,
                 private parcelService: ParcelService,
                 private alertService: AlertService) {
@@ -64,16 +63,38 @@ export class ParcelComponent implements OnInit {
     }
 
     save() {
-        console.log('save');
-        const infoFormValid = this.parcelInfoFormComponent.validateAndSubmit();
+        const infoFormValid = this.parcelInfoFormComponent.submit();
         if (!infoFormValid) {
             this.alertService.validationFailed();
+            return;
         }
-        // todo: process map data...
+
+        const isNew = this.parcelModel.id == null;
+        if (isNew && !this.parcelMapEditorComponent) {
+            this.alertService.warning('parcel.complete-map');
+            return;
+        }
+
+        if (this.parcelMapEditorComponent) {
+            const mapValid = this.parcelMapEditorComponent.submit();
+            if (!mapValid) {
+                this.alertService.warning('parcel.complete-map');
+                return;
+            }
+        }
+
+        this.parcelService.save(this.parcelModel).subscribe(model => {
+            this.parcelModel = model;
+            this.parcelService.adjust([this.parcelModel]);
+            this.alertService.saved();
+        });
     }
 
     remove() {
-        console.log('Delete');
+        this.parcelService.remove(this.parcelModel).subscribe(() => {
+            this.alertService.removed();
+            this.router.navigate(['../'], {relativeTo: this.route});
+        });
     }
 
     back() {

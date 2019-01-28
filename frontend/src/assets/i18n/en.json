@@ -12,8 +12,8 @@
 	},
 	"agro-work": {
 		"date": "Date",
-		"start-date": "Start date",
 		"end-date": "End date",
+		"start-date": "Start date",
 		"type": "Type of work",
 		"yield-goal": "Default yield goal"
 	},
@@ -39,7 +39,6 @@
 	"crop": {
 		"category": "Category",
 		"crop": "Crop",
-		"subcultures": "Subcultures",
 		"harvest-year": "Harvest year",
 		"name": "Agricultural crop",
 		"planting-date": "Planting date",
@@ -47,6 +46,7 @@
 		"seed-consumption-ha": "Seed Consumption, Ha",
 		"seeds": "Seeds",
 		"subculture": "Subculture",
+		"subcultures": "Subcultures",
 		"unit-of-measure-long": "Unit of measure",
 		"unit-of-measure-short": "Unit",
 		"varieties": "Crop varieties",
@@ -330,13 +330,17 @@
 	"parcel": {
 		"area": "Area",
 		"cadaster-number": "Cadaster Nr.",
+		"complete-map": "Mark the field on the map",
 		"description": "Description",
+		"general-tab": "General",
 		"ha": "hectare",
 		"land-worthiness-points": "Landworthiness",
 		"last-work": "Last Work",
 		"last-work-date": "Last Work Date",
+		"map-tab": "Map",
 		"name": "Parcel",
 		"one-ha": "1 Ha",
+		"parcel": "Parcel",
 		"parcels": "Parcels",
 		"planted-at": "Planted At",
 		"plants-count": "Number of plants",

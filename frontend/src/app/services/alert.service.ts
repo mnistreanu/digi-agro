@@ -26,4 +26,9 @@ export class AlertService {
         this.toastrService.warning(message);
     }
 
+    public warning(key) {
+        const message = this.langService.instant(key);
+        this.toastrService.warning(message);
+    }
+
 }

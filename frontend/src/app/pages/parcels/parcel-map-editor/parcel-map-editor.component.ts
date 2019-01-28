@@ -10,10 +10,9 @@ declare const google: any;
     templateUrl: './parcel-map-editor.component.html',
     styleUrls: ['./parcel-map-editor.component.scss']
 })
-export class ParcelMapEditorComponent implements OnInit, OnChanges {
+export class ParcelMapEditorComponent implements OnInit {
 
     @ViewChild(DrawingManager) drawingManager: DrawingManager;
-    @ViewChild(NguiMapComponent) mapComponent: NguiMapComponent;
     @Input() parcelModel: ParcelModel;
 
     private mapInstance: any;
@@ -37,10 +36,6 @@ export class ParcelMapEditorComponent implements OnInit, OnChanges {
     onMapReady(map) {
         this.mapInstance = map;
         this.setupInitialCenter();
-        this.setupParcel();
-    }
-
-    ngOnChanges(changes: SimpleChanges): void {
         this.setupParcel();
     }
 
@@ -77,7 +72,6 @@ export class ParcelMapEditorComponent implements OnInit, OnChanges {
                 const overlay = event.overlay;
 
                 this.registerCoordinates(overlay);
-                this.printCoordinates();
 
                 this.registerDragEvents(overlay, 'dragstart');
                 this.registerDragEvents(overlay, 'dragend');
@@ -91,14 +85,12 @@ export class ParcelMapEditorComponent implements OnInit, OnChanges {
 
     private registerDragEvents(overlay, eventName) {
         google.maps.event.addListener(overlay, eventName, e => {
-            console.log(eventName);
 
             if (eventName === 'dragstart') {
                 this.onDragging = true;
             }
             else {
                 this.registerCoordinates(overlay);
-                this.printCoordinates();
                 this.onDragging = false;
             }
         });
@@ -111,7 +103,6 @@ export class ParcelMapEditorComponent implements OnInit, OnChanges {
             }
             overlay.getPath().removeAt(e.vertex);
             this.registerCoordinates(overlay);
-            this.printCoordinates();
         });
     }
 
@@ -120,9 +111,7 @@ export class ParcelMapEditorComponent implements OnInit, OnChanges {
             if (this.onDragging) {
                 return;
             }
-            console.log(eventName);
             this.registerCoordinates(overlay);
-            this.printCoordinates();
         });
     }
 
@@ -135,12 +124,6 @@ export class ParcelMapEditorComponent implements OnInit, OnChanges {
         this.toggleDrawingManager();
     }
 
-    private printCoordinates() {
-        this.parcelCoordinates.forEach((coord) => {
-            console.log(coord[0], coord[1]);
-        });
-    }
-
     private setupParcel() {
         if (!this.parcelModel) {
             return;
@@ -150,8 +133,8 @@ export class ParcelMapEditorComponent implements OnInit, OnChanges {
             return;
         }
 
-        // todo: do something when model is new (no initial polygon data)
         if (this.parcelModel.id == null) {
+            this.parcelCoordinates = [];
             return;
         }
 
@@ -190,6 +173,16 @@ export class ParcelMapEditorComponent implements OnInit, OnChanges {
                 this.drawingManagerInstance.setMap(this.mapInstance);
             }
         });
+    }
+
+    public submit() {
+        if (this.parcelCoordinates.length < 3) {
+            return false;
+        }
+        this.parcelModel.coordinates = this.parcelCoordinates.map((coord) => {
+            return <[number, number]>[coord[0], coord[1]];
+        });
+        return true;
     }
 
 }

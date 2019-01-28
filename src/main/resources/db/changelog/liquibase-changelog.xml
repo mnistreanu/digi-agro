@@ -289,7 +289,8 @@
     </changeSet>
 
     <!--
-        Adaugat 3 parcele cu coordonate la tenant_id=1
+        Adaugat 3 parcele cu coordonate la tenant_id=1,
+        coordinates format was changed...
     -->
      <changeSet id="insert-3-parcels-tenant-1" author="mgorgos" failOnError="false" onValidationFail="MARK_RAN">
          <validCheckSum>ANY</validCheckSum>
@@ -366,6 +367,39 @@
             UPDATE parcel_geometry SET lat_center= 47.068758, lon_center=28.147786 WHERE parcel_id=5;
             UPDATE parcel_geometry SET lat_center= 47.067853, lon_center=28.149274 WHERE parcel_id=6;
             UPDATE parcel_geometry SET lat_center= 47.066702, lon_center=28.151290 WHERE parcel_id=7;
+        </sql>
+    </changeSet>
+
+    <changeSet id="parcel-update-coodinates-format" author="mgorgos" failOnError="true" runOnChange="true">
+        <sql>
+            <!-- 7 -->
+            UPDATE parcel_geometry
+            SET coordinates = '[[46.811898, 28.638581], [46.810215, 28.634720], [46.798834, 28.643039], [46.799954, 28.644066], [46.802772, 28.644606]]'
+            WHERE parcel_id = 1;
+
+            UPDATE parcel_geometry
+            SET coordinates = '[[46.811898, 28.638581], [46.814937, 28.645115], [46.811814, 28.644840], [46.809678, 28.640038]]'
+            WHERE parcel_id = 2;
+
+            UPDATE parcel_geometry
+            SET coordinates = '[[46.811814, 28.644840], [46.809678, 28.640038], [46.804438, 28.643071], [46.801469, 28.645740], [46.802652, 28.645927], [46.803798, 28.645621], [46.807954, 28.648691]]'
+            WHERE parcel_id = 3;
+
+            UPDATE parcel_geometry
+            SET coordinates = '[[47.070854, 28.145911], [47.069766, 28.144750], [47.068454, 28.146618], [47.069552, 28.147994]]'
+            WHERE parcel_id = 4;
+
+            UPDATE parcel_geometry
+            SET coordinates = '[[47.068454, 28.146618], [47.069552, 28.147994], [47.068984, 28.148861], [47.067851, 28.147590]]'
+            WHERE parcel_id = 5;
+
+            UPDATE parcel_geometry
+            SET coordinates = '[[47.068984, 28.148861], [47.067851, 28.147590], [47.066603, 28.149660], [47.067649, 28.150897]]'
+            WHERE parcel_id = 6;
+
+            UPDATE parcel_geometry
+            SET coordinates = '[[47.066603, 28.149660], [47.067649, 28.150897], [47.066009, 28.153511], [47.066329, 28.150125]]'
+            WHERE parcel_id = 7;
         </sql>
     </changeSet>
 

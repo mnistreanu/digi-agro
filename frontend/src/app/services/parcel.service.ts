@@ -26,6 +26,14 @@ export class ParcelService {
         return this.http.get<ParcelModel[]>(this.api + '/');
     }
 
+    save(model: ParcelModel): Observable<ParcelModel> {
+        return this.http.post<ParcelModel>(this.api + '/', model);
+    }
+
+    remove(model: ParcelModel): Observable<void> {
+        return this.http.delete<void>(this.api + '/' + model.id);
+    }
+
     adjust(models: ParcelModel[]) {
         const fieldMapper = new FieldMapper(this.langService.getLanguage());
         const lastWorkTypeField = fieldMapper.get('lastWorkType');

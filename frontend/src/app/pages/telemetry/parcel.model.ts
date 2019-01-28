@@ -8,6 +8,7 @@ export class ParcelModel {
     landWorthinessPoints: number;
     area: number;
     description: string;
+
     coordinates: [number, number][];
 
     paths: LatLng[];

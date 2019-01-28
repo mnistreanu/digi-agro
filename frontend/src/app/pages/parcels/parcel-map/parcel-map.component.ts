@@ -53,7 +53,7 @@ export class ParcelMapComponent implements OnInit, OnChanges {
 
     private setupCenter() {
         if (this.models && this.models.length > 0) {
-            this.center = this.models[0].paths[0];
+            this.center = this.models[0].center;
         }
         else {
             this.center = 'Moldova, Chisinau';

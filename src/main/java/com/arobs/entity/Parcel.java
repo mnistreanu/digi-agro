@@ -58,6 +58,9 @@ public class Parcel {
     @Column(name = "last_work_type_id")
     private Long lastWorkTypeId;
 
+    @Column(columnDefinition = "boolean default true")
+    private boolean active = true;
+
 
     public Long getId() {
         return id;
@@ -148,13 +151,11 @@ public class Parcel {
     }
 
     public Double getArea() {
-        int intValue = (int)(area.doubleValue() * 100);
-        return ((double)intValue) / 100;
+        return area;
     }
 
     public void setArea(Double area) {
-        int intValue = (int)(area.doubleValue() * 100);
-        this.area = ((double)intValue) / 100;
+        this.area = area;
     }
 
     public Long getLastWorkTypeId() {
@@ -163,5 +164,13 @@ public class Parcel {
 
     public void setLastWorkTypeId(Long lastWorkTypeId) {
         this.lastWorkTypeId = lastWorkTypeId;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

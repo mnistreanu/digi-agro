@@ -31,7 +31,7 @@ export class ParcelInfoFormComponent implements OnInit {
         });
     }
 
-    public validateAndSubmit() {
+    public submit() {
         this.forcedValidation = true;
 
         if (!this.form.valid) {

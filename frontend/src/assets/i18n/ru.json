@@ -12,8 +12,8 @@
 	},
 	"agro-work": {
 		"date": "Дата",
-		"start-date": "Дата начала",
 		"end-date": "Дата окончания",
+		"start-date": "Дата начала",
 		"type": "Тип работы",
 		"yield-goal": "Цель доходности по умолчанию"
 	},
@@ -39,7 +39,6 @@
 	"crop": {
 		"category": "Категория",
 		"crop": "Сель.хоз. культура",
-		"subcultures": "Субкультуры",
 		"harvest-year": "Год урожая",
 		"name": "Сельскохозяйственная культура",
 		"planting-date": "Дата посадки",
@@ -47,6 +46,7 @@
 		"seed-consumption-ha": "Потребление семян, га",
 		"seeds": "Семена",
 		"subculture": "Субкультура",
+		"subcultures": "Субкультуры",
 		"unit-of-measure-long": "Единица измерения",
 		"unit-of-measure-short": "Ед.И.",
 		"varieties": "Сорта сельскохозяйственных культур",
@@ -330,13 +330,17 @@
 	"parcel": {
 		"area": "Площадь",
 		"cadaster-number": "№ Кадастра",
+		"complete-map": "Отметьте поле на карте",
 		"description": "Описание",
+		"general-tab": "Общая информация",
 		"ha": "га",
 		"land-worthiness-points": "Земельная ценность",
 		"last-work": "Последняя работа",
 		"last-work-date": "Дата последней работы",
+		"map-tab": "Карта",
 		"name": "Участок",
 		"one-ha": "1 га",
+		"parcel": "Участок",
 		"parcels": "Участки",
 		"planted-at": "Дата посадки",
 		"plants-count": "Количество растений",
