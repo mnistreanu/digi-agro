@@ -5,6 +5,8 @@ import {ParcelModel} from '../../telemetry/parcel.model';
 import {ParcelService} from '../../../services/parcel.service';
 import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NumericUtil} from '../../../common/numericUtil';
+import {PinnedRowRendererComponent} from '../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
 
 @Component({
     selector: 'app-parcel-list',
@@ -79,7 +81,8 @@ export class ParcelListComponent implements OnInit {
                 headerName: 'parcel.area',
                 field: 'area',
                 width: 200,
-                minWidth: 200
+                minWidth: 200,
+                valueFormatter: (params) => NumericUtil.format(params.value)
             },
             {
                 headerName: 'info.description',
@@ -106,6 +109,26 @@ export class ParcelListComponent implements OnInit {
             this.models = models;
             this.adjustGridSize();
             this.parcelService.adjust(this.models);
+            this.setupSummaryRow(this.models);
+        });
+    }
+
+    private setupSummaryRow(models) {
+        const summaryRow = new ParcelModel();
+        models.forEach(model => this.aggregate(summaryRow, model, true));
+        this.options.api.setPinnedBottomRowData([summaryRow]);
+    }
+
+    private aggregate(source: ParcelModel, item: ParcelModel, applyAddition) {
+        const sumFields = ['area'];
+        sumFields.forEach(field => {
+            source[field] = source[field] || 0;
+            if (applyAddition) {
+                source[field] += item[field] || 0;
+            }
+            else {
+                source[field] -= item[field] || 0;
+            }
         });
     }
 

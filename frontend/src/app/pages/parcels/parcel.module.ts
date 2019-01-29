@@ -9,11 +9,11 @@ import {DirectivesModule} from '../../theme/directives/directives.module';
 import {ParcelListComponent} from './parcel-list/parcel-list.component';
 import {ParcelMapComponent} from './parcel-map/parcel-map.component';
 import {Constants} from '../../common/constants';
-import { ParcelComponent } from './parcel/parcel.component';
+import {ParcelComponent} from './parcel/parcel.component';
 import {EditRendererComponent} from '../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {EditRendererModule} from '../../modules/aggrid/edit-renderer/edit-renderer.module';
-import { ParcelMapEditorComponent } from './parcel-map-editor/parcel-map-editor.component';
-import { ParcelInfoFormComponent } from './parcel-info-form/parcel-info-form.component';
+import {ParcelMapEditorComponent} from './parcel-map-editor/parcel-map-editor.component';
+import {ParcelInfoFormComponent} from './parcel-info-form/parcel-info-form.component';
 import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-block.module';
 
 export const routes = [
