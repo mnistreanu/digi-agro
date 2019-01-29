@@ -6,6 +6,7 @@ import {AlertService} from '../../../services/alert.service';
 import {ParcelModel} from '../../telemetry/parcel.model';
 import {ParcelInfoFormComponent} from '../parcel-info-form/parcel-info-form.component';
 import {ParcelMapEditorComponent} from '../parcel-map-editor/parcel-map-editor.component';
+import {ParcelCropFormComponent} from '../parcel-crop-form/parcel-crop-form.component';
 
 @Component({
     selector: 'app-parcel',
@@ -16,7 +17,7 @@ export class ParcelComponent implements OnInit {
 
     @ViewChild(ParcelInfoFormComponent) parcelInfoFormComponent;
     @ViewChild(ParcelMapEditorComponent) parcelMapEditorComponent;
-
+    @ViewChild(ParcelCropFormComponent) parcelCropFormComponent;
 
     parcelModel: ParcelModel;
     tabIndex = 1;

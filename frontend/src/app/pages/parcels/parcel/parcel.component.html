@@ -18,6 +18,9 @@
             <li class="nav-item">
                 <a class="nav-link" [class.active]="tabIndex == 2" (click)="changeTab(2)"translate>parcel.map-tab</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="tabIndex == 3" (click)="changeTab(3)"translate>crop.crop</a>
+            </li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" *ngIf="tabIndex == 1 || loadedTabs[1]" [class.active]="tabIndex == 1">
@@ -25,6 +28,9 @@
             </div>
             <div class="tab-pane" *ngIf="tabIndex == 2  || loadedTabs[2]" [class.active]="tabIndex == 2">
                 <app-parcel-map-editor [parcelModel]="parcelModel"></app-parcel-map-editor>
+            </div>
+            <div class="tab-pane" *ngIf="tabIndex == 3  || loadedTabs[3]" [class.active]="tabIndex == 3">
+                <app-parcel-crop-form *ngIf="parcelModel" [parcelModel]="parcelModel"></app-parcel-crop-form>
             </div>
         </div>
 

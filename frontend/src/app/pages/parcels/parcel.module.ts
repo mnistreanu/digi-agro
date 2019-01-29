@@ -15,6 +15,7 @@ import {EditRendererModule} from '../../modules/aggrid/edit-renderer/edit-render
 import { ParcelMapEditorComponent } from './parcel-map-editor/parcel-map-editor.component';
 import { ParcelInfoFormComponent } from './parcel-info-form/parcel-info-form.component';
 import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-block.module';
+import {ParcelCropFormComponent} from './parcel-crop-form/parcel-crop-form.component';
 
 export const routes = [
     {path: '', component: ParcelListComponent, pathMatch: 'full'},
@@ -34,7 +35,8 @@ export const routes = [
         NguiMapModule.forRoot({apiUrl: Constants.GOOGLE_MAP_API}),
         RouterModule.forChild(routes),
     ],
-    declarations: [ParcelListComponent, ParcelMapComponent, ParcelComponent, ParcelMapEditorComponent, ParcelInfoFormComponent]
+    declarations: [ParcelListComponent, ParcelMapComponent, ParcelComponent,
+        ParcelMapEditorComponent, ParcelInfoFormComponent, ParcelCropFormComponent]
 })
 export class ParcelModule {
 }

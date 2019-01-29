@@ -35,15 +35,21 @@
                 </div>
 
                 <div class="col-sm-6">
+                    <label for="yieldGoal" translate>agro-work.yield-goal</label>
+                    <input id="yieldGoal" class="form-control checking-field" formControlName="yieldGoal" type="number" min="0"/>
+                    <app-form-error-block [control]="form.get('yieldGoal')" [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
                     <label for="cropCategoryId" translate>crop.category</label>
                     <select id="cropCategoryId" class="form-control" formControlName="cropCategoryId" (change)="onCropCategoryChange()">
                         <option *ngFor="let item of cropCategories" [ngValue]="item.id">{{ item.name }}</option>
                     </select>
                     <app-form-error-block [control]="form.get('cropCategoryId')" [formSubmitted]="submitted"></app-form-error-block>
                 </div>
-            </div>
 
-            <div class="form-group row">
                 <div class="col-sm-6">
                     <label for="cropId" translate>crop.name</label>
                     <select id="cropId" class="form-control" formControlName="cropId" (change)="onCropChange()">
@@ -53,17 +59,29 @@
                     <app-form-error-block [control]="form.get('cropId')" [formSubmitted]="submitted"></app-form-error-block>
                 </div>
 
-                <div class="col-sm-6">
-                    <label for="cropVarietyId" translate>crop.variety</label>
-                    <select id="cropVarietyId" class="form-control" formControlName="cropVarietyId">
-                        <option disabled></option>
-                        <option *ngFor="let item of varieties" [ngValue]="item.id">{{ item.name }}</option>
-                    </select>
-                    <app-form-error-block [control]="form.get('cropVarietyId')" [formSubmitted]="submitted"></app-form-error-block>
-                </div>
             </div>
 
-            <div class="form-group row">
+        <div class="form-group row">
+            <div class="col-sm-6">
+                <label for="cropSubcultureId" translate>crop.subculture</label>
+                <select id="cropSubcultureId" class="form-control" formControlName="cropSubcultureId" (change)="onCropSubcultureChange()">
+                    <option disabled></option>
+                    <option *ngFor="let item of subcultures" [ngValue]="item.id">{{ item.name }}</option>
+                </select>
+                <app-form-error-block [control]="form.get('cropSubcultureId')" [formSubmitted]="submitted"></app-form-error-block>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="cropVarietyId" translate>crop.variety</label>
+                <select id="cropVarietyId" class="form-control" formControlName="cropVarietyId">
+                    <option disabled></option>
+                    <option *ngFor="let item of varieties" [ngValue]="item.id">{{ item.name }}</option>
+                </select>
+                <app-form-error-block [control]="form.get('cropVarietyId')" [formSubmitted]="submitted"></app-form-error-block>
+            </div>
+        </div>
+
+        <div class="form-group row">
                 <div class="col-sm-6">
                     <label for="startDate" translate>agro-work.start-date</label>
                     <input id="startDate" type="date" class="form-control checking-field" formControlName="startDate" />
@@ -77,14 +95,6 @@
                 </div>
             </div>
 
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="yieldGoal" translate>agro-work.yield-goal</label>
-                    <input id="yieldGoal" class="form-control checking-field" formControlName="yieldGoal" type="number" min="0"/>
-                    <app-form-error-block [control]="form.get('yieldGoal')" [formSubmitted]="submitted"></app-form-error-block>
-                </div>
-
-            </div>
 
 
             <div class="form-group">

@@ -2,14 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LangService} from '../../../../services/lang.service';
+import {CropSeasonService} from '../../../../services/crop/crop-season.service';
 import {CropCategoryService} from '../../../../services/crop/crop-category.service';
 import {CropService} from '../../../../services/crop/crop.service';
+import {CropSubcultureService} from '../../../../services/crop/crop-subculture.service';
+import {CropVarietyService} from '../../../../services/crop/crop-variety.service';
 import {FieldMapper} from '../../../../common/field.mapper';
 import {CropSeasonModel} from './crop-season-form.model';
 import {SelectItem} from '../../../../dto/select-item.dto';
-import {CropSeasonService} from '../../../../services/crop/crop-season.service';
 import {AlertService} from '../../../../services/alert.service';
-import {CropVarietyService} from '../../../../services/crop/crop-variety.service';
 import {DateUtil} from '../../../../common/dateUtil';
 
 @Component({
@@ -27,6 +28,7 @@ export class CropSeasonFormComponent implements OnInit {
 
     cropCategories: SelectItem[] = [];
     crops: SelectItem[] = [];
+    subcultures: SelectItem[] = [];
     varieties: SelectItem[] = [];
 
     constructor(private router: Router,
@@ -35,6 +37,7 @@ export class CropSeasonFormComponent implements OnInit {
                 private langService: LangService,
                 private cropCategoryService: CropCategoryService,
                 private cropService: CropService,
+                private cropSubcultureService: CropSubcultureService,
                 private cropVarietyService: CropVarietyService,
                 private cropSeasonService: CropSeasonService) {
     }
@@ -80,6 +83,31 @@ export class CropSeasonFormComponent implements OnInit {
     }
 
     public onCropChange() {
+        const cropId = this.form.controls['cropId'].value;
+        this.setupCropSubcultures(cropId, true);
+    }
+
+    private setupCropSubcultures(cropId, updateValue) {
+        this.cropSubcultureService.find(cropId).subscribe(data => {
+            const models = data.payload;
+
+            if (models != null) {
+                const fieldMapper = new FieldMapper(this.langService.getLanguage());
+                const nameField = fieldMapper.get('name');
+                this.subcultures = models.map(model => {
+                    return new SelectItem(model.id, model[nameField]);
+                });
+            } else {
+                this.subcultures = [];
+            }
+
+            if (updateValue) {
+                // TODO only if necessary
+            }
+        });
+    }
+
+    public onCropSubcultureChange() {
         const cropId = this.form.controls['cropId'].value;
         this.setupCropVarieties(cropId, true);
     }
@@ -137,6 +165,7 @@ export class CropSeasonFormComponent implements OnInit {
             harvestYear: new FormControl(this.model.harvestYear, [Validators.required]),
             cropCategoryId: new FormControl(this.model.cropCategoryId, [Validators.required]),
             cropId: new FormControl(this.model.cropId, [Validators.required]),
+            cropSubcultureId: new FormControl(this.model.cropId),
             cropVarietyId: new FormControl(this.model.cropVarietyId),
             startDate: new FormControl(DateUtil.formatDateISO(this.model.startDate), [Validators.required]),
             endDate: new FormControl(DateUtil.formatDateISO(this.model.endDate), [Validators.required]),
