@@ -21,6 +21,8 @@ export class ParcelMapEditorComponent implements OnInit {
     drawingControlOptions: any;
     shapeOptions: any;
 
+    mapCenter: any;
+
     parcelCoordinates: LatLng[];
     onDragging: boolean;
 
@@ -31,20 +33,16 @@ export class ParcelMapEditorComponent implements OnInit {
         console.log('parcel-map-editor: initialization');
         this.initDrawingManager();
         this.setupDrawingControlOptions();
+        this.setupInitialCenter();
     }
 
     onMapReady(map) {
         this.mapInstance = map;
-        this.setupInitialCenter();
         this.setupParcel();
     }
 
     private setupInitialCenter() {
-        const moldovaChisinau = {
-            lat: 47.0105,
-            lng: 28.8638
-        };
-        this.mapInstance.setCenter(moldovaChisinau);
+        this.mapCenter = 'Moldova, Chisinau';
     }
 
     private setupDrawingControlOptions() {
@@ -157,7 +155,7 @@ export class ParcelMapEditorComponent implements OnInit {
 
         this.registerCoordinates(parcelPolygon);
 
-        this.mapInstance.setCenter(this.parcelModel.center);
+        this.mapCenter = this.parcelModel.center;
     }
 
     private getFillColor() {

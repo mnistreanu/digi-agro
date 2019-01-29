@@ -1,4 +1,5 @@
 <ngui-map zoom="12" mapTypeId="terrain" scrollwheel="true"
+          [center]="mapCenter"
           (mapReady$)="onMapReady($event)">
 
     <drawing-manager
