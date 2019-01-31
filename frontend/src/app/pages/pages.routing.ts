@@ -45,30 +45,6 @@ export const routes: Routes = [
                 data: {breadcrumb: 'Farmland'},
                 canActivate: [SuperAdminOrAdminGuard]
             },
-            // {
-            //     path: 'manage-users',
-            //     loadChildren: 'app/pages/manage-users/manage-users.module#ManageUsersModule',
-            //     data: {breadcrumb: 'Manage Users'},
-            //     canActivate: [SuperAdminOrAdminGuard]
-            // },
-            // {
-            //     path: 'employee',
-            //     loadChildren: 'app/pages/employee/employee.module#EmployeeModule',
-            //     data: {breadcrumb: 'Employee'},
-            //     canActivate: [AdminGuard]
-            // },
-            // {
-            //     path: 'manage-brands',
-            //     loadChildren: 'app/pages/manage-brands/manage-brands.module#ManageBrandsModule',
-            //     data: {breadcrumb: 'Manage Brands'},
-            //     canActivate: [AdminGuard]
-            // },
-            // {
-            //     path: 'manage-machines',
-            //     loadChildren: 'app/pages/manage-machines/manage-machines.module#ManageMachinesModule',
-            //     data: {breadcrumb: 'Manage Machines'},
-            //     canActivate: [AdminGuard]
-            // },
             {
                 path: 'telemetry',
                 loadChildren: 'app/pages/telemetry/telemetry.module#TelemetryModule',
@@ -109,6 +85,12 @@ export const routes: Routes = [
             {
                 path: 'expenses',
                 loadChildren: 'app/pages/expenses/expenses.module#ExpensesModule',
+                data: {breadcrumb: 'Expenses'},
+                canActivate: [AuthGuard]
+            },
+            {
+                path: 'expenses-new',
+                loadChildren: 'app/pages/expenses-new/expenses-new.module#ExpensesNewModule',
                 data: {breadcrumb: 'Expenses'},
                 canActivate: [AuthGuard]
             },

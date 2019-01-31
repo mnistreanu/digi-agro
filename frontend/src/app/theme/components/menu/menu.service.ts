@@ -200,6 +200,10 @@ export class MenuService {
                 subMenu: [
                     {
                         title: 'expenses.expenses',
+                        routerLink: 'expenses-new',
+                    },
+                    {
+                        title: 'expenses.expenses',
                         routerLink: 'expenses',
                     },
                     {
