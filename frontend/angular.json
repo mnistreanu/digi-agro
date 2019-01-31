@@ -32,7 +32,8 @@
               "node_modules/angular2-multiselect-dropdown/themes/default.theme.css",
               "node_modules/ag-grid/dist/styles/ag-grid.css",
               "node_modules/ag-grid/dist/styles/ag-theme-material.css",
-              "node_modules/ag-grid/dist/styles/ag-theme-balham.css"
+              "node_modules/ag-grid/dist/styles/ag-theme-balham.css",
+              "node_modules/jquery-ui-dist/jquery-ui.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

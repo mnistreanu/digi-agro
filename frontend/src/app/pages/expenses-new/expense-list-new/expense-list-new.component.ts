@@ -4,6 +4,7 @@ import {DateUtil} from '../../../common/dateUtil';
 import {LangService} from '../../../services/lang.service';
 import {ExpenseModel} from '../models/expense.model';
 import {ExpenseCategoryModel} from '../../enterprise/manage-expense-categories/expense-category/expense-category.model';
+import {AgDateColumnType} from '../../../modules/aggrid/column-types/ag-date-type';
 
 @Component({
     selector: 'app-expense-list-new',
@@ -27,6 +28,7 @@ export class ExpenseListNewComponent implements OnInit {
 
     private setupGrid() {
         this.options = <GridOptions>{};
+        this.setupColumnTypes();
 
         this.options.enableColResize = true;
         this.options.enableSorting = true;
@@ -35,6 +37,12 @@ export class ExpenseListNewComponent implements OnInit {
         this.context = {componentParent: this};
 
         this.setupRows();
+    }
+
+    private setupColumnTypes() {
+        this.options.columnTypes = {
+            dateType: AgDateColumnType.getType()
+        };
     }
 
     private setupHeaders() {
@@ -46,10 +54,8 @@ export class ExpenseListNewComponent implements OnInit {
             {
                 headerName: 'expenses.date',
                 field: 'date',
-                width: 90,
-                minWidth: 90,
-                suppressFilter: true,
-                valueFormatter: (params) => DateUtil.formatDateWithTime(params.value)
+                type: 'dateType',
+                editable: true
             },
             {
                 headerName: 'Type',
