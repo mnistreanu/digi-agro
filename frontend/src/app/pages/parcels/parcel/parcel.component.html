@@ -30,7 +30,7 @@
                 <app-parcel-map-editor [parcelModel]="parcelModel"></app-parcel-map-editor>
             </div>
             <div class="tab-pane" *ngIf="tabIndex == 3  || loadedTabs[3]" [class.active]="tabIndex == 3">
-                <app-parcel-crop-form *ngIf="parcelModel" [parcelModel]="parcelModel"></app-parcel-crop-form>
+                <app-parcel-season-form *ngIf="parcelSeasonModel" [parcelSeasonModel]="parcelSeasonModel"></app-parcel-season-form>
             </div>
         </div>
 

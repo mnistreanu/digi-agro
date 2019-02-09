@@ -1,4 +1,4 @@
-<babeledit_project version="1.2">
+<babeledit_project version="1.0">
     <preset_collections/>
     <framework>ngx-translate</framework>
     <filename>languages.babel</filename>
@@ -224,7 +224,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>end-date</name>
+                        <name>start-date</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -245,7 +245,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>start-date</name>
+                        <name>end-date</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -569,6 +569,27 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>subcultures</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ro-RO</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ru-RU</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>harvest-year</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
@@ -696,27 +717,6 @@
                     </concept_node>
                     <concept_node>
                         <name>subculture</name>
-                        <definition_loaded>false</definition_loaded>
-                        <description></description>
-                        <comment></comment>
-                        <default_text></default_text>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>false</approved>
-                            </translation>
-                            <translation>
-                                <language>ro-RO</language>
-                                <approved>false</approved>
-                            </translation>
-                            <translation>
-                                <language>ru-RU</language>
-                                <approved>false</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>subcultures</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -6213,7 +6213,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>plants-count</name>
+                        <name>plants-on-row</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -6234,7 +6234,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>rows-count</name>
+                        <name>rows-on-parcel</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -6319,6 +6319,27 @@
                     </concept_node>
                     <concept_node>
                         <name>total-ha</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ro-RO</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ru-RU</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>yield-goal</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>
@@ -8360,32 +8381,17 @@
             </folder_node>
         </children>
     </folder_node>
-    <isTemplateProject>false</isTemplateProject>
-    <languages>
-        <language>
-            <code>en-US</code>
-            <source_id></source_id>
-            <source_file>en.json</source_file>
-        </language>
-        <language>
-            <code>ro-RO</code>
-            <source_id></source_id>
-            <source_file>ro.json</source_file>
-        </language>
-        <language>
-            <code>ru-RU</code>
-            <source_id></source_id>
-            <source_file>ru.json</source_file>
-        </language>
-    </languages>
     <translation_files>
         <translation_file>
+            <language>ru-RU</language>
             <file>ru.json</file>
         </translation_file>
         <translation_file>
+            <language>ro-RO</language>
             <file>ro.json</file>
         </translation_file>
         <translation_file>
+            <language>en-US</language>
             <file>en.json</file>
         </translation_file>
     </translation_files>

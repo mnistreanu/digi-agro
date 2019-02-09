@@ -6,7 +6,8 @@ import {AlertService} from '../../../services/alert.service';
 import {ParcelModel} from '../../telemetry/parcel.model';
 import {ParcelInfoFormComponent} from '../parcel-info-form/parcel-info-form.component';
 import {ParcelMapEditorComponent} from '../parcel-map-editor/parcel-map-editor.component';
-import {ParcelCropFormComponent} from '../parcel-crop-form/parcel-crop-form.component';
+import {ParcelSeasonFormComponent} from '../parcel-season-form/parcel-season-form.component';
+import {ParcelSeasonModel} from '../parcel-season-form/parcel-season.model';
 
 @Component({
     selector: 'app-parcel',
@@ -17,9 +18,10 @@ export class ParcelComponent implements OnInit {
 
     @ViewChild(ParcelInfoFormComponent) parcelInfoFormComponent;
     @ViewChild(ParcelMapEditorComponent) parcelMapEditorComponent;
-    @ViewChild(ParcelCropFormComponent) parcelCropFormComponent;
+    @ViewChild(ParcelSeasonFormComponent) parcelSeasonFormComponent;
 
     parcelModel: ParcelModel;
+    parcelSeasonModel: ParcelSeasonModel;
     tabIndex = 1;
     loadedTabs = {1: true};
 
@@ -55,12 +57,14 @@ export class ParcelComponent implements OnInit {
     private setupModel(id) {
         this.parcelService.findOne(id).subscribe(model => {
             this.parcelModel = model;
+            this.parcelSeasonModel = new ParcelSeasonModel();
             this.parcelService.adjust([model]);
         });
     }
 
     private prepareNewModel() {
         this.parcelModel = new ParcelModel();
+        this.parcelSeasonModel = new ParcelSeasonModel();
     }
 
     save() {
@@ -78,6 +82,14 @@ export class ParcelComponent implements OnInit {
 
         if (this.parcelMapEditorComponent) {
             const mapValid = this.parcelMapEditorComponent.submit();
+            if (!mapValid) {
+                this.alertService.warning('parcel.complete-map');
+                return;
+            }
+        }
+
+        if (this.parcelSeasonFormComponent) {
+            const mapValid = this.parcelSeasonFormComponent.submit();
             if (!mapValid) {
                 this.alertService.warning('parcel.complete-map');
                 return;

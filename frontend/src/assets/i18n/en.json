@@ -12,8 +12,8 @@
 	},
 	"agro-work": {
 		"date": "Date",
-		"end-date": "End date",
 		"start-date": "Start date",
+		"end-date": "End date",
 		"type": "Type of work",
 		"yield-goal": "Default yield goal"
 	},
@@ -39,6 +39,7 @@
 	"crop": {
 		"category": "Category",
 		"crop": "Crop",
+		"subcultures": "Subcultures",
 		"harvest-year": "Harvest year",
 		"name": "Agricultural crop",
 		"planting-date": "Planting date",
@@ -46,7 +47,6 @@
 		"seed-consumption-ha": "Seed Consumption, Ha",
 		"seeds": "Seeds",
 		"subculture": "Subculture",
-		"subcultures": "Subcultures",
 		"unit-of-measure-long": "Unit of measure",
 		"unit-of-measure-short": "Unit",
 		"varieties": "Crop varieties",
@@ -343,12 +343,13 @@
 		"parcel": "Parcel",
 		"parcels": "Parcels",
 		"planted-at": "Planted At",
-		"plants-count": "Number of plants",
-		"rows-count": "Number of rows",
+		"plants-on-row": "Number of plants",
+		"rows-on-parcel": "Number of rows",
 		"space-between-plants": "Space Between Plants",
 		"space-between-rows": "Space Between Rows",
 		"the-parcels": "the parcels",
-		"total-ha": "Total Ha"
+		"total-ha": "Total Ha",
+		"yield-goal": "Yield goal"
 	},
 	"pest": {
 		"add-edit": "Add / edit pest",

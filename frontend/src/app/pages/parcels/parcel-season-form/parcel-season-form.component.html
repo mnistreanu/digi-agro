@@ -1,0 +1,82 @@
+
+<form [formGroup]="form" *ngIf="form">
+
+    <div class="form-group row">
+        <div class="col-sm-6">
+            <label for="cropCategoryId" translate>crop.category</label>
+            <select id="cropCategoryId" class="form-control" formControlName="cropCategoryId" (change)="onCropCategoryChange()">
+                <option disabled></option>
+                <option *ngFor="let item of categories" [ngValue]="item.id">{{ item.name }}</option>
+            </select>
+            <app-form-error-block [control]="form.get('cropCategoryId')" [formSubmitted]="submitted"></app-form-error-block>
+        </div>
+
+        <div class="col-sm-6">
+            <label for="plantedAt" translate>parcel.planted-at</label>
+            <input id="plantedAt" type="number" class="form-control checking-field" formControlName="plantedAt"/>
+        </div>
+
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-6">
+            <label for="cropId" translate>crop.name</label>
+            <select id="cropId" class="form-control" formControlName="cropId" (change)="onCropChange()">
+                <option disabled></option>
+                <option *ngFor="let item of crops" [ngValue]="item.id">{{ item.name }}</option>
+            </select>
+            <app-form-error-block [control]="form.get('cropId')" [formSubmitted]="submitted"></app-form-error-block>
+        </div>
+
+        <div class="col-sm-6">
+            <label for="rowsOnParcel" translate>parcel.rows-on-parcel</label>
+            <input id="rowsOnParcel" type="number" class="form-control checking-field" formControlName="rowsOnParcel"/>
+        </div>
+
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-6">
+            <label for="cropSubcultureId" translate>crop.subculture</label>
+            <select id="cropSubcultureId" class="form-control" formControlName="cropSubcultureId" (change)="onCropChange()">
+                <option disabled></option>
+                <option *ngFor="let item of subcultures" [ngValue]="item.id">{{ item.name }}</option>
+            </select>
+            <app-form-error-block [control]="form.get('cropSubcultureId')" [formSubmitted]="submitted"></app-form-error-block>
+        </div>
+
+        <div class="col-sm-6">
+            <label for="plantsOnRow" translate>parcel.plants-on-row</label>
+            <input id="plantsOnRow" type="number" class="form-control checking-field" formControlName="plantsOnRow"/>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-6">
+            <label for="cropVarietyId" translate>crop.variety</label>
+            <select id="cropVarietyId" class="form-control" formControlName="cropVarietyId" (change)="onCropChange()">
+                <option disabled></option>
+                <option *ngFor="let item of varieties" [ngValue]="item.id">{{ item.name }}</option>
+            </select>
+            <app-form-error-block [control]="form.get('cropVarietyId')" [formSubmitted]="submitted"></app-form-error-block>
+        </div>
+
+        <div class="col-sm-6">
+            <label for="spaceBetweenRows" translate>parcel.space-between-rows</label>
+            <input id="spaceBetweenRows" type="number" class="form-control checking-field" formControlName="spaceBetweenRows"/>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-6">
+            <label for="yieldGoal" translate>parcel.yield-goal</label>
+            <input id="yieldGoal" type="number" class="form-control checking-field" formControlName="yieldGoal"/>
+        </div>
+
+        <div class="col-sm-6">
+            <label for="spaceBetweenPlants" translate>parcel.space-between-plants</label>
+            <input id="spaceBetweenPlants" type="number" class="form-control checking-field" formControlName="spaceBetweenPlants"/>
+        </div>
+    </div>
+
+</form>
