@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
-import {DateUtil} from '../../../common/dateUtil';
 import {LangService} from '../../../services/lang.service';
 import {ExpenseModel} from '../models/expense.model';
-import {ExpenseCategoryModel} from '../../enterprise/manage-expense-categories/expense-category/expense-category.model';
 import {AgDateColumnType} from '../../../modules/aggrid/column-types/ag-date-type';
+import {AgNumericColumnType} from '../../../modules/aggrid/column-types/ag-numeric-type';
+import {ExpenseCategoryTotalModel} from '../models/expense-category-total.model';
 
 @Component({
     selector: 'app-expense-list-new',
@@ -17,10 +17,12 @@ export class ExpenseListNewComponent implements OnInit {
     context;
 
     models: ExpenseModel[];
-    categoryModels: ExpenseCategoryModel[];
+    categoryModels: ExpenseCategoryTotalModel[];
 
     constructor(private langService: LangService) {
     }
+
+    // todo: remove, summary row, type drop-down
 
     ngOnInit() {
         this.setupGrid();
@@ -41,7 +43,8 @@ export class ExpenseListNewComponent implements OnInit {
 
     private setupColumnTypes() {
         this.options.columnTypes = {
-            dateType: AgDateColumnType.getType()
+            dateType: AgDateColumnType.getType(),
+            numericType: AgNumericColumnType.getType()
         };
     }
 
@@ -60,22 +63,29 @@ export class ExpenseListNewComponent implements OnInit {
             {
                 headerName: 'Type',
                 field: 'type',
-                width: 100
+                width: 100,
+                editable: true,
+                onCellValueChanged: (params) => this.onCategoryChange(params)
             },
             {
                 headerName: 'Title',
                 field: 'title',
-                width: 100
+                width: 100,
+                editable: true
             },
             {
                 headerName: 'Description',
                 field: 'description',
-                width: 100
+                width: 100,
+                editable: true
             },
             {
                 headerName: 'Cost',
                 field: 'cost',
-                width: 100
+                width: 100,
+                type: 'numericType',
+                editable: true,
+                onCellValueChanged: (params) => this.onCostChange(params)
             }
         ]);
 
@@ -113,7 +123,7 @@ export class ExpenseListNewComponent implements OnInit {
         this.models.forEach((model: ExpenseModel) => {
             let categoryModel = categoryMap[model.type];
             if (!categoryModel) {
-                categoryModel = new ExpenseCategoryModel();
+                categoryModel = new ExpenseCategoryTotalModel();
                 categoryMap[model.type] = categoryModel;
                 this.categoryModels.push(categoryModel);
 
@@ -123,6 +133,31 @@ export class ExpenseListNewComponent implements OnInit {
 
             categoryModel.cost += model.cost || 0;
         });
+    }
+
+    public add() {
+        const model = this.buildModel();
+        this.models.push(model);
+        this.buildCategoryModels();
+
+        this.options.api.updateRowData({add: [model]});
+    }
+
+    private buildModel() {
+        const model = new ExpenseModel();
+        model.date = new Date();
+        model.type = 'Seed';
+        model.cost = 0;
+
+        return model;
+    }
+
+    private onCategoryChange(params) {
+        this.buildCategoryModels();
+    }
+
+    private onCostChange(params) {
+        this.buildCategoryModels();
     }
 
     public onGridReady() {

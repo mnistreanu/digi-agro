@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ExpenseCategoryTotalModel} from '../models/expense-category-total.model';
 import {ExpenseCategoryModel} from '../../enterprise/manage-expense-categories/expense-category/expense-category.model';
 
@@ -7,7 +7,7 @@ import {ExpenseCategoryModel} from '../../enterprise/manage-expense-categories/e
     templateUrl: './expenses-pie-chart.component.html',
     styleUrls: ['./expenses-pie-chart.component.scss']
 })
-export class ExpensesPieChartComponent implements OnInit {
+export class ExpensesPieChartComponent implements OnInit, OnChanges {
 
     @Input() models: ExpenseCategoryTotalModel[];
 
@@ -20,6 +20,11 @@ export class ExpensesPieChartComponent implements OnInit {
 
     ngOnInit() {
         this.setupChartOptions();
+        this.processModels();
+    }
+
+
+    ngOnChanges(changes: SimpleChanges): void {
         this.processModels();
     }
 
