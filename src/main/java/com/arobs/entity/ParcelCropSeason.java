@@ -9,8 +9,8 @@ import java.util.Date;
  * Deja lucrarile efectuate pentru aceasta parcela se vor defini in alte tabele.
  */
 @Entity
-@Table(name = "parcel_crop")
-public class ParcelCrop {
+@Table(name = "parcel_crop_season")
+public class ParcelCropSeason {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,8 +20,9 @@ public class ParcelCrop {
     @Column(name = "parcel_id")
     private Long parcelId;
 
-    @Column(name = "crop_id")
-    private Long cropId;
+    @ManyToOne
+    @JoinColumn(name = "crop_season_id")
+    private CropSeason cropSeason;
 
     @Column(name = "crop_variety_id")
     private Long cropVarietyId;
@@ -32,26 +33,15 @@ public class ParcelCrop {
     @Column(name = "rows_on_parcel")
     private Integer rowsOnParcel;
 
-    @Column(name = "plants_on_rows")
+    @Column(name = "plants_on_row")
     private Integer plantsOnRow;
 
     @Column(name = "space_between_rows")
-    private Integer spaceBetweenRows;
+    private Double spaceBetweenRows;
 
     @Column(name = "space_between_plants")
-    private Integer spaceBetweenPlants;
+    private Double spaceBetweenPlants;
 
-    @Column(name = "created_at")
-    private Date createdAt;
-
-    @Column(name = "created_by")
-    private Long createdBy;
-
-    @Column(name = "deleted_at")
-    private Date deletedAt;
-
-    @Column(name = "deleted_by")
-    private Long deletedBy;
 
     public Long getId() {
         return id;
@@ -69,12 +59,12 @@ public class ParcelCrop {
         this.parcelId = parcelId;
     }
 
-    public Long getCropId() {
-        return cropId;
+    public CropSeason getCropSeason() {
+        return cropSeason;
     }
 
-    public void setCropId(Long cropId) {
-        this.cropId = cropId;
+    public void setCropSeason(CropSeason cropSeason) {
+        this.cropSeason = cropSeason;
     }
 
     public Long getCropVarietyId() {
@@ -101,52 +91,20 @@ public class ParcelCrop {
         this.plantsOnRow = plantsOnRow;
     }
 
-    public Integer getSpaceBetweenRows() {
+    public Double getSpaceBetweenRows() {
         return spaceBetweenRows;
     }
 
-    public void setSpaceBetweenRows(Integer spaceBetweenRows) {
+    public void setSpaceBetweenRows(Double spaceBetweenRows) {
         this.spaceBetweenRows = spaceBetweenRows;
     }
 
-    public Integer getSpaceBetweenPlants() {
+    public Double getSpaceBetweenPlants() {
         return spaceBetweenPlants;
     }
 
-    public void setSpaceBetweenPlants(Integer spaceBetweenPlants) {
+    public void setSpaceBetweenPlants(Double spaceBetweenPlants) {
         this.spaceBetweenPlants = spaceBetweenPlants;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Long getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(Long createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Date getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(Date deletedAt) {
-        this.deletedAt = deletedAt;
-    }
-
-    public Long getDeletedBy() {
-        return deletedBy;
-    }
-
-    public void setDeletedBy(Long deletedBy) {
-        this.deletedBy = deletedBy;
     }
 
     public Date getPlantedAt() {

@@ -1,4 +1,4 @@
-package com.arobs.controller;
+package com.arobs.controller.parcel;
 
 import com.arobs.entity.Parcel;
 import com.arobs.model.parcel.ParcelModel;

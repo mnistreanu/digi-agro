@@ -228,9 +228,9 @@
     <!--
         Adaugat 18 sub-culturi
     -->
-    <changeSet id="insert-subcultres" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="insert-subcultres" author="mgorgos" failOnError="true" runOnChange="false" onValidationFail="MARK_RAN">
+        <validCheckSum>ANY</validCheckSum>
         <sql>
-
             INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (1, 1, 'Grâu de vară', 'Яровая пшеница');
             INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (2, 1, 'Grâu de iarnă', 'Озимая пшеница');
             INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (3, 2, 'Subcultură de Secară', 'Субкультура Рожь');
@@ -258,9 +258,9 @@
     <!--
         Adaugat soiuri de griu de la BIOCORP-Romania
     -->
-    <changeSet id="insert-crop-varieties-griu" author="mgorgos" failOnError="true" runOnChange="true">
+    <changeSet id="insert-crop-varieties-griu" author="mgorgos" failOnError="true" runOnChange="false">
+    <validCheckSum>ANY</validCheckSum>
     <sql>
-
         INSERT INTO crop_variety(id, crop_id, crop_subculture_id, name_ro, name_ru, description_ro)
         VALUES (1, 1, 1, 'AKTEUR', 'АКТЕР', 'Cel mai cunoscut soi de grau din generatia noua, Akteur si-a capatat notorietatea in randul cultivatorilor datorita rezultatelor foarte bune, in special din Banat, Crisana si centrul tarii. Este un soi nearistat, care performeaza pe toate tipurile de sol (inclusiv pe cele din zonele secetoase) si este recunoscut pentru toleranta crescuta fata de boli si calitatea recoltei ELITA (excelent pentru panificatie). Este cel mai tardiv soi din portofoliu, fiind pretabil pentru semanatul in afara epocii datorita dezvoltarii puternice in toamna. Nu se recomanda semanatul timpuriu deoarece poate conduce la slabirea tolerantei la ger. Poate asigura un nivel ridicat de productivitate in conditii tehnologice foarte variate; datorita calitatii superioare a recoltei recomandam aplicarea unei tehnologii intensive. Potentialul ridicat de productie trebuie sustinut cu un nivel ridicat de fertilizare si tratament cu fungicid. Foliajul este abundet, lat si lax cu continut ridicat de pruina pana spre finalul perioadei de vegetatie. In plus, are un sistem radicular bine dezvoltat, iar paiul este viguros si foarte tolerant la inclinare si frangere.');
 
@@ -670,50 +670,6 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert-10-parcel-crop-2016" author="mihai.gorgos" failOnError="true" runOnChange="true">
-        <sql>
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 2, 3, 1, '2016-02-28');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 2, 5, 2, '2016-03-03');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 2, 7, 3, '2016-03-06');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 2, 7, 4, '2016-03-08');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 4, 1, 5, '2016-02-28');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 4, 1, 6,  '2016-03-01');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 4, 1, 7,  '2016-03-06');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 2, 10, 8, '2016-02-24');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 2, 12, 9, '2016-02-26');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2016-02-23 11:00:00.410677', 2, 13, 10, '2016-02-28');
-        </sql>
-    </changeSet>
-
-    <changeSet id="insert-10-parcel-crop-2017" author="mihai.gorgos" failOnError="true" runOnChange="true">
-        <sql>
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 2, 2, 1, '2017-02-28');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 2, 4, 2, '2017-03-03');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 2, 12, 3, '2017-03-06');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 2, 7, 4, '2017-03-08');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 4, 2, 5, '2017-02-28');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 4, 5, 6,  '2017-03-01');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 4, 7, 7,  '2017-03-06');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 2, 9, 8, '2017-02-24');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 2, 12, 9, '2017-02-26');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES ('2017-02-28 10:00:00.410677', 2, 13, 10, '2017-02-28');
-        </sql>
-    </changeSet>
-
-    <changeSet id="insert-10-parcel-crop-2018" author="mihai.gorgos" failOnError="true" runOnChange="true">
-        <sql>
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES (NOW(), 2, 1, 1, '2018-02-28');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES (NOW(), 2, 15, 2, '2018-03-03');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES (NOW(), 2, 17, 3, '2018-03-06');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES (NOW(), 2, 6, 4, '2018-03-08');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES (NOW(), 4, 1, 5, '2018-02-28');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES (NOW(), 4, 15, 6,  '2018-03-01');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES (NOW(), 4, 17, 7,  '2018-03-06');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES (NOW(), 2, 8, 8, '2018-02-24');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES (NOW(), 2, 10, 9, '2018-02-26');
-            INSERT INTO parcel_crop(created_at, created_by, crop_id, parcel_id, planted_at) VALUES (NOW(), 2, 11, 10, '2018-02-28');
-        </sql>
-    </changeSet>
 
 
     <!--<changeSet id="insert-parcel-works-10-parcels-2018" author="mihai.gorgos" failOnError="true" runOnChange="true">-->
@@ -1131,5 +1087,18 @@
             SELECT setval('crop_season_id_seq', (SELECT MAX(id) FROM crop_season));
         </sql>
     </changeSet>
+
+    <changeSet id="insert-parcel-crop-season-2019" author="mihai.gorgos" failOnError="true" runOnChange="false">
+        <sql>
+            INSERT INTO parcel_crop_season(id, parcel_id, crop_season_id, crop_variety_id, planted_at, rows_on_parcel, plants_on_row, space_between_rows, space_between_plants)
+            VALUES (1, 1, 1, 1, null, 30, 115, 1.2, 0.8);
+
+            INSERT INTO parcel_crop_season(id, parcel_id, crop_season_id, crop_variety_id, planted_at, rows_on_parcel, plants_on_row, space_between_rows, space_between_plants)
+            VALUES (2, 2, 2, null, null, 44, 99, 1.4, 0.5);
+
+            SELECT setval('parcel_crop_season_id_seq', (SELECT MAX(id) FROM parcel_crop_season));
+        </sql>
+    </changeSet>
+
 
 </databaseChangeLog>

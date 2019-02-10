@@ -26,7 +26,7 @@ public class ParcelService implements HasRepository<ParcelRepository> {
     private ParcelGeometryService parcelGeometryService;
 
     @Autowired
-    private ParcelCropService parcelCropService;
+    private ParcelCropSeasonService parcelCropService;
     @Autowired
     private CropService cropService;
     @Autowired
@@ -87,17 +87,17 @@ public class ParcelService implements HasRepository<ParcelRepository> {
     public ParcelModel getModel(Parcel parcel) {
         ParcelModel model = new ParcelModel(parcel);
 
-        ParcelCrop parcelCrop = parcelCropService.find(parcel.getId());
-        if (parcelCrop != null) {
-            Crop crop = cropService.findOne(parcelCrop.getCropId());
-            model.setupCropInfo(parcelCrop, crop);
-
-            AgroWork lastAgroWork = agroWorkService.findLast(parcelCrop.getId());
-            if (lastAgroWork != null) {
-                AgroWorkType agroWorkType = agroWorkTypeService.findOne(lastAgroWork.getWorkType().getId());
-                model.setupLastCropWork(lastAgroWork, agroWorkType);
-            }
-        }
+//        ParcelCrop parcelCrop = parcelCropService.find(parcel.getId());
+//        if (parcelCrop != null) {
+//            Crop crop = cropService.findOne(parcelCrop.getCropId());
+//            model.setupCropSeason(parcelCrop, crop);
+//
+//            AgroWork lastAgroWork = agroWorkService.findLast(parcelCrop.getId());
+//            if (lastAgroWork != null) {
+//                AgroWorkType agroWorkType = agroWorkTypeService.findOne(lastAgroWork.getWorkType().getId());
+//                model.setupLastCropWork(lastAgroWork, agroWorkType);
+//            }
+//        }
 
         ParcelGeometry geometry = parcelGeometryService.find(parcel.getId());
         Type listType = new TypeToken<List<BigDecimal[]>>() {}.getType();

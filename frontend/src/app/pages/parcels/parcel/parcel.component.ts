@@ -74,8 +74,8 @@ export class ParcelComponent implements OnInit {
             return;
         }
 
-        const infoFormValid = this.parcelSeasonFormComponent.submit();
-        if (!infoFormValid) {
+        const seasonFormValid = this.parcelSeasonFormComponent.submit();
+        if (!seasonFormValid) {
             this.alertService.validationFailed();
             return;
         }
