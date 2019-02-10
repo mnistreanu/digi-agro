@@ -1,6 +1,16 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ParcelSeasonModel} from './parcel-season.model';
+import {SelectItem} from '../../../dto/select-item.dto';
+import {FieldMapper} from '../../../common/field.mapper';
+import {AlertService} from '../../../services/alert.service';
+import {LangService} from '../../../services/lang.service';
+import {CropCategoryService} from '../../../services/crop/crop-category.service';
+import {CropService} from '../../../services/crop/crop.service';
+import {CropSubcultureService} from '../../../services/crop/crop-subculture.service';
+import {CropVarietyService} from '../../../services/crop/crop-variety.service';
+import {CropSeasonService} from '../../../services/crop/crop-season.service';
 
 @Component({
     selector: 'app-parcel-season-form',
@@ -14,11 +24,112 @@ export class ParcelSeasonFormComponent implements OnInit {
     form: FormGroup;
     forcedValidation: boolean;
 
-    constructor(private fb: FormBuilder) {
+    cropCategories: SelectItem[] = [];
+    crops: SelectItem[] = [];
+    subcultures: SelectItem[] = [];
+    varieties: SelectItem[] = [];
+
+    constructor(private fb: FormBuilder,
+                private router: Router,
+                private route: ActivatedRoute,
+                private alertService: AlertService,
+                private langService: LangService,
+                private cropCategoryService: CropCategoryService,
+                private cropService: CropService,
+                private cropSubcultureService: CropSubcultureService,
+                private cropVarietyService: CropVarietyService,
+                private cropSeasonService: CropSeasonService) {
     }
 
     ngOnInit() {
+        this.setupCategories();
         this.buildForm();
+    }
+
+    private setupCategories() {
+        this.cropCategoryService.find().subscribe(models => {
+            const fieldMapper = new FieldMapper(this.langService.getLanguage());
+            const nameField = fieldMapper.get('name');
+            this.cropCategories = models.map(model => {
+                return new SelectItem(model.id, model[nameField]);
+            });
+        });
+    }
+
+    public onCropCategoryChange() {
+        const cropCategoryId = this.form.controls['cropCategoryId'].value;
+        this.setupCrops(cropCategoryId, true);
+    }
+
+    private setupCrops(cropCategoryId, updateValue) {
+        this.cropService.findCrops(cropCategoryId).subscribe(data => {
+            const models = data.payload;
+            if (models != null) {
+                const fieldMapper = new FieldMapper(this.langService.getLanguage());
+                const nameField = fieldMapper.get('name');
+                this.crops = models.map(model => {
+                    return new SelectItem(model.id, model[nameField]);
+                });
+                // this.crops.splice(0, 0, new SelectItem(null, ''));
+            } else {
+                this.crops = [];
+            }
+
+            if (updateValue) {
+                // TODO only if necessary
+            }
+        });
+    }
+
+    public onCropChange() {
+        const cropId = this.form.controls['cropId'].value;
+        this.varieties = [];
+        this.setupCropSubcultures(cropId, true);
+    }
+
+    private setupCropSubcultures(cropId, updateValue) {
+        this.cropSubcultureService.find(cropId).subscribe(data => {
+            const models = data.payload;
+
+            if (models != null) {
+                const fieldMapper = new FieldMapper(this.langService.getLanguage());
+                const nameField = fieldMapper.get('name');
+                this.subcultures = models.map(model => {
+                    return new SelectItem(model.id, model[nameField]);
+                });
+            } else {
+                this.subcultures = [];
+            }
+
+            if (updateValue) {
+                // TODO only if necessary
+            }
+        });
+    }
+
+    public onCropSubcultureChange() {
+        const cropSubcultureId = this.form.controls['cropSubcultureId'].value;
+        this.setupCropVarieties(cropSubcultureId, true);
+    }
+
+    private setupCropVarieties(cropSubcultureId, updateValue) {
+        this.cropVarietyService.find(cropSubcultureId).subscribe(data => {
+            const models = data.payload;
+
+            if (models != null) {
+                const fieldMapper = new FieldMapper(this.langService.getLanguage());
+                const nameField = fieldMapper.get('name');
+                this.varieties = models.map(model => {
+                    return new SelectItem(model.id, model[nameField]);
+                });
+            } else {
+                this.varieties = [];
+            }
+
+            if (updateValue) {
+                // TODO only if necessary
+            }
+        });
     }
 
     private buildForm() {
@@ -27,13 +138,13 @@ export class ParcelSeasonFormComponent implements OnInit {
             cropId: [this.parcelSeasonModel.cropId, Validators.required],
             cropSubcultureId: [this.parcelSeasonModel.cropSubcultureId],
             cropVarietyId: [this.parcelSeasonModel.cropVarietyId],
-            yieldGoal: [this.parcelSeasonModel.yieldGoal],
+            yieldGoal: [this.parcelSeasonModel.yieldGoal, Validators.min(0)],
             unitOfMeasure: [this.parcelSeasonModel.unitOfMeasure],
             plantedAt: [this.parcelSeasonModel.plantedAt],
-            rowsOnParcel: [this.parcelSeasonModel.rowsOnParcel],
-            plantsOnRow: [this.parcelSeasonModel.plantsOnRow],
-            spaceBetweenRows: [this.parcelSeasonModel.spaceBetweenRows],
-            spaceBetweenPlants: [this.parcelSeasonModel.spaceBetweenPlants]
+            rowsOnParcel: [this.parcelSeasonModel.rowsOnParcel, Validators.min(0)],
+            plantsOnRow: [this.parcelSeasonModel.plantsOnRow, Validators.min(0)],
+            spaceBetweenRows: [this.parcelSeasonModel.spaceBetweenRows, Validators.min(0)],
+            spaceBetweenPlants: [this.parcelSeasonModel.spaceBetweenPlants, Validators.min(0)]
         });
     }
 

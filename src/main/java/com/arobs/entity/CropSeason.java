@@ -25,6 +25,10 @@ public class CropSeason {
     private Crop crop;
 
     @ManyToOne
+    @JoinColumn(name = "crop_subculture_id")
+    private CropSubculture cropSubculture;
+
+    @ManyToOne
     @JoinColumn(name = "crop_variety_id")
     private CropVariety cropVariety;
 
@@ -70,6 +74,14 @@ public class CropSeason {
 
     public void setCrop(Crop crop) {
         this.crop = crop;
+    }
+
+    public CropSubculture getCropSubculture() {
+        return cropSubculture;
+    }
+
+    public void setCropSubculture(CropSubculture cropSubculture) {
+        this.cropSubculture = cropSubculture;
     }
 
     public CropVariety getCropVariety() {

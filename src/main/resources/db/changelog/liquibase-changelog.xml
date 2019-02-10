@@ -228,26 +228,28 @@
     <!--
         Adaugat 18 sub-culturi
     -->
-    <changeSet id="insert-subcultres" author="mgorgos" failOnError="true" runOnChange="false">
+    <changeSet id="insert-subcultres" author="mgorgos" failOnError="true" runOnChange="true">
         <sql>
-            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (1, 1, 'Subcultură de Grâu', 'Субкультура Пшеница');
-            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (2, 2, 'Subcultură de Secară', 'Субкультура Рожь');
-            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (3, 3, 'Subcultură de Triticale', 'Субкультура Тритикале');
-            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (4, 4, 'Subcultură de Orz', 'Субкультура Ячмень');
-            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (5, 5, 'Subcultură de Ovăz', 'Субкультура Овес');
-            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (6, 6, 'Subcultură de Porumb', 'Субкультура Кукуруза');
-            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (7, 7, 'Subcultură de Sorg', 'Субкультура Сорг');
-            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (8, 8, 'Subcultură de Mei', 'Субкультура Просо');
-            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (9, 9, 'Subcultură de Orez', 'Субкультура Рис');
-            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (10, 10, 'Subcultură de Hrișca', 'Субкультура Гречиха');
-            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (11, 11, 'Subcultură de Floarea soarelui', 'Субкультура Подсолнечник');
-            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (12, 12, 'Subcultură de Rapiță', 'Субкультура Рапс');
-            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (13, 13, 'Subcultură de Sfeclă de zahăr', 'Сахарная свекла');
-            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (14, 14, 'Subcultură de In', 'Субкультура Лён');
-            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (15, 15, 'Subcultură de Cânepă', 'Субкультура Конопля');
-            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (16, 16, 'Subcultură de Tutun', 'Субкультура Табак');
-            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (17, 17, 'Subcultură de Hamei', 'Субкультура Хмель');
-            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (18, 18, 'Subcultură de Soia', 'Субкультура Соя');
+
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (1, 1, 'Grâu de vară', 'Яровая пшеница');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (2, 1, 'Grâu de iarnă', 'Озимая пшеница');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (3, 2, 'Subcultură de Secară', 'Субкультура Рожь');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (4, 3, 'Subcultură de Triticale', 'Субкультура Тритикале');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (5, 4, 'Subcultură de Orz', 'Субкультура Ячмень');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (6, 5, 'Subcultură de Ovăz', 'Субкультура Овес');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (7, 6, 'Subcultură de Porumb', 'Субкультура Кукуруза');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (8, 7, 'Subcultură de Sorg', 'Субкультура Сорг');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (9, 8, 'Subcultură de Mei', 'Субкультура Просо');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (10, 9, 'Subcultură de Orez', 'Субкультура Рис');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (11, 10, 'Subcultură de Hrișca', 'Субкультура Гречиха');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (12, 11, 'Subcultură de Floarea soarelui', 'Субкультура Подсолнечник');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (13, 12, 'Subcultură de Rapiță', 'Субкультура Рапс');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (14, 13, 'Subcultură de Sfeclă de zahăr', 'Сахарная свекла');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (15, 14, 'Subcultură de In', 'Субкультура Лён');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (16, 15, 'Subcultură de Cânepă', 'Субкультура Конопля');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (17, 16, 'Subcultură de Tutun', 'Субкультура Табак');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (18, 17, 'Subcultură de Hamei', 'Субкультура Хмель');
+            INSERT INTO crop_subculture(id, crop_id, name_ro, name_ru) 	VALUES (19, 18, 'Subcultură de Soia', 'Субкультура Соя');
 
              SELECT setval('crop_subculture_id_seq', (SELECT MAX(id) FROM crop_subculture));
         </sql>
@@ -258,32 +260,34 @@
     -->
     <changeSet id="insert-crop-varieties-griu" author="mgorgos" failOnError="true" runOnChange="true">
     <sql>
-        ALTER TABLE crop_variety ALTER COLUMN description_ro TYPE varchar(4000);
-        ALTER TABLE crop_variety ALTER COLUMN description_ru TYPE varchar(4000);
 
-        INSERT INTO crop_variety(crop_id, name_ro, name_ru, description_ro)
-        VALUES (1, 'AKTEUR', 'AKTEUR', 'Cel mai cunoscut soi de grau din generatia noua, Akteur si-a capatat notorietatea in randul cultivatorilor datorita rezultatelor foarte bune, in special din Banat, Crisana si centrul tarii. Este un soi nearistat, care performeaza pe toate tipurile de sol (inclusiv pe cele din zonele secetoase) si este recunoscut pentru toleranta crescuta fata de boli si calitatea recoltei ELITA (excelent pentru panificatie). Este cel mai tardiv soi din portofoliu, fiind pretabil pentru semanatul in afara epocii datorita dezvoltarii puternice in toamna. Nu se recomanda semanatul timpuriu deoarece poate conduce la slabirea tolerantei la ger. Poate asigura un nivel ridicat de productivitate in conditii tehnologice foarte variate; datorita calitatii superioare a recoltei recomandam aplicarea unei tehnologii intensive. Potentialul ridicat de productie trebuie sustinut cu un nivel ridicat de fertilizare si tratament cu fungicid. Foliajul este abundet, lat si lax cu continut ridicat de pruina pana spre finalul perioadei de vegetatie. In plus, are un sistem radicular bine dezvoltat, iar paiul este viguros si foarte tolerant la inclinare si frangere.');
+        INSERT INTO crop_variety(id, crop_id, crop_subculture_id, name_ro, name_ru, description_ro)
+        VALUES (1, 1, 1, 'AKTEUR', 'АКТЕР', 'Cel mai cunoscut soi de grau din generatia noua, Akteur si-a capatat notorietatea in randul cultivatorilor datorita rezultatelor foarte bune, in special din Banat, Crisana si centrul tarii. Este un soi nearistat, care performeaza pe toate tipurile de sol (inclusiv pe cele din zonele secetoase) si este recunoscut pentru toleranta crescuta fata de boli si calitatea recoltei ELITA (excelent pentru panificatie). Este cel mai tardiv soi din portofoliu, fiind pretabil pentru semanatul in afara epocii datorita dezvoltarii puternice in toamna. Nu se recomanda semanatul timpuriu deoarece poate conduce la slabirea tolerantei la ger. Poate asigura un nivel ridicat de productivitate in conditii tehnologice foarte variate; datorita calitatii superioare a recoltei recomandam aplicarea unei tehnologii intensive. Potentialul ridicat de productie trebuie sustinut cu un nivel ridicat de fertilizare si tratament cu fungicid. Foliajul este abundet, lat si lax cu continut ridicat de pruina pana spre finalul perioadei de vegetatie. In plus, are un sistem radicular bine dezvoltat, iar paiul este viguros si foarte tolerant la inclinare si frangere.');
 
-        INSERT INTO crop_variety(crop_id, name_ro, name_ru, description_ro)
-        VALUES (1, 'ARKTIS', 'ARKTIS', 'Soi nearistat de mare productivitate, cu talia medie-inalta (80-100 cm), caracterizat de calitatea superioara a indicilor recoltei - ELITA (excelent pentru panificatie), precum si pentru randamentul foarte mare al fainii. Este de maturare intermediara, in 2016 procesul de inflorire declansandu-se in jurul perioadei 16-18 mai. Raspunde foarte bine in conditii de tehnologie intensiva, iar plasticitatea ecologica il recomanda pentru toate zonele de cultura a cerealelor paioase.');
+        INSERT INTO crop_variety(id, crop_id, crop_subculture_id, name_ro, name_ru, description_ro)
+        VALUES (2, 1, 1, 'ARKTIS', 'АРКТИС', 'Soi nearistat de mare productivitate, cu talia medie-inalta (80-100 cm), caracterizat de calitatea superioara a indicilor recoltei - ELITA (excelent pentru panificatie), precum si pentru randamentul foarte mare al fainii. Este de maturare intermediara, in 2016 procesul de inflorire declansandu-se in jurul perioadei 16-18 mai. Raspunde foarte bine in conditii de tehnologie intensiva, iar plasticitatea ecologica il recomanda pentru toate zonele de cultura a cerealelor paioase.');
 
-        INSERT INTO crop_variety(crop_id, name_ro, name_ru, description_ro)
-        VALUES (1, 'XERXES', 'XERXES', 'Soi timpuriu, nearistat, cu o buna adaptare pedoclimatica. Este de asemenea un soi cu o calitate superioara a recoltei, din categoria ELITA (recomandat pentru morarit si panificatie). Are cea mai inalta talie din portofoliul Biocrop (circa 100-120 cm) si este caracterizat de continutul superior de gluten umed. In plus, este foarte rezistent la ger, inclinare si frangere, iar toleranta buna fata de principalele boli foliare il recomanda pentru conditiile medii de tehnologie.');
+        INSERT INTO crop_variety(id, crop_id, crop_subculture_id, name_ro, name_ru, description_ro)
+        VALUES (3, 1, 1, 'XERXES', 'КСЕРКС',  'Soi timpuriu, nearistat, cu o buna adaptare pedoclimatica. Este de asemenea un soi cu o calitate superioara a recoltei, din categoria ELITA (recomandat pentru morarit si panificatie). Are cea mai inalta talie din portofoliul Biocrop (circa 100-120 cm) si este caracterizat de continutul superior de gluten umed. In plus, este foarte rezistent la ger, inclinare si frangere, iar toleranta buna fata de principalele boli foliare il recomanda pentru conditiile medii de tehnologie.');
 
-        INSERT INTO crop_variety(crop_id, name_ro, name_ru, description_ro)
-        VALUES (1, 'PATRAS', 'PATRAS', 'Soi de maturitate intermediara, nearistat, caracterizat prin rezistenta foarte mare la conditii de iarna si potentialul de productie ridicat. Foliajul este semierect cu o prezenta ridicata a pruinei. Spicele sunt nearistate, laxe, iar talia este medie de aproximativ 80-90 cm. Soiul si-a dobandit aprecierea datorita nivelului stabil al productivitatii, in special in zona Moldovei si Olteniei. Se incadreaza in grupa de calitate “A” si are de asemenea o foarte buna rezistenta la boli, inclinare si frangere.');
+        INSERT INTO crop_variety(id, crop_id, crop_subculture_id, name_ro, name_ru, description_ro)
+        VALUES (4, 1, 1, 'PATRAS', 'Патры', 'Soi de maturitate intermediara, nearistat, caracterizat prin rezistenta foarte mare la conditii de iarna si potentialul de productie ridicat. Foliajul este semierect cu o prezenta ridicata a pruinei. Spicele sunt nearistate, laxe, iar talia este medie de aproximativ 80-90 cm. Soiul si-a dobandit aprecierea datorita nivelului stabil al productivitatii, in special in zona Moldovei si Olteniei. Se incadreaza in grupa de calitate “A” si are de asemenea o foarte buna rezistenta la boli, inclinare si frangere.');
 
-        INSERT INTO crop_variety(crop_id, name_ro, name_ru, description_ro)
-        VALUES (1, 'COMBIN', 'COMBIN', 'Este cel mai nou soi din portofoliul Biocrop, singurul aristat si cu cea mai joasa talie (circa 80 cm). Este de maturitate timpurie, cu o calitate a recoltei care se incadreaza in parametrii de ELITA (conform clasificarilor germane) - are capacitatea genetica de a dobandi indici foarte buni pentru panificatie intr-o tehnologie specifica. In plus, datorita tolerantei ridicate la bolile foliare specifice, recoltele sunt foarte stabile. Este unul din cele mai solicitate soiuri de grau in Campania 2016/2017, bucurandu-se de aprecierea cultivatorilor care l-au recoltat pentru prima oara in 2016. Soiul este recomandat in toate conditiile de cultivare; poate valorifica prin cantitatea si calitatea recoltei tehnologiile intensive.');
+        INSERT INTO crop_variety(id, crop_id, crop_subculture_id, name_ro, name_ru, description_ro)
+        VALUES (5, 1, 2, 'COMBIN', 'Совмещенный', 'Este cel mai nou soi din portofoliul Biocrop, singurul aristat si cu cea mai joasa talie (circa 80 cm). Este de maturitate timpurie, cu o calitate a recoltei care se incadreaza in parametrii de ELITA (conform clasificarilor germane) - are capacitatea genetica de a dobandi indici foarte buni pentru panificatie intr-o tehnologie specifica. In plus, datorita tolerantei ridicate la bolile foliare specifice, recoltele sunt foarte stabile. Este unul din cele mai solicitate soiuri de grau in Campania 2016/2017, bucurandu-se de aprecierea cultivatorilor care l-au recoltat pentru prima oara in 2016. Soiul este recomandat in toate conditiile de cultivare; poate valorifica prin cantitatea si calitatea recoltei tehnologiile intensive.');
 
-        INSERT INTO crop_variety(crop_id, name_ro, name_ru, description_ro)
-        VALUES (1, 'POTENZIAL', 'POTENZIAL', 'Soi nearistat de maturitate semi-tardiva, caracterizat prin buna plasticitate ecologica si nivelul ridicat de productivitate in conditii dificile, valorificand foarte bine solurile sarace. Are o buna toleranta fata de principalele boli. Talia este medie, iar aparatul foliar este semierect. La maturitate, ca si la restul cerealelor paioase din portofoliu, spicul capata o forma curbata care nu favorizeaza stagnarea apei si astfel se previne deprecierea calitatii recoltei. Este un sortiment de grau cu un randament ridicat. Prezinta o rezistenta buna la seceta si ger, iar clasa A de calitate ii asigura un continut ridicat si stabil de proteina.');
+        INSERT INTO crop_variety(id, crop_id, crop_subculture_id, name_ro, name_ru, description_ro)
+        VALUES (6, 1, 2, 'POTENZIAL', 'ПОТЕНЦИАЛ', 'Soi nearistat de maturitate semi-tardiva, caracterizat prin buna plasticitate ecologica si nivelul ridicat de productivitate in conditii dificile, valorificand foarte bine solurile sarace. Are o buna toleranta fata de principalele boli. Talia este medie, iar aparatul foliar este semierect. La maturitate, ca si la restul cerealelor paioase din portofoliu, spicul capata o forma curbata care nu favorizeaza stagnarea apei si astfel se previne deprecierea calitatii recoltei. Este un sortiment de grau cu un randament ridicat. Prezinta o rezistenta buna la seceta si ger, iar clasa A de calitate ii asigura un continut ridicat si stabil de proteina.');
 
-        INSERT INTO crop_variety(crop_id, name_ro, name_ru, description_ro)
-        VALUES (1, 'ATTRAKTION', 'ATTRAKTION', 'Soi semi-timpuriu, nearistat, cu cea mai buna toleranta fata de bolile foliare intre soiurile din portofolioul Biocrop. S-a remarcat prin stabilitate productiva foarte ridicata, indiferent de arealul de cultura (in top 3 productii). Este un soi capabil sa dobandeasca indici de panificatie din categoria A si poate valorifica prin productie o tehnologie intensiva. Este caracterizat de un foliaj abundent, lat, lax, precum si de stabilitatea indicelul de cadere, rezistenta la inclinare si frangere si toleranta crescuta fata de boli.');
+        INSERT INTO crop_variety(id, crop_id, crop_subculture_id, name_ro, name_ru, description_ro)
+        VALUES (7, 1, 2, 'ATTRAKTION', 'аттракцион', 'Soi semi-timpuriu, nearistat, cu cea mai buna toleranta fata de bolile foliare intre soiurile din portofolioul Biocrop. S-a remarcat prin stabilitate productiva foarte ridicata, indiferent de arealul de cultura (in top 3 productii). Este un soi capabil sa dobandeasca indici de panificatie din categoria A si poate valorifica prin productie o tehnologie intensiva. Este caracterizat de un foliaj abundent, lat, lax, precum si de stabilitatea indicelul de cadere, rezistenta la inclinare si frangere si toleranta crescuta fata de boli.');
 
-        INSERT INTO crop_variety(crop_id, name_ro, name_ru, description_ro)
-        VALUES (1, 'CHEVALIER', 'CHEVALIER', 'Este un soi cu maturitate la recoltare semi-tardiva, din categoria “A” de calitate a recoltei. Este nearistat, de talie a plantei de cca. 20 cm, cu foliaj lax, Alaturi de Potenzial este unul din soiurile cele mai cunoscute si apreciate de cultivatorii parteneri. A demonstrat un nivel stabil, sporit al productiilor, in special in Muntenia, Oltenia si Moldova. De asemenea, prezinta un continut ridicat si stabil de proteina. Este un soi stabil, foarte rezistent in conditii de ger si seceta, putand si cultivat si dupa porumb.');
+        INSERT INTO crop_variety(id, crop_id, crop_subculture_id, name_ro, name_ru, description_ro)
+        VALUES (8, 1, 2, 'CHEVALIER', 'рыцарь', 'Este un soi cu maturitate la recoltare semi-tardiva, din categoria “A” de calitate a recoltei. Este nearistat, de talie a plantei de cca. 20 cm, cu foliaj lax, Alaturi de Potenzial este unul din soiurile cele mai cunoscute si apreciate de cultivatorii parteneri. A demonstrat un nivel stabil, sporit al productiilor, in special in Muntenia, Oltenia si Moldova. De asemenea, prezinta un continut ridicat si stabil de proteina. Este un soi stabil, foarte rezistent in conditii de ger si seceta, putand si cultivat si dupa porumb.');
+
+        UPDATE crop_variety SET description_ru = description_ro WHERE id BETWEEN 1 AND 8;
+
+        SELECT setval('crop_variety_id_seq', (SELECT MAX(id) FROM crop_variety));
 
     </sql>
     </changeSet>
@@ -1104,25 +1108,25 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert-crop-seasons" author="mihai.gorgos" failOnError="true" runOnChange="true">
+    <changeSet id="insert-crop-season-2019" author="mihai.gorgos" failOnError="true" runOnChange="true">
         <sql>
             DELETE FROM crop_season WHERE id>0;
 
             <!--Griu de soi XERCES pentru anul 2019, pentru tenant=1-->
-            INSERT INTO crop_season(id, tenant_id, harvest_year, crop_id, crop_variety_id, start_date, end_date, yield_goal)
-            VALUES (1, 1, 2019, 1, 3, '2019-01-01', '2019-12-31', 1200);
+            INSERT INTO crop_season(id, tenant_id, harvest_year, crop_id, crop_subculture_id, crop_variety_id, start_date, end_date, yield_goal)
+            VALUES (1, 1, 2019, 1, 1, 3, '2019-01-01', '2019-12-31', 1200);
 
             <!--Porumb pentru anul 2019, pentru tenant=1-->
-            INSERT INTO crop_season(id, tenant_id, harvest_year, crop_id, crop_variety_id, start_date, end_date, yield_goal)
-            VALUES (2, 1, 2019, 6, null, '2019-01-01', '2019-12-31', null);
+            INSERT INTO crop_season(id, tenant_id, harvest_year, crop_id, crop_subculture_id, crop_variety_id, start_date, end_date, yield_goal)
+            VALUES (2, 1, 2019, 6, null, null, '2019-01-01', '2019-12-31', null);
 
             <!--Griu de soi XERCES pentru anul 2019, pentru tenant=2-->
-            INSERT INTO crop_season(id, tenant_id, harvest_year, crop_id, crop_variety_id, start_date, end_date, yield_goal)
-            VALUES (3, 2, 2019, 1, 3, '2019-01-01', '2019-12-31', 1200);
+            INSERT INTO crop_season(id, tenant_id, harvest_year, crop_id, crop_subculture_id, crop_variety_id, start_date, end_date, yield_goal)
+            VALUES (3, 2, 2019, 1, 1, 3, '2019-01-01', '2019-12-31', 1200);
 
             <!--Porumb pentru anul 2019, pentru tenant=2-->
-            INSERT INTO crop_season(id, tenant_id, harvest_year, crop_id, crop_variety_id, start_date, end_date, yield_goal)
-            VALUES (4, 2, 2019, 6, null, '2019-01-01', '2019-12-31', null);
+            INSERT INTO crop_season(id, tenant_id, harvest_year, crop_id, crop_subculture_id, crop_variety_id, start_date, end_date, yield_goal)
+            VALUES (4, 2, 2019, 6, null, null, '2019-01-01', '2019-12-31', null);
 
             SELECT setval('crop_season_id_seq', (SELECT MAX(id) FROM crop_season));
         </sql>

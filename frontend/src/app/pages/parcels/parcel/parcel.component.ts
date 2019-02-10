@@ -74,6 +74,12 @@ export class ParcelComponent implements OnInit {
             return;
         }
 
+        const infoFormValid = this.parcelSeasonFormComponent.submit();
+        if (!infoFormValid) {
+            this.alertService.validationFailed();
+            return;
+        }
+
         const isNew = this.parcelModel.id == null;
         if (isNew && !this.parcelMapEditorComponent) {
             this.alertService.warning('parcel.complete-map');
@@ -82,14 +88,6 @@ export class ParcelComponent implements OnInit {
 
         if (this.parcelMapEditorComponent) {
             const mapValid = this.parcelMapEditorComponent.submit();
-            if (!mapValid) {
-                this.alertService.warning('parcel.complete-map');
-                return;
-            }
-        }
-
-        if (this.parcelSeasonFormComponent) {
-            const mapValid = this.parcelSeasonFormComponent.submit();
             if (!mapValid) {
                 this.alertService.warning('parcel.complete-map');
                 return;

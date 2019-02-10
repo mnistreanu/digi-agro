@@ -14,6 +14,10 @@ public class CropVariety {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "crop_id")
+    private Crop crop;
+
+    @ManyToOne
     @JoinColumn(name = "crop_subculture_id")
     private CropSubculture cropSubculture;
 
@@ -38,6 +42,14 @@ public class CropVariety {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Crop getCrop() {
+        return crop;
+    }
+
+    public void setCrop(Crop crop) {
+        this.crop = crop;
     }
 
     public CropSubculture getCropSubculture() {
