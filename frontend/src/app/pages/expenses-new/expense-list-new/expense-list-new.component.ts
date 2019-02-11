@@ -64,6 +64,7 @@ export class ExpenseListNewComponent implements OnInit {
                 headerName: 'Type',
                 field: 'type',
                 width: 100,
+                minWidth: 100,
                 editable: true,
                 onCellValueChanged: (params) => this.onCategoryChange(params)
             },
@@ -71,21 +72,24 @@ export class ExpenseListNewComponent implements OnInit {
                 headerName: 'Title',
                 field: 'title',
                 width: 100,
-                editable: true
-            },
-            {
-                headerName: 'Description',
-                field: 'description',
-                width: 100,
+                minWidth: 100,
                 editable: true
             },
             {
                 headerName: 'Cost',
                 field: 'cost',
                 width: 100,
+                minWidth: 100,
                 type: 'numericType',
                 editable: true,
                 onCellValueChanged: (params) => this.onCostChange(params)
+            },
+            {
+                headerName: 'Description',
+                field: 'description',
+                width: 200,
+                minWidth: 100,
+                editable: true
             }
         ]);
 
