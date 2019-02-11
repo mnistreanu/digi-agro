@@ -15,6 +15,7 @@ import {EditRendererComponent} from '../../modules/aggrid/edit-renderer/edit-ren
 import {PinnedRowRendererComponent} from '../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
 import {DeleteRendererComponent} from '../../modules/aggrid/delete-renderer/delete-renderer.component';
 import {ChartsModule} from 'ng2-charts';
+import {ConfirmationModalModule} from '../../modules/confirmation-modal/confirmation-modal.module';
 
 export const routes = [
     {path: '', component: ExpenseListNewComponent}
@@ -33,6 +34,7 @@ export const routes = [
         PinnedRowRendererModule,
         DeleteRendererModule,
         EditRendererModule,
+        ConfirmationModalModule,
         AgGridModule.withComponents([
             EditRendererComponent,
             PinnedRowRendererComponent,

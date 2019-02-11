@@ -57,12 +57,36 @@ export class ExpensesPieChartComponent implements OnInit, OnChanges {
     }
 
     processModels() {
-        this.labels = [];
-        this.data = [];
+        const labels = [];
+        const data = [];
 
         this.models.forEach((model: ExpenseCategoryTotalModel) => {
-            this.labels.push(model.type);
-            this.data.push(model.cost);
+            labels.push(model.type);
+            data.push(model.cost);
         });
+
+        this.data = data;
+
+        if (this.labelsChanged(labels)) {
+            setTimeout(() => {
+                this.labels = labels;
+            });
+        }
     }
+
+    private labelsChanged(newLabels): boolean {
+
+        if (!this.labels || this.labels.length !== newLabels.length) {
+            return true;
+        }
+
+        for (let i = 0; i < newLabels.length; i++) {
+            if (this.labels[i] !== newLabels[i]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }

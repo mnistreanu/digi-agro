@@ -5,6 +5,8 @@ import {ExpenseModel} from '../models/expense.model';
 import {AgDateColumnType} from '../../../modules/aggrid/column-types/ag-date-type';
 import {AgNumericColumnType} from '../../../modules/aggrid/column-types/ag-numeric-type';
 import {ExpenseCategoryTotalModel} from '../models/expense-category-total.model';
+import {AgDeleteColumnType} from '../../../modules/aggrid/column-types/ag-delete-type';
+import {ModalService} from '../../../services/modal.service';
 
 @Component({
     selector: 'app-expense-list-new',
@@ -19,10 +21,14 @@ export class ExpenseListNewComponent implements OnInit {
     models: ExpenseModel[];
     categoryModels: ExpenseCategoryTotalModel[];
 
-    constructor(private langService: LangService) {
+    confirmationModalId = 'expense-item-remove-confirmation-modal';
+    currentModel: ExpenseModel;
+
+    constructor(private modalService: ModalService,
+                private langService: LangService) {
     }
 
-    // todo: remove, summary row, type drop-down
+    // todo: type drop-down
 
     ngOnInit() {
         this.setupGrid();
@@ -43,6 +49,7 @@ export class ExpenseListNewComponent implements OnInit {
 
     private setupColumnTypes() {
         this.options.columnTypes = {
+            deleteType: AgDeleteColumnType.getType(),
             dateType: AgDateColumnType.getType(),
             numericType: AgNumericColumnType.getType()
         };
@@ -54,6 +61,9 @@ export class ExpenseListNewComponent implements OnInit {
 
 
         headers = headers.concat([
+            {
+                type: 'deleteType'
+            },
             {
                 headerName: 'expenses.date',
                 field: 'date',
@@ -117,7 +127,13 @@ export class ExpenseListNewComponent implements OnInit {
             {date: new Date('2018-12-13'), type: 'Seed', title: 'Seed 002', cost: 1000},
             {date: new Date('2018-12-13'), type: 'Herbicide', title: 'Herbicide 001', cost: 5000},
             {date: new Date('2018-12-23'), type: 'Fertilizer', title: 'Fertilizer 001', cost: 4200},
-            {date: new Date('2018-12-10'), type: 'Equipment', title: 'Equipment 001', description: 'some description...', cost: 3000},
+            {
+                date: new Date('2018-12-10'),
+                type: 'Equipment',
+                title: 'Equipment 001',
+                description: 'some description...',
+                cost: 3000
+            },
         ];
     }
 
@@ -137,6 +153,18 @@ export class ExpenseListNewComponent implements OnInit {
 
             categoryModel.cost += model.cost || 0;
         });
+    }
+
+    public onDelete(node) {
+        this.modalService.open(this.confirmationModalId);
+        this.currentModel = node.data;
+    }
+
+    public remove() {
+        this.options.api.updateRowData({remove: [this.currentModel]});
+        this.models.splice(this.models.indexOf(this.currentModel), 1);
+        this.currentModel = null;
+        this.buildCategoryModels();
     }
 
     public add() {
