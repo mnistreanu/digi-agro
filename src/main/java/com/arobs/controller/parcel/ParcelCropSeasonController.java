@@ -34,8 +34,11 @@ public class ParcelCropSeasonController {
 
     @RequestMapping(value = "/{harvestYear}/{parcelId}", method = RequestMethod.GET)
     public ResponseEntity<ParcelCropSeasonModel> find(@PathVariable Integer harvestYear, @PathVariable Long parcelId) {
+        ParcelCropSeasonModel model =  new ParcelCropSeasonModel();
         ParcelCropSeason pcs = pcsService.find(parcelId, harvestYear);
-        ParcelCropSeasonModel model = new ParcelCropSeasonModel(pcs);
+        if (pcs != null) {
+            model = new ParcelCropSeasonModel(pcs);
+        }
 
         return ResponseEntity.ok(model);
     }

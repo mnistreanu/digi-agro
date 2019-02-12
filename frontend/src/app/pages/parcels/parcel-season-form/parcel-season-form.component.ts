@@ -47,12 +47,7 @@ export class ParcelSeasonFormComponent implements OnInit {
         this.route.params.subscribe(params => {
             let harvestYear = params['harvestYear'];
             harvestYear = 2019;
-            // if (harvestYear == -1) {
-            //     this.prepareNewModel(harvestYear);
-            // }
-            // else {
-                this.setupModel(harvestYear, this.parcelSeasonModel.parcelId );
-            // }
+            this.setupModel(harvestYear, this.parcelSeasonModel.parcelId );
         });
     }
 
@@ -67,36 +62,14 @@ export class ParcelSeasonFormComponent implements OnInit {
             this.parcelSeasonModel = model;
             this.buildForm();
             this.setupCategories();
-            this.onCropCategoryChange();
-            this.onCropChange();
-            this.onCropSubcultureChange();
-            debugger;
-            // const fieldMapper = new FieldMapper(this.langService.getLanguage());
-            // const nameField = fieldMapper.get('name');
-            // this.cropCategories = models.map(model => {
-            //     return new SelectItem(model.id, model[nameField]);
-            // });
-        });
+            if (this.parcelSeasonModel.id != null) {
+                this.onCropCategoryChange();
+                this.onCropChange();
+                this.onCropSubcultureChange();
+            }
 
-        // this.userService.findOne(id).subscribe(model => {
-        //     this.model = model;
-        //     this.buildForm();
-        //     this.setupBranches();
-        // });
+        });
     }
-    //
-    // private setupCropSeason() {
-    //     const parcelId = 1;
-    //     this.parcelService.findLastSeason(parcelId).subscribe(model => {
-    //         this.parcelSeasonModel = model;
-    //         debugger;
-    //         // const fieldMapper = new FieldMapper(this.langService.getLanguage());
-    //         // const nameField = fieldMapper.get('name');
-    //         // this.cropCategories = models.map(model => {
-    //         //     return new SelectItem(model.id, model[nameField]);
-    //         // });
-    //     });
-    // }
 
     private setupCategories() {
         this.cropCategoryService.find().subscribe(models => {
