@@ -24,9 +24,17 @@ public class ParcelCropSeasonController {
     @Autowired
     private ParcelCropSeasonService pcsService;
 
-    @RequestMapping(value = "/{parcelId}", method = RequestMethod.GET)
-    public ResponseEntity<ParcelCropSeasonModel> findOne(@PathVariable Long parcelId) {
-        ParcelCropSeason pcs = pcsService.find(parcelId);
+    @RequestMapping(value = "/last/{parcelId}", method = RequestMethod.GET)
+    public ResponseEntity<ParcelCropSeasonModel> findLast(@PathVariable Long parcelId) {
+        ParcelCropSeason pcs = pcsService.findLast(parcelId);
+        ParcelCropSeasonModel model = new ParcelCropSeasonModel(pcs);
+
+        return ResponseEntity.ok(model);
+    }
+
+    @RequestMapping(value = "/{harvestYear}/{parcelId}", method = RequestMethod.GET)
+    public ResponseEntity<ParcelCropSeasonModel> find(@PathVariable Integer harvestYear, @PathVariable Long parcelId) {
+        ParcelCropSeason pcs = pcsService.find(parcelId, harvestYear);
         ParcelCropSeasonModel model = new ParcelCropSeasonModel(pcs);
 
         return ResponseEntity.ok(model);
@@ -36,7 +44,7 @@ public class ParcelCropSeasonController {
     public ResponseEntity<List<ParcelCropSeasonModel>> findAll(@PathVariable Long parcelId) {
         List<ParcelCropSeasonModel> models = new ArrayList<>();
 
-        List<ParcelCropSeason> list = pcsService.findAll(parcelId);
+        List<ParcelCropSeason> list = pcsService.find(parcelId);
         for (ParcelCropSeason pcs : list) {
             models.add(new ParcelCropSeasonModel(pcs));
         }

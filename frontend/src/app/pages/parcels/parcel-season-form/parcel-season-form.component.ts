@@ -11,6 +11,8 @@ import {CropService} from '../../../services/crop/crop.service';
 import {CropSubcultureService} from '../../../services/crop/crop-subculture.service';
 import {CropVarietyService} from '../../../services/crop/crop-variety.service';
 import {CropSeasonService} from '../../../services/crop/crop-season.service';
+import {ParcelService} from '../../../services/parcel.service';
+import {DateUtil} from '../../../common/dateUtil';
 
 @Component({
     selector: 'app-parcel-season-form',
@@ -38,13 +40,63 @@ export class ParcelSeasonFormComponent implements OnInit {
                 private cropService: CropService,
                 private cropSubcultureService: CropSubcultureService,
                 private cropVarietyService: CropVarietyService,
-                private cropSeasonService: CropSeasonService) {
+                private parcelService: ParcelService) {
     }
 
     ngOnInit() {
+        this.route.params.subscribe(params => {
+            let harvestYear = params['harvestYear'];
+            harvestYear = 2019;
+            // if (harvestYear == -1) {
+            //     this.prepareNewModel(harvestYear);
+            // }
+            // else {
+                this.setupModel(harvestYear, this.parcelSeasonModel.parcelId );
+            // }
+        });
+    }
+
+    private prepareNewModel() {
+        this.parcelSeasonModel = new ParcelSeasonModel();
         this.setupCategories();
         this.buildForm();
     }
+
+    private setupModel(harvestYear, parcelId) {
+        this.parcelService.findYearSeason(harvestYear, parcelId).subscribe(model => {
+            this.parcelSeasonModel = model;
+            this.buildForm();
+            this.setupCategories();
+            this.onCropCategoryChange();
+            this.onCropChange();
+            this.onCropSubcultureChange();
+            debugger;
+            // const fieldMapper = new FieldMapper(this.langService.getLanguage());
+            // const nameField = fieldMapper.get('name');
+            // this.cropCategories = models.map(model => {
+            //     return new SelectItem(model.id, model[nameField]);
+            // });
+        });
+
+        // this.userService.findOne(id).subscribe(model => {
+        //     this.model = model;
+        //     this.buildForm();
+        //     this.setupBranches();
+        // });
+    }
+    //
+    // private setupCropSeason() {
+    //     const parcelId = 1;
+    //     this.parcelService.findLastSeason(parcelId).subscribe(model => {
+    //         this.parcelSeasonModel = model;
+    //         debugger;
+    //         // const fieldMapper = new FieldMapper(this.langService.getLanguage());
+    //         // const nameField = fieldMapper.get('name');
+    //         // this.cropCategories = models.map(model => {
+    //         //     return new SelectItem(model.id, model[nameField]);
+    //         // });
+    //     });
+    // }
 
     private setupCategories() {
         this.cropCategoryService.find().subscribe(models => {
@@ -140,7 +192,7 @@ export class ParcelSeasonFormComponent implements OnInit {
             cropVarietyId: [this.parcelSeasonModel.cropVarietyId],
             yieldGoal: [this.parcelSeasonModel.yieldGoal, Validators.min(0)],
             unitOfMeasure: [this.parcelSeasonModel.unitOfMeasure],
-            plantedAt: [this.parcelSeasonModel.plantedAt],
+            plantedAt: [DateUtil.formatDateISO(this.parcelSeasonModel.plantedAt)],
             rowsOnParcel: [this.parcelSeasonModel.rowsOnParcel, Validators.min(0)],
             plantsOnRow: [this.parcelSeasonModel.plantsOnRow, Validators.min(0)],
             spaceBetweenRows: [this.parcelSeasonModel.spaceBetweenRows, Validators.min(0)],
