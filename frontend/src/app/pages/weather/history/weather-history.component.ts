@@ -23,6 +23,7 @@ export class WeatherHistoryComponent implements OnInit {
     labelHumidity: string;
     labelCondition: string;
     labelWind: string;
+    labelPressure: string;
 
     constructor(private weatherService: WeatherService,
                 private langService: LangService) {
@@ -40,6 +41,7 @@ export class WeatherHistoryComponent implements OnInit {
         this.langService.get('weather.humidity').subscribe(msg => this.labelHumidity = msg);
         this.langService.get('weather.condition').subscribe(msg => this.labelCondition = msg);
         this.langService.get('weather.wind').subscribe(msg => this.labelWind = msg);
+        this.langService.get('weather.pressure').subscribe(msg => this.labelPressure = msg);
     }
 
 

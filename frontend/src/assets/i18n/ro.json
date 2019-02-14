@@ -12,8 +12,8 @@
 	},
 	"agro-work": {
 		"date": "Data",
-		"start-date": "Data început",
 		"end-date": "Data sfârșit",
+		"start-date": "Data început",
 		"type": "Tipul lucrării",
 		"yield-goal": "Potențial producție Implicit"
 	},
@@ -39,7 +39,6 @@
 	"crop": {
 		"category": "Categoria",
 		"crop": "Cultura agricolă",
-		"subcultures": "Subculturi",
 		"harvest-year": "An recoltare",
 		"name": "Cultura agricolă",
 		"planting-date": "Data plantării",
@@ -47,6 +46,7 @@
 		"seed-consumption-ha": "Consum semințe, Ha",
 		"seeds": "Semințe",
 		"subculture": "Subcultură",
+		"subcultures": "Subculturi",
 		"unit-of-measure-long": "Unitatea de măsură",
 		"unit-of-measure-short": "U.m.",
 		"varieties": "Soiuri de culturi agricole",
@@ -467,6 +467,7 @@
 		"date": "Data",
 		"humidity": "Umiditatea",
 		"location": "Locația",
+		"pressure": "Presiunea",
 		"temperature": "Temperatura",
 		"wind": "Vîntul"
 	}
