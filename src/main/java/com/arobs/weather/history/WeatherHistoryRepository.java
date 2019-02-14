@@ -1,5 +1,6 @@
 package com.arobs.weather.history;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,18 +12,21 @@ import com.arobs.weather.entity.WeatherHistory;
 public interface WeatherHistoryRepository extends JpaRepository<WeatherHistory, Integer>, WeatherHistoryRepositoryCustom  {
 	/**
 	 * Returneaza inregistrari meteo in toate localitatile pentru data specificata
-	 * @param dayTimestamp - data specificata in format Linux
+	 * @param dt - data
 	 * @return lista de History
 	 */
-    @Query("SELECT weatherHistory FROM WeatherHistory weatherHistory WHERE weatherHistory.dayTimestamp = :dayTimestamp")
-    List<WeatherHistory> find(@Param("dayTimestamp") Long dayTimestamp );
+    @Query("SELECT weatherHistory FROM WeatherHistory weatherHistory WHERE weatherHistory.dt = :dt")
+    List<WeatherHistory> find(@Param("dt") Date dt );
 
     /**
      * Returneaza toate inregistrarile meteo pentru localitatea specificat 
      * @param locationId - ID localitatii specificate
      * @return lista de History
      */
-    @Query("SELECT weatherHistory FROM WeatherHistory weatherHistory WHERE weatherHistory.openweatherId = :locationId")
+    @Query("SELECT weatherHistory " +
+			"FROM WeatherHistory weatherHistory " +
+			"JOIN FETCH weatherHistory.weatherLocation location " +
+			"WHERE location.id = :locationId")
     List<WeatherHistory> find(@Param("locationId") Integer locationId);
 
 	/**
@@ -32,7 +36,37 @@ public interface WeatherHistoryRepository extends JpaRepository<WeatherHistory, 
 	 * @param dateTo - sfirsit de interval
 	 * @return lista de History
 	 */
-    @Query("SELECT weatherHistory FROM WeatherHistory weatherHistory " + 
-			"WHERE weatherHistory.openweatherId = :locationId AND weatherHistory.dayTimestamp BETWEEN :dateFrom AND :dateTo")
-    List<WeatherHistory> find(@Param("locationId") Integer locationId, @Param("dateFrom") Long dateFrom, @Param("dateTo") Long dateTo);
+	@Query("SELECT weatherHistory FROM WeatherHistory weatherHistory " +
+			"JOIN FETCH weatherHistory.weatherLocation location " +
+			"WHERE location.id = :locationId " +
+			"AND weatherHistory.dt BETWEEN :dateFrom AND :dateTo")
+	List<WeatherHistory> find(@Param("locationId") Integer locationId, @Param("dateFrom") Long dateFrom, @Param("dateTo") Long dateTo);
+
+	/**
+	 * Returneaza toate inregistrarile meteo pentru localitatea specificat
+	 * @param countryCode - codul tarii specificate
+	 * @param countyCode - codul regiunii specificate
+	 * @return lista de History
+	 */
+	@Query("SELECT weatherHistory " +
+			"FROM WeatherHistory weatherHistory " +
+			"JOIN FETCH weatherHistory.weatherLocation location " +
+			"WHERE location.countryCode = :countryCode AND location.countyCode = :countyCode")
+	List<WeatherHistory> find(@Param("countryCode") String countryCode, @Param("countyCode") String countyCode);
+
+	/**
+	 * Returneaza toate inregistrarile meteo pentru localitatea specificat
+	 * @param countryCode - codul tarii specificate
+	 * @param countyCode - codul regiunii specificate
+	 * @param dateFrom - inceput de interval
+	 * @param dateTo - sfirsit de interval
+	 * @return lista de History
+	 */
+	@Query("SELECT weatherHistory " +
+			"FROM WeatherHistory weatherHistory " +
+			"JOIN FETCH weatherHistory.weatherLocation location " +
+			"WHERE location.countryCode = :countryCode AND location.countyCode = :countyCode " +
+			"AND weatherHistory.dt BETWEEN :dateFrom AND :dateTo")
+	List<WeatherHistory> find(@Param("countryCode") String countryCode, @Param("countyCode") String countyCode,
+							  @Param("dateFrom") Long dateFrom, @Param("dateTo") Long dateTo);
 }

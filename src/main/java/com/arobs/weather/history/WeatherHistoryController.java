@@ -126,7 +126,7 @@ public class WeatherHistoryController {
         PayloadModel<WeatherHistoryModel> payloadModel = new PayloadModel<>();
 
         try {
-            List<WeatherHistory> weatherHistory = weatherHistoryRepository.find(WeatherUtils.getUnixTime(referenceDate));
+            List<WeatherHistory> weatherHistory = weatherHistoryRepository.find(referenceDate);
             if (! weatherHistory.isEmpty()) {
                 if (!weatherHistory.isEmpty()) {
                     List<WeatherHistoryModel> models = weatherHistory.stream().map(WeatherHistoryModel::new).collect(Collectors.toList());

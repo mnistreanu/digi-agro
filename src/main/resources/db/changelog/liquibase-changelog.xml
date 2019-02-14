@@ -1101,5 +1101,105 @@
         </sql>
     </changeSet>
 
+    <changeSet id="insert-weather-history-HN-NS" author="mihai.gorgos" failOnError="true" runOnChange="false">
+        <validCheckSum>ANY</validCheckSum>
+        <sql>
+            <!--Nisporeni-->
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-01', 800, 'Clear', 'sky is clear', '01d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-02', 500, 'Rain', 'light rain', '10d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-03', 803, 'Clouds', 'broken clouds', '04d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-04', 501, 'Rain', 'moderate rain', '10d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-05', 801, 'Clouds', 'few clouds', '02d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-06', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-07', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-08', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-09', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-10', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-11', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-12', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-13', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-14', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-15', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            <!--Hancesti-->
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-01', 800, 'Clear', 'sky is clear', '01d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-02', 500, 'Rain', 'light rain', '10d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-03', 803, 'Clouds', 'broken clouds', '04d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-04', 501, 'Rain', 'moderate rain', '10d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-05', 801, 'Clouds', 'few clouds', '02d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-06', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-07', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-08', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-09', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-10', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-11', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-12', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-13', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-14', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-15', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            SELECT setval('weather_history_id_seq', (SELECT MAX(id) FROM weather_history));
+        </sql>
+    </changeSet>
+
 
 </databaseChangeLog>

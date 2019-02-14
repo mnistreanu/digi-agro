@@ -48,18 +48,12 @@ public class WeatherHistoryRepositoryImpl implements WeatherHistoryRepositoryCus
 		}
 		int insertedHistory = 0;
 		String insertHistorySql = "INSERT INTO WeatherHistory (" + 
-				"    openweatherId," + 
-				"    dayTimestamp," + 
+				"    dayTimestamp," +
 				"    parcelId," + 
 				"    tempMin," + 
 				"    tempMax," +
-				"    morn," + 
-				"    day," + 
-				"    evn," + 
-				"    night," + 
-				"    pressure," + 
-				"    humidity," + 
-				"    humidityAir," + 
+				"    pressure," +
+				"    humidityAir," +
 				"    humiditySoil," + 
 				"    weatherId," + 
 				"    main," + 
@@ -67,39 +61,27 @@ public class WeatherHistoryRepositoryImpl implements WeatherHistoryRepositoryCus
 				"    speed," + 
 				"    deg," + 
 				"    clouds," + 
-				"    rain3h" + 
+				"    rain, " +
+				"    snow " +
 				")" + 
-				"SELECT snapshot.openweatherId AS openweatherId, " + 
-				"    snapshot.dayTimestamp AS dayTimestamp, " + 
+				"SELECT snapshot.dayTimestamp AS dayTimestamp, " +
 				"    snapshot.parcelId AS parcelId, " + 
 				"    MIN(snapshot.tempMin) AS tempMin, " + 
 				"    MAX(snapshot.tempMax) AS tempMax, " + 
-				"    MIN(CASE " + 
-				"        WHEN HOUR(dt) BETWEEN 6 AND 9 THEN snapshot.temp ELSE 0 " + 
-				"    END) AS morn," + 
-				"    MAX(CASE " + 
-				"        WHEN HOUR(dt) BETWEEN 9 AND 18 THEN snapshot.temp ELSE 0 " + 
-				"    END) AS day," + 
-				"    MIN(CASE " + 
-				"        WHEN HOUR(dt) BETWEEN 18 AND 21 THEN snapshot.temp ELSE 0 " + 
-				"    END) AS evn," + 
-				"    MIN(CASE " + 
-				"        WHEN HOUR(dt) > 9 OR HOUR(dt) < 6 THEN snapshot.temp ELSE 0 " + 
-				"    END) AS night," + 
-				"    MAX(snapshot.pressure) AS pressure," + 
-				"    MAX(snapshot.humidity) AS humidity," + 
-				"    MAX(snapshot.humidityAir) AS humidityAir," + 
-				"    MAX(snapshot.humiditySoil) AS humiditySoil," + 
+				"    MAX(snapshot.pressure) AS pressure," +
+				"    MAX(snapshot.humidity) AS humidityAir," +
+				"    MAX(snapshot.humiditySoil) AS humiditySoil," +
 				"    MAX(snapshot.weatherId) AS weatherId," + 
 				"    MAX(snapshot.main) AS main," + 
 				"    MAX(snapshot.description) AS description," + 
 				"    MAX(snapshot.speed) AS speed," + 
 				"    MAX(snapshot.deg) AS deg," + 
 				"    MAX(snapshot.clouds) AS clouds," + 
-				"    MAX(snapshot.rain3h) AS rain3h " + 
-				"FROM WeatherSnapshot snapshot " + 
+				"    MAX(snapshot.rain) AS rain, " +
+				"    MAX(snapshot.snow) AS snow " +
+				"FROM WeatherSnapshot snapshot " +
 				"WHERE snapshot.dayTimestamp <= :referenceDate " + 
-				"GROUP BY snapshot.openweatherId, snapshot.parcelId, snapshot.dayTimestamp";
+				"GROUP BY snapshot.parcelId, snapshot.dayTimestamp";
 		query = entityManager.createQuery(insertHistorySql);
 		query.setParameter("referenceDate", unixTimestanp);
 		insertedHistory = query.executeUpdate();
