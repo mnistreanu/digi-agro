@@ -5,5 +5,6 @@ export class WeatherHistoryModel {
     temperature: string;
     humidity: string;
     condition: string;
+    pressure: string;
     wind: string;
 }

@@ -65,12 +65,12 @@ export class WeatherHistoryComponent implements OnInit {
                 width: 80,
                 minWidth: 80
             },
-            // {
-            //     headerName: this.labelLocation,
-            //     field: 'location',
-            //     width: 200,
-            //     minWidth: 200
-            // },
+            {
+                headerName: this.labelLocation,
+                field: 'location',
+                width: 200,
+                minWidth: 50
+            },
             {
                 headerName: this.labelTemperature,
                 field: 'temperature',
@@ -105,6 +105,14 @@ export class WeatherHistoryComponent implements OnInit {
                 minWidth: 100,
                 suppressFilter: true,
                 suppressSorting : true,
+            },
+            {
+                headerName: this.labelPressure,
+                field: 'pressure',
+                width: 100,
+                minWidth: 100,
+                suppressFilter: true,
+                suppressSorting : true,
             }
 
         ];
@@ -114,22 +122,22 @@ export class WeatherHistoryComponent implements OnInit {
 
 
     public setupRows() {
-        let locationId = 617077;
-        let dateTo = new Date();
+        const dateTo = new Date();
         let dateFrom = new Date();
-        dateFrom.setHours(dateTo.getHours() - 72);
-        this.weatherService.findWeatherHistory(locationId, dateFrom, dateFrom).subscribe(payloadModel => {
-
+        dateFrom.setHours(dateTo.getHours() - 24*15);
+        this.weatherService.findWeatherHistory('MD', 'HN', dateFrom, dateTo).subscribe(payloadModel => {
+            debugger;
             if (payloadModel.status == 'success') {
                 const rows = payloadModel.payload.map(data => {
                     const model = new WeatherHistoryModel();
                     model.date = new Date(data.dt).toLocaleDateString();
+                    model.location = data.countyId;
                     model.icon = '/assets/img/notifications/weather-rain-alert.png';
                     model.temperature = data.tempMax + '\u00B0C / ' + data.tempMin + '\u00B0C';
-                    model.condition = data.main; //TODO de tradus din resurse, de exemplu: clouds, rain
-                    model.location = 'Nisporeni';
-                    model.humidity = data.humidity + ' %';
-                    model.wind = data.windSpeed + ' km/h NW';
+                    model.condition = data.main + ', ' + data.description;
+                    model.humidity = 'air: ' + data.humidityAir + ' %' + ', soil: ' + data.humiditySoil + '%';
+                    model.pressure = data.pressure;
+                    model.wind = data.speed + ' km/h NW';
                     return model;
                 });
                 this.options.api.setRowData(rows);

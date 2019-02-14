@@ -65,8 +65,9 @@ public interface WeatherHistoryRepository extends JpaRepository<WeatherHistory, 
 	@Query("SELECT weatherHistory " +
 			"FROM WeatherHistory weatherHistory " +
 			"JOIN FETCH weatherHistory.weatherLocation location " +
-			"WHERE location.countryCode = :countryCode AND location.countyCode = :countyCode " +
+			"WHERE UPPER(location.countryCode) = UPPER(:countryCode) " +
+			"AND UPPER(location.countyCode) = UPPER(:countyCode) " +
 			"AND weatherHistory.dt BETWEEN :dateFrom AND :dateTo")
 	List<WeatherHistory> find(@Param("countryCode") String countryCode, @Param("countyCode") String countyCode,
-							  @Param("dateFrom") Long dateFrom, @Param("dateTo") Long dateTo);
+							  @Param("dateFrom") Date dateFrom, @Param("dateTo") Date dateTo);
 }

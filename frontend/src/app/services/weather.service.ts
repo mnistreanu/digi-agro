@@ -23,8 +23,8 @@ export class WeatherService {
      * @param dateTo
      * @returns {Observable<Object>}
      */
-    public findWeatherHistory(locationId:number, dateFrom:Date, dateTo:Date): Observable<PayloadModel> {
-        let params = '?locationId='+locationId+
+    public findWeatherHistory(countryCode: string, countyCode: string, dateFrom: Date, dateTo: Date): Observable<PayloadModel> {
+        let params = '?country=' + countryCode + '&county='  + countyCode +
             '&dateFrom=' + DateUtil.formatDateDB(dateFrom) +
             '&dateTo=' + DateUtil.formatDateDB(dateTo);
         return this.http.get<PayloadModel>(this.api + '/history_interval' + params );

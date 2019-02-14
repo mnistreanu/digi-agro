@@ -85,20 +85,22 @@ public class WeatherHistoryController {
 
     /**
      * Returneaza lista de istorii meteo pentru localitatea specificata din intervalul de timp specificat  
-     * @param locationId - ID localitate in conformitate cu CITY_ID din Open weather.<br/>
-     * Exemplu URL: host:port/weather/history_interval?locationId=684038&dateFrom=20180901&dateTo=20180902 
+     * @param country - cod tara
+     * @param county - cod localitate
+     * Exemplu URL: host:port/weather/history_interval?locationId=684038&dateFrom=20180901&dateTo=20180902
      * @param dateFrom - inceput de interval in format "yyyyMMdd"
      * @param dateTo - sfirsit de interval in format "yyyyMMdd"
      * @return lista de istorii.
      */
     @RequestMapping(value = "/history_interval", method = RequestMethod.GET)
-    public ResponseEntity<PayloadModel<WeatherHistoryModel>> getWeatherHistoryInterval(@RequestParam("locationId") Integer locationId,
+    public ResponseEntity<PayloadModel<WeatherHistoryModel>> getWeatherHistoryInterval(@RequestParam("country") String country,
+                                                                                       @RequestParam("county") String county,
                                                     @RequestParam("dateFrom") @DateTimeFormat(pattern="yyyyMMdd") Date dateFrom,
                                                     @RequestParam("dateTo") @DateTimeFormat(pattern="yyyyMMdd") Date dateTo) {
         PayloadModel<WeatherHistoryModel> payloadModel = new PayloadModel<>();
 
         try {
-            List<WeatherHistory> weatherHistory = weatherHistoryRepository.find(locationId, WeatherUtils.getUnixTime(dateFrom), WeatherUtils.getUnixTime(dateTo));
+            List<WeatherHistory> weatherHistory = weatherHistoryRepository.find(country, county, dateFrom, dateTo);
             if (!weatherHistory.isEmpty()) {
                 List<WeatherHistoryModel> models = weatherHistory.stream().map(WeatherHistoryModel::new).collect(Collectors.toList());
                 WeatherHistoryModel[] payload = models.toArray(new WeatherHistoryModel[models.size()]);
