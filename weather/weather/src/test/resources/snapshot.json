@@ -1,0 +1,47 @@
+{
+  "id": 618510,
+  "cod": 200,
+  "name": "Briceni",
+  "dt": 1533684016,
+  "visibility": 10000,
+  "base": "stations",
+  "coord": {
+    "lon": 27.1,
+    "lat": 48.31
+  },
+  "weather": [
+    {
+      "id": 800,
+      "main": "Clear",
+      "description": "clear sky",
+      "icon": "01n"
+    }
+  ],
+  "main": {
+    "temp": 287.832,
+    "humidity": 85,
+    "pressure": 1003.99,
+    "temp_min": 287.832,
+    "temp_max": 287.832,
+    "sea_level": 1033.01,
+    "grnd_level": 1003.99
+  },
+  "wind": {
+    "speed": 0.91,
+    "deg": 264.002
+  },
+  "rain": {
+    "3h": 0
+  },
+  "clouds": {
+    "all": 0
+  },
+  "sys": {
+    "id": 6086,
+    "type": 1,
+    "message": 0.0332,
+    "country": "MD",
+    "sunrise": 1533610542,
+    "sunset": 1533663475
+  }
+}

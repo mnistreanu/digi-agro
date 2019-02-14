@@ -1,0 +1,47 @@
+[
+  {
+    "id": 618426,
+    "name": "Chisinau",
+    "country": "MD",
+    "coord": {
+      "lon": 28.8575,
+      "lat": 47.005562
+    }
+  },
+  {
+    "id": 618382,
+    "name": "Donduseni",
+    "country": "MD",
+    "coord": {
+      "lon": 27.6101,
+      "lat": 48.24268
+    }
+  },
+  {
+    "id": 665000,
+    "name": "Targu Secuiesc",
+    "country": "RO",
+    "coord": {
+      "lon": 26.133329,
+      "lat": 46
+    }
+  },
+  {
+    "id": 519188,
+    "name": "Novinki",
+    "country": "RU",
+    "coord": {
+      "lon": 37.666668,
+      "lat": 55.683334
+    }
+  },
+  {
+    "id": 1283378,
+    "name": "GorkhÄ�",
+    "country": "NP",
+    "coord": {
+      "lon": 84.633331,
+      "lat": 28
+    }
+  }
+]
