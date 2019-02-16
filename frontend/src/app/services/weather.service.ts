@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import {PayloadModel} from '../pages/payload.model';
 import { environment } from '../../environments/environment';
-import {DateUtil} from "../common/dateUtil";
+import {DateUtil} from '../common/dateUtil';
 
 @Injectable({
     providedIn: 'root'
@@ -24,7 +24,7 @@ export class WeatherService {
      * @returns {Observable<Object>}
      */
     public findWeatherHistory(countryCode: string, countyCode: string, dateFrom: Date, dateTo: Date): Observable<PayloadModel> {
-        let params = '?country=' + countryCode + '&county='  + countyCode +
+        const params = '?country=' + countryCode + '&county='  + countyCode +
             '&dateFrom=' + DateUtil.formatDateDB(dateFrom) +
             '&dateTo=' + DateUtil.formatDateDB(dateTo);
         return this.http.get<PayloadModel>(this.api + '/history_interval' + params );

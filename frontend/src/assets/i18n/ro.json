@@ -67,13 +67,27 @@
 	},
 	"expense-category": {
 		"fertilizers": "Cheltuieli pentru îngrășăminte",
+		"fertilizers-title": "Îngrășăminte",
 		"fuel": "Cheltuieli pentru combustibil",
+		"fuel-title": "Combustibil",
+		"irrigation": "Cheltuieli pentru irigare",
+		"irrigation-title": "Irigare",
 		"machinery": "Cheltuieli pentru repararea mașinilor agricole",
+		"machinery-title": "Tehnică și echipamente",
 		"name": "Denumire categorie",
+		"operational": "Cheltuieli operaționale",
+		"operational-title": "Operaționale",
+		"others": "Alte cheltuieli",
+		"others-title": "Altele",
 		"parent": "Categoria principală",
 		"pesticides": "Cheltuieli pentru pesticide",
+		"pesticides-title": "Pesticide",
+		"renting": "Cheltuieli pentru închiriere",
+		"renting-title": "Închiriere",
 		"sowing": "Cheltuieli pentru însămânțare",
-		"works": "Cheltuieli pentru lucrări agricole"
+		"sowing-title": "Însămânțare",
+		"works": "Cheltuieli pentru lucrări agricole",
+		"works-title": "Lucrări agricole"
 	},
 	"expenses": {
 		"agricultural-machinery": "Cheltuieli pentru repararea mașinilor agricole",
@@ -465,10 +479,12 @@
 	"weather": {
 		"condition": "Condiții",
 		"date": "Data",
+		"fog": "Ceaţă",
 		"humidity": "Umiditatea",
 		"location": "Locația",
 		"pressure": "Presiunea",
+		"snow": "Zăpadă",
 		"temperature": "Temperatura",
-		"wind": "Vîntul"
+		"wind": "Vînt"
 	}
 }

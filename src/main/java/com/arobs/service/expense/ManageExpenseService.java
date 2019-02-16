@@ -58,12 +58,12 @@ public class ManageExpenseService {
                 listModel.setMachine(machinesStr);
                 listModel.setCreatedBy(createdBy.getFullName());
                 listModel.setCreatedAt(expense.getCreatedAt());
-                listModel.setCategory(expenseItemModel.getCategory());
+                listModel.setCategory(expenseItemModel.getCategoryTitle());
                 listModel.setCategoryId(expenseItemModel.getCategoryId());
                 listModel.setParentCategoryId(expenseItemModel.getParentCategoryId());
                 if (expenseItemModel.getParentCategoryId() != null) {
                     ExpenseCategory parentCategory = expenseCategoryService.findOne(expenseItemModel.getParentCategoryId());
-                    listModel.setParentCategory(parentCategory.getName());
+                    listModel.setParentCategory(parentCategory.getTitle());
                 }
             }
         }

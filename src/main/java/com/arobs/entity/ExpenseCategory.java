@@ -12,9 +12,13 @@ public class ExpenseCategory {
     public static final long MACHINERY = 1L;
     public static final long FUEL = 2L;
     public static final long SOWING = 3L;
-    public static final long WORKS = 4L;
+    public static final long AGRO_WORKS = 4L;
     public static final long FERTILIZERS = 5L;
     public static final long PESTICIDES = 6L;
+    public static final long IRRIGATION = 7L;
+    public static final long RENTING = 8L;
+    public static final long OPERATIONAL = 9L;
+    public static final long OTHERS = 10L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +33,10 @@ public class ExpenseCategory {
     @Column (name = "default_category_id")
     private Long defaultCategoryId;
 
-    @Column (name = "name")
+    @Column (name = "title", length = 64)
+    private String title;
+
+    @Column (name = "name", length = 256)
     private String name;
 
     public ExpenseCategory() {
@@ -57,6 +64,14 @@ public class ExpenseCategory {
 
     public void setParentId(Long parentId) {
         this.parentId = parentId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getName() {

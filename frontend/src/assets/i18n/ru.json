@@ -67,13 +67,27 @@
 	},
 	"expense-category": {
 		"fertilizers": "Расходы на удобрения",
+		"fertilizers-title": "Удобрения",
 		"fuel": "Расходы на топливо",
+		"fuel-title": "Топливо",
+		"irrigation": "Расходы на орошение",
+		"irrigation-title": "Орошение",
 		"machinery": "Расходы на ремонт сельскохозяйственной техники",
+		"machinery-title": "Техника и оборудование",
 		"name": "Название категории",
+		"operational": "Операционные расходы",
+		"operational-title": "Операционные",
+		"others": "Прочие расходы",
+		"others-title": "Прочие",
 		"parent": "Основная категория",
 		"pesticides": "Расходы на пестициды",
+		"pesticides-title": "Пестициды",
+		"renting": "Расходы на аренду",
+		"renting-title": "Аренда",
 		"sowing": "Расходы на посев",
-		"works": "Расходы на сельскохозяйственные работы"
+		"sowing-title": "Посев",
+		"works": "Расходы на сельскохозяйственные работы",
+		"works-title": "Сель.хоз. работы"
 	},
 	"expenses": {
 		"agricultural-machinery": "Расходы на ремонт сельскохозяйственной техники",
@@ -465,9 +479,11 @@
 	"weather": {
 		"condition": "Условия",
 		"date": "Дата",
+		"fog": "Туман",
 		"humidity": "Влажность",
 		"location": "Место расположения",
 		"pressure": "Давление",
+		"snow": "Снег",
 		"temperature": "Температура",
 		"wind": "Ветер"
 	}

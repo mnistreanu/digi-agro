@@ -62,6 +62,7 @@ public class ExpenseCategoryService implements HasRepository<ExpenseCategoryRepo
         }
 
         category.setParentId(model.getParentId());
+        category.setTitle(model.getTitle());
         category.setName(model.getName());
 
         return save(category);
