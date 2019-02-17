@@ -7,6 +7,8 @@ import {AgNumericColumnType} from '../../../modules/aggrid/column-types/ag-numer
 import {ExpenseCategoryTotalModel} from '../models/expense-category-total.model';
 import {AgDeleteColumnType} from '../../../modules/aggrid/column-types/ag-delete-type';
 import {ModalService} from '../../../services/modal.service';
+import {GroupedSelectorComponent} from '../../../modules/aggrid/grouped-selector/grouped-selector.component';
+import {GroupedSelectorItem} from '../../../modules/aggrid/grouped-selector/grouped-selector-item.interface';
 
 @Component({
     selector: 'app-expense-list-new',
@@ -24,6 +26,9 @@ export class ExpenseListNewComponent implements OnInit {
     confirmationModalId = 'expense-item-remove-confirmation-modal';
     currentModel: ExpenseModel;
 
+    expenseTypes: GroupedSelectorItem[];
+    expenseTypeMap: Map<number, any>;
+
     constructor(private modalService: ModalService,
                 private langService: LangService) {
     }
@@ -31,7 +36,34 @@ export class ExpenseListNewComponent implements OnInit {
     // todo: type drop-down
 
     ngOnInit() {
+        this.setupExpenseTypes();
         this.setupGrid();
+    }
+
+    private setupExpenseTypes() {
+        // todo: need fetch real types...
+        this.expenseTypes = <GroupedSelectorItem[]>[
+            {
+                groupName: 'Combustibil',
+                items: [
+                    {id: 1, label: 'Motorina'},
+                    {id: 2, label: 'Ulei'},
+                    {id: 3, label: 'Solidol'},
+                ]
+            },
+            {
+                groupName: 'Agro',
+                items: [
+                    {id: 4, label: 'Seed'}
+                ]
+            }
+        ];
+
+        this.expenseTypeMap = <Map<number, any>>{};
+        this.expenseTypeMap[1] = 'Motorina';
+        this.expenseTypeMap[2] = 'Ulei';
+        this.expenseTypeMap[3] = 'Solidol';
+        this.expenseTypeMap[4] = 'Seed';
     }
 
     private setupGrid() {
@@ -43,6 +75,9 @@ export class ExpenseListNewComponent implements OnInit {
         this.options.enableFilter = true;
         this.options.columnDefs = this.setupHeaders();
         this.context = {componentParent: this};
+        this.options.frameworkComponents = {
+            groupedSelector: GroupedSelectorComponent
+        };
 
         this.setupRows();
     }
@@ -57,10 +92,10 @@ export class ExpenseListNewComponent implements OnInit {
 
     private setupHeaders() {
 
+        const self = this;
         let headers: ColDef[] = [];
 
-
-        headers = headers.concat([
+        headers = headers.concat(<ColDef[]>[
             {
                 type: 'deleteType'
             },
@@ -76,6 +111,12 @@ export class ExpenseListNewComponent implements OnInit {
                 width: 100,
                 minWidth: 100,
                 editable: true,
+                cellEditor: 'groupedSelector',
+                cellEditorParams: {
+                    dropDownItems: this.expenseTypes,
+                    dropDownValueField: 'typeId'
+                },
+                valueSetter: (params) => this.typeSetter(params),
                 onCellValueChanged: (params) => this.onCategoryChange(params)
             },
             {
@@ -112,6 +153,13 @@ export class ExpenseListNewComponent implements OnInit {
         return headers;
     }
 
+    private typeSetter(params) {
+        const value = params.newValue;
+        const model = params.data;
+
+        model.typeId = value;
+        model.type = this.expenseTypeMap[value];
+    }
 
     public setupRows() {
         setTimeout(() => {
@@ -123,17 +171,10 @@ export class ExpenseListNewComponent implements OnInit {
 
     private getDummyData(): ExpenseModel[] {
         return <ExpenseModel[]>[
-            {date: new Date('2018-12-12'), type: 'Seed', title: 'Seed 001', cost: 5000},
-            {date: new Date('2018-12-13'), type: 'Seed', title: 'Seed 002', cost: 1000},
-            {date: new Date('2018-12-13'), type: 'Herbicide', title: 'Herbicide 001', cost: 5000},
-            {date: new Date('2018-12-23'), type: 'Fertilizer', title: 'Fertilizer 001', cost: 4200},
-            {
-                date: new Date('2018-12-10'),
-                type: 'Equipment',
-                title: 'Equipment 001',
-                description: 'some description...',
-                cost: 3000
-            },
+            {date: new Date('2018-12-12'), typeId: 1, type: 'A', title: 'Title 001', cost: 5000},
+            {date: new Date('2018-12-13'), typeId: 1, type: 'A', title: 'Title 002', cost: 1000},
+            {date: new Date('2018-12-13'), typeId: 2, type: 'B', title: 'Title 003', cost: 5000},
+            {date: new Date('2018-12-23'), typeId: 3, type: 'C', title: 'Title 004', description: 'description', cost: 4200}
         ];
     }
 

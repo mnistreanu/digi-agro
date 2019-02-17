@@ -16,6 +16,8 @@ import {PinnedRowRendererComponent} from '../../modules/aggrid/pinned-row-render
 import {DeleteRendererComponent} from '../../modules/aggrid/delete-renderer/delete-renderer.component';
 import {ChartsModule} from 'ng2-charts';
 import {ConfirmationModalModule} from '../../modules/confirmation-modal/confirmation-modal.module';
+import {GroupedSelectorComponent} from '../../modules/aggrid/grouped-selector/grouped-selector.component';
+import {GroupedSelectorModule} from '../../modules/aggrid/grouped-selector/grouped-selector.module';
 
 export const routes = [
     {path: '', component: ExpenseListNewComponent}
@@ -35,10 +37,12 @@ export const routes = [
         DeleteRendererModule,
         EditRendererModule,
         ConfirmationModalModule,
+        GroupedSelectorModule,
         AgGridModule.withComponents([
             EditRendererComponent,
             PinnedRowRendererComponent,
-            DeleteRendererComponent
+            DeleteRendererComponent,
+            GroupedSelectorComponent
         ]),
         RouterModule.forChild(routes)
     ],

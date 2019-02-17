@@ -1,0 +1,7 @@
+<select class="grouped-selector" [(ngModel)]="value">
+
+    <optgroup *ngFor="let g of items" [label]="g.groupName">
+        <option *ngFor="let i of g.items" [ngValue]="i.id">{{ i.label }}</option>
+    </optgroup>
+
+</select>
