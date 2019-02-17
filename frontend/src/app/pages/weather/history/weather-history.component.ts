@@ -5,6 +5,9 @@ import {WeatherService} from '../../../services/weather.service';
 import {WeatherHistoryModel} from './weather-history.model';
 import {ImageRendererComponent} from '../../../modules/aggrid/image-renderer/image-renderer.component';
 
+import * as CanvasJS from 'assets/js/canvasjs/canvasjs.min';
+
+
 @Component({
     selector: 'app-weather-history',
     templateUrl: './weather-history.component.html',
@@ -30,6 +33,9 @@ export class WeatherHistoryComponent implements OnInit {
     }
 
     ngOnInit() {
+        // todo: remove. This is only for testing
+        console.log('CanvasJS initialized: ', CanvasJS);
+
         this.setupLabels();
         this.setupGrid();
     }
