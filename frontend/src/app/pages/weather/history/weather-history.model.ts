@@ -8,6 +8,7 @@ export class WeatherHistoryModel {
     temperature: string;
     tempMin: number;
     tempMax: number;
+    condition: string;
     humidity: string;
     humidityAir: number;
     humiditySoil: number;

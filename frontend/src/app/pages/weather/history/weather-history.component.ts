@@ -1,13 +1,14 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ColDef, GridOptions} from 'ag-grid';
+import {GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {WeatherService} from '../../../services/weather.service';
 import {WeatherHistoryModel} from './weather-history.model';
-import {ImageRendererComponent} from '../../../modules/aggrid/image-renderer/image-renderer.component';
 import {AppConfig} from '../../../app.config';
 import * as CanvasJS from 'assets/js/canvasjs/canvasjs.min';
 import {DateUtil} from '../../../common/dateUtil';
-declare var $: any
+
+
+declare const $: any;
 
 
 @Component({
@@ -54,6 +55,7 @@ export class WeatherHistoryComponent implements OnInit {
         this.loadWeatherHistory();
         this.setupWeatherChart();
     }
+
     //
     // private setupLabels() {
     //     this.langService.get('weather.date').subscribe(msg => this.labelDate = msg);
@@ -148,8 +150,11 @@ export class WeatherHistoryComponent implements OnInit {
         dateFrom.setHours(dateTo.getHours() - 24 * 15);
         this.weatherService.findWeatherHistory('MD', 'HN', dateFrom, dateTo).subscribe(payloadModel => {
             if (payloadModel.status == 'success') {
-                const rows = payloadModel.payload.map(data => {
-
+                payloadModel.payload.forEach((data, index) => {
+                    if (index >= 6) {
+                        // server must return only 6 models
+                        return;
+                    }
                     const model = new WeatherHistoryModel();
                     model.owmId = data.weatherId;
                     model.date = DateUtil.formatLocalizedDay(data.dt);
@@ -164,9 +169,7 @@ export class WeatherHistoryComponent implements OnInit {
                     model.humiditySoil = data.humiditySoil;
                     model.pressure = data.pressure;
                     model.wind = data.speed;
-                    if (this.forecastModels.length < 6) {
-                        this.forecastModels.push(model);
-                    }
+                    this.forecastModels.push(model);
                 });
             }
         });
@@ -178,7 +181,7 @@ export class WeatherHistoryComponent implements OnInit {
         dateFrom.setHours(dateTo.getHours() - 24 * 15);
         this.weatherService.findWeatherHistory('MD', 'HN', dateFrom, dateTo).subscribe(payloadModel => {
             if (payloadModel.status == 'success') {
-                const rows = payloadModel.payload.map(data => {
+                this.historyModels = payloadModel.payload.map(data => {
                     const model = new WeatherHistoryModel();
                     model.date = new Date(data.dt).toLocaleDateString();
                     model.location = data.countyId;
@@ -190,7 +193,7 @@ export class WeatherHistoryComponent implements OnInit {
                     model.humidity = 'air: ' + data.humidityAir + ' %' + ', soil: ' + data.humiditySoil + '%';
                     model.pressure = data.pressure;
                     model.wind = data.speed + ' km/h NW';
-                    this.historyModels.push(model);
+                    return model;
                 });
             }
         });
@@ -292,8 +295,8 @@ export class WeatherHistoryComponent implements OnInit {
     }
 
     public setupWeatherChart() {
-        let chart = new CanvasJS.Chart('chartContainer', {
-            title:{
+        const chart = new CanvasJS.Chart('chartContainer', {
+            title: {
                 text: 'Weather Forecast'
             },
             axisY: {
@@ -310,7 +313,7 @@ export class WeatherHistoryComponent implements OnInit {
                 type: 'rangeSplineArea',
                 fillOpacity: 0.1,
                 color: '#91AAB1',
-                indexLabelFormatter: formatter,
+                indexLabelFormatter: this.chartDataFormatter,
                 dataPoints: [
                     { label: 'Ianaurie', y: [15, 26], name: 'rainy' },
                     { label: 'Februarie', y: [15, 27], name: 'rainy' },
@@ -329,60 +332,67 @@ export class WeatherHistoryComponent implements OnInit {
         });
         chart.render();
 
-        let images = [];
+        this.addChartImages(chart);
 
-        addImages(chart);
-
-        function addImages(chart) {
-            for (let i = 0; i < chart.data[0].dataPoints.length; i++){
-                let dpsName = chart.data[0].dataPoints[i].name;
-                if(dpsName == 'cloudy'){
-                    images.push($('<img>').attr('src', 'https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/cloudy.png'));
-                } else if(dpsName == 'rainy'){
-                    images.push($('<img>').attr('src', 'https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/rainy.png'));
-                } else if(dpsName == 'sunny'){
-                    images.push($('<img>').attr('src', 'https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/sunny.png'));
-                }
-
-                images[i].attr('class', dpsName).appendTo($('#chartContainer>.canvasjs-chart-container'));
-                positionImage(images[i], i);
-            }
-        }
-
-        function positionImage(image, index) {
-            var imageCenter = chart.axisX[0].convertValueToPixel(chart.data[0].dataPoints[index].x);
-            var imageTop =  chart.axisY[0].convertValueToPixel(chart.axisY[0].maximum);
-
-            image.width('40px')
-                .css({ 'left': imageCenter - 20 + 'px',
-                    'position': 'absolute','top':imageTop + 'px'});
-        }
-
-        $( window ).resize(function() {
-            var cloudyCounter = 0, rainyCounter = 0, sunnyCounter = 0;
-            var imageCenter = 0;
-            for(var i=0;i<chart.data[0].dataPoints.length;i++) {
-                imageCenter = chart.axisX[0].convertValueToPixel(chart.data[0].dataPoints[i].x) - 20;
-                if(chart.data[0].dataPoints[i].name == 'cloudy') {
-                    $('.cloudy').eq(cloudyCounter++).css({ 'left': imageCenter});
-                } else if(chart.data[0].dataPoints[i].name == 'rainy') {
-                    $('.rainy').eq(rainyCounter++).css({ 'left': imageCenter});
-                } else if(chart.data[0].dataPoints[i].name == 'sunny') {
-                    $('.sunny').eq(sunnyCounter++).css({ 'left': imageCenter});
-                }
-            }
+        $(window).resize(() => {
+            this.resizeChart(chart);
         });
-
-        function formatter(e) {
-            if(e.index === 0 && e.dataPoint.x === 0) {
-                return ' Min ' + e.dataPoint.y[e.index] + '°';
-            } else if(e.index == 1 && e.dataPoint.x === 0) {
-                return ' Max ' + e.dataPoint.y[e.index] + '°';
-            } else{
-                return e.dataPoint.y[e.index] + '°';
-            }
-        }
 
     }
 
+    private chartDataFormatter(e) {
+        const value = e.dataPoint.y[e.index];
+        const isFirstColumn = e.dataPoint.x === 0;
+        if (e.index === 0 && isFirstColumn) {
+            return ' Min ' + value + '°';
+        }
+        else if (e.index == 1 && isFirstColumn) {
+            return ' Max ' + value + '°';
+        }
+        else {
+            return value + '°';
+        }
+    }
+
+    private addChartImages(chart) {
+        const canvasContainer = $('#chartContainer').find('>.canvasjs-chart-container');
+        chart.data[0].dataPoints.forEach(dataPoint => {
+            const pointName = dataPoint.name;
+            const chartImageIdentifier = 'char-image-' + dataPoint.x;
+            let imgElement;
+
+            if (pointName == 'cloudy') {
+                imgElement = $('<img>').attr('src', 'https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/cloudy.png');
+            }
+            else if (pointName == 'rainy') {
+                imgElement = $('<img>').attr('src', 'https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/rainy.png');
+            }
+            else if (pointName == 'sunny') {
+                imgElement = $('<img>').attr('src', 'https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/sunny.png');
+            }
+
+            this.adjustChartImagePosition(chart, imgElement, dataPoint);
+            imgElement.attr('id', chartImageIdentifier).appendTo(canvasContainer);
+        });
+    }
+
+    private adjustChartImagePosition(chart, imageElement, dataPoint) {
+        const imageCenter = chart.axisX[0].convertValueToPixel(dataPoint.x);
+        const imageTop = chart.axisY[0].convertValueToPixel(chart.axisY[0].maximum);
+
+        imageElement.css({
+            width: '40px',
+            position: 'absolute',
+            left: imageCenter - 20 + 'px',
+            top: imageTop + 'px'
+        });
+    }
+
+    private resizeChart(chart) {
+        chart.data[0].dataPoints.forEach(dataPoint => {
+            const chartImageIdentifier = 'char-image-' + dataPoint.x;
+            const imageCenter = chart.axisX[0].convertValueToPixel(dataPoint.x) - 20;
+            $('#' + chartImageIdentifier).css({'left': imageCenter});
+        });
+    }
 }
