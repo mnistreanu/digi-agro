@@ -149,7 +149,7 @@ export class WeatherHistoryComponent implements OnInit {
         this.weatherService.findWeatherHistory('MD', 'HN', dateFrom, dateTo).subscribe(payloadModel => {
             if (payloadModel.status == 'success') {
                 const rows = payloadModel.payload.map(data => {
-                    debugger;
+
                     const model = new WeatherHistoryModel();
                     model.owmId = data.weatherId;
                     model.date = DateUtil.formatLocalizedDay(data.dt);
