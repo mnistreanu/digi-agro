@@ -6,6 +6,8 @@ import {WeatherHistoryModel} from './weather-history.model';
 import {ImageRendererComponent} from '../../../modules/aggrid/image-renderer/image-renderer.component';
 import {AppConfig} from '../../../app.config';
 import * as CanvasJS from 'assets/js/canvasjs/canvasjs.min';
+import {DateUtil} from '../../../common/dateUtil';
+declare var $: any
 
 
 @Component({
@@ -21,15 +23,16 @@ export class WeatherHistoryComponent implements OnInit {
     options: GridOptions;
     context;
 
-    // models: WeatherModel[] = [];
+    forecastModels: WeatherHistoryModel[] = [];
+    historyModels: WeatherHistoryModel[] = [];
 
-    labelDate: string;
-    labelLocation: string;
-    labelTemperature: string;
-    labelHumidity: string;
-    labelCondition: string;
-    labelWind: string;
-    labelPressure: string;
+    // labelDate: string;
+    // labelLocation: string;
+    // labelTemperature: string;
+    // labelHumidity: string;
+    // labelCondition: string;
+    // labelWind: string;
+    // labelPressure: string;
 
     public lineChartType = 'line';
     public lineChartLegend = true;
@@ -46,131 +49,134 @@ export class WeatherHistoryComponent implements OnInit {
     }
 
     ngOnInit() {
-        // todo: remove. This is only for testing
-        console.log('CanvasJS initialized: ', CanvasJS);
-
-        this.setupLabels();
-        this.setupGrid();
-        let chart = new CanvasJS.Chart("chartContainer", {
-            animationEnabled: true,
-            exportEnabled: true,
-            title: {
-                text: "Basic Column Chart in Angular"
-            },
-            data: [{
-                type: "column",
-                dataPoints: [
-                    { y: 71, label: "Apple" },
-                    { y: 55, label: "Mango" },
-                    { y: 50, label: "Orange" },
-                    { y: 65, label: "Banana" },
-                    { y: 95, label: "Pineapple" },
-                    { y: 68, label: "Pears" },
-                    { y: 28, label: "Grapes" },
-                    { y: 34, label: "Lychee" },
-                    { y: 14, label: "Jackfruit" }
-                ]
-            }]
-        });
-
-        chart.render();
+        // this.setupLabels();
+        this.loadWeatherForecast();
+        this.loadWeatherHistory();
+        this.setupWeatherChart();
     }
+    //
+    // private setupLabels() {
+    //     this.langService.get('weather.date').subscribe(msg => this.labelDate = msg);
+    //     this.langService.get('weather.location').subscribe(msg => this.labelLocation = msg);
+    //     this.langService.get('weather.temperature').subscribe(msg => this.labelTemperature = msg);
+    //     this.langService.get('weather.humidity').subscribe(msg => this.labelHumidity = msg);
+    //     this.langService.get('weather.condition').subscribe(msg => this.labelCondition = msg);
+    //     this.langService.get('weather.wind').subscribe(msg => this.labelWind = msg);
+    //     this.langService.get('weather.pressure').subscribe(msg => this.labelPressure = msg);
+    // }
+    //
+    //
+    // private setupGrid() {
+    //     this.options = <GridOptions>{};
+    //
+    //     this.options.enableColResize = true;
+    //     this.options.enableSorting = true;
+    //     this.options.enableFilter = true;
+    //     this.options.rowSelection = 'single';
+    //     this.options.columnDefs = this.setupHeaders();
+    //     this.context = {componentParent: this};
+    //
+    //     this.setupRows();
+    // }
+    //
+    // private setupHeaders() {
+    //
+    //     const headers: ColDef[] = [
+    //         {
+    //             headerName: this.labelDate,
+    //             field: 'date',
+    //             width: 80,
+    //             minWidth: 80
+    //         },
+    //         {
+    //             headerName: this.labelLocation,
+    //             field: 'location',
+    //             width: 200,
+    //             minWidth: 50
+    //         },
+    //         {
+    //             headerName: this.labelTemperature,
+    //             field: 'temperature',
+    //             width: 100,
+    //             minWidth: 100,
+    //             suppressFilter: true,
+    //             suppressSorting : true,
+    //         },
+    //         {
+    //             headerName: this.labelHumidity,
+    //             field: 'humidity',
+    //             width: 100,
+    //             minWidth: 100,
+    //             suppressFilter: true,
+    //             suppressSorting : true,
+    //         },
+    //         {
+    //             headerName: this.labelCondition,
+    //             field: 'condition',
+    //             cellRendererFramework: ImageRendererComponent,
+    //             cellRendererParams: {
+    //                 textField: 'condition',
+    //                 iconField: 'icon'
+    //             },
+    //             width: 200,
+    //             minWidth: 200,
+    //         },
+    //         {
+    //             headerName: this.labelWind,
+    //             field: 'wind',
+    //             width: 100,
+    //             minWidth: 100,
+    //             suppressFilter: true,
+    //             suppressSorting : true,
+    //         },
+    //         {
+    //             headerName: this.labelPressure,
+    //             field: 'pressure',
+    //             width: 100,
+    //             minWidth: 100,
+    //             suppressFilter: true,
+    //             suppressSorting : true,
+    //         }
+    //     ];
+    //
+    //     return headers;
+    // }
 
-    private setupLabels() {
-        this.langService.get('weather.date').subscribe(msg => this.labelDate = msg);
-        this.langService.get('weather.location').subscribe(msg => this.labelLocation = msg);
-        this.langService.get('weather.temperature').subscribe(msg => this.labelTemperature = msg);
-        this.langService.get('weather.humidity').subscribe(msg => this.labelHumidity = msg);
-        this.langService.get('weather.condition').subscribe(msg => this.labelCondition = msg);
-        this.langService.get('weather.wind').subscribe(msg => this.labelWind = msg);
-        this.langService.get('weather.pressure').subscribe(msg => this.labelPressure = msg);
-    }
-
-
-    private setupGrid() {
-        this.options = <GridOptions>{};
-
-        this.options.enableColResize = true;
-        this.options.enableSorting = true;
-        this.options.enableFilter = true;
-        this.options.rowSelection = 'single';
-        this.options.columnDefs = this.setupHeaders();
-        this.context = {componentParent: this};
-
-        this.setupRows();
-    }
-
-    private setupHeaders() {
-
-        const headers: ColDef[] = [
-            {
-                headerName: this.labelDate,
-                field: 'date',
-                width: 80,
-                minWidth: 80
-            },
-            {
-                headerName: this.labelLocation,
-                field: 'location',
-                width: 200,
-                minWidth: 50
-            },
-            {
-                headerName: this.labelTemperature,
-                field: 'temperature',
-                width: 100,
-                minWidth: 100,
-                suppressFilter: true,
-                suppressSorting : true,
-            },
-            {
-                headerName: this.labelHumidity,
-                field: 'humidity',
-                width: 100,
-                minWidth: 100,
-                suppressFilter: true,
-                suppressSorting : true,
-            },
-            {
-                headerName: this.labelCondition,
-                field: 'condition',
-                cellRendererFramework: ImageRendererComponent,
-                cellRendererParams: {
-                    textField: 'condition',
-                    iconField: 'icon'
-                },
-                width: 200,
-                minWidth: 200,
-            },
-            {
-                headerName: this.labelWind,
-                field: 'wind',
-                width: 100,
-                minWidth: 100,
-                suppressFilter: true,
-                suppressSorting : true,
-            },
-            {
-                headerName: this.labelPressure,
-                field: 'pressure',
-                width: 100,
-                minWidth: 100,
-                suppressFilter: true,
-                suppressSorting : true,
-            }
-
-        ];
-
-        return headers;
-    }
-
-
-    public setupRows() {
+    public loadWeatherForecast() {
         const dateTo = new Date();
-        let dateFrom = new Date();
-        dateFrom.setHours(dateTo.getHours() - 24*15);
+        const dateFrom = new Date();
+        dateFrom.setHours(dateTo.getHours() - 24 * 15);
         this.weatherService.findWeatherHistory('MD', 'HN', dateFrom, dateTo).subscribe(payloadModel => {
-            debugger;
+            if (payloadModel.status == 'success') {
+                const rows = payloadModel.payload.map(data => {
+                    debugger;
+                    const model = new WeatherHistoryModel();
+                    model.owmId = data.weatherId;
+                    model.date = DateUtil.formatLocalizedDay(data.dt);
+                    model.location = data.countyId;
+                    model.main = data.main;
+                    this.langService.get('owm-code.' + data.weatherId).subscribe(msg => model.description = msg);
+                    model.icon = '/assets/img/openweather/' + data.icon + '.png';
+                    model.temperature = data.tempMax + '\u00B0C / ' + data.tempMin + '\u00B0C';
+                    model.tempMax = data.tempMax;
+                    model.tempMin = data.tempMin;
+                    model.humidityAir = data.humidityAir;
+                    model.humiditySoil = data.humiditySoil;
+                    model.pressure = data.pressure;
+                    model.wind = data.speed;
+                    if (this.forecastModels.length < 6) {
+                        this.forecastModels.push(model);
+                    }
+                });
+            }
+        });
+    }
+
+    public loadWeatherHistory() {
+        const dateTo = new Date();
+        const dateFrom = new Date();
+        dateFrom.setHours(dateTo.getHours() - 24 * 15);
+        this.weatherService.findWeatherHistory('MD', 'HN', dateFrom, dateTo).subscribe(payloadModel => {
             if (payloadModel.status == 'success') {
                 const rows = payloadModel.payload.map(data => {
                     const model = new WeatherHistoryModel();
@@ -178,15 +184,14 @@ export class WeatherHistoryComponent implements OnInit {
                     model.location = data.countyId;
                     model.icon = '/assets/img/notifications/weather-rain-alert.png';
                     model.temperature = data.tempMax + '\u00B0C / ' + data.tempMin + '\u00B0C';
+                    model.tempMax = data.tempMax;
+                    model.tempMin = data.tempMin;
                     model.condition = data.main + ', ' + data.description;
                     model.humidity = 'air: ' + data.humidityAir + ' %' + ', soil: ' + data.humiditySoil + '%';
                     model.pressure = data.pressure;
                     model.wind = data.speed + ' km/h NW';
-                    return model;
+                    this.historyModels.push(model);
                 });
-                this.options.api.setRowData(rows);
-            } else if (payloadModel.status == 'warning') {
-                this.options.api.setRowData(new Array());
             }
         });
     }
@@ -286,95 +291,98 @@ export class WeatherHistoryComponent implements OnInit {
         // console.log(e);
     }
 
-//     public setupWeatherChart() {
-//
-//     var chart = new CanvasJS.Chart("chartContainer", {
-//         title:{
-//             text: "Weekly Weather Forecast"
-//         },
-//         axisY: {
-//             includeZero: false,
-//             suffix: " °C",
-//             maximum: 40,
-//             gridThickness: 0
-//         },
-//         toolTip:{
-//             shared: true,
-//             content: "{name} </br> <strong>Temperature: </strong> </br> Min: {y[0]} °C, Max: {y[1]} °C"
-//         },
-//         data: [{
-//             type: "rangeSplineArea",
-//             fillOpacity: 0.1,
-//             color: "#91AAB1",
-//             indexLabelFormatter: formatter,
-//             dataPoints: [
-//                 { label: "Monday", y: [15, 26], name: "rainy" },
-//                 { label: "Tuesday", y: [15, 27], name: "rainy" },
-//                 { label: "Wednesday", y: [13, 27], name: "sunny" },
-//                 { label: "Thursday", y: [14, 27], name: "sunny" },
-//                 { label: "Friday", y: [15, 26], name: "cloudy" },
-//                 { label: "Saturday", y: [17, 26], name: "sunny" },
-//                 { label: "Sunday", y: [16, 27], name: "rainy" }
-//             ]
-//         }]
-//     });
-//     chart.render();
-//
-//     var images = [];
-//
-//     addImages(chart);
-//
-//     function addImages(chart) {
-//         for(var i = 0; i < chart.data[0].dataPoints.length; i++){
-//             var dpsName = chart.data[0].dataPoints[i].name;
-//             if(dpsName == "cloudy"){
-//                 images.push($("<img>").attr("src", "https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/cloudy.png"));
-//             } else if(dpsName == "rainy"){
-//                 images.push($("<img>").attr("src", "https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/rainy.png"));
-//             } else if(dpsName == "sunny"){
-//                 images.push($("<img>").attr("src", "https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/sunny.png"));
-//             }
-//
-//             images[i].attr("class", dpsName).appendTo($("#chartContainer>.canvasjs-chart-container"));
-//             positionImage(images[i], i);
-//         }
-//     }
-//
-//     function positionImage(image, index) {
-//         var imageCenter = chart.axisX[0].convertValueToPixel(chart.data[0].dataPoints[index].x);
-//         var imageTop =  chart.axisY[0].convertValueToPixel(chart.axisY[0].maximum);
-//
-//         image.width("40px")
-//             .css({ "left": imageCenter - 20 + "px",
-//                 "position": "absolute","top":imageTop + "px",
-//                 "position": "absolute"});
-//     }
-//
-//     $( window ).resize(function() {
-//         var cloudyCounter = 0, rainyCounter = 0, sunnyCounter = 0;
-//         var imageCenter = 0;
-//         for(var i=0;i<chart.data[0].dataPoints.length;i++) {
-//             imageCenter = chart.axisX[0].convertValueToPixel(chart.data[0].dataPoints[i].x) - 20;
-//             if(chart.data[0].dataPoints[i].name == "cloudy") {
-//                 $(".cloudy").eq(cloudyCounter++).css({ "left": imageCenter});
-//             } else if(chart.data[0].dataPoints[i].name == "rainy") {
-//                 $(".rainy").eq(rainyCounter++).css({ "left": imageCenter});
-//             } else if(chart.data[0].dataPoints[i].name == "sunny") {
-//                 $(".sunny").eq(sunnyCounter++).css({ "left": imageCenter});
-//             }
-//         }
-//     });
-//
-//     function formatter(e) {
-//         if(e.index === 0 && e.dataPoint.x === 0) {
-//             return " Min " + e.dataPoint.y[e.index] + "°";
-//         } else if(e.index == 1 && e.dataPoint.x === 0) {
-//             return " Max " + e.dataPoint.y[e.index] + "°";
-//         } else{
-//             return e.dataPoint.y[e.index] + "°";
-//         }
-//     }
-//
-// }
+    public setupWeatherChart() {
+        let chart = new CanvasJS.Chart('chartContainer', {
+            title:{
+                text: 'Weather Forecast'
+            },
+            axisY: {
+                includeZero: false,
+                suffix: ' °C',
+                maximum: 40,
+                gridThickness: 0
+            },
+            toolTip: {
+                shared: true,
+                content: '{name} </br> <strong>Temperature: </strong> </br> Min: {y[0]} °C, Max: {y[1]} °C'
+            },
+            data: [{
+                type: 'rangeSplineArea',
+                fillOpacity: 0.1,
+                color: '#91AAB1',
+                indexLabelFormatter: formatter,
+                dataPoints: [
+                    { label: 'Ianaurie', y: [15, 26], name: 'rainy' },
+                    { label: 'Februarie', y: [15, 27], name: 'rainy' },
+                    { label: 'Martie', y: [15, 27], name: 'rainy' },
+                    { label: 'Aprilie', y: [13, 27], name: 'sunny' },
+                    { label: 'Mai', y: [14, 27], name: 'sunny' },
+                    { label: 'Iunie', y: [15, 26], name: 'cloudy' },
+                    { label: 'Iulie', y: [17, 26], name: 'sunny' },
+                    { label: 'August', y: [16, 27], name: 'rainy' },
+                    { label: 'Septembrie', y: [14, 27], name: 'sunny' },
+                    { label: 'Octombrie', y: [15, 26], name: 'cloudy' },
+                    { label: 'Noiembrie', y: [17, 26], name: 'sunny' },
+                    { label: 'Decembrie', y: [16, 27], name: 'rainy' },
+                ]
+            }]
+        });
+        chart.render();
+
+        let images = [];
+
+        addImages(chart);
+
+        function addImages(chart) {
+            for (let i = 0; i < chart.data[0].dataPoints.length; i++){
+                let dpsName = chart.data[0].dataPoints[i].name;
+                if(dpsName == 'cloudy'){
+                    images.push($('<img>').attr('src', 'https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/cloudy.png'));
+                } else if(dpsName == 'rainy'){
+                    images.push($('<img>').attr('src', 'https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/rainy.png'));
+                } else if(dpsName == 'sunny'){
+                    images.push($('<img>').attr('src', 'https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/sunny.png'));
+                }
+
+                images[i].attr('class', dpsName).appendTo($('#chartContainer>.canvasjs-chart-container'));
+                positionImage(images[i], i);
+            }
+        }
+
+        function positionImage(image, index) {
+            var imageCenter = chart.axisX[0].convertValueToPixel(chart.data[0].dataPoints[index].x);
+            var imageTop =  chart.axisY[0].convertValueToPixel(chart.axisY[0].maximum);
+
+            image.width('40px')
+                .css({ 'left': imageCenter - 20 + 'px',
+                    'position': 'absolute','top':imageTop + 'px'});
+        }
+
+        $( window ).resize(function() {
+            var cloudyCounter = 0, rainyCounter = 0, sunnyCounter = 0;
+            var imageCenter = 0;
+            for(var i=0;i<chart.data[0].dataPoints.length;i++) {
+                imageCenter = chart.axisX[0].convertValueToPixel(chart.data[0].dataPoints[i].x) - 20;
+                if(chart.data[0].dataPoints[i].name == 'cloudy') {
+                    $('.cloudy').eq(cloudyCounter++).css({ 'left': imageCenter});
+                } else if(chart.data[0].dataPoints[i].name == 'rainy') {
+                    $('.rainy').eq(rainyCounter++).css({ 'left': imageCenter});
+                } else if(chart.data[0].dataPoints[i].name == 'sunny') {
+                    $('.sunny').eq(sunnyCounter++).css({ 'left': imageCenter});
+                }
+            }
+        });
+
+        function formatter(e) {
+            if(e.index === 0 && e.dataPoint.x === 0) {
+                return ' Min ' + e.dataPoint.y[e.index] + '°';
+            } else if(e.index == 1 && e.dataPoint.x === 0) {
+                return ' Max ' + e.dataPoint.y[e.index] + '°';
+            } else{
+                return e.dataPoint.y[e.index] + '°';
+            }
+        }
+
+    }
 
 }

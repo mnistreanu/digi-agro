@@ -30,6 +30,13 @@ export class DateUtil {
         return moment(value).format('D MMMM , hh:mm');
     }
 
+    public static formatLocalizedDay(value) {
+        if (!value) {
+            return '';
+        }
+        return moment(value).format('dddd, D MMM');
+    }
+
     public static compareWithoutTime(d1, d2) {
 
         if (!(d1 instanceof Date)) {
