@@ -204,7 +204,6 @@ export class WeatherHistoryComponent implements OnInit {
                     model.temperature = data.tempMax + '\u00B0C / ' + data.tempMin + '\u00B0C';
                     model.tempMax = data.tempMax;
                     model.tempMin = data.tempMin;
-                    model.condition = data.main + ', ' + data.description;
                     model.humidity = 'air: ' + data.humidityAir + ' %' + ', soil: ' + data.humiditySoil + '%';
                     model.pressure = data.pressure;
                     model.wind = data.speed + ' km/h NW';
