@@ -6,6 +6,7 @@ import {WeatherHistoryModel} from './weather-history.model';
 import {AppConfig} from '../../../app.config';
 import * as CanvasJS from 'assets/js/canvasjs/canvasjs.min';
 import {DateUtil} from '../../../common/dateUtil';
+import {AppState} from '../../../app.state';
 
 
 declare const $: any;
@@ -23,6 +24,8 @@ export class WeatherHistoryComponent implements OnInit {
     public configFn: any;
     options: GridOptions;
     context;
+
+    private chart: any;
 
     forecastModels: WeatherHistoryModel[] = [];
     historyModels: WeatherHistoryModel[] = [];
@@ -43,6 +46,7 @@ export class WeatherHistoryComponent implements OnInit {
     public lineChartOptions: any;
 
     constructor(private _appConfig: AppConfig,
+                private _state: AppState,
                 private weatherService: WeatherService,
                 private langService: LangService) {
         this.config = this._appConfig.config;
@@ -50,10 +54,21 @@ export class WeatherHistoryComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        this.subscribeToMenuEvents();
+
         // this.setupLabels();
         this.loadWeatherForecast();
         this.loadWeatherHistory();
         this.setupWeatherChart();
+    }
+
+    private subscribeToMenuEvents() {
+        this._state.subscribe('menu.isCollapsed', () => {
+            setTimeout(() => {
+                this.resizeChart(true);
+            });
+        });
     }
 
     //
@@ -295,7 +310,7 @@ export class WeatherHistoryComponent implements OnInit {
     }
 
     public setupWeatherChart() {
-        const chart = new CanvasJS.Chart('chartContainer', {
+        this.chart = new CanvasJS.Chart('chartContainer', {
             title: {
                 text: 'Weather Forecast'
             },
@@ -330,12 +345,12 @@ export class WeatherHistoryComponent implements OnInit {
                 ]
             }]
         });
-        chart.render();
+        this.chart.render();
 
-        this.addChartImages(chart);
+        this.addChartImages();
 
         $(window).resize(() => {
-            this.resizeChart(chart);
+            this.resizeChart(false);
         });
 
     }
@@ -354,9 +369,9 @@ export class WeatherHistoryComponent implements OnInit {
         }
     }
 
-    private addChartImages(chart) {
+    private addChartImages() {
         const canvasContainer = $('#chartContainer').find('>.canvasjs-chart-container');
-        chart.data[0].dataPoints.forEach(dataPoint => {
+        this.chart.data[0].dataPoints.forEach(dataPoint => {
             const pointName = dataPoint.name;
             const chartImageIdentifier = 'char-image-' + dataPoint.x;
             let imgElement;
@@ -371,14 +386,14 @@ export class WeatherHistoryComponent implements OnInit {
                 imgElement = $('<img>').attr('src', 'https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/sunny.png');
             }
 
-            this.adjustChartImagePosition(chart, imgElement, dataPoint);
+            this.adjustChartImagePosition(imgElement, dataPoint);
             imgElement.attr('id', chartImageIdentifier).appendTo(canvasContainer);
         });
     }
 
-    private adjustChartImagePosition(chart, imageElement, dataPoint) {
-        const imageCenter = chart.axisX[0].convertValueToPixel(dataPoint.x);
-        const imageTop = chart.axisY[0].convertValueToPixel(chart.axisY[0].maximum);
+    private adjustChartImagePosition(imageElement, dataPoint) {
+        const imageCenter = this.chart.axisX[0].convertValueToPixel(dataPoint.x);
+        const imageTop = this.chart.axisY[0].convertValueToPixel(this.chart.axisY[0].maximum);
 
         imageElement.css({
             width: '40px',
@@ -388,10 +403,14 @@ export class WeatherHistoryComponent implements OnInit {
         });
     }
 
-    private resizeChart(chart) {
-        chart.data[0].dataPoints.forEach(dataPoint => {
+    private resizeChart(renderRequired) {
+        if (renderRequired) {
+            this.chart.render();
+        }
+
+        this.chart.data[0].dataPoints.forEach(dataPoint => {
             const chartImageIdentifier = 'char-image-' + dataPoint.x;
-            const imageCenter = chart.axisX[0].convertValueToPixel(dataPoint.x) - 20;
+            const imageCenter = this.chart.axisX[0].convertValueToPixel(dataPoint.x) - 20;
             $('#' + chartImageIdentifier).css({'left': imageCenter});
         });
     }
