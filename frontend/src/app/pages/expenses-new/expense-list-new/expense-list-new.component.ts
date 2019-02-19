@@ -9,6 +9,9 @@ import {AgDeleteColumnType} from '../../../modules/aggrid/column-types/ag-delete
 import {ModalService} from '../../../services/modal.service';
 import {GroupedSelectorComponent} from '../../../modules/aggrid/grouped-selector/grouped-selector.component';
 import {GroupedSelectorItem} from '../../../modules/aggrid/grouped-selector/grouped-selector-item.interface';
+import {ExpenseCategoryService} from '../../../services/expenses/expense-category.service';
+import {ExpenseCategoryModel} from '../../enterprise/manage-expense-categories/expense-category/expense-category.model';
+import {SelectorItem} from '../../../modules/aggrid/grouped-selector/selector-item.interface';
 
 @Component({
     selector: 'app-expense-list-new',
@@ -27,43 +30,52 @@ export class ExpenseListNewComponent implements OnInit {
     currentModel: ExpenseModel;
 
     expenseTypes: GroupedSelectorItem[];
-    expenseTypeMap: Map<number, any>;
+    expenseTypeMap: Map<number, String>;
 
     constructor(private modalService: ModalService,
+                private expenseCategoryService: ExpenseCategoryService,
                 private langService: LangService) {
     }
 
-    // todo: type drop-down
 
     ngOnInit() {
-        this.setupExpenseTypes();
-        this.setupGrid();
+        this.setupExpenseTypes()
+            .then(() => this.setupGrid());
     }
 
-    private setupExpenseTypes() {
-        // todo: need fetch real types...
-        this.expenseTypes = <GroupedSelectorItem[]>[
-            {
-                groupName: 'Combustibil',
-                items: [
-                    {id: 1, label: 'Motorina'},
-                    {id: 2, label: 'Ulei'},
-                    {id: 3, label: 'Solidol'},
-                ]
-            },
-            {
-                groupName: 'Agro',
-                items: [
-                    {id: 4, label: 'Seed'}
-                ]
-            }
-        ];
+    private setupExpenseTypes(): Promise<void> {
+        return new Promise((resolve) => {
+            this.expenseCategoryService.getTree().subscribe(payloadModel => {
+                const models = payloadModel.payload;
+                this.expenseTypes = [];
+                this.expenseTypeMap = <Map<number, String>>{};
+                const leafParent: GroupedSelectorItem = <GroupedSelectorItem> {groupName: '', items: []};
+                models.forEach((model: ExpenseCategoryModel) => {
+                    const leaf = !model.children || model.children.length === 0;
+                    if (leaf) {
+                        this.setupSelectorItem(model, leafParent);
+                    }
+                    else {
+                        const parent: GroupedSelectorItem = <GroupedSelectorItem> {groupName: model.name, items: []};
+                        this.expenseTypes.push(parent);
+                        model.children.forEach(childModel => {
+                            this.setupSelectorItem(childModel, parent);
+                        });
+                    }
+                });
 
-        this.expenseTypeMap = <Map<number, any>>{};
-        this.expenseTypeMap[1] = 'Motorina';
-        this.expenseTypeMap[2] = 'Ulei';
-        this.expenseTypeMap[3] = 'Solidol';
-        this.expenseTypeMap[4] = 'Seed';
+                if (leafParent.items.length > 0) {
+                    this.expenseTypes.unshift(leafParent);
+                }
+                resolve();
+            });
+        });
+    }
+
+    private setupSelectorItem(model: ExpenseCategoryModel, parent: GroupedSelectorItem) {
+        this.expenseTypeMap[model.id] = model.name;
+        const item: SelectorItem = <SelectorItem> {id: model.id, text: model.name};
+        parent.items.push(item);
     }
 
     private setupGrid() {
@@ -113,7 +125,7 @@ export class ExpenseListNewComponent implements OnInit {
                 editable: true,
                 cellEditor: 'groupedSelector',
                 cellEditorParams: {
-                    dropDownItems: this.expenseTypes,
+                    getDropDownItems: () => this.expenseTypes,
                     dropDownValueField: 'typeId'
                 },
                 valueSetter: (params) => this.typeSetter(params),
@@ -170,11 +182,36 @@ export class ExpenseListNewComponent implements OnInit {
     }
 
     private getDummyData(): ExpenseModel[] {
+        const keys = Object.keys(this.expenseTypeMap);
+        const key1 = keys[0];
+        const key2 = keys[1];
+        const key3 = keys[2];
         return <ExpenseModel[]>[
-            {date: new Date('2018-12-12'), typeId: 1, type: 'A', title: 'Title 001', cost: 5000},
-            {date: new Date('2018-12-13'), typeId: 1, type: 'A', title: 'Title 002', cost: 1000},
-            {date: new Date('2018-12-13'), typeId: 2, type: 'B', title: 'Title 003', cost: 5000},
-            {date: new Date('2018-12-23'), typeId: 3, type: 'C', title: 'Title 004', description: 'description', cost: 4200}
+            {
+                date: new Date('2018-12-12'),
+                typeId: +key1,
+                type: this.expenseTypeMap[key1],
+                title: 'Title 001',
+                cost: 5000
+            },
+            {
+                date: new Date('2018-12-13'),
+                typeId: +key1,
+                type: this.expenseTypeMap[key1],
+                title: 'Title 002',
+                cost: 1000
+            },
+            {
+                date: new Date('2018-12-13'),
+                typeId: +key2,
+                type: this.expenseTypeMap[key2],
+                title: 'Title 003',
+                cost: 5000
+            },
+            {
+                date: new Date('2018-12-23'), typeId: +key3, type: this.expenseTypeMap[key3], title: 'Title 004',
+                description: 'description', cost: 4200
+            }
         ];
     }
 
@@ -217,9 +254,12 @@ export class ExpenseListNewComponent implements OnInit {
     }
 
     private buildModel() {
+        const keys = Object.keys(this.expenseTypeMap);
+
         const model = new ExpenseModel();
         model.date = new Date();
-        model.type = 'Seed';
+        model.typeId = +keys[0];
+        model.type = this.expenseTypeMap[keys[0]];
         model.cost = 0;
 
         return model;

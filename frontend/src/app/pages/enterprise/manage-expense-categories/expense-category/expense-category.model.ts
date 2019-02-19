@@ -4,4 +4,6 @@ export class ExpenseCategoryModel {
     parentId: number;
     defaultName: string;
     name: string;
+
+    children: ExpenseCategoryModel[];
 }

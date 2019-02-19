@@ -13,7 +13,7 @@ export class GroupedSelectorComponent implements ICellEditorAngularComp, AfterVi
     value: any;
 
     agInit(params: any): void {
-        this.items = params.dropDownItems;
+        this.items = params.getDropDownItems();
         const field = params.dropDownValueField;
         this.value = params.node.data[field];
     }
