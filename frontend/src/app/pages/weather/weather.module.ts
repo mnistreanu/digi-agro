@@ -35,7 +35,7 @@ export const routes = [
         NguiMapModule.forRoot({apiUrl: Constants.GOOGLE_MAP_API}),
         RouterModule.forChild(routes)
     ],
-    declarations: [WeatherDayCardComponent, WeatherForecastComponent, WeatherHistoryComponent, WeatherChartComponent]
+    declarations: [WeatherDayCardComponent, WeatherChartComponent, WeatherForecastComponent, WeatherHistoryComponent]
 })
 export class WeatherModule {
 }
