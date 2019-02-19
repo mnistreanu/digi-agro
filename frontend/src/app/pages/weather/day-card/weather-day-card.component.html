@@ -1,26 +1,26 @@
-<div class="card weather">
-    <h6 class="no-margin text-center">{{forecast.date}}</h6>
+<div class="card">
+    <h6 class="no-margin text-center">{{weather.date}}</h6>
     <div class="row">
         <div class="col-6 text-center">
-            <img [src]="forecast.icon">
+            <img [src]="weather.icon">
             <!--<canvas skycon [weather]="'partly-cloudy-day'" [color]="'default-color'" width="45" height="45"></canvas>-->
         </div>
         <div class="col-6 text-center">
-            <div class="current-temperature"><b>{{forecast.tempMax}}°C</b></div>
-            <div class="current-temperature">{{forecast.tempMin}}°C</div>
+            <div class="current-temperature"><b>{{weather.tempMax}}°C</b></div>
+            <div class="current-temperature">{{weather.tempMin}}°C</div>
         </div>
     </div>
     <div class="row">
         <div class="col-12 text-center">
-            <span>{{forecast.description}}</span>
+            <span>{{weather.description}}</span>
         </div>
     </div>
     <!--<div class="row">-->
     <!--<div class="col-6 text-center">-->
-    <!--<span><i class="fa fa-flag"></i> {{forecast.wind}} km/h</span>-->
+    <!--<span><i class="fa fa-flag"></i> {{weather.wind}} km/h</span>-->
     <!--</div>-->
     <!--<div class="col-6 text-center">-->
-    <!--<span><i class="fa fa-tint"></i> {{forecast.humidityAir}} %</span>-->
+    <!--<span><i class="fa fa-tint"></i> {{weather.humidityAir}} %</span>-->
     <!--</div>-->
     <!--</div>-->
 </div>

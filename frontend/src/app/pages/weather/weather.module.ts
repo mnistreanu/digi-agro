@@ -13,6 +13,8 @@ import {Constants} from '../../common/constants';
 import {WeatherForecastComponent} from './forecast/weather-forecast.component';
 import {WeatherHistoryComponent} from './history/weather-history.component';
 import 'chart.js/dist/Chart.js';
+import {WeatherDayCardComponent} from './day-card/weather-day-card.component';
+import { WeatherChartComponent } from './chart/weather-chart.component';
 
 export const routes = [
     {path: '', redirectTo: 'weather', pathMatch: 'full'},
@@ -33,7 +35,7 @@ export const routes = [
         NguiMapModule.forRoot({apiUrl: Constants.GOOGLE_MAP_API}),
         RouterModule.forChild(routes)
     ],
-    declarations: [WeatherForecastComponent, WeatherHistoryComponent]
+    declarations: [WeatherDayCardComponent, WeatherForecastComponent, WeatherHistoryComponent, WeatherChartComponent]
 })
 export class WeatherModule {
 }

@@ -2,11 +2,11 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {WeatherService} from '../../../services/weather.service';
-import {WeatherHistoryModel} from './weather-history.model';
 import {AppConfig} from '../../../app.config';
 import * as CanvasJS from 'assets/js/canvasjs/canvasjs.min';
 import {DateUtil} from '../../../common/dateUtil';
 import {AppState} from '../../../app.state';
+import {WeatherModel} from '../weather.model';
 
 
 declare const $: any;
@@ -27,16 +27,8 @@ export class WeatherHistoryComponent implements OnInit {
 
     private chart: any;
 
-    forecastModels: WeatherHistoryModel[] = [];
-    historyModels: WeatherHistoryModel[] = [];
-
-    // labelDate: string;
-    // labelLocation: string;
-    // labelTemperature: string;
-    // labelHumidity: string;
-    // labelCondition: string;
-    // labelWind: string;
-    // labelPressure: string;
+    forecastModels: WeatherModel[] = [];
+    historyModels: WeatherModel[] = [];
 
     public lineChartType = 'line';
     public lineChartLegend = true;
@@ -54,10 +46,7 @@ export class WeatherHistoryComponent implements OnInit {
     }
 
     ngOnInit() {
-
         this.subscribeToMenuEvents();
-
-        // this.setupLabels();
         this.loadWeatherForecast();
         this.loadWeatherHistory();
         this.setupWeatherChart();
@@ -71,94 +60,6 @@ export class WeatherHistoryComponent implements OnInit {
         });
     }
 
-    //
-    // private setupLabels() {
-    //     this.langService.get('weather.date').subscribe(msg => this.labelDate = msg);
-    //     this.langService.get('weather.location').subscribe(msg => this.labelLocation = msg);
-    //     this.langService.get('weather.temperature').subscribe(msg => this.labelTemperature = msg);
-    //     this.langService.get('weather.humidity').subscribe(msg => this.labelHumidity = msg);
-    //     this.langService.get('weather.condition').subscribe(msg => this.labelCondition = msg);
-    //     this.langService.get('weather.wind').subscribe(msg => this.labelWind = msg);
-    //     this.langService.get('weather.pressure').subscribe(msg => this.labelPressure = msg);
-    // }
-    //
-    //
-    // private setupGrid() {
-    //     this.options = <GridOptions>{};
-    //
-    //     this.options.enableColResize = true;
-    //     this.options.enableSorting = true;
-    //     this.options.enableFilter = true;
-    //     this.options.rowSelection = 'single';
-    //     this.options.columnDefs = this.setupHeaders();
-    //     this.context = {componentParent: this};
-    //
-    //     this.setupRows();
-    // }
-    //
-    // private setupHeaders() {
-    //
-    //     const headers: ColDef[] = [
-    //         {
-    //             headerName: this.labelDate,
-    //             field: 'date',
-    //             width: 80,
-    //             minWidth: 80
-    //         },
-    //         {
-    //             headerName: this.labelLocation,
-    //             field: 'location',
-    //             width: 200,
-    //             minWidth: 50
-    //         },
-    //         {
-    //             headerName: this.labelTemperature,
-    //             field: 'temperature',
-    //             width: 100,
-    //             minWidth: 100,
-    //             suppressFilter: true,
-    //             suppressSorting : true,
-    //         },
-    //         {
-    //             headerName: this.labelHumidity,
-    //             field: 'humidity',
-    //             width: 100,
-    //             minWidth: 100,
-    //             suppressFilter: true,
-    //             suppressSorting : true,
-    //         },
-    //         {
-    //             headerName: this.labelCondition,
-    //             field: 'condition',
-    //             cellRendererFramework: ImageRendererComponent,
-    //             cellRendererParams: {
-    //                 textField: 'condition',
-    //                 iconField: 'icon'
-    //             },
-    //             width: 200,
-    //             minWidth: 200,
-    //         },
-    //         {
-    //             headerName: this.labelWind,
-    //             field: 'wind',
-    //             width: 100,
-    //             minWidth: 100,
-    //             suppressFilter: true,
-    //             suppressSorting : true,
-    //         },
-    //         {
-    //             headerName: this.labelPressure,
-    //             field: 'pressure',
-    //             width: 100,
-    //             minWidth: 100,
-    //             suppressFilter: true,
-    //             suppressSorting : true,
-    //         }
-    //     ];
-    //
-    //     return headers;
-    // }
-
     public loadWeatherForecast() {
         const dateTo = new Date();
         const dateFrom = new Date();
@@ -170,7 +71,7 @@ export class WeatherHistoryComponent implements OnInit {
                         // server must return only 6 models
                         return;
                     }
-                    const model = new WeatherHistoryModel();
+                    const model = new WeatherModel();
                     model.owmId = data.weatherId;
                     model.date = DateUtil.formatLocalizedDay(data.dt);
                     model.location = data.countyId;
@@ -197,7 +98,7 @@ export class WeatherHistoryComponent implements OnInit {
         this.weatherService.findWeatherHistory('MD', 'HN', dateFrom, dateTo).subscribe(payloadModel => {
             if (payloadModel.status == 'success') {
                 this.historyModels = payloadModel.payload.map(data => {
-                    const model = new WeatherHistoryModel();
+                    const model = new WeatherModel();
                     model.date = new Date(data.dt).toLocaleDateString();
                     model.location = data.countyId;
                     model.icon = '/assets/img/notifications/weather-rain-alert.png';

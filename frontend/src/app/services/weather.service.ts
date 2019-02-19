@@ -18,7 +18,19 @@ export class WeatherService {
 
     /**
      * Date format "yyyyMMdd"
-     * @param locationId
+     * @param countryCode
+     * @param countyCode
+     * @returns {Observable<Object>}
+     */
+    public findWeatherForecast(countryCode: string, countyCode: string): Observable<PayloadModel> {
+        const params = '?country=' + countryCode + '&county='  + countyCode;
+        return this.http.get<PayloadModel>(this.api + '/forecast' + params );
+    }
+
+    /**
+     * Date format "yyyyMMdd"
+     * @param countryCode
+     * @param countyCode
      * @param dateFrom
      * @param dateTo
      * @returns {Observable<Object>}
