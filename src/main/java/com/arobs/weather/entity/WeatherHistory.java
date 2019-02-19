@@ -3,13 +3,14 @@ package com.arobs.weather.entity;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Date istorice. Se transfera zilnic din tabelul "weather_snapshot"
  */
 @Entity
 @Table(name = "weather_history", uniqueConstraints = {
-		@UniqueConstraint(name = "UQ_weather_history_openweather_id", columnNames = {"openweather_id", "day_timestamp"})
+		@UniqueConstraint(name = "UQ_weather_history_id", columnNames = {"weather_location_id", "dt"})
 	}
 )
 public class WeatherHistory implements Serializable {
@@ -18,48 +19,66 @@ public class WeatherHistory implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	@Column(name = "openweather_id")
-	private Integer openweatherId;
+
+	@Column(name = "open_weather_id")
+	private Integer openWeatherId;
+
+	@ManyToOne
+	@JoinColumn(name = "weather_location_id")
+	private WeatherLocation weatherLocation;
+
 	@Column(name = "parcel_id")
 	private Long parcelId;
-	@Column(name = "day_timestamp")
-	private Long dayTimestamp;
-	@Column(name = "day")
-	private Double day;
+
+	@Column(name = "dt")
+	private Date dt;
+
 	@Column(name = "temp_min")
 	private Double tempMin;
+
 	@Column(name = "temp_max")
 	private Double tempMax;
-	@Column(name = "night")
-	private Double night;
-	@Column(name = "evn")
-	private Double evn;
-	@Column(name = "morn")
-	private Double morn;
+
 	@Column(name = "pressure")
 	private Double pressure;
-	@Column(name = "humidity")
-	private Integer humidity;
+
 	@Column(name = "humidity_air")
 	private Integer humidityAir;
+
 	@Column(name = "humidity_soil")
 	private Integer humiditySoil;
-	@Column(name = "weather_id")
-	private Integer weatherId;
+
 	@Column(name = "main")
 	private String main;
+
 	@Column(name = "description")
 	private String description;
+
 	@Column(name = "icon")
 	private String icon;
+
 	@Column(name = "speed")
 	private Double speed;
+
 	@Column(name = "deg")
 	private Double deg;
+
 	@Column(name = "clouds")
 	private Integer clouds;
-	@Column(name = "rain_3h")
-	private Double rain3h;
+
+	@Column(name = "rain")
+	private Double rain;
+
+	@Column(name = "snow")
+	private Double snow;
+
+	@Column(name = "uvi")
+	private Double uvi;
+
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
 
 	public Long getId() {
 		return id;
@@ -69,36 +88,28 @@ public class WeatherHistory implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getOpenweatherId() {
-		return openweatherId;
-	}
-
-	public void setOpenweatherId(Integer openweatherId) {
-		this.openweatherId = openweatherId;
-	}
-
 	public Long getParcelId() {
-        return parcelId;
-    }
-
-    public void setParcelId(Long parcelId) {
-        this.parcelId = parcelId;
-    }
-
-	public Long getDayTimestamp() {
-		return dayTimestamp;
+		return parcelId;
 	}
 
-	public void setDayTimestamp(Long dayTimestamp) {
-		this.dayTimestamp = dayTimestamp;
+	public void setParcelId(Long parcelId) {
+		this.parcelId = parcelId;
 	}
 
-	public Double getDay() {
-		return day;
+	public WeatherLocation getWeatherLocation() {
+		return weatherLocation;
 	}
 
-	public void setDay(Double day) {
-		this.day = day;
+	public void setWeatherLocation(WeatherLocation weatherLocation) {
+		this.weatherLocation = weatherLocation;
+	}
+
+	public Date getDt() {
+		return dt;
+	}
+
+	public void setDt(Date dt) {
+		this.dt = dt;
 	}
 
 	public Double getTempMin() {
@@ -117,44 +128,12 @@ public class WeatherHistory implements Serializable {
 		this.tempMax = tempMax;
 	}
 
-	public Double getNight() {
-		return night;
-	}
-
-	public void setNight(Double night) {
-		this.night = night;
-	}
-
-	public Double getEvn() {
-		return evn;
-	}
-
-	public void setEvn(Double evn) {
-		this.evn = evn;
-	}
-
-	public Double getMorn() {
-		return morn;
-	}
-
-	public void setMorn(Double morn) {
-		this.morn = morn;
-	}
-
 	public Double getPressure() {
 		return pressure;
 	}
 
 	public void setPressure(Double pressure) {
 		this.pressure = pressure;
-	}
-
-	public Integer getHumidity() {
-		return humidity;
-	}
-
-	public void setHumidity(Integer humidity) {
-		this.humidity = humidity;
 	}
 
 	public Integer getHumidityAir() {
@@ -173,12 +152,12 @@ public class WeatherHistory implements Serializable {
 		this.humiditySoil = humiditySoil;
 	}
 
-	public Integer getWeatherId() {
-		return weatherId;
+	public Integer getOpenWeatherId() {
+		return openWeatherId;
 	}
 
-	public void setWeatherId(Integer weatherId) {
-		this.weatherId = weatherId;
+	public void setOpenWeatherId(Integer openWeatherId) {
+		this.openWeatherId = openWeatherId;
 	}
 
 	public String getMain() {
@@ -229,15 +208,27 @@ public class WeatherHistory implements Serializable {
 		this.clouds = clouds;
 	}
 
-	public Double getRain3h() {
-		return rain3h;
+	public Double getRain() {
+		return rain;
 	}
 
-	public void setRain3h(Double rain3h) {
-		this.rain3h = rain3h;
+	public void setRain(Double rain) {
+		this.rain = rain;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public Double getSnow() {
+		return snow;
+	}
+
+	public void setSnow(Double snow) {
+		this.snow = snow;
+	}
+
+	public Double getUvi() {
+		return uvi;
+	}
+
+	public void setUvi(Double uvi) {
+		this.uvi = uvi;
 	}
 }

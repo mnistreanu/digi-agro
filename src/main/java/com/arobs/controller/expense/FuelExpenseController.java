@@ -23,6 +23,12 @@ import java.util.List;
 @RequestMapping("/fuel-expense")
 public class FuelExpenseController {
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<ExpenseModel> getModel(@PathVariable Long id) {
+        ExpenseModel expenseModel = expenseService.findOneModel(id);
+        return ResponseEntity.ok(expenseModel);
+    }
+
     @Autowired
     private ExpenseService expenseService;
 
@@ -31,6 +37,7 @@ public class FuelExpenseController {
 
     @Autowired
     private MachineService machineService;
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<List<FuelExpenseListModel>> getModels(HttpSession session) {
@@ -67,13 +74,6 @@ public class FuelExpenseController {
         }
 
         return ResponseEntity.ok(resultModels);
-    }
-
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<ExpenseModel> getModel(@PathVariable Long id) {
-        ExpenseModel expenseModel = expenseService.findOneModel(id);
-        return ResponseEntity.ok(expenseModel);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)

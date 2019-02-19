@@ -56,6 +56,42 @@
         </sql>
     </changeSet>
 
+
+    <changeSet id="insert-weather-location-md" author="mihai.gorgos" failOnError="true" runOnChange="false">
+        <sql>
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (617077,'MD','ED',48.166672,27.25,'Raionul Edineţ');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (617181,'MD','UN',47.333328,27.91667,'Raionul Ungheni');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (617255,'MD','TL',47.583328,28.5,'Raionul Teleneşti');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (617264,'MD','TR',45.916672,28.58333,'Raionul Taraclia');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (617283,'MD','SV',46.5,29.66667,'Raionul Ştefan Vodă');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (617301,'MD','ST',47.166672,28.58333,'Raionul Străşeni');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (617366,'MD','SR',48.166672,28.25,'Raionul Soroca');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (617483,'MD','RS',47.92778,27.535089,'Raionul Rîşcani');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (617501,'MD','RZ',47.666672,28.83333,'Raionul Rezina');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (617639,'MD','OR',47.416672,28.83333,'Raionul Orhei');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (617656,'MD','OC',48.416672,27.5,'Raionul Ocniţa');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (617715,'MD','AN',46.916672,29.25,'Raionul Anenii Noi');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (617754,'MD','NS',47.083328,28.16667,'Raionul Nisporeni');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (617903,'MD','LV',46.5,28.41667,'Raionul Leova');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (617913,'MD','SG',47.666672,28.16667,'Raionul Sîngerei');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (617962,'MD','CR',47.158611,29.030649,'Raionul Criuleni');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (617991,'MD','IL',46.833328,28.83333,'Raionul Ialoveni');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (618119,'MD','CS',46.618839,29.313499,'Raionul Căuşeni');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (618142,'MD','CT',46.25,28.33333,'Raionul Cantemir');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (618162,'MD','CL',47.293652,28.308359,'Raionul Călăraşi');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (618164,'MD','CH',45.833328,28.33333,'Raionul Cahul');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (618260,'MD','GL',47.75,27.5,'Raionul Glodeni');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (618331,'MD','FR',47.873981,28.377741,'Raionul Floreşti');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (618345,'MD','FL',47.583328,27.75,'Raionul Făleşti');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (618369,'MD','DR',48.083328,27.83333,'Raionul Drochia');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (618381,'MD','DN',48.2677,27.686159,'Raionul Donduşeni');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (618430,'MD','CM',46.583328,28.83333,'Raionul Cimişlia');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (618511,'MD','BR',48.25,27,'Raionul Briceni');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (618565,'MD','BS',46.416672,28.91667,'Raionul Basarabeasca');
+            INSERT INTO weather_location(id, country, county, lat, lon, name) VALUES (858803,'MD','HN',46.833328,28.41667,'Raionul Hînceşti');
+        </sql>
+    </changeSet>
+
      <changeSet id="insert-2-tenants" author="mihai.gorgos" failOnError="true" onValidationFail="MARK_RAN">
          <validCheckSum>ANY</validCheckSum>
          <sql>
@@ -835,42 +871,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="Moldova_openweathermap_county_id" author="mihai.gorgos" failOnError="true" runAlways="true">
-        <sql>
-            UPDATE weather_location SET county='ED' WHERE id=617077;
-            UPDATE weather_location SET county='UN' WHERE id=617181;
-            UPDATE weather_location SET county='TL' WHERE id=617255;
-            UPDATE weather_location SET county='TR' WHERE id=617264;
-            UPDATE weather_location SET county='SV' WHERE id=617283;
-            UPDATE weather_location SET county='ST' WHERE id=617301;
-            UPDATE weather_location SET county='SR' WHERE id=617366;
-            UPDATE weather_location SET county='RS' WHERE id=617483;
-            UPDATE weather_location SET county='RZ' WHERE id=617501;
-            UPDATE weather_location SET county='OR' WHERE id=617639;
-            UPDATE weather_location SET county='OK' WHERE id=617656;
-            UPDATE weather_location SET county='AN' WHERE id=617715;
-            UPDATE weather_location SET county='NS' WHERE id=617754;
-            UPDATE weather_location SET county='LV' WHERE id=617903;
-            UPDATE weather_location SET county='SG' WHERE id=617913;
-            UPDATE weather_location SET county='CR' WHERE id=617962;
-            UPDATE weather_location SET county='IL' WHERE id=617991;
-            UPDATE weather_location SET county='CS' WHERE id=618119;
-            UPDATE weather_location SET county='CT' WHERE id=618142;
-            UPDATE weather_location SET county='CL' WHERE id=618162;
-            UPDATE weather_location SET county='CH' WHERE id=618164;
-            UPDATE weather_location SET county='GL' WHERE id=618260;
-            UPDATE weather_location SET county='FR' WHERE id=618331;
-            UPDATE weather_location SET county='FL' WHERE id=618345;
-            UPDATE weather_location SET county='DR' WHERE id=618369;
-            UPDATE weather_location SET county='DN' WHERE id=618381;
-            UPDATE weather_location SET county='CM' WHERE id=618430;
-            UPDATE weather_location SET county='BR' WHERE id=618511;
-            UPDATE weather_location SET county='BS' WHERE id=618565;
-            UPDATE weather_location SET county='HN' WHERE id=858803;
-        </sql>
-    </changeSet>
-
-    <changeSet id="insert_pests" author="mihai.gorgos" failOnError="true" runOnChange="false">
+     <changeSet id="insert_pests" author="mihai.gorgos" failOnError="true" runOnChange="false">
         <validCheckSum>ANY</validCheckSum>
         <sql>
             INSERT INTO pest (id, name_ro) VALUES (1, 'Rapăn');
@@ -918,15 +919,19 @@
         </sql>
     </changeSet>
 
-    <changeSet id="insert_default_expense_categories" author="mihai.gorgos" failOnError="true" runOnChange="false">
+    <changeSet id="insert_default_expense_categories" author="mihai.gorgos" failOnError="true" runOnChange="true">
         <validCheckSum>ANY</validCheckSum>
         <sql>
-            INSERT INTO expense_category(id, name) VALUES (1, 'expense-category.machinery');
-            INSERT INTO expense_category(id, name) VALUES (2, 'expense-category.fuel');
-            INSERT INTO expense_category(id, name) VALUES (3, 'expense-category.sowing');
-            INSERT INTO expense_category(id, name) VALUES (4, 'expense-category.works');
-            INSERT INTO expense_category(id, name) VALUES (5, 'expense-category.fertilizers');
-            INSERT INTO expense_category(id, name) VALUES (6, 'expense-category.pesticides');
+            INSERT INTO expense_category(id, title, name) VALUES (1, 'expense-category.machinery-title', 'expense-category.machinery');
+            INSERT INTO expense_category(id, title, name) VALUES (2, 'expense-category.fuel-title', 'expense-category.fuel');
+            INSERT INTO expense_category(id, title, name) VALUES (3, 'expense-category.sowing-title', 'expense-category.sowing');
+            INSERT INTO expense_category(id, title, name) VALUES (4, 'expense-category.works-title', 'expense-category.works');
+            INSERT INTO expense_category(id, title, name) VALUES (5, 'expense-category.fertilizers-title', 'expense-category.fertilizers');
+            INSERT INTO expense_category(id, title, name) VALUES (6, 'expense-category.pesticides-title', 'expense-category.pesticides');
+            INSERT INTO expense_category(id, title, name) VALUES (7, 'expense-category.irrigation-title', 'expense-category.irrigation');
+            INSERT INTO expense_category(id, title, name) VALUES (8, 'expense-category.renting-title', 'expense-category.renting');
+            INSERT INTO expense_category(id, title, name) VALUES (9, 'expense-category.operational-title', 'expense-category.operational');
+            INSERT INTO expense_category(id, title, name) VALUES (10, 'expense-category.others-title', 'expense-category.others');
 
             SELECT setval('expense_category_id_seq', (SELECT MAX(id) FROM expense_category)+1);
         </sql>
@@ -935,18 +940,22 @@
     <changeSet id="insert_tenant_1_expense_categories" author="mihai.gorgos" failOnError="true" runOnChange="false">
         <validCheckSum>ANY</validCheckSum>
         <sql>
-            INSERT INTO expense_category(id, tenant_id, default_category_id, name) VALUES ( 7, 1, 1, 'Cheltuieli pentru repararea mașinilor agricole');
+            INSERT INTO expense_category(id, tenant_id, default_category_id, title, name) VALUES ( 11, 1, 1, 'Tehnică și echipamente', 'Cheltuieli pentru repararea mașinilor agricole');
+            INSERT INTO expense_category(id, tenant_id, default_category_id, title, name) VALUES ( 12, 1, 2, 'Combustibil', 'Cheltuieli pentru combustibil');
+            INSERT INTO expense_category(id, tenant_id, default_category_id, title, name) VALUES (13, 1, 3, 'Însămânțare', 'Cheltuieli pentru însămânțare');
+            INSERT INTO expense_category(id, tenant_id, default_category_id, title, name) VALUES (14, 1, 4, 'Lucrări agricole', 'Cheltuieli pentru lucrări agricole');
+            INSERT INTO expense_category(id, tenant_id, default_category_id, title, name) VALUES (15, 1, 5, 'Îngrășăminte', 'Cheltuieli pentru îngrășăminte');
+            INSERT INTO expense_category(id, tenant_id, default_category_id, title, name) VALUES (16, 1, 6, 'Pesticide', 'Cheltuieli pentru pesticide');
+            INSERT INTO expense_category(id, tenant_id, default_category_id, title, name) VALUES (17, 1, 7, 'Irigare', 'Cheltuieli pentru irigare');
+            INSERT INTO expense_category(id, tenant_id, default_category_id, title, name) VALUES (18, 1, 8, 'Închiriere', 'Cheltuieli pentru închiriere');
+            INSERT INTO expense_category(id, tenant_id, default_category_id, title, name) VALUES (19, 1, 9, 'Pperaționale', 'Cheltuieli operaționale');
+            INSERT INTO expense_category(id, tenant_id, default_category_id, title, name) VALUES (20, 1, 10, 'Altele', 'Alte cheltuieli');
 
-            INSERT INTO expense_category(id, tenant_id, default_category_id, name) VALUES ( 8, 1, 2, 'Cheltuieli pentru combustibil');
-            INSERT INTO expense_category(id, tenant_id, parent_id, name) VALUES ( 9, 1, 8, 'Motorină');
-            INSERT INTO expense_category(id, tenant_id, parent_id, name) VALUES (10, 1, 8, 'Ulei');
-            INSERT INTO expense_category(id, tenant_id, parent_id, name) VALUES (11, 1, 8, 'Solidol');
-            INSERT INTO expense_category(id, tenant_id, parent_id, name) VALUES (12, 1, 8, 'Negrol');
+            INSERT INTO expense_category(id, tenant_id, parent_id, name) VALUES (21, 1, 12, 'Motorină');
+            INSERT INTO expense_category(id, tenant_id, parent_id, name) VALUES (22, 1, 12, 'Ulei');
+            INSERT INTO expense_category(id, tenant_id, parent_id, name) VALUES (23, 1, 12, 'Solidol');
+            INSERT INTO expense_category(id, tenant_id, parent_id, name) VALUES (24, 1, 12, 'Negrol');
 
-            INSERT INTO expense_category(id, tenant_id, default_category_id, name) VALUES (13, 1, 3, 'Cheltuieli pentru însămânțare');
-            INSERT INTO expense_category(id, tenant_id, default_category_id, name) VALUES (14, 1, 4, 'Cheltuieli pentru lucrări agricole');
-            INSERT INTO expense_category(id, tenant_id, default_category_id, name) VALUES (15, 1, 5, 'Cheltuieli pentru îngrășăminte');
-            INSERT INTO expense_category(id, tenant_id, default_category_id, name) VALUES (16, 1, 6, 'Cheltuieli pentru pesticide');
 
             SELECT setval('expense_category_id_seq', (SELECT MAX(id) FROM expense_category)+1);
         </sql>
@@ -1089,6 +1098,7 @@
     </changeSet>
 
     <changeSet id="insert-parcel-crop-season-2019" author="mihai.gorgos" failOnError="true" runOnChange="false">
+        <validCheckSum>ANY</validCheckSum>
         <sql>
             INSERT INTO parcel_crop_season(id, parcel_id, crop_season_id, crop_variety_id, planted_at, rows_on_parcel, plants_on_row, space_between_rows, space_between_plants)
             VALUES (1, 1, 1, 1, null, 30, 115, 1.2, 0.8);
@@ -1097,6 +1107,109 @@
             VALUES (2, 2, 2, null, null, 44, 99, 1.4, 0.5);
 
             SELECT setval('parcel_crop_season_id_seq', (SELECT MAX(id) FROM parcel_crop_season));
+        </sql>
+    </changeSet>
+
+
+
+
+    <changeSet id="insert-weather-history-HN-NS" author="mihai.gorgos" failOnError="true" runOnChange="false">
+        <validCheckSum>ANY</validCheckSum>
+        <sql>
+            <!--Nisporeni-->
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-01', 800, 'Clear', 'sky is clear', '01d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-02', 500, 'Rain', 'light rain', '10d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-03', 803, 'Clouds', 'broken clouds', '04d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-04', 501, 'Rain', 'moderate rain', '10d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-05', 801, 'Clouds', 'few clouds', '02d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-06', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-07', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-08', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-09', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-10', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-11', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-12', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-13', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-14', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (617754, null, '2019-02-15', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            <!--Hancesti-->
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-01', 800, 'Clear', 'sky is clear', '01d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-02', 500, 'Rain', 'light rain', '10d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-03', 803, 'Clouds', 'broken clouds', '04d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-04', 501, 'Rain', 'moderate rain', '10d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-05', 801, 'Clouds', 'few clouds', '02d',0.4, 212, 8, 0.96, 0.2, 8.37, 1, 8, 708.98, 65, 69);
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-06', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-07', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-08', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-09', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-10', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-11', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-12', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-13', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-14', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            INSERT INTO weather_history(weather_location_id, parcel_id, dt, open_weather_id, main, description, icon, speed, deg, clouds, rain, snow, uvi, temp_min, temp_max, pressure, humidity_air, humidity_soil )
+            VALUES (858803, null, '2019-02-15', 600, 'Snow', 'light snow', '13d', trunc(random() * 100), trunc(random() * 360), trunc(random() * 20), random(), random(), random()*10, trunc(random() * 15)-10, trunc(random() * 30)+5, trunc(random() * 700)+300, trunc(random() * 100), trunc(random() * 100));
+
+            SELECT setval('weather_history_id_seq', (SELECT MAX(id) FROM weather_history));
         </sql>
     </changeSet>
 

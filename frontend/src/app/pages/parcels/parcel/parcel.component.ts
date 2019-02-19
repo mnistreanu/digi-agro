@@ -58,6 +58,7 @@ export class ParcelComponent implements OnInit {
         this.parcelService.findOne(id).subscribe(model => {
             this.parcelModel = model;
             this.parcelSeasonModel = new ParcelSeasonModel();
+            this.parcelSeasonModel.parcelId = this.parcelModel.id;
             this.parcelService.adjust([model]);
         });
     }

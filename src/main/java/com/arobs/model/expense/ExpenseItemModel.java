@@ -13,8 +13,7 @@ public class ExpenseItemModel {
 
     private Long parentCategoryId;
     private Long categoryId;
-    private String category;
-
+    private String categoryTitle;
 
     private boolean deleted = false;
 
@@ -29,7 +28,7 @@ public class ExpenseItemModel {
         if (entity.getCategory() != null) {
             parentCategoryId = entity.getCategory().getParentId();
             categoryId = entity.getCategory().getId();
-            category = entity.getCategory().getName();
+            categoryTitle = entity.getCategory().getTitle();
         }
     }
 
@@ -81,12 +80,12 @@ public class ExpenseItemModel {
         this.categoryId = categoryId;
     }
 
-    public String getCategory() {
-        return category;
+    public String getCategoryTitle() {
+        return categoryTitle;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryTitle(String categoryTitle) {
+        this.categoryTitle = categoryTitle;
     }
 
     public Long getParentCategoryId() {

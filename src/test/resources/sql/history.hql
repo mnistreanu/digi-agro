@@ -1,5 +1,5 @@
 SELECT snapshot.openweatherId AS openweatherId, 
-    snapshot.dayTimestamp AS dayTimestamp, 
+    snapshot.dt AS dt,
     snapshot.parcelId AS parcelId, 
     MIN(snapshot.tempMin) AS tempMin, 
     MAX(snapshot.tempMax) AS tempMax, 
@@ -19,7 +19,7 @@ SELECT snapshot.openweatherId AS openweatherId,
     MAX(snapshot.humidity) AS humidity,
     MAX(snapshot.humidityAir) AS humidityAir,
     MAX(snapshot.humiditySoil) AS humiditySoil,
-    MAX(snapshot.weatherId) AS weatherId,
+    MAX(snapshot.openWeatherId) AS openWeatherId,
     MAX(snapshot.main) AS main,
     MAX(snapshot.description) AS description,
     MAX(snapshot.speed) AS speed,
@@ -27,5 +27,5 @@ SELECT snapshot.openweatherId AS openweatherId,
     MAX(snapshot.clouds) AS clouds,
     MAX(snapshot.rain3h) AS rain3h
 FROM WeatherSnapshot snapshot
-WHERE snapshot.dayTimestamp <= 1535749200
-GROUP BY snapshot.openweatherId, snapshot.parcelId, snapshot.dayTimestamp
+WHERE snapshot.dt <= 1535749200
+GROUP BY snapshot.openweatherId, snapshot.parcelId, snapshot.dt

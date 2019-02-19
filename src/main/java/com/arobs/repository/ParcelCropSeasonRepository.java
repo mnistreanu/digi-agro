@@ -13,17 +13,21 @@ import java.util.List;
 public interface ParcelCropSeasonRepository extends JpaRepository<ParcelCropSeason, Long> {
 
     @Query("SELECT pcs FROM ParcelCropSeason pcs " +
+            "JOIN FETCH pcs.cropSeason season " +
             "WHERE pcs.parcelId = :parcelId " +
-            "ORDER BY pcs.plantedAt DESC ")
+            "ORDER BY season.harvestYear DESC ")
     List<ParcelCropSeason> find(@Param("parcelId") Long parcelId);
 
     @Query("SELECT pcs FROM ParcelCropSeason pcs " +
-            "WHERE pcs.parcelId = :parcelId AND pcs.cropSeason.harvestYear = :harvestYear ")
-    ParcelCropSeason find(@Param("parcelId") Long parcelId, @Param("harvestYear") Integer harvestYear);
+            "JOIN FETCH pcs.cropSeason season " +
+            "WHERE pcs.parcelId = :parcelId " +
+            "AND season.harvestYear = :harvestYear ")
+    ParcelCropSeason find(@Param("parcelId") Long parcelId, @Param("harvestYear") int harvestYear);
 
-    @Query("SELECT MAX (pcs.plantedAt) FROM ParcelCropSeason pcs " +
-            "WHERE pcs.parcelId = :parcelId ")
-    Date getLastPlantedDate(@Param("parcelId") Long parcelId);
+//    @Query("SELECT MAX (season.harvestYear) FROM ParcelCropSeason pcs " +
+//            "JOIN FETCH pcs.cropSeason season " +
+//            "WHERE pcs.parcelId = :parcelId ")
+//    long getLastHarvestYear(@Param("parcelId") Long parcelId);
 
 }
 

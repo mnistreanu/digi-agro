@@ -6,6 +6,7 @@ import {environment} from '../../environments/environment';
 import {FieldMapper} from '../common/field.mapper';
 import {LangService} from './lang.service';
 import {LatLng} from '../interfaces/lat-lng.interface';
+import {ParcelSeasonModel} from "../pages/parcels/parcel-season-form/parcel-season.model";
 
 @Injectable({
     providedIn: 'root'
@@ -24,6 +25,14 @@ export class ParcelService {
 
     find(): Observable<ParcelModel[]> {
         return this.http.get<ParcelModel[]>(this.api + '/');
+    }
+
+    findYearSeason(harvestYear: number, parcelId: number): Observable<ParcelSeasonModel> {
+        return this.http.get<ParcelSeasonModel>(this.api + '-crop-season/' + harvestYear + '/' + parcelId);
+    }
+
+    findLastSeason(parcelId: number): Observable<ParcelSeasonModel> {
+        return this.http.get<ParcelSeasonModel>(this.api + '-crop-season/last/' + parcelId);
     }
 
     save(model: ParcelModel): Observable<ParcelModel> {

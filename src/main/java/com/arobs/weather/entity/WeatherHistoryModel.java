@@ -1,22 +1,18 @@
 package com.arobs.weather.entity;
 
+import java.util.Date;
+
 /**
  * Date istorice. Se transfera zilnic din tabelul "weather_snapshot"
  */
 public class WeatherHistoryModel {
 	private Long id;
-	private Integer openweatherId;
 	private String countyId;
 	private Long parcelId;
-	private Long dayTimestamp;
-	private Double day;
+	private Date dt;
 	private Double tempMin;
 	private Double tempMax;
-	private Double night;
-	private Double evn;
-	private Double morn;
 	private Double pressure;
-	private Integer humidity;
 	private Integer humidityAir;
 	private Integer humiditySoil;
 	private Integer weatherId;
@@ -26,33 +22,31 @@ public class WeatherHistoryModel {
 	private Double speed;
 	private Double deg;
 	private Integer clouds;
-	private Double rain3h;
-	
+	private Double rain;
+	private Double snow;
+
 	public WeatherHistoryModel(WeatherHistory weatherHistory) {
 		super();
 		this.id = weatherHistory.getId();
-		this.openweatherId = weatherHistory.getOpenweatherId();
-		this.countyId = "NS"; // TODO
+		if (weatherHistory.getWeatherLocation() != null) {
+			this.countyId = weatherHistory.getWeatherLocation().getCountyCode();
+		}
 		this.parcelId = weatherHistory.getParcelId();
-		this.dayTimestamp = weatherHistory.getDayTimestamp();
-		this.day = weatherHistory.getDay();
+		this.dt = weatherHistory.getDt();
 		this.tempMin = weatherHistory.getTempMin();
 		this.tempMax = weatherHistory.getTempMax();
-		this.night = weatherHistory.getNight();
-		this.evn = weatherHistory.getEvn();
-		this.morn = weatherHistory.getMorn();
 		this.pressure = weatherHistory.getPressure();
-		this.humidity = weatherHistory.getHumidity();
 		this.humidityAir = weatherHistory.getHumidityAir();
 		this.humiditySoil = weatherHistory.getHumiditySoil();
-		this.weatherId = weatherHistory.getWeatherId();
+		this.weatherId = weatherHistory.getOpenWeatherId();
 		this.main = weatherHistory.getMain();
 		this.description = weatherHistory.getDescription();
 		this.icon = weatherHistory.getIcon();
 		this.speed = weatherHistory.getSpeed();
 		this.deg = weatherHistory.getDeg();
 		this.clouds = weatherHistory.getClouds();
-		this.rain3h = weatherHistory.getRain3h();
+		this.rain = weatherHistory.getRain();
+		this.snow = weatherHistory.getSnow();
 	}
 
 	public Long getId() {
@@ -63,12 +57,12 @@ public class WeatherHistoryModel {
 		this.id = id;
 	}
 
-	public Integer getOpenweatherId() {
-		return openweatherId;
+	public String getCountyId() {
+		return countyId;
 	}
 
-	public void setOpenweatherId(Integer openweatherId) {
-		this.openweatherId = openweatherId;
+	public void setCountyId(String countyId) {
+		this.countyId = countyId;
 	}
 
 	public Long getParcelId() {
@@ -79,20 +73,12 @@ public class WeatherHistoryModel {
 		this.parcelId = parcelId;
 	}
 
-	public Long getDayTimestamp() {
-		return dayTimestamp;
+	public Date getDt() {
+		return dt;
 	}
 
-	public void setDayTimestamp(Long dayTimestamp) {
-		this.dayTimestamp = dayTimestamp;
-	}
-
-	public Double getDay() {
-		return day;
-	}
-
-	public void setDay(Double day) {
-		this.day = day;
+	public void setDt(Date dt) {
+		this.dt = dt;
 	}
 
 	public Double getTempMin() {
@@ -111,44 +97,12 @@ public class WeatherHistoryModel {
 		this.tempMax = tempMax;
 	}
 
-	public Double getNight() {
-		return night;
-	}
-
-	public void setNight(Double night) {
-		this.night = night;
-	}
-
-	public Double getEvn() {
-		return evn;
-	}
-
-	public void setEvn(Double evn) {
-		this.evn = evn;
-	}
-
-	public Double getMorn() {
-		return morn;
-	}
-
-	public void setMorn(Double morn) {
-		this.morn = morn;
-	}
-
 	public Double getPressure() {
 		return pressure;
 	}
 
 	public void setPressure(Double pressure) {
 		this.pressure = pressure;
-	}
-
-	public Integer getHumidity() {
-		return humidity;
-	}
-
-	public void setHumidity(Integer humidity) {
-		this.humidity = humidity;
 	}
 
 	public Integer getHumidityAir() {
@@ -223,12 +177,20 @@ public class WeatherHistoryModel {
 		this.clouds = clouds;
 	}
 
-	public Double getRain3h() {
-		return rain3h;
+	public Double getRain() {
+		return rain;
 	}
 
-	public void setRain3h(Double rain3h) {
-		this.rain3h = rain3h;
+	public void setRain(Double rain) {
+		this.rain = rain;
+	}
+
+	public Double getSnow() {
+		return snow;
+	}
+
+	public void setSnow(Double snow) {
+		this.snow = snow;
 	}
 }
 

@@ -20,23 +20,24 @@ public class ParcelCropSeasonService implements HasRepository<ParcelCropSeasonRe
         return parcelCropRepository;
     }
 
-    public Date getLastPlantedDate(Long parcelId) {
-        return getRepository().getLastPlantedDate(parcelId);
+    public List<ParcelCropSeason> find(Long parcelId) {
+        return getRepository().find(parcelId);
     }
 
-    public ParcelCropSeason find(Long parcelId) {
-        Integer harvestYear = Calendar.getInstance().get(Calendar.YEAR);
-        Date plantedDate = getLastPlantedDate(parcelId);
-        if (plantedDate != null) {
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(plantedDate);
-            harvestYear = cal.get(Calendar.YEAR);
+    public ParcelCropSeason find(Long parcelId, int harvestYear) {
+        return getRepository().find(parcelId, harvestYear);
+    }
+
+    public ParcelCropSeason findLast(Long parcelId) {
+        int harvestYear = 0;
+        List<ParcelCropSeason> list = this.find(parcelId);
+        for (ParcelCropSeason pcs:list) {
+            if (harvestYear < pcs.getCropSeason().getHarvestYear()) {
+                harvestYear = pcs.getCropSeason().getHarvestYear();
+            }
         }
         return getRepository().find(parcelId, harvestYear);
     }
 
-    public List<ParcelCropSeason> findAll(Long parcelId) {
-        return getRepository().find(parcelId);
-    }
 
 }

@@ -12,8 +12,8 @@
 	},
 	"agro-work": {
 		"date": "Date",
-		"start-date": "Start date",
 		"end-date": "End date",
+		"start-date": "Start date",
 		"type": "Type of work",
 		"yield-goal": "Default yield goal"
 	},
@@ -39,7 +39,6 @@
 	"crop": {
 		"category": "Category",
 		"crop": "Crop",
-		"subcultures": "Subcultures",
 		"harvest-year": "Harvest year",
 		"name": "Agricultural crop",
 		"planting-date": "Planting date",
@@ -47,6 +46,7 @@
 		"seed-consumption-ha": "Seed Consumption, Ha",
 		"seeds": "Seeds",
 		"subculture": "Subculture",
+		"subcultures": "Subcultures",
 		"unit-of-measure-long": "Unit of measure",
 		"unit-of-measure-short": "Unit",
 		"varieties": "Crop varieties",
@@ -67,13 +67,27 @@
 	},
 	"expense-category": {
 		"fertilizers": "Expenses for fertilizers",
+		"fertilizers-title": "Fertilizers",
 		"fuel": "Expenses for fuel",
+		"fuel-title": "Fuel",
+		"irrigation": "Expenses for irrigation",
+		"irrigation-title": "Irrigation",
 		"machinery": "Expenses for repairing agricultural machinery",
+		"machinery-title": "Machinery",
 		"name": "Category name",
+		"operational": "Operational expenses",
+		"operational-title": "Operational",
+		"others": "Other expenses",
+		"others-title": "Other",
 		"parent": "Main category",
 		"pesticides": "Expenses for pesticides",
+		"pesticides-title": "Pesticides",
+		"renting": "Expenses for renting",
+		"renting-title": "Renting",
 		"sowing": "Expenses for sowing",
-		"works": "Expenses for agricultural works"
+		"sowing-title": "Sowing",
+		"works": "Expenses for agricultural works",
+		"works-title": "Agricultural works"
 	},
 	"expenses": {
 		"agricultural-machinery": "Expenses for repairing agricultural machinery",
@@ -276,7 +290,7 @@
 		"200": "thunderstorm with light rain",
 		"201": "thunderstorm with rain ",
 		"202": "thunderstorm with heavy rain",
-		"210": "light thunderstorm ",
+		"210": "light thunderstorm",
 		"211": "thunderstorm",
 		"212": "heavy thunderstorm",
 		"221": "ragged thunderstorm",
@@ -465,8 +479,11 @@
 	"weather": {
 		"condition": "Condition",
 		"date": "Date",
+		"fog": "Fog",
 		"humidity": "Humidity",
 		"location": "Location",
+		"pressure": "Pressure",
+		"snow": "Snow",
 		"temperature": "Temperature",
 		"wind": "Wind"
 	}

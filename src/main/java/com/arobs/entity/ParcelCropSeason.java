@@ -42,6 +42,8 @@ public class ParcelCropSeason {
     @Column(name = "space_between_plants")
     private Double spaceBetweenPlants;
 
+    @Column (name = "yield_goal")
+    private Double yieldGoal;
 
     public Long getId() {
         return id;
@@ -113,5 +115,13 @@ public class ParcelCropSeason {
 
     public void setPlantedAt(Date plantedAt) {
         this.plantedAt = plantedAt;
+    }
+
+    public Double getYieldGoal() {
+        return yieldGoal;
+    }
+
+    public void setYieldGoal(Double yieldGoal) {
+        this.yieldGoal = yieldGoal;
     }
 }

@@ -1,18 +1,7 @@
-import {LatLng} from '../../../interfaces/lat-lng.interface';
-
 export class ParcelSeasonModel {
     id: number;
-    // name: string;
-    // cadasterNumber: string;
-    // landWorthinessPoints: number;
-    // area: number;
-    // description: string;
-
-    // coordinates: [number, number][];
-    // paths: LatLng[];
-    // fillColor: string;
-    // center: LatLng;
-    // icon: string;
+    parcelId: number;
+    harvestYear: number;
 
     cropCategoryId: number;
     cropId: number;
@@ -27,7 +16,4 @@ export class ParcelSeasonModel {
     spaceBetweenRows: number;
     spaceBetweenPlants: number;
 
-    // lastWorkType: string;
-    //
-    // lastWorkDate: Date;
 }
