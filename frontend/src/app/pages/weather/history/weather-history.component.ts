@@ -28,7 +28,7 @@ export class WeatherHistoryComponent implements OnInit {
     private chart: any;
 
     forecastModels: WeatherModel[] = [];
-    historyModels: WeatherModel[] = [];
+    historyModels: WeatherModel[];
 
     public lineChartType = 'line';
     public lineChartLegend = true;
@@ -46,23 +46,14 @@ export class WeatherHistoryComponent implements OnInit {
     }
 
     ngOnInit() {
-        // this.subscribeToMenuEvents();
         this.loadWeatherForecast();
         this.loadWeatherHistory();
     }
 
-    // private subscribeToMenuEvents() {
-    //     this._state.subscribe('menu.isCollapsed', () => {
-    //         setTimeout(() => {
-    //             this.resizeChart(true);
-    //         });
-    //     });
-    // }
-    //
     public loadWeatherForecast() {
         const dateTo = new Date();
         const dateFrom = new Date();
-        dateFrom.setHours(dateTo.getHours() - 24 * 15);
+        dateFrom.setHours(dateTo.getHours() - 24 * 25);
         this.weatherService.findWeatherHistory('MD', 'HN', dateFrom, dateTo).subscribe(payloadModel => {
             if (payloadModel.status == 'success') {
                 payloadModel.payload.forEach((data, index) => {
@@ -93,20 +84,24 @@ export class WeatherHistoryComponent implements OnInit {
     public loadWeatherHistory() {
         const dateTo = new Date();
         const dateFrom = new Date();
-        dateFrom.setHours(dateTo.getHours() - 24 * 15);
+        dateFrom.setHours(dateTo.getHours() - 24 * 25);
         this.weatherService.findWeatherHistory('MD', 'HN', dateFrom, dateTo).subscribe(payloadModel => {
             if (payloadModel.status == 'success') {
                 this.historyModels = payloadModel.payload.map(data => {
                     const model = new WeatherModel();
-                    model.date = new Date(data.dt).toLocaleDateString();
+                    model.owmId = data.weatherId;
+                    model.date = DateUtil.formatLocalizedDay(data.dt);
                     model.location = data.countyId;
-                    model.icon = '/assets/img/notifications/weather-rain-alert.png';
+                    model.main = data.main;
+                    this.langService.get('owm-code.' + data.weatherId).subscribe(msg => model.description = msg);
+                    model.icon = '/assets/img/openweather/' + data.icon + '.png';
                     model.temperature = data.tempMax + '\u00B0C / ' + data.tempMin + '\u00B0C';
                     model.tempMax = data.tempMax;
                     model.tempMin = data.tempMin;
-                    model.humidity = 'air: ' + data.humidityAir + ' %' + ', soil: ' + data.humiditySoil + '%';
+                    model.humidityAir = data.humidityAir;
+                    model.humiditySoil = data.humiditySoil;
                     model.pressure = data.pressure;
-                    model.wind = data.speed + ' km/h NW';
+                    model.wind = data.speed;
                     return model;
                 });
             }

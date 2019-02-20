@@ -15,4 +15,5 @@ export class WeatherModel {
     humiditySoil: number;
     pressure: string;
     wind: string;
+    x: number;
 }

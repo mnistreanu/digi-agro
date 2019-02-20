@@ -31,12 +31,8 @@
       </div>
     </div>
     <hr/>
-    <!--<div class="row">-->
-    <!--</div>-->
-
-
     <div class="row">
-      <app-weather-chart></app-weather-chart>
+      <app-weather-chart *ngIf="historyModels" [models]="historyModels"></app-weather-chart>
     </div>
   </div>
 

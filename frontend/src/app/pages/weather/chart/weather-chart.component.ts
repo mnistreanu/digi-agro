@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import * as CanvasJS from 'assets/js/canvasjs/canvasjs.min';
 import {AppState} from '../../../app.state';
+import {WeatherModel} from '../weather.model';
+import {DataPointModel} from './data-point.model';
+import {LangService} from '../../../services/lang.service';
 
 declare const $: any;
 
@@ -12,8 +15,10 @@ declare const $: any;
 export class WeatherChartComponent implements OnInit {
 
   private chart: any;
+  @Input() models: WeatherModel[];
 
-  constructor(private _state: AppState) {
+  constructor(private _state: AppState,
+              private langService: LangService) {
   }
 
   ngOnInit() {
@@ -31,10 +36,26 @@ export class WeatherChartComponent implements OnInit {
 
 
     public setupWeatherChart() {
+
+        const dps = []; // dataPoints
+        let dp: DataPointModel;
+
+        this.models.forEach (model => {
+            dp = new DataPointModel();
+            dp.name = model.description;
+            dp.label = model.date;
+            dp.y = new Array(0);
+            dp.y.push(model.tempMin);
+            dp.y.push(model.tempMax);
+            dp.icon = model.icon;
+            dps.push(dp);
+        });
+
+
     this.chart = new CanvasJS.Chart('chartContainer', {
-      title: {
-        text: 'Weather Forecast'
-      },
+      // title: {
+      //   text: 'Weather Forecast'
+      // },
       axisY: {
         includeZero: false,
         suffix: ' °C',
@@ -43,29 +64,32 @@ export class WeatherChartComponent implements OnInit {
       },
       toolTip: {
         shared: true,
-        content: '{name} </br> <strong>Temperature: </strong> </br> Min: {y[0]} °C, Max: {y[1]} °C'
+        content: '{name} </br> <strong>' + this.langService.instant('weather.temperature') +
+        ': </strong> </br> Min: {y[0]} °C, Max: {y[1]} °C'
       },
       data: [{
         type: 'rangeSplineArea',
         fillOpacity: 0.1,
         color: '#91AAB1',
         indexLabelFormatter: this.chartDataFormatter,
-        dataPoints: [
-          { label: 'Ianaurie', y: [15, 26], name: 'rainy' },
-          { label: 'Februarie', y: [15, 27], name: 'rainy' },
-          { label: 'Martie', y: [15, 27], name: 'rainy' },
-          { label: 'Aprilie', y: [13, 27], name: 'sunny' },
-          { label: 'Mai', y: [14, 27], name: 'sunny' },
-          { label: 'Iunie', y: [15, 26], name: 'cloudy' },
-          { label: 'Iulie', y: [17, 26], name: 'sunny' },
-          { label: 'August', y: [16, 27], name: 'rainy' },
-          { label: 'Septembrie', y: [14, 27], name: 'sunny' },
-          { label: 'Octombrie', y: [15, 26], name: 'cloudy' },
-          { label: 'Noiembrie', y: [17, 26], name: 'sunny' },
-          { label: 'Decembrie', y: [16, 27], name: 'rainy' },
-        ]
+        dataPoints: dps,
+        // dataPoints: [
+        //   { label: 'Ianaurie', y: [15, 26], name: 'rainy' },
+        //   { label: 'Februarie', y: [15, 27], name: 'rainy' },
+        //   { label: 'Martie', y: [15, 27], name: 'rainy' },
+        //   { label: 'Aprilie', y: [13, 27], name: 'sunny' },
+        //   { label: 'Mai', y: [14, 27], name: 'sunny' },
+        //   { label: 'Iunie', y: [15, 26], name: 'cloudy' },
+        //   { label: 'Iulie', y: [17, 26], name: 'sunny' },
+        //   { label: 'August', y: [16, 27], name: 'rainy' },
+        //   { label: 'Septembrie', y: [14, 27], name: 'sunny' },
+        //   { label: 'Octombrie', y: [15, 26], name: 'cloudy' },
+        //   { label: 'Noiembrie', y: [17, 26], name: 'sunny' },
+        //   { label: 'Decembrie', y: [16, 27], name: 'rainy' },
+        // ]
       }]
     });
+
     this.chart.render();
 
     this.addChartImages();
@@ -93,20 +117,18 @@ export class WeatherChartComponent implements OnInit {
   private addChartImages() {
     const canvasContainer = $('#chartContainer').find('>.canvasjs-chart-container');
     this.chart.data[0].dataPoints.forEach(dataPoint => {
-      const pointName = dataPoint.name;
       const chartImageIdentifier = 'char-image-' + dataPoint.x;
-      let imgElement;
+      const imgElement = $('<img>').attr('src', dataPoint.icon);
 
-      if (pointName == 'cloudy') {
-        imgElement = $('<img>').attr('src', 'https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/cloudy.png');
-      }
-      else if (pointName == 'rainy') {
-        imgElement = $('<img>').attr('src', 'https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/rainy.png');
-      }
-      else if (pointName == 'sunny') {
-        imgElement = $('<img>').attr('src', 'https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/sunny.png');
-      }
-
+      // if (model.name == 'cloudy') {
+      //   imgElement = $('<img>').attr('src', 'https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/cloudy.png');
+      // }
+      // else if (model.name == 'rainy') {
+      //   imgElement = $('<img>').attr('src', 'https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/rainy.png');
+      // }
+      // else if (model.name == 'sunny') {
+      //   imgElement = $('<img>').attr('src', 'https://canvasjs.com/wp-content/uploads/images/gallery/gallery-overview/sunny.png');
+      // }
       this.adjustChartImagePosition(imgElement, dataPoint);
       imgElement.attr('id', chartImageIdentifier).appendTo(canvasContainer);
     });
