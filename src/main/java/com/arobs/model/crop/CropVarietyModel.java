@@ -8,12 +8,17 @@ import java.io.Serializable;
 
 public class CropVarietyModel implements Serializable {
 
-//    private Long cropCategoryId;
-//    private Long cropId;
     private Long id;
+    private Long cropCategoryId;
+
+    private Long cropId;
+    private String cropNameRo;
+    private String cropNameRu;
+
     private Long cropSubcultureId;
-//    private String cropNameRo;
-//    private String cropNameRu;
+    private String cropSubcultureNameRo;
+    private String cropSubcultureNameRu;
+
     private String nameRo;
     private String nameRu;
     private String descriptionRo;
@@ -27,33 +32,37 @@ public class CropVarietyModel implements Serializable {
         CropSubculture cropSubculture = cropVariety.getCropSubculture();
         if (cropSubculture != null) {
             this.cropSubcultureId = cropSubculture.getId();
+            this.cropSubcultureNameRo = cropSubculture.getNameRo();
+            this.cropSubcultureNameRu = cropSubculture.getNameRu();
         }
-//        this.cropNameRo = cropSubculture.getNameRo();
-//        this.cropNameRu = cropSubculture.getNameRu();
-//        this.cropCategoryId = cropSubculture.getCropCategoryId();
+
+        Crop crop = cropVariety.getCrop();
+        if (crop != null) {
+            this.cropNameRo = crop.getNameRo();
+            this.cropNameRu = crop.getNameRu();
+            this.cropCategoryId = crop.getCropCategoryId();
+        }
         this.nameRo = cropVariety.getNameRo();
         this.nameRu = cropVariety.getNameRu();
         this.descriptionRo = cropVariety.getDescriptionRo();
         this.descriptionRu = cropVariety.getDescriptionRu();
-//        this.seedConsumptionHa = cropVariety.getSeedConsumptionHa();
-//        this.unitOfMeasure = cropVariety.getUnitOfMeasure();
     }
 
-//    public Long getCropCategoryId() {
-//        return cropCategoryId;
-//    }
-//
-//    public void setCropCategoryId(Long cropCategoryId) {
-//        this.cropCategoryId = cropCategoryId;
-//    }
-//
-//    public Long getCropId() {
-//        return cropId;
-//    }
-//
-//    public void setCropId(Long cropId) {
-//        this.cropId = cropId;
-//    }
+    public Long getCropCategoryId() {
+        return cropCategoryId;
+    }
+
+    public void setCropCategoryId(Long cropCategoryId) {
+        this.cropCategoryId = cropCategoryId;
+    }
+
+    public Long getCropId() {
+        return cropId;
+    }
+
+    public void setCropId(Long cropId) {
+        this.cropId = cropId;
+    }
 
     public Long getId() {
         return id;
@@ -69,6 +78,22 @@ public class CropVarietyModel implements Serializable {
 
     public void setCropSubcultureId(Long cropSubcultureId) {
         this.cropSubcultureId = cropSubcultureId;
+    }
+
+    public String getCropSubcultureNameRo() {
+        return cropSubcultureNameRo;
+    }
+
+    public void setCropSubcultureNameRo(String cropSubcultureNameRo) {
+        this.cropSubcultureNameRo = cropSubcultureNameRo;
+    }
+
+    public String getCropSubcultureNameRu() {
+        return cropSubcultureNameRu;
+    }
+
+    public void setCropSubcultureNameRu(String cropSubcultureNameRu) {
+        this.cropSubcultureNameRu = cropSubcultureNameRu;
     }
 
     public String getNameRo() {
@@ -103,20 +128,20 @@ public class CropVarietyModel implements Serializable {
         this.descriptionRu = descriptionRu;
     }
 
-//
-//    public String getCropNameRo() {
-//        return cropNameRo;
-//    }
-//
-//    public void setCropNameRo(String cropNameRo) {
-//        this.cropNameRo = cropNameRo;
-//    }
-//
-//    public String getCropNameRu() {
-//        return cropNameRu;
-//    }
-//
-//    public void setCropNameRu(String cropNameRu) {
-//        this.cropNameRu = cropNameRu;
-//    }
+
+    public String getCropNameRo() {
+        return cropNameRo;
+    }
+
+    public void setCropNameRo(String cropNameRo) {
+        this.cropNameRo = cropNameRo;
+    }
+
+    public String getCropNameRu() {
+        return cropNameRu;
+    }
+
+    public void setCropNameRu(String cropNameRu) {
+        this.cropNameRu = cropNameRu;
+    }
 }

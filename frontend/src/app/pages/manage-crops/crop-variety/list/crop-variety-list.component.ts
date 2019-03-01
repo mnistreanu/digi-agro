@@ -72,6 +72,12 @@ export class CropVarietyListComponent implements OnInit {
                 minWidth: 200
             },
             {
+                headerName: 'crop.subculture',
+                field: 'cropSubculture',
+                width: 200,
+                minWidth: 200
+            },
+            {
                 headerName: 'crop.variety',
                 field: 'name',
                 width: 200,
@@ -83,18 +89,6 @@ export class CropVarietyListComponent implements OnInit {
                 width: 300,
                 minWidth: 200
             },
-            {
-                headerName: 'crop.seed-consumption-ha',
-                field: 'seedConsumptionHa',
-                width: 200,
-                minWidth: 200
-            },
-            {
-                headerName: 'unit-of-measure.unit-short',
-                field: 'unitOfMeasure',
-                width: 100,
-                minWidth: 100
-            }
         ];
 
         headers.forEach((h) => {
@@ -108,15 +102,15 @@ export class CropVarietyListComponent implements OnInit {
 
     private setupRows() {
         this.cropVarietyService.findAll(this.pageNo, this.pageSize, this.filterMap, null).subscribe(data => {
-
             const fieldMapper = new FieldMapper(this.langService.getLanguage());
             const cropNameField = fieldMapper.get('cropName');
+            const cropSubcultureField = fieldMapper.get('cropSubcultureName');
             const nameField = fieldMapper.get('name');
             const descriptionField = fieldMapper.get('description');
-
             const models = JSON.parse(data['items']);
             models.forEach((model) => {
                 model['cropName'] = model[cropNameField];
+                model['cropSubculture'] = model[cropSubcultureField];
                 model['name'] = model[nameField];
                 model['description'] = model[descriptionField];
             });
