@@ -1213,5 +1213,15 @@
         </sql>
     </changeSet>
 
+    <changeSet id="expense-category-refactoring" author="maxim.nistreanu" failOnError="true">
+        <sql>
+            <!-- todo: refactor changelog -->
+            UPDATE expense_category SET description = name;
+            UPDATE expense_category SET name = title;
+            UPDATE expense_category SET name = description WHERE name IS null;
+            ALTER table expense_category DROP COLUMN title;
+        </sql>
+    </changeSet>
+
 
 </databaseChangeLog>

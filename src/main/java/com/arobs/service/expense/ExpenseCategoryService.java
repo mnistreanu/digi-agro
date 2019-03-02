@@ -31,6 +31,10 @@ public class ExpenseCategoryService implements HasRepository<ExpenseCategoryRepo
         return getRepository().find(tenantId);
     }
 
+    public List<ExpenseCategory> findRoots(Long tenantId) {
+        return getRepository().findRoots(tenantId);
+    }
+
     public ExpenseCategory findDefault(Long defaultCategoryId) {
         return getRepository().findDefault(defaultCategoryId);
     }
@@ -62,8 +66,8 @@ public class ExpenseCategoryService implements HasRepository<ExpenseCategoryRepo
         }
 
         category.setParentId(model.getParentId());
-        category.setTitle(model.getTitle());
         category.setName(model.getName());
+        category.setDescription(model.getDescription());
 
         return save(category);
     }
@@ -73,10 +77,10 @@ public class ExpenseCategoryService implements HasRepository<ExpenseCategoryRepo
         return getRepository().save(category);
     }
 
-//    @Transactional
-//    public void remove(Long id) {
-//        getRepository().remove(id);
-//    }
+    @Transactional
+    public void remove(Long id) {
+        getRepository().remove(id);
+    }
 
 
 }

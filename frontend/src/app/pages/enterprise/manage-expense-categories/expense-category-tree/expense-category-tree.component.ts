@@ -1,23 +1,20 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ColDef, GridOptions} from 'ag-grid';
 import {FieldMapper} from '../../../../common/field.mapper';
 import {LangService} from '../../../../services/lang.service';
 import {ExpenseCategoryService} from '../../../../services/expenses/expense-category.service';
 import {ExpenseCategoryTreeModel} from './expense-category-tree.model';
-import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
+import {AgEditColumnType} from '../../../../modules/aggrid/column-types/ag-edit-type';
 
 @Component({
     selector: 'app-expense-category-tree',
-    encapsulation: ViewEncapsulation.None,
     templateUrl: './expense-category-tree.component.html',
     styleUrls: ['./expense-category-tree.component.scss']
 })
 export class ExpenseCategoryTreeComponent implements OnInit {
     options: GridOptions;
     context;
-
-    labelName: string;
 
     constructor(private expenseCategoryService: ExpenseCategoryService,
                 private router: Router,
@@ -27,82 +24,64 @@ export class ExpenseCategoryTreeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.setupLabels();
         this.setupGrid();
         this.setupTreeData();
     }
 
-    private setupLabels() {
-        this.langService.get('expense-category.name').subscribe(msg => this.labelName = msg);
-    }
 
     private setupGrid() {
         this.options = <GridOptions>{};
+        this.setupColumnTypes();
 
         this.options.enableColResize = true;
         this.options.enableSorting = true;
         this.options.enableFilter = true;
-        this.options.rowSelection = 'single';
         this.options.columnDefs = this.setupHeaders();
-        // this.options.frameworkComponents = { pinnedRowRenderer: PinnedRowRendererComponent };
 
         this.context = {componentParent: this};
+    }
+
+    private setupColumnTypes() {
+        this.options.columnTypes = {
+            editColumnType: AgEditColumnType.getType()
+        };
     }
 
     private setupHeaders() {
 
         const headers: ColDef[] = [
             {
-                field: 'edit',
-                width: 24,
-                minWidth: 24,
-                maxWidth: 30,
-                editable: false,
-                suppressResize: true,
-                suppressMenu: true,
-                cellRendererFramework: EditRendererComponent,
-                cellStyle: () => {
-                    return {padding: 0};
-                }
+                type: 'editColumnType'
             },
             {
-                headerName: this.labelName,
+                headerName: 'info.name',
                 field: 'name',
                 width: 200,
                 minWidth: 200,
-                // pinned: 'left',
-                cellRenderer: 'agGroupCellRenderer',
-                suppressFilter: true
+                cellRenderer: 'agGroupCellRenderer'
             },
+            {
+                headerName: 'info.description',
+                field: 'description',
+                width: 200,
+            }
         ];
+
+        headers.forEach(header => {
+            if (header.headerName) {
+                this.langService.get(header.headerName).subscribe(m => header.headerName = m);
+            }
+        });
 
         return headers;
     }
 
-
-
     private setupTreeData() {
         this.expenseCategoryService.getTree().subscribe(payloadModel => {
             const models = payloadModel.payload;
-            console.log(models);
-            this.adjustModels(models);
             this.options.api.setRowData(models);
         });
     }
-
-    private adjustModels(models: ExpenseCategoryTreeModel[]) {
-        const mapper = new FieldMapper(this.langService.getLanguage());
-        const defaultName = mapper.get('defaultName');
-        models.forEach((model: ExpenseCategoryTreeModel) => {
-            model.name = model.name;
-            model.defaultName = defaultName;
-            model.children.forEach(child => {
-                child.name = child.name;
-
-            });
-        });
-    }
-
 
     private getNodeChildDetails(item) {
         if (!item.children) {

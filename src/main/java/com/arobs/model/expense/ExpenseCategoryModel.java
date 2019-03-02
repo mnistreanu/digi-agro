@@ -11,8 +11,10 @@ public class ExpenseCategoryModel implements Serializable {
     private Long tenantId;
     private Long parentId;
     private Long defaultCategoryId;
-    private String title;
+
     private String name;
+    private String description;
+
     private List<ExpenseCategoryModel> children;
 
     public ExpenseCategoryModel() {
@@ -23,8 +25,8 @@ public class ExpenseCategoryModel implements Serializable {
         this.tenantId = category.getTenantId();
         this.parentId = category.getParentId();
         this.defaultCategoryId = category.getDefaultCategoryId();
-        this.title = category.getTitle();
         this.name = category.getName();
+        this.description = category.getDescription();
     }
 
     public Long getId() {
@@ -59,14 +61,6 @@ public class ExpenseCategoryModel implements Serializable {
         this.defaultCategoryId = defaultCategoryId;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getName() {
         return name;
     }
@@ -81,5 +75,13 @@ public class ExpenseCategoryModel implements Serializable {
 
     public void setChildren(List<ExpenseCategoryModel> children) {
         this.children = children;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

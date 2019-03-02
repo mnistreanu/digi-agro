@@ -6,9 +6,9 @@ import javax.persistence.*;
  * Created by mihail.gorgos on 14.07.2018.
  */
 @Entity
-@Table(name = "expense_category")
 public class ExpenseCategory {
 
+    // todo: remove?
     public static final long MACHINERY = 1L;
     public static final long FUEL = 2L;
     public static final long SOWING = 3L;
@@ -30,14 +30,19 @@ public class ExpenseCategory {
     @Column (name = "parent_id")
     private Long parentId;
 
+    // todo: remove?
     @Column (name = "default_category_id")
     private Long defaultCategoryId;
 
-    @Column (name = "title", length = 64)
+    // todo: remove (refactor changelog)
     private String title;
 
-    @Column (name = "name", length = 256)
     private String name;
+    private String description;
+
+
+    @Column(columnDefinition = "boolean default true")
+    private boolean active = true;
 
     public ExpenseCategory() {
     }
@@ -66,14 +71,6 @@ public class ExpenseCategory {
         this.parentId = parentId;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getName() {
         return name;
     }
@@ -88,5 +85,29 @@ public class ExpenseCategory {
 
     public void setDefaultCategoryId(Long defaultCategoryId) {
         this.defaultCategoryId = defaultCategoryId;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

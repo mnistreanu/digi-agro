@@ -36,9 +36,8 @@ public class ReminderController {
             List<Reminder> reminders = reminderService.find(tenantId, scheduledTime);
             if (!reminders.isEmpty()) {
                 List<ReminderModel> models = reminders.stream().map(ReminderModel::new).collect(Collectors.toList());
-                ReminderModel[] payload = models.toArray(new ReminderModel[models.size()]);
                 payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
-                payloadModel.setPayload(payload);
+                payloadModel.setPayload(models);
             } else {
                 payloadModel.setStatus(PayloadModel.STATUS_WARNING);
             }
@@ -60,9 +59,8 @@ public class ReminderController {
             List<AgroWorkType> workTypes = agroWorkTypeService.find(tenantId);
             if (!workTypes.isEmpty()) {
                 List<AgroWorkTypeModel> models = workTypes.stream().map(AgroWorkTypeModel::new).collect(Collectors.toList());
-                AgroWorkTypeModel[] payload = models.toArray(new AgroWorkTypeModel[models.size()]);
                 payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
-                payloadModel.setPayload(payload);
+                payloadModel.setPayload(models);
             } else {
                 payloadModel.setStatus(PayloadModel.STATUS_WARNING);
             }

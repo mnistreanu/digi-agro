@@ -15,8 +15,12 @@ export class ExpenseCategoryService {
     constructor(private http: HttpClient) {
     }
 
-    public getTree(): Observable<PayloadModel> {
+    getTree(): Observable<PayloadModel> {
         return this.http.get<PayloadModel>(this.api + '/tree');
+    }
+
+    getRoots(): Observable<ExpenseCategoryModel[]> {
+        return this.http.get<ExpenseCategoryModel[]>(this.api + '/roots');
     }
 
     find(category: string): Observable<ExpenseCategoryModel[]> {

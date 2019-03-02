@@ -42,9 +42,8 @@ public class CropSubcultureController {
             List<CropSubculture> subcultures = subCropService.find();
             if (!subcultures.isEmpty()) {
                 List<CropSubcultureModel> models = subcultures.stream().map(CropSubcultureModel::new).collect(Collectors.toList());
-                CropSubcultureModel[] payload = models.toArray(new CropSubcultureModel[models.size()]);
                 payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
-                payloadModel.setPayload(payload);
+                payloadModel.setPayload(models);
             } else {
                 payloadModel.setStatus(PayloadModel.STATUS_WARNING);
             }
@@ -65,9 +64,8 @@ public class CropSubcultureController {
             List<CropSubculture> varieties = subCropService.find(cropId);
             if (!varieties.isEmpty()) {
                 List<CropSubcultureModel> models = varieties.stream().map(CropSubcultureModel::new).collect(Collectors.toList());
-                CropSubcultureModel[] payload = models.toArray(new CropSubcultureModel[models.size()]);
                 payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
-                payloadModel.setPayload(payload);
+                payloadModel.setPayload(models);
             } else {
                 payloadModel.setStatus(PayloadModel.STATUS_WARNING);
             }
