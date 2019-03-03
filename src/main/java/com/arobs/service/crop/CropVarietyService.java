@@ -25,8 +25,12 @@ public class CropVarietyService implements HasRepository<CropVarietyRepository> 
 
     @Autowired
     private CropVarietyRepository cropVarietyRepository;
+
     @Autowired
     private CropVarietyCustomRepository cropVarietyCustomRepository;
+
+    @Autowired
+    private CropService cropService;
 
     @Autowired
     private CropSubcultureService cropSubcultureService;
@@ -65,7 +69,12 @@ public class CropVarietyService implements HasRepository<CropVarietyRepository> 
         cropVariety.setNameRu(model.getNameRu());
         cropVariety.setDescriptionRo(model.getDescriptionRo());
         cropVariety.setDescriptionRu(model.getDescriptionRu());
-        cropVariety.setCropSubculture(cropSubcultureService.findOne(model.getCropSubcultureId()));
+        if (model.getCropId() != null) {
+            cropVariety.setCrop(cropService.findOne(model.getCropId()));
+        }
+        if (model.getCropSubcultureId() != null) {
+            cropVariety.setCropSubculture(cropSubcultureService.findOne(model.getCropSubcultureId()));
+        }
 
         return save(cropVariety);
     }

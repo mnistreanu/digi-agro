@@ -38,6 +38,7 @@ public class CropVarietyModel implements Serializable {
 
         Crop crop = cropVariety.getCrop();
         if (crop != null) {
+            this.cropId = crop.getId();
             this.cropNameRo = crop.getNameRo();
             this.cropNameRu = crop.getNameRu();
             this.cropCategoryId = crop.getCropCategoryId();

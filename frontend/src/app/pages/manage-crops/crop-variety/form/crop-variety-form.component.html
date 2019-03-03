@@ -21,13 +21,25 @@
                     </select>
                     <app-form-error-block [control]="form.get('cropCategoryId')" [formSubmitted]="submitted"></app-form-error-block>
                 </div>
+            </div>
 
+
+            <div class="form-group row">
                 <div class="col-sm-6">
                     <label for="cropId" translate>crop.name</label>
-                    <select id="cropId" class="form-control custom-select" formControlName="cropId">
+                    <select id="cropId" class="form-control custom-select" formControlName="cropId" (change)="onCropChange()">
                         <option *ngFor="let item of crops" [ngValue]="item.id">{{ item.name }}</option>
                     </select>
                     <app-form-error-block [control]="form.get('cropId')" [formSubmitted]="submitted"></app-form-error-block>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="cropSubcultureId" translate>crop.subculture</label>
+                    <select id="cropSubcultureId" class="form-control custom-select" formControlName="cropSubcultureId" >
+                        <option disabled></option>
+                        <option *ngFor="let item of cropSubcultures" [ngValue]="item.id">{{ item.name }}</option>
+                    </select>
+                    <app-form-error-block [control]="form.get('cropSubcultureId')" [formSubmitted]="submitted"></app-form-error-block>
                 </div>
             </div>
 
@@ -59,24 +71,6 @@
                     <app-form-error-block [control]="form.get('descriptionRu')" [formSubmitted]="submitted"></app-form-error-block>
                 </div>
             </div>
-
-            <div class="form-group row">
-                <div class="col-sm-6">
-                    <label for="seedConsumptionHa" translate>crop.seed-consumption-ha</label>
-                    <input id="seedConsumptionHa" class="form-control checking-field" formControlName="seedConsumptionHa" type="number"/>
-                    <app-form-error-block [control]="form.get('seedConsumptionHa')" [formSubmitted]="submitted"></app-form-error-block>
-                </div>
-
-                <div class="col-sm-6">
-                    <label for="unitOfMeasure" translate>unit-of-measure.unit-long</label>
-                    <select id="unitOfMeasure" class="form-control custom-select" formControlName="unitOfMeasure">
-                        <option value="">Select Value</option>
-                        <option *ngFor="let item of unitOfMeasureSelectItems" value="{{item.id}}">{{ item.name }}</option>
-                    </select>
-                    <app-form-error-block [control]="form.get('unitOfMeasure')" [formSubmitted]="submitted"></app-form-error-block>
-                </div>
-            </div>
-
 
             <div class="form-group">
                 <button class="btn btn-danger" *ngIf="!isNew" (click)="remove()" translate>action.remove</button>

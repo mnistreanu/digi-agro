@@ -4,9 +4,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {SelectItem} from '../../../../dto/select-item.dto';
 import {CropVarietyModel} from '../crop-variety.model';
 import {CropVarietyService} from '../../../../services/crop/crop-variety.service';
-import {UnitOfMeasure} from '../../../../enums/unit-of-measure.enum';
 import {AlertService} from '../../../../services/alert.service';
 import {CropService} from '../../../../services/crop/crop.service';
+import {CropSubcultureService} from '../../../../services/crop/crop-subculture.service';
 import {CropCategoryService} from '../../../../services/crop/crop-category.service';
 import {FieldMapper} from '../../../../common/field.mapper';
 import {LangService} from '../../../../services/lang.service';
@@ -24,9 +24,10 @@ export class CropVarietyFormComponent implements OnInit {
     model: CropVarietyModel;
     isNew: boolean;
 
-    unitOfMeasureSelectItems: SelectItem[] = [];
+    // unitOfMeasureSelectItems: SelectItem[] = [];
     cropCategories: SelectItem[] = [];
     crops: SelectItem[] = [];
+    cropSubcultures: SelectItem[] = [];
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
@@ -34,12 +35,12 @@ export class CropVarietyFormComponent implements OnInit {
                 private langService: LangService,
                 private cropCategoryService: CropCategoryService,
                 private cropService: CropService,
+                private cropSubcultureService: CropSubcultureService,
                 private cropVarietyService: CropVarietyService) {
     }
 
     ngOnInit() {
         this.setupCategories();
-        this.setupUnitOfMeasure();
         this.restoreModel();
     }
 
@@ -72,15 +73,39 @@ export class CropVarietyFormComponent implements OnInit {
                 const value = this.crops.length > 0 ? this.crops[0].id : null;
                 cropControl.setValue(value);
             }
+            const cropId = this.form.controls['cropId'].value;
+            this.setupCropSubcultures(cropId, true);
         });
     }
 
-    private setupUnitOfMeasure() {
-        const names = Object.keys(UnitOfMeasure);
-        for (const name of names) {
-            this.unitOfMeasureSelectItems.push(new SelectItem(UnitOfMeasure[name], name));
-        }
+    public onCropChange() {
+        const cropId = this.form.controls['cropId'].value;
+        this.setupCropSubcultures(cropId, true);
     }
+
+    private setupCropSubcultures(cropId, updateValue) {
+        this.cropSubcultureService.find(cropId).subscribe(data => {
+            const models = data.payload;
+            const fieldMapper = new FieldMapper(this.langService.getLanguage());
+            const nameField = fieldMapper.get('name');
+            this.cropSubcultures = models.map(model => {
+                return new SelectItem(model.id, model[nameField]);
+            });
+
+            if (updateValue) {
+                const cropSubcultureControl = this.form.controls['cropSubcultureId'];
+                const value = this.cropSubcultures.length > 0 ? this.cropSubcultures[0].id : null;
+                cropSubcultureControl.setValue(value);
+            }
+        });
+    }
+
+    // private setupUnitOfMeasure() {
+    //     const names = Object.keys(UnitOfMeasure);
+    //     for (const name of names) {
+    //         this.unitOfMeasureSelectItems.push(new SelectItem(UnitOfMeasure[name], name));
+    //     }
+    // }
 
     private restoreModel() {
         this.route.params.subscribe(params => {
@@ -99,6 +124,9 @@ export class CropVarietyFormComponent implements OnInit {
         this.cropVarietyService.findOne(id).subscribe(model => {
             this.model = model;
             this.setupCrops(model.cropCategoryId, false);
+            if (model.cropSubcultureId != null) {
+                this.setupCropSubcultures(model.cropId, false);
+            }
             this.buildForm();
         });
     }
@@ -113,18 +141,16 @@ export class CropVarietyFormComponent implements OnInit {
         this.form = new FormGroup({
             cropCategoryId: new FormControl(this.model.cropCategoryId, [Validators.required]),
             cropId: new FormControl(this.model.cropId, [Validators.required]),
+            cropSubcultureId: new FormControl(this.model.cropSubcultureId),
             nameRo: new FormControl(this.model.nameRo, [Validators.required, Validators.maxLength(128)]),
             nameRu: new FormControl(this.model.nameRu, [Validators.required, Validators.maxLength(128)]),
             descriptionRo: new FormControl(this.model.descriptionRo, [Validators.required]),
             descriptionRu: new FormControl(this.model.descriptionRu, [Validators.required]),
-            seedConsumptionHa: new FormControl(this.model.seedConsumptionHa, [Validators.required]),
-            unitOfMeasure: new FormControl(this.model.unitOfMeasure, [Validators.required])
         });
     }
 
 
     public save(form: FormGroup) {
-
         this.submitted = true;
 
         if (!form.valid) {
@@ -132,14 +158,15 @@ export class CropVarietyFormComponent implements OnInit {
             return;
         }
 
-        this.isNew = false;
-        this.submitted = false;
 
         Object.assign(this.model, form.value);
         this.cropVarietyService.save(this.model).subscribe((model) => {
             this.model = model;
             this.alertService.saved();
         });
+
+        this.isNew = false;
+        this.submitted = false;
     }
 
     public remove() {
