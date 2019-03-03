@@ -4,14 +4,15 @@ import com.arobs.entity.ExpenseCategory;
 import com.arobs.model.PayloadModel;
 import com.arobs.model.expense.ExpenseCategoryModel;
 import com.arobs.service.expense.ExpenseCategoryService;
-import com.sun.org.apache.xml.internal.security.keys.keyresolver.implementations.RetrievalMethodResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -19,41 +20,62 @@ import java.util.stream.Collectors;
 public class ExpenseCategoryController {
 
     @Autowired
-    private ExpenseCategoryService categoryService;
+    private ExpenseCategoryService expenseCategoryService;
 
     @RequestMapping(value = "/tree", method = RequestMethod.GET)
-    public ResponseEntity<PayloadModel> getCategoriesTree(HttpSession session) {
+    public ResponseEntity<PayloadModel> getTree(HttpSession session) {
         Long tenantId = (Long) session.getAttribute("tenant");
 
-        List<ExpenseCategoryModel> list = new ArrayList<>();
-        PayloadModel<ExpenseCategoryModel> payloadModel = new PayloadModel<>();
+        List<ExpenseCategoryModel> models = new ArrayList<>();
+        Map<Long, ExpenseCategoryModel> parentMap = new HashMap<>();
 
-        List<ExpenseCategory> categories = categoryService.find(tenantId);
-        for (ExpenseCategory mainCategory : categories) {
-            if (mainCategory.getParentId() == null) {
-                ExpenseCategoryModel parentModel = new ExpenseCategoryModel(mainCategory);
-                parentModel.setChildren(new ArrayList<>());
+        List<ExpenseCategory> categories = expenseCategoryService.find(tenantId);
 
-                for (ExpenseCategory subCategory : categories) {
-                    if (subCategory.getParentId() != null && subCategory.getParentId().equals(mainCategory.getId())) {
-                        ExpenseCategoryModel childModel = new ExpenseCategoryModel(subCategory);
-                        parentModel.getChildren().add(childModel);
-                    }
-                }
-
-                list.add(parentModel);
+        // process parents
+        for (ExpenseCategory category : categories) {
+            if (category.getParentId() != null) {
+                continue;
             }
+
+            ExpenseCategoryModel model = new ExpenseCategoryModel(category);
+            parentMap.put(category.getId(), model);
+            models.add(model);
         }
 
-        ExpenseCategoryModel[] arr = new ExpenseCategoryModel[list.size()];
-        payloadModel.setPayload(list.toArray(arr));
+        // process children
+        for (ExpenseCategory category : categories) {
+            if (category.getParentId() == null) {
+                continue;
+            }
+            ExpenseCategoryModel model = new ExpenseCategoryModel(category);
+            ExpenseCategoryModel parent = parentMap.get(category.getParentId());
+            if (parent == null) {
+                continue;
+            }
+            if (parent.getChildren() == null) {
+                parent.setChildren(new ArrayList<>());
+            }
+            parent.getChildren().add(model);
+        }
+
+        PayloadModel<ExpenseCategoryModel> payloadModel = new PayloadModel<>();
+        payloadModel.setPayload(models);
         payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
         return ResponseEntity.ok(payloadModel);
     }
 
+    @RequestMapping(value = "/roots", method = RequestMethod.GET)
+    public ResponseEntity<List<ExpenseCategoryModel>> getRoots(HttpSession session) {
+        Long tenantId = (Long) session.getAttribute("tenant");
+        List<ExpenseCategory> roots = expenseCategoryService.findRoots(tenantId);
+        List<ExpenseCategoryModel> models = roots.stream().map(ExpenseCategoryModel::new).collect(Collectors.toList());
+        return ResponseEntity.ok(models);
+    }
+
+
     @RequestMapping(value = "/category/{categoryName}", method = RequestMethod.GET)
     public ResponseEntity<List<ExpenseCategoryModel>> getCategoriesTree(@PathVariable String categoryName) {
-        List<ExpenseCategory> categories = categoryService.find(categoryName);
+        List<ExpenseCategory> categories = expenseCategoryService.find(categoryName);
         List<ExpenseCategoryModel> models = categories.stream().map(ExpenseCategoryModel::new).collect(Collectors.toList());
         return ResponseEntity.ok(models);
     }
@@ -61,7 +83,7 @@ public class ExpenseCategoryController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<ExpenseCategoryModel> getModel(@PathVariable Long id) {
-        ExpenseCategory category = categoryService.findOne(id);
+        ExpenseCategory category = expenseCategoryService.findOne(id);
         return ResponseEntity.ok(new ExpenseCategoryModel(category));
     }
 
@@ -69,7 +91,12 @@ public class ExpenseCategoryController {
     public ResponseEntity<ExpenseCategory> save(@RequestBody ExpenseCategoryModel model,
                                                 HttpSession session) {
         Long tenantId = (Long) session.getAttribute("tenant");
-        return ResponseEntity.ok(categoryService.save(model, tenantId));
+        return ResponseEntity.ok(expenseCategoryService.save(model, tenantId));
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void remove(@PathVariable Long id) {
+        expenseCategoryService.remove(id);
     }
 
 }

@@ -15,7 +15,9 @@ export class ExpenseCategoryComponent implements OnInit {
     form: FormGroup;
     submitted = false;
     model: ExpenseCategoryModel;
-    mainCategories: ExpenseCategoryModel[] = [];
+
+    roots: ExpenseCategoryModel[];
+    isRootCurrentModel = false;
 
     constructor(private fb: FormBuilder,
                 private router: Router,
@@ -25,12 +27,7 @@ export class ExpenseCategoryComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.expenseCategoryService.getTree().subscribe(payloadModel => {
-            const models = payloadModel.payload;
-            models.forEach((model: ExpenseCategoryModel) => {
-                this.mainCategories.push(model);
-            });
-        });
+        this.setupRoots();
 
         this.route.params.subscribe(params => {
             const id = params['id'];
@@ -44,9 +41,16 @@ export class ExpenseCategoryComponent implements OnInit {
         });
     }
 
+    private setupRoots() {
+        this.expenseCategoryService.getRoots().subscribe(models => {
+            this.roots = models;
+        });
+    }
+
     private setupModel(id) {
         this.expenseCategoryService.findOne(id).subscribe(model => {
             this.model = model;
+            this.isRootCurrentModel = model.parentId == null;
             this.buildForm();
         });
     }
@@ -59,10 +63,9 @@ export class ExpenseCategoryComponent implements OnInit {
     private buildForm() {
 
         this.form = this.fb.group({
-            // id: [this.model.id, Validators.required],
             parentId: [this.model.parentId],
             name: [this.model.name, Validators.required],
-            defaultName: [this.model.defaultName],
+            description: [this.model.description],
         });
     }
 
@@ -81,16 +84,19 @@ export class ExpenseCategoryComponent implements OnInit {
         this.expenseCategoryService.save(this.model).subscribe((model) => {
             this.model = model;
             this.alertService.saved();
-            this.router.navigate(['../'], {relativeTo: this.route});
         });
 
     }
 
-    // public remove() {
-    //     this.expenseCategoryService.remove(this.model).subscribe(() => {
-    //         this.alertService.removed();
-    //         this.router.navigate(['../'], {relativeTo: this.route});
-    //     });
-    // }
+    public remove() {
+        this.expenseCategoryService.remove(this.model).subscribe(() => {
+            this.alertService.removed();
+            this.router.navigate(['../'], {relativeTo: this.route});
+        });
+    }
+
+    back() {
+        this.router.navigate(['../'], {relativeTo: this.route});
+    }
 
 }

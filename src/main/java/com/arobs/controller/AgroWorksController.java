@@ -206,8 +206,7 @@ public class AgroWorksController {
         }
 
 
-        OtherWorksModel[] arr = new OtherWorksModel[list.size()];
-        payloadModel.setPayload(list.toArray(arr));
+        payloadModel.setPayload(list);
         payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
         return ResponseEntity.ok(payloadModel);
     }

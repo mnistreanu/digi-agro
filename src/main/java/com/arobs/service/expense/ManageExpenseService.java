@@ -63,7 +63,7 @@ public class ManageExpenseService {
                 listModel.setParentCategoryId(expenseItemModel.getParentCategoryId());
                 if (expenseItemModel.getParentCategoryId() != null) {
                     ExpenseCategory parentCategory = expenseCategoryService.findOne(expenseItemModel.getParentCategoryId());
-                    listModel.setParentCategory(parentCategory.getTitle());
+                    listModel.setParentCategory(parentCategory.getName());
                 }
             }
         }

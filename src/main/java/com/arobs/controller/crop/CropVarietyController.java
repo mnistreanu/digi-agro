@@ -50,9 +50,8 @@ public class CropVarietyController {
             List<CropVariety> varieties = cropVarietyService.find(cropId);
             if (!varieties.isEmpty()) {
                 List<CropVarietyModel> models = varieties.stream().map(CropVarietyModel::new).collect(Collectors.toList());
-                CropVarietyModel[] payload = models.toArray(new CropVarietyModel[models.size()]);
                 payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
-                payloadModel.setPayload(payload);
+                payloadModel.setPayload(models);
             } else {
                 payloadModel.setStatus(PayloadModel.STATUS_WARNING);
             }
@@ -118,8 +117,7 @@ public class CropVarietyController {
             }
         }
 
-        CropVarietyTreeModel[] arr = new CropVarietyTreeModel[models.size()];
-        payloadModel.setPayload(models.toArray(arr));
+        payloadModel.setPayload(models);
 
         return ResponseEntity.ok(payloadModel);
     }

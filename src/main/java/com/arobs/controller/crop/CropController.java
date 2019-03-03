@@ -82,9 +82,8 @@ public class CropController {
             List<Crop> crops = cropService.find(categoryId == null ? 1L : categoryId);
             if (!crops.isEmpty()) {
                 List<CropModel> models = crops.stream().map(CropModel::new).collect(Collectors.toList());
-                CropModel[] payload = models.toArray(new CropModel[models.size()]);
                 payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
-                payloadModel.setPayload(payload);
+                payloadModel.setPayload(models);
             } else {
                 payloadModel.setStatus(PayloadModel.STATUS_WARNING);
             }

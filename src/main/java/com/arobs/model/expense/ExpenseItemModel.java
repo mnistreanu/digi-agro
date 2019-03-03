@@ -28,7 +28,7 @@ public class ExpenseItemModel {
         if (entity.getCategory() != null) {
             parentCategoryId = entity.getCategory().getParentId();
             categoryId = entity.getCategory().getId();
-            categoryTitle = entity.getCategory().getTitle();
+            categoryTitle = entity.getCategory().getName();
         }
     }
 

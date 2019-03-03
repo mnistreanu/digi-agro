@@ -2,6 +2,7 @@ package com.arobs.model;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by mihail.gorgos on 19.07.2018.
@@ -14,7 +15,7 @@ public class PayloadModel<T> implements Serializable {
 
     private String status;
     private String message;
-    private T[] payload;
+    private List<T> payload;
 
     public PayloadModel() {
         this.message = "";
@@ -41,20 +42,15 @@ public class PayloadModel<T> implements Serializable {
         this.message = message;
     }
 
-    public T[] getPayload() {
+    public static String getStatusSuccess() {
+        return STATUS_SUCCESS;
+    }
+
+    public List<T> getPayload() {
         return payload;
     }
 
-    public void setPayload(T[] payload) {
+    public void setPayload(List<T> payload) {
         this.payload = payload;
-    }
-
-    @Override
-    public String toString() {
-        return "PayloadModel{" +
-                "status='" + status + '\'' +
-                ", message='" + message + '\'' +
-                ", payload=" + Arrays.toString(payload) +
-                '}';
     }
 }
