@@ -1,6 +1,6 @@
 import { ExpensesNewModule } from './expenses-new.module';
 
-describe('ExpensesNewModule', () => {
+describe('ExpensesModule', () => {
   let expensesNewModule: ExpensesNewModule;
 
   beforeEach(() => {

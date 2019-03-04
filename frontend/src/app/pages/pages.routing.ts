@@ -89,12 +89,6 @@ export const routes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
-                path: 'expenses-new',
-                loadChildren: 'app/pages/expenses-new/expenses-new.module#ExpensesNewModule',
-                data: {breadcrumb: 'Expenses'},
-                canActivate: [AuthGuard]
-            },
-            {
                 path: 'agro-works',
                 loadChildren: 'app/pages/agro-works/agro-works.module#AgroWorksModule',
                 data: {breadcrumb: 'AgroWorks'},

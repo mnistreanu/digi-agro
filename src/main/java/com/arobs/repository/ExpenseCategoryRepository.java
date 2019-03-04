@@ -20,14 +20,6 @@ public interface ExpenseCategoryRepository extends JpaRepository<ExpenseCategory
             "WHERE ec.tenantId = :tenantId AND ec.parentId IS null AND ec.active = true")
     List<ExpenseCategory> findRoots(@Param("tenantId") Long tenantId);
 
-    @Query("SELECT ec FROM ExpenseCategory ec " +
-            "WHERE ec.parentId = :parentId AND ec.active = true")
-    List<ExpenseCategory> findByParent(@Param("parentId") Long parentId);
-
-    @Query("SELECT ec FROM ExpenseCategory ec " +
-            "WHERE ec.defaultCategoryId = :defaultCategoryId AND ec.active = true")
-    ExpenseCategory findDefault(@Param("defaultCategoryId") Long defaultCategoryId);
-
     @Modifying
     @Query("UPDATE ExpenseCategory ec SET ec.active = false WHERE ec.id = :id")
     void remove(@Param("id") Long id);

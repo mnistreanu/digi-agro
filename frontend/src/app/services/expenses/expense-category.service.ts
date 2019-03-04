@@ -23,10 +23,6 @@ export class ExpenseCategoryService {
         return this.http.get<ExpenseCategoryModel[]>(this.api + '/roots');
     }
 
-    find(category: string): Observable<ExpenseCategoryModel[]> {
-        return this.http.get<ExpenseCategoryModel[]>(this.api + '/category/' + category);
-    }
-
     findOne(id: number): Observable<ExpenseCategoryModel> {
         return this.http.get<ExpenseCategoryModel>(this.api + '/' + id);
     }

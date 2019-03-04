@@ -1,134 +1,158 @@
 import {Component, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
-import {AuthService} from '../../../services/auth/auth.service';
-import {Router} from '@angular/router';
 import {LangService} from '../../../services/lang.service';
-import {DateUtil} from '../../../common/dateUtil';
-import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
-import {Authorities} from '../../../common/authorities';
-import {ExpenseService} from '../../../services/expenses/expense.service';
-import {ExpenseListModel} from './expense-list.model';
+import {ExpenseModel} from '../models/expense.model';
+import {AgDateColumnType} from '../../../modules/aggrid/column-types/ag-date-type';
+import {AgNumericColumnType} from '../../../modules/aggrid/column-types/ag-numeric-type';
+import {ExpenseCategoryTotalModel} from '../models/expense-category-total.model';
+import {AgDeleteColumnType} from '../../../modules/aggrid/column-types/ag-delete-type';
+import {ModalService} from '../../../services/modal.service';
+import {GroupedSelectorComponent} from '../../../modules/aggrid/grouped-selector/grouped-selector.component';
+import {GroupedSelectorItem} from '../../../modules/aggrid/grouped-selector/grouped-selector-item.interface';
+import {ExpenseCategoryService} from '../../../services/expenses/expense-category.service';
+import {ExpenseCategoryModel} from '../../enterprise/manage-expense-categories/expense-category/expense-category.model';
+import {SelectorItem} from '../../../modules/aggrid/grouped-selector/selector-item.interface';
+
 @Component({
-    selector: 'app-expense-list',
+    selector: 'app-expense-list-new',
     templateUrl: './expense-list.component.html',
     styleUrls: ['./expense-list.component.scss']
 })
 export class ExpenseListComponent implements OnInit {
 
-    readOnly;
-
     options: GridOptions;
     context;
 
-    constructor(private expenseService: ExpenseService,
-                private authService: AuthService,
-                private router: Router,
+    models: ExpenseModel[];
+    categoryModels: ExpenseCategoryTotalModel[];
+
+    confirmationModalId = 'expense-item-remove-confirmation-modal';
+    currentModel: ExpenseModel;
+
+    expenseTypes: GroupedSelectorItem[];
+    expenseTypeMap: Map<number, String>;
+
+    constructor(private modalService: ModalService,
+                private expenseCategoryService: ExpenseCategoryService,
                 private langService: LangService) {
     }
 
+
     ngOnInit() {
-        this.setupTableMode();
-        this.setupGrid();
+        this.setupExpenseTypes()
+            .then(() => this.setupGrid());
     }
 
-    private setupTableMode() {
-        this.readOnly = this.authService.hasAuthority(Authorities.ROLE_USER);
+    private setupExpenseTypes(): Promise<void> {
+        return new Promise((resolve) => {
+            this.expenseCategoryService.getTree().subscribe(payloadModel => {
+                const models = payloadModel.payload;
+                this.expenseTypes = [];
+                this.expenseTypeMap = <Map<number, String>>{};
+                const leafParent: GroupedSelectorItem = <GroupedSelectorItem> {groupName: '', items: []};
+                models.forEach((model: ExpenseCategoryModel) => {
+                    const leaf = !model.children || model.children.length === 0;
+                    if (leaf) {
+                        this.setupSelectorItem(model, leafParent);
+                    }
+                    else {
+                        const parent: GroupedSelectorItem = <GroupedSelectorItem> {groupName: model.name, items: []};
+                        this.expenseTypes.push(parent);
+                        model.children.forEach(childModel => {
+                            this.setupSelectorItem(childModel, parent);
+                        });
+                    }
+                });
+
+                if (leafParent.items.length > 0) {
+                    this.expenseTypes.unshift(leafParent);
+                }
+                resolve();
+            });
+        });
     }
 
+    private setupSelectorItem(model: ExpenseCategoryModel, parent: GroupedSelectorItem) {
+        this.expenseTypeMap[model.id] = model.name;
+        const item: SelectorItem = <SelectorItem> {id: model.id, text: model.name};
+        parent.items.push(item);
+    }
 
     private setupGrid() {
         this.options = <GridOptions>{};
+        this.setupColumnTypes();
 
         this.options.enableColResize = true;
         this.options.enableSorting = true;
         this.options.enableFilter = true;
         this.options.columnDefs = this.setupHeaders();
         this.context = {componentParent: this};
+        this.options.frameworkComponents = {
+            groupedSelector: GroupedSelectorComponent
+        };
 
         this.setupRows();
     }
 
+    private setupColumnTypes() {
+        this.options.columnTypes = {
+            deleteType: AgDeleteColumnType.getType(),
+            dateType: AgDateColumnType.getType(),
+            numericType: AgNumericColumnType.getType()
+        };
+    }
+
     private setupHeaders() {
 
+        const self = this;
         let headers: ColDef[] = [];
 
-        if (!this.readOnly) {
-            headers.push({
-                field: 'edit',
-                width: 24,
-                minWidth: 24,
-                editable: false,
-                suppressResize: true,
-                suppressMenu: true,
-                cellRendererFramework: EditRendererComponent,
-                cellStyle: () => {
-                    return {padding: 0};
-                }
-            });
-        }
-
-        headers = headers.concat([
+        headers = headers.concat(<ColDef[]>[
+            {
+                type: 'deleteType'
+            },
             {
                 headerName: 'expenses.date',
-                field: 'expenseDate',
-                width: 90,
-                minWidth: 90,
-                suppressFilter: true,
-                valueFormatter: (params) => DateUtil.formatDateWithTime(params.value)
+                field: 'date',
+                type: 'dateType',
+                editable: true
             },
             {
-                headerName: 'machine.agricultural-machinery',
-                field: 'machine',
-                width: 180,
-                minWidth: 180
-            },
-            {
-                headerName: 'employee.employee',
-                field: 'employee',
+                headerName: 'Type',
+                field: 'type',
                 width: 100,
                 minWidth: 100,
-                suppressFilter: true,
+                editable: true,
+                cellEditor: 'groupedSelector',
+                cellEditorParams: {
+                    getDropDownItems: () => this.expenseTypes,
+                    dropDownValueField: 'typeId'
+                },
+                valueSetter: (params) => this.typeSetter(params),
+                onCellValueChanged: (params) => this.onCategoryChange(params)
             },
-            // {
-            //     headerName: 'expense-category.name',
-            //     field: 'category',
-            //     width: 200,
-            //     minWidth: 200,
-            //     suppressFilter: true,
-            // },
-            // {
-            //     headerName: 'expenses.element',
-            //     field: 'element',
-            //     width: 200,
-            //     minWidth: 200,
-            //     suppressFilter: true,
-            // },
-            // {
-            //     headerName: 'expenses.quantity',
-            //     field: 'quantity',
-            //     width: 100,
-            //     minWidth: 100,
-            //     suppressFilter: true,
-            // },
-            // {
-            //     headerName: 'expenses.cost',
-            //     field: 'cost',
-            //     width: 100,
-            //     minWidth: 100,
-            //     suppressFilter: true,
-            // },
             {
-                headerName: 'info.created-by',
-                field: 'createdBy',
+                headerName: 'Title',
+                field: 'title',
                 width: 100,
                 minWidth: 100,
+                editable: true
             },
             {
-                headerName: 'info.creation-time',
-                field: 'createdAt',
-                width: 130,
-                minWidth: 130,
-                valueFormatter: (params) => DateUtil.formatDateWithTime(params.value)
+                headerName: 'Cost',
+                field: 'cost',
+                width: 100,
+                minWidth: 100,
+                type: 'numericType',
+                editable: true,
+                onCellValueChanged: (params) => this.onCostChange(params)
+            },
+            {
+                headerName: 'Description',
+                field: 'description',
+                width: 200,
+                minWidth: 100,
+                editable: true
             }
         ]);
 
@@ -141,145 +165,112 @@ export class ExpenseListComponent implements OnInit {
         return headers;
     }
 
+    private typeSetter(params) {
+        const value = params.newValue;
+        const model = params.data;
+
+        model.typeId = value;
+        model.type = this.expenseTypeMap[value];
+    }
 
     public setupRows() {
-        this.expenseService.find().subscribe(models => {
-            models = this.adjustModels(models);
-            this.options.api.setRowData(models);
+        setTimeout(() => {
+            this.models = this.getDummyData();
+            this.options.api.setRowData(this.models);
+            this.buildCategoryModels();
         });
     }
 
-    private adjustModels(models) {
-        const resultModels = [];
-        const modelMap = {};
-        const columnMap = {};
-        const columns = [];
-        const expenseGroups = this.groupByExpense(models);
-        Object.keys(expenseGroups).forEach((expenseId) => {
-            let group = expenseGroups[expenseId];
-            group = this.aggregateSimilarCategories(group);
-            group.forEach(groupModel => {
-                this.transformCategoryModel(groupModel, resultModels, columns, modelMap, columnMap);
-            });
+    private getDummyData(): ExpenseModel[] {
+        const keys = Object.keys(this.expenseTypeMap);
+        const key1 = keys[0];
+        const key2 = keys[1];
+        const key3 = keys[2];
+        return <ExpenseModel[]>[
+            {
+                date: new Date('2018-12-12'),
+                typeId: +key1,
+                type: this.expenseTypeMap[key1],
+                title: 'Title 001',
+                cost: 5000
+            },
+            {
+                date: new Date('2018-12-13'),
+                typeId: +key1,
+                type: this.expenseTypeMap[key1],
+                title: 'Title 002',
+                cost: 1000
+            },
+            {
+                date: new Date('2018-12-13'),
+                typeId: +key2,
+                type: this.expenseTypeMap[key2],
+                title: 'Title 003',
+                cost: 5000
+            },
+            {
+                date: new Date('2018-12-23'), typeId: +key3, type: this.expenseTypeMap[key3], title: 'Title 004',
+                description: 'description', cost: 4200
+            }
+        ];
+    }
+
+    private buildCategoryModels() {
+        this.categoryModels = [];
+        const categoryMap = {};
+        this.models.forEach((model: ExpenseModel) => {
+            let categoryModel = categoryMap[model.type];
+            if (!categoryModel) {
+                categoryModel = new ExpenseCategoryTotalModel();
+                categoryMap[model.type] = categoryModel;
+                this.categoryModels.push(categoryModel);
+
+                categoryModel.type = model.type;
+                categoryModel.cost = 0;
+            }
+
+            categoryModel.cost += model.cost || 0;
         });
-
-        this.registerCategoryColumns(columns);
-
-        return resultModels;
     }
 
-    private groupByExpense(models: ExpenseListModel[]) {
-        const expenseGroups = {};
-
-        models.forEach(model => {
-            let group = expenseGroups[model.expenseId];
-            if (!group) {
-                group = [];
-                expenseGroups[model.expenseId] = group;
-            }
-            group.push(model);
-        });
-
-        return expenseGroups;
+    public onDelete(node) {
+        this.modalService.open(this.confirmationModalId);
+        this.currentModel = node.data;
     }
 
-    private aggregateSimilarCategories(models: ExpenseListModel[]) {
-        const categoryModels = {};
-        const resultModels = [];
-
-        models.forEach(model => {
-            const categoryModel = categoryModels[model.categoryId];
-            if (categoryModel) {
-                const fields = ['quantity', 'cost'];
-                fields.forEach(field => {
-                   categoryModel[field] = categoryModel[field] || 0;
-                   categoryModel[field] += model[field] || 0;
-                });
-            }
-            else {
-                categoryModels[model.categoryId] = model;
-                resultModels.push(model);
-            }
-        });
-
-        return resultModels;
+    public remove() {
+        this.options.api.updateRowData({remove: [this.currentModel]});
+        this.models.splice(this.models.indexOf(this.currentModel), 1);
+        this.currentModel = null;
+        this.buildCategoryModels();
     }
 
-    private transformCategoryModel(model, models, columns, modelMap, columnMap) {
-        const parentCategoryId = 'p-' + (model.parentCategoryId == null ? model.categoryId : model.parentCategoryId);
-        const childCategoryId = parentCategoryId + '-c-' + model.categoryId;
+    public add() {
+        const model = this.buildModel();
+        this.models.push(model);
+        this.buildCategoryModels();
 
-        if (!modelMap[parentCategoryId]) {
-            modelMap[parentCategoryId] = model;
-            models.push(model);
-        }
-
-        const aggregatedModel = modelMap[parentCategoryId];
-
-        const quantityField = 'quantity_' + model.categoryId;
-        const costField = 'cost_' + model.categoryId;
-
-        aggregatedModel[quantityField] = model.quantity;
-        aggregatedModel[costField] = model.cost;
-
-
-        let parentColumn = columnMap[parentCategoryId];
-
-        if (!parentColumn) {
-            parentColumn = {
-                headerName: model.parentCategory,  // todo: replace with parentCategory
-                width: 180,
-                minWidth: 180,
-                children: []
-            };
-            columnMap[parentCategoryId] = parentColumn;
-            columns.push(parentColumn);
-        }
-
-        let childColumn = columnMap[childCategoryId];
-        if (!childColumn) {
-
-            const quantityTitle = this.langService.instant('expenses.quantity');
-            const costTitle = this.langService.instant('expenses.cost');
-
-            childColumn = {
-                headerName: model.category,
-                width: 180,
-                minWidth: 180,
-                columnGroupShow: parentColumn.children.length == 0 ? 'close' : 'open',
-                children: [
-                    {
-                        headerName: quantityTitle,
-                        field: quantityField,
-                        width: 180,
-                        minWidth: 180,
-                        columnGroupShow: 'close'
-                    },
-                    {
-                        headerName: costTitle,
-                        field: costField,
-                        width: 180,
-                        minWidth: 180,
-                        columnGroupShow: 'open'
-                    }
-                ]
-            };
-            columnMap[childCategoryId] = childColumn;
-            parentColumn.children = parentColumn.children.concat(childColumn);
-        }
+        this.options.api.updateRowData({add: [model]});
     }
 
-    private registerCategoryColumns(columns) {
-        let gridColumns = this.options.columnDefs;
-        let index = 0;
-        for (const column of gridColumns) {
-            if (column['field'] == 'createdBy') {
-                break;
-            }
-            index++;
-        }
-        gridColumns = gridColumns.slice(0, index).concat(columns).concat(gridColumns.slice(index));
-        this.options.api.setColumnDefs(gridColumns);
+    private buildModel() {
+        const keys = Object.keys(this.expenseTypeMap);
+
+        const model = new ExpenseModel();
+        model.date = new Date();
+        model.typeId = +keys[0];
+        model.type = this.expenseTypeMap[keys[0]];
+        model.cost = 0;
+
+        return model;
+    }
+
+    private onCategoryChange(params) {
+        this.buildCategoryModels();
+    }
+
+    private onCostChange(params) {
+        this.buildCategoryModels();
     }
 
     public onGridReady() {
@@ -294,12 +285,4 @@ export class ExpenseListComponent implements OnInit {
         }, 500);
     }
 
-    public add() {
-        // this.router.navigate(['/pages/expenses/machinery/-1']);
-    }
-
-    public onEdit(node) {
-        // const model = node.data;
-        // this.router.navigate(['/pages/expenses/machinery/' + model.expenseId]);
-    }
 }

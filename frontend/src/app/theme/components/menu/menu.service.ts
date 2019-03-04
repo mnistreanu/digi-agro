@@ -200,36 +200,8 @@ export class MenuService {
                 subMenu: [
                     {
                         title: 'expenses.expenses',
-                        routerLink: 'expenses-new',
-                    },
-                    {
-                        title: 'expenses.expenses',
                         routerLink: 'expenses',
-                    },
-                    {
-                        title: 'nav.agricultural-machinery',
-                        routerLink: 'expenses/machinery',
-                    },
-                    {
-                        title: 'nav.fuel',
-                        routerLink: 'expenses/fuel',
-                    },
-                    {
-                        title: 'nav.sowing',
-                        routerLink: 'expenses/sowing',
-                    },
-                    {
-                        title: 'nav.agricultural-works',
-                        routerLink: 'expenses/works',
-                    },
-                    {
-                        title: 'nav.pesticides',
-                        routerLink: 'expenses/pesticide',
-                    },
-                    {
-                        title: 'nav.fertilizers',
-                        routerLink: 'expenses/fertilizer',
-                    },
+                    }
                 ]
             });
         }

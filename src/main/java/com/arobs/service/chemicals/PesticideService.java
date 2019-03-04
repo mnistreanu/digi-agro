@@ -1,16 +1,13 @@
 package com.arobs.service.chemicals;
 
-import com.arobs.entity.Expense;
 import com.arobs.entity.Pesticide;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.chemicals.PesticideModel;
-import com.arobs.model.expense.ExpenseModel;
 import com.arobs.repository.PesticideRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 
 @Service

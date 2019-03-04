@@ -8,18 +8,6 @@ import javax.persistence.*;
 @Entity
 public class ExpenseCategory {
 
-    // todo: remove?
-    public static final long MACHINERY = 1L;
-    public static final long FUEL = 2L;
-    public static final long SOWING = 3L;
-    public static final long AGRO_WORKS = 4L;
-    public static final long FERTILIZERS = 5L;
-    public static final long PESTICIDES = 6L;
-    public static final long IRRIGATION = 7L;
-    public static final long RENTING = 8L;
-    public static final long OPERATIONAL = 9L;
-    public static final long OTHERS = 10L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,16 +18,8 @@ public class ExpenseCategory {
     @Column (name = "parent_id")
     private Long parentId;
 
-    // todo: remove?
-    @Column (name = "default_category_id")
-    private Long defaultCategoryId;
-
-    // todo: remove (refactor changelog)
-    private String title;
-
     private String name;
     private String description;
-
 
     @Column(columnDefinition = "boolean default true")
     private boolean active = true;
@@ -79,14 +59,6 @@ public class ExpenseCategory {
         this.name = name;
     }
 
-    public Long getDefaultCategoryId() {
-        return defaultCategoryId;
-    }
-
-    public void setDefaultCategoryId(Long defaultCategoryId) {
-        this.defaultCategoryId = defaultCategoryId;
-    }
-
     public boolean isActive() {
         return active;
     }
@@ -103,11 +75,4 @@ public class ExpenseCategory {
         this.description = description;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 }

@@ -72,15 +72,6 @@ public class ExpenseCategoryController {
         return ResponseEntity.ok(models);
     }
 
-
-    @RequestMapping(value = "/category/{categoryName}", method = RequestMethod.GET)
-    public ResponseEntity<List<ExpenseCategoryModel>> getCategoriesTree(@PathVariable String categoryName) {
-        List<ExpenseCategory> categories = expenseCategoryService.find(categoryName);
-        List<ExpenseCategoryModel> models = categories.stream().map(ExpenseCategoryModel::new).collect(Collectors.toList());
-        return ResponseEntity.ok(models);
-    }
-
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<ExpenseCategoryModel> getModel(@PathVariable Long id) {
         ExpenseCategory category = expenseCategoryService.findOne(id);

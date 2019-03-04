@@ -35,23 +35,6 @@ public class ExpenseCategoryService implements HasRepository<ExpenseCategoryRepo
         return getRepository().findRoots(tenantId);
     }
 
-    public ExpenseCategory findDefault(Long defaultCategoryId) {
-        return getRepository().findDefault(defaultCategoryId);
-    }
-
-    public List<ExpenseCategory> find(String categoryName) {
-        Long defaultCategoryId = null;
-        if (categoryName.equals("fuel")) {
-            defaultCategoryId = ExpenseCategory.FUEL;
-        }
-        ExpenseCategory parent = findDefault(defaultCategoryId);
-        List<ExpenseCategory> children = getRepository().findByParent(parent.getId());
-        if (StaticUtil.isEmpty(children)) {
-            return Collections.singletonList(parent);
-        }
-        return children;
-    }
-
     @Transactional
     public ExpenseCategory save(ExpenseCategoryModel model, Long tenantId) {
 
