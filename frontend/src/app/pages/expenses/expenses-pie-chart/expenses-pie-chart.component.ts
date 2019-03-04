@@ -61,7 +61,7 @@ export class ExpensesPieChartComponent implements OnInit, OnChanges {
         const data = [];
 
         this.models.forEach((model: ExpenseCategoryTotalModel) => {
-            labels.push(model.type);
+            labels.push(model.categoryName);
             data.push(model.cost);
         });
 

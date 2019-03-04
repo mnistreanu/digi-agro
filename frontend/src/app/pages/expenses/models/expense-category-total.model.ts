@@ -1,4 +1,4 @@
 export class ExpenseCategoryTotalModel {
-    type: string;
+    categoryName: string;
     cost: number;
 }

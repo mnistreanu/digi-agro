@@ -1,7 +1,10 @@
 export class ExpenseModel {
+    id: number;
     date: Date;
-    typeId: number;
-    type: string;
+
+    categoryId: number;
+    categoryName: string;
+
     title: string;
     description: string;
     cost: number;

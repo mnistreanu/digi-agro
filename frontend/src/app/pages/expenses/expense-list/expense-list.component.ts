@@ -12,6 +12,8 @@ import {GroupedSelectorItem} from '../../../modules/aggrid/grouped-selector/grou
 import {ExpenseCategoryService} from '../../../services/expenses/expense-category.service';
 import {ExpenseCategoryModel} from '../../enterprise/manage-expense-categories/expense-category/expense-category.model';
 import {SelectorItem} from '../../../modules/aggrid/grouped-selector/selector-item.interface';
+import {ExpenseService} from '../../../services/expenses/expense.service';
+import {AlertService} from '../../../services/alert.service';
 
 @Component({
     selector: 'app-expense-list-new',
@@ -33,7 +35,9 @@ export class ExpenseListComponent implements OnInit {
     expenseTypeMap: Map<number, String>;
 
     constructor(private modalService: ModalService,
+                private expenseService: ExpenseService,
                 private expenseCategoryService: ExpenseCategoryService,
+                private alertService: AlertService,
                 private langService: LangService) {
     }
 
@@ -115,18 +119,19 @@ export class ExpenseListComponent implements OnInit {
                 headerName: 'expenses.date',
                 field: 'date',
                 type: 'dateType',
-                editable: true
+                editable: true,
+                onCellValueChanged: (params) => this.updateModel(params.data)
             },
             {
                 headerName: 'Type',
-                field: 'type',
+                field: 'categoryName',
                 width: 100,
                 minWidth: 100,
                 editable: true,
                 cellEditor: 'groupedSelector',
                 cellEditorParams: {
                     getDropDownItems: () => this.expenseTypes,
-                    dropDownValueField: 'typeId'
+                    dropDownValueField: 'categoryId'
                 },
                 valueSetter: (params) => this.typeSetter(params),
                 onCellValueChanged: (params) => this.onCategoryChange(params)
@@ -136,7 +141,8 @@ export class ExpenseListComponent implements OnInit {
                 field: 'title',
                 width: 100,
                 minWidth: 100,
-                editable: true
+                editable: true,
+                onCellValueChanged: (params) => this.updateModel(params.data)
             },
             {
                 headerName: 'Cost',
@@ -152,7 +158,8 @@ export class ExpenseListComponent implements OnInit {
                 field: 'description',
                 width: 200,
                 minWidth: 100,
-                editable: true
+                editable: true,
+                onCellValueChanged: (params) => this.updateModel(params.data)
             }
         ]);
 
@@ -169,68 +176,38 @@ export class ExpenseListComponent implements OnInit {
         const value = params.newValue;
         const model = params.data;
 
-        model.typeId = value;
-        model.type = this.expenseTypeMap[value];
+        model.categoryId = value;
+        model.categoryName = this.expenseTypeMap[value];
     }
 
     public setupRows() {
-        setTimeout(() => {
-            this.models = this.getDummyData();
-            this.options.api.setRowData(this.models);
+        this.expenseService.find().subscribe(models => {
+            models.forEach(model => model.date = new Date(model.date));
+            this.options.api.setRowData(models);
+            this.models = models;
             this.buildCategoryModels();
         });
-    }
-
-    private getDummyData(): ExpenseModel[] {
-        const keys = Object.keys(this.expenseTypeMap);
-        const key1 = keys[0];
-        const key2 = keys[1];
-        const key3 = keys[2];
-        return <ExpenseModel[]>[
-            {
-                date: new Date('2018-12-12'),
-                typeId: +key1,
-                type: this.expenseTypeMap[key1],
-                title: 'Title 001',
-                cost: 5000
-            },
-            {
-                date: new Date('2018-12-13'),
-                typeId: +key1,
-                type: this.expenseTypeMap[key1],
-                title: 'Title 002',
-                cost: 1000
-            },
-            {
-                date: new Date('2018-12-13'),
-                typeId: +key2,
-                type: this.expenseTypeMap[key2],
-                title: 'Title 003',
-                cost: 5000
-            },
-            {
-                date: new Date('2018-12-23'), typeId: +key3, type: this.expenseTypeMap[key3], title: 'Title 004',
-                description: 'description', cost: 4200
-            }
-        ];
     }
 
     private buildCategoryModels() {
         this.categoryModels = [];
         const categoryMap = {};
         this.models.forEach((model: ExpenseModel) => {
-            let categoryModel = categoryMap[model.type];
+            let categoryModel = categoryMap[model.categoryName];
             if (!categoryModel) {
                 categoryModel = new ExpenseCategoryTotalModel();
-                categoryMap[model.type] = categoryModel;
+                categoryMap[model.categoryName] = categoryModel;
                 this.categoryModels.push(categoryModel);
 
-                categoryModel.type = model.type;
+                categoryModel.categoryName = model.categoryName;
                 categoryModel.cost = 0;
             }
 
             categoryModel.cost += model.cost || 0;
         });
+        if (this.categoryModels.length === 0) {
+            this.categoryModels = null;
+        }
     }
 
     public onDelete(node) {
@@ -239,18 +216,28 @@ export class ExpenseListComponent implements OnInit {
     }
 
     public remove() {
-        this.options.api.updateRowData({remove: [this.currentModel]});
-        this.models.splice(this.models.indexOf(this.currentModel), 1);
-        this.currentModel = null;
-        this.buildCategoryModels();
+        this.expenseService.remove(this.currentModel).subscribe(() => {
+            this.options.api.updateRowData({remove: [this.currentModel]});
+            this.models.splice(this.models.indexOf(this.currentModel), 1);
+            this.currentModel = null;
+            this.buildCategoryModels();
+            this.alertService.removed();
+        });
     }
 
     public add() {
-        const model = this.buildModel();
-        this.models.push(model);
-        this.buildCategoryModels();
+        let model = this.buildModel();
 
-        this.options.api.updateRowData({add: [model]});
+        this.expenseService.save(model).subscribe(responseModel => {
+            model = responseModel;
+            model.date = new Date(model.date);
+
+            this.models.push(model);
+            this.buildCategoryModels();
+
+            this.options.api.updateRowData({add: [model]});
+            this.alertService.saved();
+        });
     }
 
     private buildModel() {
@@ -258,8 +245,8 @@ export class ExpenseListComponent implements OnInit {
 
         const model = new ExpenseModel();
         model.date = new Date();
-        model.typeId = +keys[0];
-        model.type = this.expenseTypeMap[keys[0]];
+        model.categoryId = +keys[0];
+        model.categoryName = this.expenseTypeMap[keys[0]];
         model.cost = 0;
 
         return model;
@@ -267,10 +254,18 @@ export class ExpenseListComponent implements OnInit {
 
     private onCategoryChange(params) {
         this.buildCategoryModels();
+        this.updateModel(params.data);
     }
 
     private onCostChange(params) {
         this.buildCategoryModels();
+        this.updateModel(params.data);
+    }
+
+    private updateModel(model) {
+        this.expenseService.save(model).subscribe(() => {
+            this.alertService.saved();
+        });
     }
 
     public onGridReady() {
