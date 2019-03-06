@@ -14,6 +14,8 @@ import {ExpenseCategoryModel} from '../../enterprise/manage-expense-categories/e
 import {SelectorItem} from '../../../modules/aggrid/grouped-selector/selector-item.interface';
 import {ExpenseService} from '../../../services/expenses/expense.service';
 import {AlertService} from '../../../services/alert.service';
+import {CropSeasonService} from '../../../services/crop/crop-season.service';
+import {CropSeasonListModel} from '../../manage-crops/crop-season/list/crop-season-list.model';
 
 @Component({
     selector: 'app-expense-list-new',
@@ -31,10 +33,15 @@ export class ExpenseListComponent implements OnInit {
     confirmationModalId = 'expense-item-remove-confirmation-modal';
     currentModel: ExpenseModel;
 
+    cropSeasons: CropSeasonListModel[];
+    selectedCropSeasonId;
+    hasCropSeasons: boolean;
+
     expenseTypes: GroupedSelectorItem[];
     expenseTypeMap: Map<number, String>;
 
     constructor(private modalService: ModalService,
+                private cropSeasonService: CropSeasonService,
                 private expenseService: ExpenseService,
                 private expenseCategoryService: ExpenseCategoryService,
                 private alertService: AlertService,
@@ -43,8 +50,23 @@ export class ExpenseListComponent implements OnInit {
 
 
     ngOnInit() {
-        this.setupExpenseTypes()
+        this.setupCropSeasons()
+            .then(() => this.setupExpenseTypes())
             .then(() => this.setupGrid());
+    }
+
+    private setupCropSeasons(): Promise<void> {
+        return new Promise((resolve) => {
+            this.cropSeasonService.find().subscribe(models => {
+                this.cropSeasonService.adjustListModels(models);
+                this.cropSeasons = models;
+                if (models.length > 0) {
+                    this.selectedCropSeasonId = models[0].id;
+                    this.hasCropSeasons = true;
+                }
+                resolve();
+            });
+        });
     }
 
     private setupExpenseTypes(): Promise<void> {
@@ -80,6 +102,10 @@ export class ExpenseListComponent implements OnInit {
         this.expenseTypeMap[model.id] = model.name;
         const item: SelectorItem = <SelectorItem> {id: model.id, text: model.name};
         parent.items.push(item);
+    }
+
+    public onCropSeasonChange() {
+        this.setupRows();
     }
 
     private setupGrid() {
@@ -181,7 +207,7 @@ export class ExpenseListComponent implements OnInit {
     }
 
     public setupRows() {
-        this.expenseService.find().subscribe(models => {
+        this.expenseService.find(this.selectedCropSeasonId).subscribe(models => {
             models.forEach(model => model.date = new Date(model.date));
             this.options.api.setRowData(models);
             this.models = models;
@@ -244,6 +270,7 @@ export class ExpenseListComponent implements OnInit {
         const keys = Object.keys(this.expenseTypeMap);
 
         const model = new ExpenseModel();
+        model.cropSeasonId = this.selectedCropSeasonId;
         model.date = new Date();
         model.categoryId = +keys[0];
         model.categoryName = this.expenseTypeMap[keys[0]];

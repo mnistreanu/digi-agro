@@ -4,6 +4,8 @@ import {Observable} from 'rxjs/Rx';
 import {environment} from '../../../environments/environment';
 import {CropSeasonModel} from '../../pages/manage-crops/crop-season/form/crop-season-form.model';
 import {CropSeasonListModel} from '../../pages/manage-crops/crop-season/list/crop-season-list.model';
+import {LangService} from '../lang.service';
+import {FieldMapper} from '../../common/field.mapper';
 
 @Injectable({
     providedIn: 'root'
@@ -12,11 +14,24 @@ export class CropSeasonService {
 
     private api: string = environment.apiUrl + '/crop-season';
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient,
+                private langService: LangService) {
     }
 
     public find(): Observable<CropSeasonListModel[]> {
         return this.http.get<CropSeasonListModel[]>(this.api + '/');
+    }
+
+    public adjustListModels(models: CropSeasonListModel[]) {
+        const fieldMapper = new FieldMapper(this.langService.getLanguage());
+        const nameField = fieldMapper.get('name');
+        return models.map((model: CropSeasonListModel) => {
+            model.harvestYearCropVariety = model.harvestYear + ' ' + model.cropModel[nameField];
+            if (model.cropVarietyModel != null) {
+                model.harvestYearCropVariety += ' ' + model.cropVarietyModel[nameField];
+            }
+            return model;
+        });
     }
 
     findOne(id: number): Observable<CropSeasonModel> {

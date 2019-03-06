@@ -11,6 +11,7 @@ public class ExpenseModel implements Serializable {
 
     private Long id;
     private Long tenantId;
+    private Long cropSeasonId;
 
     private Long categoryId;
     private String categoryName;
@@ -26,6 +27,7 @@ public class ExpenseModel implements Serializable {
     public ExpenseModel(Expense expense, ExpenseCategory expenseCategory) {
         id = expense.getId();
         tenantId = expense.getTenant();
+        cropSeasonId = expense.getCropSeasonId();
 
         categoryId = expense.getCategoryId();
         categoryName = expenseCategory.getName();
@@ -100,5 +102,11 @@ public class ExpenseModel implements Serializable {
         this.cost = cost;
     }
 
+    public Long getCropSeasonId() {
+        return cropSeasonId;
+    }
 
+    public void setCropSeasonId(Long cropSeasonId) {
+        this.cropSeasonId = cropSeasonId;
+    }
 }

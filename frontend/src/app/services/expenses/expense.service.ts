@@ -14,8 +14,8 @@ export class ExpenseService {
     constructor(private http: HttpClient) {
     }
 
-    find(): Observable<ExpenseModel[]> {
-        return this.http.get<ExpenseModel[]>(this.api + '/');
+    find(cropSeasonId): Observable<ExpenseModel[]> {
+        return this.http.get<ExpenseModel[]>(this.api + '/' + cropSeasonId);
     }
 
     save(model: ExpenseModel): Observable<ExpenseModel> {

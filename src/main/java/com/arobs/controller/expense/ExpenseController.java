@@ -24,11 +24,11 @@ public class ExpenseController {
     @Autowired
     private ExpenseCategoryService expenseCategoryService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<List<ExpenseModel>> getList(HttpSession session) {
+    @RequestMapping(value = "/{cropSeasonId}", method = RequestMethod.GET)
+    public ResponseEntity<List<ExpenseModel>> getList(@PathVariable Long cropSeasonId, HttpSession session) {
         Long tenantId = (Long) session.getAttribute("tenant");
 
-        List<Expense> expenses = expenseService.find(tenantId);
+        List<Expense> expenses = expenseService.find(tenantId, cropSeasonId);
         List<ExpenseModel> models = new ArrayList<>();
         Map<Long, ExpenseCategory> expenseCategoryMap = new HashMap<>();
 

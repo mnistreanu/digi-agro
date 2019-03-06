@@ -13,8 +13,10 @@ import java.util.List;
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
 
-    @Query("SELECT e FROM Expense e WHERE e.tenant = :tenantId")
-    List<Expense> find(@Param("tenantId") Long tenantId);
+    @Query("SELECT e FROM Expense e " +
+            "WHERE e.tenant = :tenantId AND e.cropSeasonId = :cropSeasonId")
+    List<Expense> find(@Param("tenantId") Long tenantId,
+                       @Param("cropSeasonId") Long cropSeasonId);
 
     @Modifying
     @Query("DELETE FROM Expense e WHERE e.id = :id")

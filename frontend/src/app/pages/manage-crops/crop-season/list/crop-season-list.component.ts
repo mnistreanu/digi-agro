@@ -104,19 +104,8 @@ export class CropSeasonListComponent implements OnInit {
 
     private setupRows() {
         this.cropSeasonService.find().subscribe(models => {
-            this.adjustModels(models);
+            this.cropSeasonService.adjustListModels(models);
             this.options.api.setRowData(models);
-        });
-    }
-
-    private adjustModels(models: CropSeasonListModel[]) {
-        const fieldMapper = new FieldMapper(this.langService.getLanguage());
-        const nameField = fieldMapper.get('name');
-        models.forEach(model => {
-            model.harvestYearCropVariety = model.harvestYear + ' ' + model.cropModel[nameField];
-            if (model.cropVarietyModel != null) {
-                model.harvestYearCropVariety += ' ' + model.cropVarietyModel[nameField];
-            }
         });
     }
 

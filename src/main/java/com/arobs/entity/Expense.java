@@ -15,6 +15,12 @@ public class Expense {
     @Column(name = "tenant_id")
     private Long tenant;
 
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "crop_season_id")
+    private CropSeason cropSeason;
+    @Column(name = "crop_season_id", insertable = false, updatable = false)
+    private Long cropSeasonId;
+
     private Long categoryId;
 
     private Date date;
@@ -76,5 +82,21 @@ public class Expense {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public CropSeason getCropSeason() {
+        return cropSeason;
+    }
+
+    public void setCropSeason(CropSeason cropSeason) {
+        this.cropSeason = cropSeason;
+    }
+
+    public Long getCropSeasonId() {
+        return cropSeasonId;
+    }
+
+    public void setCropSeasonId(Long cropSeasonId) {
+        this.cropSeasonId = cropSeasonId;
     }
 }
