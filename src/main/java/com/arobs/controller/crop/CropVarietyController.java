@@ -3,12 +3,14 @@ package com.arobs.controller.crop;
 
 import com.arobs.entity.Crop;
 import com.arobs.entity.CropCategory;
+import com.arobs.entity.CropSubculture;
 import com.arobs.entity.CropVariety;
 import com.arobs.model.PayloadModel;
 import com.arobs.model.crop.CropVarietyModel;
 import com.arobs.model.crop.CropVarietyTreeModel;
 import com.arobs.service.crop.CropCategoryService;
 import com.arobs.service.crop.CropService;
+import com.arobs.service.crop.CropSubcultureService;
 import com.arobs.service.crop.CropVarietyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,8 +27,13 @@ public class CropVarietyController {
 
     @Autowired
     private CropVarietyService cropVarietyService;
+
+    @Autowired
+    private CropSubcultureService cropSubcultureService;
+
     @Autowired
     private CropService cropService;
+
     @Autowired
     private CropCategoryService cropCategoryService;
 
@@ -47,7 +54,7 @@ public class CropVarietyController {
         PayloadModel<CropVarietyModel> payloadModel = new PayloadModel<>();
 
         try {
-            List<CropVariety> varieties = cropVarietyService.find(cropId);
+            List<CropVariety> varieties = cropVarietyService.findByCrop(cropId);
             if (!varieties.isEmpty()) {
                 List<CropVarietyModel> models = varieties.stream().map(CropVarietyModel::new).collect(Collectors.toList());
                 payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
@@ -106,13 +113,41 @@ public class CropVarietyController {
                 CropVarietyTreeModel cropModel = new CropVarietyTreeModel(crop);
                 categoryModel.getChildren().add(cropModel);
 
-                List<CropVariety> varieties = cropVarietyService.find(crop.getId());
-                if (!varieties.isEmpty()) {
+                List<CropSubculture> subcultures = cropSubcultureService.find(crop.getId());
+                if (!subcultures.isEmpty()) {
+                    cropModel.setChildren(new ArrayList<>());
+                }
+
+                for (CropSubculture subculture : subcultures) {
+                    CropVarietyTreeModel subcultureTree = new CropVarietyTreeModel(subculture);
+                    cropModel.getChildren().add(subcultureTree);
+
+                    List<CropVariety> varieties = cropVarietyService.findBySubculture(subculture.getId());
+                    if (!varieties.isEmpty() && cropModel.getChildren() == null) {
+                        cropModel.setChildren(new ArrayList<>());
+                    }
+
+                    for (CropVariety variety : varieties) {
+                        if (subcultureTree.getChildren() == null) {
+                            subcultureTree.setChildren(new ArrayList<>());
+                        }
+                        subcultureTree.getChildren().add(new CropVarietyTreeModel(variety));
+                    }
+
+                }
+
+                /**
+                 * varieties without subculture
+                 */
+                List<CropVariety> varieties = cropVarietyService.findByCrop(crop.getId());
+                if (!varieties.isEmpty() && cropModel.getChildren() == null) {
                     cropModel.setChildren(new ArrayList<>());
                 }
 
                 for (CropVariety variety : varieties) {
-                    cropModel.getChildren().add(new CropVarietyTreeModel(variety));
+                    if (variety.getCropSubculture() == null) {
+                        cropModel.getChildren().add(new CropVarietyTreeModel(variety));
+                    }
                 }
             }
         }

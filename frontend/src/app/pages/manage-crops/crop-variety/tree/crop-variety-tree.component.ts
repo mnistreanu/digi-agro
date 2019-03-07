@@ -74,13 +74,13 @@ export class CropVarietyTreeComponent implements OnInit {
                 headerName: this.labelName,
                 field: 'name',
                 cellRenderer: 'agGroupCellRenderer',
-                width: 200,
-                minWidth: 200
+                width: 280,
+                minWidth: 280
             },
             {
                 headerName: this.labelDescription,
                 field: 'description',
-                width: 600,
+                width: 400,
                 minWidth: 200
             }
         ];

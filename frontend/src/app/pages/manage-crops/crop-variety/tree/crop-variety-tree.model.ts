@@ -2,6 +2,7 @@ export class CropVarietyTreeModel {
 
     cropCategoryId: number;
     cropId: number;
+    cropSubcultureId: number;
     cropVarietyId: number;
 
     nameRo: string;

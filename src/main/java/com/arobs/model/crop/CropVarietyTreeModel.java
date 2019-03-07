@@ -2,6 +2,7 @@ package com.arobs.model.crop;
 
 import com.arobs.entity.Crop;
 import com.arobs.entity.CropCategory;
+import com.arobs.entity.CropSubculture;
 import com.arobs.entity.CropVariety;
 
 import java.io.Serializable;
@@ -12,6 +13,7 @@ public class CropVarietyTreeModel implements Serializable {
 
     private Long cropCategoryId;
     private Long cropId;
+    private Long cropSubcultureId;
     private Long cropVarietyId;
     private String nameRo;
     private String nameRu;
@@ -35,7 +37,16 @@ public class CropVarietyTreeModel implements Serializable {
         this.nameRu = crop.getNameRu();
     }
 
+    public CropVarietyTreeModel(CropSubculture subculture) {
+        this.cropId = subculture.getId();
+        this.nameRo = subculture.getNameRo();
+        this.nameRu = subculture.getNameRu();
+    }
+
     public CropVarietyTreeModel(CropVariety cropVariety) {
+        if (cropVariety.getCropSubculture() != null) {
+            this.cropSubcultureId = cropVariety.getCropSubculture().getId();
+        }
         this.cropVarietyId = cropVariety.getId();
         this.nameRo = cropVariety.getNameRo();
         this.nameRu = cropVariety.getNameRu();
@@ -57,6 +68,14 @@ public class CropVarietyTreeModel implements Serializable {
 
     public void setCropId(Long cropId) {
         this.cropId = cropId;
+    }
+
+    public Long getCropSubcultureId() {
+        return cropSubcultureId;
+    }
+
+    public void setCropSubcultureId(Long cropSubcultureId) {
+        this.cropSubcultureId = cropSubcultureId;
     }
 
     public Long getCropVarietyId() {

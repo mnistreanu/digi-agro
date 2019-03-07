@@ -35,8 +35,12 @@ public class CropVarietyService implements HasRepository<CropVarietyRepository> 
     @Autowired
     private CropSubcultureService cropSubcultureService;
 
-    public List<CropVariety> find(Long cropId) {
-        return getRepository().find(cropId);
+    public List<CropVariety> findByCrop(Long cropId) {
+        return getRepository().findByCrop(cropId);
+    }
+
+    public List<CropVariety> findBySubculture(Long cropSubcultureId) {
+        return getRepository().findBySubculture(cropSubcultureId);
     }
 
     public CropVariety findOne(Long id) {
