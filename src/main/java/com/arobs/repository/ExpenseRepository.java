@@ -14,7 +14,8 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
 
     @Query("SELECT e FROM Expense e " +
-            "WHERE e.tenant = :tenantId AND e.cropSeasonId = :cropSeasonId")
+            "WHERE e.tenant = :tenantId AND e.cropSeasonId = :cropSeasonId " +
+            "ORDER BY e.date, e.categoryId")
     List<Expense> find(@Param("tenantId") Long tenantId,
                        @Param("cropSeasonId") Long cropSeasonId);
 

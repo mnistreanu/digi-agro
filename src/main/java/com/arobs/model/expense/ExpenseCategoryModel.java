@@ -11,6 +11,7 @@ public class ExpenseCategoryModel implements Serializable {
     private Long tenantId;
     private Long parentId;
 
+    private String rootName;
     private String name;
     private String description;
 
@@ -25,6 +26,8 @@ public class ExpenseCategoryModel implements Serializable {
         this.parentId = category.getParentId();
         this.name = category.getName();
         this.description = category.getDescription();
+
+        this.rootName = category.getRootName();
     }
 
     public Long getId() {
@@ -73,5 +76,14 @@ public class ExpenseCategoryModel implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    public String getRootName() {
+        return rootName;
+    }
+
+    public void setRootName(String rootName) {
+        this.rootName = rootName;
     }
 }

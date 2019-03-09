@@ -2,8 +2,8 @@ export class ExpenseCategoryModel {
 
     id: number;
     parentId: number;
-    defaultName: string;
 
+    rootName: string;
     name: string;
     description: string;
 

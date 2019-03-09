@@ -15,6 +15,7 @@ public class ExpenseModel implements Serializable {
 
     private Long categoryId;
     private String categoryName;
+    private String categoryRootName;
 
     private Date date;
     private String title;
@@ -24,13 +25,14 @@ public class ExpenseModel implements Serializable {
     public ExpenseModel() {
     }
 
-    public ExpenseModel(Expense expense, ExpenseCategory expenseCategory) {
+    public ExpenseModel(Expense expense, ExpenseCategory category) {
         id = expense.getId();
         tenantId = expense.getTenant();
         cropSeasonId = expense.getCropSeasonId();
 
         categoryId = expense.getCategoryId();
-        categoryName = expenseCategory.getName();
+        categoryName = category.getName();
+        categoryRootName = category.getRootName();
 
         date = expense.getDate();
         title = expense.getTitle();
@@ -108,5 +110,13 @@ public class ExpenseModel implements Serializable {
 
     public void setCropSeasonId(Long cropSeasonId) {
         this.cropSeasonId = cropSeasonId;
+    }
+
+    public String getCategoryRootName() {
+        return categoryRootName;
+    }
+
+    public void setCategoryRootName(String categoryRootName) {
+        this.categoryRootName = categoryRootName;
     }
 }

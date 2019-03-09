@@ -15,7 +15,10 @@ public class ExpenseCategory {
     @Column (name = "tenant_id")
     private Long tenantId;
 
-    @Column (name = "parent_id")
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private ExpenseCategory parent;
+    @Column (name = "parent_id", insertable = false, updatable = false)
     private Long parentId;
 
     private String name;
@@ -25,6 +28,19 @@ public class ExpenseCategory {
     private boolean active = true;
 
     public ExpenseCategory() {
+    }
+
+    public String getRootName() {
+
+        /*
+            We have only 2 levels
+         */
+
+        if (parent == null) {
+            return name;
+        }
+
+        return parent.getName();
     }
 
     public Long getId() {
@@ -75,4 +91,11 @@ public class ExpenseCategory {
         this.description = description;
     }
 
+    public ExpenseCategory getParent() {
+        return parent;
+    }
+
+    public void setParent(ExpenseCategory parent) {
+        this.parent = parent;
+    }
 }

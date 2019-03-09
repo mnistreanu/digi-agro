@@ -18,7 +18,7 @@ import {CropSeasonService} from '../../../services/crop/crop-season.service';
 import {CropSeasonListModel} from '../../manage-crops/crop-season/list/crop-season-list.model';
 
 @Component({
-    selector: 'app-expense-list-new',
+    selector: 'app-expense-list',
     templateUrl: './expense-list.component.html',
     styleUrls: ['./expense-list.component.scss']
 })
@@ -38,7 +38,7 @@ export class ExpenseListComponent implements OnInit {
     hasCropSeasons: boolean;
 
     expenseTypes: GroupedSelectorItem[];
-    expenseTypeMap: Map<number, String>;
+    categoryMap: Map<number, ExpenseCategoryModel>;
 
     constructor(private modalService: ModalService,
                 private cropSeasonService: CropSeasonService,
@@ -74,7 +74,7 @@ export class ExpenseListComponent implements OnInit {
             this.expenseCategoryService.getTree().subscribe(payloadModel => {
                 const models = payloadModel.payload;
                 this.expenseTypes = [];
-                this.expenseTypeMap = <Map<number, String>>{};
+                this.categoryMap = <Map<number, ExpenseCategoryModel>>{};
                 const leafParent: GroupedSelectorItem = <GroupedSelectorItem> {groupName: '', items: []};
                 models.forEach((model: ExpenseCategoryModel) => {
                     const leaf = !model.children || model.children.length === 0;
@@ -99,7 +99,7 @@ export class ExpenseListComponent implements OnInit {
     }
 
     private setupSelectorItem(model: ExpenseCategoryModel, parent: GroupedSelectorItem) {
-        this.expenseTypeMap[model.id] = model.name;
+        this.categoryMap[model.id] = model;
         const item: SelectorItem = <SelectorItem> {id: model.id, text: model.name};
         parent.items.push(item);
     }
@@ -134,7 +134,6 @@ export class ExpenseListComponent implements OnInit {
 
     private setupHeaders() {
 
-        const self = this;
         let headers: ColDef[] = [];
 
         headers = headers.concat(<ColDef[]>[
@@ -203,7 +202,8 @@ export class ExpenseListComponent implements OnInit {
         const model = params.data;
 
         model.categoryId = value;
-        model.categoryName = this.expenseTypeMap[value];
+        model.categoryName = this.categoryMap[model.categoryId].name;
+        model.categoryRootName = this.categoryMap[model.categoryId].rootName;
     }
 
     public setupRows() {
@@ -217,19 +217,19 @@ export class ExpenseListComponent implements OnInit {
 
     private buildCategoryModels() {
         this.categoryModels = [];
-        const categoryMap = {};
+        const chartModelMap = {};
         this.models.forEach((model: ExpenseModel) => {
-            let categoryModel = categoryMap[model.categoryName];
-            if (!categoryModel) {
-                categoryModel = new ExpenseCategoryTotalModel();
-                categoryMap[model.categoryName] = categoryModel;
-                this.categoryModels.push(categoryModel);
+            let chartModel = chartModelMap[model.categoryRootName];
+            if (!chartModel) {
+                chartModel = new ExpenseCategoryTotalModel();
+                chartModelMap[model.categoryRootName] = chartModel;
+                this.categoryModels.push(chartModel);
 
-                categoryModel.categoryName = model.categoryName;
-                categoryModel.cost = 0;
+                chartModel.categoryName = model.categoryRootName;
+                chartModel.cost = 0;
             }
 
-            categoryModel.cost += model.cost || 0;
+            chartModel.cost += model.cost || 0;
         });
         if (this.categoryModels.length === 0) {
             this.categoryModels = null;
@@ -267,13 +267,15 @@ export class ExpenseListComponent implements OnInit {
     }
 
     private buildModel() {
-        const keys = Object.keys(this.expenseTypeMap);
+        const keys = Object.keys(this.categoryMap);
+        const categoryId = keys[0];
 
         const model = new ExpenseModel();
         model.cropSeasonId = this.selectedCropSeasonId;
         model.date = new Date();
-        model.categoryId = +keys[0];
-        model.categoryName = this.expenseTypeMap[keys[0]];
+        model.categoryId = +categoryId;
+        model.categoryName = this.categoryMap[categoryId].name;
+        model.categoryRootName = this.categoryMap[categoryId].rootName;
         model.cost = 0;
 
         return model;
