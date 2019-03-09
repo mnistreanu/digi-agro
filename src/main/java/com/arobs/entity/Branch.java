@@ -21,26 +21,25 @@ public class Branch {
     private Branch parent;
 
     @NotNull
-    @Column(columnDefinition = "varchar(128)")
+    @Column(name = "name")
     private String name;
 
-    @Column(columnDefinition = "varchar(1024)")
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "county_id", columnDefinition = "char(2)")
+    @ManyToOne (fetch = FetchType.EAGER)
+    @JoinColumn(name = "county_id")
+    private County county;
+    @Column(name = "county_id", insertable = false, updatable = false)
     private String countyId;
 
-    @ManyToOne (fetch = FetchType.EAGER)
-    @JoinColumn(name = "county_id", insertable = false, updatable = false)
-    private County county;
-
-    @Column(name = "city", columnDefinition = "varchar(128)")
+    @Column(name = "city")
     private String city;
 
-    @Column(name = "address", columnDefinition = "varchar(1024)")
+    @Column(name = "address")
     private String address;
 
-    @Column(name = "phones", columnDefinition = "varchar(128)")
+    @Column(name = "phones")
     private String phones;
 
     public Branch() {
