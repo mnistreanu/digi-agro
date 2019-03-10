@@ -987,8 +987,9 @@
                 (16, 1, 'Pesticide', 'Cheltuieli pentru pesticide'),
                 (17, 1, 'Irigare', 'Cheltuieli pentru irigare'),
                 (18, 1, 'Închiriere', 'Cheltuieli pentru închiriere'),
-                (19, 1, 'Pperaționale', 'Cheltuieli operaționale'),
+                (19, 1, 'Operaționale', 'Cheltuieli operaționale'),
                 (20, 1, 'Altele', 'Alte cheltuieli');
+
 
             INSERT INTO expense_category(id, tenant_id, parent_id, name) VALUES
                 (21, 1, 12, 'Motorină'),
@@ -998,6 +999,19 @@
 
             SELECT setval('expense_category_id_seq', (SELECT MAX(id) FROM expense_category)+1);
         </sql>
+    </changeSet>
+
+    <changeSet id="insert_tenant_1_expense_machinery_sub_categories" author="mihai.gorgos" failOnError="true" runOnChange="false">
+    <validCheckSum>ANY</validCheckSum>
+    <sql>
+        INSERT INTO expense_category(id, tenant_id, parent_id, name) VALUES
+        (25, 1, 11, 'Tractoare'),
+        (26, 1, 11, 'Combine'),
+        (27, 1, 11, 'Altă tehnică mecanizată'),
+        (28, 1, 11, 'Diverse echipamente');
+
+        SELECT setval('expense_category_id_seq', (SELECT MAX(id) FROM expense_category)+1);
+    </sql>
     </changeSet>
 
     <changeSet id="insert_tenant_1_expenses" author="maxim.nistreanu" failOnError="true" runOnChange="false">
