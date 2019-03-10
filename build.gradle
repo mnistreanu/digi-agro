@@ -69,9 +69,12 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
 
     compile('org.flywaydb:flyway-core')
-    compile('org.springframework.boot:spring-boot-starter-data-jpa')
-    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa') {
+        exclude group: 'org.apache.tomcat', module: 'tomcat-jdbc'
+    }
+    compile('com.zaxxer:HikariCP:3.2.0')
 
+    compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('io.jsonwebtoken:jjwt:0.7.0')
 
