@@ -54,8 +54,7 @@ public class ExpenseController {
     public ResponseEntity<ExpenseModel> save(@RequestBody ExpenseModel model, HttpSession session) {
         Long tenantId = (Long) session.getAttribute("tenant");
         Expense expense = expenseService.save(model, tenantId);
-        ExpenseCategory category = expenseCategoryService.findOne(expense.getCategoryId());
-        return ResponseEntity.ok(new ExpenseModel(expense, category));
+        return ResponseEntity.ok(new ExpenseModel(expense, expense.getCategory()));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

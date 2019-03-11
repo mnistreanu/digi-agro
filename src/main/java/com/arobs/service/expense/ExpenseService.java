@@ -26,6 +26,8 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
     private ExpenseRepository expenseRepository;
     @Autowired
     private CropSeasonService cropSeasonService;
+    @Autowired
+    private ExpenseCategoryService expenseCategoryService;
 
     @Override
     public ExpenseRepository getRepository() {
@@ -105,7 +107,7 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
             expense = findOne(model.getId());
         }
 
-        expense.setCategoryId(model.getCategoryId());
+        expense.setCategory(expenseCategoryService.findOne(model.getCategoryId()));
 
         expense.setDate(model.getDate());
         expense.setTitle(model.getTitle());
