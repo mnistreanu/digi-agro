@@ -21,6 +21,10 @@ public class Expense {
     @Column(name = "crop_season_id", insertable = false, updatable = false)
     private Long cropSeasonId;
 
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private ExpenseCategory category;
+    @Column(name = "category_id", insertable = false, updatable = false)
     private Long categoryId;
 
     private Date date;
@@ -98,5 +102,13 @@ public class Expense {
 
     public void setCropSeasonId(Long cropSeasonId) {
         this.cropSeasonId = cropSeasonId;
+    }
+
+    public ExpenseCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ExpenseCategory category) {
+        this.category = category;
     }
 }

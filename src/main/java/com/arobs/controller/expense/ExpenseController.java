@@ -3,6 +3,7 @@ package com.arobs.controller.expense;
 import com.arobs.entity.Expense;
 import com.arobs.entity.ExpenseCategory;
 import com.arobs.model.expense.ExpenseModel;
+import com.arobs.model.expense.ExpenseSeasonTreeModel;
 import com.arobs.service.expense.ExpenseCategoryService;
 import com.arobs.service.expense.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,14 @@ public class ExpenseController {
     private ExpenseService expenseService;
     @Autowired
     private ExpenseCategoryService expenseCategoryService;
+
+    @RequestMapping(value = "/season-tree", method = RequestMethod.GET)
+    public ResponseEntity<List<ExpenseSeasonTreeModel>> getExpenseSeasonTreeModels(HttpSession session) {
+        Long tenantId = (Long) session.getAttribute("tenant");
+        List<ExpenseSeasonTreeModel> models = expenseService.getExpenseSeasonTreeModels(tenantId);
+        return ResponseEntity.ok(models);
+    }
+
 
     @RequestMapping(value = "/{cropSeasonId}", method = RequestMethod.GET)
     public ResponseEntity<List<ExpenseModel>> getList(@PathVariable Long cropSeasonId, HttpSession session) {

@@ -1,6 +1,7 @@
 package com.arobs.repository;
 
 import com.arobs.entity.Expense;
+import com.arobs.model.expense.ExpenseSeasonGroupModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -22,5 +23,18 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     @Modifying
     @Query("DELETE FROM Expense e WHERE e.id = :id")
     void remove(@Param("id") Long id);
+
+    @Query("SELECT new com.arobs.model.expense.ExpenseSeasonGroupModel( " +
+            " e.cropSeasonId, " +
+            " e.categoryId, " +
+            " MIN(ec.name), " +
+            " EXTRACT(MONTH FROM e.date), " +
+            " SUM(e.cost) " +
+            " ) " +
+            "FROM Expense e " +
+            "LEFT JOIN e.category ec " +
+            "WHERE e.tenant = :tenantId " +
+            "GROUP BY e.cropSeasonId, e.categoryId, EXTRACT(MONTH FROM e.date)")
+    List<ExpenseSeasonGroupModel> getExpenseSeasonGroupModels(@Param("tenantId") Long tenantId);
 }
 

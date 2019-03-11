@@ -2,10 +2,10 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {PinnedRowRendererComponent} from '../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
-import {ExpenseSeasonListModel} from './expense-season-list.model';
-import {FieldMapper} from '../../../common/field.mapper';
 import {CropSeasonService} from '../../../services/crop/crop-season.service';
-import {CropSeasonListModel} from "../../manage-crops/crop-season/list/crop-season-list.model";
+import {ExpenseService} from '../../../services/expenses/expense.service';
+import {ExpenseSeasonTreeModel} from './expense-season-tree.model';
+import {AgNumericColumnType} from '../../../modules/aggrid/column-types/ag-numeric-type';
 
 @Component({
     selector: 'app-expense-season-list',
@@ -17,7 +17,8 @@ export class ExpenseSeasonListComponent implements OnInit {
     options: GridOptions;
     context;
 
-    constructor(private cropSeasonService: CropSeasonService,
+    constructor(private expenseService: ExpenseService,
+                private cropSeasonService: CropSeasonService,
                 private langService: LangService) {
 
     }
@@ -30,6 +31,7 @@ export class ExpenseSeasonListComponent implements OnInit {
 
     private setupGrid() {
         this.options = <GridOptions>{};
+        this.setupColumnTypes();
 
         this.options.enableColResize = true;
         this.options.enableSorting = true;
@@ -39,6 +41,12 @@ export class ExpenseSeasonListComponent implements OnInit {
         this.options.frameworkComponents = { pinnedRowRenderer: PinnedRowRendererComponent };
 
         this.context = {componentParent: this};
+    }
+
+    private setupColumnTypes() {
+        this.options.columnTypes = {
+            numericType: AgNumericColumnType.getType()
+        };
     }
 
     private setupHeaders() {
@@ -51,7 +59,7 @@ export class ExpenseSeasonListComponent implements OnInit {
         const headers: ColDef[] = [
             {
                 headerName: 'crop.season',
-                field: 'season',
+                field: 'title',
                 width: 200,
                 minWidth: 90,
                 pinned: 'left',
@@ -62,80 +70,104 @@ export class ExpenseSeasonListComponent implements OnInit {
                 headerName: 'month.jan',
                 field: 'jan',
                 width: 50,
-                minWidth: 50
+                minWidth: 50,
+                type: 'numericType',
+                valueGetter: (params) => this.getMonthValue(params, 1)
             },
             {
                 headerName: 'month.feb',
                 field: 'feb',
                 width: 50,
                 minWidth: 50,
-                suppressFilter: true
+                type: 'numericType',
+                valueGetter: (params) => this.getMonthValue(params, 2)
             },
             {
                 headerName: 'month.mar',
                 field: 'mar',
                 width: 50,
-                minWidth: 50
+                minWidth: 50,
+                type: 'numericType',
+                valueGetter: (params) => this.getMonthValue(params, 3)
             },
             {
                 headerName: 'month.apr',
                 field: 'apr',
                 width: 50,
-                minWidth: 50
+                minWidth: 50,
+                type: 'numericType',
+                valueGetter: (params) => this.getMonthValue(params, 4)
             },
             {
                 headerName: 'month.may',
                 field: 'may',
                 width: 50,
-                minWidth: 50
+                minWidth: 50,
+                type: 'numericType',
+                valueGetter: (params) => this.getMonthValue(params, 5)
             },
             {
                 headerName: 'month.jun',
                 field: 'jun',
                 width: 50,
-                minWidth: 50
+                minWidth: 50,
+                type: 'numericType',
+                valueGetter: (params) => this.getMonthValue(params, 6)
             },
             {
                 headerName: 'month.jul',
                 field: 'jul',
                 width: 50,
-                minWidth: 50
+                minWidth: 50,
+                type: 'numericType',
+                valueGetter: (params) => this.getMonthValue(params, 7)
             },
             {
                 headerName: 'month.aug',
                 field: 'aug',
                 width: 50,
-                minWidth: 50
+                minWidth: 50,
+                type: 'numericType',
+                valueGetter: (params) => this.getMonthValue(params, 8)
             },
             {
                 headerName: 'month.sep',
                 field: 'sep',
                 width: 50,
-                minWidth: 50
+                minWidth: 50,
+                type: 'numericType',
+                valueGetter: (params) => this.getMonthValue(params, 9)
             },
             {
                 headerName: 'month.oct',
                 field: 'oct',
                 width: 50,
-                minWidth: 50
+                minWidth: 50,
+                type: 'numericType',
+                valueGetter: (params) => this.getMonthValue(params, 10)
             },
             {
                 headerName: 'month.nov',
                 field: 'nov',
                 width: 50,
-                minWidth: 50
+                minWidth: 50,
+                type: 'numericType',
+                valueGetter: (params) => this.getMonthValue(params, 11)
             },
             {
                 headerName: 'month.dec',
                 field: 'dec',
                 width: 50,
-                minWidth: 50
+                minWidth: 50,
+                type: 'numericType',
+                valueGetter: (params) => this.getMonthValue(params, 12)
             },
             {
                 headerName: 'general.total',
-                field: 'total',
+                field: 'totalCost',
                 width: 50,
-                minWidth: 50
+                minWidth: 50,
+                type: 'numericType'
             }
         ];
 
@@ -148,70 +180,54 @@ export class ExpenseSeasonListComponent implements OnInit {
         return headers;
     }
 
+    private getMonthValue(params, month) {
+        const values = params.data.values;
+        return values ? values[month] : null;
+    }
+
     private setupTreeData() {
-        const treeModels: ExpenseSeasonListModel[] = [];
-        this.cropSeasonService.find().subscribe(seasonModels => {
-            this.cropSeasonService.adjustListModels(seasonModels);
-            seasonModels.forEach((model: CropSeasonListModel) => {
-                let a = new ExpenseSeasonListModel();
-                a.season = model.harvestYearCropVariety;
-                treeModels.push(a);
+        this.expenseService.getExpenseSeasonTreeModels().subscribe((models: ExpenseSeasonTreeModel[]) => {
+            models.forEach(rootModel => {
+                this.cropSeasonService.adjustModel(rootModel.cropSeasonModel);
+                rootModel.title = rootModel.cropSeasonModel.harvestYearCropVariety;
+                rootModel.children.forEach(child => child.title = child.categoryName);
             });
-            debugger;
-            this.adjustModels(treeModels);
-            this.options.api.setRowData(treeModels);
-            this.setupSummaryRow(treeModels);
+
+            this.options.api.setRowData(models);
+            this.setupSummaryRow(models);
         });
     }
 
-    private adjustModels(models: ExpenseSeasonListModel[]) {
-        const mapper = new FieldMapper(this.langService.getLanguage());
-        const season = mapper.get('season');
-        const expenseType = mapper.get('expenseType');
-        models.forEach((model: ExpenseSeasonListModel) => {
-            model.expenseType = model[season];
-            model.children.forEach(child => {
-                child.jan = Math.round(Math.random() * 100);
-                child.feb = Math.round(Math.random() * 100);
-                child.mar = Math.round(Math.random() * 100);
-                child.apr = Math.round(Math.random() * 100);
-                child.may = Math.round(Math.random() * 100);
-                child.jun = Math.round(Math.random() * 100);
-                child.jul = Math.round(Math.random() * 100);
-                child.aug = Math.round(Math.random() * 100);
-                child.sep = Math.round(Math.random() * 100);
-                child.oct = Math.round(Math.random() * 100);
-                child.nov = Math.round(Math.random() * 100);
-                child.dec = Math.round(Math.random() * 100);
-                child.total = child.jan + child.feb + child.mar + child.apr + child.may + child.jun +
-                              child.jul + child.aug + child.sep + child.oct + child.nov + child.dec;
-
-                this.aggregate(model, child);
-                child.expenseType = child[expenseType];
-            });
-        });
-    }
-
-    private aggregate(source: ExpenseSeasonListModel, item: ExpenseSeasonListModel) {
-
-        const sumFields = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec', 'total'];
-
-        sumFields.forEach(field => {
-            source[field] = source[field] || 0;
-            source[field] += item[field] || 0;
-        });
-    }
-
-    private setupSummaryRow(rows) {
-        const summaryRow = new ExpenseSeasonListModel();
-        summaryRow.expenseType = 'TOTAL';
-        rows.forEach(row => {
-            row.children.forEach(child => {
-                this.aggregate(summaryRow, child);
-            });
-        });
+    private setupSummaryRow(models) {
+        const summaryRow = new ExpenseSeasonTreeModel();
+        summaryRow.title = 'TOTAL';
+        this.aggregate(summaryRow, models);
         this.options.api.setPinnedBottomRowData([summaryRow]);
     }
+
+    private aggregate(model: ExpenseSeasonTreeModel, sourceItems: ExpenseSeasonTreeModel[]) {
+        let totalCost = 0;
+
+        sourceItems.forEach(source => {
+            if (!source.values) {
+                return;
+            }
+
+            if (!model.values) {
+                model.values = new Map<number, number>();
+            }
+
+            Object.keys(source.values).forEach(key => {
+                const sourceValue = source.values[key] || 0;
+                model.values[key] = model.values[key] || 0;
+                model.values[key] = model.values[key] + sourceValue;
+                totalCost += sourceValue;
+            });
+        });
+
+        model.totalCost = totalCost;
+    }
+
 
     private getNodeChildDetails(item) {
         if (!item.children) {
