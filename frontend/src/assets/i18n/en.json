@@ -155,7 +155,8 @@
 		"form": "Form",
 		"lines-per-table": "Lines per table",
 		"none": "None",
-		"settings": "Settings"
+		"settings": "Settings",
+		"total": "Total"
 	},
 	"geo": {
 		"address": "Address",
@@ -220,6 +221,20 @@
 		"SOWING": "Sowing",
 		"TRACTOR": "Tractor"
 	},
+	"month": {
+		"apr": "Apr",
+		"aug": "Aug",
+		"dec": "Dec",
+		"feb": "Feb",
+		"jan": "Jan",
+		"jul": "Jul",
+		"jun": "Jun",
+		"mar": "Mar",
+		"may": "May",
+		"nov": "Nov",
+		"oct": "Oct",
+		"sep": "Sep"
+	},
 	"nav": {
 		"agricultural-machinery": "Agricultural machinery",
 		"agricultural-works": "Agricultural works",
@@ -239,6 +254,7 @@
 		"enterprise": "Enterprise",
 		"expense-categories": "Expense categories",
 		"expenses-management": "Expenses management",
+		"expenses-seasons": "Expenseses by seasons",
 		"farmland": "Farmland",
 		"fertilizers": "Fertilizers",
 		"field-diagnosis": "Field diagnosis",
