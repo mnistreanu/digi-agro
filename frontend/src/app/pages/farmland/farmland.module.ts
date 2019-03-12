@@ -15,9 +15,13 @@ import {EditRendererComponent} from '../../modules/aggrid/edit-renderer/edit-ren
 import {EditRendererModule} from '../../modules/aggrid/edit-renderer/edit-renderer.module';
 import {NguiAutoCompleteModule} from '@ngui/auto-complete';
 import {ParcelListComponent} from './field-diagnosis/list/parcel-list.component';
+import {CropPlannerComponent} from './crop-planner/list/crop-planner.component';
+import {ManageHarvestComponent} from './manage-harvest/list/manage-harvest.component';
 
 export const routes = [
     {path: 'field-list', component: ParcelListComponent, data: {breadcrumb: 'Field list'}},
+    {path: 'manage-harvest', component: ManageHarvestComponent, data: {breadcrumb: 'Manage Harvest'}},
+    {path: 'crop-planner', component: CropPlannerComponent, data: {breadcrumb: 'Crop planner'}},
     // {path: 'manage-branches/:id', component: BranchComponent, data: {breadcrumb: 'Branch Form'}},
     // {path: 'manage-users', component: UserListComponent, data: {breadcrumb: 'Users'}},
     // {path: 'manage-users/:id', component: UserFormComponent, data: {breadcrumb: 'User Form'}},
@@ -47,15 +51,8 @@ export const routes = [
     ],
     declarations: [
         ParcelListComponent,
-        // BranchComponent,
-        // UserListComponent,
-        // UserFormComponent,
-        // EmployeeListComponent,
-        // EmployeeComponent,
-        // MachineListComponent,
-        // MachineComponent,
-        // ExpenseCategoryTreeComponent,
-        // ExpenseCategoryComponent
+        CropPlannerComponent,
+        ManageHarvestComponent
     ],
     providers: []
 })
