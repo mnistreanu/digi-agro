@@ -3,6 +3,8 @@ import {ColDef, GridOptions} from 'ag-grid';
 import {ManageHarvestModel} from '../manage-harvest.model';
 import {ParcelService} from '../../../../services/parcel.service';
 import {LangService} from '../../../../services/lang.service';
+import {FieldMapper} from '../../../../common/field.mapper';
+import {DateUtil} from '../../../../common/dateUtil';
 
 @Component({
     selector: 'app-manage-harvest',
@@ -44,35 +46,65 @@ export class ManageHarvestComponent implements OnInit {
 
         const headers: ColDef[] = [
             {
-                headerName: 'info.name',
-                field: 'name',
-                tooltipField: 'description',
-                width: 200,
-                minWidth: 200
-            },
-            {
                 headerName: 'parcel.cadaster-number',
                 field: 'cadasterNumber',
-                width: 140,
-                minWidth: 140
+                width: 150,
+                minWidth: 150
             },
             {
-                headerName: 'parcel.land-worthiness-points',
-                field: 'landWorthinessPoints',
-                width: 100,
-                minWidth: 100
-            },
-            {
-                headerName: 'parcel.area',
-                field: 'area',
-                width: 100,
-                minWidth: 100
+                headerName: 'info.name',
+                field: 'description',
+                tooltipField: 'description',
+                width: 150,
+                minWidth: 150
             },
             {
                 headerName: 'crop.crop',
-                field: 'description',
+                field: 'name',
+                width: 150,
+                minWidth: 150
+            },
+            {
+                headerName: 'Seeded Hectares',
+                field: 'seededHectares',
+                width: 100,
+                minWidth: 100
+            },
+            {
+                headerName: 'Harvest Date',
+                field: 'harvestDate',
+                width: 100,
+                minWidth: 100
+            },
+            {
+                headerName: 'hectares',
+                field: 'hectares',
+                width: 100,
+                minWidth: 100
+            },
+            {
+                headerName: 'Actual Yield',
+                field: 'actualYield',
+                width: 100,
+                minWidth: 100
+            },
+            {
+                headerName: 'Total Yield',
+                field: 'totalYield',
+                width: 100,
+                minWidth: 100
+            },
+            {
+                headerName: 'Comments',
+                field: 'Comments',
                 width: 200,
                 minWidth: 200
+            },
+            {
+                headerName: 'Sale Price',
+                field: 'salePrice',
+                width: 100,
+                minWidth: 100
             }
 
         ];
@@ -87,10 +119,26 @@ export class ManageHarvestComponent implements OnInit {
 
     public setupRows() {
         this.parcelService.find().subscribe(models => {
-            this.options.api.setRowData(models);
-            this.models = models;
+            models.forEach((model) => {
+                const mhm: ManageHarvestModel = new ManageHarvestModel();
+                mhm.id = model.id;
+                mhm.name = model.name;
+                mhm.cadasterNumber = model.cadasterNumber;
+                mhm.description = model.description;
+                mhm.seededHectares = Math.round(Math.random() * 100);
+                mhm.harvestDate = DateUtil.formatDate(new Date());
+                mhm.hectares = Math.round(Math.random() * 100);
+                mhm.actualYield = Math.round(Math.random() * 100);
+                mhm.totalYield = Math.round(Math.random() * 100);
+                mhm.comments = '';
+                mhm.salePrice = Math.round(Math.random() * 100);
+
+                this.models.push(mhm);
+            });
+
+            this.options.api.setRowData(this.models);
             this.adjustGridSize();
-            this.parcelService.adjust(this.models);
+            // this.adjustModels(this.models);
             this.dataChanged.emit(this.models);
         });
     }
@@ -98,6 +146,17 @@ export class ManageHarvestComponent implements OnInit {
     public onGridReady() {
         this.options.api.sizeColumnsToFit();
     }
+//
+//     public adjustModels(models: ManageHarvestModel[]) {
+//         const fieldMapper = new FieldMapper(this.langService.getLanguage());
+//         const lastWorkTypeField = fieldMapper.get('lastWorkType');
+//         const cropNameField = fieldMapper.get('cropName');
+//
+//         this.models.forEach((model) => {
+// //            model.lastWorkType = model[lastWorkTypeField];
+// //            model.cropName = model[cropNameField];
+//         });
+//     }
 
     public adjustGridSize() {
         setTimeout(() => {
