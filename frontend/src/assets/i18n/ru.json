@@ -364,6 +364,8 @@
 		"description": "Описание",
 		"general-tab": "Общая информация",
 		"ha": "га",
+		"irrigated-long": "Орошаемая",
+		"irrigated-short": "Оро.",
 		"land-worthiness-points": "Земельная ценность",
 		"last-work": "Последняя работа",
 		"last-work-date": "Дата последней работы",

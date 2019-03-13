@@ -364,6 +364,8 @@
 		"description": "Description",
 		"general-tab": "General",
 		"ha": "hectare",
+		"irrigated-long": "Irrigated",
+		"irrigated-short": "Irr.",
 		"land-worthiness-points": "Landworthiness",
 		"last-work": "Last Work",
 		"last-work-date": "Last Work Date",

@@ -58,9 +58,11 @@ public class Parcel {
     @Column(name = "last_work_type_id")
     private Long lastWorkTypeId;
 
+    @Column(name="irrigated", columnDefinition = "boolean default false")
+    private boolean irrigated;
+
     @Column(columnDefinition = "boolean default true")
     private boolean active = true;
-
 
     public Long getId() {
         return id;
@@ -164,6 +166,14 @@ public class Parcel {
 
     public void setLastWorkTypeId(Long lastWorkTypeId) {
         this.lastWorkTypeId = lastWorkTypeId;
+    }
+
+    public boolean isIrrigated() {
+        return irrigated;
+    }
+
+    public void setIrrigated(boolean irrigated) {
+        this.irrigated = irrigated;
     }
 
     public boolean isActive() {
