@@ -6,14 +6,13 @@ public class ExpenseSeasonGroupModel {
 
     private Long cropSeasonId;
     private Long categoryId;
-    private String categoryName;
     private Integer periodIndex;
     private BigDecimal cost;
 
-    public ExpenseSeasonGroupModel(Long cropSeasonId, Long categoryId, String categoryName, Integer periodIndex, BigDecimal cost) {
+    public ExpenseSeasonGroupModel(Long cropSeasonId, Long categoryId,
+                                   Integer periodIndex, BigDecimal cost) {
         this.cropSeasonId = cropSeasonId;
         this.categoryId = categoryId;
-        this.categoryName = categoryName;
         this.periodIndex = periodIndex;
         this.cost = cost;
     }
@@ -48,13 +47,5 @@ public class ExpenseSeasonGroupModel {
 
     public void setCost(BigDecimal cost) {
         this.cost = cost;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
     }
 }

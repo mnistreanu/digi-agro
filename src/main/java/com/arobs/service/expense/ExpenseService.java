@@ -2,6 +2,7 @@ package com.arobs.service.expense;
 
 import com.arobs.entity.CropSeason;
 import com.arobs.entity.Expense;
+import com.arobs.entity.ExpenseCategory;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.crop.CropSeasonModel;
 import com.arobs.model.expense.ExpenseModel;
@@ -42,7 +43,7 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
         return getRepository().find(tenantId, cropSeasonId);
     }
 
-    public List<ExpenseSeasonGroupModel> getExpenseSeasonGroupModels(Long tenantId) {
+    private List<ExpenseSeasonGroupModel> getExpenseSeasonGroupModels(Long tenantId) {
         return getRepository().getExpenseSeasonGroupModels(tenantId);
     }
 
@@ -53,45 +54,98 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
         Map<Long, CropSeasonModel> cropSeasonModelMap = cropSeasons.stream()
                 .map(CropSeasonModel::new).collect(Collectors.toMap(CropSeasonModel::getId, m -> m));
 
+        List<ExpenseCategory> expenseCategories = expenseCategoryService.find(tenantId);
+        Map<Long, ExpenseCategory> expenseCategoryMap = expenseCategories.stream()
+                .collect(Collectors.toMap(ExpenseCategory::getId, c -> c));
+
         List<ExpenseSeasonTreeModel> models = new ArrayList<>();
         Map<String, ExpenseSeasonTreeModel> modelMap = new HashMap<>();
 
         for (ExpenseSeasonGroupModel groupModel : groupModels) {
-            String rootIdentifier = "R-" + groupModel.getCropSeasonId();
-            ExpenseSeasonTreeModel rootModel = modelMap.get(rootIdentifier);
-            if (rootModel == null) {
-                rootModel = new ExpenseSeasonTreeModel();
-                modelMap.put(rootIdentifier, rootModel);
-                models.add(rootModel);
+            String seasonIdentifier = "R-" + groupModel.getCropSeasonId();
+            ExpenseSeasonTreeModel rootModel = buildExpenseSeasonRoot(seasonIdentifier, groupModel, models, modelMap, cropSeasonModelMap);
 
-                rootModel.setCropSeasonModel(cropSeasonModelMap.get(groupModel.getCropSeasonId()));
-                rootModel.setChildren(new ArrayList<>());
+            ExpenseCategory ec = expenseCategoryMap.get(groupModel.getCategoryId());
+            ExpenseSeasonTreeModel parentModel;
+
+            if (ec.getParentId() != null) {
+                parentModel = buildExpenseSeasonTreeModel(seasonIdentifier, null, rootModel, modelMap, ec.getParentId(), expenseCategoryMap);
+            }
+            else {
+                parentModel = rootModel;
             }
 
-            String categoryIdentifier = rootIdentifier + "-C-" + groupModel.getCategoryId();
-            ExpenseSeasonTreeModel categoryModel = modelMap.get(categoryIdentifier);
-            if (categoryModel == null) {
-                categoryModel = new ExpenseSeasonTreeModel();
-                modelMap.put(categoryIdentifier, categoryModel);
-
-                categoryModel.setCategoryName(groupModel.getCategoryName());
-                categoryModel.setValues(new HashMap<>());
-                rootModel.getChildren().add(categoryModel);
-            }
-            categoryModel.getValues().put(groupModel.getPeriodIndex(), groupModel.getCost());
+            buildExpenseSeasonTreeModel(seasonIdentifier, groupModel, parentModel, modelMap, ec.getId(), expenseCategoryMap);
         }
 
-        // recalculate values (root + formulas)
         for (ExpenseSeasonTreeModel model : models) {
-            for (ExpenseSeasonTreeModel child : model.getChildren()) {
-                child.calcTotalCost();
-                model.append(child);
-            }
-            model.calcTotalCost();
+            adjustExpenseSeasonTreeModel(model);
         }
 
         return models;
     }
+
+    private void adjustExpenseSeasonTreeModel(ExpenseSeasonTreeModel model) {
+        if (model.getChildren() != null) {
+            for (ExpenseSeasonTreeModel childModel : model.getChildren()) {
+                adjustExpenseSeasonTreeModel(childModel);
+                model.append(childModel);
+            }
+        }
+
+        model.calcTotalCost();
+    }
+
+    private ExpenseSeasonTreeModel buildExpenseSeasonRoot(String identifier,
+                                                          ExpenseSeasonGroupModel groupModel,
+                                                          List<ExpenseSeasonTreeModel> models,
+                                                          Map<String, ExpenseSeasonTreeModel> modelMap,
+                                                          Map<Long, CropSeasonModel> cropSeasonModelMap) {
+        ExpenseSeasonTreeModel model = modelMap.get(identifier);
+        if (model == null) {
+            model = new ExpenseSeasonTreeModel();
+            modelMap.put(identifier, model);
+            models.add(model);
+
+            model.setCropSeasonModel(cropSeasonModelMap.get(groupModel.getCropSeasonId()));
+        }
+        return model;
+    }
+
+    private ExpenseSeasonTreeModel buildExpenseSeasonTreeModel(String seasonIdentifier,
+                                                               ExpenseSeasonGroupModel groupModel,
+                                                               ExpenseSeasonTreeModel parentModel,
+                                                               Map<String, ExpenseSeasonTreeModel> modelMap,
+                                                               Long expenseCategoryId,
+                                                               Map<Long, ExpenseCategory> expenseCategoryMap) {
+
+        String identifier = seasonIdentifier + "-" + expenseCategoryId;
+        ExpenseSeasonTreeModel model = modelMap.get(identifier);
+
+        if (model == null) {
+            model = new ExpenseSeasonTreeModel();
+            modelMap.put(identifier, model);
+
+            ExpenseCategory ec = expenseCategoryMap.get(expenseCategoryId);
+
+            model.setCategoryName(ec.getName());
+            model.setTitle(model.getCategoryName());
+
+            model.setValues(new HashMap<>());
+
+            if (parentModel.getChildren() == null) {
+                parentModel.setChildren(new ArrayList<>());
+            }
+            parentModel.getChildren().add(model);
+        }
+
+        if (groupModel != null) {
+            model.getValues().put(groupModel.getPeriodIndex(), groupModel.getCost());
+        }
+
+        return model;
+    }
+
 
     @Transactional
     public Expense save(ExpenseModel model, Long tenantId) {

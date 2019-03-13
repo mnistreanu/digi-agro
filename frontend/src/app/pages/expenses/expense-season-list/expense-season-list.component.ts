@@ -190,7 +190,6 @@ export class ExpenseSeasonListComponent implements OnInit {
             models.forEach(rootModel => {
                 this.cropSeasonService.adjustModel(rootModel.cropSeasonModel);
                 rootModel.title = rootModel.cropSeasonModel.harvestYearCropVariety;
-                rootModel.children.forEach(child => child.title = child.categoryName);
             });
 
             this.options.api.setRowData(models);

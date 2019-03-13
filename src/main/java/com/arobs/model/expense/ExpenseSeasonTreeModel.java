@@ -10,8 +10,17 @@ import java.util.Map;
 
 public class ExpenseSeasonTreeModel {
 
+    /**
+     * only root contains: season information
+     */
     private CropSeasonModel cropSeasonModel;
     private String categoryName;
+
+    /**
+     * root: in frontend will be populated based on season information
+     * others: categoryName
+     */
+    private String title;
 
     private Map<Integer, BigDecimal> values;
     private BigDecimal totalCost;
@@ -81,5 +90,13 @@ public class ExpenseSeasonTreeModel {
 
     public void setTotalCost(BigDecimal totalCost) {
         this.totalCost = totalCost;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

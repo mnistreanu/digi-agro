@@ -27,7 +27,6 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     @Query("SELECT new com.arobs.model.expense.ExpenseSeasonGroupModel( " +
             " e.cropSeasonId, " +
             " e.categoryId, " +
-            " MIN(ec.name), " +
             " EXTRACT(MONTH FROM e.date), " +
             " SUM(e.cost) " +
             " ) " +
@@ -36,5 +35,6 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
             "WHERE e.tenant = :tenantId " +
             "GROUP BY e.cropSeasonId, e.categoryId, EXTRACT(MONTH FROM e.date)")
     List<ExpenseSeasonGroupModel> getExpenseSeasonGroupModels(@Param("tenantId") Long tenantId);
+
 }
 
