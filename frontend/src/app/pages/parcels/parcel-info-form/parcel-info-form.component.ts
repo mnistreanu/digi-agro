@@ -27,6 +27,7 @@ export class ParcelInfoFormComponent implements OnInit {
             cadasterNumber: [this.parcelModel.cadasterNumber, Validators.required],
             landWorthinessPoints: [this.parcelModel.landWorthinessPoints],
             area: [this.parcelModel.area],
+            irrigated: [this.parcelModel.irrigated],
             description: [this.parcelModel.description]
         });
     }

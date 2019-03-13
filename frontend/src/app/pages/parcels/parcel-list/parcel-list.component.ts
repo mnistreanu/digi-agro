@@ -74,15 +74,22 @@ export class ParcelListComponent implements OnInit {
             {
                 headerName: 'parcel.land-worthiness-points',
                 field: 'landWorthinessPoints',
-                width: 200,
-                minWidth: 200
+                width: 150,
+                minWidth: 100
             },
             {
                 headerName: 'parcel.area',
                 field: 'area',
-                width: 200,
-                minWidth: 200,
+                width: 150,
+                minWidth: 100,
                 valueFormatter: (params) => NumericUtil.format(params.value)
+            },
+            {
+                headerName: 'parcel.irrigated-short',
+                field: 'irrigated',
+                width: 80,
+                minWidth: 80,
+                valueFormatter: (params) => NumericUtil.formatBoolean(params.value)
             },
             {
                 headerName: 'info.description',

@@ -73,6 +73,7 @@ export class ManageHarvestComponent implements OnInit {
             {
                 headerName: 'Harvest Date',
                 field: 'harvestDate',
+                valueFormatter: params => DateUtil.formatDate(params.value),
                 width: 100,
                 minWidth: 100
             },
@@ -126,11 +127,11 @@ export class ManageHarvestComponent implements OnInit {
                 mhm.cadasterNumber = model.cadasterNumber;
                 mhm.description = model.description;
                 mhm.seededHectares = Math.round(Math.random() * 100);
-                mhm.harvestDate = DateUtil.formatDate(new Date());
+                mhm.harvestDate = new Date();
                 mhm.hectares = Math.round(Math.random() * 100);
                 mhm.actualYield = Math.round(Math.random() * 100);
                 mhm.totalYield = Math.round(Math.random() * 100);
-                mhm.comments = '';
+                mhm.comments = 'some comments';
                 mhm.salePrice = Math.round(Math.random() * 100);
 
                 this.models.push(mhm);

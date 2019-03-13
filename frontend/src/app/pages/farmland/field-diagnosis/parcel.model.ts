@@ -5,6 +5,7 @@ export class ParcelModel {
     cadasterNumber: string;
     landWorthinessPoints: number;
     area: number;
+    irrigated: boolean;
     description: string;
     coordinates: any;
 

@@ -88,9 +88,9 @@ export class CropPlannerComponent implements OnInit {
     public setupRows() {
         this.parcelService.find().subscribe(models => {
             this.options.api.setRowData(models);
-            this.models = models;
+            // this.models = models;
             this.adjustGridSize();
-            this.parcelService.adjust(this.models);
+//            this.parcelService.adjust(this.models);
             this.dataChanged.emit(this.models);
         });
     }
