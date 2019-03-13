@@ -13,3 +13,20 @@
 .ag-cell-edit-input {
   height: 100% !important;
 }
+
+.ag-numeric-field {
+  text-align: right;
+}
+
+.ag-floating-bottom {
+  .ag-row {
+    background: #f1f1f1 !important;
+  }
+
+  .ag-cell {
+    font-weight: bold !important;
+  }
+  .ag-cell .ag-group-value {
+    font-weight: bold !important;
+  }
+}

@@ -38,7 +38,6 @@ export class ExpenseSeasonListComponent implements OnInit {
         this.options.enableFilter = true;
         this.options.rowSelection = 'single';
         this.options.columnDefs = this.setupHeaders();
-        this.options.frameworkComponents = { pinnedRowRenderer: PinnedRowRendererComponent };
 
         this.context = {componentParent: this};
     }
@@ -50,11 +49,6 @@ export class ExpenseSeasonListComponent implements OnInit {
     }
 
     private setupHeaders() {
-
-        this.options.defaultColDef = {
-            pinnedRowCellRenderer: 'pinnedRowRenderer',
-            pinnedRowCellRendererParams: { style: { fontWeight: 'bold' } } // color: 'blue'
-        };
 
         const headers: ColDef[] = [
             {

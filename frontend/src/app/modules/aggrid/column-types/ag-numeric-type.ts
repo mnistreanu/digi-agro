@@ -12,7 +12,8 @@ export class AgNumericColumnType {
                 }
                 return +newValue;
             },
-            filter: 'agNumberColumnFilter'
+            filter: 'agNumberColumnFilter',
+            cellClass: 'ag-numeric-field'
         };
     }
 
