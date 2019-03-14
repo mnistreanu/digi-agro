@@ -6,7 +6,8 @@ import {environment} from '../../environments/environment';
 import {FieldMapper} from '../common/field.mapper';
 import {LangService} from './lang.service';
 import {LatLng} from '../interfaces/lat-lng.interface';
-import {ParcelSeasonModel} from "../pages/parcels/parcel-season-form/parcel-season.model";
+import {ParcelSeasonModel} from '../pages/parcels/parcel-season-form/parcel-season.model';
+import {ManageHarvestModel} from "../pages/farmland/manage-harvest/manage-harvest.model";
 
 @Injectable({
     providedIn: 'root'
@@ -33,6 +34,10 @@ export class ParcelService {
 
     findLastSeason(parcelId: number): Observable<ParcelSeasonModel> {
         return this.http.get<ParcelSeasonModel>(this.api + '-crop-season/last/' + parcelId);
+    }
+
+    findHarvestSummary(harvestYear: number): Observable<ManageHarvestModel> {
+        return this.http.get<ManageHarvestModel>(this.api + '-harvest-summary/' + harvestYear);
     }
 
     save(model: ParcelModel): Observable<ParcelModel> {

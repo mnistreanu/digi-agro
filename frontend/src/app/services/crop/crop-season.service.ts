@@ -34,6 +34,15 @@ export class CropSeasonService {
         });
     }
 
+    public adjustModel(model: CropSeasonListModel) {
+        const fieldMapper = new FieldMapper(this.langService.getLanguage());
+        const nameField = fieldMapper.get('name');
+        model.harvestYearCropVariety = model.harvestYear + ' ' + model.cropModel[nameField];
+        if (model.cropVarietyModel != null) {
+            model.harvestYearCropVariety += ' ' + model.cropVarietyModel[nameField];
+        }
+    }
+
     findOne(id: number): Observable<CropSeasonModel> {
         return this.http.get<CropSeasonModel>(this.api + '/' + id);
     }

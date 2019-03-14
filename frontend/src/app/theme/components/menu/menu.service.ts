@@ -108,7 +108,7 @@ export class MenuService {
                     },
                     {
                         title: 'nav.harvest-summary',
-                        routerLink: 'farmland/harvest-summary'
+                        routerLink: 'farmland/manage-harvest'
                     },
                 ]
             });
@@ -201,6 +201,10 @@ export class MenuService {
                     {
                         title: 'expenses.expenses',
                         routerLink: 'expenses',
+                    },
+                    {
+                        title: 'nav.expenses-seasons',
+                        routerLink: 'expenses/expense-season-list',
                     }
                 ]
             });

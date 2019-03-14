@@ -13,6 +13,7 @@ public class ParcelModel {
     private Integer landWorthinessPoints;
     private Double area;
     private String name;
+    private boolean irrigated;
     private String description;
 
     private List<BigDecimal[]> coordinates;
@@ -38,6 +39,7 @@ public class ParcelModel {
         landWorthinessPoints = entity.getLandWorthinessPoints();
         area = entity.getArea();
         name = entity.getName();
+        irrigated = entity.isIrrigated();
         description = entity.getDescription();
     }
 //
@@ -89,6 +91,14 @@ public class ParcelModel {
 
     public void setArea(Double area) {
         this.area = area;
+    }
+
+    public boolean isIrrigated() {
+        return irrigated;
+    }
+
+    public void setIrrigated(boolean irrigated) {
+        this.irrigated = irrigated;
     }
 
     public String getName() {

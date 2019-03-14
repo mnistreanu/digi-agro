@@ -18,9 +18,11 @@ import {ChartsModule} from 'ng2-charts';
 import {ConfirmationModalModule} from '../../modules/confirmation-modal/confirmation-modal.module';
 import {GroupedSelectorComponent} from '../../modules/aggrid/grouped-selector/grouped-selector.component';
 import {GroupedSelectorModule} from '../../modules/aggrid/grouped-selector/grouped-selector.module';
+import {ExpenseSeasonListComponent} from './expense-season-list/expense-season-list.component';
 
 export const routes = [
-    {path: '', component: ExpenseListComponent}
+    {path: '', component: ExpenseListComponent},
+    {path: 'expense-season-list', component: ExpenseSeasonListComponent}
 ];
 
 
@@ -46,7 +48,7 @@ export const routes = [
         ]),
         RouterModule.forChild(routes)
     ],
-    declarations: [ExpenseListComponent, ExpensesPieChartComponent]
+    declarations: [ExpenseListComponent, ExpenseSeasonListComponent, ExpensesPieChartComponent]
 })
 export class ExpensesModule {
 }

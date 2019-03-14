@@ -155,7 +155,8 @@
 		"form": "Форма",
 		"lines-per-table": "Строк в таблице",
 		"none": "Нет",
-		"settings": "Настройки"
+		"settings": "Настройки",
+		"total": "Всего"
 	},
 	"geo": {
 		"address": "Адрес",
@@ -220,6 +221,20 @@
 		"SOWING": "Сеялка",
 		"TRACTOR": "Трактор"
 	},
+	"month": {
+		"apr": "Апр",
+		"aug": "Авг",
+		"dec": "Дек",
+		"feb": "Фев",
+		"jan": "Янв",
+		"jul": "Июль",
+		"jun": "Июнь",
+		"mar": "Март",
+		"may": "Май",
+		"nov": "Нояб",
+		"oct": "Окт",
+		"sep": "Сен"
+	},
 	"nav": {
 		"agricultural-machinery": "Сельхоз. техника",
 		"agricultural-works": "Сельхоз. работы",
@@ -239,6 +254,7 @@
 		"enterprise": "Предприятие",
 		"expense-categories": "Категории расходов",
 		"expenses-management": "Учет затрат",
+		"expenses-seasons": "Учет затрат за сезоны",
 		"farmland": "Сельхоз. земля",
 		"fertilizers": "Удобрения",
 		"field-diagnosis": "Диагноз поля",
@@ -348,6 +364,8 @@
 		"description": "Описание",
 		"general-tab": "Общая информация",
 		"ha": "га",
+		"irrigated-long": "Орошаемая",
+		"irrigated-short": "Оро.",
 		"land-worthiness-points": "Земельная ценность",
 		"last-work": "Последняя работа",
 		"last-work-date": "Дата последней работы",

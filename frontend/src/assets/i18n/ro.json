@@ -155,7 +155,8 @@
 		"form": "Forma",
 		"lines-per-table": "Linii în listă",
 		"none": "Nu este",
-		"settings": "Setări"
+		"settings": "Setări",
+		"total": "Total"
 	},
 	"geo": {
 		"address": "Adresa",
@@ -220,6 +221,20 @@
 		"SOWING": "Semănătoare",
 		"TRACTOR": "Tractor"
 	},
+	"month": {
+		"apr": "Apr",
+		"aug": "Aug",
+		"dec": "Dec",
+		"feb": "Feb",
+		"jan": "Ian",
+		"jul": "Iul",
+		"jun": "Iun",
+		"mar": "Mar",
+		"may": "Mai",
+		"nov": "Noi",
+		"oct": "Oct",
+		"sep": "Sep"
+	},
 	"nav": {
 		"agricultural-machinery": "Maşini agricole",
 		"agricultural-works": "Lucrări agricole",
@@ -239,6 +254,7 @@
 		"enterprise": "Întreprindere",
 		"expense-categories": "Categorii de cheltuieli",
 		"expenses-management": "Evidența cheltuielilor",
+		"expenses-seasons": "Cheltuieli pe sezoane",
 		"farmland": "Terenuri agricole",
 		"fertilizers": "Îngrășăminte",
 		"field-diagnosis": "Diagnostic teren",
@@ -348,13 +364,15 @@
 		"description": "Descriere",
 		"general-tab": "General",
 		"ha": "ha",
+		"irrigated-long": "Irigat",
+		"irrigated-short": "Iri.",
 		"land-worthiness-points": "Bonitatea",
 		"last-work": "Ultima lucrare",
 		"last-work-date": "Ultima dată de lucru",
 		"map-tab": "Harta",
 		"name": "Parcela",
 		"one-ha": "1 Ha",
-		"parcel": "Parcel",
+		"parcel": "Parcelă",
 		"parcels": "Parcele",
 		"planted-at": "Data plantării",
 		"plants-on-row": "Plante pe rând",

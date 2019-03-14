@@ -1,11 +1,10 @@
-export class ParcelModel {
+export class CropPlannerModel {
 
     id: number;
     name: string;
     cadasterNumber: string;
     landWorthinessPoints: number;
     area: number;
-    irrigated: boolean;
     description: string;
     coordinates: any;
 
