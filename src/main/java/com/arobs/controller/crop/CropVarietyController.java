@@ -70,6 +70,28 @@ public class CropVarietyController {
         return ResponseEntity.ok(payloadModel);
     }
 
+
+    @RequestMapping(value = "/by-subculture/{id}", method = RequestMethod.GET)
+    public ResponseEntity<PayloadModel> getVarietiesBySubculture(@PathVariable("id") Long cropSubcultureId) {
+        PayloadModel<CropVarietyModel> payloadModel = new PayloadModel<>();
+
+        try {
+            List<CropVariety> varieties = cropVarietyService.findBySubculture(cropSubcultureId);
+            if (!varieties.isEmpty()) {
+                List<CropVarietyModel> models = varieties.stream().map(CropVarietyModel::new).collect(Collectors.toList());
+                payloadModel.setStatus(PayloadModel.STATUS_SUCCESS);
+                payloadModel.setPayload(models);
+            } else {
+                payloadModel.setStatus(PayloadModel.STATUS_WARNING);
+            }
+        } catch (Exception e) {
+            payloadModel.setStatus(PayloadModel.STATUS_ERROR);
+            payloadModel.setMessage(e.getLocalizedMessage());
+        }
+
+        return ResponseEntity.ok(payloadModel);
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody

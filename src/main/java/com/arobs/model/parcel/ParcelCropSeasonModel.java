@@ -8,6 +8,7 @@ public class ParcelCropSeasonModel {
 
     private Long id;
     private Long parcelId;
+    private Long cropSeasonId;
 
     private Long cropCategoryId;
     private Long cropId;
@@ -30,6 +31,8 @@ public class ParcelCropSeasonModel {
         this.parcelId = parcelCropSeason.getParcelId();
 
         if (parcelCropSeason.getCropSeason() != null) {
+            this.cropSeasonId = parcelCropSeason.getCropSeason().getId();
+
             if (parcelCropSeason.getCropSeason().getCrop() != null) {
                 this.cropCategoryId = parcelCropSeason.getCropSeason().getCrop().getCropCategoryId();
                 this.cropId = parcelCropSeason.getCropSeason().getCrop().getId();
@@ -65,6 +68,14 @@ public class ParcelCropSeasonModel {
 
     public void setParcelId(Long parcelId) {
         this.parcelId = parcelId;
+    }
+
+    public Long getCropSeasonId() {
+        return cropSeasonId;
+    }
+
+    public void setCropSeasonId(Long cropSeasonId) {
+        this.cropSeasonId = cropSeasonId;
     }
 
     public Long getCropCategoryId() {

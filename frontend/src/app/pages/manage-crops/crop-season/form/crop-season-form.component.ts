@@ -113,7 +113,7 @@ export class CropSeasonFormComponent implements OnInit {
     }
 
     private setupCropVarieties(cropId, updateValue) {
-        this.cropVarietyService.find(cropId).subscribe(data => {
+        this.cropVarietyService.findByCrop(cropId).subscribe(data => {
             const models = data.payload;
 
             if (models != null) {

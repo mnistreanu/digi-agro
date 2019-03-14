@@ -11,7 +11,7 @@ import {CropService} from '../../../services/crop/crop.service';
 import {CropSubcultureService} from '../../../services/crop/crop-subculture.service';
 import {CropVarietyService} from '../../../services/crop/crop-variety.service';
 import {CropSeasonService} from '../../../services/crop/crop-season.service';
-import {ParcelService} from '../../../services/parcel.service';
+import {ParcelService} from '../../../services/parcel/parcel.service';
 import {DateUtil} from '../../../common/dateUtil';
 
 @Component({
@@ -133,28 +133,52 @@ export class ParcelSeasonFormComponent implements OnInit {
     }
 
     public onCropSubcultureChange() {
+        const cropId = this.form.controls['cropId'].value;
         const cropSubcultureId = this.form.controls['cropSubcultureId'].value;
-        this.setupCropVarieties(cropSubcultureId, true);
+        this.setupCropVarieties(cropId, cropSubcultureId, true);
     }
 
-    private setupCropVarieties(cropSubcultureId, updateValue) {
-        this.cropVarietyService.find(cropSubcultureId).subscribe(data => {
-            const models = data.payload;
+    private setupCropVarieties(cropId, cropSubcultureId, updateValue) {
+        if (cropId != null) {
+            this.cropVarietyService.findByCrop(cropId).subscribe(data => {
+                const models = data.payload;
 
-            if (models != null) {
-                const fieldMapper = new FieldMapper(this.langService.getLanguage());
-                const nameField = fieldMapper.get('name');
-                this.varieties = models.map(model => {
-                    return new SelectItem(model.id, model[nameField]);
-                });
-            } else {
-                this.varieties = [];
-            }
+                if (models != null) {
+                    const fieldMapper = new FieldMapper(this.langService.getLanguage());
+                    const nameField = fieldMapper.get('name');
+                    this.varieties = models.map(model => {
+                        return new SelectItem(model.id, model[nameField]);
+                    });
+                } else {
+                    this.varieties = [];
+                }
 
-            if (updateValue) {
-                // TODO only if necessary
-            }
-        });
+                if (updateValue) {
+                    // TODO only if necessary
+                }
+            });
+        }
+
+        if (cropSubcultureId != null) {
+            this.cropVarietyService.findBySubculture(cropSubcultureId).subscribe(data => {
+                const models = data.payload;
+
+                if (models != null) {
+                    const fieldMapper = new FieldMapper(this.langService.getLanguage());
+                    const nameField = fieldMapper.get('name');
+                    this.varieties = models.map(model => {
+                        return new SelectItem(model.id, model[nameField]);
+                    });
+                } else {
+                    this.varieties = [];
+                }
+
+                if (updateValue) {
+                    // TODO only if necessary
+                }
+            });
+        }
+
     }
 
     private buildForm() {

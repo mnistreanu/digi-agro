@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ParcelService} from '../../../services/parcel.service';
+import {ParcelService} from '../../../services/parcel/parcel.service';
 import {AlertService} from '../../../services/alert.service';
 import {ParcelModel} from '../../telemetry/parcel.model';
 import {ParcelInfoFormComponent} from '../parcel-info-form/parcel-info-form.component';
@@ -61,6 +61,14 @@ export class ParcelComponent implements OnInit {
             this.parcelSeasonModel.parcelId = this.parcelModel.id;
             this.parcelService.adjust([model]);
         });
+
+        // const harvestYear = 2019;
+        // this.parcelService.findYearSeason(2019, id).subscribe(model => {
+        //     this.parcelSeasonModel = model;
+        //     // this.parcelSeasonModel = new ParcelSeasonModel();
+        //     // this.parcelSeasonModel.parcelId = this.parcelModel.id;
+        //     // this.parcelService.adjust([model]);
+        // });
     }
 
     private prepareNewModel() {
@@ -98,6 +106,15 @@ export class ParcelComponent implements OnInit {
         this.parcelService.save(this.parcelModel).subscribe(model => {
             this.parcelModel = model;
             this.parcelService.adjust([this.parcelModel]);
+            this.alertService.saved();
+        });
+
+        this.parcelSeasonModel = this.parcelSeasonFormComponent.parcelSeasonModel;
+
+        debugger;
+        this.parcelService.saveYearSeason(this.parcelSeasonModel).subscribe(model => {
+            this.parcelSeasonModel = model;
+            // this.parcelService.adjust([this.parcelModel]);
             this.alertService.saved();
         });
     }

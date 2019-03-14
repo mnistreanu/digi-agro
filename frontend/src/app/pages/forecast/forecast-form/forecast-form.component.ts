@@ -6,7 +6,7 @@ import {CropCategoryModel} from '../../manage-crops/crop-category.model';
 import {CropModel} from '../../manage-crops/crop/crop.model';
 import {CropVarietyModel} from '../../manage-crops/crop-variety.model';
 import {IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts} from 'angular-2-dropdown-multiselect';
-import {ParcelService} from '../../../services/parcel.service';
+import {ParcelService} from '../../../services/parcel/parcel.service';
 import {LangService} from '../../../services/lang.service';
 import {Messages} from '../../../common/messages';
 import {ForecastService} from '../../../services/forecast.service';
@@ -202,7 +202,7 @@ export class ForecastFormComponent implements OnInit {
     }
 
     private setupCropVarieties(cropId: number) {
-        this.cropVarietyService.find(cropId).subscribe(payloadModel => {
+        this.cropVarietyService.findByCrop(cropId).subscribe(payloadModel => {
             const status = payloadModel.status;
             const message = payloadModel.message;
             const mapper = new FieldMapper(this.langService.getLanguage());

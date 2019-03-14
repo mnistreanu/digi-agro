@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {CropPlannerModel} from '../crop-planner.model';
-import {ParcelService} from '../../../../services/parcel.service';
+import {ParcelService} from '../../../../services/parcel/parcel.service';
 import {LangService} from '../../../../services/lang.service';
 
 @Component({
