@@ -13,6 +13,7 @@ create table parcel (
     name varchar(128),
     parent_id int8,
     tenant_id int8,
+    irrigated boolean default false,
     primary key (id)
 );
 

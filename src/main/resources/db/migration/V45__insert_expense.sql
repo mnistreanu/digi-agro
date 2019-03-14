@@ -30,7 +30,7 @@ INSERT INTO expense(id, tenant_id, crop_season_id, category_id, date, cost) VALU
 (12, 1, 2, 14, '2019-03-01', 800),
 -- Irigare
 (13, 1, 2, 17, '2019-05-01', 300),
--- Pperaționale
+-- Operaționale
 (14, 1, 2, 19, '2019-06-01', 100),
 -- Altele
 (15, 1, 2, 20, '2019-06-03', 700),
