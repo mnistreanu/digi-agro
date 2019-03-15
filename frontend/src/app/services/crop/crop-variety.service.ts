@@ -19,8 +19,12 @@ export class CropVarietyService {
         return this.http.get<CropVarietyModel>(this.api + '/' + id);
     }
 
-    public find(cropId: number): Observable<PayloadModel> {
+    public findByCrop(cropId: number): Observable<PayloadModel> {
         return this.http.get<PayloadModel>(this.api + '/by-crop/' + cropId);
+    }
+
+    public findBySubculture(cropSubcultureId: number): Observable<PayloadModel> {
+        return this.http.get<PayloadModel>(this.api + '/by-subculture/' + cropSubcultureId);
     }
 
     public findAll(page: number, size: number, filters: Map<string, string>, order: string): Observable<CropVarietyModel[]> {

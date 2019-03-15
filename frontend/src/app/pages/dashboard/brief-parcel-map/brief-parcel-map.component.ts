@@ -3,7 +3,7 @@ import {ParcelModel} from '../../telemetry/parcel.model';
 import {ToastrService} from 'ngx-toastr';
 import {DateUtil} from '../../../common/dateUtil';
 import {LangService} from '../../../services/lang.service';
-import {ParcelService} from '../../../services/parcel.service';
+import {ParcelService} from '../../../services/parcel/parcel.service';
 
 @Component({
     selector: 'app-brief-parcel-map',

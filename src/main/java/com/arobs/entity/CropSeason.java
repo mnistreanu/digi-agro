@@ -44,6 +44,10 @@ public class CropSeason {
     public CropSeason() {
     }
 
+    public CropSeason(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

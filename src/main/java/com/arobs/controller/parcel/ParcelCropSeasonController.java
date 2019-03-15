@@ -18,9 +18,6 @@ import java.util.List;
 @RequestMapping("/parcel-crop-season")
 public class ParcelCropSeasonController {
 
-//    @Autowired
-//    private ParcelService parcelService;
-
     @Autowired
     private ParcelCropSeasonService pcsService;
 
@@ -71,15 +68,15 @@ public class ParcelCropSeasonController {
 //        return ResponseEntity.ok(models);
 //    }
 //
-//    @RequestMapping(value = "/", method = RequestMethod.POST)
-//    public ResponseEntity<ParcelModel> save(@RequestBody ParcelModel model, HttpSession session) {
-//        Long tenantId = (Long) session.getAttribute("tenant");
-//
-//        Parcel parcel = pcsService.save(model, tenantId);
-//        model = pcsService.getModel(parcel);
-//
-//        return ResponseEntity.ok(model);
-//    }
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public ResponseEntity<ParcelCropSeasonModel> save(@RequestBody ParcelCropSeasonModel model, HttpSession session) {
+        Long tenantId = (Long) session.getAttribute("tenant");
+
+        ParcelCropSeason parcel = pcsService.save(model);
+        model = pcsService.getModel(parcel);
+
+        return ResponseEntity.ok(model);
+    }
 //
 //    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 //    public void remove(@PathVariable Long id) {

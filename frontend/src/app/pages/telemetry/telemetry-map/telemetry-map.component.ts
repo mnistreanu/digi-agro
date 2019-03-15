@@ -1,5 +1,5 @@
 import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {ParcelService} from '../../../services/parcel.service';
+import {ParcelService} from '../../../services/parcel/parcel.service';
 import {ParcelModel} from '../parcel.model';
 
 @Component({
