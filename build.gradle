@@ -66,7 +66,6 @@ configurations {
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
 
     compile('org.flywaydb:flyway-core')
     compile('org.springframework.boot:spring-boot-starter-data-jpa') {
@@ -77,6 +76,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('io.jsonwebtoken:jjwt:0.7.0')
+
+    compile('net.ttddyy:datasource-proxy:1.4.1')
 
     compile('com.google.code.gson:gson:2.8.2')
     compile 'org.json:json:20171018'
