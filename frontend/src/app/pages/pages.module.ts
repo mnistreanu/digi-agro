@@ -24,6 +24,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FormErrorBlockModule} from '../modules/form-error-block/form-error-block.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {ReminderService} from '../services/reminder.service';
+import {SeasonYearSelectorComponent} from '../components/season-year-selector/season-year-selector.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -52,7 +53,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         BreadcrumbComponent,
         BackTopComponent,
         SearchComponent,
-        UserProfileComponent
+        UserProfileComponent,
+        SeasonYearSelectorComponent
     ],
     providers: [
         AuthGuard,

@@ -20,6 +20,12 @@ public class CropSeasonController {
     @Autowired
     private CropSeasonService cropSeasonService;
 
+    @RequestMapping(value = "/years", method = RequestMethod.GET)
+    public ResponseEntity<List<Integer>> getCropYears(HttpSession session) {
+        Long tenantId = (Long) session.getAttribute("tenant");
+        return ResponseEntity.ok(cropSeasonService.getYears(tenantId));
+    }
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<List<CropSeasonModel>> getCropSeasons(HttpSession session) {
         Long tenantId = (Long) session.getAttribute("tenant");

@@ -1,0 +1,26 @@
+@import "../../theme/styles/variables";
+
+.crop-season-selector {
+  margin: 0 10px;
+
+  .season-year-label {
+    color: rgba($default-color, 0.8);
+  }
+
+  .dropdown-menu {
+    top: auto !important;
+    transition: 0.3s;
+
+    .dropdown-header {
+      padding: 10px;
+      font-size: 12px;
+      background-color: $main-color;
+      color: rgba($default-color, 0.8);
+    }
+
+    .dropdown-body {
+      padding: 10px;
+    }
+  }
+
+}

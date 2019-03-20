@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import {environment} from '../../../environments/environment';
@@ -14,8 +14,25 @@ export class CropSeasonService {
 
     private api: string = environment.apiUrl + '/crop-season';
 
+    public seasonsChanged: EventEmitter<void> = new EventEmitter();
+    public seasonYearChanged: EventEmitter<number> = new EventEmitter();
+    public seasonYear: number;
+
     constructor(private http: HttpClient,
                 private langService: LangService) {
+    }
+
+    public emitSeasonsChanged() {
+        this.seasonsChanged.emit();
+    }
+
+    public changeSeasonYear(year: number) {
+        this.seasonYear = year;
+        this.seasonYearChanged.emit(year);
+    }
+
+    public getYears(): Observable<number[]> {
+        return this.http.get<number[]>(this.api + '/years');
     }
 
     public find(): Observable<CropSeasonListModel[]> {

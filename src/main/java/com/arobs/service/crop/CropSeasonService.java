@@ -70,4 +70,8 @@ public class CropSeasonService implements HasRepository<CropSeasonRepository> {
     public CropSeasonRepository getRepository() {
         return cropSeasonRepository;
     }
+
+    public List<Integer> getYears(Long tenantId) {
+        return getRepository().getYears(tenantId);
+    }
 }

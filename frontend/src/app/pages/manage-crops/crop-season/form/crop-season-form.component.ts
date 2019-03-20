@@ -188,12 +188,14 @@ export class CropSeasonFormComponent implements OnInit {
         this.cropSeasonService.save(this.model).subscribe((model) => {
             this.model = model;
             this.alertService.saved();
+            this.cropSeasonService.emitSeasonsChanged();
         });
     }
 
     public remove() {
         this.cropSeasonService.remove(this.model.id).subscribe(() => {
             this.alertService.removed();
+            this.cropSeasonService.emitSeasonsChanged();
             this.back();
         });
     }

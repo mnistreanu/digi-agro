@@ -1,0 +1,17 @@
+<div class="crop-season-selector dropdown">
+    <a class="season-year-label dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+        {{ seasonYear }}
+    </a>
+
+    <div class="dropdown-menu">
+        <div class="dropdown-header">Crop Season Year</div>
+        <form class="dropdown-body">
+            <select name="season-current-year"
+                    [(ngModel)]="seasonYear"
+                    (change)="onSeasonYearChanged()"
+                    class="form-control">
+                <option *ngFor="let i of availableYears" [value]="i">{{ i }}</option>
+            </select>
+        </form>
+    </div>
+</div>
