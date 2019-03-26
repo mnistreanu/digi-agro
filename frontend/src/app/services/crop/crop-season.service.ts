@@ -39,6 +39,10 @@ export class CropSeasonService {
         return this.http.get<CropSeasonListModel[]>(this.api + '/');
     }
 
+    public findByYear(harvestYear: number): Observable<CropSeasonListModel[]> {
+        return this.http.get<CropSeasonListModel[]>(this.api + '/year/' + harvestYear);
+    }
+
     public adjustListModels(models: CropSeasonListModel[]) {
         const fieldMapper = new FieldMapper(this.langService.getLanguage());
         const nameField = fieldMapper.get('name');

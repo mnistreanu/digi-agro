@@ -20,8 +20,15 @@ public class ParcelCropSeason {
     @Column(name = "parcel_id")
     private Long parcelId;
 
-    @ManyToOne
-    @JoinColumn(name = "crop_season_id")
+//    @ManyToOne
+//    @JoinColumn(name = "crop_season_id")
+//    private CropSeason cropSeason;
+
+    @Column(name = "crop_season_id")
+    private Long cropSeasonId;
+
+    @ManyToOne (fetch = FetchType.EAGER)
+    @JoinColumn (insertable = false, updatable = false)
     private CropSeason cropSeason;
 
     @Column(name = "crop_variety_id")
@@ -59,6 +66,14 @@ public class ParcelCropSeason {
 
     public void setParcelId(Long parcelId) {
         this.parcelId = parcelId;
+    }
+
+    public Long getCropSeasonId() {
+        return cropSeasonId;
+    }
+
+    public void setCropSeasonId(Long cropSeasonId) {
+        this.cropSeasonId = cropSeasonId;
     }
 
     public CropSeason getCropSeason() {

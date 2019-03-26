@@ -3,6 +3,7 @@ export class ParcelSeasonModel {
     parcelId: number;
     harvestYear: number;
 
+    cropSeasonId: number;
     cropCategoryId: number;
     cropId: number;
     cropSubcultureId: number;

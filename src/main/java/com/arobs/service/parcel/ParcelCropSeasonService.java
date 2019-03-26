@@ -77,7 +77,7 @@ public class ParcelCropSeasonService implements HasRepository<ParcelCropSeasonRe
     }
 
     private void copyValues(ParcelCropSeason entity, ParcelCropSeasonModel model) {
-        entity.setCropSeason(new CropSeason(model.getCropSeasonId()));
+        entity.setCropSeasonId(model.getCropSeasonId());
         entity.setCropVarietyId(model.getCropVarietyId());
         entity.setId(model.getId());
         entity.setParcelId(model.getParcelId());

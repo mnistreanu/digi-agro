@@ -27,6 +27,10 @@ public class CropSeasonService implements HasRepository<CropSeasonRepository> {
         return getRepository().find(tenantId);
     }
 
+    public List<CropSeason> find(Long tenantId, Integer harvestYear) {
+        return getRepository().find(tenantId, harvestYear);
+    }
+
     public CropSeason findOne(Long id) {
         return getRepository().findOne(id);
     }

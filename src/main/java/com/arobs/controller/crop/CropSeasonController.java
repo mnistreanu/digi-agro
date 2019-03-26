@@ -36,6 +36,16 @@ public class CropSeasonController {
         return ResponseEntity.ok(models);
     }
 
+    @RequestMapping(value = "/year/{harvestYear}", method = RequestMethod.GET)
+    public ResponseEntity<List<CropSeasonModel>> getCropSeasons(@PathVariable("harvestYear") final Integer harvestYear, HttpSession session) {
+        Long tenantId = (Long) session.getAttribute("tenant");
+
+        List<CropSeason> seasons = cropSeasonService.find(tenantId, harvestYear);
+        List<CropSeasonModel> models = seasons.stream().map(CropSeasonModel::new).collect(Collectors.toList());
+
+        return ResponseEntity.ok(models);
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<CropSeasonModel> findById(@PathVariable("id") final Long id) {
 

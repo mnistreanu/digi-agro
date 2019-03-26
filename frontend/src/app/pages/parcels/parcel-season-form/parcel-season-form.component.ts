@@ -13,6 +13,7 @@ import {CropVarietyService} from '../../../services/crop/crop-variety.service';
 import {CropSeasonService} from '../../../services/crop/crop-season.service';
 import {ParcelService} from '../../../services/parcel/parcel.service';
 import {DateUtil} from '../../../common/dateUtil';
+import {CropSeasonListModel} from '../../manage-crops/crop-season/list/crop-season-list.model';
 
 @Component({
     selector: 'app-parcel-season-form',
@@ -26,16 +27,22 @@ export class ParcelSeasonFormComponent implements OnInit {
     form: FormGroup;
     forcedValidation: boolean;
 
+    harvestYear = 2019;
+
+    seasons: SelectItem[] = [];
     cropCategories: SelectItem[] = [];
     crops: SelectItem[] = [];
     subcultures: SelectItem[] = [];
     varieties: SelectItem[] = [];
+
+    cropSeasonModels: CropSeasonListModel[] = [];
 
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private route: ActivatedRoute,
                 private alertService: AlertService,
                 private langService: LangService,
+                private cropSeasonService: CropSeasonService,
                 private cropCategoryService: CropCategoryService,
                 private cropService: CropService,
                 private cropSubcultureService: CropSubcultureService,
@@ -45,15 +52,14 @@ export class ParcelSeasonFormComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            let harvestYear = params['harvestYear'];
-            harvestYear = 2019;
-            this.setupModel(harvestYear, this.parcelSeasonModel.parcelId );
+            this.setupModel(this.harvestYear, this.parcelSeasonModel.parcelId );
         });
     }
 
     private prepareNewModel() {
         this.parcelSeasonModel = new ParcelSeasonModel();
-        this.setupCategories();
+        this.setupSeasons();
+        // this.setupCategories();
         this.buildForm();
     }
 
@@ -61,55 +67,43 @@ export class ParcelSeasonFormComponent implements OnInit {
         this.parcelService.findYearSeason(harvestYear, parcelId).subscribe(model => {
             this.parcelSeasonModel = model;
             this.buildForm();
-            this.setupCategories();
+            this.setupSeasons();
+            // this.setupCategories();
             if (this.parcelSeasonModel.id != null) {
-                this.onCropCategoryChange();
-                this.onCropChange();
                 this.onCropSubcultureChange();
             }
 
         });
     }
 
-    private setupCategories() {
-        this.cropCategoryService.find().subscribe(models => {
+    private setupSeasons() {
+        this.cropSeasonService.findByYear(this.harvestYear).subscribe(models => {
+            this.cropSeasonModels = models;
             const fieldMapper = new FieldMapper(this.langService.getLanguage());
             const nameField = fieldMapper.get('name');
-            this.cropCategories = models.map(model => {
-                return new SelectItem(model.id, model[nameField]);
+
+            this.seasons = models.map(model => {
+                let itemLabel = model.harvestYear + ' ' + model.cropModel[nameField];
+                if (model.cropVarietyModel != null) {
+                    itemLabel += ' ' + model.cropVarietyModel[nameField];
+                }
+                return new SelectItem(model.id, itemLabel);
             });
         });
     }
 
-    public onCropCategoryChange() {
-        const cropCategoryId = this.form.controls['cropCategoryId'].value;
-        this.setupCrops(cropCategoryId, true);
-    }
-
-    private setupCrops(cropCategoryId, updateValue) {
-        this.cropService.findCrops(cropCategoryId).subscribe(data => {
-            const models = data.payload;
-            if (models != null) {
-                const fieldMapper = new FieldMapper(this.langService.getLanguage());
-                const nameField = fieldMapper.get('name');
-                this.crops = models.map(model => {
-                    return new SelectItem(model.id, model[nameField]);
-                });
-                // this.crops.splice(0, 0, new SelectItem(null, ''));
-            } else {
-                this.crops = [];
-            }
-
-            if (updateValue) {
-                // TODO only if necessary
+    private onCropSeasonChange() {
+        const cropSeasonId = this.form.controls['cropSeasonId'].value;
+        this.cropSeasonModels.forEach((model: CropSeasonListModel) => {
+            if (cropSeasonId == model.id) {
+                this.parcelSeasonModel.cropCategoryId = model.cropCategoryId;
+                this.parcelSeasonModel.cropId = model.cropId;
+                this.setupCropSubcultures(model.cropId, true);
+                this.form.controls['cropSubcultureId'].setValue(model.cropSubcultureId);
+                this.setupCropVarieties(model.cropId, model.cropSubcultureId, true);
+                this.form.controls['cropVarietyId'].setValue(model.cropVarietyId);
             }
         });
-    }
-
-    public onCropChange() {
-        const cropId = this.form.controls['cropId'].value;
-        this.varieties = [];
-        this.setupCropSubcultures(cropId, true);
     }
 
     private setupCropSubcultures(cropId, updateValue) {
@@ -133,7 +127,7 @@ export class ParcelSeasonFormComponent implements OnInit {
     }
 
     public onCropSubcultureChange() {
-        const cropId = this.form.controls['cropId'].value;
+        const cropId = this.parcelSeasonModel.cropId;
         const cropSubcultureId = this.form.controls['cropSubcultureId'].value;
         this.setupCropVarieties(cropId, cropSubcultureId, true);
     }
@@ -183,6 +177,7 @@ export class ParcelSeasonFormComponent implements OnInit {
 
     private buildForm() {
         this.form = this.fb.group({
+            cropSeasonId: [this.parcelSeasonModel.cropSeasonId, Validators.required],
             cropCategoryId: [this.parcelSeasonModel.cropCategoryId, Validators.required],
             cropId: [this.parcelSeasonModel.cropId, Validators.required],
             cropSubcultureId: [this.parcelSeasonModel.cropSubcultureId],

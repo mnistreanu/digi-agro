@@ -16,6 +16,11 @@ public interface CropSeasonRepository extends JpaRepository<CropSeason, Long> {
             "ORDER BY s.harvestYear ")
     List<CropSeason> find(@Param("tenantId") Long tenantId);
 
+    @Query("SELECT s FROM CropSeason s " +
+            "WHERE s.tenantId = :tenantId " +
+            "AND s.harvestYear = :harvestYear " +
+            "ORDER BY s.crop ")
+    List<CropSeason> find(@Param("tenantId") Long tenantId, @Param("harvestYear") Integer harvestYear);
 
     @Query("SELECT DISTINCT s.harvestYear " +
             "FROM CropSeason s " +
@@ -23,4 +28,6 @@ public interface CropSeasonRepository extends JpaRepository<CropSeason, Long> {
             "ORDER BY s.harvestYear ")
     List<Integer> getYears(@Param("tenantId") Long tenantId);
 }
+
+
 
