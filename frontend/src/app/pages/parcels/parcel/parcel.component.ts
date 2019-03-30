@@ -62,13 +62,6 @@ export class ParcelComponent implements OnInit {
             this.parcelService.adjust([model]);
         });
 
-        // const harvestYear = 2019;
-        // this.parcelService.findYearSeason(2019, id).subscribe(model => {
-        //     this.parcelSeasonModel = model;
-        //     // this.parcelSeasonModel = new ParcelSeasonModel();
-        //     // this.parcelSeasonModel.parcelId = this.parcelModel.id;
-        //     // this.parcelService.adjust([model]);
-        // });
     }
 
     private prepareNewModel() {
@@ -111,7 +104,6 @@ export class ParcelComponent implements OnInit {
 
         this.parcelSeasonModel = this.parcelSeasonFormComponent.parcelSeasonModel;
 
-        debugger;
         this.parcelService.saveYearSeason(this.parcelSeasonModel).subscribe(model => {
             this.parcelSeasonModel = model;
             // this.parcelService.adjust([this.parcelModel]);

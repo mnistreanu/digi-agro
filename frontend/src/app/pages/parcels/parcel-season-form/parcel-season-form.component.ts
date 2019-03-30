@@ -45,12 +45,12 @@ export class ParcelSeasonFormComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.harvestYear = this.cropSeasonService.seasonYear;
+
         this.cropSeasonService.seasonYearChanged.subscribe((year) => {
             this.harvestYear = year;
             this.setupCropSeasons().then(() => this.onCropSeasonChange());
         });
-
-        // this.harvestYear = this.cropSeasonService.seasonYear;
 
         this.route.params.subscribe(params => {
             this.setupModel(this.harvestYear, this.parcelSeasonModel.parcelId );
@@ -59,13 +59,15 @@ export class ParcelSeasonFormComponent implements OnInit {
 
     private prepareNewModel() {
         this.parcelSeasonModel = new ParcelSeasonModel();
-        this.setupCropSeasons();
-        this.buildForm();
+        this.setupCropSeasons()
+            .then(() => this.buildForm());
     }
 
     private setupModel(harvestYear, parcelId) {
         this.parcelService.findYearSeason(harvestYear, parcelId).subscribe(model => {
-            this.parcelSeasonModel = model;
+            if (model.id != null) {
+                this.parcelSeasonModel = model;
+            }
             this.buildForm();
             this.setupCropSeasons()
                 .then(() => this.onCropSeasonChange());
@@ -105,7 +107,6 @@ export class ParcelSeasonFormComponent implements OnInit {
                 this.form.controls['cropVarietyId'].setValue(model.cropVarietyId);
             }
         });
-
     }
 
     private setupCropSubcultures(cropId, updateValue) {
