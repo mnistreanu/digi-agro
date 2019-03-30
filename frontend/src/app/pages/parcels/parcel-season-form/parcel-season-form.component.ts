@@ -6,8 +6,6 @@ import {SelectItem} from '../../../dto/select-item.dto';
 import {FieldMapper} from '../../../common/field.mapper';
 import {AlertService} from '../../../services/alert.service';
 import {LangService} from '../../../services/lang.service';
-import {CropCategoryService} from '../../../services/crop/crop-category.service';
-import {CropService} from '../../../services/crop/crop.service';
 import {CropSubcultureService} from '../../../services/crop/crop-subculture.service';
 import {CropVarietyService} from '../../../services/crop/crop-variety.service';
 import {CropSeasonService} from '../../../services/crop/crop-season.service';
@@ -27,11 +25,9 @@ export class ParcelSeasonFormComponent implements OnInit {
     form: FormGroup;
     forcedValidation: boolean;
 
-    harvestYear = 2019;
+    harvestYear: number;
 
     seasons: SelectItem[] = [];
-    cropCategories: SelectItem[] = [];
-    crops: SelectItem[] = [];
     subcultures: SelectItem[] = [];
     varieties: SelectItem[] = [];
 
@@ -43,14 +39,19 @@ export class ParcelSeasonFormComponent implements OnInit {
                 private alertService: AlertService,
                 private langService: LangService,
                 private cropSeasonService: CropSeasonService,
-                private cropCategoryService: CropCategoryService,
-                private cropService: CropService,
                 private cropSubcultureService: CropSubcultureService,
                 private cropVarietyService: CropVarietyService,
                 private parcelService: ParcelService) {
     }
 
     ngOnInit() {
+        this.cropSeasonService.seasonYearChanged.subscribe((year) => {
+            this.harvestYear = year;
+            this.setupCropSeasons().then(() => this.onCropSeasonChange());
+        });
+
+        // this.harvestYear = this.cropSeasonService.seasonYear;
+
         this.route.params.subscribe(params => {
             this.setupModel(this.harvestYear, this.parcelSeasonModel.parcelId );
         });
@@ -58,8 +59,7 @@ export class ParcelSeasonFormComponent implements OnInit {
 
     private prepareNewModel() {
         this.parcelSeasonModel = new ParcelSeasonModel();
-        this.setupSeasons();
-        // this.setupCategories();
+        this.setupCropSeasons();
         this.buildForm();
     }
 
@@ -67,33 +67,34 @@ export class ParcelSeasonFormComponent implements OnInit {
         this.parcelService.findYearSeason(harvestYear, parcelId).subscribe(model => {
             this.parcelSeasonModel = model;
             this.buildForm();
-            this.setupSeasons();
-            // this.setupCategories();
-            if (this.parcelSeasonModel.id != null) {
-                this.onCropSubcultureChange();
-            }
-
+            this.setupCropSeasons()
+                .then(() => this.onCropSeasonChange());
         });
     }
 
-    private setupSeasons() {
-        this.cropSeasonService.findByYear(this.harvestYear).subscribe(models => {
-            this.cropSeasonModels = models;
-            const fieldMapper = new FieldMapper(this.langService.getLanguage());
-            const nameField = fieldMapper.get('name');
-
-            this.seasons = models.map(model => {
-                let itemLabel = model.harvestYear + ' ' + model.cropModel[nameField];
-                if (model.cropVarietyModel != null) {
-                    itemLabel += ' ' + model.cropVarietyModel[nameField];
-                }
-                return new SelectItem(model.id, itemLabel);
+    private setupCropSeasons(): Promise<void> {
+        return new Promise((resolve) => {
+            this.cropSeasonService.findByYear(this.harvestYear).subscribe(models => {
+                this.cropSeasonModels = models;
+                const fieldMapper = new FieldMapper(this.langService.getLanguage());
+                const nameField = fieldMapper.get('name');
+                this.seasons = models.map(model => {
+                    let itemLabel = model.harvestYear + ' ' + model.cropModel[nameField];
+                    if (model.cropVarietyModel != null) {
+                        itemLabel += ' ' + model.cropVarietyModel[nameField];
+                    }
+                    return new SelectItem(model.id, itemLabel);
+                });
+                resolve();
             });
         });
     }
 
     private onCropSeasonChange() {
         const cropSeasonId = this.form.controls['cropSeasonId'].value;
+        this.subcultures = [];
+        this.varieties = [];
+
         this.cropSeasonModels.forEach((model: CropSeasonListModel) => {
             if (cropSeasonId == model.id) {
                 this.parcelSeasonModel.cropCategoryId = model.cropCategoryId;
@@ -104,6 +105,7 @@ export class ParcelSeasonFormComponent implements OnInit {
                 this.form.controls['cropVarietyId'].setValue(model.cropVarietyId);
             }
         });
+
     }
 
     private setupCropSubcultures(cropId, updateValue) {
@@ -178,8 +180,8 @@ export class ParcelSeasonFormComponent implements OnInit {
     private buildForm() {
         this.form = this.fb.group({
             cropSeasonId: [this.parcelSeasonModel.cropSeasonId, Validators.required],
-            cropCategoryId: [this.parcelSeasonModel.cropCategoryId, Validators.required],
-            cropId: [this.parcelSeasonModel.cropId, Validators.required],
+            // cropCategoryId: [this.parcelSeasonModel.cropCategoryId, Validators.required],
+            // cropId: [this.parcelSeasonModel.cropId, Validators.required],
             cropSubcultureId: [this.parcelSeasonModel.cropSubcultureId],
             cropVarietyId: [this.parcelSeasonModel.cropVarietyId],
             yieldGoal: [this.parcelSeasonModel.yieldGoal, Validators.min(0)],
