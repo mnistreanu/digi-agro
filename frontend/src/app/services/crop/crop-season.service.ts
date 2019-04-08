@@ -40,7 +40,15 @@ export class CropSeasonService {
     }
 
     public findByYear(harvestYear: number): Observable<CropSeasonListModel[]> {
-        return this.http.get<CropSeasonListModel[]>(this.api + '/year/' + harvestYear);
+        if (harvestYear) {
+            return this.http.get<CropSeasonListModel[]>(this.api + '/year/' + harvestYear);
+        }
+        else {
+            return Observable.create(observer => {
+                observer.next([]);
+                observer.complete();
+            });
+        }
     }
 
     public adjustListModels(models: CropSeasonListModel[]) {
