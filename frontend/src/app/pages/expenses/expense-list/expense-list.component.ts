@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {ExpenseModel} from '../models/expense.model';
@@ -22,7 +22,7 @@ import {CropSeasonListModel} from '../../manage-crops/crop-season/list/crop-seas
     templateUrl: './expense-list.component.html',
     styleUrls: ['./expense-list.component.scss']
 })
-export class ExpenseListComponent implements OnInit {
+export class ExpenseListComponent implements OnInit, OnDestroy {
 
     options: GridOptions;
     context;
@@ -33,6 +33,7 @@ export class ExpenseListComponent implements OnInit {
     confirmationModalId = 'expense-item-remove-confirmation-modal';
     currentModel: ExpenseModel;
 
+    seasonYearSubscription;
     cropSeasons: CropSeasonListModel[];
     selectedCropSeasonId;
     hasCropSeasons: boolean;
@@ -53,11 +54,22 @@ export class ExpenseListComponent implements OnInit {
         this.setupCropSeasons()
             .then(() => this.setupExpenseTypes())
             .then(() => this.setupGrid());
+
+        this.seasonYearSubscription = this.cropSeasonService.seasonYearChanged.subscribe(() => {
+            setTimeout(() => {
+                this.setupCropSeasons()
+                    .then(() => this.setupRows());
+            });
+        });
+    }
+
+    ngOnDestroy() {
+        this.seasonYearSubscription.unsubscribe();
     }
 
     private setupCropSeasons(): Promise<void> {
         return new Promise((resolve) => {
-            this.cropSeasonService.find().subscribe(models => {
+            this.cropSeasonService.findByYear(this.cropSeasonService.seasonYear).subscribe(models => {
                 this.cropSeasonService.adjustListModels(models);
                 this.cropSeasons = models;
                 if (models.length > 0) {
@@ -207,6 +219,9 @@ export class ExpenseListComponent implements OnInit {
     }
 
     public setupRows() {
+        if (!this.hasCropSeasons) {
+            return;
+        }
         this.expenseService.find(this.selectedCropSeasonId).subscribe(models => {
             models.forEach(model => model.date = new Date(model.date));
             this.options.api.setRowData(models);
