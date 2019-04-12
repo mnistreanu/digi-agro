@@ -40,6 +40,19 @@ public class ParcelCropSeasonController {
         return ResponseEntity.ok(model);
     }
 
+    @RequestMapping(value = "/{harvestYear}", method = RequestMethod.GET)
+    public ResponseEntity<List<ParcelCropSeasonModel>> find(HttpSession session, @PathVariable Integer harvestYear) {
+        Long tenantId = (Long) session.getAttribute("tenant");
+        List<ParcelCropSeasonModel> models = new ArrayList<>();
+        List<ParcelCropSeason> list = pcsService.findByTenant(tenantId, harvestYear);
+
+        for (ParcelCropSeason pcs : list) {
+            models.add(new ParcelCropSeasonModel(pcs));
+        }
+
+        return ResponseEntity.ok(models);
+    }
+
     @RequestMapping(value = "/all/{parcelId}", method = RequestMethod.GET)
     public ResponseEntity<List<ParcelCropSeasonModel>> findAll(@PathVariable Long parcelId) {
         List<ParcelCropSeasonModel> models = new ArrayList<>();

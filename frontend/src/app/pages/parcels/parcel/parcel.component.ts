@@ -8,6 +8,7 @@ import {ParcelInfoFormComponent} from '../parcel-info-form/parcel-info-form.comp
 import {ParcelMapEditorComponent} from '../parcel-map-editor/parcel-map-editor.component';
 import {ParcelSeasonFormComponent} from '../parcel-season-form/parcel-season-form.component';
 import {ParcelSeasonModel} from '../parcel-season-form/parcel-season.model';
+import {ParcelCropSeasonService} from '../../../services/parcel/parcel-crop-season.service';
 
 @Component({
     selector: 'app-parcel',
@@ -28,6 +29,7 @@ export class ParcelComponent implements OnInit {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private parcelService: ParcelService,
+                private parcelCropSeasonService: ParcelCropSeasonService,
                 private alertService: AlertService) {
     }
 
@@ -104,7 +106,7 @@ export class ParcelComponent implements OnInit {
 
         this.parcelSeasonModel = this.parcelSeasonFormComponent.parcelSeasonModel;
 
-        this.parcelService.saveYearSeason(this.parcelSeasonModel).subscribe(model => {
+        this.parcelCropSeasonService.saveYearSeason(this.parcelSeasonModel).subscribe(model => {
             this.parcelSeasonModel = model;
             // this.parcelService.adjust([this.parcelModel]);
             this.alertService.saved();

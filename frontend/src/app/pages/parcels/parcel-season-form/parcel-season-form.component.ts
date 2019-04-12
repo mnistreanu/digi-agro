@@ -9,7 +9,7 @@ import {LangService} from '../../../services/lang.service';
 import {CropSubcultureService} from '../../../services/crop/crop-subculture.service';
 import {CropVarietyService} from '../../../services/crop/crop-variety.service';
 import {CropSeasonService} from '../../../services/crop/crop-season.service';
-import {ParcelService} from '../../../services/parcel/parcel.service';
+import {ParcelCropSeasonService} from '../../../services/parcel/parcel-crop-season.service';
 import {DateUtil} from '../../../common/dateUtil';
 import {CropSeasonListModel} from '../../manage-crops/crop-season/list/crop-season-list.model';
 
@@ -41,7 +41,7 @@ export class ParcelSeasonFormComponent implements OnInit {
                 private cropSeasonService: CropSeasonService,
                 private cropSubcultureService: CropSubcultureService,
                 private cropVarietyService: CropVarietyService,
-                private parcelService: ParcelService) {
+                private parcelCropSeasonService: ParcelCropSeasonService) {
     }
 
     ngOnInit() {
@@ -64,7 +64,7 @@ export class ParcelSeasonFormComponent implements OnInit {
     }
 
     private setupModel(harvestYear, parcelId) {
-        this.parcelService.findYearSeason(harvestYear, parcelId).subscribe(model => {
+        this.parcelCropSeasonService.findYearSeasonParcel(harvestYear, parcelId).subscribe(model => {
             if (model.id != null) {
                 this.parcelSeasonModel = model;
             }

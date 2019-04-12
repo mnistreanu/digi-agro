@@ -14,23 +14,14 @@ import {PinnedRowRendererComponent} from '../../modules/aggrid/pinned-row-render
 import {EditRendererComponent} from '../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {EditRendererModule} from '../../modules/aggrid/edit-renderer/edit-renderer.module';
 import {NguiAutoCompleteModule} from '@ngui/auto-complete';
-import {ParcelListComponent} from './field-diagnosis/list/parcel-list.component';
 import {CropPlannerComponent} from './crop-planner/list/crop-planner.component';
 import {ManageHarvestComponent} from './manage-harvest/list/manage-harvest.component';
+import {ParcelSeasonListComponent} from '../parcels/parcel-season-list/parcel-season-list.component';
 
 export const routes = [
-    {path: 'field-list', component: ParcelListComponent, data: {breadcrumb: 'Field list'}},
+    {path: 'field-diagnosis-list', component: ParcelSeasonListComponent, data: {breadcrumb: 'Field diagnosis list'}},
     {path: 'manage-harvest', component: ManageHarvestComponent, data: {breadcrumb: 'Manage Harvest'}},
     {path: 'crop-planner', component: CropPlannerComponent, data: {breadcrumb: 'Crop planner'}},
-    // {path: 'manage-branches/:id', component: BranchComponent, data: {breadcrumb: 'Branch Form'}},
-    // {path: 'manage-users', component: UserListComponent, data: {breadcrumb: 'Users'}},
-    // {path: 'manage-users/:id', component: UserFormComponent, data: {breadcrumb: 'User Form'}},
-    // {path: 'manage-employees', component: EmployeeListComponent, data: {breadcrumb: 'Employees'}},
-    // {path: 'manage-employees/:id', component: EmployeeComponent, data: {breadcrumb: 'Employee Form'}},
-    // {path: 'manage-machines', component: MachineListComponent, data: {breadcrumb: 'Machines'}},
-    // {path: 'manage-machines/:id', component: MachineComponent, data: {breadcrumb: 'Machine Form'}},
-    // {path: 'manage-expense-categories', component: ExpenseCategoryTreeComponent, data: {breadcrumb: 'Expense categories'}},
-    // {path: 'manage-expense-categories/:id', component: ExpenseCategoryComponent, data: {breadcrumb: 'Expense category'}},
 ];
 
 @NgModule({
@@ -50,7 +41,7 @@ export const routes = [
         RouterModule.forChild(routes)
     ],
     declarations: [
-        ParcelListComponent,
+        ParcelSeasonListComponent,
         CropPlannerComponent,
         ManageHarvestComponent
     ],

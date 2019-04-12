@@ -1,6 +1,9 @@
 package com.arobs.model.parcel;
 
 import com.arobs.entity.ParcelCropSeason;
+import com.arobs.model.crop.CropModel;
+import com.arobs.model.crop.CropVarietyModel;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.Date;
 
@@ -8,12 +11,20 @@ public class ParcelCropSeasonModel {
 
     private Long id;
     private Long parcelId;
+    private String parcelName;
+    private String cadasterNumber;
+    private Double area;
+    private Boolean irrigated;
+
     private Long cropSeasonId;
 
     private Long cropCategoryId;
     private Long cropId;
+    private CropModel cropModel;
+
     private Long cropSubcultureId;
     private Long cropVarietyId;
+    private CropVarietyModel cropVarietyModel;
     private Integer harvestYear;
 
     private Date plantedAt;
@@ -30,16 +41,28 @@ public class ParcelCropSeasonModel {
         this.id = parcelCropSeason.getId();
         this.parcelId = parcelCropSeason.getParcelId();
 
+        if (parcelCropSeason.getParcel() != null) {
+            this.parcelName = parcelCropSeason.getParcel().getName();
+            this.cadasterNumber = parcelCropSeason.getParcel().getCadasterNumber();
+            this.area = parcelCropSeason.getParcel().getArea();
+            this.irrigated = parcelCropSeason.getParcel().isIrrigated();
+        }
+
         if (parcelCropSeason.getCropSeason() != null) {
             this.cropSeasonId = parcelCropSeason.getCropSeason().getId();
 
             if (parcelCropSeason.getCropSeason().getCrop() != null) {
+                this.cropModel = new CropModel(parcelCropSeason.getCropSeason().getCrop());
                 this.cropCategoryId = parcelCropSeason.getCropSeason().getCrop().getCropCategoryId();
                 this.cropId = parcelCropSeason.getCropSeason().getCrop().getId();
             }
 
             if (parcelCropSeason.getCropSeason().getCropSubculture() != null) {
                 this.cropSubcultureId = parcelCropSeason.getCropSeason().getCropSubculture().getId();
+            }
+
+            if (parcelCropSeason.getCropSeason().getCropVariety() != null) {
+                this.cropVarietyModel = new CropVarietyModel(parcelCropSeason.getCropSeason().getCropVariety());
             }
 
             this.harvestYear = parcelCropSeason.getCropSeason().getHarvestYear();
@@ -70,6 +93,38 @@ public class ParcelCropSeasonModel {
         this.parcelId = parcelId;
     }
 
+    public String getParcelName() {
+        return parcelName;
+    }
+
+    public void setParcelName(String parcelName) {
+        this.parcelName = parcelName;
+    }
+
+    public String getCadasterNumber() {
+        return cadasterNumber;
+    }
+
+    public void setCadasterNumber(String cadasterNumber) {
+        this.cadasterNumber = cadasterNumber;
+    }
+
+    public Double getArea() {
+        return area;
+    }
+
+    public void setArea(Double area) {
+        this.area = area;
+    }
+
+    public Boolean getIrrigated() {
+        return irrigated;
+    }
+
+    public void setIrrigated(Boolean irrigated) {
+        this.irrigated = irrigated;
+    }
+
     public Long getCropSeasonId() {
         return cropSeasonId;
     }
@@ -94,6 +149,14 @@ public class ParcelCropSeasonModel {
         this.cropId = cropId;
     }
 
+    public CropModel getCropModel() {
+        return cropModel;
+    }
+
+    public void setCropModel(CropModel cropModel) {
+        this.cropModel = cropModel;
+    }
+
     public Long getCropSubcultureId() {
         return cropSubcultureId;
     }
@@ -108,6 +171,14 @@ public class ParcelCropSeasonModel {
 
     public void setCropVarietyId(Long cropVarietyId) {
         this.cropVarietyId = cropVarietyId;
+    }
+
+    public CropVarietyModel getCropVarietyModel() {
+        return cropVarietyModel;
+    }
+
+    public void setCropVarietyModel(CropVarietyModel cropVarietyModel) {
+        this.cropVarietyModel = cropVarietyModel;
     }
 
     public Integer getHarvestYear() {

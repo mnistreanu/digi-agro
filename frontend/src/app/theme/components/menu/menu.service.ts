@@ -96,7 +96,7 @@ export class MenuService {
                     },
                     {
                         title: 'nav.field-diagnosis',
-                        routerLink: 'farmland/field-list'
+                        routerLink: 'farmland/field-diagnosis-list'
                     },
                     {
                         title: 'nav.map',

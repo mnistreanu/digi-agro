@@ -1,13 +1,18 @@
 export class ParcelSeasonModel {
     id: number;
     parcelId: number;
+    parcelName: String;
     harvestYear: number;
 
     cropSeasonId: number;
     cropCategoryId: number;
     cropId: number;
+    cropName: String;
+    cropModel: any;
     cropSubcultureId: number;
     cropVarietyId: number;
+    cropVarietyName: String;
+    cropVarietyModel: any;
     yieldGoal: number;
     unitOfMeasure: String;
 

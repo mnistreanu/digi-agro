@@ -6,8 +6,6 @@ import {environment} from '../../../environments/environment';
 import {FieldMapper} from '../../common/field.mapper';
 import {LangService} from '../lang.service';
 import {LatLng} from '../../interfaces/lat-lng.interface';
-import {ParcelSeasonModel} from '../../pages/parcels/parcel-season-form/parcel-season.model';
-import {ManageHarvestModel} from '../../pages/farmland/manage-harvest/manage-harvest.model';
 
 @Injectable({
     providedIn: 'root'
@@ -28,24 +26,8 @@ export class ParcelService {
         return this.http.get<ParcelModel[]>(this.api + '/');
     }
 
-    findYearSeason(harvestYear: number, parcelId: number): Observable<ParcelSeasonModel> {
-        return this.http.get<ParcelSeasonModel>(this.api + '-crop-season/' + harvestYear + '/' + parcelId);
-    }
-
-    findLastSeason(parcelId: number): Observable<ParcelSeasonModel> {
-        return this.http.get<ParcelSeasonModel>(this.api + '-crop-season/last/' + parcelId);
-    }
-
-    findHarvestSummary(harvestYear: number): Observable<ManageHarvestModel> {
-        return this.http.get<ManageHarvestModel>(this.api + '-harvest-summary/' + harvestYear);
-    }
-
     save(model: ParcelModel): Observable<ParcelModel> {
         return this.http.post<ParcelModel>(this.api + '/', model);
-    }
-
-    saveYearSeason(model: ParcelSeasonModel): Observable<ParcelSeasonModel> {
-        return this.http.post<ParcelSeasonModel>(this.api + '-crop-season/', model);
     }
 
     remove(model: ParcelModel): Observable<void> {

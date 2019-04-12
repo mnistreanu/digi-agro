@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ParcelListComponent} from './parcel-list.component';
+import {ParcelSeasonListComponent} from './parcel-season-list.component';
 
-describe('ParcelListComponent', () => {
-    let component: ParcelListComponent;
-    let fixture: ComponentFixture<ParcelListComponent>;
+describe('ParcelSeasonListComponent', () => {
+    let component: ParcelSeasonListComponent;
+    let fixture: ComponentFixture<ParcelSeasonListComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ParcelListComponent]
+            declarations: [ParcelSeasonListComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ParcelListComponent);
+        fixture = TestBed.createComponent(ParcelSeasonListComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

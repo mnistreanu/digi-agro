@@ -38,6 +38,10 @@ public class ParcelCropSeasonService implements HasRepository<ParcelCropSeasonRe
         return getRepository().find(parcelId, harvestYear);
     }
 
+    public List<ParcelCropSeason> findByTenant(Long tenantId, int harvestYear) {
+        return getRepository().findByTenant(tenantId, harvestYear);
+    }
+
     public ParcelCropSeason findLast(Long parcelId) {
         int harvestYear = 0;
         List<ParcelCropSeason> list = this.find(parcelId);

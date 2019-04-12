@@ -24,7 +24,16 @@ public interface ParcelCropSeasonRepository extends JpaRepository<ParcelCropSeas
             "AND season.harvestYear = :harvestYear ")
     ParcelCropSeason find(@Param("parcelId") Long parcelId, @Param("harvestYear") int harvestYear);
 
-//    @Query("SELECT MAX (season.harvestYear) FROM ParcelCropSeason pcs " +
+    @Query("SELECT pcs FROM ParcelCropSeason pcs " +
+            "JOIN FETCH pcs.cropSeason season " +
+            "WHERE season.tenantId = :tenantId " +
+            "AND season.harvestYear = :harvestYear " +
+            "AND pcs.parcelId <> NULL " +
+            "ORDER BY season.harvestYear DESC ")
+    List<ParcelCropSeason> findByTenant(@Param("tenantId") Long tenantId, @Param("harvestYear") int harvestYear);
+
+
+    //    @Query("SELECT MAX (season.harvestYear) FROM ParcelCropSeason pcs " +
 //            "JOIN FETCH pcs.cropSeason season " +
 //            "WHERE pcs.parcelId = :parcelId ")
 //    long getLastHarvestYear(@Param("parcelId") Long parcelId);
