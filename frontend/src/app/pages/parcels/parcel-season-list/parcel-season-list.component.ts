@@ -1,8 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
-import {ParcelModel} from '../../telemetry/parcel.model';
-import {ParcelService} from '../../../services/parcel/parcel.service';
 import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NumericUtil} from '../../../common/numericUtil';
@@ -10,29 +8,48 @@ import {PinnedRowRendererComponent} from '../../../modules/aggrid/pinned-row-ren
 import {ParcelCropSeasonService} from '../../../services/parcel/parcel-crop-season.service';
 import {ParcelSeasonModel} from '../parcel-season-form/parcel-season.model';
 import {FieldMapper} from '../../../common/field.mapper';
+import {CropSeasonService} from '../../../services/crop/crop-season.service';
 
 @Component({
     selector: 'app-parcel-season-list',
     templateUrl: './parcel-season-list.component.html',
     styleUrls: ['./parcel-season-list.component.scss']
 })
-export class ParcelSeasonListComponent implements OnInit {
+export class ParcelSeasonListComponent implements OnInit, OnDestroy {
 
     options: GridOptions;
     context;
 
     models: ParcelSeasonModel[] = [];
-    center: any;
+    seasonYearSubscription;
+    harvestYear: number;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
+                private cropSeasonService: CropSeasonService,
                 private parcelCropSeasonService: ParcelCropSeasonService,
-                private parcelService: ParcelService,
                 private langService: LangService) {
     }
 
     ngOnInit() {
-        this.setupGrid();
+        this.seasonYearSubscription = this.cropSeasonService.seasonYearChanged.subscribe(() => {
+            setTimeout(() => {
+                this.harvestYear = this.cropSeasonService.seasonYear;
+                this.setupGrid();
+            });
+        });
+
+        // this.harvestYear = this.cropSeasonService.seasonYear;
+        //
+        // this.cropSeasonService.seasonYearChanged.subscribe((year) => {
+        //     this.harvestYear = year;
+        //     this.setupGrid();
+        // });
+
+    }
+
+    ngOnDestroy() {
+        this.seasonYearSubscription.unsubscribe();
     }
 
     private setupGrid() {
@@ -119,17 +136,16 @@ export class ParcelSeasonListComponent implements OnInit {
         return headers;
     }
 
-
     public setupRows() {
-        this.parcelCropSeasonService.findParcels(2019).subscribe(models => {
+        this.parcelCropSeasonService.findParcels(this.harvestYear).subscribe(models => {
             models.forEach(model => this.adjustModel(model));
             this.options.api.setRowData(models);
             this.models = models;
             this.adjustGridSize();
             this.setupSummaryRow(this.models);
         });
-
     }
+
     private adjustModel(model: ParcelSeasonModel) {
         const fieldMapper = new FieldMapper(this.langService.getLanguage());
         const nameField = fieldMapper.get('name');
@@ -171,11 +187,6 @@ export class ParcelSeasonListComponent implements OnInit {
                 this.options.api.sizeColumnsToFit();
             }
         }, 500);
-    }
-
-    onSelectionChanged() {
-        const model = this.options.api.getSelectedRows()[0];
-        this.center = model.center;
     }
 
     // public addParcel() {

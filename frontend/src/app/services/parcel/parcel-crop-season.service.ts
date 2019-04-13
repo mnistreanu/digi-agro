@@ -22,7 +22,15 @@ export class ParcelCropSeasonService {
     }
 
     findParcels(harvestYear: number): Observable<ParcelSeasonModel[]> {
-        return this.http.get<ParcelSeasonModel[]>(this.api + '/' + harvestYear);
+        if (harvestYear) {
+            return this.http.get<ParcelSeasonModel[]>(this.api + '/' + harvestYear);
+        }
+        else {
+            return Observable.create(observer => {
+                observer.next([]);
+                observer.complete();
+            });
+        }
     }
 
     findLastSeason(parcelId: number): Observable<ParcelSeasonModel> {
