@@ -4,7 +4,6 @@ import {LangService} from '../../../services/lang.service';
 import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NumericUtil} from '../../../common/numericUtil';
-import {PinnedRowRendererComponent} from '../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
 import {ParcelCropSeasonService} from '../../../services/parcel/parcel-crop-season.service';
 import {ParcelSeasonModel} from '../parcel-season-form/parcel-season.model';
 import {FieldMapper} from '../../../common/field.mapper';
@@ -22,7 +21,6 @@ export class ParcelSeasonListComponent implements OnInit, OnDestroy {
 
     models: ParcelSeasonModel[] = [];
     seasonYearSubscription;
-    harvestYear: number;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
@@ -32,20 +30,11 @@ export class ParcelSeasonListComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.setupGrid();
+
         this.seasonYearSubscription = this.cropSeasonService.seasonYearChanged.subscribe(() => {
-            setTimeout(() => {
-                this.harvestYear = this.cropSeasonService.seasonYear;
-                this.setupGrid();
-            });
+            this.setupRows();
         });
-
-        // this.harvestYear = this.cropSeasonService.seasonYear;
-        //
-        // this.cropSeasonService.seasonYearChanged.subscribe((year) => {
-        //     this.harvestYear = year;
-        //     this.setupGrid();
-        // });
-
     }
 
     ngOnDestroy() {
@@ -137,7 +126,10 @@ export class ParcelSeasonListComponent implements OnInit, OnDestroy {
     }
 
     public setupRows() {
-        this.parcelCropSeasonService.findParcels(this.harvestYear).subscribe(models => {
+        if (!this.cropSeasonService.seasonYear) {
+            return;
+        }
+        this.parcelCropSeasonService.findParcels(this.cropSeasonService.seasonYear).subscribe(models => {
             models.forEach(model => this.adjustModel(model));
             this.options.api.setRowData(models);
             this.models = models;
