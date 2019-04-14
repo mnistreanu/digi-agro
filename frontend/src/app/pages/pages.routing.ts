@@ -113,6 +113,11 @@ export const routes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
+                path: 'parcel-event',
+                loadChildren: 'app/pages/parcel-event/parcel-event.module#ParcelEventModule',
+                canActivate: [AuthGuard]
+            },
+            {
                 path: 'manage-crops',
                 loadChildren: 'app/pages/manage-crops/manage-crops.module#ManageCropsModule',
                 data: {breadcrumb: 'Crops'},

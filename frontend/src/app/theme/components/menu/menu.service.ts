@@ -110,6 +110,15 @@ export class MenuService {
                         title: 'nav.harvest-summary',
                         routerLink: 'farmland/manage-harvest'
                     },
+                    {
+                        title: 'event.events',
+                        subMenu: [
+                            {
+                                title: 'event.types',
+                                routerLink: 'parcel-event/event-type'
+                            },
+                        ]
+                    }
                 ]
             });
         }
