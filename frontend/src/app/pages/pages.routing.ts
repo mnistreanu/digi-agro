@@ -40,12 +40,6 @@ export const routes: Routes = [
                 canActivate: [SuperAdminOrAdminGuard]
             },
             {
-                path: 'farmland',
-                loadChildren: 'app/pages/farmland/farmland.module#FarmlandModule',
-                data: {breadcrumb: 'Farmland'},
-                canActivate: [SuperAdminOrAdminGuard]
-            },
-            {
                 path: 'telemetry',
                 loadChildren: 'app/pages/telemetry/telemetry.module#TelemetryModule',
                 data: {breadcrumb: 'Telemetry'},
@@ -106,11 +100,17 @@ export const routes: Routes = [
                 data: {breadcrumb: 'Costs'},
                 canActivate: [AuthGuard]
             },
+            // {
+            //     path: 'farmland',
+            //     loadChildren: 'app/pages/manage-farmland/manage-farmland.module#ManageFarmlandModule',
+            //     data: {breadcrumb: 'Parcels'},
+            //     canActivate: [AuthGuard]
+            // },
             {
-                path: 'parcels',
-                loadChildren: 'app/pages/parcels/parcel.module#ParcelModule',
-                data: {breadcrumb: 'Parcels'},
-                canActivate: [AuthGuard]
+                path: 'farmland',
+                loadChildren: 'app/pages/manage-farmland/manage-farmland.module#ManageFarmlandModule',
+                data: {breadcrumb: 'Farmland'},
+                canActivate: [SuperAdminOrAdminGuard]
             },
             {
                 path: 'manage-crops',

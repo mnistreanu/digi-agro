@@ -22,8 +22,8 @@
 		"logout": "Выход"
 	},
 	"branch": {
-		"branch": "Филиал",
-		"branches": "Филиалы",
+		"branch": "Хозяйство",
+		"branches": "Хозяйства",
 		"subordinates-to": "Подчиняется"
 	},
 	"brand": {
@@ -238,7 +238,7 @@
 	"nav": {
 		"agricultural-machinery": "Сельхоз. техника",
 		"agricultural-works": "Сельхоз. работы",
-		"branches": "Филиалы",
+		"branches": "Хозяйства",
 		"brands": "Бренды",
 		"chemicals-and-pests": "Химикаты и вредители",
 		"costs-forecasting": "Прогнозирование затрат",

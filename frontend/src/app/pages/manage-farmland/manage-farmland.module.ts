@@ -16,10 +16,16 @@ import {ParcelMapEditorComponent} from './parcel-map-editor/parcel-map-editor.co
 import {ParcelInfoFormComponent} from './parcel-info-form/parcel-info-form.component';
 import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-block.module';
 import {ParcelSeasonFormComponent} from './parcel-season-form/parcel-season-form.component';
+import {ManageHarvestComponent} from './manage-harvest/list/manage-harvest.component';
+import {CropPlannerComponent} from './crop-planner/list/crop-planner.component';
+import {ParcelSeasonListComponent} from './parcel-season-list/parcel-season-list.component';
 
 export const routes = [
-    {path: '', component: ParcelListComponent, pathMatch: 'full'},
-    {path: ':id', component: ParcelComponent},
+    {path: 'parcels', component: ParcelListComponent, pathMatch: 'full'},
+    {path: 'parcels/:id', component: ParcelComponent},
+    {path: 'field-diagnosis-list', component: ParcelSeasonListComponent, data: {breadcrumb: 'Field diagnosis list'}},
+    {path: 'manage-harvest', component: ManageHarvestComponent, data: {breadcrumb: 'Manage Harvest'}},
+    {path: 'crop-planner', component: CropPlannerComponent, data: {breadcrumb: 'Crop planner'}},
 ];
 
 @NgModule({
@@ -35,8 +41,17 @@ export const routes = [
         NguiMapModule.forRoot({apiUrl: Constants.GOOGLE_MAP_API}),
         RouterModule.forChild(routes),
     ],
-    declarations: [ParcelListComponent, ParcelMapComponent, ParcelComponent,
-        ParcelMapEditorComponent, ParcelInfoFormComponent, ParcelSeasonFormComponent]
+    declarations: [
+        ParcelListComponent,
+        ParcelMapComponent,
+        ParcelComponent,
+        ParcelMapEditorComponent,
+        ParcelInfoFormComponent,
+        ParcelSeasonFormComponent,
+        ParcelSeasonListComponent,
+        CropPlannerComponent,
+        ManageHarvestComponent
+    ]
 })
-export class ParcelModule {
+export class ManageFarmlandModule {
 }

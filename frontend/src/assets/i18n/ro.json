@@ -22,8 +22,8 @@
 		"logout": "Ieșire"
 	},
 	"branch": {
-		"branch": "Filiala",
-		"branches": "Filiale",
+		"branch": "Gospodărie",
+		"branches": "Gospodării",
 		"subordinates-to": "Se subordoneaza la"
 	},
 	"brand": {
@@ -238,7 +238,7 @@
 	"nav": {
 		"agricultural-machinery": "Maşini agricole",
 		"agricultural-works": "Lucrări agricole",
-		"branches": "Filiale",
+		"branches": "Gospodării",
 		"brands": "Brands",
 		"chemicals-and-pests": "Chimicale si dăunatori",
 		"costs-forecasting": "Prognoză costuri",

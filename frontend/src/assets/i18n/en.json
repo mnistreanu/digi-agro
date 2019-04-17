@@ -22,8 +22,8 @@
 		"logout": "Logout"
 	},
 	"branch": {
-		"branch": "Branch",
-		"branches": "Branches",
+		"branch": "Farm",
+		"branches": "Farms",
 		"subordinates-to": "Subordinates to"
 	},
 	"brand": {
@@ -238,7 +238,7 @@
 	"nav": {
 		"agricultural-machinery": "Agricultural machinery",
 		"agricultural-works": "Agricultural works",
-		"branches": "Branches",
+		"branches": "Farms",
 		"brands": "Brands",
 		"chemicals-and-pests": "Chemicals & Pests",
 		"costs-forecasting": "Costs forecasting",
