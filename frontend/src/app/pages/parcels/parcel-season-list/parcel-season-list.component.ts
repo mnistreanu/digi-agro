@@ -8,6 +8,7 @@ import {ParcelCropSeasonService} from '../../../services/parcel/parcel-crop-seas
 import {ParcelSeasonModel} from '../parcel-season-form/parcel-season.model';
 import {FieldMapper} from '../../../common/field.mapper';
 import {CropSeasonService} from '../../../services/crop/crop-season.service';
+import {UnitOfMeasureUtil} from '../../../common/unit-of-measure-util';
 
 @Component({
     selector: 'app-parcel-season-list',
@@ -110,6 +111,7 @@ export class ParcelSeasonListComponent implements OnInit, OnDestroy {
             {
                 headerName: 'parcel.yield-goal',
                 field: 'yieldGoal',
+                valueFormatter: params => UnitOfMeasureUtil.formatKgHa(params.value),
                 width: 150,
                 minWidth: 150
             }
@@ -139,6 +141,7 @@ export class ParcelSeasonListComponent implements OnInit, OnDestroy {
     }
 
     private adjustModel(model: ParcelSeasonModel) {
+
         const fieldMapper = new FieldMapper(this.langService.getLanguage());
         const nameField = fieldMapper.get('name');
         if (model.cropModel != null) {
