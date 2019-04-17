@@ -3,11 +3,12 @@ import {FormBuilder} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ParcelService} from '../../../services/parcel/parcel.service';
 import {AlertService} from '../../../services/alert.service';
-import {ParcelModel} from '../../telemetry/parcel.model';
-import {ParcelInfoFormComponent} from '../parcel-info-form/parcel-info-form.component';
-import {ParcelMapEditorComponent} from '../parcel-map-editor/parcel-map-editor.component';
-import {ParcelSeasonFormComponent} from '../parcel-season-form/parcel-season-form.component';
-import {ParcelSeasonModel} from '../parcel-season-form/parcel-season.model';
+import {ParcelModel} from './parcel.model';
+import {ParcelGeneralFormComponent} from './parcel-general-form/parcel-general-form.component';
+import {ParcelMapEditorComponent} from './parcel-map-editor/parcel-map-editor.component';
+import {ParcelSeasonFormComponent} from './parcel-season-form/parcel-season-form.component';
+import {ParcelSoilFormComponent} from './parcel-soil-form/parcel-soil-form.component';
+import {ParcelSeasonModel} from './parcel-season-form/parcel-season.model';
 import {ParcelCropSeasonService} from '../../../services/parcel/parcel-crop-season.service';
 
 @Component({
@@ -17,9 +18,10 @@ import {ParcelCropSeasonService} from '../../../services/parcel/parcel-crop-seas
 })
 export class ParcelComponent implements OnInit {
 
-    @ViewChild(ParcelInfoFormComponent) parcelInfoFormComponent;
+    @ViewChild(ParcelGeneralFormComponent) parcelGeneralFormComponent;
     @ViewChild(ParcelMapEditorComponent) parcelMapEditorComponent;
     @ViewChild(ParcelSeasonFormComponent) parcelSeasonFormComponent;
+    @ViewChild(ParcelSoilFormComponent) parcelSoilFormComponent;
 
     parcelModel: ParcelModel;
     parcelSeasonModel: ParcelSeasonModel;
@@ -72,7 +74,7 @@ export class ParcelComponent implements OnInit {
     }
 
     save() {
-        const infoFormValid = this.parcelInfoFormComponent.submit();
+        const infoFormValid = this.parcelGeneralFormComponent.submit();
         if (!infoFormValid) {
             this.alertService.validationFailed();
             return;

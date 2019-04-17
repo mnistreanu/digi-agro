@@ -12,10 +12,11 @@ import {Constants} from '../../common/constants';
 import {ParcelComponent} from './parcel/parcel.component';
 import {EditRendererComponent} from '../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {EditRendererModule} from '../../modules/aggrid/edit-renderer/edit-renderer.module';
-import {ParcelMapEditorComponent} from './parcel-map-editor/parcel-map-editor.component';
-import {ParcelInfoFormComponent} from './parcel-info-form/parcel-info-form.component';
+import {ParcelMapEditorComponent} from './parcel/parcel-map-editor/parcel-map-editor.component';
+import {ParcelGeneralFormComponent} from './parcel/parcel-general-form/parcel-general-form.component';
 import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-block.module';
-import {ParcelSeasonFormComponent} from './parcel-season-form/parcel-season-form.component';
+import {ParcelSeasonFormComponent} from './parcel/parcel-season-form/parcel-season-form.component';
+import {ParcelSoilFormComponent} from './parcel/parcel-soil-form/parcel-soil-form.component';
 import {ManageHarvestComponent} from './manage-harvest/list/manage-harvest.component';
 import {CropPlannerComponent} from './crop-planner/list/crop-planner.component';
 import {ParcelSeasonListComponent} from './parcel-season-list/parcel-season-list.component';
@@ -24,6 +25,7 @@ export const routes = [
     {path: 'parcels', component: ParcelListComponent, pathMatch: 'full'},
     {path: 'parcels/:id', component: ParcelComponent},
     {path: 'field-diagnosis-list', component: ParcelSeasonListComponent, data: {breadcrumb: 'Field diagnosis list'}},
+    {path: 'field-diagnosis-list/:id', component: ParcelComponent},
     {path: 'manage-harvest', component: ManageHarvestComponent, data: {breadcrumb: 'Manage Harvest'}},
     {path: 'crop-planner', component: CropPlannerComponent, data: {breadcrumb: 'Crop planner'}},
 ];
@@ -46,7 +48,8 @@ export const routes = [
         ParcelMapComponent,
         ParcelComponent,
         ParcelMapEditorComponent,
-        ParcelInfoFormComponent,
+        ParcelGeneralFormComponent,
+        ParcelSoilFormComponent,
         ParcelSeasonFormComponent,
         ParcelSeasonListComponent,
         CropPlannerComponent,

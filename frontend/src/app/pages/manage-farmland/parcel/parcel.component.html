@@ -21,16 +21,22 @@
             <li class="nav-item">
                 <a class="nav-link" [class.active]="tabIndex == 3" (click)="changeTab(3)"translate>crop.crop</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="tabIndex == 4" (click)="changeTab(4)"translate>parcel.soil</a>
+            </li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" *ngIf="tabIndex == 1 || loadedTabs[1]" [class.active]="tabIndex == 1">
-                <app-parcel-info-form *ngIf="parcelModel" [parcelModel]="parcelModel"></app-parcel-info-form>
+                <app-parcel-general-form *ngIf="parcelModel" [parcelModel]="parcelModel"></app-parcel-general-form>
             </div>
             <div class="tab-pane" *ngIf="tabIndex == 2  || loadedTabs[2]" [class.active]="tabIndex == 2">
                 <app-parcel-map-editor [parcelModel]="parcelModel"></app-parcel-map-editor>
             </div>
             <div class="tab-pane" *ngIf="tabIndex == 3  || loadedTabs[3]" [class.active]="tabIndex == 3">
                 <app-parcel-season-form *ngIf="parcelSeasonModel" [parcelSeasonModel]="parcelSeasonModel"></app-parcel-season-form>
+            </div>
+            <div class="tab-pane" *ngIf="tabIndex == 4  || loadedTabs[4]" [class.active]="tabIndex == 4">
+                <app-parcel-soil-form *ngIf="parcelModel" [parcelModel]="parcelModel"></app-parcel-soil-form>
             </div>
         </div>
 

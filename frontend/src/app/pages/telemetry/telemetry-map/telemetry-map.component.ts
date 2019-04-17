@@ -1,6 +1,6 @@
 import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ParcelService} from '../../../services/parcel/parcel.service';
-import {ParcelModel} from '../parcel.model';
+import {TelemetryModel} from '../telemetry.model';
 
 @Component({
     selector: 'app-telemetry-map',
@@ -16,9 +16,9 @@ export class TelemetryMapComponent implements OnInit, OnChanges {
 
     center: string;
 
-    parcels: ParcelModel[];
+    parcels: TelemetryModel[];
 
-    infoParcel: ParcelModel;
+    infoParcel: TelemetryModel;
     infoWindow;
 
     constructor(private parcelService: ParcelService) {

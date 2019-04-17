@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
-import {ParcelModel} from '../../telemetry/parcel.model';
+import {ParcelModel} from '../parcel/parcel.model';
 import {ParcelService} from '../../../services/parcel/parcel.service';
 import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {ActivatedRoute, Router} from '@angular/router';

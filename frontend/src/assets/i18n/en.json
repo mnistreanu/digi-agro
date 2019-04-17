@@ -358,6 +358,7 @@
 		"804": "overcast clouds"
 	},
 	"parcel": {
+		"arable-area": "Arable area",
 		"area": "Area",
 		"cadaster-number": "Cadaster Nr.",
 		"complete-map": "Mark the field on the map",
@@ -377,6 +378,7 @@
 		"planted-at": "Planted At",
 		"plants-on-row": "Number of plants",
 		"rows-on-parcel": "Number of rows",
+		"soil": "Soil",
 		"space-between-plants": "Space Between Plants",
 		"space-between-rows": "Space Between Rows",
 		"the-parcels": "the parcels",

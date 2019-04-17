@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import {environment} from '../../../environments/environment';
 import {LangService} from '../lang.service';
-import {ParcelSeasonModel} from '../../pages/manage-farmland/parcel-season-form/parcel-season.model';
+import {ParcelSeasonModel} from '../../pages/manage-farmland/parcel/parcel-season-form/parcel-season.model';
 import {ManageHarvestModel} from '../../pages/manage-farmland/manage-harvest/manage-harvest.model';
 
 @Injectable({

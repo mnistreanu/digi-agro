@@ -358,6 +358,7 @@
 		"804": "acoperit de nori"
 	},
 	"parcel": {
+		"arable-area": "Suprafața arabilă",
 		"area": "Suprafața",
 		"cadaster-number": "Nr. cadastral",
 		"complete-map": "Marcați câmpul pe hartă",
@@ -377,6 +378,7 @@
 		"planted-at": "Data plantării",
 		"plants-on-row": "Plante pe rând",
 		"rows-on-parcel": "Rânduri pe parcelă",
+		"soil": "Sol",
 		"space-between-plants": "Spațiu între plante",
 		"space-between-rows": "Spațiu între rânduri",
 		"the-parcels": "parcelele",

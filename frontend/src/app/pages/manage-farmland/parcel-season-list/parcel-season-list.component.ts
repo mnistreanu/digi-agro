@@ -5,7 +5,7 @@ import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-
 import {ActivatedRoute, Router} from '@angular/router';
 import {NumericUtil} from '../../../common/numericUtil';
 import {ParcelCropSeasonService} from '../../../services/parcel/parcel-crop-season.service';
-import {ParcelSeasonModel} from '../parcel-season-form/parcel-season.model';
+import {ParcelSeasonModel} from '../parcel/parcel-season-form/parcel-season.model';
 import {FieldMapper} from '../../../common/field.mapper';
 import {CropSeasonService} from '../../../services/crop/crop-season.service';
 import {UnitOfMeasureUtil} from '../../../common/unit-of-measure-util';

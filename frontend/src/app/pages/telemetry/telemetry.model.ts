@@ -1,9 +1,14 @@
 import {LatLng} from '../../interfaces/lat-lng.interface';
 
-export class ParcelModel {
+export class TelemetryModel {
 
     id: number;
     name: string;
+    tenantId: number;
+    branchId: number;
+    countryId: string;
+    countyId: string;
+    cityId: number;
     cadasterNumber: string;
     landWorthinessPoints: number;
     area: number;
