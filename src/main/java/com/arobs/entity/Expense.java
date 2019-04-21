@@ -94,6 +94,7 @@ public class Expense {
 
     public void setCropSeason(CropSeason cropSeason) {
         this.cropSeason = cropSeason;
+        this.cropSeasonId = cropSeason == null ? null : cropSeason.getId();
     }
 
     public Long getCropSeasonId() {
@@ -110,5 +111,6 @@ public class Expense {
 
     public void setCategory(ExpenseCategory category) {
         this.category = category;
+        this.categoryId = category == null ? null : category.getId();
     }
 }

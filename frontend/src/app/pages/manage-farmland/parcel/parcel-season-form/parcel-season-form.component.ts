@@ -2,16 +2,16 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ParcelSeasonModel} from './parcel-season.model';
-import {SelectItem} from '../../../dto/select-item.dto';
-import {FieldMapper} from '../../../common/field.mapper';
-import {AlertService} from '../../../services/alert.service';
-import {LangService} from '../../../services/lang.service';
-import {CropSubcultureService} from '../../../services/crop/crop-subculture.service';
-import {CropVarietyService} from '../../../services/crop/crop-variety.service';
-import {CropSeasonService} from '../../../services/crop/crop-season.service';
-import {ParcelCropSeasonService} from '../../../services/parcel/parcel-crop-season.service';
-import {DateUtil} from '../../../common/dateUtil';
-import {CropSeasonListModel} from '../../manage-crops/crop-season/list/crop-season-list.model';
+import {SelectItem} from '../../../../dto/select-item.dto';
+import {FieldMapper} from '../../../../common/field.mapper';
+import {AlertService} from '../../../../services/alert.service';
+import {LangService} from '../../../../services/lang.service';
+import {CropSubcultureService} from '../../../../services/crop/crop-subculture.service';
+import {CropVarietyService} from '../../../../services/crop/crop-variety.service';
+import {CropSeasonService} from '../../../../services/crop/crop-season.service';
+import {ParcelCropSeasonService} from '../../../../services/parcel/parcel-crop-season.service';
+import {DateUtil} from '../../../../common/dateUtil';
+import {CropSeasonListModel} from '../../../manage-crops/crop-season/list/crop-season-list.model';
 
 @Component({
     selector: 'app-parcel-season-form',

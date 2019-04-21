@@ -9,6 +9,11 @@ import java.util.List;
 public class ParcelModel {
 
     private Long id;
+    private Long tenantId;
+    private Long branchId;
+    private String countryId;
+    private String countyId;
+    private Long cityId;
     private String cadasterNumber;
     private Integer landWorthinessPoints;
     private Double area;
@@ -18,15 +23,6 @@ public class ParcelModel {
 
     private List<BigDecimal[]> coordinates;
 
-//    private String icon;
-//    private String cropNameRo, cropNameRu;
-//
-//    private Date plantedAt;
-//    private Integer rowsOnParcel;
-//    private Integer plantsOnRow;
-//    private Integer spaceBetweenRows;
-//    private Integer spaceBetweenPlants;
-
     private String lastWorkTypeRo, lastWorkTypeRu;
     private Date lastWorkDate;
 
@@ -34,31 +30,24 @@ public class ParcelModel {
     }
 
     public ParcelModel(Parcel entity) {
-        id = entity.getId();
-        cadasterNumber = entity.getCadasterNumber();
-        landWorthinessPoints = entity.getLandWorthinessPoints();
-        area = entity.getArea();
-        name = entity.getName();
-        irrigated = entity.isIrrigated();
-        description = entity.getDescription();
+        this.id = entity.getId();
+        this.tenantId = entity.getTenantId();
+        this.branchId = entity.getBranchId();
+        this.countryId = entity.getCountyId();
+        this.countyId = entity.getCountryId();
+        this.cityId = entity.getCityId();
+        this.cadasterNumber = entity.getCadasterNumber();
+        this.landWorthinessPoints = entity.getLandWorthinessPoints();
+        this.area = entity.getArea();
+        this.name = entity.getName();
+        this.description = entity.getDescription();
+        this.irrigated = entity.isIrrigated();
     }
-//
-//    public void setupCropInfo(ParcelCrop parcelCrop, Crop crop) {
-//        plantedAt = parcelCrop.getPlantedAt();
-//        rowsOnParcel = parcelCrop.getRowsOnParcel();
-//        plantsOnRow = parcelCrop.getPlantsOnRow();
-//        spaceBetweenRows = parcelCrop.getSpaceBetweenRows();
-//        spaceBetweenPlants = parcelCrop.getSpaceBetweenPlants();
-//
-//        icon = crop.getIcon();
-//        cropNameRo = crop.getNameRo();
-//        cropNameRu = crop.getNameRu();
-//    }
 
     public void setupLastCropWork(AgroWork lastAgroWork, AgroWorkType workType) {
-        lastWorkDate = lastAgroWork.getWorkDate();
-        lastWorkTypeRo = workType.getNameRo();
-        lastWorkTypeRu = workType.getNameRu();
+        this.lastWorkDate = lastAgroWork.getWorkDate();
+        this.lastWorkTypeRo = workType.getNameRo();
+        this.lastWorkTypeRu = workType.getNameRu();
     }
 
     public Long getId() {
@@ -67,6 +56,46 @@ public class ParcelModel {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(Long tenantId) {
+        this.tenantId = tenantId;
+    }
+
+    public Long getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(Long branchId) {
+        this.branchId = branchId;
+    }
+
+    public String getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(String countryId) {
+        this.countryId = countryId;
+    }
+
+    public String getCountyId() {
+        return countyId;
+    }
+
+    public void setCountyId(String countyId) {
+        this.countyId = countyId;
+    }
+
+    public Long getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
     }
 
     public String getCadasterNumber() {

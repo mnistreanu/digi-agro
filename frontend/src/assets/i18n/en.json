@@ -22,8 +22,8 @@
 		"logout": "Logout"
 	},
 	"branch": {
-		"branch": "Branch",
-		"branches": "Branches",
+		"branch": "Farm",
+		"branches": "Farms",
 		"subordinates-to": "Subordinates to"
 	},
 	"brand": {
@@ -241,7 +241,7 @@
 	"nav": {
 		"agricultural-machinery": "Agricultural machinery",
 		"agricultural-works": "Agricultural works",
-		"branches": "Branches",
+		"branches": "Farms",
 		"brands": "Brands",
 		"chemicals-and-pests": "Chemicals & Pests",
 		"costs-forecasting": "Costs forecasting",
@@ -361,6 +361,7 @@
 		"804": "overcast clouds"
 	},
 	"parcel": {
+		"arable-area": "Arable area",
 		"area": "Area",
 		"cadaster-number": "Cadaster Nr.",
 		"complete-map": "Mark the field on the map",
@@ -380,6 +381,7 @@
 		"planted-at": "Planted At",
 		"plants-on-row": "Number of plants",
 		"rows-on-parcel": "Number of rows",
+		"soil": "Soil",
 		"space-between-plants": "Space Between Plants",
 		"space-between-rows": "Space Between Rows",
 		"the-parcels": "the parcels",

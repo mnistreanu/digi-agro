@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ParcelInfoFormComponent } from './parcel-info-form.component';
+import { ParcelGeneralFormComponent } from './parcel-general-form.component';
 
-describe('ParcelInfoFormComponent', () => {
-  let component: ParcelInfoFormComponent;
-  let fixture: ComponentFixture<ParcelInfoFormComponent>;
+describe('ParcelGeneralFormComponent', () => {
+  let component: ParcelGeneralFormComponent;
+  let fixture: ComponentFixture<ParcelGeneralFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ParcelInfoFormComponent ]
+      declarations: [ ParcelGeneralFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ParcelInfoFormComponent);
+    fixture = TestBed.createComponent(ParcelGeneralFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

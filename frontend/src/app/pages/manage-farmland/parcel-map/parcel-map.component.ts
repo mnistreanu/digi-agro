@@ -1,5 +1,5 @@
 import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {ParcelModel} from '../../telemetry/parcel.model';
+import {ParcelModel} from '../parcel/parcel.model';
 import {ToastrService} from 'ngx-toastr';
 import {DateUtil} from '../../../common/dateUtil';
 import {LangService} from '../../../services/lang.service';

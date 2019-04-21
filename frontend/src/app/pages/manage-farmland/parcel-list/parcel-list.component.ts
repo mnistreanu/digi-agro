@@ -1,32 +1,28 @@
 import {Component, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
-import {ParcelModel} from '../../telemetry/parcel.model';
+import {ParcelModel} from '../parcel/parcel.model';
 import {ParcelService} from '../../../services/parcel/parcel.service';
 import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NumericUtil} from '../../../common/numericUtil';
 import {PinnedRowRendererComponent} from '../../../modules/aggrid/pinned-row-renderer/pinned-row-renderer.component';
-import {ParcelCropSeasonService} from '../../../services/parcel/parcel-crop-season.service';
-import {ParcelSeasonModel} from '../parcel-season-form/parcel-season.model';
-import {FieldMapper} from '../../../common/field.mapper';
 
 @Component({
-    selector: 'app-parcel-season-list',
-    templateUrl: './parcel-season-list.component.html',
-    styleUrls: ['./parcel-season-list.component.scss']
+    selector: 'app-parcel-list',
+    templateUrl: './parcel-list.component.html',
+    styleUrls: ['./parcel-list.component.scss']
 })
-export class ParcelSeasonListComponent implements OnInit {
+export class ParcelListComponent implements OnInit {
 
     options: GridOptions;
     context;
 
-    models: ParcelSeasonModel[] = [];
+    models: ParcelModel[] = [];
     center: any;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                private parcelCropSeasonService: ParcelCropSeasonService,
                 private parcelService: ParcelService,
                 private langService: LangService) {
     }
@@ -65,20 +61,26 @@ export class ParcelSeasonListComponent implements OnInit {
             },
             {
                 headerName: 'info.name',
-                field: 'parcelName',
+                field: 'name',
                 width: 200,
                 minWidth: 200
             },
             {
                 headerName: 'parcel.cadaster-number',
                 field: 'cadasterNumber',
-                width: 175,
-                minWidth: 175
+                width: 200,
+                minWidth: 200
+            },
+            {
+                headerName: 'parcel.land-worthiness-points',
+                field: 'landWorthinessPoints',
+                width: 150,
+                minWidth: 100
             },
             {
                 headerName: 'parcel.area',
                 field: 'area',
-                width: 100,
+                width: 150,
                 minWidth: 100,
                 valueFormatter: (params) => NumericUtil.format(params.value)
             },
@@ -90,22 +92,10 @@ export class ParcelSeasonListComponent implements OnInit {
                 valueFormatter: (params) => NumericUtil.formatBoolean(params.value)
             },
             {
-                headerName: 'crop.crop',
-                field: 'cropName',
+                headerName: 'info.description',
+                field: 'description',
                 width: 200,
                 minWidth: 200
-            },
-            {
-                headerName: 'crop.variety',
-                field: 'cropVarietyName',
-                width: 200,
-                minWidth: 200
-            },
-            {
-                headerName: 'parcel.yield-goal',
-                field: 'yieldGoal',
-                width: 150,
-                minWidth: 150
             }
 
         ];
@@ -121,35 +111,23 @@ export class ParcelSeasonListComponent implements OnInit {
 
 
     public setupRows() {
-        this.parcelCropSeasonService.findParcels(2019).subscribe(models => {
-            models.forEach(model => this.adjustModel(model));
+        this.parcelService.find().subscribe(models => {
             this.options.api.setRowData(models);
             this.models = models;
             this.adjustGridSize();
+            this.parcelService.adjust(this.models);
             this.setupSummaryRow(this.models);
         });
-
-    }
-    private adjustModel(model: ParcelSeasonModel) {
-        const fieldMapper = new FieldMapper(this.langService.getLanguage());
-        const nameField = fieldMapper.get('name');
-        if (model.cropModel != null) {
-            model['cropName'] = model.cropModel[nameField];
-        }
-
-        if (model.cropVarietyModel != null) {
-            model['cropVarietyName'] = model.cropVarietyModel[nameField];
-        }
     }
 
     private setupSummaryRow(models) {
-        const summaryRow = new ParcelSeasonModel();
+        const summaryRow = new ParcelModel();
         models.forEach(model => this.aggregate(summaryRow, model, true));
         this.options.api.setPinnedBottomRowData([summaryRow]);
     }
 
-    private aggregate(source: ParcelSeasonModel, item: ParcelSeasonModel, applyAddition) {
-        const sumFields = ['area', 'yieldGoal'];
+    private aggregate(source: ParcelModel, item: ParcelModel, applyAddition) {
+        const sumFields = ['area'];
         sumFields.forEach(field => {
             source[field] = source[field] || 0;
             if (applyAddition) {
@@ -178,9 +156,9 @@ export class ParcelSeasonListComponent implements OnInit {
         this.center = model.center;
     }
 
-    // public addParcel() {
-    //     this.router.navigate(['./-1'], {relativeTo: this.route});
-    // }
+    public addParcel() {
+        this.router.navigate(['./-1'], {relativeTo: this.route});
+    }
 
     public onEdit(node) {
         const model = node.data;

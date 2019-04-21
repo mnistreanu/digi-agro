@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {DrawingManager, NguiMapComponent} from '@ngui/map';
-import {ParcelModel} from '../../telemetry/parcel.model';
-import {LatLng} from '../../../interfaces/lat-lng.interface';
+import {ParcelModel} from '../parcel.model';
+import {LatLng} from '../../../../interfaces/lat-lng.interface';
 
 declare const google: any;
 

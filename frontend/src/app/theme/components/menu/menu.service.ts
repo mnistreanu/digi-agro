@@ -92,7 +92,7 @@ export class MenuService {
                 subMenu: [
                     {
                         title: 'nav.parcels',
-                        routerLink: 'parcels'
+                        routerLink: 'farmland/parcels'
                     },
                     {
                         title: 'nav.field-diagnosis',

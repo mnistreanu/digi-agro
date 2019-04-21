@@ -1,13 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ParcelModel} from '../../telemetry/parcel.model';
+import {ParcelModel} from '../parcel.model';
 
 @Component({
-    selector: 'app-parcel-info-form',
-    templateUrl: './parcel-info-form.component.html',
-    styleUrls: ['./parcel-info-form.component.scss']
+    selector: 'app-parcel-general-form',
+    templateUrl: './parcel-general-form.component.html',
+    styleUrls: ['./parcel-general-form.component.scss']
 })
-export class ParcelInfoFormComponent implements OnInit {
+export class ParcelGeneralFormComponent implements OnInit {
 
     @Input() parcelModel: ParcelModel;
 
@@ -24,6 +24,7 @@ export class ParcelInfoFormComponent implements OnInit {
     private buildForm() {
         this.form = this.fb.group({
             name: [this.parcelModel.name, Validators.required],
+            branchId: [this.parcelModel.branchId, Validators.required],
             cadasterNumber: [this.parcelModel.cadasterNumber, Validators.required],
             landWorthinessPoints: [this.parcelModel.landWorthinessPoints],
             area: [this.parcelModel.area],

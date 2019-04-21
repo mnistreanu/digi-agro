@@ -25,6 +25,9 @@ public class Parcel {
     @Column(name = "parent_id")
     private Long parentId;
 
+    @Column(name = "branch_id")
+    private Long branchId;
+
     @Column(name = "cadaster_number", length = 128)
     private String cadasterNumber;
 
@@ -86,6 +89,14 @@ public class Parcel {
 
     public void setParentId(Long parentId) {
         this.parentId = parentId;
+    }
+
+    public Long getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(Long branchId) {
+        this.branchId = branchId;
     }
 
     public String getCadasterNumber() {

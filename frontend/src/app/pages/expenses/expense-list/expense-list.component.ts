@@ -56,10 +56,8 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
             .then(() => this.setupGrid());
 
         this.seasonYearSubscription = this.cropSeasonService.seasonYearChanged.subscribe(() => {
-            setTimeout(() => {
-                this.setupCropSeasons()
-                    .then(() => this.setupRows());
-            });
+            this.setupCropSeasons()
+                .then(() => this.setupRows());
         });
     }
 

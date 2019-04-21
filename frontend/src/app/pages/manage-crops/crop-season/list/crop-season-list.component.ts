@@ -7,6 +7,7 @@ import {LangService} from '../../../../services/lang.service';
 import {CropSeasonService} from '../../../../services/crop/crop-season.service';
 import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {CropSeasonListModel} from './crop-season-list.model';
+import {UnitOfMeasureUtil} from '../../../../common/unit-of-measure-util';
 
 @Component({
     selector: 'app-crop-season-list',
@@ -84,6 +85,7 @@ export class CropSeasonListComponent implements OnInit {
                 headerName: 'agro-work.yield-goal',
                 headerTooltip: 'agro-work.yield-goal',
                 field: 'yieldGoal',
+                valueFormatter: params => UnitOfMeasureUtil.formatKgHa(params.value),
                 width: 200,
                 minWidth: 200
             }
