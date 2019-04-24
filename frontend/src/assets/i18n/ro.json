@@ -62,6 +62,7 @@
 		"title": "Titlu"
 	},
 	"event": {
+		"event": "Eveniment",
 		"events": "Evenimente",
 		"message": "Mesaj",
 		"type": "Tip de eveniment",
@@ -175,6 +176,7 @@
 		"by": "De",
 		"created-by": "Creat de",
 		"creation-time": "Timpul de creație",
+		"date": "Data",
 		"description": "Descriere",
 		"description-ro": "Descriere (Rom)",
 		"description-ru": "Descriere (Rus)",

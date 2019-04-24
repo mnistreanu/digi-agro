@@ -117,6 +117,10 @@ export class MenuService {
                                 title: 'event.types',
                                 routerLink: 'parcel-event/event-type'
                             },
+                            {
+                                title: 'event.events',
+                                routerLink: 'parcel-event/event-list'
+                            },
                         ]
                     }
                 ]

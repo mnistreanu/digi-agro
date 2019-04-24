@@ -1,5 +1,5 @@
-import {SelectorItem} from './selector-item.interface';
 
+import {SelectorItem} from '../selector-item.interface';
 export interface GroupedSelectorItem {
 
     groupName: string;

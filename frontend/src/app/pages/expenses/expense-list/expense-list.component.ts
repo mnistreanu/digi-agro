@@ -7,15 +7,15 @@ import {AgNumericColumnType} from '../../../modules/aggrid/column-types/ag-numer
 import {ExpenseCategoryTotalModel} from '../models/expense-category-total.model';
 import {AgDeleteColumnType} from '../../../modules/aggrid/column-types/ag-delete-type';
 import {ModalService} from '../../../services/modal.service';
-import {GroupedSelectorComponent} from '../../../modules/aggrid/grouped-selector/grouped-selector.component';
-import {GroupedSelectorItem} from '../../../modules/aggrid/grouped-selector/grouped-selector-item.interface';
 import {ExpenseCategoryService} from '../../../services/expenses/expense-category.service';
 import {ExpenseCategoryModel} from '../../enterprise/manage-expense-categories/expense-category/expense-category.model';
-import {SelectorItem} from '../../../modules/aggrid/grouped-selector/selector-item.interface';
 import {ExpenseService} from '../../../services/expenses/expense.service';
 import {AlertService} from '../../../services/alert.service';
 import {CropSeasonService} from '../../../services/crop/crop-season.service';
 import {CropSeasonListModel} from '../../manage-crops/crop-season/list/crop-season-list.model';
+import {SelectorItem} from '../../../modules/aggrid/selector/selector-item.interface';
+import {GroupedSelectorItem} from '../../../modules/aggrid/selector/grouped-selector/grouped-selector-item.interface';
+import {GroupedSelectorComponent} from '../../../modules/aggrid/selector/grouped-selector/grouped-selector.component';
 
 @Component({
     selector: 'app-expense-list',

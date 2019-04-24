@@ -1,12 +1,10 @@
 package com.arobs.service.parcel;
 
-import com.arobs.entity.*;
+import com.arobs.entity.Parcel;
+import com.arobs.entity.ParcelGeometry;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.parcel.ParcelModel;
 import com.arobs.repository.ParcelRepository;
-import com.arobs.service.agrowork.AgroWorkService;
-import com.arobs.service.agrowork.AgroWorkTypeService;
-import com.arobs.service.crop.CropService;
 import com.arobs.utils.StaticUtil;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +22,6 @@ public class ParcelService implements HasRepository<ParcelRepository> {
     private ParcelRepository parcelRepository;
     @Autowired
     private ParcelGeometryService parcelGeometryService;
-
-    @Autowired
-    private ParcelCropSeasonService parcelCropService;
-    @Autowired
-    private CropService cropService;
-    @Autowired
-    private AgroWorkService agroWorkService;
-    @Autowired
-    private AgroWorkTypeService agroWorkTypeService;
 
     public ParcelRepository getRepository() {
         return parcelRepository;

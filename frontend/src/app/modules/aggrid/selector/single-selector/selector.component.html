@@ -1,0 +1,3 @@
+<select class="selector" [(ngModel)]="value" (change)="onChange()">
+    <option *ngFor="let i of items" [ngValue]="i.id">{{ i.text }}</option>
+</select>

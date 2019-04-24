@@ -41,7 +41,7 @@ export class ParcelService {
 
         models.forEach((parcel) => {
             parcel.fillColor = this.randomColor();
-            parcel.icon = '/assets/img/crops/' + parcel.icon;
+            parcel.icon = '/assets/img/crops/' + (parcel.icon ? parcel.icon : 'transparent.png');
             parcel.paths = parcel.coordinates.map((c) => {
                 return {
                     lat: c[0],

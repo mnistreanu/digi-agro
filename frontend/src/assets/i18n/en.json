@@ -62,6 +62,7 @@
 		"title": "Title"
 	},
 	"event": {
+		"event": "Event",
 		"events": "Events",
 		"message": "Message",
 		"type": "Event Type",
@@ -175,6 +176,7 @@
 		"by": "By",
 		"created-by": "Created By",
 		"creation-time": "Creation Time",
+		"date": "Date",
 		"description": "Description",
 		"description-ro": "Description",
 		"description-ru": "Description",

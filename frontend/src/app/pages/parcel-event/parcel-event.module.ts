@@ -12,10 +12,17 @@ import {NguiAutoCompleteModule} from '@ngui/auto-complete';
 import {TranslateModule} from '@ngx-translate/core';
 import {EventTypeListComponent} from './event-type/event-type-list/event-type-list.component';
 import {EventTypeFormComponent} from './event-type/event-type-form/event-type-form.component';
+import { ParcelEventListComponent } from './parcel-event-list/parcel-event-list.component';
+import {ConfirmationModalModule} from '../../modules/confirmation-modal/confirmation-modal.module';
+import {DeleteRendererModule} from '../../modules/aggrid/delete-renderer/delete-renderer.module';
+import {DeleteRendererComponent} from '../../modules/aggrid/delete-renderer/delete-renderer.component';
+import {SelectorModule} from '../../modules/aggrid/selector/selector.module';
+import {SelectorComponent} from '../../modules/aggrid/selector/single-selector/selector.component';
 
 export const routes = [
     {path: 'event-type', component: EventTypeListComponent},
-    {path: 'event-type/:id', component: EventTypeFormComponent}
+    {path: 'event-type/:id', component: EventTypeFormComponent},
+    {path: 'event-list', component: ParcelEventListComponent},
 ];
 
 
@@ -29,11 +36,14 @@ export const routes = [
         MultiselectDropdownModule,
         DirectivesModule,
         FormErrorBlockModule,
+        DeleteRendererModule,
         EditRendererModule,
-        AgGridModule.withComponents([EditRendererComponent]),
+        ConfirmationModalModule,
+        SelectorModule,
+        AgGridModule.withComponents([EditRendererComponent, DeleteRendererComponent, SelectorComponent]),
         RouterModule.forChild(routes)
     ],
-    declarations: [EventTypeListComponent, EventTypeFormComponent]
+    declarations: [EventTypeListComponent, EventTypeFormComponent, ParcelEventListComponent]
 })
 export class ParcelEventModule {
 }

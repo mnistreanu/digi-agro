@@ -62,6 +62,7 @@
 		"title": "Титул"
 	},
 	"event": {
+		"event": "Событие",
 		"events": "События",
 		"message": "Сообщение",
 		"type": "Тип события",
@@ -175,6 +176,7 @@
 		"by": "Ф.И.О.",
 		"created-by": "Создан",
 		"creation-time": "Время создания",
+		"date": "Дата",
 		"description": "Описание",
 		"description-ro": "Описание (Рум)",
 		"description-ru": "Описание (Рус)",
