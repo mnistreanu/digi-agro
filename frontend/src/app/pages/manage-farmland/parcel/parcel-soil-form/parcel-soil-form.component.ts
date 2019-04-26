@@ -23,11 +23,8 @@ export class ParcelSoilFormComponent implements OnInit {
 
     private buildForm() {
         this.form = this.fb.group({
-            name: [this.parcelModel.name, Validators.required],
-            branchId: [this.parcelModel.branchId, Validators.required],
-            cadasterNumber: [this.parcelModel.cadasterNumber, Validators.required],
             landWorthinessPoints: [this.parcelModel.landWorthinessPoints],
-            area: [this.parcelModel.area],
+            area: [this.parcelModel.area, Validators.required],
             irrigated: [this.parcelModel.irrigated],
             description: [this.parcelModel.description]
         });

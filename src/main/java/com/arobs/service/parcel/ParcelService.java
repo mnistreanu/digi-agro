@@ -62,6 +62,10 @@ public class ParcelService implements HasRepository<ParcelRepository> {
     }
 
     private void copyValues(Parcel entity, ParcelModel model) {
+        entity.setBranchId(model.getBranchId());
+        entity.setCountryId(model.getCountryId());
+        entity.setCountyId(model.getCountyId());
+        entity.setCityId(model.getCityId());
         entity.setName(model.getName());
         entity.setCadasterNumber(model.getCadasterNumber());
         entity.setLandWorthinessPoints(model.getLandWorthinessPoints());

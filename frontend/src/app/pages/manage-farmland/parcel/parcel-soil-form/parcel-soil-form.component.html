@@ -2,44 +2,15 @@
 <form [formGroup]="form" *ngIf="form">
 
     <div class="form-group row">
-        <div class="col-sm-3">
-            <label for="parcel-name" translate>info.name</label>
-            <input id="parcel-name" class="form-control checking-field" formControlName="name">
-            <app-form-error-block [control]="form.get('name')"
-                                  [formSubmitted]="forcedValidation"></app-form-error-block>
-        </div>
-
-        <div class="col-sm-3">
-            <label for="branchId" translate>branch.branch</label>
-            <input id="branchId" class="form-control checking-field" formControlName="branchId">
-            <app-form-error-block [control]="form.get('branchId')"
-                                  [formSubmitted]="forcedValidation"></app-form-error-block>
-        </div>
-
-        <!--<div class="col-sm-3">-->
-        <!--<label for="parcel-name" translate>info.name</label>-->
-        <!--<input id="parcel-name" class="form-control checking-field" formControlName="name">-->
-        <!--<app-form-error-block [control]="form.get('name')"-->
-        <!--[formSubmitted]="forcedValidation"></app-form-error-block>-->
-        <!--</div>-->
-    </div>
-
-    <div class="form-group row">
-        <div class="col-sm-3">
-            <label for="parcel-cadaster-number" translate>parcel.cadaster-number</label>
-            <input id="parcel-cadaster-number" class="form-control checking-field" formControlName="cadasterNumber">
-            <app-form-error-block [control]="form.get('cadasterNumber')"
-                                  [formSubmitted]="forcedValidation"></app-form-error-block>
-        </div>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <label for="parcel-lwp" translate>parcel.land-worthiness-points</label>
             <input id="parcel-lwp" class="form-control checking-field"  formControlName="landWorthinessPoints">
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <label for="parcel-area" translate>parcel.area</label>
             <input id="parcel-area" type="number" class="form-control checking-field" formControlName="area">
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <label for="parcel-irrigated" translate>parcel.irrigated-long</label>
             <input id="parcel-irrigated" type="checkbox" class="abc-checkbox abc-checkbox-info" formControlName="irrigated">
         </div>

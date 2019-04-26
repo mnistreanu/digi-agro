@@ -100,7 +100,7 @@ export class MenuService {
                     },
                     {
                         title: 'nav.map',
-                        routerLink: 'farmland/map'
+                        routerLink: 'farmland/parcels-map'
                     },
                     {
                         title: 'nav.crop-planner',

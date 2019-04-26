@@ -12,7 +12,7 @@ import java.util.List;
 public interface CountyRepository extends JpaRepository<County, String> {
 
     @Query("SELECT c FROM County c " +
-            "WHERE c.countryId = :countryId " +
+            "WHERE upper(c.countryId) = upper(:countryId) " +
             "ORDER BY c.id ")
     List<County> find(@Param("countryId") String countryId);
 

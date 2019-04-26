@@ -33,8 +33,8 @@ public class ParcelModel {
         this.id = entity.getId();
         this.tenantId = entity.getTenantId();
         this.branchId = entity.getBranchId();
-        this.countryId = entity.getCountyId();
-        this.countyId = entity.getCountryId();
+        this.countryId = entity.getCountryId();
+        this.countyId = entity.getCountyId();
         this.cityId = entity.getCityId();
         this.cadasterNumber = entity.getCadasterNumber();
         this.landWorthinessPoints = entity.getLandWorthinessPoints();

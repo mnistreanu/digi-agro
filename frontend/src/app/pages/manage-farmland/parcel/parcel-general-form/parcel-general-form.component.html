@@ -2,26 +2,12 @@
 <form [formGroup]="form" *ngIf="form">
 
     <div class="form-group row">
-        <div class="col-sm-3">
+        <div class="col-sm-6">
             <label for="parcel-name" translate>info.name</label>
             <input id="parcel-name" class="form-control checking-field" formControlName="name">
-            <app-form-error-block [control]="form.get('name')"
-                                  [formSubmitted]="forcedValidation"></app-form-error-block>
+            <app-form-error-block [control]="form.get('name')" [formSubmitted]="forcedValidation"></app-form-error-block>
         </div>
 
-        <div class="col-sm-3">
-            <label for="branchId" translate>branch.branch</label>
-            <input id="branchId" class="form-control checking-field" formControlName="branchId">
-            <app-form-error-block [control]="form.get('branchId')"
-                                  [formSubmitted]="forcedValidation"></app-form-error-block>
-        </div>
-
-        <!--<div class="col-sm-3">-->
-            <!--<label for="parcel-name" translate>info.name</label>-->
-            <!--<input id="parcel-name" class="form-control checking-field" formControlName="name">-->
-            <!--<app-form-error-block [control]="form.get('name')"-->
-                                  <!--[formSubmitted]="forcedValidation"></app-form-error-block>-->
-        <!--</div>-->
     </div>
 
     <div class="form-group row">
@@ -32,23 +18,40 @@
                                   [formSubmitted]="forcedValidation"></app-form-error-block>
         </div>
         <div class="col-sm-3">
-            <label for="parcel-lwp" translate>parcel.land-worthiness-points</label>
-            <input id="parcel-lwp" class="form-control checking-field"  formControlName="landWorthinessPoints">
-        </div>
-        <div class="col-sm-3">
             <label for="parcel-area" translate>parcel.area</label>
             <input id="parcel-area" type="number" class="form-control checking-field" formControlName="area">
         </div>
-        <div class="col-sm-3">
-            <label for="parcel-irrigated" translate>parcel.irrigated-long</label>
-            <input id="parcel-irrigated" type="checkbox" class="abc-checkbox abc-checkbox-info" formControlName="irrigated">
+
+        <div class="col-sm-6">
+            <label for="branchId" translate>branch.branch</label>
+            <select id="branchId" class="form-control checking-field" formControlName="branchId">
+                <option disabled></option>
+                <option *ngFor="let item of branches" [ngValue]="item.id">{{ item.name }}</option>
+            </select>
+
+            <app-form-error-block [control]="form.get('branchId')" [formSubmitted]="forcedValidation"></app-form-error-block>
         </div>
     </div>
 
     <div class="form-group row">
-        <div class="col-sm-12">
-            <label for="parcel-description" translate>info.description</label>
-            <textarea id="parcel-description" class="form-control checking-field" formControlName="description"></textarea>
+        <div class="col-sm-6">
+            <label for="countyId" translate>geo.county</label>
+            <select id="countyId" class="form-control checking-field" formControlName="countyId" (change)="onCountyChange()">
+                <option disabled></option>
+                <option *ngFor="let item of counties" [ngValue]="item.id">{{ item.name }}</option>
+            </select>
+
+            <app-form-error-block [control]="form.get('branchId')" [formSubmitted]="forcedValidation"></app-form-error-block>
+        </div>
+
+        <div class="col-sm-6">
+            <label for="cityId" translate>geo.village-city</label>
+            <select id="cityId" class="form-control checking-field" formControlName="cityId">
+                <option disabled></option>
+                <option *ngFor="let item of cities" [ngValue]="item.id">{{ item.name }}</option>
+            </select>
+
+            <app-form-error-block [control]="form.get('cityId')" [formSubmitted]="forcedValidation"></app-form-error-block>
         </div>
     </div>
 

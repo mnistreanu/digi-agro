@@ -12,14 +12,14 @@ import java.util.List;
 public interface CityRepository extends JpaRepository<City, Long> {
 
     @Query("SELECT cv FROM City cv " +
-            "WHERE cv.countyId = :countyId AND cv.countryId = :countryId " +
+            "WHERE upper(cv.countyId) = upper(:countyId) AND upper(cv.countryId) = upper(:countryId) " +
             "ORDER BY cv.nameRo ")
     List<City> find(@Param("countryId") String countryId,
                     @Param("countyId") String countyId);
 
     @Query("SELECT cv FROM City cv " +
-            "WHERE cv.countyId = :countyId AND cv.countryId = :countryId " +
-            "AND (cv.nameRo LIKE :name OR cv.nameRu LIKE :name) " +
+            "WHERE upper(cv.countyId) = upper(:countyId) AND upper(cv.countryId) = upper(:countryId) " +
+            "AND (upper(cv.nameRo) LIKE upper(:name) OR upper(cv.nameRu) LIKE upper(:name)) " +
             "ORDER BY cv.nameRo")
     List<City> find(@Param("countryId") String countryId,
                     @Param("countyId") String countyId,

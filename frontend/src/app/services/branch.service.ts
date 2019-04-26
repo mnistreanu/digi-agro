@@ -40,7 +40,6 @@ export class BranchService {
     }
 
     fetchListItems(skipRootId: number, tenants: number[]): Observable<ListItem[]> {
-
         const model = {
             skipRootId: skipRootId,
             tenants: tenants

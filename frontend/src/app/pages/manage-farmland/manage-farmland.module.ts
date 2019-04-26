@@ -9,7 +9,6 @@ import {DirectivesModule} from '../../theme/directives/directives.module';
 import {ParcelListComponent} from './parcel-list/parcel-list.component';
 import {ParcelMapComponent} from './parcel-map/parcel-map.component';
 import {Constants} from '../../common/constants';
-import {ParcelComponent} from './parcel/parcel.component';
 import {EditRendererComponent} from '../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {EditRendererModule} from '../../modules/aggrid/edit-renderer/edit-renderer.module';
 import {ParcelMapEditorComponent} from './parcel/parcel-map-editor/parcel-map-editor.component';
@@ -20,10 +19,13 @@ import {ParcelSoilFormComponent} from './parcel/parcel-soil-form/parcel-soil-for
 import {ManageHarvestComponent} from './manage-harvest/list/manage-harvest.component';
 import {CropPlannerComponent} from './crop-planner/list/crop-planner.component';
 import {ParcelSeasonListComponent} from './parcel-season-list/parcel-season-list.component';
+import {ParcelComponent} from './parcel/parcel.component';
+import {ParcelsMapComponent} from './parcels-map/parcels-map.component';
 
 export const routes = [
     {path: 'parcels', component: ParcelListComponent, pathMatch: 'full'},
     {path: 'parcels/:id', component: ParcelComponent},
+    {path: 'parcels-map', component: ParcelsMapComponent, data: {breadcrumb: 'Parcels map'}},
     {path: 'field-diagnosis-list', component: ParcelSeasonListComponent, data: {breadcrumb: 'Field diagnosis list'}},
     {path: 'field-diagnosis-list/:id', component: ParcelComponent},
     {path: 'manage-harvest', component: ManageHarvestComponent, data: {breadcrumb: 'Manage Harvest'}},
@@ -45,7 +47,7 @@ export const routes = [
     ],
     declarations: [
         ParcelListComponent,
-        ParcelMapComponent,
+        ParcelsMapComponent,
         ParcelComponent,
         ParcelMapEditorComponent,
         ParcelGeneralFormComponent,
