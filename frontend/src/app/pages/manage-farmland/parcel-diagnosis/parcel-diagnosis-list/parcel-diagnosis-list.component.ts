@@ -1,21 +1,21 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
-import {LangService} from '../../../services/lang.service';
-import {EditRendererComponent} from '../../../modules/aggrid/edit-renderer/edit-renderer.component';
+import {LangService} from '../../../../services/lang.service';
+import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NumericUtil} from '../../../common/numericUtil';
-import {ParcelCropSeasonService} from '../../../services/parcel/parcel-crop-season.service';
-import {ParcelSeasonModel} from '../parcel/parcel-season-form/parcel-season.model';
-import {FieldMapper} from '../../../common/field.mapper';
-import {CropSeasonService} from '../../../services/crop/crop-season.service';
-import {UnitOfMeasureUtil} from '../../../common/unit-of-measure-util';
+import {NumericUtil} from '../../../../common/numericUtil';
+import {ParcelCropSeasonService} from '../../../../services/parcel/parcel-crop-season.service';
+import {FieldMapper} from '../../../../common/field.mapper';
+import {CropSeasonService} from '../../../../services/crop/crop-season.service';
+import {UnitOfMeasureUtil} from '../../../../common/unit-of-measure-util';
+import {ParcelSeasonModel} from '../../parcel-season.model';
 
 @Component({
-    selector: 'app-parcel-season-list',
-    templateUrl: './parcel-season-list.component.html',
-    styleUrls: ['./parcel-season-list.component.scss']
+    selector: 'app-parcel-diagnosis-list',
+    templateUrl: './parcel-diagnosis-list.component.html',
+    styleUrls: ['./parcel-diagnosis-list.component.scss']
 })
-export class ParcelSeasonListComponent implements OnInit, OnDestroy {
+export class ParcelDiagnosisListComponent implements OnInit, OnDestroy {
 
     options: GridOptions;
     context;

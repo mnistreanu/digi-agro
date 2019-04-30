@@ -4,11 +4,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ParcelService} from '../../../services/parcel/parcel.service';
 import {AlertService} from '../../../services/alert.service';
 import {ParcelModel} from './parcel.model';
+import {ParcelSeasonModel} from '../parcel-season.model';
 import {ParcelGeneralFormComponent} from './parcel-general-form/parcel-general-form.component';
 import {ParcelMapEditorComponent} from './parcel-map-editor/parcel-map-editor.component';
-import {ParcelSeasonFormComponent} from './parcel-season-form/parcel-season-form.component';
+import {ParcelCropFormComponent} from './parcel-crop-form/parcel-crop-form.component';
 import {ParcelSoilFormComponent} from './parcel-soil-form/parcel-soil-form.component';
-import {ParcelSeasonModel} from './parcel-season-form/parcel-season.model';
 import {ParcelCropSeasonService} from '../../../services/parcel/parcel-crop-season.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class ParcelComponent implements OnInit {
 
     @ViewChild(ParcelGeneralFormComponent) parcelGeneralFormComponent;
     @ViewChild(ParcelMapEditorComponent) parcelMapEditorComponent;
-    @ViewChild(ParcelSeasonFormComponent) parcelSeasonFormComponent;
+    @ViewChild(ParcelCropFormComponent) parcelCropFormComponent;
     @ViewChild(ParcelSoilFormComponent) parcelSoilFormComponent;
 
     parcelModel: ParcelModel;
@@ -80,7 +80,7 @@ export class ParcelComponent implements OnInit {
             return;
         }
 
-        const seasonFormValid = this.parcelSeasonFormComponent.submit();
+        const seasonFormValid = this.parcelCropFormComponent.submit();
         if (!seasonFormValid) {
             this.alertService.validationFailed();
             return;
@@ -112,7 +112,7 @@ export class ParcelComponent implements OnInit {
             this.alertService.saved();
         });
 
-        this.parcelSeasonModel = this.parcelSeasonFormComponent.parcelSeasonModel;
+        this.parcelSeasonModel = this.parcelCropFormComponent.parcelSeasonModel;
 
         this.parcelCropSeasonService.saveYearSeason(this.parcelSeasonModel).subscribe(model => {
             this.parcelSeasonModel = model;

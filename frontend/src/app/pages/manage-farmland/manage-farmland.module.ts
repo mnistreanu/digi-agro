@@ -7,18 +7,18 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {DirectivesModule} from '../../theme/directives/directives.module';
 import {ParcelListComponent} from './parcel-list/parcel-list.component';
-import {ParcelMapComponent} from './parcel-map/parcel-map.component';
 import {Constants} from '../../common/constants';
 import {EditRendererComponent} from '../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {EditRendererModule} from '../../modules/aggrid/edit-renderer/edit-renderer.module';
 import {ParcelMapEditorComponent} from './parcel/parcel-map-editor/parcel-map-editor.component';
 import {ParcelGeneralFormComponent} from './parcel/parcel-general-form/parcel-general-form.component';
+import {ParcelCropFormComponent} from './parcel/parcel-crop-form/parcel-crop-form.component';
 import {FormErrorBlockModule} from '../../modules/form-error-block/form-error-block.module';
-import {ParcelSeasonFormComponent} from './parcel/parcel-season-form/parcel-season-form.component';
 import {ParcelSoilFormComponent} from './parcel/parcel-soil-form/parcel-soil-form.component';
+import {ParcelDiagnosisListComponent} from './parcel-diagnosis/parcel-diagnosis-list/parcel-diagnosis-list.component';
+import {ParcelDiagnosisFormComponent} from './parcel-diagnosis/parcel-diagnosis-form/parcel-diagnosis-form.component';
 import {ManageHarvestComponent} from './manage-harvest/list/manage-harvest.component';
 import {CropPlannerComponent} from './crop-planner/list/crop-planner.component';
-import {ParcelSeasonListComponent} from './parcel-season-list/parcel-season-list.component';
 import {ParcelComponent} from './parcel/parcel.component';
 import {ParcelsMapComponent} from './parcels-map/parcels-map.component';
 
@@ -26,8 +26,8 @@ export const routes = [
     {path: 'parcels', component: ParcelListComponent, pathMatch: 'full'},
     {path: 'parcels/:id', component: ParcelComponent},
     {path: 'parcels-map', component: ParcelsMapComponent, data: {breadcrumb: 'Parcels map'}},
-    {path: 'field-diagnosis-list', component: ParcelSeasonListComponent, data: {breadcrumb: 'Field diagnosis list'}},
-    {path: 'field-diagnosis-list/:id', component: ParcelComponent},
+    {path: 'field-diagnosis-list', component: ParcelDiagnosisListComponent, data: {breadcrumb: 'Field diagnosis list'}},
+    {path: 'field-diagnosis-list/:id', component: ParcelDiagnosisFormComponent},
     {path: 'manage-harvest', component: ManageHarvestComponent, data: {breadcrumb: 'Manage Harvest'}},
     {path: 'crop-planner', component: CropPlannerComponent, data: {breadcrumb: 'Crop planner'}},
 ];
@@ -52,8 +52,9 @@ export const routes = [
         ParcelMapEditorComponent,
         ParcelGeneralFormComponent,
         ParcelSoilFormComponent,
-        ParcelSeasonFormComponent,
-        ParcelSeasonListComponent,
+        ParcelCropFormComponent,
+        ParcelDiagnosisListComponent,
+        ParcelDiagnosisFormComponent,
         CropPlannerComponent,
         ManageHarvestComponent
     ]

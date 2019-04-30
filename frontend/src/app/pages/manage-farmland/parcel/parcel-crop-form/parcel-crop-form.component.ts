@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ParcelSeasonModel} from './parcel-season.model';
 import {SelectItem} from '../../../../dto/select-item.dto';
 import {FieldMapper} from '../../../../common/field.mapper';
 import {AlertService} from '../../../../services/alert.service';
@@ -12,13 +11,14 @@ import {CropSeasonService} from '../../../../services/crop/crop-season.service';
 import {ParcelCropSeasonService} from '../../../../services/parcel/parcel-crop-season.service';
 import {DateUtil} from '../../../../common/dateUtil';
 import {CropSeasonListModel} from '../../../manage-crops/crop-season/list/crop-season-list.model';
+import {ParcelSeasonModel} from '../../parcel-season.model';
 
 @Component({
-    selector: 'app-parcel-season-form',
-    templateUrl: './parcel-season-form.component.html',
-    styleUrls: ['./parcel-season-form.component.scss']
+    selector: 'app-parcel-crop-form',
+    templateUrl: './parcel-crop-form.component.html',
+    styleUrls: ['./parcel-crop-form.component.scss']
 })
-export class ParcelSeasonFormComponent implements OnInit {
+export class ParcelCropFormComponent implements OnInit {
 
     @Input() parcelSeasonModel: ParcelSeasonModel;
 
