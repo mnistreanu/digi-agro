@@ -1,6 +1,6 @@
-import {LatLng} from '../../../../interfaces/lat-lng.interface';
+import {LatLng} from '../../../interfaces/lat-lng.interface';
 
-export class ParcelDiagnosisFormModel {
+export class ParcelDiagnosisModel {
 
     id: number;
     name: string;

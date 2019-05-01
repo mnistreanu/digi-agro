@@ -1,4 +1,4 @@
-<div widget class="card bottom-30" *ngIf="parcelModel">
+<div widget class="card bottom-30">
     <div class="card-header">
         <span translate>parcel.summarizer</span>
         <div class="widget-controls">
@@ -19,14 +19,14 @@
                 <a class="nav-link" [class.active]="tabIndex == 2" (click)="changeTab(2)"translate>parcel.map-tab</a>
             </li>
         </ul>
-        <!--<div class="tab-content">-->
-            <!--<div class="tab-pane active" *ngIf="tabIndex == 1 || loadedTabs[1]" [class.active]="tabIndex == 1">-->
-                <!--<app-parcel-general-form *ngIf="parcelModel" [parcelModel]="parcelModel"></app-parcel-general-form>-->
-            <!--</div>-->
-            <!--<div class="tab-pane" *ngIf="tabIndex == 2  || loadedTabs[2]" [class.active]="tabIndex == 2">-->
-                <!--<app-parcel-map-editor [parcelModel]="parcelModel"></app-parcel-map-editor>-->
-            <!--</div>-->
-        <!--</div>-->
+        <div class="tab-content">
+            <div class="tab-pane active" *ngIf="tabIndex == 1 || loadedTabs[1]" [class.active]="tabIndex == 1">
+                <app-parcel-diagnosis-summarizer [parcelDiagnosisModel]="parcelDiagnosisModel"></app-parcel-diagnosis-summarizer>
+            </div>
+            <div class="tab-pane" *ngIf="tabIndex == 2  || loadedTabs[2]" [class.active]="tabIndex == 2">
+                <app-parcel-diagnosis-map [parcelDiagnosisModel]="parcelDiagnosisModel"></app-parcel-diagnosis-map>
+            </div>
+        </div>
 
         <div class="mt-3">
             <button class="btn btn-danger" *ngIf="parcelModel.id != null" (click)="remove()" translate>action.remove</button>

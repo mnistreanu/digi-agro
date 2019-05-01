@@ -1,0 +1,11 @@
+<ngui-map zoom="12" mapTypeId="terrain" scrollwheel="true"
+          [center]="mapCenter"
+          (mapReady$)="onMapReady($event)">
+
+    <drawing-manager
+            [drawingControl]="true"
+            [drawingControlOptions]="drawingControlOptions"
+            [polygonOptions]="shapeOptions">
+    </drawing-manager>
+
+</ngui-map>
