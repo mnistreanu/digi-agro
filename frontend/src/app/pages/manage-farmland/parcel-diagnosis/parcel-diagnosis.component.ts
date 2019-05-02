@@ -6,6 +6,8 @@ import {ParcelService} from '../../../services/parcel/parcel.service';
 import {AlertService} from '../../../services/alert.service';
 import {ParcelDiagnosisSummarizerComponent} from './parcel-diagnosis-summarizer/parcel-diagnosis-summarizer.component';
 import {ParcelDiagnosisMapComponent} from './parcel-diagnosis-map/parcel-diagnosis-map.component';
+import {ParcelSeasonModel} from '../parcel-season.model';
+import {ParcelCropSeasonService} from '../../../services/parcel/parcel-crop-season.service';
 
 @Component({
     selector: 'app-parcel-diagnosis',
@@ -18,12 +20,15 @@ export class ParcelDiagnosisComponent implements OnInit {
     @ViewChild(ParcelDiagnosisMapComponent) parcelDiagnosisMapComponent;
 
     parcelDiagnosisModel: ParcelDiagnosisModel;
+    parcelSeasonModel: ParcelSeasonModel;
+
     tabIndex = 1;
     loadedTabs = {1: true};
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private parcelService: ParcelService,
+                private parcelCropSeasonService: ParcelCropSeasonService,
                 private alertService: AlertService) {
     }
 
@@ -39,20 +44,38 @@ export class ParcelDiagnosisComponent implements OnInit {
     private restoreModel() {
         this.route.params.subscribe(params => {
             const id = params['id'];
-            this.setupModel(id);
+            const harvestYear = 2019;
+            this.setupModel(id, harvestYear);
         });
     }
 
 
-    private setupModel(id) {
-        this.parcelDiagnosisModel.id = id;
-        // this.parcelService.findOne(id).subscribe(model => {
-        //     this.parcelSeasonModel = new ParcelSeasonModel();
-        //     this.parcelSeasonModel.parcelId = this.parcelModel.id;
-        //     this.parcelService.adjust([model]);
-        // });
-
+    private setupModel(parcelId, harvestYear) {
+        this.parcelCropSeasonService.findYearSeasonParcel(harvestYear, parcelId).subscribe(model => {
+            if (model.id != null) {
+                this.parcelSeasonModel = model;
+                debugger;
+            }
+            // this.buildForm();
+        });
     }
+
+    // private buildForm() {
+    //     this.form = this.fb.group({
+    //         cropSeasonId: [this.parcelSeasonModel.cropSeasonId],
+    //         // cropCategoryId: [this.parcelSeasonModel.cropCategoryId, Validators.required],
+    //         // cropId: [this.parcelSeasonModel.cropId, Validators.required],
+    //         cropSubcultureId: [this.parcelSeasonModel.cropSubcultureId],
+    //         cropVarietyId: [this.parcelSeasonModel.cropVarietyId],
+    //         yieldGoal: [this.parcelSeasonModel.yieldGoal, Validators.min(0)],
+    //         unitOfMeasure: [this.parcelSeasonModel.unitOfMeasure],
+    //         plantedAt: [DateUtil.formatDateISO(this.parcelSeasonModel.plantedAt)],
+    //         rowsOnParcel: [this.parcelSeasonModel.rowsOnParcel, Validators.min(0)],
+    //         plantsOnRow: [this.parcelSeasonModel.plantsOnRow, Validators.min(0)],
+    //         spaceBetweenRows: [this.parcelSeasonModel.spaceBetweenRows, Validators.min(0)],
+    //         spaceBetweenPlants: [this.parcelSeasonModel.spaceBetweenPlants, Validators.min(0)]
+    //     });
+    // }
 
 
     save() {

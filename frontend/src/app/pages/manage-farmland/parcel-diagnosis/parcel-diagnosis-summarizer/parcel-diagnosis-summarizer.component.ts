@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ParcelDiagnosisModel} from '../parcel-diagnosis.model';
+import {ParcelSeasonModel} from '../../parcel-season.model';
 
 @Component({
     selector: 'app-parcel-diagnosis-summarizer',
@@ -10,6 +11,7 @@ import {ParcelDiagnosisModel} from '../parcel-diagnosis.model';
 export class ParcelDiagnosisSummarizerComponent implements OnInit {
 
     @Input() parcelDiagnosisModel: ParcelDiagnosisModel;
+    @Input() parcelSeasonModel: ParcelSeasonModel;
 
     form: FormGroup;
     forcedValidation: boolean;
@@ -22,12 +24,13 @@ export class ParcelDiagnosisSummarizerComponent implements OnInit {
     }
 
     private buildForm() {
-        if (this.parcelDiagnosisModel == null) {
-            this.parcelDiagnosisModel = new ParcelDiagnosisModel();
+        debugger;
+        if (this.parcelSeasonModel == null) {
+            this.parcelSeasonModel = new ParcelSeasonModel();
         }
 
         this.form = this.fb.group({
-            description: [this.parcelDiagnosisModel.description]
+            // description: [this.parcelSeasonModel.description]
         });
     }
 
@@ -38,7 +41,7 @@ export class ParcelDiagnosisSummarizerComponent implements OnInit {
             return false;
         }
 
-        Object.assign(this.parcelDiagnosisModel, this.form.value);
+        Object.assign(this.parcelSeasonModel, this.form.value);
 
         this.forcedValidation = false;
         return true;
