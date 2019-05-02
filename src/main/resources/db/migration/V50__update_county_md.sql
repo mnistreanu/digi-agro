@@ -1,4 +1,4 @@
-INSERT INTO county (id, country_id, name_ro, name_ru) VALUES ('GE', 'MD', 'UTA Găgăuzia', 'АТО Гагаузия')
+INSERT INTO county (id, country_id, name_ro, name_ru) VALUES ('GE', 'MD', 'UTA Găgăuzia', 'АТО Гагаузия');
 
 DELETE FROM county WHERE country_id='MD' and id='CG';
 DELETE FROM county WHERE country_id='MD' and id='CO';
