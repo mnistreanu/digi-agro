@@ -22,10 +22,11 @@ export class ParcelDiagnosisSummarizerComponent implements OnInit {
     }
 
     private buildForm() {
+        if (this.parcelDiagnosisModel == null) {
+            this.parcelDiagnosisModel = new ParcelDiagnosisModel();
+        }
+
         this.form = this.fb.group({
-            landWorthinessPoints: [this.parcelDiagnosisModel.landWorthinessPoints],
-            area: [this.parcelDiagnosisModel.area, Validators.required],
-            irrigated: [this.parcelDiagnosisModel.irrigated],
             description: [this.parcelDiagnosisModel.description]
         });
     }

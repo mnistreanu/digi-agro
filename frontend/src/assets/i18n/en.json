@@ -39,6 +39,7 @@
 	"crop": {
 		"category": "Category",
 		"crop": "Crop",
+		"harvest-date": "Harvest date",
 		"harvest-year": "Harvest year",
 		"name": "Agricultural crop",
 		"planting-date": "Planting date",
@@ -368,7 +369,7 @@
 		"cadaster-number": "Cadaster Nr.",
 		"complete-map": "Mark the field on the map",
 		"description": "Description",
-		"general-tab": "General",
+		"general-tab": "General view",
 		"ha": "hectare",
 		"irrigated-long": "Irrigated",
 		"irrigated-short": "Irr.",
@@ -388,6 +389,7 @@
 		"space-between-rows": "Space Between Rows",
 		"the-parcels": "the parcels",
 		"total-ha": "Total Ha",
+		"yield-actual": "Actual yield",
 		"yield-goal": "Yield goal"
 	},
 	"pest": {

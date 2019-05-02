@@ -569,6 +569,27 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>harvest-date</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ro-RO</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ru-RU</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>harvest-year</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
@@ -985,7 +1006,7 @@
                         <default_text></default_text>
                         <translations>
                             <translation>
-                                <language>en-US</language>
+                                <language>ru-RU</language>
                                 <approved>false</approved>
                             </translation>
                             <translation>
@@ -993,7 +1014,7 @@
                                 <approved>false</approved>
                             </translation>
                             <translation>
-                                <language>ru-RU</language>
+                                <language>en-US</language>
                                 <approved>false</approved>
                             </translation>
                         </translations>
@@ -1048,7 +1069,7 @@
                         <default_text></default_text>
                         <translations>
                             <translation>
-                                <language>en-US</language>
+                                <language>ru-RU</language>
                                 <approved>false</approved>
                             </translation>
                             <translation>
@@ -1056,7 +1077,7 @@
                                 <approved>false</approved>
                             </translation>
                             <translation>
-                                <language>ru-RU</language>
+                                <language>en-US</language>
                                 <approved>false</approved>
                             </translation>
                         </translations>
@@ -1069,7 +1090,7 @@
                         <default_text></default_text>
                         <translations>
                             <translation>
-                                <language>en-US</language>
+                                <language>ru-RU</language>
                                 <approved>false</approved>
                             </translation>
                             <translation>
@@ -1077,7 +1098,7 @@
                                 <approved>false</approved>
                             </translation>
                             <translation>
-                                <language>ru-RU</language>
+                                <language>en-US</language>
                                 <approved>false</approved>
                             </translation>
                         </translations>
@@ -3046,7 +3067,7 @@
                         <default_text></default_text>
                         <translations>
                             <translation>
-                                <language>en-US</language>
+                                <language>ru-RU</language>
                                 <approved>false</approved>
                             </translation>
                             <translation>
@@ -3054,7 +3075,7 @@
                                 <approved>false</approved>
                             </translation>
                             <translation>
-                                <language>ru-RU</language>
+                                <language>en-US</language>
                                 <approved>false</approved>
                             </translation>
                         </translations>
@@ -3214,7 +3235,7 @@
                         <default_text></default_text>
                         <translations>
                             <translation>
-                                <language>en-US</language>
+                                <language>ru-RU</language>
                                 <approved>false</approved>
                             </translation>
                             <translation>
@@ -3222,7 +3243,7 @@
                                 <approved>false</approved>
                             </translation>
                             <translation>
-                                <language>ru-RU</language>
+                                <language>en-US</language>
                                 <approved>false</approved>
                             </translation>
                         </translations>
@@ -7101,6 +7122,27 @@
                     </concept_node>
                     <concept_node>
                         <name>total-ha</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ro-RO</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ru-RU</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>yield-actual</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
                         <comment></comment>

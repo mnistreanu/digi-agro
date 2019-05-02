@@ -39,6 +39,7 @@
 	"crop": {
 		"category": "Categoria",
 		"crop": "Cultura agricolă",
+		"harvest-date": "Data recoltare",
 		"harvest-year": "An recoltare",
 		"name": "Cultura agricolă",
 		"planting-date": "Data plantării",
@@ -368,7 +369,7 @@
 		"cadaster-number": "Nr. cadastral",
 		"complete-map": "Marcați câmpul pe hartă",
 		"description": "Descriere",
-		"general-tab": "General",
+		"general-tab": "Vedere generală",
 		"ha": "ha",
 		"irrigated-long": "Irigat",
 		"irrigated-short": "Iri.",
@@ -388,6 +389,7 @@
 		"space-between-rows": "Spațiu între rânduri",
 		"the-parcels": "parcelele",
 		"total-ha": "Total Ha",
+		"yield-actual": "Producție actuală",
 		"yield-goal": "Obiectiv producție"
 	},
 	"pest": {

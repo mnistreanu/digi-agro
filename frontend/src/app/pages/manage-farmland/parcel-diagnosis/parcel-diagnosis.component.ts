@@ -45,8 +45,8 @@ export class ParcelDiagnosisComponent implements OnInit {
 
 
     private setupModel(id) {
+        this.parcelDiagnosisModel.id = id;
         // this.parcelService.findOne(id).subscribe(model => {
-        //     this.parcelModel = model;
         //     this.parcelSeasonModel = new ParcelSeasonModel();
         //     this.parcelSeasonModel.parcelId = this.parcelModel.id;
         //     this.parcelService.adjust([model]);
