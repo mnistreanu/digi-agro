@@ -5,7 +5,7 @@
         <div class="col-sm-12">
             <div widget class="card">
                 <div class="card-header">
-                    <span>2019 - Detalii Teren #453535</span>
+                    <span>{{parcelSeasonModel.harvestYear}} - Detalii Teren #453535</span>
                     <div class="widget-controls">
                         <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
                         <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
@@ -22,31 +22,31 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-2" translate>parcel.cadaster-number</div>
-                        <div class="col-sm-2">123AZ788</div>
+                        <div class="col-sm-2">{{parcelSeasonModel.cadasterNumber}}</div>
                         <div class="col-sm-2" translate>parcel.area</div>
-                        <div class="col-sm-2">100</div>
+                        <div class="col-sm-2">{{parcelSeasonModel.area}}</div>
                         <div class="col-sm-2" translate>parcel.irrigated-long</div>
-                        <div class="col-sm-2">Nu</div>
+                        <div class="col-sm-2">{{parcelSeasonModel.irrigatedFormatted}}</div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-2" translate>crop.crop</div>
-                        <div class="col-sm-2">Fasole</div>
+                        <div class="col-sm-2">{{parcelSeasonModel.cropName}}</div>
                         <div class="col-sm-2" translate>crop.variety</div>
-                        <div class="col-sm-2">Red Kidney</div>
+                        <div class="col-sm-2">{{parcelSeasonModel.cropVarietyName}}</div>
                         <div class="col-sm-2" translate>crop.planting-date</div>
-                        <div class="col-sm-2"></div>
+                        <div class="col-sm-2">{{parcelSeasonModel.plantedAtFormatted}}</div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-2" translate>parcel.yield-goal</div>
-                        <div class="col-sm-2">335</div>
+                        <div class="col-sm-2">{{parcelSeasonModel.yieldGoalFormatted}}</div>
                         <div class="col-sm-2" translate>parcel.yield-actual</div>
-                        <div class="col-sm-2">100</div>
+                        <div class="col-sm-2">{{parcelSeasonModel.yieldActualFormatted}}</div>
                         <div class="col-sm-2" translate>crop.harvest-date</div>
-                        <div class="col-sm-2">01.01.2019</div>
+                        <div class="col-sm-2">{{parcelSeasonModel.harvestDateFormatted}}</div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-2" translate>info.information</div>
-                        <div class="col-sm-102">m,klklajs lkaj klj klj kl jhjh gjhg jh jhjhjhgjh</div>
+                        <div class="col-sm-2" translate>info.notes</div>
+                        <div class="col-sm-10">{{parcelSeasonModel.notes}}</div>
                     </div>
                 </div>
             </div>

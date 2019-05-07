@@ -54,29 +54,9 @@ export class ParcelDiagnosisComponent implements OnInit {
         this.parcelCropSeasonService.findYearSeasonParcel(harvestYear, parcelId).subscribe(model => {
             if (model.id != null) {
                 this.parcelSeasonModel = model;
-                debugger;
             }
-            // this.buildForm();
         });
     }
-
-    // private buildForm() {
-    //     this.form = this.fb.group({
-    //         cropSeasonId: [this.parcelSeasonModel.cropSeasonId],
-    //         // cropCategoryId: [this.parcelSeasonModel.cropCategoryId, Validators.required],
-    //         // cropId: [this.parcelSeasonModel.cropId, Validators.required],
-    //         cropSubcultureId: [this.parcelSeasonModel.cropSubcultureId],
-    //         cropVarietyId: [this.parcelSeasonModel.cropVarietyId],
-    //         yieldGoal: [this.parcelSeasonModel.yieldGoal, Validators.min(0)],
-    //         unitOfMeasure: [this.parcelSeasonModel.unitOfMeasure],
-    //         plantedAt: [DateUtil.formatDateISO(this.parcelSeasonModel.plantedAt)],
-    //         rowsOnParcel: [this.parcelSeasonModel.rowsOnParcel, Validators.min(0)],
-    //         plantsOnRow: [this.parcelSeasonModel.plantsOnRow, Validators.min(0)],
-    //         spaceBetweenRows: [this.parcelSeasonModel.spaceBetweenRows, Validators.min(0)],
-    //         spaceBetweenPlants: [this.parcelSeasonModel.spaceBetweenPlants, Validators.min(0)]
-    //     });
-    // }
-
 
     save() {
         // const generalFormValid = this.parcelGeneralFormComponent.submit();

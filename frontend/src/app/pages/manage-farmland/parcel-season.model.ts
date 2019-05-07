@@ -1,6 +1,7 @@
 export class ParcelSeasonModel {
     id: number;
     parcelId: number;
+    irrigated: any;
     parcelName: String;
     harvestYear: number;
 

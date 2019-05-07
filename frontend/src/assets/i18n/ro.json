@@ -185,6 +185,7 @@
 		"name": "Denumire",
 		"name-ro": "Denumire (Rom)",
 		"name-ru": "Denumire (Rus)",
+		"notes": "Notițe",
 		"parent-category": "Categoria părinte",
 		"registered": "Înregistrat",
 		"title": "Descriere"

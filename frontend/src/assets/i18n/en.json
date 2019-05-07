@@ -185,6 +185,7 @@
 		"name": "Name",
 		"name-ro": "Name",
 		"name-ru": "Name",
+		"notes": "Notes",
 		"parent-category": "Parent Category",
 		"registered": "Registered",
 		"title": "Description"
