@@ -23,6 +23,7 @@ import {ParcelComponent} from './parcel/parcel.component';
 import {ParcelsMapComponent} from './parcels-map/parcels-map.component';
 import {ParcelDiagnosisSummarizerComponent} from './parcel-diagnosis/parcel-diagnosis-summarizer/parcel-diagnosis-summarizer.component';
 import {ParcelDiagnosisMapComponent} from './parcel-diagnosis/parcel-diagnosis-map/parcel-diagnosis-map.component';
+import {ExpensesModule} from '../expenses/expenses.module';
 
 export const routes = [
     {path: 'parcels', component: ParcelListComponent, pathMatch: 'full'},
@@ -46,6 +47,7 @@ export const routes = [
         AgGridModule.withComponents([EditRendererComponent]),
         NguiMapModule.forRoot({apiUrl: Constants.GOOGLE_MAP_API}),
         RouterModule.forChild(routes),
+        ExpensesModule
     ],
     declarations: [
         ParcelListComponent,

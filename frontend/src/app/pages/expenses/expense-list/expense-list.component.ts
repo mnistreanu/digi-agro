@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
 import {LangService} from '../../../services/lang.service';
 import {ExpenseModel} from '../models/expense.model';
@@ -24,6 +24,10 @@ import {GroupedSelectorComponent} from '../../../modules/aggrid/selector/grouped
 })
 export class ExpenseListComponent implements OnInit, OnDestroy {
 
+    @Input() readOnlyMode = false;
+    @Input() singleSeasonMode = false;
+    @Input() cropSeasonId;
+
     options: GridOptions;
     context;
 
@@ -35,7 +39,6 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
 
     seasonYearSubscription;
     cropSeasons: CropSeasonListModel[];
-    selectedCropSeasonId;
     hasCropSeasons: boolean;
 
     expenseTypes: GroupedSelectorItem[];
@@ -55,23 +58,33 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
             .then(() => this.setupExpenseTypes())
             .then(() => this.setupGrid());
 
-        this.seasonYearSubscription = this.cropSeasonService.seasonYearChanged.subscribe(() => {
-            this.setupCropSeasons()
-                .then(() => this.setupRows());
-        });
+        if (this.singleSeasonMode) {
+            this.hasCropSeasons = this.cropSeasonId != null;
+        }
+        else {
+            this.seasonYearSubscription = this.cropSeasonService.seasonYearChanged.subscribe(() => {
+                this.setupCropSeasons()
+                    .then(() => this.setupRows());
+            });
+        }
     }
 
     ngOnDestroy() {
-        this.seasonYearSubscription.unsubscribe();
+        if (this.seasonYearSubscription) {
+            this.seasonYearSubscription.unsubscribe();
+        }
     }
 
     private setupCropSeasons(): Promise<void> {
         return new Promise((resolve) => {
+            if (this.singleSeasonMode) {
+                resolve();
+            }
             this.cropSeasonService.findByYear(this.cropSeasonService.seasonYear).subscribe(models => {
                 this.cropSeasonService.adjustListModels(models);
                 this.cropSeasons = models;
                 if (models.length > 0) {
-                    this.selectedCropSeasonId = models[0].id;
+                    this.cropSeasonId = models[0].id;
                     this.hasCropSeasons = true;
                 }
                 resolve();
@@ -143,18 +156,18 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
     }
 
     private setupHeaders() {
-
         let headers: ColDef[] = [];
 
+        if (!this.readOnlyMode) {
+            headers.push({type: 'deleteType'});
+        }
+
         headers = headers.concat(<ColDef[]>[
-            {
-                type: 'deleteType'
-            },
             {
                 headerName: 'expenses.date',
                 field: 'date',
                 type: 'dateType',
-                editable: true,
+                editable: !this.readOnlyMode,
                 onCellValueChanged: (params) => this.updateModel(params.data)
             },
             {
@@ -162,7 +175,7 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
                 field: 'categoryName',
                 width: 100,
                 minWidth: 100,
-                editable: true,
+                editable: !this.readOnlyMode,
                 cellEditor: 'groupedSelector',
                 cellEditorParams: {
                     getDropDownItems: () => this.expenseTypes,
@@ -176,7 +189,7 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
                 field: 'title',
                 width: 100,
                 minWidth: 100,
-                editable: true,
+                editable: !this.readOnlyMode,
                 onCellValueChanged: (params) => this.updateModel(params.data)
             },
             {
@@ -185,7 +198,7 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
                 width: 100,
                 minWidth: 100,
                 type: 'numericType',
-                editable: true,
+                editable: !this.readOnlyMode,
                 onCellValueChanged: (params) => this.onCostChange(params)
             },
             {
@@ -193,7 +206,7 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
                 field: 'description',
                 width: 200,
                 minWidth: 100,
-                editable: true,
+                editable: !this.readOnlyMode,
                 onCellValueChanged: (params) => this.updateModel(params.data)
             }
         ]);
@@ -220,7 +233,7 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
         if (!this.hasCropSeasons) {
             return;
         }
-        this.expenseService.find(this.selectedCropSeasonId).subscribe(models => {
+        this.expenseService.find(this.cropSeasonId).subscribe(models => {
             models.forEach(model => model.date = new Date(model.date));
             this.options.api.setRowData(models);
             this.models = models;
@@ -284,7 +297,7 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
         const categoryId = keys[0];
 
         const model = new ExpenseModel();
-        model.cropSeasonId = this.selectedCropSeasonId;
+        model.cropSeasonId = this.cropSeasonId;
         model.date = new Date();
         model.categoryId = +categoryId;
         model.categoryName = this.categoryMap[categoryId].name;

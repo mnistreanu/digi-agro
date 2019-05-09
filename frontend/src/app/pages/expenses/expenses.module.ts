@@ -48,7 +48,10 @@ export const routes = [
         ]),
         RouterModule.forChild(routes)
     ],
-    declarations: [ExpenseListComponent, ExpenseSeasonListComponent, ExpensesPieChartComponent]
+    declarations: [ExpenseListComponent, ExpenseSeasonListComponent, ExpensesPieChartComponent],
+    exports: [
+        ExpenseListComponent
+    ]
 })
 export class ExpensesModule {
 }
