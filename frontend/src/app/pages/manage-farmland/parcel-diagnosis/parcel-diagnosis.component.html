@@ -22,7 +22,7 @@
         <div class="tab-content">
             <div class="tab-pane active" *ngIf="tabIndex == 1 || loadedTabs[1]" [class.active]="tabIndex == 1">
                 <app-parcel-diagnosis-summarizer [parcelSeasonModel]="parcelSeasonModel"></app-parcel-diagnosis-summarizer>
-                <app-expense-list [readOnlyMode]="true" [singleSeasonMode]="true" [cropSeasonId]="parcelSeasonModel.id"></app-expense-list>
+                <app-expense-list [readOnlyMode]="true" [singleSeasonMode]="true" [shortMode]="true" [cropSeasonId]="parcelSeasonModel.id"></app-expense-list>
             </div>
             <div class="tab-pane" *ngIf="tabIndex == 2  || loadedTabs[2]" [class.active]="tabIndex == 2">
                 <app-parcel-diagnosis-map [parcelDiagnosisModel]="parcelDiagnosisModel"></app-parcel-diagnosis-map>

@@ -26,6 +26,7 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
 
     @Input() readOnlyMode = false;
     @Input() singleSeasonMode = false;
+    @Input() shortMode = false;
     @Input() cropSeasonId;
 
     options: GridOptions;
@@ -156,19 +157,18 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
     }
 
     private setupHeaders() {
-        let headers: ColDef[] = [];
-
-        if (!this.readOnlyMode) {
-            headers.push({type: 'deleteType'});
-        }
-
-        headers = headers.concat(<ColDef[]>[
+        let headers: ColDef[] = <ColDef[]>[
+            {
+                type: 'deleteType',
+                hide: this.readOnlyMode
+            },
             {
                 headerName: 'expenses.date',
                 field: 'date',
                 type: 'dateType',
                 editable: !this.readOnlyMode,
-                onCellValueChanged: (params) => this.updateModel(params.data)
+                onCellValueChanged: (params) => this.updateModel(params.data),
+                hide: this.shortMode
             },
             {
                 headerName: 'Type',
@@ -190,7 +190,8 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
                 width: 100,
                 minWidth: 100,
                 editable: !this.readOnlyMode,
-                onCellValueChanged: (params) => this.updateModel(params.data)
+                onCellValueChanged: (params) => this.updateModel(params.data),
+                hide: this.shortMode
             },
             {
                 headerName: 'Cost',
@@ -207,9 +208,12 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
                 width: 200,
                 minWidth: 100,
                 editable: !this.readOnlyMode,
-                onCellValueChanged: (params) => this.updateModel(params.data)
+                onCellValueChanged: (params) => this.updateModel(params.data),
+                hide: this.shortMode
             }
-        ]);
+        ];
+
+        headers = headers.filter(h => !h.hide);
 
         headers.forEach(header => {
             if (header.headerName) {
