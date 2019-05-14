@@ -1,13 +1,6 @@
 <div widget class="card bottom-30" *ngIf="parcelSeasonModel">
     <div class="card-header">
         <span translate>nav.field-diagnosis</span>
-        <!--<div class="widget-controls">-->
-            <!--<a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>-->
-            <!--<a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>-->
-            <!--<a data-widgster="fullscreen" href="#" class="transition"><i class="fa fa-expand"></i></a>-->
-            <!--<a data-widgster="restore" href="#" class="transition"><i class="fa fa-compress"></i></a>-->
-            <!--<a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>-->
-        <!--</div>-->
     </div>
     <div class="card-body widget-body">
 
@@ -23,6 +16,7 @@
             <div class="tab-pane active" *ngIf="tabIndex == 1 || loadedTabs[1]" [class.active]="tabIndex == 1">
                 <app-parcel-diagnosis-summarizer [parcelSeasonModel]="parcelSeasonModel"></app-parcel-diagnosis-summarizer>
                 <app-expense-list [readOnlyMode]="true" [singleSeasonMode]="true" [shortMode]="true" [cropSeasonId]="parcelSeasonModel.id"></app-expense-list>
+                <app-parcel-fertilizer-application [parcelSeasonModel]="parcelSeasonModel"></app-parcel-fertilizer-application>
             </div>
             <div class="tab-pane" *ngIf="tabIndex == 2  || loadedTabs[2]" [class.active]="tabIndex == 2">
                 <app-parcel-diagnosis-map [parcelDiagnosisModel]="parcelDiagnosisModel"></app-parcel-diagnosis-map>

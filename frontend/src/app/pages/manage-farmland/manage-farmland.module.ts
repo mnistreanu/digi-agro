@@ -22,6 +22,7 @@ import {CropPlannerComponent} from './crop-planner/list/crop-planner.component';
 import {ParcelComponent} from './parcel/parcel.component';
 import {ParcelsMapComponent} from './parcels-map/parcels-map.component';
 import {ParcelDiagnosisSummarizerComponent} from './parcel-diagnosis/parcel-diagnosis-summarizer/parcel-diagnosis-summarizer.component';
+import {ParcelFertilizerApplicationComponent} from './parcel-diagnosis/parcel-fertilizer-application/parcel-fertilizer-application.component';
 import {ParcelDiagnosisMapComponent} from './parcel-diagnosis/parcel-diagnosis-map/parcel-diagnosis-map.component';
 import {ExpensesModule} from '../expenses/expenses.module';
 
@@ -60,6 +61,7 @@ export const routes = [
         ParcelDiagnosisListComponent,
         ParcelDiagnosisComponent,
         ParcelDiagnosisSummarizerComponent,
+        ParcelFertilizerApplicationComponent,
         ParcelDiagnosisMapComponent,
         CropPlannerComponent,
         ManageHarvestComponent
