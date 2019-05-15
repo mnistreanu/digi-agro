@@ -25,6 +25,7 @@ import {ParcelDiagnosisSummarizerComponent} from './parcel-diagnosis/parcel-diag
 import {ParcelFertilizerApplicationComponent} from './parcel-diagnosis/parcel-fertilizer-application/parcel-fertilizer-application.component';
 import {ParcelDiagnosisMapComponent} from './parcel-diagnosis/parcel-diagnosis-map/parcel-diagnosis-map.component';
 import {ExpensesModule} from '../expenses/expenses.module';
+import {ParcelExpenseBreakdownComponent} from './parcel-diagnosis/parcel-expense-breakdown/parcel-expense-breakdown.component';
 
 export const routes = [
     {path: 'parcels', component: ParcelListComponent, pathMatch: 'full'},
@@ -61,6 +62,7 @@ export const routes = [
         ParcelDiagnosisListComponent,
         ParcelDiagnosisComponent,
         ParcelDiagnosisSummarizerComponent,
+        ParcelExpenseBreakdownComponent,
         ParcelFertilizerApplicationComponent,
         ParcelDiagnosisMapComponent,
         CropPlannerComponent,

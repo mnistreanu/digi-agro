@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ColDef, GridOptions} from 'ag-grid';
+import {EditRendererComponent} from '../../../../modules/aggrid/edit-renderer/edit-renderer.component';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ParcelDiagnosisModel} from '../parcel-diagnosis.model';
 import {ParcelSeasonModel} from '../../parcel-season.model';
@@ -7,6 +9,7 @@ import {LangService} from '../../../../services/lang.service';
 import {NumericUtil} from '../../../../common/numericUtil';
 import {UnitOfMeasureUtil} from '../../../../common/unit-of-measure-util';
 import {DateUtil} from '../../../../common/dateUtil';
+import {FertilizerService} from '../../../../services/chemicals-pests/fertilizer.service';
 
 @Component({
     selector: 'app-parcel-fertilizer-application',
@@ -18,16 +21,21 @@ export class ParcelFertilizerApplicationComponent implements OnInit {
     @Input() parcelDiagnosisModel: ParcelDiagnosisModel;
     @Input() parcelSeasonModel: ParcelSeasonModel;
 
+    options: GridOptions;
+    context;
+
     form: FormGroup;
     forcedValidation: boolean;
 
     constructor(private fb: FormBuilder,
-                private langService: LangService) {
+                private langService: LangService,
+                private fertilizerService: FertilizerService) {
     }
 
     ngOnInit() {
+        this.setupGrid();
         this.buildForm();
-        this.adjustModel(this.parcelSeasonModel);
+        // this.adjustModel(this.parcelSeasonModel);
     }
 
     private buildForm() {
@@ -36,7 +44,11 @@ export class ParcelFertilizerApplicationComponent implements OnInit {
         }
 
         this.form = this.fb.group({
-            irrigated: [NumericUtil.formatBoolean(this.parcelSeasonModel.irrigated)]
+            // fertilizerType: [this.model.fertilizerType, Validators.required],
+            // nameRo: [this.model.nameRo, Validators.required],
+            // nameRu: [this.model.nameRu],
+            // descriptionRo: [this.model.descriptionRo, Validators.required],
+            // descriptionRu: [this.model.descriptionRu],
         });
     }
 
@@ -76,4 +88,116 @@ export class ParcelFertilizerApplicationComponent implements OnInit {
         return true;
     }
 
+    private setupGrid() {
+        this.options = <GridOptions>{};
+
+        this.options.enableColResize = true;
+        this.options.enableSorting = true;
+        this.options.enableFilter = true;
+        this.options.columnDefs = this.setupHeaders();
+        this.context = {componentParent: this};
+
+        // this.setupRows();
+
+    }
+
+    private setupHeaders() {
+
+        const headers: ColDef[] = [
+            {
+                field: 'edit',
+                width: 24,
+                minWidth: 24,
+                maxWidth: 30,
+                editable: false,
+                suppressResize: true,
+                suppressMenu: true,
+                cellRendererFramework: EditRendererComponent,
+                cellStyle: () => {
+                    return {padding: 0};
+                }
+            },
+            {
+                headerName: 'info.date',
+                field: 'fertilizerType',
+                width: 150,
+                minWidth: 100
+            },
+            {
+                headerName: 'fertilizer.comments',
+                field: 'fertilizerType',
+                width: 150,
+                minWidth: 100
+            },
+            {
+                headerName: 'Poziționare',
+                field: 'fertilizerType',
+                width: 150,
+                minWidth: 100
+            },
+            {
+                headerName: 'fertilizer.type',
+                field: 'fertilizerType',
+                width: 150,
+                minWidth: 100
+            },
+            {
+                headerName: 'info.name',
+                field: 'nameRo',
+                width: 400,
+                minWidth: 200
+            },
+            {
+                headerName: 'Preț(tonă)',
+                field: 'nameRu',
+                width: 400,
+                minWidth: 200
+            },
+            {
+                headerName: 'Hectare',
+                field: 'descriptionRo',
+                width: 400,
+                minWidth: 200
+            },
+            {
+                headerName: 'Rată',
+                field: 'descriptionRu',
+                width: 400,
+                minWidth: 200
+            },
+            {
+                headerName: 'Cost/Hectare',
+                field: 'descriptionRu',
+                width: 400,
+                minWidth: 200
+            }
+        ];
+
+        headers.forEach(header => {
+            if (header.headerName) {
+                this.langService.get(header.headerName).subscribe(m => header.headerName = m);
+            }
+        });
+
+        return headers;
+    }
+
+    private setupRows() {
+        // this.fertilizerService.find().subscribe(models => {
+        //     this.adjustModels(models);
+        //     this.options.api.setRowData(models);
+        // });
+    }
+
+    public onGridReady() {
+        this.options.api.sizeColumnsToFit();
+    }
+
+    public adjustGridSize() {
+        setTimeout(() => {
+            if (this.options && this.options.api) {
+                this.options.api.sizeColumnsToFit();
+            }
+        }, 500);
+    }
 }

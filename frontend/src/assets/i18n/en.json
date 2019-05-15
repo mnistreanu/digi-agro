@@ -96,6 +96,7 @@
 	"expenses": {
 		"agricultural-machinery": "Expenses for repairing agricultural machinery",
 		"agricultural-works": "Expenses for agricultural works",
+		"breakdown": "Expenses breakdown",
 		"categories": "Expense categories",
 		"category": "Category",
 		"cost": "Cost",

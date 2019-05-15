@@ -12,9 +12,14 @@
                     </div>
                 </div>
                 <div class="card-body widget-body">
-                    <div class="form-group row">
+                    <ag-grid-angular class="ag-theme-material" style="width: 100%; height: 400px; min-height: 100%;"
+                                     *ngIf="options"
+                                     [gridOptions]="options"
+                                     [context]="context"
+                                     (gridReady)="onGridReady($event)"></ag-grid-angular>
+                    <!--<div class="form-group row">-->
 
-                    </div>
+                    <!--</div>-->
                 </div>
             </div>
         </div>

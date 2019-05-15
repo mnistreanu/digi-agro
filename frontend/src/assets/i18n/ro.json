@@ -96,6 +96,7 @@
 	"expenses": {
 		"agricultural-machinery": "Cheltuieli pentru repararea mașinilor agricole",
 		"agricultural-works": "Cheltuieli pentru lucrări agricole",
+		"breakdown": "Distribuția cheltuielilor",
 		"categories": "Categorii de cheltuieli",
 		"category": "Categoria",
 		"cost": "Preț",
