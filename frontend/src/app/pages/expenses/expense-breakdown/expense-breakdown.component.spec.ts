@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ParcelExpenseBreakdownComponent } from './parcel-expense-breakdown.component';
 
-describe('ParcelExpenseBreakdownComponent', () => {
+describe('ExpenseBreakdownComponent', () => {
   let component: ParcelExpenseBreakdownComponent;
   let fixture: ComponentFixture<ParcelExpenseBreakdownComponent>;
 

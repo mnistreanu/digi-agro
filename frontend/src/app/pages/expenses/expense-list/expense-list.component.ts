@@ -246,24 +246,7 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
     }
 
     private buildCategoryModels() {
-        this.categoryModels = [];
-        const chartModelMap = {};
-        this.models.forEach((model: ExpenseModel) => {
-            let chartModel = chartModelMap[model.categoryRootName];
-            if (!chartModel) {
-                chartModel = new ExpenseCategoryTotalModel();
-                chartModelMap[model.categoryRootName] = chartModel;
-                this.categoryModels.push(chartModel);
-
-                chartModel.categoryName = model.categoryRootName;
-                chartModel.cost = 0;
-            }
-
-            chartModel.cost += model.cost || 0;
-        });
-        if (this.categoryModels.length === 0) {
-            this.categoryModels = null;
-        }
+        this.categoryModels = this.expenseService.getTotalModels(this.models);
     }
 
     public onDelete(node) {

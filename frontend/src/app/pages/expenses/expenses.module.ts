@@ -19,6 +19,7 @@ import {ConfirmationModalModule} from '../../modules/confirmation-modal/confirma
 import {ExpenseSeasonListComponent} from './expense-season-list/expense-season-list.component';
 import {GroupedSelectorComponent} from '../../modules/aggrid/selector/grouped-selector/grouped-selector.component';
 import {SelectorModule} from '../../modules/aggrid/selector/selector.module';
+import {ExpenseBreakdownComponent} from './expense-breakdown/expense-breakdown.component';
 
 export const routes = [
     {path: '', component: ExpenseListComponent},
@@ -48,9 +49,10 @@ export const routes = [
         ]),
         RouterModule.forChild(routes)
     ],
-    declarations: [ExpenseListComponent, ExpenseSeasonListComponent, ExpensesPieChartComponent],
+    declarations: [ExpenseListComponent, ExpenseSeasonListComponent, ExpensesPieChartComponent, ExpenseBreakdownComponent],
     exports: [
-        ExpenseListComponent
+        ExpenseListComponent,
+        ExpenseBreakdownComponent
     ]
 })
 export class ExpensesModule {

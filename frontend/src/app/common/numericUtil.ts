@@ -26,4 +26,8 @@ export class NumericUtil {
         return pipe.transform(number, '1.0-2');
     }
 
+    public static safeDiv(a: number, b: number) {
+        return b == null ? null : a / b;
+    }
+
 }
