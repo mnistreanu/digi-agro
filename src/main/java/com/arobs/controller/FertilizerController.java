@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/fertilizer")
+@RequestMapping("/fertilizer-application")
 public class FertilizerController {
 
     @Autowired
@@ -60,5 +60,6 @@ public class FertilizerController {
     public void remove(@PathVariable Long id) {
         fertilizerService.remove(id);
     }
+
 
 }

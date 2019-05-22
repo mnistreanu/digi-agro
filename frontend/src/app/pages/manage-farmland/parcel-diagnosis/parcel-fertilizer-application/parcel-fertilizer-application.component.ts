@@ -10,6 +10,7 @@ import {NumericUtil} from '../../../../common/numericUtil';
 import {UnitOfMeasureUtil} from '../../../../common/unit-of-measure-util';
 import {DateUtil} from '../../../../common/dateUtil';
 import {FertilizerService} from '../../../../services/chemicals-pests/fertilizer.service';
+import {ParcelFertilizerApplicationModel} from './parcel-fertilizer-application.model';
 
 @Component({
     selector: 'app-parcel-fertilizer-application',
@@ -52,41 +53,41 @@ export class ParcelFertilizerApplicationComponent implements OnInit {
         });
     }
 
-    private adjustModel(model: ParcelSeasonModel) {
-
-        const fieldMapper = new FieldMapper(this.langService.getLanguage());
-        const nameField = fieldMapper.get('name');
-        if (model.cropModel != null) {
-            model['cropName'] = model.cropModel[nameField];
-        }
-
-        if (model.cropVarietyModel != null) {
-            model['cropVarietyName'] = model.cropVarietyModel[nameField];
-        }
-
-        model['irrigatedFormatted'] =  NumericUtil.formatBoolean(model.irrigated);
-        model['yieldGoalFormatted'] = UnitOfMeasureUtil.formatKgHa(model.yieldGoal);
-        model['yieldActualFormatted'] = UnitOfMeasureUtil.formatKgHa(model.yieldGoal);
-        model['plantedAtFormatted'] = DateUtil.formatDate(model.plantedAt);
-        model['harvestDateFormatted'] = DateUtil.formatDate(model.plantedAt);
-        model['notes'] = 'Un studiu realizat de Banca Mondială, arată însă că agricultura ' +
-            'din Republica Moldova este ineficientă, anul trecut (2011) sectorul a înregistrat ' +
-            'o productivitate scăzută, investițiile în domeniu au fost mici, iar costurile exagerate. ' +
-            'Productivitatea sectorului este de 2 ori mai mică decît în media europeană';
-    }
-
-    public submit() {
-        this.forcedValidation = true;
-
-        if (!this.form.valid) {
-            return false;
-        }
-
-        Object.assign(this.parcelSeasonModel, this.form.value);
-
-        this.forcedValidation = false;
-        return true;
-    }
+    // private adjustModel(model: ParcelSeasonModel) {
+    //
+    //     const fieldMapper = new FieldMapper(this.langService.getLanguage());
+    //     const nameField = fieldMapper.get('name');
+    //     if (model.cropModel != null) {
+    //         model['cropName'] = model.cropModel[nameField];
+    //     }
+    //
+    //     if (model.cropVarietyModel != null) {
+    //         model['cropVarietyName'] = model.cropVarietyModel[nameField];
+    //     }
+    //
+    //     model['irrigatedFormatted'] =  NumericUtil.formatBoolean(model.irrigated);
+    //     model['yieldGoalFormatted'] = UnitOfMeasureUtil.formatKgHa(model.yieldGoal);
+    //     model['yieldActualFormatted'] = UnitOfMeasureUtil.formatKgHa(model.yieldGoal);
+    //     model['plantedAtFormatted'] = DateUtil.formatDate(model.plantedAt);
+    //     model['harvestDateFormatted'] = DateUtil.formatDate(model.plantedAt);
+    //     model['notes'] = 'Un studiu realizat de Banca Mondială, arată însă că agricultura ' +
+    //         'din Republica Moldova este ineficientă, anul trecut (2011) sectorul a înregistrat ' +
+    //         'o productivitate scăzută, investițiile în domeniu au fost mici, iar costurile exagerate. ' +
+    //         'Productivitatea sectorului este de 2 ori mai mică decît în media europeană';
+    // }
+    //
+    // public submit() {
+    //     this.forcedValidation = true;
+    //
+    //     if (!this.form.valid) {
+    //         return false;
+    //     }
+    //
+    //     Object.assign(this.parcelSeasonModel, this.form.value);
+    //
+    //     this.forcedValidation = false;
+    //     return true;
+    // }
 
     private setupGrid() {
         this.options = <GridOptions>{};
@@ -97,8 +98,7 @@ export class ParcelFertilizerApplicationComponent implements OnInit {
         this.options.columnDefs = this.setupHeaders();
         this.context = {componentParent: this};
 
-        // this.setupRows();
-
+        this.setupRows();
     }
 
     private setupHeaders() {
@@ -119,21 +119,21 @@ export class ParcelFertilizerApplicationComponent implements OnInit {
             },
             {
                 headerName: 'info.date',
-                field: 'fertilizerType',
+                field: 'applicationDate',
                 width: 150,
-                minWidth: 100
-            },
+                minWidth: 100,
+                valueFormatter: (params) => DateUtil.formatDate(params.value)            },
             {
                 headerName: 'fertilizer.comments',
-                field: 'fertilizerType',
-                width: 150,
-                minWidth: 100
+                field: 'comments',
+                width: 300,
+                minWidth: 200
             },
             {
-                headerName: 'Poziționare',
-                field: 'fertilizerType',
-                width: 150,
-                minWidth: 100
+                headerName: 'Tip Plasare',
+                field: 'placementType',
+                width: 250,
+                minWidth: 200
             },
             {
                 headerName: 'fertilizer.type',
@@ -142,32 +142,32 @@ export class ParcelFertilizerApplicationComponent implements OnInit {
                 minWidth: 100
             },
             {
-                headerName: 'info.name',
-                field: 'nameRo',
+                headerName: 'fertilizer.name',
+                field: 'fertilizerNameRo',
                 width: 400,
                 minWidth: 200
             },
             {
                 headerName: 'Preț(tonă)',
-                field: 'nameRu',
+                field: 'tonePrice',
                 width: 400,
                 minWidth: 200
             },
             {
                 headerName: 'Hectare',
-                field: 'descriptionRo',
+                field: 'fertilizedArea',
                 width: 400,
                 minWidth: 200
             },
             {
                 headerName: 'Rată',
-                field: 'descriptionRu',
+                field: 'rate',
                 width: 400,
                 minWidth: 200
             },
             {
                 headerName: 'Cost/Hectare',
-                field: 'descriptionRu',
+                field: 'hectareCost',
                 width: 400,
                 minWidth: 200
             }
@@ -183,10 +183,17 @@ export class ParcelFertilizerApplicationComponent implements OnInit {
     }
 
     private setupRows() {
-        // this.fertilizerService.find().subscribe(models => {
-        //     this.adjustModels(models);
-        //     this.options.api.setRowData(models);
-        // });
+        //
+        //
+        //
+        // this.options.api.setRowData(models);
+        //
+        this.fertilizerService.findApplications(1, 2019).subscribe(models => {
+            // this.adjustModels(models);
+            this.options.api.setRowData(models);
+        });
+
+        this.adjustGridSize();
     }
 
     public onGridReady() {

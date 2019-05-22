@@ -3,6 +3,7 @@ import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 import {FertilizerModel} from '../../pages/chemicals-pests/manage-fertilizers/fertilizer.model';
+import {ParcelFertilizerApplicationModel} from '../../pages/manage-farmland/parcel-diagnosis/parcel-fertilizer-application/parcel-fertilizer-application.model';
 
 @Injectable({
     providedIn: 'root'
@@ -20,6 +21,10 @@ export class FertilizerService {
 
     find(): Observable<FertilizerModel[]> {
         return this.http.get<FertilizerModel[]>(this.api + '/');
+    }
+
+    findApplications(parcelId: number, harvestYear: number): Observable<ParcelFertilizerApplicationModel[]> {
+        return this.http.get<ParcelFertilizerApplicationModel[]>(this.api + '-application/' + parcelId + '/' + harvestYear);
     }
 
     findByType(typeId: number): Observable<FertilizerModel[]> {
