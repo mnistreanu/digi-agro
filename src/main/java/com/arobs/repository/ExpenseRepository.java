@@ -1,6 +1,6 @@
 package com.arobs.repository;
 
-import com.arobs.entity.Expense;
+import com.arobs.entity.expense.Expense;
 import com.arobs.model.expense.ExpenseSeasonGroupModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -16,24 +16,20 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
     @Query("SELECT e FROM Expense e " +
             "WHERE e.tenant = :tenantId AND e.cropSeasonId = :cropSeasonId " +
-            "ORDER BY e.date, e.categoryId")
+            "ORDER BY e.date, e.rootCategory.id")
     List<Expense> find(@Param("tenantId") Long tenantId,
                        @Param("cropSeasonId") Long cropSeasonId);
 
-    @Modifying
-    @Query("DELETE FROM Expense e WHERE e.id = :id")
-    void remove(@Param("id") Long id);
-
     @Query("SELECT new com.arobs.model.expense.ExpenseSeasonGroupModel( " +
-            " e.cropSeasonId, " +
-            " e.categoryId, " +
-            " EXTRACT(MONTH FROM e.date), " +
-            " SUM(e.cost) " +
-            " ) " +
+            "e.cropSeasonId, " +
+            "ec.id, " +
+            "EXTRACT(MONTH FROM e.date), " +
+            "SUM(e.cost) " +
+            ") " +
             "FROM Expense e " +
-            "LEFT JOIN e.category ec " +
+            "LEFT JOIN e.rootCategory ec " +
             "WHERE e.tenant = :tenantId " +
-            "GROUP BY e.cropSeasonId, e.categoryId, EXTRACT(MONTH FROM e.date)")
+            "GROUP BY e.cropSeasonId, ec.id, EXTRACT(MONTH FROM e.date)")
     List<ExpenseSeasonGroupModel> getExpenseSeasonGroupModels(@Param("tenantId") Long tenantId);
 
 }

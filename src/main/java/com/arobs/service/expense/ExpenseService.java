@@ -1,8 +1,8 @@
 package com.arobs.service.expense;
 
 import com.arobs.entity.CropSeason;
-import com.arobs.entity.Expense;
-import com.arobs.entity.ExpenseCategory;
+import com.arobs.entity.expense.Expense;
+import com.arobs.entity.expense.ExpenseCategory;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.crop.CropSeasonModel;
 import com.arobs.model.expense.ExpenseModel;
@@ -155,13 +155,16 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
         if (model.getId() == null) {
             expense = new Expense();
             expense.setTenant(tenantId);
-            expense.setCropSeason(cropSeasonService.findOne(model.getCropSeasonId()));
+            expense.setCropSeason(cropSeasonService.getOne(model.getCropSeasonId()));
         }
         else {
             expense = findOne(model.getId());
         }
 
-        expense.setCategory(expenseCategoryService.findOne(model.getCategoryId()));
+        expense.setRootCategory(expenseCategoryService.getOne(model.getRootCategoryId()));
+        if (model.getSubCategoryId() != null) {
+            expense.setSubCategory(expenseCategoryService.getOne(model.getSubCategoryId()));
+        }
 
         expense.setDate(model.getDate());
         expense.setTitle(model.getTitle());
@@ -178,7 +181,7 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
 
     @Transactional
     public void remove(Long id) {
-        getRepository().remove(id);
+        getRepository().delete(id);
     }
 
 

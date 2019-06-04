@@ -3,7 +3,6 @@ package com.arobs.model.parcel;
 import com.arobs.entity.ParcelCropSeason;
 import com.arobs.model.crop.CropModel;
 import com.arobs.model.crop.CropVarietyModel;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.Date;
 

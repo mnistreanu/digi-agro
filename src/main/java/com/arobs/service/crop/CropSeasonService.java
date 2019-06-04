@@ -35,6 +35,11 @@ public class CropSeasonService implements HasRepository<CropSeasonRepository> {
         return getRepository().findOne(id);
     }
 
+    public CropSeason getOne(Long id) {
+        return getRepository().getOne(id);
+    }
+
+
     @Transactional
     public void delete(Long id) {
         getRepository().delete(id);

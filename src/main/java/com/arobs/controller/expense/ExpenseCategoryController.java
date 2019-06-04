@@ -1,6 +1,6 @@
 package com.arobs.controller.expense;
 
-import com.arobs.entity.ExpenseCategory;
+import com.arobs.entity.expense.ExpenseCategory;
 import com.arobs.model.PayloadModel;
 import com.arobs.model.expense.ExpenseCategoryModel;
 import com.arobs.service.expense.ExpenseCategoryService;

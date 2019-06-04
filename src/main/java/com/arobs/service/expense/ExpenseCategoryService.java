@@ -1,15 +1,13 @@
 package com.arobs.service.expense;
 
-import com.arobs.entity.ExpenseCategory;
+import com.arobs.entity.expense.ExpenseCategory;
 import com.arobs.interfaces.HasRepository;
 import com.arobs.model.expense.ExpenseCategoryModel;
 import com.arobs.repository.ExpenseCategoryRepository;
-import com.arobs.utils.StaticUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -25,6 +23,10 @@ public class ExpenseCategoryService implements HasRepository<ExpenseCategoryRepo
 
     public ExpenseCategory findOne(Long id) {
         return getRepository().findOne(id);
+    }
+
+    public ExpenseCategory getOne(Long id) {
+        return getRepository().getOne(id);
     }
 
     public List<ExpenseCategory> find(Long tenantId) {

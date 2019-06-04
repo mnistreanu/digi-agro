@@ -1,4 +1,6 @@
-package com.arobs.entity;
+package com.arobs.entity.expense;
+
+import com.arobs.entity.CropSeason;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -9,23 +11,25 @@ public class Expense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "tenant_id")
     private Long tenant;
 
-    @ManyToOne (fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "crop_season_id")
     private CropSeason cropSeason;
     @Column(name = "crop_season_id", insertable = false, updatable = false)
     private Long cropSeasonId;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    private ExpenseCategory category;
-    @Column(name = "category_id", insertable = false, updatable = false)
-    private Long categoryId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "root_category_id")
+    private ExpenseCategory rootCategory;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sub_category_id")
+    private ExpenseCategory subCategory;
 
     private Date date;
     private String title;
@@ -46,14 +50,6 @@ public class Expense {
 
     public void setTenant(Long tenant) {
         this.tenant = tenant;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
     }
 
     public String getTitle() {
@@ -105,12 +101,19 @@ public class Expense {
         this.cropSeasonId = cropSeasonId;
     }
 
-    public ExpenseCategory getCategory() {
-        return category;
+    public ExpenseCategory getSubCategory() {
+        return subCategory;
     }
 
-    public void setCategory(ExpenseCategory category) {
-        this.category = category;
-        this.categoryId = category == null ? null : category.getId();
+    public void setSubCategory(ExpenseCategory subCategory) {
+        this.subCategory = subCategory;
+    }
+
+    public ExpenseCategory getRootCategory() {
+        return rootCategory;
+    }
+
+    public void setRootCategory(ExpenseCategory rootCategory) {
+        this.rootCategory = rootCategory;
     }
 }

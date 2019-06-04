@@ -13,9 +13,7 @@ import {ExpenseService} from '../../../services/expenses/expense.service';
 import {AlertService} from '../../../services/alert.service';
 import {CropSeasonService} from '../../../services/crop/crop-season.service';
 import {CropSeasonListModel} from '../../manage-crops/crop-season/list/crop-season-list.model';
-import {SelectorItem} from '../../../modules/aggrid/selector/selector-item.interface';
-import {GroupedSelectorItem} from '../../../modules/aggrid/selector/grouped-selector/grouped-selector-item.interface';
-import {GroupedSelectorComponent} from '../../../modules/aggrid/selector/grouped-selector/grouped-selector.component';
+import {SelectorComponent} from "../../../modules/aggrid/selector/single-selector/selector.component";
 
 @Component({
     selector: 'app-expense-list',
@@ -42,8 +40,8 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
     cropSeasons: CropSeasonListModel[];
     hasCropSeasons: boolean;
 
-    expenseTypes: GroupedSelectorItem[];
     categoryMap: Map<number, ExpenseCategoryModel>;
+    rootCategories: ExpenseCategoryModel[];
 
     constructor(private modalService: ModalService,
                 private cropSeasonService: CropSeasonService,
@@ -56,13 +54,12 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.setupCropSeasons()
-            .then(() => this.setupExpenseTypes())
+            .then(() => this.setupCategories())
             .then(() => this.setupGrid());
 
         if (this.singleSeasonMode) {
             this.hasCropSeasons = this.cropSeasonId != null;
-        }
-        else {
+        } else {
             this.seasonYearSubscription = this.cropSeasonService.seasonYearChanged.subscribe(() => {
                 this.setupCropSeasons()
                     .then(() => this.setupRows());
@@ -93,39 +90,27 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
         });
     }
 
-    private setupExpenseTypes(): Promise<void> {
+    private setupCategories(): Promise<void> {
         return new Promise((resolve) => {
             this.expenseCategoryService.getTree().subscribe(payloadModel => {
                 const models = payloadModel.payload;
-                this.expenseTypes = [];
                 this.categoryMap = <Map<number, ExpenseCategoryModel>>{};
-                const leafParent: GroupedSelectorItem = <GroupedSelectorItem> {groupName: '', items: []};
+                this.rootCategories = [];
                 models.forEach((model: ExpenseCategoryModel) => {
-                    const leaf = !model.children || model.children.length === 0;
-                    if (leaf) {
-                        this.setupSelectorItem(model, leafParent);
-                    }
-                    else {
-                        const parent: GroupedSelectorItem = <GroupedSelectorItem> {groupName: model.name, items: []};
-                        this.expenseTypes.push(parent);
-                        model.children.forEach(childModel => {
-                            this.setupSelectorItem(childModel, parent);
+                    this.rootCategories.push(model);
+                    this.categoryMap[model.id] = model;
+
+                    if (model.children) {
+                        model.children.forEach((child) => {
+                            this.categoryMap[child.id] = child;
                         });
                     }
+
                 });
 
-                if (leafParent.items.length > 0) {
-                    this.expenseTypes.unshift(leafParent);
-                }
                 resolve();
             });
         });
-    }
-
-    private setupSelectorItem(model: ExpenseCategoryModel, parent: GroupedSelectorItem) {
-        this.categoryMap[model.id] = model;
-        const item: SelectorItem = <SelectorItem> {id: model.id, text: model.name};
-        parent.items.push(item);
     }
 
     public onCropSeasonChange() {
@@ -139,10 +124,10 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
         this.options.enableColResize = true;
         this.options.enableSorting = true;
         this.options.enableFilter = true;
-        this.options.columnDefs = this.setupHeaders();
+        this.options.columnDefs = this.setupColumns();
         this.context = {componentParent: this};
         this.options.frameworkComponents = {
-            groupedSelector: GroupedSelectorComponent
+            selectorEditor: SelectorComponent
         };
 
         this.setupRows();
@@ -156,8 +141,8 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
         };
     }
 
-    private setupHeaders() {
-        let headers: ColDef[] = <ColDef[]>[
+    private setupColumns() {
+        let columns: ColDef[] = <ColDef[]>[
             {
                 type: 'deleteType',
                 hide: this.readOnlyMode
@@ -171,18 +156,24 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
                 hide: this.shortMode
             },
             {
-                headerName: 'Type',
-                field: 'categoryName',
+                headerName: 'Category',
+                field: 'rootCategoryId',
                 width: 100,
                 minWidth: 100,
                 editable: !this.readOnlyMode,
-                cellEditor: 'groupedSelector',
+                cellEditor: 'selectorEditor',
                 cellEditorParams: {
-                    getDropDownItems: () => this.expenseTypes,
-                    dropDownValueField: 'categoryId'
+                    getDropDownItems: () => this.createDropDownItems(this.rootCategories),
+                    dropDownValueField: 'rootCategoryId'
                 },
-                valueSetter: (params) => this.typeSetter(params),
-                onCellValueChanged: (params) => this.onCategoryChange(params)
+                valueFormatter: (params) => this.eventTypeFormatter(params),
+                // cellEditor: 'groupedSelector',
+                // cellEditorParams: {
+                //     getDropDownItems: () => this.expenseTypes,
+                //     dropDownValueField: 'categoryId'
+                // },
+                // valueSetter: (params) => this.typeSetter(params),
+                // onCellValueChanged: (params) => this.onCategoryChange(params)
             },
             {
                 headerName: 'Title',
@@ -213,24 +204,32 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
             }
         ];
 
-        headers = headers.filter(h => !h.hide);
+        columns = columns.filter(h => !h.hide);
 
-        headers.forEach(header => {
+        columns.forEach(header => {
             if (header.headerName) {
                 this.langService.get(header.headerName).subscribe(m => header.headerName = m);
             }
         });
 
-        return headers;
+        return columns;
     }
 
-    private typeSetter(params) {
-        const value = params.newValue;
-        const model = params.data;
+    private createDropDownItems(list: ExpenseCategoryModel[]) {
+        if (!list) {
+            return [];
+        }
+        return list.map(item => {
+            return {
+                id: item.id,
+                text: item.name
+            };
+        });
+    }
 
-        model.categoryId = value;
-        model.categoryName = this.categoryMap[model.categoryId].name;
-        model.categoryRootName = this.categoryMap[model.categoryId].rootName;
+    private eventTypeFormatter(params) {
+        const item = this.categoryMap[params.value];
+        return item ? item.name : null;
     }
 
     public setupRows() {

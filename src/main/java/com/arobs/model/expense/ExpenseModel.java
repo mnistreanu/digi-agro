@@ -1,7 +1,7 @@
 package com.arobs.model.expense;
 
-import com.arobs.entity.Expense;
-import com.arobs.entity.ExpenseCategory;
+import com.arobs.entity.expense.Expense;
+import com.arobs.entity.expense.ExpenseCategory;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -13,9 +13,8 @@ public class ExpenseModel implements Serializable {
     private Long tenantId;
     private Long cropSeasonId;
 
-    private Long categoryId;
-    private String categoryName;
-    private String categoryRootName;
+    private Long rootCategoryId, subCategoryId;
+    private String rootCategoryName, subCategoryName;
 
     private Date date;
     private String title;
@@ -25,14 +24,22 @@ public class ExpenseModel implements Serializable {
     public ExpenseModel() {
     }
 
-    public ExpenseModel(Expense expense, ExpenseCategory category) {
+    public ExpenseModel(Expense expense) {
         id = expense.getId();
         tenantId = expense.getTenant();
         cropSeasonId = expense.getCropSeasonId();
 
-        categoryId = expense.getCategoryId();
-        categoryName = category.getName();
-        categoryRootName = category.getRootName();
+        // todo: optimize
+        ExpenseCategory rootCategory = expense.getRootCategory();
+        ExpenseCategory subCategory = expense.getRootCategory();
+
+        rootCategoryId = rootCategory.getId();
+        rootCategoryName = rootCategory.getName();
+
+        if (subCategory != null) {
+            subCategoryId = subCategory.getId();
+            subCategoryName = subCategory.getName();
+        }
 
         date = expense.getDate();
         title = expense.getTitle();
@@ -54,22 +61,6 @@ public class ExpenseModel implements Serializable {
 
     public void setTenantId(Long tenantId) {
         this.tenantId = tenantId;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
     }
 
     public Date getDate() {
@@ -112,11 +103,35 @@ public class ExpenseModel implements Serializable {
         this.cropSeasonId = cropSeasonId;
     }
 
-    public String getCategoryRootName() {
-        return categoryRootName;
+    public Long getRootCategoryId() {
+        return rootCategoryId;
     }
 
-    public void setCategoryRootName(String categoryRootName) {
-        this.categoryRootName = categoryRootName;
+    public void setRootCategoryId(Long rootCategoryId) {
+        this.rootCategoryId = rootCategoryId;
+    }
+
+    public Long getSubCategoryId() {
+        return subCategoryId;
+    }
+
+    public void setSubCategoryId(Long subCategoryId) {
+        this.subCategoryId = subCategoryId;
+    }
+
+    public String getRootCategoryName() {
+        return rootCategoryName;
+    }
+
+    public void setRootCategoryName(String rootCategoryName) {
+        this.rootCategoryName = rootCategoryName;
+    }
+
+    public String getSubCategoryName() {
+        return subCategoryName;
+    }
+
+    public void setSubCategoryName(String subCategoryName) {
+        this.subCategoryName = subCategoryName;
     }
 }

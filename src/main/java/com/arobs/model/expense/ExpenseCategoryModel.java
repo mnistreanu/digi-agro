@@ -1,6 +1,6 @@
 package com.arobs.model.expense;
 
-import com.arobs.entity.ExpenseCategory;
+import com.arobs.entity.expense.ExpenseCategory;
 
 import java.io.Serializable;
 import java.util.List;

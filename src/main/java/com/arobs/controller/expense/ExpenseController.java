@@ -1,7 +1,6 @@
 package com.arobs.controller.expense;
 
-import com.arobs.entity.Expense;
-import com.arobs.entity.ExpenseCategory;
+import com.arobs.entity.expense.Expense;
 import com.arobs.model.expense.ExpenseModel;
 import com.arobs.model.expense.ExpenseSeasonTreeModel;
 import com.arobs.service.expense.ExpenseCategoryService;
@@ -11,10 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/expense")
@@ -38,14 +35,7 @@ public class ExpenseController {
         Long tenantId = (Long) session.getAttribute("tenant");
 
         List<Expense> expenses = expenseService.find(tenantId, cropSeasonId);
-        List<ExpenseModel> models = new ArrayList<>();
-        Map<Long, ExpenseCategory> expenseCategoryMap = new HashMap<>();
-
-        for (Expense expense : expenses) {
-            ExpenseCategory expenseCategory = expenseCategoryMap
-                    .computeIfAbsent(expense.getCategoryId(), k -> expenseCategoryService.findOne(expense.getCategoryId()));
-            models.add(new ExpenseModel(expense, expenseCategory));
-        }
+        List<ExpenseModel> models = expenses.stream().map(ExpenseModel::new).collect(Collectors.toList());
 
         return ResponseEntity.ok(models);
     }
@@ -54,7 +44,7 @@ public class ExpenseController {
     public ResponseEntity<ExpenseModel> save(@RequestBody ExpenseModel model, HttpSession session) {
         Long tenantId = (Long) session.getAttribute("tenant");
         Expense expense = expenseService.save(model, tenantId);
-        return ResponseEntity.ok(new ExpenseModel(expense, expense.getCategory()));
+        return ResponseEntity.ok(new ExpenseModel(expense));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

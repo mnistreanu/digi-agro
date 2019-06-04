@@ -1,4 +1,4 @@
-package com.arobs.entity;
+package com.arobs.entity.expense;
 
 import javax.persistence.*;
 
