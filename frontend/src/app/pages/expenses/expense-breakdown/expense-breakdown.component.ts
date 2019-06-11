@@ -1,12 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid';
-import {ExpenseCategoryTotalModel} from '../models/expense-category-total.model';
 import {ExpenseService} from '../../../services/expenses/expense.service';
 import {LangService} from '../../../services/lang.service';
 import {GroupedSelectorComponent} from '../../../modules/aggrid/selector/grouped-selector/grouped-selector.component';
 import {AgNumericColumnType} from '../../../modules/aggrid/column-types/ag-numeric-type';
 import {ParcelSeasonModel} from '../../manage-farmland/parcel-season.model';
 import {NumericUtil} from '../../../common/numericUtil';
+import {ExpenseSummaryModel} from '../models/expense-summary.model';
 
 @Component({
     selector: 'app-expense-breakdown',
@@ -20,7 +20,7 @@ export class ExpenseBreakdownComponent implements OnInit {
     options: GridOptions;
     context;
 
-    models: ExpenseCategoryTotalModel[];
+    models: ExpenseSummaryModel[];
 
     constructor(private expenseService: ExpenseService,
                 private langService: LangService) {
@@ -95,7 +95,7 @@ export class ExpenseBreakdownComponent implements OnInit {
 
     public setupRows() {
         this.expenseService.find(this.parcelSeasonModel.id).subscribe(expenses => {
-            this.models = this.expenseService.getTotalModels(expenses);
+            this.models = this.expenseService.convertSummaryModels(expenses);
             this.adjustModels();
             this.options.api.setRowData(this.models);
         });

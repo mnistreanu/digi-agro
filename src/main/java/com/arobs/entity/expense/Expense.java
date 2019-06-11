@@ -24,8 +24,8 @@ public class Expense {
     private Long cropSeasonId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "root_category_id")
-    private ExpenseCategory rootCategory;
+    @JoinColumn(name = "category_id")
+    private ExpenseCategory category;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sub_category_id")
@@ -109,11 +109,11 @@ public class Expense {
         this.subCategory = subCategory;
     }
 
-    public ExpenseCategory getRootCategory() {
-        return rootCategory;
+    public ExpenseCategory getCategory() {
+        return category;
     }
 
-    public void setRootCategory(ExpenseCategory rootCategory) {
-        this.rootCategory = rootCategory;
+    public void setCategory(ExpenseCategory category) {
+        this.category = category;
     }
 }

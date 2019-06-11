@@ -70,8 +70,7 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
 
             if (ec.getParentId() != null) {
                 parentModel = buildExpenseSeasonTreeModel(seasonIdentifier, null, rootModel, modelMap, ec.getParentId(), expenseCategoryMap);
-            }
-            else {
+            } else {
                 parentModel = rootModel;
             }
 
@@ -156,16 +155,14 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
             expense = new Expense();
             expense.setTenant(tenantId);
             expense.setCropSeason(cropSeasonService.getOne(model.getCropSeasonId()));
-        }
-        else {
+        } else {
             expense = findOne(model.getId());
         }
 
-        expense.setRootCategory(expenseCategoryService.getOne(model.getRootCategoryId()));
+        expense.setCategory(expenseCategoryService.getOne(model.getCategoryId()));
         if (model.getSubCategoryId() != null) {
             expense.setSubCategory(expenseCategoryService.getOne(model.getSubCategoryId()));
-        }
-        else {
+        } else {
             expense.setSubCategory(null);
         }
 

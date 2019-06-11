@@ -13,8 +13,8 @@ public class ExpenseModel implements Serializable {
     private Long tenantId;
     private Long cropSeasonId;
 
-    private Long rootCategoryId, subCategoryId;
-    private String rootCategoryName, subCategoryName;
+    private Long categoryId, subCategoryId;
+    private String categoryName, subCategoryName;
 
     private Date date;
     private String title;
@@ -30,11 +30,11 @@ public class ExpenseModel implements Serializable {
         cropSeasonId = expense.getCropSeasonId();
 
         // todo: optimize
-        ExpenseCategory rootCategory = expense.getRootCategory();
+        ExpenseCategory category = expense.getCategory();
         ExpenseCategory subCategory = expense.getSubCategory();
 
-        rootCategoryId = rootCategory.getId();
-        rootCategoryName = rootCategory.getName();
+        categoryId = category.getId();
+        categoryName = category.getName();
 
         if (subCategory != null) {
             subCategoryId = subCategory.getId();
@@ -103,12 +103,12 @@ public class ExpenseModel implements Serializable {
         this.cropSeasonId = cropSeasonId;
     }
 
-    public Long getRootCategoryId() {
-        return rootCategoryId;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setRootCategoryId(Long rootCategoryId) {
-        this.rootCategoryId = rootCategoryId;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Long getSubCategoryId() {
@@ -119,12 +119,12 @@ public class ExpenseModel implements Serializable {
         this.subCategoryId = subCategoryId;
     }
 
-    public String getRootCategoryName() {
-        return rootCategoryName;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setRootCategoryName(String rootCategoryName) {
-        this.rootCategoryName = rootCategoryName;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public String getSubCategoryName() {

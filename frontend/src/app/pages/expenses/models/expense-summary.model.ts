@@ -1,4 +1,4 @@
-export class ExpenseCategoryTotalModel {
+export class ExpenseSummaryModel {
     categoryName: string;
     cost: number;
 

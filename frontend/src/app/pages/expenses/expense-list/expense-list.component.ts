@@ -4,7 +4,6 @@ import {LangService} from '../../../services/lang.service';
 import {ExpenseModel} from '../models/expense.model';
 import {AgDateColumnType} from '../../../modules/aggrid/column-types/ag-date-type';
 import {AgNumericColumnType} from '../../../modules/aggrid/column-types/ag-numeric-type';
-import {ExpenseCategoryTotalModel} from '../models/expense-category-total.model';
 import {AgDeleteColumnType} from '../../../modules/aggrid/column-types/ag-delete-type';
 import {ModalService} from '../../../services/modal.service';
 import {ExpenseCategoryService} from '../../../services/expenses/expense-category.service';
@@ -13,7 +12,8 @@ import {ExpenseService} from '../../../services/expenses/expense.service';
 import {AlertService} from '../../../services/alert.service';
 import {CropSeasonService} from '../../../services/crop/crop-season.service';
 import {CropSeasonListModel} from '../../manage-crops/crop-season/list/crop-season-list.model';
-import {SelectorComponent} from "../../../modules/aggrid/selector/single-selector/selector.component";
+import {SelectorComponent} from '../../../modules/aggrid/selector/single-selector/selector.component';
+import {ExpenseSummaryModel} from '../models/expense-summary.model';
 
 @Component({
     selector: 'app-expense-list',
@@ -31,7 +31,7 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
     context;
 
     models: ExpenseModel[];
-    categoryModels: ExpenseCategoryTotalModel[];
+    summaryModels: ExpenseSummaryModel[];
 
     confirmationModalId = 'expense-item-remove-confirmation-modal';
     currentModel: ExpenseModel;
@@ -105,7 +105,6 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
                             this.categoryMap[child.id] = child;
                         });
                     }
-
                 });
 
                 resolve();
@@ -157,14 +156,14 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
             },
             {
                 headerName: 'Category',
-                field: 'rootCategoryId',
+                field: 'categoryId',
                 width: 100,
                 minWidth: 100,
                 editable: !this.readOnlyMode,
                 cellEditor: 'selectorEditor',
                 cellEditorParams: {
                     getDropDownItems: () => this.getCategoriesDropDownItems(),
-                    dropDownValueField: 'rootCategoryId'
+                    dropDownValueField: 'categoryId'
                 },
                 valueFormatter: (params) => this.categoryFormatter(params),
                 onCellValueChanged: (params) => this.onCategoryChange(params)
@@ -240,7 +239,7 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
     }
 
     private getSubCategoriesDropDownItems(model) {
-        return this.createDropDownItems(this.categoryMap[model.rootCategoryId].children);
+        return this.createDropDownItems(this.categoryMap[model.categoryId].children);
     }
 
     private categoryFormatter(params) {
@@ -256,12 +255,12 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
             models.forEach(model => model.date = new Date(model.date));
             this.options.api.setRowData(models);
             this.models = models;
-            this.buildCategoryModels();
+            this.buildSummaryModels();
         });
     }
 
-    private buildCategoryModels() {
-        this.categoryModels = this.expenseService.getTotalModels(this.models);
+    private buildSummaryModels() {
+        this.summaryModels = this.expenseService.convertSummaryModels(this.models);
     }
 
     public onDelete(node) {
@@ -274,7 +273,7 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
             this.options.api.updateRowData({remove: [this.currentModel]});
             this.models.splice(this.models.indexOf(this.currentModel), 1);
             this.currentModel = null;
-            this.buildCategoryModels();
+            this.buildSummaryModels();
             this.alertService.removed();
         });
     }
@@ -287,7 +286,7 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
             model.date = new Date(model.date);
 
             this.models.push(model);
-            this.buildCategoryModels();
+            this.buildSummaryModels();
 
             this.options.api.updateRowData({add: [model]});
             this.alertService.saved();
@@ -296,14 +295,13 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
 
     private buildModel() {
         const keys = Object.keys(this.categoryMap);
-        const categoryId = keys[0];
+        const categoryId = +keys[0];
 
         const model = new ExpenseModel();
         model.cropSeasonId = this.cropSeasonId;
         model.date = new Date();
-        model.categoryId = +categoryId;
+        model.categoryId = categoryId;
         model.categoryName = this.categoryMap[categoryId].name;
-        model.categoryRootName = this.categoryMap[categoryId].rootName;
         model.cost = 0;
 
         return model;
@@ -311,8 +309,17 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
 
     private onCategoryChange(params) {
         const model = params.data;
-        model.subCategoryId = null;
-        // this.buildCategoryModels();
+
+        if (model.subCategoryId != null) {
+            const subCategory = this.categoryMap[model.subCategoryId];
+            if (subCategory.parentId != model.categoryId) {
+                model.subCategoryId = null;
+
+                params.api.updateRowData({update: [model]});
+            }
+        }
+
+        this.buildSummaryModels();
         this.updateModel(model);
     }
 
@@ -322,7 +329,7 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
     }
 
     private onCostChange(params) {
-        this.buildCategoryModels();
+        this.buildSummaryModels();
         this.updateModel(params.data);
     }
 

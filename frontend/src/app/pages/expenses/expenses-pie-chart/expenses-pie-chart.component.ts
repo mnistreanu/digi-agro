@@ -1,6 +1,5 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {ExpenseCategoryTotalModel} from '../models/expense-category-total.model';
-import {ExpenseCategoryModel} from '../../enterprise/manage-expense-categories/expense-category/expense-category.model';
+import {ExpenseSummaryModel} from '../models/expense-summary.model';
 
 @Component({
     selector: 'app-expenses-pie-chart',
@@ -9,7 +8,7 @@ import {ExpenseCategoryModel} from '../../enterprise/manage-expense-categories/e
 })
 export class ExpensesPieChartComponent implements OnInit, OnChanges {
 
-    @Input() models: ExpenseCategoryTotalModel[];
+    @Input() models: ExpenseSummaryModel[];
 
     labels: Array<string>;
     data: Array<number>;
@@ -60,7 +59,7 @@ export class ExpensesPieChartComponent implements OnInit, OnChanges {
         const labels = [];
         const data = [];
 
-        this.models.forEach((model: ExpenseCategoryTotalModel) => {
+        this.models.forEach((model: ExpenseSummaryModel) => {
             labels.push(model.categoryName);
             data.push(model.cost);
         });

@@ -4,7 +4,7 @@ import {ExpenseModel} from '../../pages/expenses/models/expense.model';
 import {Observable} from 'rxjs/Rx';
 import {environment} from '../../../environments/environment';
 import {ExpenseSeasonTreeModel} from '../../pages/expenses/expense-season-list/expense-season-tree.model';
-import {ExpenseCategoryTotalModel} from '../../pages/expenses/models/expense-category-total.model';
+import {ExpenseSummaryModel} from '../../pages/expenses/models/expense-summary.model';
 
 @Injectable({
     providedIn: 'root'
@@ -24,18 +24,18 @@ export class ExpenseService {
         return this.http.get<ExpenseModel[]>(this.api + '/' + cropSeasonId);
     }
 
-    getTotalModels(expenses: ExpenseModel[]): ExpenseCategoryTotalModel[] {
+    convertSummaryModels(expenses: ExpenseModel[]): ExpenseSummaryModel[] {
         let models = [];
 
         const rootMap = {};
         expenses.forEach((expenseModel: ExpenseModel) => {
-            let model = rootMap[expenseModel.categoryRootName];
+            let model = rootMap[expenseModel.categoryId];
             if (!model) {
-                model = new ExpenseCategoryTotalModel();
-                rootMap[expenseModel.categoryRootName] = model;
+                model = new ExpenseSummaryModel();
+                rootMap[expenseModel.categoryId] = model;
                 models.push(model);
 
-                model.categoryName = expenseModel.categoryRootName;
+                model.categoryName = expenseModel.categoryName;
                 model.cost = 0;
             }
 

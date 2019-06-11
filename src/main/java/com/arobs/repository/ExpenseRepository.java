@@ -16,10 +16,11 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
     @Query("SELECT e FROM Expense e " +
             "WHERE e.tenant = :tenantId AND e.cropSeasonId = :cropSeasonId " +
-            "ORDER BY e.date, e.rootCategory.id")
+            "ORDER BY e.date, e.category.id")
     List<Expense> find(@Param("tenantId") Long tenantId,
                        @Param("cropSeasonId") Long cropSeasonId);
 
+    // todo: why ec join?
     @Query("SELECT new com.arobs.model.expense.ExpenseSeasonGroupModel( " +
             "e.cropSeasonId, " +
             "ec.id, " +
@@ -27,7 +28,7 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
             "SUM(e.cost) " +
             ") " +
             "FROM Expense e " +
-            "LEFT JOIN e.rootCategory ec " +
+            "LEFT JOIN e.category ec " +
             "WHERE e.tenant = :tenantId " +
             "GROUP BY e.cropSeasonId, ec.id, EXTRACT(MONTH FROM e.date)")
     List<ExpenseSeasonGroupModel> getExpenseSeasonGroupModels(@Param("tenantId") Long tenantId);

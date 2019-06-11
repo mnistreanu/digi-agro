@@ -6,7 +6,8 @@ export class ExpenseModel {
 
     categoryId: number;
     categoryName: string;
-    categoryRootName: string;
+    subCategoryId: number;
+    subCategoryName: string;
 
     title: string;
     description: string;

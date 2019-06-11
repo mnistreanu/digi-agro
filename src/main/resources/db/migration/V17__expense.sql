@@ -1,11 +1,12 @@
 create table expense (
-    id  bigserial not null,
-    category_id int8,
-    cost numeric(19, 2),
+    id bigserial not null,
+    tenant_id int8,
     crop_season_id int8,
+    category_id int8,
+    sub_category_id int8,
+    cost numeric(19, 2),
     date timestamp,
     description varchar(255),
-    tenant_id int8,
     title varchar(255),
     primary key (id)
 );
@@ -28,6 +29,11 @@ alter table expense
 alter table expense
     add constraint fk_expense_category_id
     foreign key (category_id)
+    references expense_category;
+
+alter table expense
+    add constraint fk_expense_sub_category_id
+    foreign key (sub_category_id)
     references expense_category;
 
 alter table expense_category
