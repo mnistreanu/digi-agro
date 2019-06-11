@@ -163,26 +163,25 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
                 editable: !this.readOnlyMode,
                 cellEditor: 'selectorEditor',
                 cellEditorParams: {
-                    getDropDownItems: () => this.createDropDownItems(this.rootCategories),
+                    getDropDownItems: () => this.getCategoriesDropDownItems(),
                     dropDownValueField: 'rootCategoryId'
                 },
-                valueFormatter: (params) => this.eventTypeFormatter(params),
-                // cellEditor: 'groupedSelector',
-                // cellEditorParams: {
-                //     getDropDownItems: () => this.expenseTypes,
-                //     dropDownValueField: 'categoryId'
-                // },
-                // valueSetter: (params) => this.typeSetter(params),
-                // onCellValueChanged: (params) => this.onCategoryChange(params)
+                valueFormatter: (params) => this.categoryFormatter(params),
+                onCellValueChanged: (params) => this.onCategoryChange(params)
             },
             {
-                headerName: 'Title',
-                field: 'title',
+                headerName: 'Detail',
+                field: 'subCategoryId',
                 width: 100,
                 minWidth: 100,
                 editable: !this.readOnlyMode,
-                onCellValueChanged: (params) => this.updateModel(params.data),
-                hide: this.shortMode
+                cellEditor: 'selectorEditor',
+                cellEditorParams: {
+                    getDropDownItems: (params) => this.getSubCategoriesDropDownItems(params),
+                    dropDownValueField: 'subCategoryId'
+                },
+                valueFormatter: (params) => this.categoryFormatter(params),
+                onCellValueChanged: (params) => this.onSubCategoryChange(params)
             },
             {
                 headerName: 'Cost',
@@ -192,6 +191,15 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
                 type: 'numericType',
                 editable: !this.readOnlyMode,
                 onCellValueChanged: (params) => this.onCostChange(params)
+            },
+            {
+                headerName: 'Title',
+                field: 'title',
+                width: 100,
+                minWidth: 100,
+                editable: !this.readOnlyMode,
+                onCellValueChanged: (params) => this.updateModel(params.data),
+                hide: this.shortMode
             },
             {
                 headerName: 'Description',
@@ -227,7 +235,15 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
         });
     }
 
-    private eventTypeFormatter(params) {
+    private getCategoriesDropDownItems() {
+        return this.createDropDownItems(this.rootCategories);
+    }
+
+    private getSubCategoriesDropDownItems(model) {
+        return this.createDropDownItems(this.categoryMap[model.rootCategoryId].children);
+    }
+
+    private categoryFormatter(params) {
         const item = this.categoryMap[params.value];
         return item ? item.name : null;
     }
@@ -294,8 +310,15 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
     }
 
     private onCategoryChange(params) {
-        this.buildCategoryModels();
-        this.updateModel(params.data);
+        const model = params.data;
+        model.subCategoryId = null;
+        // this.buildCategoryModels();
+        this.updateModel(model);
+    }
+
+    private onSubCategoryChange(params) {
+        const model = params.data;
+        this.updateModel(model);
     }
 
     private onCostChange(params) {

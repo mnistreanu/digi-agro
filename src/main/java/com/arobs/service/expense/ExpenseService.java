@@ -165,6 +165,9 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
         if (model.getSubCategoryId() != null) {
             expense.setSubCategory(expenseCategoryService.getOne(model.getSubCategoryId()));
         }
+        else {
+            expense.setSubCategory(null);
+        }
 
         expense.setDate(model.getDate());
         expense.setTitle(model.getTitle());

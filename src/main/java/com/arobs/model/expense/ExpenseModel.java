@@ -31,7 +31,7 @@ public class ExpenseModel implements Serializable {
 
         // todo: optimize
         ExpenseCategory rootCategory = expense.getRootCategory();
-        ExpenseCategory subCategory = expense.getRootCategory();
+        ExpenseCategory subCategory = expense.getSubCategory();
 
         rootCategoryId = rootCategory.getId();
         rootCategoryName = rootCategory.getName();

@@ -20,6 +20,7 @@ import {ExpenseSeasonListComponent} from './expense-season-list/expense-season-l
 import {GroupedSelectorComponent} from '../../modules/aggrid/selector/grouped-selector/grouped-selector.component';
 import {SelectorModule} from '../../modules/aggrid/selector/selector.module';
 import {ExpenseBreakdownComponent} from './expense-breakdown/expense-breakdown.component';
+import {SelectorComponent} from "../../modules/aggrid/selector/single-selector/selector.component";
 
 export const routes = [
     {path: '', component: ExpenseListComponent},
@@ -45,7 +46,8 @@ export const routes = [
             EditRendererComponent,
             PinnedRowRendererComponent,
             DeleteRendererComponent,
-            GroupedSelectorComponent
+            GroupedSelectorComponent, // todo: remove
+            SelectorComponent
         ]),
         RouterModule.forChild(routes)
     ],
