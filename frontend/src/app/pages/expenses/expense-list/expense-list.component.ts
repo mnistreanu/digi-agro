@@ -309,11 +309,13 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
 
     private onCategoryChange(params) {
         const model = params.data;
+        model.categoryName = this.categoryMap[model.categoryId].name;
 
         if (model.subCategoryId != null) {
             const subCategory = this.categoryMap[model.subCategoryId];
             if (subCategory.parentId != model.categoryId) {
                 model.subCategoryId = null;
+                model.subCategoryName = null;
 
                 params.api.updateRowData({update: [model]});
             }
@@ -325,6 +327,7 @@ export class ExpenseListComponent implements OnInit, OnDestroy {
 
     private onSubCategoryChange(params) {
         const model = params.data;
+        model.subCategoryName = this.categoryMap[model.subCategoryId].name;
         this.updateModel(model);
     }
 

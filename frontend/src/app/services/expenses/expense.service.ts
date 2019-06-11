@@ -24,6 +24,10 @@ export class ExpenseService {
         return this.http.get<ExpenseModel[]>(this.api + '/' + cropSeasonId);
     }
 
+    fetchSummaryModels(cropSeasonId): Observable<ExpenseSummaryModel[]> {
+        return this.http.get<ExpenseSummaryModel[]>(this.api + '/summary/' + cropSeasonId);
+    }
+
     convertSummaryModels(expenses: ExpenseModel[]): ExpenseSummaryModel[] {
         let models = [];
 

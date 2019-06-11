@@ -8,6 +8,7 @@ import com.arobs.model.crop.CropSeasonModel;
 import com.arobs.model.expense.ExpenseModel;
 import com.arobs.model.expense.ExpenseSeasonGroupModel;
 import com.arobs.model.expense.ExpenseSeasonTreeModel;
+import com.arobs.model.expense.ExpenseSummaryModel;
 import com.arobs.repository.ExpenseRepository;
 import com.arobs.service.crop.CropSeasonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -184,5 +185,18 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
         getRepository().delete(id);
     }
 
+    public List<ExpenseSummaryModel> getSummaryModels(Long tenantId, Long cropSeasonId) {
+        List<String> categories = expenseCategoryService.getRootNames(tenantId);
+        List<ExpenseSummaryModel> summaryModels = getRepository().getSummaryModels(cropSeasonId);
 
+        // add missing categories
+        for (ExpenseSummaryModel model : summaryModels) {
+            categories.remove(model.getCategoryName());
+        }
+        for (String category : categories) {
+            summaryModels.add(new ExpenseSummaryModel(category, null));
+        }
+
+        return summaryModels;
+    }
 }

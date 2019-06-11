@@ -67,5 +67,8 @@ public class ExpenseCategoryService implements HasRepository<ExpenseCategoryRepo
         getRepository().remove(id);
     }
 
+    public List<String> getRootNames(Long tenantId) {
+        return getRepository().getRootNames(tenantId);
+    }
 
 }

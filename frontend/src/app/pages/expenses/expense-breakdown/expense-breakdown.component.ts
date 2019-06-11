@@ -94,8 +94,8 @@ export class ExpenseBreakdownComponent implements OnInit {
     }
 
     public setupRows() {
-        this.expenseService.find(this.parcelSeasonModel.id).subscribe(expenses => {
-            this.models = this.expenseService.convertSummaryModels(expenses);
+        this.expenseService.fetchSummaryModels(this.parcelSeasonModel.id).subscribe(models => {
+            this.models = models;
             this.adjustModels();
             this.options.api.setRowData(this.models);
         });
