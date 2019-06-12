@@ -112,7 +112,7 @@ public class CropVarietyController {
             return ResponseEntity.ok(cropVarietyService.findAll(page, rowsPerPage, new ArrayList<>(), new ArrayList<>()).toString());
         }
 
-        return ResponseEntity.ok(cropVarietyService.findAll().toString());
+        return ResponseEntity.ok(cropVarietyService.find().toString());
     }
 
     @RequestMapping(value = "/tree", method = RequestMethod.GET)

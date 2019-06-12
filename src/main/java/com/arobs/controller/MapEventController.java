@@ -36,8 +36,8 @@ public class MapEventController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void remove(@PathVariable Long id) {
-        mapEventService.remove(id);
+    public void delete(@PathVariable Long id) {
+        mapEventService.delete(id);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)

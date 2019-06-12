@@ -1,9 +1,9 @@
 package com.arobs.service.crop;
 
 import com.arobs.entity.CropSeason;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.model.crop.CropSeasonModel;
 import com.arobs.repository.CropSeasonRepository;
+import com.arobs.service.BaseEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,17 +11,19 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class CropSeasonService implements HasRepository<CropSeasonRepository> {
+public class CropSeasonService extends BaseEntityService<CropSeason, CropSeasonRepository> {
 
     @Autowired
     private CropService cropService;
-
     @Autowired
     private CropVarietyService cropVarietyService;
-
     @Autowired
     private CropSeasonRepository cropSeasonRepository;
 
+    @Override
+    public CropSeasonRepository getRepository() {
+        return cropSeasonRepository;
+    }
 
     public List<CropSeason> find(Long tenantId) {
         return getRepository().find(tenantId);
@@ -31,25 +33,6 @@ public class CropSeasonService implements HasRepository<CropSeasonRepository> {
         return getRepository().find(tenantId, harvestYear);
     }
 
-    public CropSeason findOne(Long id) {
-        return getRepository().findOne(id);
-    }
-
-    public CropSeason getOne(Long id) {
-        return getRepository().getOne(id);
-    }
-
-
-    @Transactional
-    public void delete(Long id) {
-        getRepository().delete(id);
-    }
-
-    @Transactional
-    public CropSeason save(CropSeason cropSeason) {
-        return getRepository().save(cropSeason);
-    }
-
     @Transactional
     public CropSeason save(CropSeasonModel model) {
 
@@ -57,8 +40,7 @@ public class CropSeasonService implements HasRepository<CropSeasonRepository> {
 
         if (model.getId() == null) {
             season = new CropSeason();
-        }
-        else {
+        } else {
             season = getRepository().findOne(model.getId());
         }
 
@@ -73,11 +55,6 @@ public class CropSeasonService implements HasRepository<CropSeasonRepository> {
         season.setYieldGoal(model.getYieldGoal());
 
         return save(season);
-    }
-
-    @Override
-    public CropSeasonRepository getRepository() {
-        return cropSeasonRepository;
     }
 
     public List<Integer> getYears(Long tenantId) {

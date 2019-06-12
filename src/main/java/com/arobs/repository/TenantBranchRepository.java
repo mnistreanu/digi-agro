@@ -12,10 +12,6 @@ import java.util.List;
 @Repository
 public interface TenantBranchRepository extends JpaRepository<Branch, Long> {
 
-    @Modifying
-    @Query("DELETE FROM Branch b WHERE b.id = :id")
-    void remove(@Param("id") Long id);
-
     @Query("SELECT b.id FROM Branch b WHERE b.parent.id = :id")
     List<Long> getChildren(@Param("id") Long id);
 

@@ -1,7 +1,6 @@
 package com.arobs.service;
 
 import com.arobs.entity.MachineGroup;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.model.machine.MachineGroupModel;
 import com.arobs.repository.MachineGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class MachineGroupService implements HasRepository<MachineGroupRepository> {
+public class MachineGroupService extends BaseEntityService<MachineGroup, MachineGroupRepository> {
 
     @Autowired
     private MachineGroupRepository machineGroupRepository;
@@ -21,21 +20,14 @@ public class MachineGroupService implements HasRepository<MachineGroupRepository
         return machineGroupRepository;
     }
 
-    public MachineGroup findOne(Long id) {
-        return getRepository().findOne(id);
-    }
-
     public List<MachineGroup> find(Long tenantId) {
         return getRepository().find(tenantId);
     }
 
-    public List<MachineGroup> findAll(List<Long> ids) {
-        return getRepository().findAll(ids);
-    }
-
+    @Override
     @Transactional
-    public void remove(Long id) {
-        getRepository().remove(id);
+    public void delete(Long id) {
+        getRepository().softDelete(id);
     }
 
     @Transactional(rollbackOn = Exception.class)
@@ -50,7 +42,7 @@ public class MachineGroupService implements HasRepository<MachineGroupRepository
         }
 
         copyValues(entity, model);
-        return getRepository().save(entity);
+        return save(entity);
     }
 
     private void copyValues(MachineGroup entity, MachineGroupModel model) {

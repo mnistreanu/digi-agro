@@ -18,6 +18,6 @@ public interface ForecastParcelRepository extends JpaRepository<ForecastParcel, 
 
     @Modifying
     @Query("DELETE FROM ForecastParcel fp WHERE fp.forecastSnapshotId = :snapshotId")
-    void remove(@Param("snapshotId") Long snapshotId);
+    void delete(@Param("snapshotId") Long snapshotId);
 }
 

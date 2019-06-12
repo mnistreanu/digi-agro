@@ -44,8 +44,8 @@ public class EmployeeController {
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void remove(@PathVariable Long id) {
-        employeeService.remove(id);
+    public void delete(@PathVariable Long id) {
+        employeeService.delete(id);
     }
 
 }

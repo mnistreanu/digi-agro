@@ -2,7 +2,6 @@ package com.arobs.controller.parcel;
 
 import com.arobs.entity.Parcel;
 import com.arobs.model.parcel.ParcelModel;
-import com.arobs.service.parcel.ParcelEventService;
 import com.arobs.service.parcel.ParcelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -54,8 +53,8 @@ public class ParcelController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void remove(@PathVariable Long id) {
-        parcelService.remove(id);
+    public void delete(@PathVariable Long id) {
+        parcelService.delete(id);
     }
 
 }

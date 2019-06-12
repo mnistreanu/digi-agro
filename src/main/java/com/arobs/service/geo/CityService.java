@@ -1,21 +1,27 @@
 package com.arobs.service.geo;
 
 import com.arobs.entity.City;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.repository.CityRepository;
+import com.arobs.service.BaseEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CityService implements HasRepository<CityRepository> {
+public class CityService extends BaseEntityService<City, CityRepository> {
 
     @Autowired
     private CityRepository cityRepository;
 
+    @Override
+    public CityRepository getRepository() {
+        return cityRepository;
+    }
+
     /**
      * Cauta lista de sate si orase dupa tara si raion/judet
+     *
      * @param countryId
      * @param countyId
      * @return
@@ -26,6 +32,7 @@ public class CityService implements HasRepository<CityRepository> {
 
     /**
      * Cauta lista de sate si orase dupa tara, raion/judet si nume
+     *
      * @param countryId
      * @param countyId
      * @param name
@@ -35,8 +42,4 @@ public class CityService implements HasRepository<CityRepository> {
         return getRepository().find(countryId, countyId, '%' + name + '%');
     }
 
-    @Override
-    public CityRepository getRepository() {
-        return cityRepository;
-    }
 }

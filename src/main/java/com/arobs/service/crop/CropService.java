@@ -1,7 +1,6 @@
 package com.arobs.service.crop;
 
 import com.arobs.entity.Crop;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.model.crop.CropModel;
 import com.arobs.repository.CropRepository;
 import com.arobs.repository.custom.CropCustomRepository;
@@ -21,7 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class CropService implements HasRepository<CropRepository> {
+public class CropService {
 
     @Autowired
     private CropRepository cropRepository;
@@ -29,7 +28,6 @@ public class CropService implements HasRepository<CropRepository> {
     @Autowired
     private CropCustomRepository cropCustomRepository;
 
-    @Override
     public CropRepository getRepository() {
         return cropRepository;
     }
@@ -47,7 +45,7 @@ public class CropService implements HasRepository<CropRepository> {
     }
 
     public Page<Crop> findAll(int page, int size) {
-        return  cropRepository.findAll(new PageRequest(page, size));
+        return cropRepository.findAll(new PageRequest(page, size));
     }
 
     public JSONObject findAll() {
@@ -59,7 +57,8 @@ public class CropService implements HasRepository<CropRepository> {
         JSONObject response = new JSONObject();
 
         Gson gson = new Gson();
-        JsonElement element = gson.toJsonTree(crops, new TypeToken<List<Crop>>() {}.getType());
+        JsonElement element = gson.toJsonTree(crops, new TypeToken<List<Crop>>() {
+        }.getType());
 
         try {
             response.put("total_count", crops.size());
@@ -82,7 +81,8 @@ public class CropService implements HasRepository<CropRepository> {
 
         JSONObject response = new JSONObject();
         Gson gson = new Gson();
-        JsonElement element = gson.toJsonTree(models, new TypeToken<List<CropModel>>() {}.getType());
+        JsonElement element = gson.toJsonTree(models, new TypeToken<List<CropModel>>() {
+        }.getType());
 
         try {
             response.put("total_count", totalFilteredCrops);
@@ -103,8 +103,7 @@ public class CropService implements HasRepository<CropRepository> {
 
         if (model.getId() == null) {
             crop = new Crop();
-        }
-        else {
+        } else {
             crop = getRepository().findOne(model.getId());
         }
 

@@ -14,7 +14,7 @@ public interface MachineTelemetryRepository extends JpaRepository<MachineTelemet
 
     @Modifying
     @Query("UPDATE MachineTelemetry t SET t.active = false WHERE t.id = :id")
-    void remove(@Param("id") Long id);
+    void softDelete(@Param("id") Long id);
 
     @Query("SELECT t FROM MachineTelemetry t " +
             " WHERE t.active = true AND t.userAccount.id = :userId AND t.machine.id = :machineId " +

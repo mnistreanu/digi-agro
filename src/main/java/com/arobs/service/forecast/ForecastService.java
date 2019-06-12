@@ -1,10 +1,10 @@
 package com.arobs.service.forecast;
 
 import com.arobs.entity.Forecast;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.model.forecast.ForecastModel;
 import com.arobs.repository.ForecastRepository;
 import com.arobs.service.AuthService;
+import com.arobs.service.BaseEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class ForecastService implements HasRepository<ForecastRepository> {
+public class ForecastService extends BaseEntityService<Forecast, ForecastRepository> {
 
     @Autowired
     private AuthService authService;
@@ -35,10 +35,6 @@ public class ForecastService implements HasRepository<ForecastRepository> {
         }
     }
 
-    public Forecast findOne(Long id) {
-        return getRepository().findOne(id);
-    }
-
     @Transactional
     public Forecast create(ForecastModel model, Long tenantId) {
 
@@ -50,8 +46,7 @@ public class ForecastService implements HasRepository<ForecastRepository> {
             forecast.setTenantId(tenantId);
             forecast.setCreatedAt(now);
             forecast.setCreatedBy(authService.getCurrentUser().getId());
-        }
-        else {
+        } else {
             forecast = findOne(model.getId());
         }
 
@@ -69,16 +64,12 @@ public class ForecastService implements HasRepository<ForecastRepository> {
         return forecast;
     }
 
+    @Override
     @Transactional
-    public Forecast save(Forecast forecast) {
-        return getRepository().save(forecast);
-    }
-
-    @Transactional
-    public void remove(Long id) {
+    public void delete(Long id) {
         Long userId = authService.getCurrentUser().getId();
         Date now = new Date();
-        getRepository().remove(id, userId, now);
+        getRepository().softDelete(id, userId, now);
     }
 
     public ForecastModel getModel(Long id) {

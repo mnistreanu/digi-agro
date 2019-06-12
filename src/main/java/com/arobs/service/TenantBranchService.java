@@ -1,11 +1,9 @@
 package com.arobs.service;
 
 import com.arobs.entity.Branch;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.model.branch.BranchModel;
 import com.arobs.repository.TenantBranchRepository;
 import com.arobs.repository.custom.CommonCustomRepository;
-import com.arobs.utils.StaticUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class TenantBranchService implements HasRepository<TenantBranchRepository> {
+public class TenantBranchService extends BaseEntityService<Branch, TenantBranchRepository> {
 
     @Autowired
     private TenantBranchRepository tenantBranchRepository;
@@ -27,10 +25,6 @@ public class TenantBranchService implements HasRepository<TenantBranchRepository
     @Override
     public TenantBranchRepository getRepository() {
         return tenantBranchRepository;
-    }
-
-    public Branch findOne(Long id) {
-        return getRepository().findOne(id);
     }
 
     public List<Branch> find(List<Long> tenants) {
@@ -47,14 +41,6 @@ public class TenantBranchService implements HasRepository<TenantBranchRepository
         return branches;
     }
 
-    public List<Branch> findAll(List<Long> ids) {
-
-        if (StaticUtil.isEmpty(ids)) {
-            return new ArrayList<>();
-        }
-        return getRepository().findAll(ids);
-    }
-
     public boolean isUnique(Long currentId, String value) {
         return commonCustomRepository.isUnique("Branch", currentId, "name", value);
     }
@@ -67,8 +53,7 @@ public class TenantBranchService implements HasRepository<TenantBranchRepository
         if (model.getId() == null) {
             branch = new Branch();
             branch.setTenant(model.getTenantId() == null ? null : tenantService.findOne(model.getTenantId()));
-        }
-        else {
+        } else {
             branch = findOne(model.getId());
         }
 
@@ -87,17 +72,13 @@ public class TenantBranchService implements HasRepository<TenantBranchRepository
         entity.setParent(model.getParentId() == null ? null : findOne(model.getParentId()));
     }
 
+    @Override
     @Transactional
-    public Branch save(Branch TenantBranch) {
-        return getRepository().save(TenantBranch);
-    }
-
-    @Transactional
-    public void remove(Long id) {
+    public void delete(Long id) {
         List<Long> treeDown = new ArrayList<>();
         getTreeDown(id, treeDown);
         for (Long itemId : treeDown) {
-            getRepository().remove(itemId);
+            getRepository().delete(itemId);
         }
     }
 

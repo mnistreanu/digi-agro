@@ -1,9 +1,9 @@
 package com.arobs.service.crop;
 
 import com.arobs.entity.CropSubculture;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.model.crop.CropSubcultureModel;
 import com.arobs.repository.CropSubcultureRepository;
+import com.arobs.service.BaseEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,13 +11,17 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class CropSubcultureService implements HasRepository<CropSubcultureRepository> {
+public class CropSubcultureService extends BaseEntityService<CropSubculture, CropSubcultureRepository> {
 
     @Autowired
     private CropSubcultureRepository subCropRepository;
-
     @Autowired
     private CropService cropService;
+
+    @Override
+    public CropSubcultureRepository getRepository() {
+        return subCropRepository;
+    }
 
     public List<CropSubculture> find() {
         return getRepository().find();
@@ -27,20 +31,6 @@ public class CropSubcultureService implements HasRepository<CropSubcultureReposi
         return getRepository().find(cropId);
     }
 
-    public CropSubculture findOne(Long id) {
-        return getRepository().findOne(id);
-    }
-
-    @Transactional
-    public void delete(Long id) {
-        getRepository().delete(id);
-    }
-
-    @Transactional
-    public CropSubculture save(CropSubculture subCrop) {
-        return getRepository().save(subCrop);
-    }
-
     @Transactional
     public CropSubculture save(CropSubcultureModel model) {
 
@@ -48,8 +38,7 @@ public class CropSubcultureService implements HasRepository<CropSubcultureReposi
 
         if (model.getId() == null) {
             cropSubculture = new CropSubculture();
-        }
-        else {
+        } else {
             cropSubculture = getRepository().findOne(model.getId());
         }
 
@@ -60,10 +49,5 @@ public class CropSubcultureService implements HasRepository<CropSubcultureReposi
         cropSubculture.setCrop(cropService.findOne(model.getCropId()));
 
         return save(cropSubculture);
-    }
-
-    @Override
-    public CropSubcultureRepository getRepository() {
-        return subCropRepository;
     }
 }

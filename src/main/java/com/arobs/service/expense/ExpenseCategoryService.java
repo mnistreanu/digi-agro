@@ -1,9 +1,9 @@
 package com.arobs.service.expense;
 
 import com.arobs.entity.expense.ExpenseCategory;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.model.expense.ExpenseCategoryModel;
 import com.arobs.repository.ExpenseCategoryRepository;
+import com.arobs.service.BaseEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class ExpenseCategoryService implements HasRepository<ExpenseCategoryRepository> {
+public class ExpenseCategoryService extends BaseEntityService<ExpenseCategory, ExpenseCategoryRepository> {
 
     @Autowired
     private ExpenseCategoryRepository expenseCategoryRepository;
@@ -19,14 +19,6 @@ public class ExpenseCategoryService implements HasRepository<ExpenseCategoryRepo
     @Override
     public ExpenseCategoryRepository getRepository() {
         return expenseCategoryRepository;
-    }
-
-    public ExpenseCategory findOne(Long id) {
-        return getRepository().findOne(id);
-    }
-
-    public ExpenseCategory getOne(Long id) {
-        return getRepository().getOne(id);
     }
 
     public List<ExpenseCategory> find(Long tenantId) {
@@ -45,8 +37,7 @@ public class ExpenseCategoryService implements HasRepository<ExpenseCategoryRepo
         if (model.getId() == null) {
             category = new ExpenseCategory();
             category.setTenantId(tenantId);
-        }
-        else {
+        } else {
             category = findOne(model.getId());
         }
 
@@ -57,14 +48,10 @@ public class ExpenseCategoryService implements HasRepository<ExpenseCategoryRepo
         return save(category);
     }
 
+    @Override
     @Transactional
-    public ExpenseCategory save(ExpenseCategory category) {
-        return getRepository().save(category);
-    }
-
-    @Transactional
-    public void remove(Long id) {
-        getRepository().remove(id);
+    public void delete(Long id) {
+        getRepository().softDelete(id);
     }
 
     public List<String> getRootNames(Long tenantId) {

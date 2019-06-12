@@ -52,8 +52,8 @@ public class MachineController {
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void remove(@PathVariable Long id) {
-        machineService.remove(id);
+    public void delete(@PathVariable Long id) {
+        machineService.delete(id);
     }
 
 }

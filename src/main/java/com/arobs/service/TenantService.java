@@ -1,22 +1,19 @@
 package com.arobs.service;
 
 import com.arobs.entity.Tenant;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.model.tenant.TenantFilterModel;
 import com.arobs.model.tenant.TenantModel;
 import com.arobs.repository.TenantRepository;
 import com.arobs.repository.custom.CommonCustomRepository;
 import com.arobs.repository.custom.TenantCustomRepository;
-import com.arobs.utils.StaticUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class TenantService implements HasRepository<TenantRepository> {
+public class TenantService extends BaseEntityService<Tenant, TenantRepository> {
 
     @Autowired
     private TenantRepository tenantRepository;
@@ -32,15 +29,10 @@ public class TenantService implements HasRepository<TenantRepository> {
         return tenantRepository;
     }
 
-    public Tenant findOne(Long id) {
-        return getRepository().findOne(id);
-    }
-
     public List<Tenant> findByUser() {
         if (authService.isSuperAdmin()) {
             return getRepository().findAll();
-        }
-        else {
+        } else {
             return getRepository().findByUser(authService.getCurrentUser().getId());
         }
     }
@@ -64,8 +56,7 @@ public class TenantService implements HasRepository<TenantRepository> {
 
         if (model.getId() == null) {
             tenant = new Tenant();
-        }
-        else {
+        } else {
             tenant = findOne(model.getId());
         }
 
@@ -85,21 +76,11 @@ public class TenantService implements HasRepository<TenantRepository> {
         entity.setPhones(model.getPhones());
     }
 
+    @Override
     @Transactional
-    public Tenant save(Tenant tenant) {
-        return getRepository().save(tenant);
-    }
-
-    @Transactional
-    public void remove(Long id, Long userId) {
-        getRepository().remove(id, userId);
+    public void delete(Long id) {
+        Long userId = authService.getCurrentUser().getId();
+        getRepository().softDelete(id, userId);
         getRepository().unSubscribeUsers(id);
-    }
-
-    public List<Tenant> findAll(List<Long> ids) {
-        if (StaticUtil.isEmpty(ids)) {
-            return new ArrayList<>();
-        }
-        return getRepository().findAll(ids);
     }
 }

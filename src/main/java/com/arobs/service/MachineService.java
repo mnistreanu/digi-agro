@@ -1,7 +1,6 @@
 package com.arobs.service;
 
 import com.arobs.entity.Machine;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.model.EmployeeModel;
 import com.arobs.model.machine.MachineModel;
 import com.arobs.repository.MachineRepository;
@@ -16,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class MachineService implements HasRepository<MachineRepository> {
+public class MachineService extends BaseEntityService<Machine, MachineRepository> {
 
     @Autowired
     private MachineRepository machineRepository;
@@ -42,10 +41,6 @@ public class MachineService implements HasRepository<MachineRepository> {
         return commonCustomRepository.isUnique("Machine", currentId, field, value);
     }
 
-    public Machine findOne(Long id) {
-        return getRepository().findOne(id);
-    }
-
     public List<Machine> find(Long tenantId) {
         return getRepository().find(tenantId);
     }
@@ -57,13 +52,10 @@ public class MachineService implements HasRepository<MachineRepository> {
         return getRepository().find(tenantId, machineGroupId);
     }
 
-    public List<Machine> findAll(List<Long> ids) {
-        return getRepository().findAll(ids);
-    }
-
+    @Override
     @Transactional
-    public void remove(Long id) {
-        getRepository().remove(id);
+    public void delete(Long id) {
+        getRepository().softDelete(id);
     }
 
     @Transactional(rollbackOn = Exception.class)
@@ -73,13 +65,12 @@ public class MachineService implements HasRepository<MachineRepository> {
         if (model.getId() == null) {
             entity = new Machine();
             entity.setTenant(tenantService.findOne(tenant));
-        }
-        else {
+        } else {
             entity = findOne(model.getId());
         }
 
         copyValues(entity, model);
-        return getRepository().save(entity);
+        return save(entity);
     }
 
     private void copyValues(Machine entity, MachineModel model) {
@@ -101,8 +92,7 @@ public class MachineService implements HasRepository<MachineRepository> {
 
         if (model.getMachineGroupId() == null) {
             entity.setMachineGroup(null);
-        }
-        else {
+        } else {
             entity.setMachineGroup(machineGroupService.findOne(model.getMachineGroupId()));
         }
 

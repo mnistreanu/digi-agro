@@ -1,9 +1,7 @@
 package com.arobs.controller;
 
-import com.arobs.entity.Employee;
 import com.arobs.entity.Fertilizer;
 import com.arobs.enums.FertilizerType;
-import com.arobs.model.EmployeeModel;
 import com.arobs.model.chemicals.FertilizerModel;
 import com.arobs.service.chemicals.FertilizerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,9 +55,8 @@ public class FertilizerController {
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void remove(@PathVariable Long id) {
-        fertilizerService.remove(id);
+    public void delete(@PathVariable Long id) {
+        fertilizerService.delete(id);
     }
-
 
 }

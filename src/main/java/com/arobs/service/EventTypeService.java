@@ -1,7 +1,6 @@
 package com.arobs.service;
 
 import com.arobs.entity.EventType;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.model.EventTypeModel;
 import com.arobs.repository.EventTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class EventTypeService implements HasRepository<EventTypeRepository> {
+public class EventTypeService extends BaseEntityService<EventType, EventTypeRepository> {
 
     @Autowired
     private EventTypeRepository eventTypeRepository;
@@ -19,10 +18,6 @@ public class EventTypeService implements HasRepository<EventTypeRepository> {
     @Override
     public EventTypeRepository getRepository() {
         return eventTypeRepository;
-    }
-
-    public EventType findOne(Long id) {
-        return getRepository().findOne(id);
     }
 
     public List<EventType> find(Long tenantId) {
@@ -41,8 +36,7 @@ public class EventTypeService implements HasRepository<EventTypeRepository> {
         if (model.getId() == null) {
             eventType = new EventType();
             eventType.setTenantId(tenantId);
-        }
-        else {
+        } else {
             eventType = findOne(model.getId());
         }
 
@@ -56,14 +50,10 @@ public class EventTypeService implements HasRepository<EventTypeRepository> {
         return save(eventType);
     }
 
+    @Override
     @Transactional
-    public EventType save(EventType eventType) {
-        return getRepository().save(eventType);
-    }
-
-    @Transactional
-    public void remove(Long id) {
-        getRepository().remove(id);
+    public void delete(Long id) {
+        getRepository().softDelete(id);
     }
 
 }

@@ -17,7 +17,7 @@ public interface TenantRepository extends JpaRepository<Tenant, Long> {
     @Query("UPDATE Tenant t " +
             "SET t.deletedAt = now(), t.deletedBy = :userId " +
             "WHERE t.id = :id")
-    void remove(@Param("id") Long id, @Param("userId") Long userId);
+    void softDelete(@Param("id") Long id, @Param("userId") Long userId);
 
     @Modifying
     @Query(value = "DELETE FROM tenant_user WHERE tenant_id = :id", nativeQuery = true)

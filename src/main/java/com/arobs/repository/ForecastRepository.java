@@ -30,6 +30,6 @@ public interface ForecastRepository extends JpaRepository<Forecast, Long> {
 
     @Modifying
     @Query("UPDATE Forecast f SET f.deletedAt = :now, f.deletedBy = :userId WHERE f.id = :id")
-    void remove(@Param("id") Long id, @Param("userId") Long userId, @Param("now") Date now);
+    void softDelete(@Param("id") Long id, @Param("userId") Long userId, @Param("now") Date now);
 }
 

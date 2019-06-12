@@ -24,7 +24,7 @@ public interface FertilizerRepository extends JpaRepository<Fertilizer, Long> {
 
     @Modifying
     @Query("UPDATE Fertilizer f SET f.deletedAt = NOW() WHERE f.id = :id")
-    void remove(@Param("id") Long id);
+    void softDelete(@Param("id") Long id);
 
 }
 

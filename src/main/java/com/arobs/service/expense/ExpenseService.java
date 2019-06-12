@@ -3,13 +3,13 @@ package com.arobs.service.expense;
 import com.arobs.entity.CropSeason;
 import com.arobs.entity.expense.Expense;
 import com.arobs.entity.expense.ExpenseCategory;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.model.crop.CropSeasonModel;
 import com.arobs.model.expense.ExpenseModel;
 import com.arobs.model.expense.ExpenseSeasonGroupModel;
 import com.arobs.model.expense.ExpenseSeasonTreeModel;
 import com.arobs.model.expense.ExpenseSummaryModel;
 import com.arobs.repository.ExpenseRepository;
+import com.arobs.service.BaseEntityService;
 import com.arobs.service.crop.CropSeasonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class ExpenseService implements HasRepository<ExpenseRepository> {
+public class ExpenseService extends BaseEntityService<Expense, ExpenseRepository> {
 
     @Autowired
     private ExpenseRepository expenseRepository;
@@ -34,10 +34,6 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
     @Override
     public ExpenseRepository getRepository() {
         return expenseRepository;
-    }
-
-    public Expense findOne(Long id) {
-        return getRepository().findOne(id);
     }
 
     public List<Expense> find(Long tenantId, Long cropSeasonId) {
@@ -173,16 +169,6 @@ public class ExpenseService implements HasRepository<ExpenseRepository> {
         expense.setCost(model.getCost());
 
         return save(expense);
-    }
-
-    @Transactional
-    public Expense save(Expense expense) {
-        return getRepository().save(expense);
-    }
-
-    @Transactional
-    public void remove(Long id) {
-        getRepository().delete(id);
     }
 
     public List<ExpenseSummaryModel> getSummaryModels(Long tenantId, Long cropSeasonId) {

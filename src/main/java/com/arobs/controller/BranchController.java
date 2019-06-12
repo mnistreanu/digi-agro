@@ -58,8 +58,8 @@ public class BranchController {
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void remove(@PathVariable Long id) {
-        tenantBranchService.remove(id);
+    public void delete(@PathVariable Long id) {
+        tenantBranchService.delete(id);
     }
 
 }

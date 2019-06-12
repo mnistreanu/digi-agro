@@ -47,8 +47,8 @@ public class BrandController {
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void remove(@PathVariable Long id) {
-        brandService.remove(id);
+    public void delete(@PathVariable Long id) {
+        brandService.delete(id);
     }
 
 }

@@ -76,14 +76,14 @@ public class EventTypeController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<EventType> save(@RequestBody EventTypeModel model,
-                                                HttpSession session) {
+                                          HttpSession session) {
         Long tenantId = (Long) session.getAttribute("tenant");
         return ResponseEntity.ok(eventTypeService.save(model, tenantId));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void remove(@PathVariable Long id) {
-        eventTypeService.remove(id);
+    public void delete(@PathVariable Long id) {
+        eventTypeService.delete(id);
     }
 
 }

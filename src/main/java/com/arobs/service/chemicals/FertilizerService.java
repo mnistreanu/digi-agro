@@ -1,12 +1,10 @@
 package com.arobs.service.chemicals;
 
-import com.arobs.entity.Employee;
 import com.arobs.entity.Fertilizer;
 import com.arobs.enums.FertilizerType;
-import com.arobs.interfaces.HasRepository;
-import com.arobs.model.EmployeeModel;
 import com.arobs.model.chemicals.FertilizerModel;
 import com.arobs.repository.FertilizerRepository;
+import com.arobs.service.BaseEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +12,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class FertilizerService implements HasRepository<FertilizerRepository> {
+public class FertilizerService extends BaseEntityService<Fertilizer, FertilizerRepository> {
 
     @Autowired
     private FertilizerRepository fertilizerRepository;
@@ -32,18 +30,13 @@ public class FertilizerService implements HasRepository<FertilizerRepository> {
         return getRepository().find(fertilizerType);
     }
 
-    public Fertilizer findOne(Long fertilizerId) {
-        return getRepository().findOne(fertilizerId);
-    }
-
     @Transactional
     public Fertilizer save(FertilizerModel model) {
         Fertilizer entity;
 
         if (model.getId() == null) {
             entity = new Fertilizer();
-        }
-        else {
+        } else {
             entity = findOne(model.getId());
         }
 
@@ -59,8 +52,9 @@ public class FertilizerService implements HasRepository<FertilizerRepository> {
         entity.setDescriptionRu(model.getDescriptionRu());
     }
 
+    @Override
     @Transactional
-    public void remove(Long id) {
-        getRepository().remove(id);
+    public void delete(Long id) {
+        getRepository().softDelete(id);
     }
 }

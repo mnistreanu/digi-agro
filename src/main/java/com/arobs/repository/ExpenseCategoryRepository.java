@@ -22,7 +22,7 @@ public interface ExpenseCategoryRepository extends JpaRepository<ExpenseCategory
 
     @Modifying
     @Query("UPDATE ExpenseCategory ec SET ec.active = false WHERE ec.id = :id")
-    void remove(@Param("id") Long id);
+    void softDelete(@Param("id") Long id);
 
     @Query("SELECT ec.name " +
             "FROM ExpenseCategory ec " +

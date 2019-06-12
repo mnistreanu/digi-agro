@@ -1,27 +1,17 @@
 package com.arobs.service.parcel;
 
-import com.arobs.entity.CropSeason;
-import com.arobs.entity.Parcel;
 import com.arobs.entity.ParcelCropSeason;
-import com.arobs.entity.ParcelGeometry;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.model.parcel.ParcelCropSeasonModel;
-import com.arobs.model.parcel.ParcelModel;
 import com.arobs.repository.ParcelCropSeasonRepository;
-import com.arobs.utils.StaticUtil;
-import com.google.gson.reflect.TypeToken;
+import com.arobs.service.BaseEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.lang.reflect.Type;
-import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Service
-public class ParcelCropSeasonService implements HasRepository<ParcelCropSeasonRepository> {
+public class ParcelCropSeasonService extends BaseEntityService<ParcelCropSeason, ParcelCropSeasonRepository> {
 
     @Autowired
     private ParcelCropSeasonRepository parcelCropRepository;
@@ -45,7 +35,7 @@ public class ParcelCropSeasonService implements HasRepository<ParcelCropSeasonRe
     public ParcelCropSeason findLast(Long parcelId) {
         int harvestYear = 0;
         List<ParcelCropSeason> list = this.find(parcelId);
-        for (ParcelCropSeason pcs:list) {
+        for (ParcelCropSeason pcs : list) {
             if (harvestYear < pcs.getCropSeason().getHarvestYear()) {
                 harvestYear = pcs.getCropSeason().getHarvestYear();
             }
@@ -53,13 +43,8 @@ public class ParcelCropSeasonService implements HasRepository<ParcelCropSeasonRe
         return getRepository().find(parcelId, harvestYear);
     }
 
-    public ParcelCropSeason findOne(Long id) {
-        return getRepository().findOne(id);
-    }
-
     public ParcelCropSeasonModel getModel(ParcelCropSeason entity) {
-        ParcelCropSeasonModel model = new ParcelCropSeasonModel(entity);
-        return model;
+        return new ParcelCropSeasonModel(entity);
     }
 
     @Transactional
@@ -69,13 +54,12 @@ public class ParcelCropSeasonService implements HasRepository<ParcelCropSeasonRe
 
         if (model.getId() == null) {
             entity = new ParcelCropSeason();
-        }
-        else {
+        } else {
             entity = findOne(model.getId());
         }
 
         copyValues(entity, model);
-        entity = getRepository().save(entity);
+        entity = save(entity);
 
         return entity;
     }

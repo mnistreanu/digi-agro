@@ -32,8 +32,7 @@ public class UserController {
         List<UserAccount> userAccounts;
         if (authService.isSuperAdmin()) {
             userAccounts = userAccountService.findAdmins();
-        }
-        else {
+        } else {
             userAccounts = userAccountService.findUsers();
         }
 
@@ -75,8 +74,8 @@ public class UserController {
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPER_ADMIN','ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void remove(@PathVariable Long id) {
-        userAccountService.remove(id);
+    public void delete(@PathVariable Long id) {
+        userAccountService.delete(id);
     }
 
 }

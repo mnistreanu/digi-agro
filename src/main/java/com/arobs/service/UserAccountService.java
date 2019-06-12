@@ -4,12 +4,14 @@ package com.arobs.service;
 import com.arobs.entity.Branch;
 import com.arobs.entity.Tenant;
 import com.arobs.entity.UserAccount;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.model.userAccount.UserAccountModel;
 import com.arobs.repository.UserAccountRepository;
+import com.arobs.security.JwtUserFactory;
 import com.arobs.security.SecurityUtil;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,7 +20,8 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-public class UserAccountService implements HasRepository<UserAccountRepository> {
+public class UserAccountService extends BaseEntityService<UserAccount, UserAccountRepository>
+        implements UserDetailsService {
 
     @Autowired
     private UserAccountRepository userAccountRepository;
@@ -31,15 +34,27 @@ public class UserAccountService implements HasRepository<UserAccountRepository> 
     @Autowired
     private FileService fileService;
 
+    @Override
+    public UserAccountRepository getRepository() {
+        return userAccountRepository;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserAccount userAccount = userAccountRepository.findByUsername(username);
+
+        if (userAccount == null) {
+            throw new UsernameNotFoundException("No user found with username " + username);
+        } else {
+            return JwtUserFactory.create(userAccount);
+        }
+    }
+
     public boolean validateUsername(Long id, String username) {
         if (id == -1) {
             return getRepository().countByUsername(username) == 0;
         }
         return getRepository().countByUsernameEscapeId(id, username) == 0;
-    }
-
-    public UserAccount findOne(Long id) {
-        return getRepository().findOne(id);
     }
 
     public UserAccount findByUsername(String username) {
@@ -58,9 +73,10 @@ public class UserAccountService implements HasRepository<UserAccountRepository> 
         return getRepository().findUsers();
     }
 
+    @Override
     @Transactional
-    public void remove(Long id) {
-        getRepository().remove(id);
+    public void delete(Long id) {
+        getRepository().softDelete(id);
     }
 
     @Transactional(rollbackOn = Exception.class)
@@ -69,9 +85,8 @@ public class UserAccountService implements HasRepository<UserAccountRepository> 
 
         if (model.getId() == null) {
             userAccount = new UserAccount();
-            userAccount.setAuthorities(authorityService.findAllByName(model.getRoleName()));
-        }
-        else {
+            userAccount.setAuthorities(authorityService.find(model.getRoleName()));
+        } else {
             userAccount = findOne(model.getId());
         }
 
@@ -87,8 +102,7 @@ public class UserAccountService implements HasRepository<UserAccountRepository> 
             List<Tenant> tenants = tenantService.findAll(model.getTenants());
             if (userAccount.getTenants() == null) {
                 userAccount.setTenants(tenants);
-            }
-            else {
+            } else {
                 userAccount.getTenants().clear();
                 userAccount.getTenants().addAll(tenants);
             }
@@ -98,8 +112,7 @@ public class UserAccountService implements HasRepository<UserAccountRepository> 
             List<Branch> branches = tenantBranchService.findAll(model.getBranches());
             if (userAccount.getBranches() == null) {
                 userAccount.setBranches(branches);
-            }
-            else {
+            } else {
                 userAccount.getBranches().clear();
                 userAccount.getBranches().addAll(branches);
             }
@@ -119,11 +132,6 @@ public class UserAccountService implements HasRepository<UserAccountRepository> 
         if (model.getPassword() != null) {
             userAccount.setPassword(SecurityUtil.encryptPassword(model.getPassword()));
         }
-    }
-
-    @Override
-    public UserAccountRepository getRepository() {
-        return userAccountRepository;
     }
 
     @Transactional

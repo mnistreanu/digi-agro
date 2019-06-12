@@ -1,29 +1,25 @@
 package com.arobs.service.notification;
 
 import com.arobs.entity.NotificationType;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.repository.NotificationTypeRepository;
+import com.arobs.service.BaseEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class NotificationTypeService implements HasRepository<NotificationTypeRepository> {
+public class NotificationTypeService extends BaseEntityService<NotificationType, NotificationTypeRepository> {
 
     @Autowired
     private NotificationTypeRepository notificationTypeRepository;
 
-    public NotificationType findOne(Long id) {
-        return getRepository().findOne(id);
+    @Override
+    public NotificationTypeRepository getRepository() {
+        return notificationTypeRepository;
     }
 
     public List<NotificationType> find() {
         return getRepository().find();
-    }
-
-    @Override
-    public NotificationTypeRepository getRepository() {
-        return notificationTypeRepository;
     }
 }

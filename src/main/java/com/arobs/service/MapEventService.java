@@ -1,7 +1,6 @@
 package com.arobs.service;
 
 import com.arobs.entity.MapEvent;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.model.MapEventModel;
 import com.arobs.model.UpdateFieldModel;
 import com.arobs.repository.MapEventRepository;
@@ -14,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class MapEventService implements HasRepository<MapEventRepository> {
+public class MapEventService extends BaseEntityService<MapEvent, MapEventRepository> {
 
     @Autowired
     private MapEventRepository mapEventRepository;
@@ -23,19 +22,19 @@ public class MapEventService implements HasRepository<MapEventRepository> {
     @Autowired
     private UserAccountService userAccountService;
 
-
-    public MapEvent findOne(Long id) {
-        return getRepository().findOne(id);
+    @Override
+    public MapEventRepository getRepository() {
+        return mapEventRepository;
     }
-
 
     public List<MapEvent> find(Long userId) {
         return getRepository().find(userId);
     }
 
+    @Override
     @Transactional
-    public void remove(Long id) {
-        getRepository().remove(id);
+    public void delete(Long id) {
+        getRepository().softDelete(id);
     }
 
     @Transactional(rollbackOn = Exception.class)
@@ -45,13 +44,12 @@ public class MapEventService implements HasRepository<MapEventRepository> {
         if (model.getId() == null) {
             entity = new MapEvent();
             entity.setUserAccount(userAccountService.findOne(userId));
-        }
-        else {
+        } else {
             entity = findOne(model.getId());
         }
 
         copyValues(entity, model);
-        return getRepository().save(entity);
+        return save(entity);
     }
 
     private void copyValues(MapEvent entity, MapEventModel model) {
@@ -68,10 +66,5 @@ public class MapEventService implements HasRepository<MapEventRepository> {
     @Transactional
     public void update(UpdateFieldModel model) {
         mapEventCustomRepository.update(model);
-    }
-
-    @Override
-    public MapEventRepository getRepository() {
-        return mapEventRepository;
     }
 }

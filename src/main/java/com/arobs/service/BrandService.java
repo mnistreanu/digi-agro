@@ -1,7 +1,6 @@
 package com.arobs.service;
 
 import com.arobs.entity.Brand;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.model.BrandModel;
 import com.arobs.repository.BrandRepository;
 import com.arobs.repository.custom.CommonCustomRepository;
@@ -12,28 +11,20 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class BrandService implements HasRepository<BrandRepository> {
+public class BrandService extends BaseEntityService<Brand, BrandRepository> {
 
     @Autowired
     private BrandRepository brandRepository;
     @Autowired
     private CommonCustomRepository commonCustomRepository;
 
+    @Override
+    public BrandRepository getRepository() {
+        return brandRepository;
+    }
+
     public boolean isUnique(Long currentId, String field, String value) {
         return commonCustomRepository.isUnique("Brand", currentId, field, value);
-    }
-
-    public Brand findOne(Long id) {
-        return getRepository().findOne(id);
-    }
-
-    public List<Brand> findAll() {
-        return getRepository().findAll();
-    }
-
-    @Transactional
-    public void remove(Long id) {
-        getRepository().remove(id);
     }
 
     @Transactional(rollbackOn = Exception.class)
@@ -42,23 +33,16 @@ public class BrandService implements HasRepository<BrandRepository> {
 
         if (model.getId() == null) {
             entity = new Brand();
-        }
-        else {
+        } else {
             entity = findOne(model.getId());
         }
 
         copyValues(entity, model);
-        return getRepository().save(entity);
+        return save(entity);
     }
 
     private void copyValues(Brand entity, BrandModel model) {
         entity.setName(model.getName());
-    }
-
-
-    @Transactional
-    public Brand save(Brand item) {
-        return getRepository().save(item);
     }
 
     @Transactional
@@ -77,10 +61,5 @@ public class BrandService implements HasRepository<BrandRepository> {
 
     private Brand find(String name) {
         return getRepository().find(name);
-    }
-
-    @Override
-    public BrandRepository getRepository() {
-        return brandRepository;
     }
 }

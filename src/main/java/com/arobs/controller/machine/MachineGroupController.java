@@ -43,8 +43,8 @@ public class MachineGroupController {
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void remove(@PathVariable Long id) {
-        machineGroupService.remove(id);
+    public void delete(@PathVariable Long id) {
+        machineGroupService.delete(id);
     }
 
 }

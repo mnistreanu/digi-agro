@@ -2,11 +2,11 @@ package com.arobs.service.forecast;
 
 import com.arobs.entity.ForecastParcel;
 import com.arobs.entity.ForecastSnapshot;
-import com.arobs.interfaces.HasRepository;
-import com.arobs.model.forecast.ForecastSnapshotModel;
 import com.arobs.model.forecast.ForecastHarvestModel;
+import com.arobs.model.forecast.ForecastSnapshotModel;
 import com.arobs.repository.ForecastSnapshotRepository;
 import com.arobs.repository.custom.ForecastSnapshotCustomRepository;
+import com.arobs.service.BaseEntityService;
 import com.arobs.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ForecastSnapshotService implements HasRepository<ForecastSnapshotRepository> {
+public class ForecastSnapshotService extends BaseEntityService<ForecastSnapshot, ForecastSnapshotRepository> {
 
 
     @Autowired
@@ -41,8 +41,7 @@ public class ForecastSnapshotService implements HasRepository<ForecastSnapshotRe
         ForecastSnapshot snapshot;
         if (lastSnapshot != null && DateUtil.isSameYearAndMonth(now, lastSnapshot.getCreatedAt())) {
             snapshot = lastSnapshot;
-        }
-        else {
+        } else {
             snapshot = new ForecastSnapshot();
             snapshot.setForecastId(forecastId);
             snapshot.setCreatedAt(now);
@@ -60,11 +59,6 @@ public class ForecastSnapshotService implements HasRepository<ForecastSnapshotRe
 
     private ForecastSnapshot getLastSnapshot(Long forecastId) {
         return forecastSnapshotCustomRepository.getLastSnapshot(forecastId);
-    }
-
-    @Transactional
-    public ForecastSnapshot save(ForecastSnapshot snapshot) {
-        return getRepository().save(snapshot);
     }
 
     public ForecastSnapshotModel getModel(Long forecastId) {

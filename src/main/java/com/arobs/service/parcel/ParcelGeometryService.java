@@ -2,9 +2,9 @@ package com.arobs.service.parcel;
 
 import com.arobs.entity.Parcel;
 import com.arobs.entity.ParcelGeometry;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.model.parcel.ParcelModel;
 import com.arobs.repository.ParcelGeometryRepository;
+import com.arobs.service.BaseEntityService;
 import com.arobs.utils.StaticUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Service
-public class ParcelGeometryService implements HasRepository<ParcelGeometryRepository> {
+public class ParcelGeometryService extends BaseEntityService<ParcelGeometry, ParcelGeometryRepository> {
 
     @Autowired
     private ParcelGeometryRepository parcelGeometryRepository;
@@ -22,10 +22,6 @@ public class ParcelGeometryService implements HasRepository<ParcelGeometryReposi
     @Override
     public ParcelGeometryRepository getRepository() {
         return parcelGeometryRepository;
-    }
-
-    public ParcelGeometry findOne(Long id) {
-        return getRepository().findOne(id);
     }
 
     public ParcelGeometry find(Long parcelId) {
@@ -40,14 +36,13 @@ public class ParcelGeometryService implements HasRepository<ParcelGeometryReposi
         if (model.getId() == null) {
             entity = new ParcelGeometry();
             entity.setParcelId(parcel.getId());
-        }
-        else {
+        } else {
             entity = findOne(model.getId());
         }
 
         copyValues(entity, model);
 
-        getRepository().save(entity);
+        save(entity);
     }
 
     private void copyValues(ParcelGeometry entity, ParcelModel model) {

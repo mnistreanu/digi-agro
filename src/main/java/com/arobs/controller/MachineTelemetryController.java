@@ -42,8 +42,8 @@ public class MachineTelemetryController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void remove(@PathVariable Long id) {
-        telemetryService.remove(id);
+    public void delete(@PathVariable Long id) {
+        telemetryService.delete(id);
     }
 
     @RequestMapping(value = "/coordinates", method = RequestMethod.POST)

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CropCategoryRepository extends JpaRepository<CropCategory, Integer> {
+public interface CropCategoryRepository extends JpaRepository<CropCategory, Long> {
 
     @Query("SELECT cc FROM CropCategory cc ")
     List<CropCategory> find();

@@ -4,7 +4,6 @@ import com.arobs.entity.Tenant;
 import com.arobs.model.ListItemModel;
 import com.arobs.model.tenant.TenantFilterModel;
 import com.arobs.model.tenant.TenantModel;
-import com.arobs.service.AuthService;
 import com.arobs.service.TenantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +19,6 @@ public class TenantController {
 
     @Autowired
     private TenantService tenantService;
-    @Autowired
-    private AuthService authService;
 
     @RequestMapping(value = "/list-items", method = RequestMethod.GET)
     public ResponseEntity<List<ListItemModel>> fetchListItems() {
@@ -56,8 +53,8 @@ public class TenantController {
 
     @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void remove(@PathVariable Long id) {
-        tenantService.remove(id, authService.getCurrentUser().getId());
+    public void delete(@PathVariable Long id) {
+        tenantService.delete(id);
     }
 
 }

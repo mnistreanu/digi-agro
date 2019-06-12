@@ -27,7 +27,7 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, Long> 
 
     @Modifying
     @Query("UPDATE UserAccount ua SET ua.active = false WHERE ua.id = :id")
-    void remove(@Param("id") Long id);
+    void softDelete(@Param("id") Long id);
 
     @Query("SELECT COUNT(ua) FROM UserAccount ua WHERE ua.username = :username AND ua.active = true")
     long countByUsername(@Param("username") String username);

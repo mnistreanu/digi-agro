@@ -86,8 +86,8 @@ public class ExpenseCategoryController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void remove(@PathVariable Long id) {
-        expenseCategoryService.remove(id);
+    public void delete(@PathVariable Long id) {
+        expenseCategoryService.delete(id);
     }
 
 }

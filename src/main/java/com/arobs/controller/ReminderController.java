@@ -110,7 +110,7 @@ public class ReminderController {
     @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void remove(@PathVariable Long id) {
-        reminderService.remove(id);
+        reminderService.delete(id);
     }
 
 }

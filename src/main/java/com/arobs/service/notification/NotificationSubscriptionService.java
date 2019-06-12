@@ -1,8 +1,8 @@
 package com.arobs.service.notification;
 
 import com.arobs.entity.NotificationSubscription;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.repository.NotificationSubscriptionRepository;
+import com.arobs.service.BaseEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class NotificationSubscriptionService implements HasRepository<NotificationSubscriptionRepository> {
+public class NotificationSubscriptionService extends BaseEntityService<NotificationSubscription, NotificationSubscriptionRepository> {
 
     @Autowired
     private NotificationSubscriptionRepository notificationSubscriptionRepository;
@@ -20,10 +20,6 @@ public class NotificationSubscriptionService implements HasRepository<Notificati
     @Override
     public NotificationSubscriptionRepository getRepository() {
         return notificationSubscriptionRepository;
-    }
-
-    public NotificationSubscription findOne(Long id) {
-        return getRepository().findOne(id);
     }
 
     public List<NotificationSubscription> find(Long userId) {
@@ -37,14 +33,9 @@ public class NotificationSubscriptionService implements HasRepository<Notificati
             notificationSubscription.setUserId(userId);
             notificationSubscription.setNotificationType(notificationTypeService.findOne(typeId));
             save(notificationSubscription);
-        }
-        else {
+        } else {
             getRepository().delete(userId, typeId);
         }
     }
 
-    @Transactional
-    private NotificationSubscription save(NotificationSubscription entity) {
-        return getRepository().save(entity);
-    }
 }

@@ -23,7 +23,7 @@ public interface EventTypeRepository extends JpaRepository<EventType, Long> {
 
     @Modifying
     @Query("UPDATE EventType et SET et.active = false WHERE et.id = :id")
-    void remove(@Param("id") Long id);
+    void softDelete(@Param("id") Long id);
     
 }
 

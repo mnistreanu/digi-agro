@@ -1,7 +1,6 @@
 package com.arobs.service;
 
 import com.arobs.entity.MachineTelemetry;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.model.UpdateFieldModel;
 import com.arobs.model.telemetry.MachineTelemetryModel;
 import com.arobs.repository.MachineTelemetryRepository;
@@ -15,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class TelemetryService implements HasRepository<MachineTelemetryRepository> {
+public class TelemetryService extends BaseEntityService<MachineTelemetry, MachineTelemetryRepository> {
 
     @Autowired
     private MachineTelemetryRepository machineTelemetryRepository;
@@ -26,17 +25,19 @@ public class TelemetryService implements HasRepository<MachineTelemetryRepositor
     @Autowired
     private MachineService machineService;
 
-    public MachineTelemetry findOne(Long id) {
-        return getRepository().findOne(id);
+    @Override
+    public MachineTelemetryRepository getRepository() {
+        return machineTelemetryRepository;
     }
 
     public List<MachineTelemetry> find(Long machineId, Long userId) {
         return getRepository().find(machineId, userId);
     }
 
+    @Override
     @Transactional
-    public void remove(Long id) {
-        getRepository().remove(id);
+    public void delete(Long id) {
+        getRepository().softDelete(id);
     }
 
     @Transactional(rollbackOn = Exception.class)
@@ -48,13 +49,12 @@ public class TelemetryService implements HasRepository<MachineTelemetryRepositor
             entity.setUserAccount(userAccountService.findOne(userId));
             entity.setMachine(machineService.findOne(model.getMachineId()));
             entity.setCreatedAt(new Date());
-        }
-        else {
+        } else {
             entity = findOne(model.getId());
         }
 
         copyValues(entity, model);
-        return getRepository().save(entity);
+        return save(entity);
     }
 
     private void copyValues(MachineTelemetry entity, MachineTelemetryModel model) {
@@ -65,10 +65,5 @@ public class TelemetryService implements HasRepository<MachineTelemetryRepositor
     @Transactional
     public void updateCoordinate(UpdateFieldModel model) {
         machineTelemetryCustomRepository.updateCoordinate(model.getId(), model.getField(), NumericUtil.convertToBigDecimal(model.getValue()));
-    }
-
-    @Override
-    public MachineTelemetryRepository getRepository() {
-        return machineTelemetryRepository;
     }
 }

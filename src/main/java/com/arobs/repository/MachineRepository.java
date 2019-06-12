@@ -14,7 +14,7 @@ public interface MachineRepository extends JpaRepository<Machine, Long> {
 
     @Modifying
     @Query("UPDATE Machine m SET m.active = false WHERE m.id = :id")
-    void remove(@Param("id") Long id);
+    void softDelete(@Param("id") Long id);
 
     @Query("SELECT m FROM Machine m " +
             "WHERE m.active = true AND m.tenant.id = :tenantId")

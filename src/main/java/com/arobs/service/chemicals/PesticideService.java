@@ -1,9 +1,9 @@
 package com.arobs.service.chemicals;
 
 import com.arobs.entity.Pesticide;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.model.chemicals.PesticideModel;
 import com.arobs.repository.PesticideRepository;
+import com.arobs.service.BaseEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,28 +11,22 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class PesticideService implements HasRepository<PesticideRepository> {
+public class PesticideService extends BaseEntityService<Pesticide, PesticideRepository> {
 
     @Autowired
     private PesticideRepository pesticideRepository;
-
-    public List<Pesticide> find() {
-        return getRepository().find();
-    }
-
-//    public List<Pesticide> find(Long typeId) {
-//        return getRepository().find(typeId);
-//    }
 
     @Override
     public PesticideRepository getRepository() {
         return pesticideRepository;
     }
 
-    public Pesticide findOne(Long id) {
-        return getRepository().findOne(id);
+    public List<Pesticide> find() {
+        return getRepository().find();
     }
 
+    // todo: refactor
+    @Deprecated
     public PesticideModel findOneModel(Long id) {
         PesticideModel model = new PesticideModel(getRepository().findOne(id));
         return model;
@@ -45,8 +39,7 @@ public class PesticideService implements HasRepository<PesticideRepository> {
 
         if (model.getId() == null) {
             pesticide = new Pesticide();
-        }
-        else {
+        } else {
             pesticide = findOne(model.getId());
         }
 
@@ -62,15 +55,4 @@ public class PesticideService implements HasRepository<PesticideRepository> {
 
         return save(pesticide);
     }
-
-    @Transactional
-    public Pesticide save(Pesticide pesticide) {
-        return getRepository().save(pesticide);
-    }
-
-//    @Transactional
-//    public void remove(Long id) {
-//        getRepository().remove(id);
-//    }
-
 }

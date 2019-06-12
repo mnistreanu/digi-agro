@@ -30,7 +30,7 @@ public class NotificationController {
         List<Notification> notifications;
 
         if (all != null && all) {
-            notifications = notificationService.findAll(userId);
+            notifications = notificationService.find(userId);
         }
         else {
             notifications = notificationService.findNotSeen(userId, dateFrom);

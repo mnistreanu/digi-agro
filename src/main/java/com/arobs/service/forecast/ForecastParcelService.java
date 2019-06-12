@@ -1,8 +1,8 @@
 package com.arobs.service.forecast;
 
 import com.arobs.entity.ForecastParcel;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.repository.ForecastParcelRepository;
+import com.arobs.service.BaseEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ForecastParcelService implements HasRepository<ForecastParcelRepository> {
+public class ForecastParcelService extends BaseEntityService<ForecastParcel, ForecastParcelRepository> {
 
     @Autowired
     private ForecastParcelRepository forecastParcelRepository;
@@ -22,18 +22,13 @@ public class ForecastParcelService implements HasRepository<ForecastParcelReposi
     }
 
     @Transactional
-    public List<ForecastParcel> save(List<ForecastParcel> items) {
-        return getRepository().save(items);
-    }
-
-    @Transactional
-    public void remove(Long snapshotId) {
-        getRepository().remove(snapshotId);
+    public void delete(Long snapshotId) {
+        getRepository().delete(snapshotId);
     }
 
     @Transactional
     public void create(Long snapshotId, List<Long> parcels) {
-        remove(snapshotId);
+        delete(snapshotId);
         List<ForecastParcel> forecastParcels = new ArrayList<>();
         for (Long parcelId : parcels) {
             ForecastParcel fp = new ForecastParcel();

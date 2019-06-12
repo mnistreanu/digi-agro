@@ -24,11 +24,6 @@ public interface ReminderRepository extends JpaRepository<Reminder, Long> {
             "ORDER BY r.starting ")
     List<Reminder> find(@Param("tenantId") Long tenantId, @Param("starting") Date starting);
 
-
-    @Modifying
-    @Query("DELETE FROM Reminder r WHERE r.id = :id")
-    void remove(@Param("id") Long id);
-
     @Modifying
     @Query("UPDATE Reminder r SET r.starting = :starting, r.ending = :ending WHERE r.id = :id")
     void changeSchedule(@Param("id") Long id, @Param("starting") Date start, @Param("ending") Date ending);

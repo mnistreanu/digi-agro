@@ -1,7 +1,6 @@
 package com.arobs.service;
 
 import com.arobs.entity.Reminder;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.model.reminder.ReminderModel;
 import com.arobs.repository.ReminderRepository;
 import com.arobs.service.agrowork.AgroWorkTypeService;
@@ -13,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class ReminderService implements HasRepository<ReminderRepository> {
+public class ReminderService extends BaseEntityService<Reminder, ReminderRepository> {
 
     @Autowired
     private AuthService authService;
@@ -35,15 +34,6 @@ public class ReminderService implements HasRepository<ReminderRepository> {
         }
     }
 
-    public Reminder findOne(Long id) {
-        return getRepository().findOne(id);
-    }
-
-    @Transactional
-    public void remove(Long id) {
-        getRepository().remove(id);
-    }
-
     @Transactional(rollbackOn = Exception.class)
     public Reminder save(ReminderModel model) {
         Reminder entity;
@@ -52,14 +42,13 @@ public class ReminderService implements HasRepository<ReminderRepository> {
             entity = new Reminder();
             entity.setCreatedBy(authService.getCurrentUser().getId());
             entity.setTenantId(model.getTenantId());
-        }
-        else {
+        } else {
             entity = findOne(model.getId());
         }
 
         copyValues(entity, model);
 
-        return getRepository().save(entity);
+        return save(entity);
     }
 
     private void copyValues(Reminder entity, ReminderModel model) {

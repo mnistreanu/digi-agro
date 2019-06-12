@@ -4,7 +4,6 @@ import com.arobs.entity.expense.Expense;
 import com.arobs.model.expense.ExpenseModel;
 import com.arobs.model.expense.ExpenseSeasonTreeModel;
 import com.arobs.model.expense.ExpenseSummaryModel;
-import com.arobs.service.expense.ExpenseCategoryService;
 import com.arobs.service.expense.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +19,6 @@ public class ExpenseController {
 
     @Autowired
     private ExpenseService expenseService;
-    @Autowired
-    private ExpenseCategoryService expenseCategoryService;
 
     @RequestMapping(value = "/season-tree", method = RequestMethod.GET)
     public ResponseEntity<List<ExpenseSeasonTreeModel>> getExpenseSeasonTreeModels(HttpSession session) {
@@ -55,7 +52,7 @@ public class ExpenseController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void remove(@PathVariable Long id) {
-        expenseService.remove(id);
+        expenseService.delete(id);
     }
 
 }

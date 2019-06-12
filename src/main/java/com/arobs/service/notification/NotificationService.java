@@ -1,9 +1,8 @@
 package com.arobs.service.notification;
 
 import com.arobs.entity.Notification;
-import com.arobs.interfaces.HasRepository;
 import com.arobs.repository.NotificationRepository;
-import com.arobs.service.AuthService;
+import com.arobs.service.BaseEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +11,8 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class NotificationService implements HasRepository<NotificationRepository> {
+public class NotificationService extends BaseEntityService<Notification, NotificationRepository> {
 
-    @Autowired
-    private AuthService authService;
     @Autowired
     private NotificationRepository notificationRepository;
 
@@ -24,17 +21,13 @@ public class NotificationService implements HasRepository<NotificationRepository
         return notificationRepository;
     }
 
-    public List<Notification> findAll(Long userId) {
-        return getRepository().findAll(userId);
+    public List<Notification> find(Long userId) {
+        return getRepository().find(userId);
     }
 
     public List<Notification> findNotSeen(Long userId, Date dateFrom) {
         dateFrom = dateFrom == null ? new Date() : dateFrom;
         return getRepository().findNotSeen(userId, dateFrom);
-    }
-
-    public Notification findOne(Long id) {
-        return getRepository().findOne(id);
     }
 
     @Transactional

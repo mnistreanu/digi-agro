@@ -15,7 +15,7 @@ public interface MachineGroupRepository extends JpaRepository<MachineGroup, Long
     @Modifying
     @Query("UPDATE MachineGroup mg SET mg.active = false " +
             "WHERE mg.id = :id")
-    void remove(@Param("id") Long id);
+    void softDelete(@Param("id") Long id);
 
     @Query("SELECT mg FROM MachineGroup mg " +
             "WHERE mg.tenantId = :tenantId AND mg.active = true")

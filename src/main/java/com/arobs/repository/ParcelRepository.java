@@ -18,7 +18,7 @@ public interface ParcelRepository extends JpaRepository<Parcel, Long> {
     @Modifying
     @Query("UPDATE Parcel p SET p.active = false " +
             "WHERE p.id = :id")
-    void remove(@Param("id") Long id);
+    void softDelete(@Param("id") Long id);
 
 }
 

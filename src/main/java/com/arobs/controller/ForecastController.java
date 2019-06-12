@@ -1,7 +1,6 @@
 package com.arobs.controller;
 
 import com.arobs.entity.Forecast;
-import com.arobs.model.PayloadModel;
 import com.arobs.model.forecast.ForecastModel;
 import com.arobs.service.forecast.ForecastService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +33,8 @@ public class ForecastController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void remove(@PathVariable("id") Long id) {
-        forecastService.remove(id);
+    public void delete(@PathVariable("id") Long id) {
+        forecastService.delete(id);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
