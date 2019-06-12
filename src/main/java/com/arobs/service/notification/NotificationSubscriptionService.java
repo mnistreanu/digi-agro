@@ -1,6 +1,6 @@
 package com.arobs.service.notification;
 
-import com.arobs.entity.NotificationSubscription;
+import com.arobs.entity.notification.NotificationSubscription;
 import com.arobs.repository.NotificationSubscriptionRepository;
 import com.arobs.service.BaseEntityService;
 import org.springframework.beans.factory.annotation.Autowired;

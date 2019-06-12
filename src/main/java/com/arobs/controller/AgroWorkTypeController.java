@@ -1,6 +1,6 @@
 package com.arobs.controller;
 
-import com.arobs.entity.AgroWorkType;
+import com.arobs.entity.agro.AgroWorkType;
 import com.arobs.model.agrowork.AgroWorkTypeModel;
 import com.arobs.service.agrowork.AgroWorkTypeService;
 import org.springframework.beans.factory.annotation.Autowired;

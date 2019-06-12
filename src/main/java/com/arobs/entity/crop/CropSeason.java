@@ -1,4 +1,6 @@
-package com.arobs.entity;
+package com.arobs.entity.crop;
+
+import com.arobs.entity.BaseEntity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,16 +10,12 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "crop_season")
-public class CropSeason {
+public class CropSeason extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column (name = "tenant_id")
+    @Column(name = "tenant_id")
     private Long tenantId;
 
-    @Column (name = "harvest_year")
+    @Column(name = "harvest_year")
     private Integer harvestYear;
 
     @ManyToOne
@@ -32,28 +30,16 @@ public class CropSeason {
     @JoinColumn(name = "crop_variety_id")
     private CropVariety cropVariety;
 
-    @Column (name = "start_date")
+    @Column(name = "start_date")
     private Date startDate;
 
-    @Column (name = "end_date")
+    @Column(name = "end_date")
     private Date endDate;
 
-    @Column (name = "yield_goal")
+    @Column(name = "yield_goal")
     private Double yieldGoal;
 
     public CropSeason() {
-    }
-
-    public CropSeason(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Long getTenantId() {

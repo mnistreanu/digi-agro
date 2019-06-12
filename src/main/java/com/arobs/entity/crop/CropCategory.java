@@ -1,33 +1,25 @@
-package com.arobs.entity;
+package com.arobs.entity.crop;
 
-import javax.persistence.*;
+import com.arobs.entity.BaseEntity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Created by mihail.gorgos on 14.07.2018.
  */
 @Entity
 @Table(name = "crop_category")
-public class CropCategory {
+public class CropCategory extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column (name = "name_ro")
+    @Column(name = "name_ro")
     private String nameRo;
 
-    @Column (name = "name_ru")
+    @Column(name = "name_ru")
     private String nameRu;
 
     public CropCategory() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNameRo() {

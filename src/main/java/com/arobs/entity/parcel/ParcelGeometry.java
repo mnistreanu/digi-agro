@@ -1,4 +1,4 @@
-package com.arobs.entity;
+package com.arobs.entity.parcel;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 /**
  * Created by mihail.gorgos on 25.07.2018.
- *
+ * <p>
  * Ppentru definirea geometriei parcelei se va folosi tabelul PARCEL_COORDS.Fiecare parcela are un
  * set de coordonate aferent acestei parcele si centrul geografic. Respectiv perimetrul va defini hotarele parcelei.
  */

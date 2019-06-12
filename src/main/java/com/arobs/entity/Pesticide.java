@@ -10,55 +10,43 @@ import java.util.List;
  */
 @Entity
 @Table(name = "pesticide")
-public class Pesticide {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Pesticide extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
-    @Column (name = "pesticide_type")
+    @Column(name = "pesticide_type")
     private PesticideType pesticideType;
 
-    @Column (name = "name_ro")
+    @Column(name = "name_ro")
     private String nameRo;
 
-    @Column (name = "name_ru")
+    @Column(name = "name_ru")
     private String nameRu;
 
-    @Column (name = "description_ro", length = 4096)
+    @Column(name = "description_ro", length = 4096)
     private String descriptionRo;
 
-    @Column (name = "description_ru", length = 4096)
+    @Column(name = "description_ru", length = 4096)
     private String descriptionRu;
 
     @ManyToMany
-    @JoinTable(name="pesticide_pest",
-            joinColumns= @JoinColumn(name="pesticide_id"),
+    @JoinTable(name = "pesticide_pest",
+            joinColumns = @JoinColumn(name = "pesticide_id"),
             inverseJoinColumns = @JoinColumn(name = "pest_id"))
     private List<Pest> pests;
 
-    @Column (name = "pests_ro", length = 4098)
+    @Column(name = "pests_ro", length = 4098)
     private String pestsRo;
 
-    @Column (name = "pests_ru", length = 4098)
+    @Column(name = "pests_ru", length = 4098)
     private String pestsRu;
 
-    @Column (name = "active_substance")
+    @Column(name = "active_substance")
     private String activeSubstance;
 
-    @Column (name = "toxicity_group")
+    @Column(name = "toxicity_group")
     private Integer toxicityGroup;
 
     public Pesticide() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public PesticideType getPesticideType() {

@@ -1,9 +1,9 @@
 package com.arobs.model.userAccount;
 
-import com.arobs.entity.Authority;
+import com.arobs.entity.auth.Authority;
 import com.arobs.entity.Branch;
 import com.arobs.entity.Tenant;
-import com.arobs.entity.UserAccount;
+import com.arobs.entity.auth.UserAccount;
 import com.arobs.enums.AuthorityName;
 
 import java.util.List;

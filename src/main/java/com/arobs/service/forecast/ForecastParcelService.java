@@ -1,6 +1,6 @@
 package com.arobs.service.forecast;
 
-import com.arobs.entity.ForecastParcel;
+import com.arobs.entity.forecast.ForecastParcel;
 import com.arobs.repository.ForecastParcelRepository;
 import com.arobs.service.BaseEntityService;
 import org.springframework.beans.factory.annotation.Autowired;

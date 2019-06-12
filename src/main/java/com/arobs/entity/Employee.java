@@ -2,15 +2,10 @@ package com.arobs.entity;
 
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "employee")
-public class Employee {
-
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Employee extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "tenant_id")
@@ -23,14 +18,7 @@ public class Employee {
     @Column(columnDefinition = "boolean default true")
     private boolean active = true;
 
-    public Employee() { }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public Employee() {
     }
 
     public Tenant getTenant() {

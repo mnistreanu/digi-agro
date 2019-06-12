@@ -1,7 +1,7 @@
 package com.arobs.service.parcel;
 
-import com.arobs.entity.Parcel;
-import com.arobs.entity.ParcelGeometry;
+import com.arobs.entity.parcel.Parcel;
+import com.arobs.entity.parcel.ParcelGeometry;
 import com.arobs.model.parcel.ParcelModel;
 import com.arobs.repository.ParcelRepository;
 import com.arobs.service.BaseEntityService;

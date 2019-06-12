@@ -1,31 +1,23 @@
-package com.arobs.entity;
+package com.arobs.entity.forecast;
 
-import javax.persistence.*;
+import com.arobs.entity.BaseEntity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Created by mihail.gorgos on 03.08.2018.
  */
 @Entity
 @Table(name = "forecast_parcel")
-public class ForecastParcel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ForecastParcel extends BaseEntity {
 
     @Column(name = "forecast_snapshot_id")
     private Long forecastSnapshotId;
 
     @Column(name = "parcel_id")
     private Long parcelId;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getForecastSnapshotId() {
         return forecastSnapshotId;

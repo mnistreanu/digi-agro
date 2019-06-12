@@ -1,7 +1,5 @@
 package com.arobs.model.notification;
 
-import com.arobs.entity.NotificationSubscription;
-
 import java.io.Serializable;
 
 public class NotificationChangeSubscriptionModel implements Serializable {

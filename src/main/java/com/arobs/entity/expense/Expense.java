@@ -1,18 +1,14 @@
 package com.arobs.entity.expense;
 
-import com.arobs.entity.CropSeason;
+import com.arobs.entity.BaseEntity;
+import com.arobs.entity.crop.CropSeason;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-public class Expense {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+public class Expense extends BaseEntity {
 
     @Column(name = "tenant_id")
     private Long tenant;
@@ -35,14 +31,6 @@ public class Expense {
     private String title;
     private String description;
     private BigDecimal cost;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getTenant() {
         return tenant;

@@ -1,24 +1,21 @@
 package com.arobs.entity;
 
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
 @Table(name = "tenant")
-public class Tenant {
-
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private Long id;
+public class Tenant extends BaseEntity {
 
     @NotNull
-    @Column(name="name", columnDefinition = "varchar(256)")
+    @Column(name = "name", columnDefinition = "varchar(256)")
     private String name;
 
-    @Column(name="description", columnDefinition = "varchar(1024)")
+    @Column(name = "description", columnDefinition = "varchar(1024)")
     private String description;
 
     @Column(name = "fiscal_code")
@@ -40,30 +37,22 @@ public class Tenant {
     @Column(name = "phones", columnDefinition = "varchar(128)")
     private String phones;
 
-    @Column(name="deleted_at")
+    @Column(name = "deleted_at")
     private Date deletedAt;
 
-    @Column(name="deleted_by")
+    @Column(name = "deleted_by")
     private Long deletedBy;
 
-    @Column(name="blocked_at")
+    @Column(name = "blocked_at")
     private Date blockedAt;
 
-    @Column(name="blocked_by")
+    @Column(name = "blocked_by")
     private Long blockedBy;
 
-    @Column(name="blocked_reason", columnDefinition = "varchar(256)")
+    @Column(name = "blocked_reason", columnDefinition = "varchar(256)")
     private String blockedReason;
 
     public Tenant() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {

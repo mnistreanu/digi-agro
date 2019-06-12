@@ -1,13 +1,12 @@
 package com.arobs.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class EventType {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class EventType extends BaseEntity {
 
     private Long tenantId;
 
@@ -20,14 +19,6 @@ public class EventType {
 
     @Column(columnDefinition = "boolean default true")
     private boolean active = true;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getTenantId() {
         return tenantId;

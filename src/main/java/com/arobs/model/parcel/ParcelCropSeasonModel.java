@@ -1,6 +1,6 @@
 package com.arobs.model.parcel;
 
-import com.arobs.entity.ParcelCropSeason;
+import com.arobs.entity.parcel.ParcelCropSeason;
 import com.arobs.model.crop.CropModel;
 import com.arobs.model.crop.CropVarietyModel;
 

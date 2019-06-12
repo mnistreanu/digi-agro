@@ -1,8 +1,8 @@
 package com.arobs.controller;
 
-import com.arobs.entity.AgroWork;
-import com.arobs.entity.AgroWorkType;
-import com.arobs.entity.Crop;
+import com.arobs.entity.agro.AgroWork;
+import com.arobs.entity.agro.AgroWorkType;
+import com.arobs.entity.crop.Crop;
 import com.arobs.enums.UnitOfMeasure;
 import com.arobs.model.PayloadModel;
 import com.arobs.model.agrowork.OtherWorksModel;

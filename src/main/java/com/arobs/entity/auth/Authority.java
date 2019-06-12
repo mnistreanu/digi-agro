@@ -1,29 +1,20 @@
-package com.arobs.entity;
+package com.arobs.entity.auth;
 
 
+import com.arobs.entity.BaseEntity;
 import com.arobs.enums.AuthorityName;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Entity
-public class Authority {
-
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Authority extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private AuthorityName name;
 
     public Authority() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public AuthorityName getName() {

@@ -1,20 +1,16 @@
 package com.arobs.entity;
 
+import com.arobs.entity.agro.AgroWorkType;
 import com.arobs.enums.MachineType;
 import com.arobs.enums.MotorType;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "machine")
-public class Machine {
-
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Machine extends BaseEntity {
 
     private String identifier;
 
@@ -49,27 +45,20 @@ public class Machine {
 
     @ManyToMany
     @JoinTable(name = "machine_work_type",
-            joinColumns = { @JoinColumn(name = "machine_id") },
-            inverseJoinColumns = { @JoinColumn(name = "work_type_id") })
+            joinColumns = {@JoinColumn(name = "machine_id")},
+            inverseJoinColumns = {@JoinColumn(name = "work_type_id")})
     private List<AgroWorkType> workTypes = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "machine_employee",
-            joinColumns = { @JoinColumn(name = "machine_id") },
-            inverseJoinColumns = { @JoinColumn(name = "employee_id") })
+            joinColumns = {@JoinColumn(name = "machine_id")},
+            inverseJoinColumns = {@JoinColumn(name = "employee_id")})
     private List<Employee> employees = new ArrayList<>();
 
     @Column(columnDefinition = "boolean default true")
     private boolean active = true;
 
-    public Machine() { }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public Machine() {
     }
 
     public String getIdentifier() {

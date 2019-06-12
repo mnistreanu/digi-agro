@@ -1,4 +1,6 @@
-package com.arobs.entity;
+package com.arobs.entity.agro;
+
+import com.arobs.entity.BaseEntity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -6,17 +8,12 @@ import java.util.Date;
 /**
  * Created by mihail.gorgos on 16.08.2018.
  * Aici se va defini relatie parcela cu cultura agricola si cu lucrarea efetuata.
- *
+ * <p>
  * Se va folosi tabelul AGRO_WORK
  */
 @Entity
 @Table(name = "agro_work")
-public class AgroWork {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
-    private Long id;
+public class AgroWork extends BaseEntity {
 
     @Column(name = "tenant_id")
     private Long tenant;
@@ -24,7 +21,7 @@ public class AgroWork {
     @Column(name = "parcel_crop_id")
     private Long parcelCropId;
 
-    @ManyToOne (fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "work_type_id")
     private AgroWorkType workType;
 
@@ -39,14 +36,6 @@ public class AgroWork {
 
     @Column(name = "created_by")
     private Long createdBy;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getTenant() {
         return tenant;

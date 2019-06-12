@@ -1,24 +1,25 @@
 package com.arobs.entity.expense;
 
-import javax.persistence.*;
+import com.arobs.entity.BaseEntity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * Created by mihail.gorgos on 14.07.2018.
  */
 @Entity
-public class ExpenseCategory {
+public class ExpenseCategory extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column (name = "tenant_id")
+    @Column(name = "tenant_id")
     private Long tenantId;
 
     @ManyToOne
     @JoinColumn(name = "parent_id")
     private ExpenseCategory parent;
-    @Column (name = "parent_id", insertable = false, updatable = false)
+    @Column(name = "parent_id", insertable = false, updatable = false)
     private Long parentId;
 
     private String name;
@@ -41,14 +42,6 @@ public class ExpenseCategory {
         }
 
         return parent.getName();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Long getTenantId() {

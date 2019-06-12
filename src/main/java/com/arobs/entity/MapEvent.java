@@ -1,16 +1,17 @@
 package com.arobs.entity;
 
 
-import javax.persistence.*;
+import com.arobs.entity.auth.UserAccount;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-public class MapEvent {
-
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
+public class MapEvent extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_account_id")
@@ -20,21 +21,13 @@ public class MapEvent {
 
     private String message;
 
-    @Column(columnDefinition="Decimal(16, 6) default '0.000000'")
+    @Column(columnDefinition = "Decimal(16, 6) default '0.000000'")
     private BigDecimal latitude, longitude;
 
     @Column(columnDefinition = "boolean default true")
     private boolean active = true;
 
     public MapEvent() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public UserAccount getUserAccount() {

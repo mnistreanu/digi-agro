@@ -1,7 +1,7 @@
 package com.arobs.model.userAccount;
 
 
-import com.arobs.entity.UserAccount;
+import com.arobs.entity.auth.UserAccount;
 
 public class UserAccountListModel {
 

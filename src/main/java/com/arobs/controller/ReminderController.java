@@ -1,7 +1,7 @@
 package com.arobs.controller;
 
 import com.arobs.entity.Reminder;
-import com.arobs.entity.AgroWorkType;
+import com.arobs.entity.agro.AgroWorkType;
 import com.arobs.model.agrowork.AgroWorkTypeModel;
 import com.arobs.model.PayloadModel;
 import com.arobs.model.reminder.ReminderModel;

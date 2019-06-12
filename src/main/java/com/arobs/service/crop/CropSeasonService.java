@@ -1,6 +1,6 @@
 package com.arobs.service.crop;
 
-import com.arobs.entity.CropSeason;
+import com.arobs.entity.crop.CropSeason;
 import com.arobs.model.crop.CropSeasonModel;
 import com.arobs.repository.CropSeasonRepository;
 import com.arobs.service.BaseEntityService;

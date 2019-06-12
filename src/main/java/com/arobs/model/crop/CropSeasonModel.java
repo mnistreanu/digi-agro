@@ -1,6 +1,6 @@
 package com.arobs.model.crop;
 
-import com.arobs.entity.CropSeason;
+import com.arobs.entity.crop.CropSeason;
 
 import java.io.Serializable;
 import java.util.Date;

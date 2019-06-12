@@ -1,4 +1,6 @@
-package com.arobs.entity;
+package com.arobs.entity.notification;
+
+import com.arobs.entity.BaseEntity;
 
 import javax.persistence.*;
 import java.time.Duration;
@@ -11,20 +13,16 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "notification")
-public class Notification {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private Long id;
+public class Notification extends BaseEntity {
 
-    @ManyToOne (fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "notification_type_id")
     private NotificationType notificationType;
 
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name="message", columnDefinition = "varchar(1024)")
+    @Column(name = "message", columnDefinition = "varchar(1024)")
     private String message;
 
     @Column(name = "date_to")
@@ -34,14 +32,6 @@ public class Notification {
     private Date seenAt;
 
     private Date createdAt;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public NotificationType getNotificationType() {
         return notificationType;

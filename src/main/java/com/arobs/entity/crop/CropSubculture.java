@@ -1,4 +1,6 @@
-package com.arobs.entity;
+package com.arobs.entity.crop;
+
+import com.arobs.entity.BaseEntity;
 
 import javax.persistence.*;
 
@@ -6,20 +8,12 @@ import javax.persistence.*;
  * Created by mihail.gorgos on 14.07.2018.
  */
 @Entity
-@Table(name = "crop_variety")
-public class CropVariety {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Table(name = "crop_subculture")
+public class CropSubculture extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "crop_id")
     private Crop crop;
-
-    @ManyToOne
-    @JoinColumn(name = "crop_subculture_id")
-    private CropSubculture cropSubculture;
 
     @Column(name = "name_ro")
     private String nameRo;
@@ -33,15 +27,7 @@ public class CropVariety {
     @Column(name = "description_ru", length = 4000)
     private String descriptionRu;
 
-    public CropVariety() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public CropSubculture() {
     }
 
     public Crop getCrop() {
@@ -50,14 +36,6 @@ public class CropVariety {
 
     public void setCrop(Crop crop) {
         this.crop = crop;
-    }
-
-    public CropSubculture getCropSubculture() {
-        return cropSubculture;
-    }
-
-    public void setCropSubculture(CropSubculture cropSubculture) {
-        this.cropSubculture = cropSubculture;
     }
 
     public String getNameRo() {

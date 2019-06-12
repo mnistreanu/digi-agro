@@ -1,6 +1,6 @@
 package com.arobs.service.parcel;
 
-import com.arobs.entity.ParcelCropSeason;
+import com.arobs.entity.parcel.ParcelCropSeason;
 import com.arobs.model.parcel.ParcelCropSeasonModel;
 import com.arobs.repository.ParcelCropSeasonRepository;
 import com.arobs.service.BaseEntityService;

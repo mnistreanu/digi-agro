@@ -1,9 +1,8 @@
 package com.arobs.model.machine;
 
 
-import com.arobs.entity.AgroWorkType;
+import com.arobs.entity.agro.AgroWorkType;
 import com.arobs.entity.Machine;
-import com.arobs.entity.MachineGroup;
 import com.arobs.enums.MachineType;
 import com.arobs.enums.MotorType;
 import com.arobs.model.EmployeeModel;

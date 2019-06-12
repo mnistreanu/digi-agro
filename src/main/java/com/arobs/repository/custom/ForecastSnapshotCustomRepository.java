@@ -1,6 +1,6 @@
 package com.arobs.repository.custom;
 
-import com.arobs.entity.ForecastSnapshot;
+import com.arobs.entity.forecast.ForecastSnapshot;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

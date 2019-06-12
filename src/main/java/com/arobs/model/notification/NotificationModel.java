@@ -1,7 +1,7 @@
 package com.arobs.model.notification;
 
 
-import com.arobs.entity.Notification;
+import com.arobs.entity.notification.Notification;
 
 import java.io.Serializable;
 import java.time.Duration;

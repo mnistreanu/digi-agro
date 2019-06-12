@@ -1,6 +1,10 @@
-package com.arobs.entity;
+package com.arobs.entity.forecast;
 
-import javax.persistence.*;
+import com.arobs.entity.BaseEntity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -8,10 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "forecast_harvest")
-public class ForecastHarvest {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ForecastHarvest extends BaseEntity {
 
     @Column(name = "forecast_snapshot_id")
     private Long forecastSnapshotId;
@@ -27,14 +28,6 @@ public class ForecastHarvest {
 
     @Column(name = "created_by")
     private Long createdBy;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getForecastSnapshotId() {
         return forecastSnapshotId;

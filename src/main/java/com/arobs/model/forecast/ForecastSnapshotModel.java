@@ -1,6 +1,6 @@
 package com.arobs.model.forecast;
 
-import com.arobs.entity.ForecastSnapshot;
+import com.arobs.entity.forecast.ForecastSnapshot;
 
 import java.util.List;
 

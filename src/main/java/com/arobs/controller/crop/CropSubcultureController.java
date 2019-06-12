@@ -1,7 +1,7 @@
 package com.arobs.controller.crop;
 
 
-import com.arobs.entity.CropSubculture;
+import com.arobs.entity.crop.CropSubculture;
 import com.arobs.model.PayloadModel;
 import com.arobs.model.crop.CropSubcultureModel;
 import com.arobs.service.crop.CropService;

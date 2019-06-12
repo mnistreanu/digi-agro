@@ -6,11 +6,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "branch")
-public class Branch {
-
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Branch extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "tenant_id")
@@ -27,7 +23,7 @@ public class Branch {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne (fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "county_id")
     private County county;
     @Column(name = "county_id", insertable = false, updatable = false)
@@ -43,14 +39,6 @@ public class Branch {
     private String phones;
 
     public Branch() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Tenant getTenant() {

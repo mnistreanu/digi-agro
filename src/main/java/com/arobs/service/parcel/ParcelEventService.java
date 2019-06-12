@@ -1,6 +1,6 @@
 package com.arobs.service.parcel;
 
-import com.arobs.entity.ParcelEvent;
+import com.arobs.entity.parcel.ParcelEvent;
 import com.arobs.model.parcel.ParcelEventModel;
 import com.arobs.repository.ParcelEventRepository;
 import com.arobs.service.BaseEntityService;

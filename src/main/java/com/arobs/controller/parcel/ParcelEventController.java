@@ -1,6 +1,6 @@
 package com.arobs.controller.parcel;
 
-import com.arobs.entity.ParcelEvent;
+import com.arobs.entity.parcel.ParcelEvent;
 import com.arobs.model.parcel.ParcelEventModel;
 import com.arobs.service.parcel.ParcelEventService;
 import org.springframework.beans.factory.annotation.Autowired;

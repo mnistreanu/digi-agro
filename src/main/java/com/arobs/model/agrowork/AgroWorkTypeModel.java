@@ -1,7 +1,7 @@
 package com.arobs.model.agrowork;
 
 
-import com.arobs.entity.AgroWorkType;
+import com.arobs.entity.agro.AgroWorkType;
 
 import java.io.Serializable;
 

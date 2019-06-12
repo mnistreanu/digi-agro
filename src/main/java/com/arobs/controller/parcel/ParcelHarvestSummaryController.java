@@ -1,6 +1,5 @@
 package com.arobs.controller.parcel;
 
-import com.arobs.entity.ParcelCropSeason;
 import com.arobs.model.parcel.ParcelCropSeasonModel;
 import com.arobs.service.parcel.ParcelHarvestSummaryService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,10 @@
-package com.arobs.entity;
+package com.arobs.entity.parcel;
 
-import javax.persistence.*;
+import com.arobs.entity.BaseEntity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -12,12 +16,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "parcel")
-public class Parcel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
-    private Long id;
+public class Parcel extends BaseEntity {
 
     @Column(name = "tenant_id")
     private Long tenantId;
@@ -61,19 +60,11 @@ public class Parcel {
     @Column(name = "last_work_type_id")
     private Long lastWorkTypeId;
 
-    @Column(name="irrigated", columnDefinition = "boolean default false")
+    @Column(name = "irrigated", columnDefinition = "boolean default false")
     private boolean irrigated;
 
     @Column(columnDefinition = "boolean default true")
     private boolean active = true;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getTenantId() {
         return tenantId;

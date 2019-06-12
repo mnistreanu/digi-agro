@@ -10,19 +10,19 @@ import javax.persistence.*;
 public class City {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (name = "county_id", length = 2)
+    @Column(name = "county_id", length = 2)
     private String countyId;
 
-    @Column (name = "country_id", length = 2)
+    @Column(name = "country_id", length = 2)
     private String countryId;
 
-    @Column (name = "name_ro")
+    @Column(name = "name_ro")
     private String nameRo;
 
-    @Column (name = "name_ru")
+    @Column(name = "name_ru")
     private String nameRu;
 
     public City() {

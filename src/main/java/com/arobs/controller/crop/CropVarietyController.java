@@ -1,10 +1,10 @@
 package com.arobs.controller.crop;
 
 
-import com.arobs.entity.Crop;
-import com.arobs.entity.CropCategory;
-import com.arobs.entity.CropSubculture;
-import com.arobs.entity.CropVariety;
+import com.arobs.entity.crop.Crop;
+import com.arobs.entity.crop.CropCategory;
+import com.arobs.entity.crop.CropSubculture;
+import com.arobs.entity.crop.CropVariety;
 import com.arobs.model.PayloadModel;
 import com.arobs.model.crop.CropVarietyModel;
 import com.arobs.model.crop.CropVarietyTreeModel;

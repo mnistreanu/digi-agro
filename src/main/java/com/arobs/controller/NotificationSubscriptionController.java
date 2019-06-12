@@ -1,7 +1,7 @@
 package com.arobs.controller;
 
-import com.arobs.entity.NotificationSubscription;
-import com.arobs.entity.NotificationType;
+import com.arobs.entity.notification.NotificationSubscription;
+import com.arobs.entity.notification.NotificationType;
 import com.arobs.model.notification.NotificationChangeSubscriptionModel;
 import com.arobs.model.notification.NotificationSubscriptionModel;
 import com.arobs.model.notification.NotificationTypeModel;

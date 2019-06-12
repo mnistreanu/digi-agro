@@ -1,6 +1,6 @@
 package com.arobs.controller;
 
-import com.arobs.entity.UserAccount;
+import com.arobs.entity.auth.UserAccount;
 import com.arobs.model.userAccount.UserAccountListModel;
 import com.arobs.model.userAccount.UserAccountModel;
 import com.arobs.service.AuthService;

@@ -1,12 +1,11 @@
 package com.arobs.model.crop;
 
-import com.arobs.entity.Crop;
-import com.arobs.entity.CropCategory;
-import com.arobs.entity.CropSubculture;
-import com.arobs.entity.CropVariety;
+import com.arobs.entity.crop.Crop;
+import com.arobs.entity.crop.CropCategory;
+import com.arobs.entity.crop.CropSubculture;
+import com.arobs.entity.crop.CropVariety;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CropVarietyTreeModel implements Serializable {

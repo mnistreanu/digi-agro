@@ -1,6 +1,6 @@
 package com.arobs.repository;
 
-import com.arobs.entity.AgroWorkType;
+import com.arobs.entity.agro.AgroWorkType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

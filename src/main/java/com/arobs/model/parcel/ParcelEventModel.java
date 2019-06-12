@@ -1,6 +1,6 @@
 package com.arobs.model.parcel;
 
-import com.arobs.entity.ParcelEvent;
+import com.arobs.entity.parcel.ParcelEvent;
 import java.util.Date;
 
 

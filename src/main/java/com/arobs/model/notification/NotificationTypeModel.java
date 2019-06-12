@@ -1,6 +1,6 @@
 package com.arobs.model.notification;
 
-import com.arobs.entity.NotificationType;
+import com.arobs.entity.notification.NotificationType;
 
 public class NotificationTypeModel {
 

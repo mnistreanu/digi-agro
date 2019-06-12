@@ -1,7 +1,7 @@
 package com.arobs.repository.custom;
 
 
-import com.arobs.entity.Crop;
+import com.arobs.entity.crop.Crop;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

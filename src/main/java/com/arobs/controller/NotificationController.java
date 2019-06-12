@@ -1,6 +1,6 @@
 package com.arobs.controller;
 
-import com.arobs.entity.Notification;
+import com.arobs.entity.notification.Notification;
 import com.arobs.model.notification.NotificationModel;
 import com.arobs.service.AuthService;
 import com.arobs.service.notification.NotificationService;

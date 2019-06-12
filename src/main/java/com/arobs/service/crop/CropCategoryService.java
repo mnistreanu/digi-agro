@@ -1,6 +1,6 @@
 package com.arobs.service.crop;
 
-import com.arobs.entity.CropCategory;
+import com.arobs.entity.crop.CropCategory;
 import com.arobs.repository.CropCategoryRepository;
 import com.arobs.service.BaseEntityService;
 import org.springframework.beans.factory.annotation.Autowired;

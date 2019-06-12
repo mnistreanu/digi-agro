@@ -1,14 +1,12 @@
-package com.arobs.entity;
+package com.arobs.entity.parcel;
 
-import javax.persistence.*;
+import com.arobs.entity.BaseEntity;
+
+import javax.persistence.Entity;
 import java.util.Date;
 
 @Entity
-public class ParcelEvent {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ParcelEvent extends BaseEntity {
 
     private Long parcelId;
 
@@ -20,14 +18,6 @@ public class ParcelEvent {
     private String description;
 
     public ParcelEvent() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Date getDate() {

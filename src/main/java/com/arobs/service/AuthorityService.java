@@ -1,6 +1,6 @@
 package com.arobs.service;
 
-import com.arobs.entity.Authority;
+import com.arobs.entity.auth.Authority;
 import com.arobs.enums.AuthorityName;
 import com.arobs.repository.AuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -87,12 +87,12 @@ create table weather_history (
     temp_max float8,
     temp_min float8,
     uvi float8,
-    weather_location_id int4,
+    weather_location_id int8,
     primary key (id)
 );
 
 create table weather_location (
-    id int4 not null,
+    id int8 not null,
     country varchar(255),
     county varchar(255),
     lat float8,

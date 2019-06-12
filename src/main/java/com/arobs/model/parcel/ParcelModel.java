@@ -1,6 +1,8 @@
 package com.arobs.model.parcel;
 
-import com.arobs.entity.*;
+import com.arobs.entity.agro.AgroWork;
+import com.arobs.entity.agro.AgroWorkType;
+import com.arobs.entity.parcel.Parcel;
 
 import java.math.BigDecimal;
 import java.util.Date;

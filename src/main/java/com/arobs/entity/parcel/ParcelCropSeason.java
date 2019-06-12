@@ -1,4 +1,7 @@
-package com.arobs.entity;
+package com.arobs.entity.parcel;
+
+import com.arobs.entity.BaseEntity;
+import com.arobs.entity.crop.CropSeason;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,25 +13,20 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "parcel_crop_season")
-public class ParcelCropSeason {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
-    private Long id;
+public class ParcelCropSeason extends BaseEntity {
 
     @Column(name = "parcel_id")
     private Long parcelId;
 
-    @ManyToOne (fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(insertable = false, updatable = false)
     private Parcel parcel;
 
     @Column(name = "crop_season_id")
     private Long cropSeasonId;
 
-    @ManyToOne (fetch = FetchType.EAGER)
-    @JoinColumn (insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(insertable = false, updatable = false)
     private CropSeason cropSeason;
 
     @Column(name = "crop_variety_id")
@@ -49,16 +47,8 @@ public class ParcelCropSeason {
     @Column(name = "space_between_plants")
     private Double spaceBetweenPlants;
 
-    @Column (name = "yield_goal")
+    @Column(name = "yield_goal")
     private Double yieldGoal;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getParcelId() {
         return parcelId;

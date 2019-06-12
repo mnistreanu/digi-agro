@@ -1,6 +1,6 @@
 package com.arobs.model.forecast;
 
-import com.arobs.entity.Forecast;
+import com.arobs.entity.forecast.Forecast;
 
 public class ForecastModel {
 

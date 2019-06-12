@@ -1,6 +1,6 @@
 package com.arobs.model.crop;
 
-import com.arobs.entity.Crop;
+import com.arobs.entity.crop.Crop;
 
 public class CropModel {
 

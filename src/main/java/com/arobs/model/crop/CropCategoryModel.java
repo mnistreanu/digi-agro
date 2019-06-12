@@ -1,6 +1,6 @@
 package com.arobs.model.crop;
 
-import com.arobs.entity.CropCategory;
+import com.arobs.entity.crop.CropCategory;
 
 import java.io.Serializable;
 

@@ -4,18 +4,13 @@ import com.arobs.enums.FertilizerType;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by mihail.gorgos on 14.07.2018.
  */
 @Entity
 @Table(name = "fertilizer")
-public class Fertilizer {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Fertilizer extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private FertilizerType fertilizerType;
@@ -36,14 +31,6 @@ public class Fertilizer {
     private Date deletedAt;
 
     public Fertilizer() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNameRo() {

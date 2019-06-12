@@ -1,6 +1,6 @@
 package com.arobs.service.forecast;
 
-import com.arobs.entity.ForecastHarvest;
+import com.arobs.entity.forecast.ForecastHarvest;
 import com.arobs.model.forecast.ForecastHarvestModel;
 import com.arobs.repository.ForecastHarvestRepository;
 import com.arobs.service.AuthService;

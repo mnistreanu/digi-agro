@@ -1,6 +1,6 @@
 package com.arobs.service.crop;
 
-import com.arobs.entity.CropSubculture;
+import com.arobs.entity.crop.CropSubculture;
 import com.arobs.model.crop.CropSubcultureModel;
 import com.arobs.repository.CropSubcultureRepository;
 import com.arobs.service.BaseEntityService;

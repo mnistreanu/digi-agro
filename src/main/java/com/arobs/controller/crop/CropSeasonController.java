@@ -1,7 +1,6 @@
 package com.arobs.controller.crop;
 
-import com.arobs.entity.CropSeason;
-import com.arobs.model.branch.BranchModel;
+import com.arobs.entity.crop.CropSeason;
 import com.arobs.model.crop.CropSeasonModel;
 import com.arobs.service.crop.CropSeasonService;
 import org.springframework.beans.factory.annotation.Autowired;

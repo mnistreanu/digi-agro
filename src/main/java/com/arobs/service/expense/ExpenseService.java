@@ -1,6 +1,6 @@
 package com.arobs.service.expense;
 
-import com.arobs.entity.CropSeason;
+import com.arobs.entity.crop.CropSeason;
 import com.arobs.entity.expense.Expense;
 import com.arobs.entity.expense.ExpenseCategory;
 import com.arobs.model.crop.CropSeasonModel;

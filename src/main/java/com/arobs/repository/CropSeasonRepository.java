@@ -1,6 +1,6 @@
 package com.arobs.repository;
 
-import com.arobs.entity.CropSeason;
+import com.arobs.entity.crop.CropSeason;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

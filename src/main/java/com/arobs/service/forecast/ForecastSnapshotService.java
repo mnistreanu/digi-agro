@@ -1,7 +1,7 @@
 package com.arobs.service.forecast;
 
-import com.arobs.entity.ForecastParcel;
-import com.arobs.entity.ForecastSnapshot;
+import com.arobs.entity.forecast.ForecastParcel;
+import com.arobs.entity.forecast.ForecastSnapshot;
 import com.arobs.model.forecast.ForecastHarvestModel;
 import com.arobs.model.forecast.ForecastSnapshotModel;
 import com.arobs.repository.ForecastSnapshotRepository;

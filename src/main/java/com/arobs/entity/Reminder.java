@@ -1,7 +1,8 @@
 package com.arobs.entity;
 
+import com.arobs.entity.agro.AgroWorkType;
+
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -9,11 +10,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "reminder")
-public class Reminder implements Serializable {
-
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Reminder extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "agro_work_type_id")
@@ -37,14 +34,7 @@ public class Reminder implements Serializable {
     @Column(name = "ending")
     private Date ending;
 
-    public Reminder() {}
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public Reminder() {
     }
 
     public AgroWorkType getWorkType() {

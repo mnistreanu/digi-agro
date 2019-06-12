@@ -1,6 +1,6 @@
 package com.arobs.repository;
 
-import com.arobs.entity.Forecast;
+import com.arobs.entity.forecast.Forecast;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

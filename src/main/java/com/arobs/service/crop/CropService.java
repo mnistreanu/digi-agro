@@ -1,6 +1,6 @@
 package com.arobs.service.crop;
 
-import com.arobs.entity.Crop;
+import com.arobs.entity.crop.Crop;
 import com.arobs.model.crop.CropModel;
 import com.arobs.repository.CropRepository;
 import com.arobs.repository.custom.CropCustomRepository;

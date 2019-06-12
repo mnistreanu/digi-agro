@@ -1,7 +1,7 @@
 package com.arobs.security;
 
-import com.arobs.entity.Authority;
-import com.arobs.entity.UserAccount;
+import com.arobs.entity.auth.Authority;
+import com.arobs.entity.auth.UserAccount;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 

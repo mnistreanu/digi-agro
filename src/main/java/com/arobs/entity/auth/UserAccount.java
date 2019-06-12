@@ -1,15 +1,15 @@
-package com.arobs.entity;
+package com.arobs.entity.auth;
 
+
+import com.arobs.entity.BaseEntity;
+import com.arobs.entity.Branch;
+import com.arobs.entity.Tenant;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class UserAccount {
-
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
+public class UserAccount extends BaseEntity {
 
     private String username;
     private String password;
@@ -49,7 +49,8 @@ public class UserAccount {
     @Column(columnDefinition = "boolean default true")
     private boolean active = true;
 
-    public UserAccount() { }
+    public UserAccount() {
+    }
 
     public String getSafeLogoUrl() {
         if (logoUrl == null) {
@@ -60,14 +61,6 @@ public class UserAccount {
 
     public String getFullName() {
         return firstName + " " + lastName;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUsername() {

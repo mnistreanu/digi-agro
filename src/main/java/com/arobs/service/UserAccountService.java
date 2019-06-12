@@ -3,7 +3,7 @@ package com.arobs.service;
 
 import com.arobs.entity.Branch;
 import com.arobs.entity.Tenant;
-import com.arobs.entity.UserAccount;
+import com.arobs.entity.auth.UserAccount;
 import com.arobs.model.userAccount.UserAccountModel;
 import com.arobs.repository.UserAccountRepository;
 import com.arobs.security.JwtUserFactory;

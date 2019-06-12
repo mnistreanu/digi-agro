@@ -1,4 +1,6 @@
-package com.arobs.entity;
+package com.arobs.entity.notification;
+
+import com.arobs.entity.BaseEntity;
 
 import javax.persistence.*;
 
@@ -7,27 +9,14 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "notification_subscription")
-public class NotificationSubscription {
+public class NotificationSubscription extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
-    private Long id;
-
-    @ManyToOne (fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "notification_type_id")
     private NotificationType notificationType;
 
     @Column(name = "user_id")
     private Long userId;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public NotificationType getNotificationType() {
         return notificationType;

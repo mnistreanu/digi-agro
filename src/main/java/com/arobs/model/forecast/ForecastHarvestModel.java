@@ -1,6 +1,6 @@
 package com.arobs.model.forecast;
 
-import com.arobs.entity.ForecastHarvest;
+import com.arobs.entity.forecast.ForecastHarvest;
 
 import java.util.Date;
 

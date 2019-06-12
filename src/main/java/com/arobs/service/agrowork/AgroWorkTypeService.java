@@ -1,6 +1,6 @@
 package com.arobs.service.agrowork;
 
-import com.arobs.entity.AgroWorkType;
+import com.arobs.entity.agro.AgroWorkType;
 import com.arobs.repository.AgroWorkTypeRepository;
 import com.arobs.service.BaseEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
