@@ -28,8 +28,7 @@ public class PesticideService extends BaseEntityService<Pesticide, PesticideRepo
     // todo: refactor
     @Deprecated
     public PesticideModel findOneModel(Long id) {
-        PesticideModel model = new PesticideModel(getRepository().findOne(id));
-        return model;
+        return new PesticideModel(getRepository().findOne(id));
     }
 
     @Transactional

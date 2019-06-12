@@ -43,7 +43,7 @@ public class MapEventService extends BaseEntityService<MapEvent, MapEventReposit
 
         if (model.getId() == null) {
             entity = new MapEvent();
-            entity.setUserAccount(userAccountService.findOne(userId));
+            entity.setUserAccount(userAccountService.getOne(userId));
         } else {
             entity = findOne(model.getId());
         }

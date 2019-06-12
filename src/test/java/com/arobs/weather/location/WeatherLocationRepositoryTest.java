@@ -40,7 +40,7 @@ public class WeatherLocationRepositoryTest {
 	private TestEntityManager entityManager;
 
 	@Autowired
-	public WeatherLocationRepository repository;
+	private WeatherLocationRepository repository;
 	
 	@Test
 	public void testEntityManager() {
@@ -49,7 +49,7 @@ public class WeatherLocationRepositoryTest {
 	
 	@Test
 	public void testFindOne() {
-		Integer id = 617077;
+		Long id = 617077L;
 		WeatherLocation location = repository.findOne(id);
 		assertEquals("Raionul Edineţ", location.getName());
 		assertEquals("MD", location.getCountryCode());

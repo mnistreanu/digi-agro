@@ -4,7 +4,6 @@ package com.arobs.controller.crop;
 import com.arobs.entity.crop.CropSubculture;
 import com.arobs.model.PayloadModel;
 import com.arobs.model.crop.CropSubcultureModel;
-import com.arobs.service.crop.CropService;
 import com.arobs.service.crop.CropSubcultureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +18,6 @@ public class CropSubcultureController {
 
     @Autowired
     private CropSubcultureService subCropService;
-    @Autowired
-    private CropService cropService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<CropSubcultureModel> findById(@PathVariable("id") final Long id) {
@@ -77,7 +74,7 @@ public class CropSubcultureController {
         return ResponseEntity.ok(payloadModel);
     }
 
-     @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<CropSubcultureModel> save(@RequestBody CropSubcultureModel model) {
         return ResponseEntity.ok(new CropSubcultureModel(subCropService.save(model)));
     }

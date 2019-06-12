@@ -32,7 +32,7 @@ public class EmployeeService extends BaseEntityService<Employee, EmployeeReposit
 
         if (model.getId() == null) {
             entity = new Employee();
-            entity.setTenant(tenantService.findOne(tenantId));
+            entity.setTenant(tenantService.getOne(tenantId));
         } else {
             entity = findOne(model.getId());
         }

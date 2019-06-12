@@ -62,10 +62,10 @@ public class CropVarietyService extends BaseEntityService<CropVariety, CropVarie
         cropVariety.setDescriptionRo(model.getDescriptionRo());
         cropVariety.setDescriptionRu(model.getDescriptionRu());
         if (model.getCropId() != null) {
-            cropVariety.setCrop(cropService.findOne(model.getCropId()));
+            cropVariety.setCrop(cropService.getOne(model.getCropId()));
         }
         if (model.getCropSubcultureId() != null) {
-            cropVariety.setCropSubculture(cropSubcultureService.findOne(model.getCropSubcultureId()));
+            cropVariety.setCropSubculture(cropSubcultureService.getOne(model.getCropSubcultureId()));
         }
 
         return save(cropVariety);

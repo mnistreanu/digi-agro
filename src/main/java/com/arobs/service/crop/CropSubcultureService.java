@@ -46,7 +46,7 @@ public class CropSubcultureService extends BaseEntityService<CropSubculture, Cro
         cropSubculture.setNameRu(model.getNameRu());
         cropSubculture.setDescriptionRo(model.getDescriptionRo());
         cropSubculture.setDescriptionRu(model.getDescriptionRu());
-        cropSubculture.setCrop(cropService.findOne(model.getCropId()));
+        cropSubculture.setCrop(cropService.getOne(model.getCropId()));
 
         return save(cropSubculture);
     }

@@ -4,6 +4,7 @@ import com.arobs.entity.crop.Crop;
 import com.arobs.model.crop.CropModel;
 import com.arobs.repository.CropRepository;
 import com.arobs.repository.custom.CropCustomRepository;
+import com.arobs.service.BaseEntityService;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class CropService {
+public class CropService extends BaseEntityService<Crop, CropRepository> {
 
     @Autowired
     private CropRepository cropRepository;
@@ -28,6 +29,7 @@ public class CropService {
     @Autowired
     private CropCustomRepository cropCustomRepository;
 
+    @Override
     public CropRepository getRepository() {
         return cropRepository;
     }
@@ -40,15 +42,11 @@ public class CropService {
         }
     }
 
-    public Crop findOne(Long id) {
-        return getRepository().findOne(id);
-    }
-
     public Page<Crop> findAll(int page, int size) {
         return cropRepository.findAll(new PageRequest(page, size));
     }
 
-    public JSONObject findAll() {
+    public JSONObject find() {
 
         Iterable<Crop> iterable = cropRepository.findAll();
         List<Crop> crops = new ArrayList<>();
@@ -114,9 +112,10 @@ public class CropService {
         return getRepository().save(crop);
     }
 
+    @Override
     @Transactional
     public void delete(Long id) {
-        // todo: problem with references...
+        // todo: problem with references... (may be soft delete?)
         getRepository().delete(id);
     }
 

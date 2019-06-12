@@ -2,10 +2,10 @@ package com.arobs.controller;
 
 import com.arobs.entity.Reminder;
 import com.arobs.entity.agro.AgroWorkType;
-import com.arobs.model.agrowork.AgroWorkTypeModel;
 import com.arobs.model.PayloadModel;
-import com.arobs.model.reminder.ReminderModel;
+import com.arobs.model.agrowork.AgroWorkTypeModel;
 import com.arobs.model.reminder.ReminderChangeModel;
+import com.arobs.model.reminder.ReminderModel;
 import com.arobs.service.ReminderService;
 import com.arobs.service.agrowork.AgroWorkTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class ReminderController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<PayloadModel> getScheduledTasks() {
-        Long tenantId  = 1L;
+        Long tenantId = 1L;
         Date scheduledTime = new Date();
         PayloadModel<ReminderModel> payloadModel = new PayloadModel<>();
 
@@ -51,7 +51,7 @@ public class ReminderController {
 
     @RequestMapping(value = "/work-types", method = RequestMethod.GET)
     public ResponseEntity<PayloadModel> getAgroWorkTypes() {
-        Long tenantId  = 1L;
+        Long tenantId = 1L;
 
         PayloadModel<AgroWorkTypeModel> payloadModel = new PayloadModel<>();
 
@@ -71,23 +71,6 @@ public class ReminderController {
 
         return ResponseEntity.ok(payloadModel);
     }
-//
-//    @RequestMapping(value = "/identifiers", method = RequestMethod.GET)
-//    public ResponseEntity<List<String>> fetchIdentifiers() {
-//        return ResponseEntity.ok(agroTaskService.fetchIdentifiers());
-//    }
-//
-//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-//    public ResponseEntity<ReminderModel> getModel(@PathVariable Long id) {
-//        Reminder at = agroTaskService.findOne(id);
-//        return ResponseEntity.ok(new ReminderModel(at));
-//    }
-//
-//    @RequestMapping(value = "/validate-identifier", method = RequestMethod.GET)
-//    public ResponseEntity<Boolean> validateIdentifier(@RequestParam("id") Long id, @RequestParam("value") String value) {
-//        return ResponseEntity.ok(agroTaskService.validateIdentifier(id, value));
-//    }
-//
 
     @PreAuthorize("hasAuthority('ROLE_SUPER_ADMIN')")
     @RequestMapping(value = "/schedule", method = RequestMethod.POST)

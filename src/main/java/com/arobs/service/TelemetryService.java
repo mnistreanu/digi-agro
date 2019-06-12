@@ -46,8 +46,8 @@ public class TelemetryService extends BaseEntityService<MachineTelemetry, Machin
 
         if (model.getId() == null) {
             entity = new MachineTelemetry();
-            entity.setUserAccount(userAccountService.findOne(userId));
-            entity.setMachine(machineService.findOne(model.getMachineId()));
+            entity.setUserAccount(userAccountService.getOne(userId));
+            entity.setMachine(machineService.getOne(model.getMachineId()));
             entity.setCreatedAt(new Date());
         } else {
             entity = findOne(model.getId());

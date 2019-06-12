@@ -55,9 +55,9 @@ public class CropController {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> getCrops(@RequestParam(value = "page_no", required = false) final Integer page,
-                                               @RequestParam(value = "rows_per_page", required = false) final Integer rowsPerPage,
-                                               @RequestParam(value = "sort", required = false) final List<String> sorts,
-                                               @RequestParam(value = "filter", required = false) final List<String> filters) {
+                                           @RequestParam(value = "rows_per_page", required = false) final Integer rowsPerPage,
+                                           @RequestParam(value = "sort", required = false) final List<String> sorts,
+                                           @RequestParam(value = "filter", required = false) final List<String> filters) {
 
         if (page != null && rowsPerPage != null && sorts != null && filters != null) {
             return ResponseEntity.ok(cropService.findAll(page, rowsPerPage, filters, sorts).toString());
@@ -71,7 +71,7 @@ public class CropController {
             return ResponseEntity.ok(cropService.findAll(page, rowsPerPage, new ArrayList<>(), new ArrayList<>()).toString());
         }
 
-        return ResponseEntity.ok(cropService.findAll().toString());
+        return ResponseEntity.ok(cropService.find().toString());
     }
 
     @RequestMapping(value = "/crops", method = RequestMethod.GET)

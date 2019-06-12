@@ -56,7 +56,7 @@ public class ReminderService extends BaseEntityService<Reminder, ReminderReposit
         entity.setDescription(model.getDescription());
         entity.setStarting(model.getStarting());
         entity.setEnding(model.getEnding());
-        entity.setWorkType(agroWorkTypeService.findOne(model.getWorkTypeId()));
+        entity.setWorkType(agroWorkTypeService.getOne(model.getWorkTypeId()));
     }
 
     @Transactional

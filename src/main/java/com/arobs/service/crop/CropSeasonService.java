@@ -45,9 +45,9 @@ public class CropSeasonService extends BaseEntityService<CropSeason, CropSeasonR
         }
 
         season.setTenantId(model.getTenantId());
-        season.setCrop(cropService.findOne(model.getCropId()));
+        season.setCrop(cropService.getOne(model.getCropId()));
         if (model.getCropVarietyId() != null) {
-            season.setCropVariety(cropVarietyService.findOne(model.getCropVarietyId()));
+            season.setCropVariety(cropVarietyService.getOne(model.getCropVarietyId()));
         }
         season.setHarvestYear(model.getHarvestYear());
         season.setStartDate(model.getStartDate());

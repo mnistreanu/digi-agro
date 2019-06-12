@@ -31,7 +31,7 @@ public class NotificationSubscriptionService extends BaseEntityService<Notificat
         if (subscribed) {
             NotificationSubscription notificationSubscription = new NotificationSubscription();
             notificationSubscription.setUserId(userId);
-            notificationSubscription.setNotificationType(notificationTypeService.findOne(typeId));
+            notificationSubscription.setNotificationType(notificationTypeService.getOne(typeId));
             save(notificationSubscription);
         } else {
             getRepository().delete(userId, typeId);

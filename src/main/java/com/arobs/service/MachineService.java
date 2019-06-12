@@ -64,7 +64,7 @@ public class MachineService extends BaseEntityService<Machine, MachineRepository
 
         if (model.getId() == null) {
             entity = new Machine();
-            entity.setTenant(tenantService.findOne(tenant));
+            entity.setTenant(tenantService.getOne(tenant));
         } else {
             entity = findOne(model.getId());
         }
@@ -93,7 +93,7 @@ public class MachineService extends BaseEntityService<Machine, MachineRepository
         if (model.getMachineGroupId() == null) {
             entity.setMachineGroup(null);
         } else {
-            entity.setMachineGroup(machineGroupService.findOne(model.getMachineGroupId()));
+            entity.setMachineGroup(machineGroupService.getOne(model.getMachineGroupId()));
         }
 
         entity.getWorkTypes().clear();

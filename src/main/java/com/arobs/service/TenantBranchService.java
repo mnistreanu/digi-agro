@@ -52,7 +52,7 @@ public class TenantBranchService extends BaseEntityService<Branch, TenantBranchR
 
         if (model.getId() == null) {
             branch = new Branch();
-            branch.setTenant(model.getTenantId() == null ? null : tenantService.findOne(model.getTenantId()));
+            branch.setTenant(model.getTenantId() == null ? null : tenantService.getOne(model.getTenantId()));
         } else {
             branch = findOne(model.getId());
         }
