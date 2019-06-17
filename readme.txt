@@ -1,10 +1,7 @@
 Backend:
 - install: Java, Gradle, PostgreSQL
-- with gradle, install all dependencies
 - create data base with name: digi-agro-db
-- starting Application.java, will be created structure in DB
-- restart application
-
+- run Application.java
 
 Frontend:
 - install: Node JS
