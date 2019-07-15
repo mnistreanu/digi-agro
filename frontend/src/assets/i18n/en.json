@@ -423,6 +423,11 @@
 		"PHEROMONE": "Pheromones",
 		"RODENTICIDE_MOLLUSCICIDE_REPELLANT": "Rodenticides, molluscicides, repellents"
 	},
+	"placement-type": {
+		"air": "Air",
+		"furrow": "In durrow",
+		"soil": "Soil"
+	},
 	"reminder": {
 		"enter-new-event": "Just enter event name to create a new one",
 		"event": "Event",

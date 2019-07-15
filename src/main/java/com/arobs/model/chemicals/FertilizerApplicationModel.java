@@ -1,6 +1,8 @@
 package com.arobs.model.chemicals;
 
 
+import com.arobs.entity.FertilizerApplication;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -11,8 +13,8 @@ public class FertilizerApplicationModel implements Serializable {
     private Long parcelId;
     private Date applicationDate;
     private String comments;
-    private Integer placementType;
-    private Integer fertilizerType;
+    private String placementType;
+    private String fertilizerType;
     private Long fertilizerId;
     private String fertilizerNameRo;
     private String fertilizerNameRu;
@@ -23,6 +25,30 @@ public class FertilizerApplicationModel implements Serializable {
     private BigDecimal hectareCost;
 
     public FertilizerApplicationModel() {
+    }
+
+    public FertilizerApplicationModel(FertilizerApplication fa) {
+        this.id = fa.getId();
+        if (fa.getParcel() != null) {
+            this.parcelId = fa.getParcel().getId();
+        }
+
+        this.applicationDate = fa.getApplicationDate();
+        this.comments = fa.getComments();
+
+        if (fa.getFertilizer() != null) {
+            this.fertilizerId = fa.getFertilizer().getId();
+            this.fertilizerNameRo = fa.getFertilizer().getNameRo();
+            this.fertilizerNameRu = fa.getFertilizer().getNameRu();
+            this.fertilizerType = fa.getFertilizer().getFertilizerType().name();
+        }
+
+        this.placementType = fa.getPlacementType();
+        this.tonePrice = fa.getTonePrice();
+        this.fertilizedArea = fa.getFertilizedArea();
+        this.rate = fa.getRate();
+        this.rateUnitOfMeasure = fa.getRateUnitOfMeasure();
+        this.hectareCost = fa.getHectareCost();
     }
 
     public Long getId() {
@@ -57,19 +83,19 @@ public class FertilizerApplicationModel implements Serializable {
         this.comments = comments;
     }
 
-    public Integer getPlacementType() {
+    public String getPlacementType() {
         return placementType;
     }
 
-    public void setPlacementType(Integer placementType) {
+    public void setPlacementType(String placementType) {
         this.placementType = placementType;
     }
 
-    public Integer getFertilizerType() {
+    public String getFertilizerType() {
         return fertilizerType;
     }
 
-    public void setFertilizerType(Integer fertilizerType) {
+    public void setFertilizerType(String fertilizerType) {
         this.fertilizerType = fertilizerType;
     }
 

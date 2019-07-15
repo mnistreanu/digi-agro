@@ -183,17 +183,20 @@ export class ParcelFertilizerApplicationComponent implements OnInit {
     }
 
     private setupRows() {
-        //
-        //
-        //
-        // this.options.api.setRowData(models);
-        //
         this.fertilizerService.findApplications(1, 2019).subscribe(models => {
-            // this.adjustModels(models);
+            this.adjustModels(models);
             this.options.api.setRowData(models);
         });
 
         this.adjustGridSize();
+    }
+
+    private adjustModels(models: FertilizerApplicationModel[]) {
+        models.forEach(model => {
+            this.langService
+                .get('placement-type.' + model.placementType)
+                .subscribe(m => model.placementType = m);
+        });
     }
 
     public onGridReady() {

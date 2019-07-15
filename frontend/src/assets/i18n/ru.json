@@ -423,6 +423,11 @@
 		"PHEROMONE": "Феромоны",
 		"RODENTICIDE_MOLLUSCICIDE_REPELLANT": "Родентициды, моллюскициды, репелленты"
 	},
+	"placement-type": {
+		"air": "В воздухе",
+		"furrow": "В борозде",
+		"soil": "В почве"
+	},
 	"reminder": {
 		"enter-new-event": "Просто введите название события",
 		"event": "Задача",

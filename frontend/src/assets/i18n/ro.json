@@ -423,6 +423,11 @@
 		"PHEROMONE": "Feromoni",
 		"RODENTICIDE_MOLLUSCICIDE_REPELLANT": "Rodenticide, moluscocide, repelenti"
 	},
+	"placement-type": {
+		"air": "În aer",
+		"furrow": "In brazdă",
+		"soil": "În sol"
+	},
 	"reminder": {
 		"enter-new-event": "Doar introduceți numele evenimentului",
 		"event": "Activitate",
